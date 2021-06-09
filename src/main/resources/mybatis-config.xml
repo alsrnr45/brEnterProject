@@ -4,7 +4,29 @@
 
 	<!-- settings, typeAliases, mappers -->
 
-
-
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type=""/>
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="/mappers/approval-mapper.xml" />
+		<mapper resource="/mappers/archive-mapper.xml" />
+		<mapper resource="/mappers/artist-mapper.xml" />
+		<mapper resource="/mappers/chat-mapper.xml" />
+		<mapper resource="/mappers/event-mapper.xml" />
+		<mapper resource="/mappers/free-mapper.xml" />
+		<mapper resource="/mappers/mail-mapper.xml" />
+		<mapper resource="/mappers/meetingRoom-mapper.xml" />
+		<mapper resource="/mappers/member-mapper.xml" />
+		<mapper resource="/mappers/menu-mapper.xml" />
+		<mapper resource="/mappers/notice-mapper.xml" />
+		<mapper resource="/mappers/personnelMgt-mapper.xml" />
+		<mapper resource="/mappers/phoneBook-mapper.xml" />
+		<mapper resource="/mappers/schedule-mapper.xml" />
+	</mappers>
 
 </configuration>

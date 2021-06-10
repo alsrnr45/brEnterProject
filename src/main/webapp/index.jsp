@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment </title>
+<title>Insert title here</title>
 </head>
 <body>
 
-	<jsp:forward page="WEB-INF/views/main.jsp"/>
+	잘 열리나?
 
 </body>
 </html>

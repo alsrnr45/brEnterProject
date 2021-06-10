@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment Admin</title>
+<title>brEnter Admin</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -153,8 +153,8 @@
                             </table>
 
                             <div style="float:right; margin-top: 15px;">
-                                <button type="submit" class="btn btn-light">뒤로가기</button>
-                                <button type="submit" class="btn btn-warning" style="margin-left: 7px;">반려하기</button>
+                                <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);">뒤로가기</button>
+                                <button type="button" class="btn btn-warning" style="margin-left: 7px;">반려하기</button>
                                 <button type="button" class="btn btn-danger" style="margin-left: 7px;">등록하기</button>
                             </div>
 

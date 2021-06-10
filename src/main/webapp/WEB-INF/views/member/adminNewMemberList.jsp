@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment Admin</title>
+<title>brEnter Admin</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -384,9 +384,17 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
+    
+	<script>
+	$(function() {
+	    $(".newMemberList>tbody>tr").click(function() {
+	        location.href ="newMemberDetail.admin";		<%--?bno=" + $(this).children(".bno").text();--%>
+	        console.log("신규사원클릭");
+		})
+	})
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

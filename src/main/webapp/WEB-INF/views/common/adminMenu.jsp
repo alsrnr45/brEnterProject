@@ -23,8 +23,8 @@
 	                </a>
 	                <div class="collapse" id="personnelManagement" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                    <nav class="sb-sidenav-menu-nested nav">
-	                        <a class="nav-link" href="#">신규사원관리</a>
-	                        <a class="nav-link" href="#">기존사원관리</a>
+	                        <a class="nav-link" href="newMemberList.admin">신규사원관리</a>
+	                        <a class="nav-link" href="memberList.admin">기존사원관리</a>
 	                    </nav>
 	                </div>        
 	

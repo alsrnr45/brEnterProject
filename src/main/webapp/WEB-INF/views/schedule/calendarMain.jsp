@@ -24,10 +24,21 @@
     </script>
 </head>
 <body>
-  <jsp:include page="header-sideNav.jsp" />
-    <div id='calendar'></div>
+   <!-- 상단바 -->
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<jsp:include page="../common/userHeader.jsp"/>
+    </nav>
     
-                
+    <div id="layoutSidenav">
+        
+        <!-- 메뉴바 -->
+        <div id="layoutSidenav_nav">
+            <jsp:include page="../common/userMenu.jsp"/>
+        </div>
+
+        <!--컨텐츠-->
+        <div id="layoutSidenav_content">
+            
         </div>
     </div>
 </body>

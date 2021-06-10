@@ -5,11 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment </title>
+<title>brEntertainment</title>
 </head>
 <body>
-
-	<jsp:forward page="WEB-INF/views/main.jsp"/>
-
+	
+	<jsp:include page="common/userTemplate.jsp"/>
+	
+	<%--  
+	<jsp:include page="common/adminTemplate.jsp"/>
+	--%>
+	
 </body>
 </html>

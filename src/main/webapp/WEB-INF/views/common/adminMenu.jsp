@@ -15,7 +15,7 @@
 	        <div class="sb-sidenav-menu">
 	            <div class="nav">
 	
-	                <!-- 인사관리 -->
+	                <!-- 인사관리 --><br>
 	                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#personnelManagement" aria-expanded="false" aria-controls="collapseLayouts">
 	                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
 	                    	사원관리

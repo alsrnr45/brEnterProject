@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>adminTemplate</title>
+<title>brEntertainment Admin</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -21,7 +21,7 @@
 	* {font-family: 'Noto Sans KR', sans-serif;}
 	
 	/* input 스타일 */
-	.dataTable-input:focus, .dataTable-input[type]:focus, .uneditable-input:focus {
+	input:focus, input[type]:focus, .uneditable-input:focus {
 	border-color: rgb(255, 227, 14); 
 	box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);
 	outline: 0 none;

@@ -76,6 +76,7 @@
                                 <a class="nav-link" href="#">근태관리</a>
                                 <a class="nav-link" href="#">근무현황</a>
                                 <a class="nav-link" href="#">연차</a>
+                                <a class="nav-link" href="salaryList.pm">급여내역 조회</a>
                             </nav>
                         </div>            
 
@@ -144,7 +145,6 @@
                                 <a class="nav-link" href="#">개인정보 설정</a>
                                 <a class="nav-link" href="#">비밀번호 변경</a>
                                 <a class="nav-link" href="#">주문내역 조회</a>
-                                <a class="nav-link" href="#">급여내역 조회</a>
                             </nav>
                         </div>
 

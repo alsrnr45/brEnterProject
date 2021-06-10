@@ -79,7 +79,7 @@
 	                </a>
 	                <div class="collapse" id="store" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                    <nav class="sb-sidenav-menu-nested nav">
-	                        <a class="nav-link" href="#">상품관리</a>
+	                        <a class="nav-link" href="productList.admin">상품관리</a>
 	                    </nav>
 	                </div>
 	

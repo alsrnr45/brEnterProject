@@ -6,6 +6,37 @@
 <head>
 <meta charset="UTF-8">
 <title>userTemplate</title>
+<style>
+	/* 폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+	* {font-family: 'Noto Sans KR', sans-serif;}
+	
+	/* input 스타일 */
+	input:focus, input[type]:focus, .uneditable-input:focus {
+	border-color: rgb(155, 89, 182); 
+	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+	outline: 0 none;
+	}
+	
+	/* 드롭박스 스타일 */
+	.dataTable-selector:focus, .dataTable-selector:active{
+	    border-color: rgb(155, 89, 182); 
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+	    outline: 0 none;
+	}
+	option:checked {background: rgb(155, 89, 182); color: white;}
+	
+	/* 페이징바 스타일 */
+	.dataTable-pagination a {color:black;}
+	.dataTable-pagination a:hover, 
+	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
+	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
+	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
+	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
+	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
+	    background-color: rgb(155, 89, 182);
+	    box-shadow: none;} 
+</style>
 </head>
 <body class="sb-nav-fixed">
     

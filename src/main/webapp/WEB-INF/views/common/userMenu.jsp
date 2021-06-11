@@ -42,11 +42,11 @@
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#schedule" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
                             일정관리
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="schedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="">전체 일정보기</a>
+                                <a class="nav-link" href="calendar.sch">전체 일정보기</a>
                                 <a class="nav-link" href="#">일정 만들기</a>
                                 <div> calendar </div>
                             </nav>

@@ -39,9 +39,9 @@
                         </a>
 
                         <!-- 일정관리 -->
-                        <a class="nav-link" href="#">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#schedule" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                            &nbsp;일정관리
+                            일정관리
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                         </a>
                         <div class="collapse" id="schedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">

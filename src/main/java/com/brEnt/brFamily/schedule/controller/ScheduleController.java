@@ -7,4 +7,5 @@ public class ScheduleController {
 	public String calendarMain() {
 		// /WEB-INF/views/
 		return "schedule/calendarMain";
+	}
 }

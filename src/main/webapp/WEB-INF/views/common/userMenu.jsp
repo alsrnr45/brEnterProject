@@ -47,7 +47,7 @@
                         <div class="collapse" id="schedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="calendar.sch">전체 일정보기</a>
-                                <a class="nav-link" href="#">일정 만들기</a>
+                                <a class="nav-link" href="enroll.sch">일정 만들기</a>
                                 <div> calendar </div>
                             </nav>
                         </div>

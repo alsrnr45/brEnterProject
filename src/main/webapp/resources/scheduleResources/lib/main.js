@@ -4100,7 +4100,7 @@ var FullCalendar = (function (exports) {
     var globalLocales = [];
 
     var RAW_EN_LOCALE = {
-        code: 'en',
+        code: 'ko',
         week: {
             dow: 0,
             doy: 4, // 4 days need to be within the year to be considered the first week
@@ -4111,12 +4111,12 @@ var FullCalendar = (function (exports) {
             next: 'next',
             prevYear: 'prev year',
             nextYear: 'next year',
-            year: 'year',
-            today: 'today',
-            month: 'month',
-            week: 'week',
-            day: 'day',
-            list: 'list',
+            year: '연간',
+            today: '오늘',
+            month: '월간',
+            week: '주간',
+            day: '일간',
+            list: '목록',
         },
         weekText: 'W',
         allDayText: 'all-day',
@@ -4124,7 +4124,7 @@ var FullCalendar = (function (exports) {
         noEventsText: 'No events to display',
     };
     function organizeRawLocales(explicitRawLocales) {
-        var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'en';
+        var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'ko';
         var allRawLocales = globalLocales.concat(explicitRawLocales);
         var rawLocaleMap = {
             en: RAW_EN_LOCALE, // necessary?
@@ -13890,7 +13890,8 @@ var FullCalendar = (function (exports) {
     };
 
     var timeGridPlugin = createPlugin({
-        initialView: 'timeGridWeek',
+        // 기본적으로 오늘 날짜 뿌려주기
+        initialView: new Date(),
         optionRefiners: OPTION_REFINERS$2,
         views: {
             timeGrid: {

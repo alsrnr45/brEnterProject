@@ -11,4 +11,9 @@ public class ScheduleController {
 		// /WEB-INF/views/
 		return "schedule/calendarMain";
 	}
+	
+	@RequestMapping("enroll.sch")
+	public String enrollSch() {
+		return "schedule/enrollSch";
+	}
 }

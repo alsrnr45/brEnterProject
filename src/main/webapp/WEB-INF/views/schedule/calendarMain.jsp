@@ -17,19 +17,103 @@
 	<!-- jQuery 라이브러리 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
+  <!-- fullcalendar CDNs-->
     <link href='resources/scheduleResources/lib/main.css' rel='stylesheet' />
     <script src='resources/scheduleResources/lib/main.js'></script>
+    <script src='resources/scheduleResources/lib/locales/ko.js'></script>
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
+        
+       
+
         var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
+          headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+          },
+          // 오늘 날짜 뿌려주기
+          initialDate: new Date(),
+          navLinks: true, // can click day/week names to navigate views
+          businessHours: true, // display business hours
+          editable: true,
+          selectable: true,
+          events: [
+            {
+              title: 'Business Lunch',
+              start: new Date(),
+              constraint: 'businessHours'
+            },
+            {
+              title: 'Meeting',
+              start: '2020-09-13T11:00:00',
+              constraint: 'availableForMeeting', // defined below
+              color: '#257e4a'
+            },
+            {
+              title: 'Conference',
+              start: '2021-06-03',
+              end: '2021-06-08'
+            },
+            {
+              title: 'Party',
+              start: '2021-06-11T10:00:00'
+            },
+    
+            // areas where "Meeting" must be dropped
+            {
+              groupId: 'availableForMeeting',
+              start: '2020-09-11T10:00:00',
+              end: '2020-09-11T16:00:00',
+              display: 'background'
+            },
+            {
+              groupId: 'availableForMeeting',
+              start: '2020-09-13T10:00:00',
+              end: '2020-09-13T16:00:00',
+              display: 'background'
+            },
+    
+            // red areas where no events can be dropped
+            {
+              start: '2021-06-22',
+              end: '2021-06-24',
+              overlap: false,
+              display: 'background',
+              color: '#ff9f89'
+            },
+            {
+              start: '2020-09-06',
+              end: '2020-09-08',
+              overlap: false,
+              display: 'background',
+              color: '#ff9f89'
+            }
+          ]
         });
+    
         calendar.render();
       });
-
+    
     </script>
+
+    <style>
+    body {
+      margin: 40px 10px;
+      padding: 0;
+      font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+      font-size: 14px;
+    }
+
+    #calendar {
+      max-width: 900px;
+      margin-top: 50px;
+      margin-right: 300px;
+      margin-left: 300px;
+    }
+    </style>
 </head>
 <body>
    <!-- 상단바 -->
@@ -46,7 +130,8 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            <div> </div>
+            
+            <div class="full" id='calendar'></div>
         </div>
     </div>
 </body>

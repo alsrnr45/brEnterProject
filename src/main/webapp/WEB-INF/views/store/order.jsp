@@ -16,35 +16,50 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
 	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
+	button:focus, button[type]:focus, .uneditable-button:focus {
 	border-color: rgb(155, 89, 182); 
 	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
 	outline: 0 none;
 	}
+
+
+	/* 스타일 */
+	/* .content div {outline: 1px solid blueviolet;} */
+	.content {height:1000px; padding: 50px 40px 20px 60px;}
+	.content>div {float: left;}
+	.content1 {width:920px; height:100%;}
+	.content2 {width:420px; height:100%; margin: auto;}
 	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
-	}
-	option:checked {background: rgb(155, 89, 182); color: white;}
+	h1{margin-bottom:20px;}
+
+	/* 주문상품 */
+	.table-secondary {border-color: #000;}
+	.table > tbody, .dataTable-table > tbody {vertical-align:0%;}
+	.table > :not(caption) > * > *, .dataTable-table > :not(caption) > * > * {padding-right:0px}
+
+	#orderProduct{margin:20px 20px 60px 0px;}
+	#orderProduct img{width: 100px; height: 100px;}
+	#orderProduct thead tr{border-top:1px solid;}
+	#orderProduct tbody td{height:100px;}
+	#orderProduct tfoot td{height:70px; text-align:right; font-size: 20px; padding-right:30px;}
+
+	/* 주문자정보 */
+	#senderInfo{margin-bottom: 60px; width: 850px;}
+
+
+	/* 배송지정보 */
+	#receiverInfo{margin-bottom: 60px; width: 850px;}
+	.btn-secondary {background-color: #dfdfdf; border-color: #c3c4c4; color: black;}
+
 	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color:black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(155, 89, 182);
-	    box-shadow: none;} 
+	/* 결제금액 */
+	.fixedArea{position:fixed;}
+	.fixedArea input {vertical-align: 20px;}
+	.fixedArea label {padding: 3px 0px 0px 7px;}
+	.fixedArea button {width: 350px; height:50px; margin: 15px 0px 0px 50px; border-radius:0.5em; background-color:rgb(155, 89, 182); color: white; font-size: large;}
+	.totalPriceCheck{width:350px; height:400px; margin: 77px 20px 0 50px; border-radius:0.5em; background-color:rgb(245, 238, 248); border: 1px solid rgb(127, 127, 127); padding: 13px 30px 13px 30px;}
+
 </style>
 
 </head>
@@ -55,16 +70,157 @@
     </nav>
     
     <div id="layoutSidenav">
-        
-        <!-- 메뉴바 -->
-        <div id="layoutSidenav_nav">
-            <jsp:include page="../common/userMenu.jsp"/>
-        </div>
+    
+		<form action="">
+			<div class="content">
+				
+				<h1 class="mt-4">Order</h1>
+				<hr>
 
-        <!--컨텐츠-->
-        <div id="layoutSidenav_content">
-            
-        </div>
+				<div class="content1">
+					<!--주문상품 -->
+					<h2 class="mt-4">주문상품</h2>
+					<div id="orderProduct">
+						<table class="table" style="text-align:center; margin:auto;">
+							<thead>
+								<tr class="table-secondary">
+									<th width="150">이미지</th>
+									<th width="350">상품정보</th>
+									<th width="150">판매가</th>
+									<th width="150">직원할인가</th>
+									<th width="100">수량</th>
+								</tr>
+							</thead>
+							<tbody >
+								<tr>
+									<td><img src="https://ygselect.com/web/product/big/202012/e2226610ac7c233b51c2ae88fafdac39.jpg"></td>
+									<td>BLACKPINK 1st FULL ALBUM</td>
+									<td>20,000원</td>
+									<td>18,000원</td>
+									<td>1</td>
+								</tr>
+								<tr>
+									<td><img src="https://ygselect.com/web/product/big/202102/d2789bf916ad16516ffc355cb2dc17d1.jpg"></td>
+									<td>BLACKPINK OFFICIAL LIGHT STICK Ver.2 LIMITED EDITION</td>
+									<td>40,000원</td>
+									<td>36,000원</td>
+									<td>1</td>
+								</tr>
+							</tbody>
+							<tfoot>
+								<td colspan="5">합계: 54,000원</td>
+							</tfoot>
+						</table>
+					</div>  
+
+					<!-- 주문자정보 -->
+					<h2 class="mt-4">주문자정보</h2><hr>
+					<div id="senderInfo">
+						<table class="table table-borderless">
+							<tr>
+								<th width="150">주문하시는분</th>
+								<td width="250"><input type="text" class="form-control" id="userName" name="userName" value="김사원" required></td>
+								<td width="350"></td>
+							</tr>
+							<tr>
+								<th>주소</th>
+								<td><input type="text" class="form-control" id="postCode" name="postCode" value="48434" required></td>
+								<td></td>
+							</tr>
+							<tr>
+								<th></th>
+								<td colspan="2"><input type="text" class="form-control" id="roadAddress" name="roadAddress" value="부산광역시 남구 대연동 73-15번지" required></td>
+							</tr>
+							<tr>
+								<th></th>
+								<td colspan="2"><input type="text" class="form-control" id="detailAddress" name="detailAddress" value="202동 118호( 주엽동, 햇빛아파트 )" required></td>
+							</tr>
+							<tr>
+								<th>연락처</th>
+								<td colspan="2"><input type="text" class="form-control" id="phone" name="phone" value="010-4865-2846" required></td>
+							</tr>
+							<tr>
+								<th>이메일</th>
+								<td colspan="2"><input type="text" class="form-control" id="" name="userId" value="sawon@brent.com" required></td>
+							</tr>
+						</table>
+					</div>
+
+					<!-- 배송지정보 -->
+					<h2 class="mt-4">배송지정보</h2><hr>
+					<div id="receiverInfo">
+						<form action="">
+							<table class="table table-borderless">
+								<tr>
+									<th width="150">받으시는분</th>
+									<td width="250"><input type="text" class="form-control" id="receiverName" name="receiverName" required></td>
+									<td width="350"></td>
+								</tr>
+								<tr>
+									<th>주소</th>
+									<td><input type="text" class="form-control" id="receiverPostCode" name="receiverPostCode" required></td>
+									<td><button type="button" class="btn btn-secondary">주소검색</button></td>
+								</tr>
+								<tr>
+									<th></th>
+									<td colspan="2"><input type="text" class="form-control" id="receiverRoadAddress" name="receiverRoadAddress" required></td>
+								</tr>
+								<tr>
+									<th></th>
+									<td colspan="2"><input type="text" class="form-control" id="receiverDetailAddress" name="receiverDetailAddress" required></td>
+								</tr>
+								<tr>
+									<th>연락처</th>
+									<td colspan="2"><input type="text" class="form-control" id="receiverPhone" name="receiverPhone" required></td>
+								</tr>
+								<tr>
+									<th>베송메세지</th>
+									<td colspan="2"><input type="text" class="form-control" id="deliveryMessage" name="deliveryMessage" required style="height: 100px;"></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+
+					<!-- 결제수단 -->
+					<h2 class="mt-4">결제수단</h2><hr>
+					<div id="paymentType">
+						<button class="btn btn-outline-secondary" style="width: 150px;">신용카드</button>
+					</div>
+				
+					<br><br><br><br>
+				</div>
+
+				
+				<div class="content2">
+					<div class="fixedArea">
+						<div class="totalPriceCheck">
+							<h3 class="mt-4">결제금액</h3>
+							<table class="table table-borderless">
+								<tr style="font-size:large;">
+									<td>총 상품금액</td>
+									<td align="right">60000원</td>
+								</tr>
+								<tr style="font-size:large;">
+									<td>총 할인금액</td>
+									<td align="right">6000원</td>
+								</tr>
+							</table>
+							
+							<hr>
+							<h3 class="mt-4">최종 결제금액</h3>
+							<p align="right" style="font-size:x-large;">54000원</p>
+							
+							<hr>
+							<input id="terms" type="checkbox" class="form-check-input" required>
+							<label for="terms">모든 내용을 확인하였으며 <br>구매조건에 동의합니다.</label>
+						</div>
+						<button type="submit" class="btn">결제하기</button>
+					</div>
+				</div>
+				
+			</div>
+		</form>
+    
     </div>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

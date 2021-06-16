@@ -36,13 +36,19 @@ public class storeController {
 		return "store/adminProductList";
 	}
 	
-	// 작성자 : 김혜미 -- 상품관리 디테일
+	// 작성자 : 김혜미 -- 상품관리 상세
 	@RequestMapping("productDetail.admin")
 	public String productDetail() {
 		return "store/adminProductDetail";
 	}
 	
-	// 작성자 : 김혜미 -- 상품관리 디테일
+	// 작성자 : 김혜미 -- 상품관리 등록
+	@RequestMapping("productUpdate.admin")
+	public String productUpdate() {
+		return "store/adminProductUpdate";
+	}
+
+	// 작성자 : 김혜미 -- 상품관리 등록
 	@RequestMapping("productEnroll.admin")
 	public String productEnroll() {
 		return "store/adminProductEnroll";

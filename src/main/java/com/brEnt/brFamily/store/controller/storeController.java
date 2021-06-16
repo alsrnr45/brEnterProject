@@ -41,5 +41,11 @@ public class storeController {
 	public String productDetail() {
 		return "store/adminProductDetail";
 	}
+	
+	// 작성자 : 김혜미 -- 상품관리 디테일
+	@RequestMapping("productEnroll.admin")
+	public String productEnroll() {
+		return "store/adminProductEnroll";
+	}
 		
 }

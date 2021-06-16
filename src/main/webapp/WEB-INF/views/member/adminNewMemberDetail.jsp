@@ -51,9 +51,9 @@
 	.content2 {width: 850px; height: 100%; padding: 52px 0px 50px 0px;}
 	.information{width: 800px; height: 100%;}
 	
-	#personalInformation table {width:100%;}
-	#personalInformation>table *{margin-bottom: 8px;}
-	#personalInformation>table th {text-align:center; width:150px; font-size: 17px;}
+	.information table {width:100%;}
+	.information>table *{margin-bottom: 8px;}
+	.information>table th {text-align:center; width:150px; font-size: 17px;}
 	
 	input{height:40px;}
 	#personalInformation button{height:38px; width:100px; text-align:center;}
@@ -80,18 +80,18 @@
         <div id="layoutSidenav_content">
             <div class="content">
                 
-                <div class="content1">
-                    <div class="box">
-                        <img class="profile" src="resources/profileUpfiles/defaultProfile.jpg" alt="">
+                <form id="personalInformation" action="" method="post">
+                    <div class="content1">
+                        <div class="box">
+                            <img class="profile" src="resources/profileUpfiles/defaultProfile.jpg">
+                        </div>
+                        <input type="file" name="" hidden>
                     </div>
-                    <input type="file" name="" hidden>
-                </div>
 
-                <div class="content2">
-                    
-                    <div class="information">
+                    <div class="content2">
                         
-                        <form id="personalInformation" action="" method="post">
+                        <div class="information">
+                            
                             <table align="center">
                                 <tr>
                                     <th><label for="userName">사원명</label></th>
@@ -157,16 +157,14 @@
                                 <button type="button" class="btn btn-warning" style="margin-left: 7px;">반려하기</button>
                                 <button type="button" class="btn btn-danger" style="margin-left: 7px;">등록하기</button>
                             </div>
+                        </div><!--information-->
+                    </div><!--content2-->
+                </form>
 
-                        </form>
-
-                    </div>
-                    
-                </div>
-
-            </div>
+             </div><!--content-->
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

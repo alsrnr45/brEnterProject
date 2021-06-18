@@ -11,4 +11,10 @@ public class PersonnelMgtController {
 	public String slaryList() {
 		return "personnelMgt/slaryList";
 	}
+	
+	// 작성자 : 김혜미 -- 연차 조회
+	@RequestMapping("offList.pm")
+	public String offList() {
+		return "personnelMgt/offList";
+	}
 }

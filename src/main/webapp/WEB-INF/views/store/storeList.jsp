@@ -20,31 +20,46 @@
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 	* {font-family: 'Noto Sans KR', sans-serif;}
 	
-	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(155, 89, 182); 
-	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	outline: 0 none;
+	/* input */
+	input:focus, input[type]:focus, .uneditable-input:focus, button:focus, button:active{
+		border-color: rgb(155, 89, 182) !important; 
+		box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+		outline: 0 none !important;
 	}
 	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
+	/* 드롭박스 */
+	select:focus, select:active{
+	    border-color: rgb(155, 89, 182) !important;
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+	    outline: 0 none !important;
 	}
 	option:checked {background: rgb(155, 89, 182); color: white;}
+	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
+	p{font-size:15px; text-align: left; margin-top: 7px; margin-left: 15px;}
 	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color:black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
+	/* 페이징바(수정중) */
+	.pagination a {color:black;}
+	.pagination a:hover, 
+	.pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
+	.pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
+	.page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
 	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(155, 89, 182);
-	    box-shadow: none;} 
+	.pagination .active a, .pagination .active a:focus, .pagination .active a:hover {background-color: rgb(155, 89, 182); box-shadow: none;} 
+	#pagingArea{margin: auto;}
+
+	/* 카테고리, 검색창 */
+	.headArea{width: 1200px; height: 100px; text-align: center; margin: auto; padding: 50px 85px 0px 85px;}
+	.headArea>div {float: left;}
+	.input-group {width: 250px; margin-left: 630px;}
+	#form-group {width: 150px;}
+	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
+
+	/* 상품리스트 */
+	.listArea{width:1200px; text-align: center; margin: auto;}
+    .thumbnail{width: 320px; display: inline-block; margin: 15px 20px 15px 20px;}
+    .thumbnail:hover{cursor:pointer; opacity:0.7;}
+
+	#layoutSidenav_content div {outline: 1px solid blueviolet;}
 </style>
 
 </head>
@@ -64,8 +79,103 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
+			<div class="headArea">
+				<!-- 카테고리 -->
+				<div id="form-group">
+					<select class="form-control">
+						<option value="newest">최신순</option>
+						<option value="expensive">높은가격순</option>
+						<option value="cheap">낮은가격순</option>
+					</select>
+				</div>
+
+				<!-- 검색창 -->
+				<div class="input-group">
+                    <input type="text" class="form-control" placeholder="상품 검색">
+                    <div class="input-group-append">
+                        <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+			</div>
+
+			<!-- 상품리스트 -->
+			<div class="listArea">
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
+					<p>
+						BLACKPINK 1st FULL ALBUM<br>
+						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
+					</p>
+				</div>
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
+					<p>
+						BLACKPINK 1st FULL ALBUM<br>
+						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
+					</p>
+				</div>
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
+					<p>
+						BLACKPINK 1st FULL ALBUM<br>
+						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
+					</p>
+				</div>
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
+					<p>
+						BLACKPINK 1st FULL ALBUM<br>
+						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
+					</p>
+				</div>
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
+					<p>
+						BLACKPINK 1st FULL ALBUM<br>
+						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
+					</p>
+				</div>
+				<div class="thumbnail" align="center">
+					<input type="hidden" value="">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
+					<p>
+						BLACKPINK 1st FULL ALBUM<br>
+						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
+					</p>
+				</div>
+			</div>
+
+			<div id="pagingArea">
+                <ul class="pagination">
+                    <li class="page-item disabled"><a class="page-link" href="#" onclick="return false">&lt;</a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="return false" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182); color: #fff;">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="return false">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="return false">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="return false">4</a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="return false">5</a></li>
+                    <li class="page-item"><a class="page-link" href="#" onclick="return false">&gt;</a></li>
+                </ul>
+            </div>
         </div>
     </div>
+
+	<script>
+        $(function() {
+            $(".thumbnail>img").click(function() {
+            	location.href ="storeDetail.st";		<%--?bno=" + $(this).children(".bno").text();--%>
+                console.log("상품클릭");
+            })
+        });
+
+		$('a.feellink').click(function(e) {
+			e.preventDefault();   
+		});
+    </script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

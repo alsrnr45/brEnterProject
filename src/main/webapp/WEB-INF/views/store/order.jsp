@@ -16,13 +16,16 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
+	/* 폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+	* {font-family: 'Noto Sans KR', sans-serif;}
+
 	/* input 스타일 */
 	button:focus, button[type]:focus, .uneditable-button:focus {
 	border-color: rgb(155, 89, 182); 
 	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
 	outline: 0 none;
 	}
-
 
 	/* 스타일 */
 	/* .content div {outline: 1px solid blueviolet;} */
@@ -47,12 +50,10 @@
 	/* 주문자정보 */
 	#senderInfo{margin-bottom: 60px; width: 850px;}
 
-
 	/* 배송지정보 */
 	#receiverInfo{margin-bottom: 60px; width: 850px;}
 	.btn-secondary {background-color: #dfdfdf; border-color: #c3c4c4; color: black;}
 
-	
 	/* 결제금액 */
 	.fixedArea{position:fixed;}
 	.fixedArea input {vertical-align: 20px;}
@@ -65,8 +66,32 @@
 </head>
 <body class="sb-nav-fixed">
    <!-- 상단바 -->
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<jsp:include page="../common/userHeader.jsp"/>
+	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+		<!-- Navbar Brand-->
+		<a class="navbar-brand ps-3" href="index.html" style="width: 225px;">
+		<img src="resources/images/brLogo_user.png" style="height: 56px;"></a>
+
+		<!-- Sidebar Toggle-->
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!" hidden><i class="fas fa-bars"></i></button>
+	  
+	  	<!-- Navbar-->
+		<div style="width:100%;" align="right">
+			<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4" style="flex-direction: column;">
+				<li class="nav-item dropdown" style="justify-content: space-between;"> 
+					<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+					<ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+						<li><a class="dropdown-item" href="#!">사원명</a></li>
+						<li><a class="dropdown-item" href="#!" style="font-size: 13px;">이메일</a></li>
+						<li><hr class="dropdown-divider" /></li>
+						
+						<!--logout-->
+						<div class="dropmenu">
+							<button class="logout mymenu" >Logout</button><button class="mypage mymenu">MYPAGE</button>
+						</div>
+					</ul>
+				</li>
+			</ul>
+		</div>
     </nav>
     
     <div id="layoutSidenav">

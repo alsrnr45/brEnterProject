@@ -19,32 +19,44 @@
 	/* 폰트 */
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 	* {font-family: 'Noto Sans KR', sans-serif;}
-	
-	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(155, 89, 182); 
-	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	outline: 0 none;
+
+    /* input */
+	input:focus, input[type]:focus, .uneditable-input:focus, button:focus, button:active{
+		border-color: rgba(255, 255, 255, 0) !important; 
+		box-shadow: 0 1px 1px rgba(255, 255, 255, 0) inset, 0 0 8px rgba(255, 255, 255, 0) !important;
+		outline: 0 none !important;
 	}
-	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
-	}
-	option:checked {background: rgb(155, 89, 182); color: white;}
-	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color:black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(155, 89, 182);
-	    box-shadow: none;} 
+    table input{border:0px solid rgba(255, 255, 255, 0) !important; height: 40px;}
+
+    /* button 스타일 */
+	.btn-warning {background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); color: white; margin-left: 30px;}
+    .btn-light {background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215);}
+    .information a {width: 250px; height: 50px;}
+
+	/* */
+	.headArea{width: 1100px; height: 450px; text-align: center; margin: auto; padding-top: 30px;}
+	.headArea>div {float: left;}
+
+    .thumbnail{width: 450px; height: 100%; padding: 20px 0px 25px 50px;}
+    .information{width: 650px; height: 100%; padding: 25px 50px 25px 50px;}
+
+    table th {height:40px; font-size:20px;}
+    table td {height:40px; font-size:17px;}
+    table{width:100%; text-align:left;}
+
+    .totalPrice{text-align:left; padding: 20px 25px 20px 25px;}
+    .totalPrice td {font-size:27px;}
+    .calculation{background-color: rgba(224, 224, 224, 0.76); text-align:left; padding: 15px 25px 15px 25px;}
+    #amount{height:30px; padding-left:20px;}
+
+	/* 상품디테일 */
+	.detailArea{width:1100px; height:500px; text-align:center; margin:auto; padding: 25px 50px 25px 50px;}
+    .content{width:1000px; height:450px;}
+
+
+
+    
+    #layoutSidenav_content div {outline: 1px solid blueviolet;}
 </style>
 
 </head>
@@ -64,8 +76,76 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
+            <!-- 상품 -->
+			<div class="headArea">
+				
+				<div class="thumbnail">
+					<img src="resources/profileUpfiles/hamster1.jpg" width="400" height="400">
+				</div>
+
+				<div class="information">
+                    <div class="productInfo">
+                        <table>
+                            <tr>
+                                <th colspan="2">BLACKPINK 1st FULL ALBUM</th>
+                            </tr>
+                            <tr>
+                                <td width="120;">판매가</td>
+                                <td>20000원</td>
+                            </tr>
+                            <tr>
+                                <td>직원할인가</td>
+                                <td>18000원</td>
+                            </tr>
+                        </table>
+                        <hr>
+                    </div>
+                    <div class="calculation">
+                        <table>
+                            <tr>
+                                <td colspan="2">BLACKPINK 1st FULL ALBUM</td>
+                            </tr>
+                            <tr>
+                                <td><input type="number" id="amount" name="amount" value="1" min="1" max="10"></td>
+                                <td align="right">36000원</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="totalPrice">
+                        <table>
+                            <tr>
+                                <td>Total</td>
+                                <td align="right">36000원</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <a type="button" class="btn btn-light btn-lg" href="#">장바구니 담기</a>
+                    <a type="button" class="btn btn-warning btn-lg" href="#">바로 구매하기</a>
+                </div>
+			</div>
+            
+			<!-- 상품디테일 -->
+			<div class="detailArea">
+                <div class="content">
+
+                </div>
+			</div>
+			
         </div>
     </div>
+
+	<script>
+        $(function() {
+            $(".thumbnail>img").click(function() {
+            	location.href ="storeDetail.st";		<%--?bno=" + $(this).children(".bno").text();--%>
+                console.log("상품클릭");
+            })
+        });
+
+		$('a.feellink').click(function(e) {
+			e.preventDefault();   
+		});
+    </script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

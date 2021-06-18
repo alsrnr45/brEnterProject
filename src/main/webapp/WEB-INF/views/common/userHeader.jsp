@@ -17,7 +17,25 @@
 	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
 	outline: 0 none;
 	}
+
+    /* textarea 스타일 */
+	.dataTable-input:focus{
+	border-color: rgb(155, 89, 182); 
+	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+	outline: 0 none;
+	}
 	
+    /* btn 스타일 */
+    .btn-primary{
+        background-color: rgb(155, 89, 182);
+        border-color: rgb(159, 103, 182);
+    }
+
+    .btn-primary:hover{
+        background-color: rgba(155, 89, 182, 0.6);
+        border-color: rgba(155, 89, 182, 0.6);
+    }
+
 	/* 드롭박스 스타일 */
 	.dataTable-selector:focus, .dataTable-selector:active{
 	    border-color: rgb(155, 89, 182); 
@@ -74,5 +92,6 @@
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="resources/js/datatables-simple-demo.js"></script>
+    
 </body>
 </html>

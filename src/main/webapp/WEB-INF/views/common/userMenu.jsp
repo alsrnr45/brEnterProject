@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>userTemplate</title>
+<!-- min-calenadr css-->
 </head>
 <body class="sb-nav-fixed">
  
@@ -23,7 +24,7 @@
                         </a>
                         <div class="collapse" id="mail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">전체 메일</a>
+                                <a class="nav-link" href="list.mail">전체 메일</a>
                                 <a class="nav-link" href="#">받은 메일함</a>
                                 <a class="nav-link" href="#">보낸 메일함</a>
                                 <a class="nav-link" href="#">임시 보관함</a>
@@ -46,9 +47,66 @@
                         </a>
                         <div class="collapse" id="schedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
+                                <div class="min-calendar">
+                                    <main class="card">
+                                        <section class="card__header">
+                                          <h3>Thursday 7th</h3>
+                                          <h3>January 2020</h3>
+                                        </section>
+                                        <section class="card__body">
+                                          <ul class="card__body--days">
+                                            <li>mon</li>
+                                            <li>tue</li>
+                                            <li>wed</li>
+                                            <li>thu</li>
+                                            <li>fri</li>
+                                            <li>sat</li>
+                                            <li>sun</li>
+                                          </ul>
+                                          <ul class="card__body--dates">
+                                            <li class="prev">30</li>
+                                            <li class="prev">31</li>
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                            <li>5</li>
+                                            <li>6</li>
+                                            <li class="active">7</li>
+                                            <li>8</li>
+                                            <li>9</li>
+                                            <li>10</li>
+                                            <li>11</li>
+                                            <li>12</li>
+                                            <li>13</li>
+                                            <li>14</li>
+                                            <li>15</li>
+                                            <li class="circle orange">16 <span>5</span></li>
+                                            <li>17</li>
+                                            <li>18</li>
+                                            <li class="circle purple">19 <span>6</span></li>
+                                            <li>20</li>
+                                            <li>21</li>
+                                            <li>22</li>
+                                            <li>23</li>
+                                            <li>24</li>
+                                            <li>25</li>
+                                            <li>26</li>
+                                            <li>27</li>
+                                            <li>28</li>
+                                            <li>29</li>
+                                            <li>30</li>
+                                            <li>31</li>
+                                            <li class="next">1</li>
+                                            <li class="next">2</li>
+                                          </ul>
+                                        </section>
+                                      </main>    
+                                    <!--<a class="nav-link" href="min.sch">미니캘린더</a>-->
+                                </div>
                                 <a class="nav-link" href="calendar.sch">전체 일정보기</a>
                                 <a class="nav-link" href="enroll.sch">일정 만들기</a>
-                                <div> calendar </div>
+                                <a class="nav-link" href="adminEnroll.sch">관리자 일정만들기</a>
                             </nav>
                         </div>
 
@@ -165,5 +223,6 @@
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="resources/js/datatables-simple-demo.js"></script>
+    
 </body>
 </html>

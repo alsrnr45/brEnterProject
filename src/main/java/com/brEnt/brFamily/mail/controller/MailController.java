@@ -8,6 +8,6 @@ public class MailController {
 
 	@RequestMapping("list.mail")
 	public String mailListView() {
-		return "mail/";
+		return "mail/mailListView";
 	}
 }

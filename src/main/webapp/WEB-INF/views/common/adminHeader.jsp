@@ -18,6 +18,25 @@
 	outline: 0 none;
 	}
 	
+	/* textarea 스타일 */
+	.dataTable-input:focus{
+	border-color: rgb(255, 227, 14); 
+	box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);
+	outline: 0 none;
+	}
+	
+    /* btn 스타일 */
+    .btn-primary{
+		color:black;
+        background-color: rgb(255, 227, 14); 
+        border-color: rgb(231, 224, 165); 
+    }
+
+    .btn-primary:hover{
+        background-color: rgb(255, 227, 14);
+        border-color: rgb(255,235,152);
+    }
+
 	/* 드롭박스 스타일 */
 	.dataTable-selector:focus, .dataTable-selector:active{
 	    border-color: rgb(255, 227, 14); 

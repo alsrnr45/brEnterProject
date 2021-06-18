@@ -41,7 +41,7 @@
             width: 60%;
         }
 
-        #startDate, #endDate, #startTime, #endTime{
+        #startDate, #endDate, #startTime, #endTime, #schStatus{
             height:40px; width:130px;
         }
 
@@ -56,14 +56,14 @@
 <body>
        <!-- 상단바 -->
        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<jsp:include page="../common/userHeader.jsp"/>
+		<jsp:include page="../common/adminHeader.jsp"/>
     </nav>
     
     <div id="layoutSidenav">
         
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
-            <jsp:include page="../common/userMenu.jsp"/>
+            <jsp:include page="../common/adminMenu.jsp"/>
         </div>
 
         <!--컨텐츠-->
@@ -85,7 +85,7 @@
                                         <label for="startDate"></label>
                                         <!-- 시간대 고를 때 default를 현재 시간 값으로 만들고 싶음-->
                                         <select id="startTime">
-                                            <option value="" ></option>
+                                            <option value="" selected>기본값</option>
                                             <script>
                                             // 현재시간 default 값으로 만들기
                                             function thisTime(){
@@ -129,7 +129,7 @@
                                         - <input id="endDate" type="date" />
                                         <!-- 시간대 고를 때 default를 현재 시간 값으로 만들고 싶음-->
                                         <select id="endTime">
-                                            <option value="" ></option>
+                                            <option value="" selected >기본값</option>
                                             <script>
                                             // 현재시간 default 값으로 만들기
                                             function thisTime(){
@@ -174,6 +174,12 @@
                                         <span class="input-explain">일정유형</span><input class="dataTable-input" id="schCategory" type="text" min=0 placeholder="ex) 회의"/>&nbsp;
                                         <label for="schCategory"></label>
                                         <br><br>
+                                        <span class="input-explain">일정구분</span>
+                                        <select class="dataTable-input" id="schStatus">
+                                            <option value="" selected>전체</option>
+                                            <option value="">부서</option>
+                                        </select>
+                                        <br><br>
                                         내용<br>
                                         <textarea class="dataTable-input" id="schContent" rows="5px"></textarea>
                                         <br><br>
@@ -191,6 +197,7 @@
                 </div>
             </main>
         </div>
+
     </div>
 
 </body>

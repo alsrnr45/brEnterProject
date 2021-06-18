@@ -16,4 +16,14 @@ public class ScheduleController {
 	public String enrollSch() {
 		return "schedule/enrollSch";
 	}
+	
+	@RequestMapping("adminEnroll.sch")
+	public String adminEnrollSch() {
+		return "schedule/adminEnrollSch";
+	}
+	
+	@RequestMapping("min.sch")
+	public String minSch() {
+		return "schedule/min-calendar";
+	}
 }

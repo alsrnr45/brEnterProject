@@ -45,6 +45,8 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
+
+    .card {box-shadow: 0 7px 15px rgb(0 0 0 / 40%);}
 </style>
 
 </head>
@@ -63,83 +65,80 @@
 
         <!--컨텐츠-->
          <div id="layoutSidenav_content">
-            <main>
-                <div class="container-fluid px-4">
-                    
-                    <div class="container-fluid px-4">
-                        <h1 class="mt-4">급여내역</h1><br>
+                
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">급여내역</h1><br>
 
-                        <div class="card mb-4">
-                            <div class="card-header">
-                                <i class="fas fa-user me-1"></i>
-                                	김자바님의 급여내역
-                            </div>
-                            <div class="card-body">
-                                <table id="datatablesSimple" class="salaryList">
-                                    <thead>
-                                        <tr>
-                                            <th>근무년도</th>
-                                            <th>근무월</th>
-                                            <th>근무시간</th>
-                                            <th>기본급</th>
-                                            <th>초과수당</th>
-                                            <th>지급액</th>
-                                            <th>지급일</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>2021년</td>
-                                            <td>5월</td>
-                                            <td>220</td>
-                                            <td>2.400,000</td>
-                                            <td>110,000</td>
-                                            <td>2,510,000</td>
-                                            <td>2021.06.14</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021년</td>
-                                            <td>4월</td>
-                                            <td>209</td>
-                                            <td>2.400,000</td>
-                                            <td>0</td>
-                                            <td>2,400,000</td>
-                                            <td>2021.05.14</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021년</td>
-                                            <td>3월</td>
-                                            <td>209</td>
-                                            <td>2.400,000</td>
-                                            <td>0</td>
-                                            <td>2,400,000</td>
-                                            <td>2021.04.14</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021년</td>
-                                            <td>2월</td>
-                                            <td>215</td>
-                                            <td>2.400,000</td>
-                                            <td>60,000</td>
-                                            <td>2,460,000</td>
-                                            <td>2021.03.14</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021년</td>
-                                            <td>1월</td>
-                                            <td>209</td>
-                                            <td>2.400,000</td>
-                                            <td>0</td>
-                                            <td>2,400,000</td>
-                                            <td>2021.02.14</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <i class="fas fa-user me-1"></i>
+                            김자바님의 급여내역
+                    </div>
+                    <div class="card-body">
+                        <table id="datatablesSimple" class="salaryList">
+                            <thead>
+                                <tr>
+                                    <th>근무년도</th>
+                                    <th>근무월</th>
+                                    <th>근무시간</th>
+                                    <th>기본급</th>
+                                    <th>초과수당</th>
+                                    <th>지급액</th>
+                                    <th>지급일</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2021년</td>
+                                    <td>5월</td>
+                                    <td>220</td>
+                                    <td>2.400,000</td>
+                                    <td>110,000</td>
+                                    <td>2,510,000</td>
+                                    <td>2021.06.14</td>
+                                </tr>
+                                <tr>
+                                    <td>2021년</td>
+                                    <td>4월</td>
+                                    <td>209</td>
+                                    <td>2.400,000</td>
+                                    <td>0</td>
+                                    <td>2,400,000</td>
+                                    <td>2021.05.14</td>
+                                </tr>
+                                <tr>
+                                    <td>2021년</td>
+                                    <td>3월</td>
+                                    <td>209</td>
+                                    <td>2.400,000</td>
+                                    <td>0</td>
+                                    <td>2,400,000</td>
+                                    <td>2021.04.14</td>
+                                </tr>
+                                <tr>
+                                    <td>2021년</td>
+                                    <td>2월</td>
+                                    <td>215</td>
+                                    <td>2.400,000</td>
+                                    <td>60,000</td>
+                                    <td>2,460,000</td>
+                                    <td>2021.03.14</td>
+                                </tr>
+                                <tr>
+                                    <td>2021년</td>
+                                    <td>1월</td>
+                                    <td>209</td>
+                                    <td>2.400,000</td>
+                                    <td>0</td>
+                                    <td>2,400,000</td>
+                                    <td>2021.02.14</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </main> 
+            </div>
+
         </div>
     </div>
 

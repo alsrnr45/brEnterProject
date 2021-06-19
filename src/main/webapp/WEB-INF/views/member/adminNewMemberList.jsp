@@ -48,6 +48,7 @@
 
 	/* 스타일 */
 	h1{margin-bottom:20px;}  
+    .card {box-shadow: 0 7px 15px rgb(0 0 0 / 40%);}
 </style>
 </head>
 <body class="sb-nav-fixed">

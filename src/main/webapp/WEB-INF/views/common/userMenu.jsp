@@ -140,7 +140,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="#">근태관리</a>
                                 <a class="nav-link" href="#">근무현황</a>
-                                <a class="nav-link" href="#">연차</a>
+                                <a class="nav-link" href="offList.pm">연차</a>
                                 <a class="nav-link" href="salaryList.pm">급여내역 조회</a>
                             </nav>
                         </div>            
@@ -189,11 +189,11 @@
                         </a>
                         <div class="collapse" id="store" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Album</a>
-                                <a class="nav-link" href="#">Cherring</a>
-                                <a class="nav-link" href="#">Photo</a>
-                                <a class="nav-link" href="#">Fashion</a>
-                                <a class="nav-link" href="#">Stationery</a>
+                                <a class="nav-link" href="storeList.st">Album</a>
+                                <a class="nav-link" href="storeList.st">Cherring</a>
+                                <a class="nav-link" href="storeList.st">Photo</a>
+                                <a class="nav-link" href="storeList.st">Fashion</a>
+                                <a class="nav-link" href="storeList.st">Stationery</a>
                                 <a class="nav-link" href="#">Cart</a>
                                 <a class="nav-link" href="#">Offline Store</a>
                             </nav>

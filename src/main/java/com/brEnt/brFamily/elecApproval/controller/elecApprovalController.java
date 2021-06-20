@@ -7,9 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class elecApprovalController {
 
 	// 작성자 : 김혜미 -- 연차 신청폼
-	@RequestMapping("offForm.ea")
-	public String offForm() {
-		return "elecApproval/offForm";
+	@RequestMapping("offEnrollForm.ea")
+	public String offEnrollForm() {
+		return "elecApproval/offEnrollForm";
 	}
+	// 작성자 : 김혜미 -- 연차 신청폼
+	@RequestMapping("offCheckForm.ea")
+	public String offCheckForm() {
+		return "elecApproval/offCheckForm";
+	}
+
 	
 }

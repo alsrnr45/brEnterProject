@@ -20,6 +20,19 @@
 <script src='resources/js/fullcalendar_off.js'></script>
 <script src='resources/js/fullcalendar_ko_off.js'></script>
 
+<!-- alertify -->
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+
 <style>
 	/* 폰트 */
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
@@ -225,28 +238,40 @@
 			right: 'dayGridMonth,listMonth'
 		},
 
-
+		// 
 		initialDate: new Date(),
 		navLinks: true, // can click day/week names to navigate views
 		selectable: true,
 		selectMirror: true,
+
+		// 
 		select: function(arg) {
-			var title = prompt('Event Title:');
-			if (title) {
-			calendar.addEvent({
-				title: title,
-				start: arg.start,
-				end: arg.end,
-				allDay: arg.allDay
-			})
-			}
-			calendar.unselect()
+			alertify.confirm('BR-Enter', '해당 일에 연차를 신청하시겠습니까?', function(){location = 'offEnrollForm.ea';}, function(){ location.reload(); });
+			
+			var startDay = arg.start
+			console.log(startDay);
+
+			// var message = confirm('해당 일에 연차를 신청하시겠습니까?');
+			// if(message == onok){
+			// 	location = 'offForm.ea';
+			// 	consolel.log("확인클릭");
+			// }
+
+			// if (title) {
+			// calendar.addEvent({
+			// 	title: title,
+			// 	start: arg.start,
+			// 	end: arg.end,
+			// 	allDay: arg.allDay
+			// })
+			// }
+			// calendar.unselect()
 		},
-		eventClick: function(arg) {
-			if (confirm('Are you sure you want to delete this event?')) {
-			arg.event.remove()
-			}
-		},
+		// eventClick: function(arg) {
+		// 	if (confirm('Are you sure you want to delete this event?')) {
+		// 	arg.event.remove()
+		// 	}
+		// },
 		editable: true,
 		dayMaxEvents: true, // allow "more" link when too many events
 		// locale : "ko",

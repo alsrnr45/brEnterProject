@@ -158,7 +158,7 @@
             			<tbody>
             				<tr>
             					<td>
-            						<img src="resources/images/peng.png" class="orderProd">&nbsp;&nbsp;
+            						<img src="resources/produnctUpfiles/peng.png" class="orderProd">&nbsp;&nbsp;
             					</td>
             					<td><br><br>&nbsp; 2</td>
             					<td>
@@ -170,7 +170,7 @@
             				</tr>
             				<tr>
             					<td>
-            						<img src="resources/images/peng.png" class="orderProd">&nbsp;&nbsp;
+            						<img src="resources/produnctUpfiles/peng.png" class="orderProd">&nbsp;&nbsp;
             					</td>
             					<td><br><br>&nbsp; 1</td>
             					<td>

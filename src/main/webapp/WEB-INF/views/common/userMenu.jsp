@@ -25,10 +25,10 @@
                         <div class="collapse" id="mail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="list.mail">전체 메일</a>
-                                <a class="nav-link" href="#">받은 메일함</a>
-                                <a class="nav-link" href="#">보낸 메일함</a>
-                                <a class="nav-link" href="#">임시 보관함</a>
-                                <a class="nav-link" href="#">휴지통</a>
+                                <a class="nav-link" href="receive.mail">받은 메일함</a>
+                                <a class="nav-link" href="send.mail">보낸 메일함</a>
+                                <a class="nav-link" href="temp.mail">임시 보관함</a>
+                                <a class="nav-link" href="bin.mail">휴지통</a>
                             </nav>
                         </div>
 

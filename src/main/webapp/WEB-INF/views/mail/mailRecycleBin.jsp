@@ -25,7 +25,12 @@
     .card-footer{
         text-align: end;
     }
-
+    
+    .dataTable-table > tbody > tr > td, .dataTable-table > tbody > tr > th, 
+    .dataTable-table > tfoot > tr > td, .dataTable-table > tfoot > tr > th, 
+    .dataTable-table > thead > tr > td, .dataTable-table > thead > tr > th{
+        text-align:center;
+    }
 </style>
 </head>
 <body>

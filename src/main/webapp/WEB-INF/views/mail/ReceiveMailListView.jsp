@@ -1,3 +1,4 @@
+@@ -0,0 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -25,7 +26,12 @@
     .card-footer{
         text-align: end;
     }
-
+    
+    .dataTable-table > tbody > tr > td, .dataTable-table > tbody > tr > th, 
+    .dataTable-table > tfoot > tr > td, .dataTable-table > tfoot > tr > th, 
+    .dataTable-table > thead > tr > td, .dataTable-table > thead > tr > th{
+        text-align:center;
+    }
 </style>
 </head>
 <body>
@@ -45,17 +51,18 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">메일 전체 보기</h1>
+                    <h1 class="mt-4">받은 메일함</h1>
                     <br>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="far fa-envelope"></i>
-                            전체 메일
+                            받은 메일
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple" class="mailList">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th></th>
                                         <th></th>
                                         <th>보낸사람</th>
@@ -68,7 +75,9 @@
                                     <tr>
                                         <td><input type="checkbox" name="" id=""></td>
                                         <td><input type="button" hidden><i class="far fa-star"></i></input></td>
-                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->
+                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->                                        
+                                        <th><i class="far fa-envelope"></i></th>
+                                        <!-- <th><i class="far fa-envelope-open"></i></th>-->
                                         <td>kimjava@br.com</td>
                                         <td>제목입니다</td>
                                         <td>2021.06.04</td>

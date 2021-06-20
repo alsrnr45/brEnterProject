@@ -25,7 +25,12 @@
     .card-footer{
         text-align: end;
     }
-
+    
+    .dataTable-table > tbody > tr > td, .dataTable-table > tbody > tr > th, 
+    .dataTable-table > tfoot > tr > td, .dataTable-table > tfoot > tr > th, 
+    .dataTable-table > thead > tr > td, .dataTable-table > thead > tr > th{
+        text-align:center;
+    }
 </style>
 </head>
 <body>
@@ -58,6 +63,7 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
+                                        <th></th>
                                         <th>보낸사람</th>
                                         <th>제목</th>
                                         <th>일시</th>
@@ -69,6 +75,8 @@
                                         <td><input type="checkbox" name="" id=""></td>
                                         <td><input type="button" hidden><i class="far fa-star"></i></input></td>
                                         <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->
+                                        <th><i class="far fa-envelope"></i></th>
+                                        <!-- <th><i class="far fa-envelope-open"></i></th>-->
                                         <td>kimjava@br.com</td>
                                         <td>제목입니다</td>
                                         <td>2021.06.04</td>
@@ -90,7 +98,7 @@
                                 <a class="btn btn-primary btn-block">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
-                                <a class="btn btn-primary btn-block">메일쓰기</a>
+                                <a class="btn btn-primary btn-block"  href="enroll.mail">메일쓰기</a>
                                 <a class="btn btn-primary btn-block">삭제하기</a>
                             </div>
                         </div>

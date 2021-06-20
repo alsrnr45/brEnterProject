@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd" >
 <configuration>
 
 	<!-- settings, typeAliases, mappers -->
@@ -8,10 +9,15 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
+	<!-- 별칭등록 -->
 	<typeAliases>
-		<typeAlias type=""/>
+		<typeAlias type="com.brEnt.brFamily.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.brEnt.brFamily." alias=""/>
+		<typeAlias type="com.brEnt.brFamily." alias=""/>
+		<typeAlias type="com.brEnt.brFamily." alias=""/>
 	</typeAliases>
 	
+	<!-- mapper파일 등록 -->
 	<mappers>
 		<mapper resource="/mappers/approval-mapper.xml" />
 		<mapper resource="/mappers/archive-mapper.xml" />

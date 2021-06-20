@@ -8,7 +8,7 @@
 <title>brEntertainment </title>
 </head>
 <body>
-
+<!-- 포워딩 -->
 	<jsp:forward page="WEB-INF/views/main.jsp"/>
 
 </body>

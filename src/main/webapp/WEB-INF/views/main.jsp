@@ -9,10 +9,14 @@
 </head>
 <body>
 	
-	<jsp:include page="common/userTemplate.jsp"/>
+	<jsp:include page="common/userMain.jsp"/>
 	
-	<%--  
-	<jsp:include page="common/adminTemplate.jsp"/>
+	<%-- 
+	
+	* 첫화면: 로그인
+	<jsp:include page="member/login.jsp"/>
+	<jsp:include page="common/userMain.jsp"/> -->로그인 후 넘어갈 수 있게끔!
+	<jsp:include page="common/adminMain.jsp"/>
 	--%>
 	
 </body>

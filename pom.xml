@@ -200,7 +200,7 @@
 		    <version>2.4</version>
 		</dependency>
 		
-		<!-- 4. json, gson -->
+		<!-- 4. JSON, GSON -->
 		<!-- JSON -->
 		<dependency>
 		    <groupId>com.googlecode.json-simple</groupId>

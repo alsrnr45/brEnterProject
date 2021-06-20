@@ -30,9 +30,16 @@ public class boardFreeController {
 		return "boardFree/boardFreeUpdate"; 
 	}
 	
+	// 관리자 자유게시판 리스트 
+	@RequestMapping("adminBoardFreeList.admin")
+	public String adminBoardFreeList() { 
+		return "boardFree/adminBoardFreeList"; 
+	}
 	
-	
-	
-	
+	// 관리자 자유게시판 디테일 
+	@RequestMapping("adminBoardFreeDetail.admin")
+	public String adminBoardFreeDetail() { 
+		return "boardFree/adminBoardFreeDetail"; 
+	}
 	
 }

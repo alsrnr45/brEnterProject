@@ -8,8 +8,10 @@
 <title>brEntertainment</title>
 </head>
 <body>
-	
+
+
 	<jsp:include page="common/userMain.jsp"/>
+
 	
 	<%-- 
 	

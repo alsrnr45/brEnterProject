@@ -11,9 +11,25 @@
 	
 	<!-- 별칭등록 :폴더리스트 순으로-->
 	<typeAliases>
-		<typeAlias type="com.brEnt.brFamily.artist.model.vo" alias=""/>
-		<typeAlias type="com.brEnt.brFamily." alias=""/>
-		<typeAlias type="com.brEnt.brFamily." alias=""/>
+		<typeAlias type="com.brEnt.brFamily.artist.model.vo.Artist" alias="Artist"/>
+		<typeAlias type="com.brEnt.brFamily.boardArchive.model.vo.BoardArchive" alias="BoardArchive"/>
+		<typeAlias type="com.brEnt.brFamily.boardEvent.model.vo.BoardEvent" alias="BoardEvent"/>
+		<typeAlias type="com.brEnt.brFamily.boardEvent.model.vo.BoardEventReply" alias="BoardEventReply"/>
+		<typeAlias type="com.brEnt.brFamily.boardFree.model.vo.BoardFree" alias="BoardFree"/>
+		<typeAlias type="com.brEnt.brFamily.boardFree.model.vo.BoardFreeReply" alias="BoardFreeReply"/>
+		<typeAlias type="com.brEnt.brFamily.boardMenu.model.vo.BoardMenu" alias="BoardMenu"/>
+		<typeAlias type="com.brEnt.brFamily.boardMenu.model.vo.BoardMenuReply" alias="BoardMenuReply"/>
+		<typeAlias type="com.brEnt.brFamily.chat.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.ElecApproval" alias="ElecApproval"/>
+		<typeAlias type="com.brEnt.brFamily.mail.model.vo.Mail" alias="Mail"/>
+		<typeAlias type="com.brEnt.brFamily.meetingRoom.model.vo.MeetingRoom" alias="MeetingRoom"/>
+		<typeAlias type="com.brEnt.brFamily.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.brEnt.brFamily.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.brEnt.brFamily.notice.model.vo.NoticeReply" alias="NoticeReply"/>
+		<typeAlias type="com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt" alias="PersonnelMgt"/>
+		<typeAlias type="com.brEnt.brFamily.phoneBook.model.vo.PhoneBook" alias="PhoneBook"/>
+		<typeAlias type="com.brEnt.brFamily.schedule.model.vo.Schedule" alias="Schedule"/>
+		<typeAlias type="com.brEnt.brFamily.store.model.vo.Product" alias="Product"/>
 	</typeAliases>
 	
 	<!-- mapper파일 등록 -->
@@ -34,5 +50,7 @@
 		<mapper resource="/mappers/schedule-mapper.xml" />
 		<mapper resource="/mappers/store-mapper.xml" />
 	</mappers>
+
+
 
 </configuration>

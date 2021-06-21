@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment</title>
+<title>BR-Home-User</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />

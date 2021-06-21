@@ -5,5 +5,40 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-		
+	<!-- DB연결설정: dataSource 빈 등록 -->	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="BRENTER" />
+		<property name="password" value="BRENTER" />
+	</bean>
+	
+	<!-- SqlSessionFactory 빈 등록 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+
+
+	<!-- SqlSession 빈 등록 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	
+	<!-- 
+		ref=참조하다
+		property : setter DI 
+		constructor-arg : 생성자 DI
+	-->
+	
+	
+	<!-- 파일업로드 관련 빈 등록 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="100000000"/>
+		<property name="maxInMemorySize" value="100000000"/>
+	</bean>
+	
+	
+
 </beans>

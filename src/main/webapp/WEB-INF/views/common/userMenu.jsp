@@ -125,8 +125,8 @@
                         </a>
                         <div class="collapse" id="electronicApproval" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">문서함</a>
-                                <a class="nav-link" href="#">진행중인 문서</a>     
+                                <a class="nav-link" href="approvalTotalList.ea">문서함</a>
+                                <a class="nav-link" href="approvalStandbyList.ea">진행중인 문서</a>     
                             </nav>
                         </div>
                         

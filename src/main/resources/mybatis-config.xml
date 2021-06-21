@@ -9,9 +9,9 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	
-	<!-- 별칭등록 -->
+	<!-- 별칭등록 :폴더리스트 순으로-->
 	<typeAliases>
-		<typeAlias type="com.brEnt.brFamily." alias=""/>
+		<typeAlias type="com.brEnt.brFamily.artist.model.vo" alias=""/>
 		<typeAlias type="com.brEnt.brFamily." alias=""/>
 		<typeAlias type="com.brEnt.brFamily." alias=""/>
 	</typeAliases>

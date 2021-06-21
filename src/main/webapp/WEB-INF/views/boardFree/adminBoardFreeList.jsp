@@ -47,7 +47,7 @@
 	    box-shadow: none;}
 	    
 	/* 관리자 자유게시판 리스트 */
-	h1{margin-bottom:20px;}
+	h1{margin-bottom: 20px;}
 	
 </style>
 </head>

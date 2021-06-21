@@ -55,10 +55,10 @@
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 
 	/* 자유게시판 작성 */
-	h1{margin-top:20px; margin-left:60px;}  
+	h1{margin-top: 20px; margin-left: 60px;}  
     #boardFreeEnrollForm>.content_1>table{
-    	margin-left:60px;
-        width:85%;
+    	margin-left: 60px;
+        width: 85%;
     }
 </style>	
 </head>

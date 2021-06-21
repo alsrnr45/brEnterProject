@@ -191,12 +191,12 @@
 	</div>
 		
 	<script>
-    $(function() {
-        $(".boardFreeList>tbody>tr").click(function() {
-            location.href = "boardFreeDetail.bf";
-            console.log("자유게시글 클릭");
-        })
-    }); 
+   		$(function() {
+       		$(".boardFreeList>tbody>tr").click(function() {
+            	location.href = "boardFreeDetail.bf";
+            	console.log("자유게시글 클릭");
+        	})
+    	}); 
    	</script>
    		
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

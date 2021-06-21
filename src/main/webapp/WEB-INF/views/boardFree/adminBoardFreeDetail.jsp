@@ -47,11 +47,9 @@
 	    box-shadow: none;}
 	    
 	/* 관리자 자유게시판 디테일 */
-	h1{margin-top:20px; margin-left:40px;}  
-
-    .adBoardFreeDetailArea, .adBoardFreeReplyArea{margin-left:40px;}
-
-    a:hover{color:rgb(255, 235, 152);}
+	h1{margin-top: 20px; margin-left: 40px;}  
+    .adBoardFreeDetailArea, .adBoardFreeReplyArea{margin-left: 40px;}
+    a:hover{color: rgb(255, 235, 152);}
 	
 </style>
 </head>

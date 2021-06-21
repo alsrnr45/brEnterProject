@@ -55,11 +55,12 @@
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 	
 	/* 자유게시판 수정 */
-	h1{margin-top:20px; margin-left:40px;}  
+	h1{margin-top: 20px; margin-left: 60px;}  	
     #boardFreeUpdateForm>.content_1>table{
-    	margin-left:60px;
-        width:85%;
+    	margin-left: 60px;
+        width: 85%;
     }
+    a:hover{color: rgb(155, 89, 182);}
 	
 </style>	
 </head>
@@ -87,7 +88,7 @@
 	
 	                        <form id="boardFreeUpdateForm" method="post" action="" enctype="multipart/form-data">
 	                           
-	                            <div style="margin-left:900px;">
+	                            <div style="margin-left:870px;">
 	                                <button type="submit" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
 	                                    수정하기</button>
 	                                    <a class="btn btn-primary" href="" style="background-color:lightgray; border-color:lightgray;">목록으로</a>

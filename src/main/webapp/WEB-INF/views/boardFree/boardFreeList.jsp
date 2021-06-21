@@ -16,6 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
+ 
 	/* 폰트 */
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 	* {font-family: 'Noto Sans KR', sans-serif;}
@@ -35,7 +36,7 @@
 	}
 	option:checked {background: rgb(155, 89, 182); color: white;}
 	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
-	p{font-size:15px; text-align: left; margin-top: 7px; margin-left: 15px;}
+	p{font-size:15px; text-align: center; margin-top: 7px; margin-left: 15px;}
 	
 	/* 페이징바 */
 	.pagination a {color:black;}
@@ -54,13 +55,12 @@
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 	
-	/* 자유게시판 리스트 */
-    h1{margin-bottom:20px;}
-  	.boardFreeList{
+  	/* 자유게시판 리스트 */
+    h1{margin-bottom: 20px;}
+  	table{
   		text-align: center; 
   		margin: auto;
   	}
-  	
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -86,20 +86,20 @@
 	
 	                        <div class="card mb-4">
 	                            <div class="card-header">
-	                                <i class="fas fa-chalkboard"></i> 게시판 > 자유게시판
-	                            </div>
-	                            <div class="card-body">
-	                                
+	                                <i class="fas fa-chalkboard"></i> 게시판 > 자유게시판 &nbsp;
 	                                <a class="btn btn-primary" href="boardFreeEnroll.bf" style="background-color:rgb(155, 89, 182); ; border-color:rgb(155, 89, 182);">
-	                                	작성하기</a> <br><br>
+	                                	작성하기</a> 
+	                            </div>
+	                            <div class="card-body">	                                	                             	
+
 	                                <table id="datatablesSimple" class="boardFreeList">
-	                                    <thead style="text-align:center;">
+	                                    <thead>
 	                                        <tr>
-	                                            <th>번호</th>
-	                                            <th>제목</th>
-	                                            <th>작성자</th>
-	                                            <th>조회수</th>
-	                                            <th>작성일</th>
+	                                            <th style="text-align:center;">번호</th>
+	                                            <th style="text-align:center;">제목</th>
+	                                            <th style="text-align:center;">작성자</th>
+	                                            <th style="text-align:center;">조회수</th>
+	                                            <th style="text-align:center;">작성일</th>
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
@@ -180,29 +180,29 @@
 	                                            <td>12</td>
 	                                            <td>2021-06-15</td>
 	                                        </tr>
-	                                    </tbody>
-	                                </table>
+	                                    </tbody>	                                                                 
+	                                </table>	                               
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
             	</main> 
         	</div>
-		</div>
+	</div>
 		
-		<script>
-        $(function() {
-            $(".boardFreeList>tbody>tr").click(function() {
-                location.href = "boardFreeDetail.bf";
-                console.log("자유게시글 클릭");
-            })
-        }); 
-   		</script>
+	<script>
+    $(function() {
+        $(".boardFreeList>tbody>tr").click(function() {
+            location.href = "boardFreeDetail.bf";
+            console.log("자유게시글 클릭");
+        })
+    }); 
+   	</script>
    		
-   		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	    <script src="resources/js/scripts.js"></script>
-	    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
-	    <script src="resources/js/datatables-simple-demo.js"></script>
+   	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+	<script src="resources/js/scripts.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+	<script src="resources/js/datatables-simple-demo.js"></script>
 	   		
 </body>
 </html>

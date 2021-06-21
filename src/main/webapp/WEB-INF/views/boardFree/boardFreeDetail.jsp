@@ -54,14 +54,11 @@
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 	
-	/* 자유게시판 디테일 */
-	
-	.wrap{width:1200px;}	
-	h1{margin-top:20px; margin-left:40px;}  
-
-    .boardFreeDetailArea, .boardFreeReplyArea{margin-left:40px;}
-
-    a:hover{color:rgb(155, 89, 182);}
+	/* 자유게시판 디테일 */	
+	.wrap{width: 1200px;}	
+	h1{margin-top: 20px; margin-left: 60px;}  
+    .boardFreeDetailArea, .boardFreeReplyArea{margin-left: 60px;}
+    a:hover{color: rgb(155, 89, 182);}
 	
 </style>
 </head>
@@ -84,7 +81,8 @@
 
                 <h1>자유게시판</h1>
 
-                <a class="btn btn-primary" href="" style="background-color:lightgray; border-color:lightgray; margin-left:900px;">목록으로</a> 
+                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:910px;">
+                목록으로</a> 
                 <br><br><br>
 
                 <div class="content">
@@ -118,9 +116,10 @@
                         </table>
                     </div> <br>
 
-                    <div class="boardFreeBtn" style="margin-left:820px;">
+                    <div class="boardFreeBtn" style="margin-left:830px;">
                         <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
-                        <a class="btn btn-primary" href="boardFreeUpdate.bf" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">수정하기</a>
+                        <a class="btn btn-primary" href="boardFreeUpdate.bf" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
+                        수정하기</a>
                         <a class="btn btn-danger" href="">삭제하기</a>
                     </div><br><br>
                 </div>

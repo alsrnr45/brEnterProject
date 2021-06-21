@@ -32,6 +32,7 @@
 		<mapper resource="/mappers/personnelMgt-mapper.xml" />
 		<mapper resource="/mappers/phoneBook-mapper.xml" />
 		<mapper resource="/mappers/schedule-mapper.xml" />
+		<mapper resource="/mappers/store-mapper.xml" />
 	</mappers>
 
 </configuration>

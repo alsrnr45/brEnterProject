@@ -1,5 +1,5 @@
 package com.brEnt.brFamily.schedule.model.service;
 
-public class ScheduleServiceImpl {
+public class ScheduleServiceImpl implements ScheduleService  {
 
 }

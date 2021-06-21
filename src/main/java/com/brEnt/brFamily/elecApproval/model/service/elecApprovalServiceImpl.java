@@ -1,5 +1,5 @@
 package com.brEnt.brFamily.elecApproval.model.service;
 
-public interface elecApprovalServiceImpl {
+public class ElecApprovalServiceImpl implements ElecApprovalService {
 
 }

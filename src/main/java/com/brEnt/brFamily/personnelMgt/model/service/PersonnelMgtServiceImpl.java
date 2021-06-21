@@ -1,5 +1,5 @@
 package com.brEnt.brFamily.personnelMgt.model.service;
 
-public interface PersonnelMgtServiceImpl {
+public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 
 }

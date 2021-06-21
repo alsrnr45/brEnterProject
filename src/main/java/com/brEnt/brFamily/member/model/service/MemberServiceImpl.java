@@ -1,5 +1,5 @@
 package com.brEnt.brFamily.member.model.service;
 
-public interface MemberServiceImpl {
+public class MemberServiceImpl implements MemberService {
 
 }

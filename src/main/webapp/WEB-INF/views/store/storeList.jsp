@@ -59,7 +59,7 @@
     .thumbnail{width: 320px; display: inline-block; margin: 15px 20px 15px 20px;}
     .thumbnail:hover{cursor:pointer; opacity:0.7;}
 
-	#layoutSidenav_content div {outline: 1px solid blueviolet;}
+	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 </style>
 
 </head>
@@ -172,9 +172,9 @@
             })
         });
 
-		$('a.feellink').click(function(e) {
-			e.preventDefault();   
-		});
+		// $('a.feellink').click(function(e) {
+		// 	e.preventDefault();   
+		// });
     </script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -54,6 +54,10 @@
 	.input-group {width: 250px; margin-left: 630px;}
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
+	
+	/* 전자결재 전체 리스트 */
+    h1{margin-bottom: 20px;}  
+    .approvalTotalList{text-align: center;}
 
 </style>
 </head>
@@ -72,10 +76,153 @@
         
         	<!-- 컨텐츠 -->
         	<div id="layoutSidenav_content">
-        	
+        		<main>
+	                <div class="container-fluid px-4">
+	                    
+	                    <div class="container-fluid px-4">
+	                        <h1 class="mt-4">전자결재</h1>
+	
+	                        <div class="card mb-4">
+	                            <div class="card-header">
+	                                <i class="far fa-clipboard"></i>&nbsp;
+	                                문서함 &nbsp;
+	                                <a class="btn btn-primary" href="documentEnrollForm.ea" style="background-color:rgb(155, 89, 182); ; border-color:rgb(155, 89, 182);">
+	                                작성하기</a> 
+	                            </div>
+	                            <div class="card-body">
+	                                <!-- 결재대기인 경우에만 빨간색으로 글자색 변경할 것 -->
+	                                <table id="datatablesSimple" class="approvalTotalList">
+	                                    <thead>
+	                                        <tr>
+	                                            <th style="text-align:center;">문서번호</th>
+	                                            <th style="text-align:center;">문서종류</th>
+	                                            <th style="text-align:center;">제목</th>
+	                                            <th style="text-align:center;">기안자</th>
+	                                            <th style="text-align:center;">기안일</th>
+	                                            <th style="text-align:center;">완료일</th>
+	                                            <th style="text-align:center;">결재상태</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                        <tr>
+	                                            <td>11</td>
+	                                            <td>업무연락</td>
+	                                            <td>문서 11입니다.</td>
+	                                            <td>최과장</td>
+	                                            <td>2021-06-05</td>
+	                                            <td></td>
+	                                            <td style="color:red">결재대기</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>10</td>
+	                                            <td>업무연락</td>
+	                                            <td>문서 10입니다.</td>
+	                                            <td>최과장</td>
+	                                            <td>2021-06-05</td>
+	                                            <td></td>
+	                                            <td style="color:red">결재대기</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>9</td>
+	                                            <td>업무연락</td>
+	                                            <td>문서 9입니다.</td>
+	                                            <td>최과장</td>
+	                                            <td>2021-06-05</td>
+	                                            <td></td>
+	                                            <td style="color:red">결재대기</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>8</td>
+	                                            <td>기획안</td>
+	                                            <td>문서 8입니다.</td>
+	                                            <td>최부장</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>반려</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>7</td>
+	                                            <td>기획안</td>
+	                                            <td>문서 7입니다.</td>
+	                                            <td>최사원</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>반려</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>6</td>
+	                                            <td>회람</td>
+	                                            <td>문서 6입니다.</td>
+	                                            <td>최사원</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>결재완료</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>5</td>
+	                                            <td>회람</td>
+	                                            <td>문서 5입니다.</td>
+	                                            <td>최사원</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>결재완료</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>4</td>
+	                                            <td>연차</td>
+	                                            <td>문서 4입니다.</td>
+	                                            <td>최사원</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>결재완료</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>3</td>
+	                                            <td>연차</td>
+	                                            <td>문서 3입니다.</td>
+	                                            <td>최사원</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>결재완료</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>2</td>
+	                                            <td>지출결의서</td>
+	                                            <td>문서 2입니다.</td>
+	                                            <td>최과장</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>결재완료</td>
+	                                        </tr>
+	                                        <tr>
+	                                            <td>1</td>
+	                                            <td>지출결의서</td>
+	                                            <td>문서 1입니다.</td>
+	                                            <td>최부장</td>
+	                                            <td>2021-06-05</td>
+	                                            <td>2021-06-07</td>
+	                                            <td>결재완료</td>
+	                                        </tr>
+	                                    </tbody>
+	                                </table>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+            	</main> 
         	</div>
         	
     </div>
+    
+    <script>
+    	$(function() {
+            $(".approvalTotalList>tbody>tr").click(function() {
+            	// 폼마다 디테일 뷰 다름 => 조건 설정 (조건 1: 공문, 기획안, 회람 / 조건 2: 연차 / 조건 3: 지출결의서)
+            	location.href = "";
+                console.log("전자결재문서클릭");
+            })
+        })
+    </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="resources/js/scripts.js"></script>

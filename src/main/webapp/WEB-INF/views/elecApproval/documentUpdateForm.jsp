@@ -51,6 +51,7 @@
 	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
 	
 	a:hover{color:rgb(155, 89, 182);}
+	a{text-decoration: none;}
 	
 </style>
 </head>
@@ -160,11 +161,10 @@
 								<tr height="40">									
 									<th>기안 일시</th>
 									<td><input type="text" name="" id="" value="2021-06-11 10:18:07" readonly></td>
-                                    <th>첨부파일</th>
+                                    <th height="60">첨부파일</th>
 									<td>
                                         <input type="file" name="ecUpfile" id="ecUpfile" style="cursor:pointer;">
-                                               &nbsp; 현재 업로드된 파일 : 
-                                        <a href="" download="">test.png</a>
+                                        <a href="" download=""> &nbsp;&nbsp; test.png</a>
                                     </td>
 								</tr>
 								<tr height="30">

@@ -116,6 +116,11 @@
                            	 회의실
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                         </a>
+                        <div class="collapse" id="mail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="test.mt">jsp테스트용</a>
+                            </nav>
+                        </div>
 
                         <!-- 전자결재 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#electronicApproval" aria-expanded="false" aria-controls="collapseLayouts">

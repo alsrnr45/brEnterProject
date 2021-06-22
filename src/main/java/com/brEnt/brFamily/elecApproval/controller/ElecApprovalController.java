@@ -53,6 +53,11 @@ public class ElecApprovalController {
 		return "elecApproval/documentUpdateForm";
 	}
 	
+	// 작성자 : 최선희 -- 기획안/업무연락/회람 상세페이지
+	@RequestMapping("documentDetail.ea")
+	public String documentDetail() {
+		return "elecApproval/documentDetail";
+	}
 	
 	
 	

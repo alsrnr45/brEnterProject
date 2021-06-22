@@ -180,7 +180,7 @@
                         </div>
 
                         <!-- 채팅 -->
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="chatMain.ch">
                             <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                             	채팅
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>

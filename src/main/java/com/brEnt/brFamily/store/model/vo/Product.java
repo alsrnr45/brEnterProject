@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Store {
+public class Product {
 
 	private int pdtNo;
 	private String pdtCtg;

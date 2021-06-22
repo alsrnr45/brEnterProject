@@ -1,38 +1,15 @@
 package com.brEnt.brFamily.store.controller;
 
-import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import com.brEnt.brFamily.common.model.vo.PageInfo;
-import com.brEnt.brFamily.common.template.Pagination;
-import com.brEnt.brFamily.store.model.service.StoreService;
-import com.brEnt.brFamily.store.model.vo.Product;
 
 @Controller
 public class StoreController {
 
-	@Autowired
-	private StoreService sService;
-	
 	// 작성자 : 김혜미 -- 스토어 리스트
 	@RequestMapping("storeList.st")
-	public ModelAndView storeList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
-
-		int listCount = sService.selectProductListCount();
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 6, 10);
-		
-		ArrayList<Product> list = sService.selectProductList(pi);
-		
-		mv.addObject("pi", pi)
-		  .addObject("list", list)
-		  .setViewName("store/storeList");
-		
-		return mv;
+	public String storeList() {
+		return "store/storeList";
 	}
 	
 	// 작성자 : 김혜미 -- 스토어 디테일

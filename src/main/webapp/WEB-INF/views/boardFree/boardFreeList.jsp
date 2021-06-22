@@ -61,6 +61,7 @@
   		text-align: center; 
   		margin: auto;
   	}
+  	
 </style>
 </head>
 <body class="sb-nav-fixed">

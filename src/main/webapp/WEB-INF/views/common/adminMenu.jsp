@@ -36,8 +36,8 @@
 	                </a>
 	                <div class="collapse" id="electronicApproval" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                    <nav class="sb-sidenav-menu-nested nav">
-	                        <a class="nav-link" href="#">문서함</a>
-	                        <a class="nav-link" href="#">진행중인문서</a>
+	                        <a class="nav-link" href="adminApprovalTotalList.ea">문서함</a>
+	                        <a class="nav-link" href="adminApprovalStandbyList.ea">진행중인 문서</a>
 	                    </nav>
 	                </div>    
 	
@@ -51,7 +51,7 @@
 	                    <nav class="sb-sidenav-menu-nested nav">
 	                        <a class="nav-link" href="#">경조사</a>
 	                        <a class="nav-link" href="#">주간식단</a>
-	                        <a class="nav-link" href="adminBoardFreeList.admin">자유게시판</a>
+	                        <a class="nav-link" href="adminBoardFreeList.bf">자유게시판</a>
 	                    </nav>
 	                </div>
 	                

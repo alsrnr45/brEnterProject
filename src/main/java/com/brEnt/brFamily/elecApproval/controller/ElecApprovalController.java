@@ -59,9 +59,23 @@ public class ElecApprovalController {
 		return "elecApproval/documentDetail";
 	}
 	
+	// 작성자 : 최선희 -- 관리자 전자결재 전체 리스트 
+	@RequestMapping("adminApprovalTotalList.ea")
+	public String adminApprovalTotalList() {
+		return "elecApproval/adminApprovalTotalList";
+	}
 	
+	// 작성자 : 최선희 -- 관리자 전자결재 진행중인 문서 승인 리스트 
+	@RequestMapping("adminApprovalStandbyList.ea")
+	public String adminApprovalStandbyList() {
+		return "elecApproval/adminApprovalStandbyList";
+	}
 	
-	
+	// 작성자 : 최선희 -- 관리자 기획안/업무연락/회람 상세 페이지
+	@RequestMapping("adminDocumentDetail.ea")
+	public String adminDocumentDetail() {
+		return "elecApproval/adminDocumentDetail";
+	}
 	
 	
 	

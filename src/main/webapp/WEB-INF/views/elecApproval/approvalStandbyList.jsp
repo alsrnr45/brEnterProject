@@ -218,8 +218,8 @@
     	$(function() {
             $(".approvalTotalList>tbody>tr").click(function() {
             	// 폼마다 디테일 뷰 다름 => 조건 설정 (조건 1: 공문, 기획안, 회람 / 조건 2: 연차 / 조건 3: 지출결의서)
-            	location.href = "";
-                console.log("전자결재문서클릭");
+            	location.href = "documentDetail.ea";
+                console.log("전자결재 문서 클릭");
             })
         })
     </script>

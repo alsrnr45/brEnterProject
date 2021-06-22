@@ -31,13 +31,13 @@ public class BoardFreeController {
 	}
 		
 	// 관리자 자유게시판 리스트 
-	@RequestMapping("adminBoardFreeList.admin")
+	@RequestMapping("adminBoardFreeList.bf")
 	public String adminBoardFreeList() { 
 		return "boardFree/adminBoardFreeList"; 
 	}
 		
 	// 관리자 자유게시판 디테일 
-	@RequestMapping("adminBoardFreeDetail.admin")
+	@RequestMapping("adminBoardFreeDetail.bf")
 	public String adminBoardFreeDetail() { 
 		return "boardFree/adminBoardFreeDetail"; 
 	}

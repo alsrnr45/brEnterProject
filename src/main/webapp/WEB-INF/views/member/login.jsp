@@ -50,13 +50,15 @@
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
                                 
                                 <div class="card-body">
-                                    <form style="margin: 30px;">
+                                
+                                <!-- LOGIN 요청 -->
+                                    <form action="login.me" method="post" style="margin: 30px;">
                                         <div class="form-floating mb-3" style="margin-top: 30px;">
-                                            <input class="form-control" id="userId" type="text" placeholder="@brent.com" style="border: none; border-bottom: 1px solid #ddd; border-radius:0px !important; " />
+                                            <input class="form-control" id="userId" type="text" name="id" placeholder="@brent.com" style="border: none; border-bottom: 1px solid #ddd; border-radius:0px !important; " />
                                             <label for="userId" >ID</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputPassword" type="password" placeholder="Password"  style="border: none; border-bottom: 1px solid #ddd; border-radius:0px !important "/>
+                                            <input class="form-control" id="inputPassword" type="password" name="pwd" placeholder="Password"  style="border: none; border-bottom: 1px solid #ddd; border-radius:0px !important "/>
                                             <label for="inputPassword">Password</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0" style="align-items: flex-start;">

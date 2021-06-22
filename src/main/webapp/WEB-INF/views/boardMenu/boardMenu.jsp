@@ -56,12 +56,7 @@
 	
 	/* 검색창 */
 	
-	.searchTag {
-		color:black;
-		position:absolute;
-		right:56%;
-		top:260px;
-	}
+	.searchTag {color:black;}
 	a:hover {
 		color:gray;
 		cursor:pointer;

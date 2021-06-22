@@ -46,83 +46,76 @@
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
 	    
-	/*주문목록 있을때*/
+	/* 주문목록 있을 때 */
 	
-	/*전체화면*/
-	.orderOuter{
-		margin: auto;
-		margin-bottom: 150px;
-	}
+	/* 테이블*/
+	
+	.orderOuter {
+		margin:auto;
+	}  
 	table {
-		font-size: small;
+		font-size:0.875em;
+	} 
+	.productInfo {
+		width: 52%;
+	}
+	.amount {
+		width:16%;
+	}
+	.resultPrice {
+		width: 20%;
+	}
+	.productImg {
+		width:10%;
 	}
 	
-	/*상품상세정보*/
-	.discountPrice {
-		margin-top: 17px;
-	}
-	.delivery {
-		margin-top:17px;
-	}
-	img {
-		height:100px;
-	}
-	
-	/*버튼,a태그*/
-	.StoreBtn {
+	/* 버튼 */
+	.storeBtn {
+		border: 15px solid rgb(155, 89, 182);
 		background-color: rgb(155, 89, 182);
-		color: white;
-		border-radius: 3px;
-		border: 1px solid rgb(155, 89, 182);
-		font-weight: bold;
-		font-size: 15px;
-		text-decoration: none;
-		padding: 12px;
-		margin: 2px;
-	}
-	.orderBtn {
-		width:780px;
-		padding:10px;
-		margin:10px;
-	}
-	a:hover {
-		color:black;
+		border-radius:3px;
+		text-decoration:none;
+		color:white;
+		font-size:0.875em;
+		font-weight:bold;
+		margin-left: 44%;
 	}
 	
-	/*주문내역 없을떼*/
+	/* 주문내역 없을 때 */
 	
-	/*전체화면*/
-    .orderOuter2 {
-    	margin-auto;
-    	margin-top:250px;
-    }
-    
-    /*텍스트*/
-    
-    .circleOrderImg {
-    	width: 75px;
-    	height: 75px;
-    	border-radius: 50px;
-    	background-color: lightgray;
-    }
-    .circleImg {
-    	width: 75px;
-    	height: 75px;
-    	border-radius: 50px;
-    	background-color: lightgray;
-    }
-    
-    /*버튼*/
-    .orderBtn2 {
-    	background-color: rgb(155, 89, 182);
-    	color: white;
-    	border-radius: 3px;
-    	border: 1px solid rgb(155, 89, 182);
-    	font-weight: bold;
-    	font-size: 15px;
-    	padding: 12px;
-    	text-decoration: none;
-    }
+	.orderNoOuter {
+		margin:auto;
+	}
+	
+	/* 아이콘 */
+	.orderIconOuter {
+		border: 1px solid lightgray;
+		background-color: lightgray;
+		border-radius: 50%;
+		width: 26%;
+		height: 51%;
+		margin-left:37%;
+		margin-bottom:2%;
+	}
+	#order-list {
+		font-size:2.2em;
+		margin-top:17%;
+		margin-left:25%;
+	}
+	
+	/* 버튼 */
+	.storeBtn2 {
+		border: 12px solid rgb(155, 89, 182);
+		background-color: rgb(155, 89, 182);
+		border-radius:3px;
+		text-decoration:none;
+		color:white;
+		font-size:0.875em;
+		font-weight:bold;
+		position:absolute;
+		margin-bottom:15%;
+		margin-left:4%;
+	}
     
 </style>
 
@@ -143,77 +136,62 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
-            <!-- 주문목록 있을때 보여질 화면 -->
-            <div class="orderOuter" align="center">
-            	<form name="orderList" id="orderList" method="post" action="#">
-            		<table class="table">
-            			<thead class="table-light">
-            				<tr>
-            					<th>&nbsp; 상품정보</th>
-            					<th>수량</th>
-            					<th class="orderPrice">결제금액</th>
-            					<th>배송상태</th>
-            				</tr>
-            			</thead>
-            			<tbody>
-            				<tr>
-            					<td>
-            						<img src="resources/produnctUpfiles/peng.png" class="orderProd">&nbsp;&nbsp;
-            					</td>
-            					<td><br><br>&nbsp; 2</td>
-            					<td>
-            						<div class="discountPrice"><br>4,000 &nbsp;원</div>
-            					</td>
-            					<td>
-            						<div class="delivery"><br> 배송중</div>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td>
-            						<img src="resources/produnctUpfiles/peng.png" class="orderProd">&nbsp;&nbsp;
-            					</td>
-            					<td><br><br>&nbsp; 1</td>
-            					<td>
-            						<div class="discountPrice"><br> 40,000 &nbsp; 원</div>
-            					</td>
-            					<td>
-            						<div class="delivery"><br> 배송완료</div>
-            					</td>
-            				</tr>
-            			</tbody>	
-            		</table>
-            	</form>
-            	
-            	<br><br>
-            	<div class="orderBtn" align="center">
-            		<a href="#" class="storeBtn">스토어가기</a>
-            	</div>
-            </div>
-            
-            <!-- 주문목록 없을때 보여질 화면 -->
-            <!-- 
-            <div class="orderOuter2" align="center">
-            	
-            	<div class="circleOrderImg">
-            		<div class="circleImg">
-            			<div class="fas fa-clipboard-list" style="font-size: 36px; position: relative; top: 20px; right: 2px;"></div>
+            <!-- 주문목록 있을 때 보여질 화면 -->  
+          	<div class="orderOuter">
+	        	<form name="" id="" method="post" action="#">
+	        		<table class="table">
+	        			<thead class="table-light">
+	        				<tr>
+	        					<th class="productInfo">상품정보</th>
+	        					<th class="amount">수량</th>
+	        					<th class="resultPrice">결제금액</th>
+								<th>배송상태</th>		
+	        				</tr>
+	        			</thead>
+	        			<tbody>
+	        				<tr>
+	        					<td>
+	        						<p><img src="resources/images/peng.png" class="productImg" align="left">&nbsp;자바소년단 포토카드</p>
+	        					</td>
+	        					<td>2</td>
+	        					<td><div>4,000 원</div></td>
+	        					<td>
+	        						<div>배송중</div>
+	        					</td>
+	        				</tr>
+	        			</tbody>
+	        		</table>
+	        	</form>
+	        	
+	        	<div clss="btn">
+	        		<br>
+	        		<a href="" class="storeBtn">스토어 가기</a>
+	        	</div>
+	        </div> 
+        	
+        	
+        	<!-- 주문내역 없을때 보여질 화면 -->
+        	<!--  
+        	<div class="orderNoOuter">
+        		<div class="orderIconOuter">
+        			<div class="orderIcon">
+        				<div class="fas fa-clipboard-list" id="order-list"></div>
         			</div>
-      			</div>
-      			<br>
-      			
-      			<div class="ordertext">
-          			<h4 class="orderText2">주문내역이 없습니다.</h4>
-      			</div>
-      			<br><br>
-      			
-      			<div>
-          			<a href="#" class="orderBtn2">스토어가기</a>
-      			</div> 
-      			
-      		</div>	
-             -->
+        		</div>
+        		
+        		<div>
+        			<h4>주문내역이 없습니다.</h4>
+        		</div>
+        		
+        		<br>
+	        	<div>
+	        		<a href="" class="storeBtn2">스토어가기</a>
+	        	</div>
+	        </div>
+	        -->
+            
         </div>
-        
+   
     </div>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -111,12 +111,12 @@
                         </div>
 
                         <!-- 회의실 -->
-                        <a class="nav-link" href="#">
+                        <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#meetingRoom" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-handshake"></i></div>
                            	 회의실
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                         </a>
-                        <div class="collapse" id="mail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="meetingRoom" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="test.mt">jsp테스트용</a>
                             </nav>
@@ -180,7 +180,7 @@
                         </div>
 
                         <!-- 채팅 -->
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="chatMain.ch">
                             <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
                             	채팅
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>

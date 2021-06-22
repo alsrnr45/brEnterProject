@@ -46,106 +46,109 @@
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
 	    
-	 /*장바구니 목록 있을때*/
+	/* 장바구니 목록 있을때 */
+	    
+	/* 테이블 */    
+	.cartOuter {
+		margin:auto;	
+	}  
+	.table-light, .trOne {
+		font-size:0.875em;
+	}
+	.productInfo {
+		width: 60%;
+	}
+	.amount {
+		width: 27%;
+	}
+	.productPrice {
+		width: 15%;
+	}
+	.productImg {
+		width:10%;
+	}
+	.originalPrice {
+		color:gray;
+		text-decoration: line-through;
+	}
+	.priceInfo {
+		float:right;
+		font-weight:bold;
+		padding:3%;
+		font-size:0.9375em;
+	}
+	
+	/* 버튼*/
+	.deleteBtn {
+		border: 1px solid rgb(207, 154, 228);
+		background: rgb(207, 154, 228);
+		color:white;
+		border-radius:3px;
+		width:13%;
+		font-size: 0.75em;
+		position:relative;
+		bottom:13px;
+	}
+	.btns {
+		padding:0 0 0 250px;
+	}
+	.orderBtn, .storeBtn {
+		border: 15px solid rgb(155, 89, 182);
+		background-color: rgb(155, 89, 182);
+		border-radius:3px;
+		text-decoration:none;
+		color:white;
+		font-size:0.875em;
+		font-weight:bold;
+	}
+	a:hover {
+		color:black;
+	}
+	
+	/*장바구니 목록 없을때*/
+	
+	.cartNoOuter {
+		margin:auto;
+	}
+	
+	/*아이콘*/
+	.cartIconOuter {
+		border: 1px solid lightgray;
+		background-color: lightgray;
+		border-radius: 50%;
+		width: 17%;
+		height: 47%;
+		margin-left:40%;
+		margin-bottom:2%;
+		
+		
+	}
+	#shopping-cart {
+		font-size:2.2em;
+		margin-top:22%;	
+		margin-left:17%;	
+	}
+	
+	/* 텍스트 */
+	.cartText {
+		margin-left:9%;
+		color:gray;
+	}
+	
+	/* 버튼 */
+	.storeBtn2 {
+		border: 13px solid rgb(155, 89, 182);
+		background-color: rgb(155, 89, 182);
+		border-radius:3px;
+		text-decoration:none;
+		color:white;
+		font-size:0.875em;
+		font-weight:bold;
+		position:absolute;
+		margin-bottom:15%;
+		margin-left:10%;
+	}    
 	 
-	 /*전체화면*/
-	 .cartouter {
-	 	margin: auto;
-	 	margin-bottom: 150px;
-	 }
-	 table {
-	 	font-size: small;
-	 }
-     
-     /*목록 상세정보*/
-     img {
-     	height: 100px;
-     } 
-     .cartPrice2 {
-     	font-weight: bolder;
-     	font-size: 15px;
-     	width: 780px;
-     	padding: 0 90px 0 90px;
-     	margin-right:10px;
-     }
-     .originPrice, .discountPrice, .resultPrice {
-     	margin-top:5px;
-     }   
-     .originPrice {
-     	color:gray;
-     	text-decoration:line-through;
-     }   
-     
-     /*a태그, 버튼*/
-     .orderBtn, .storeBtn {
-     	background-color: rgb(155, 89, 182);
-     	color: white;
-     	border-radius: 3px;
-     	border: 1px solid rgb(155, 89, 182);
-     	font-weight: bold;
-     	font-size: 15px;
-     	text-decoration: none;
-     	padding: 12px;
-     	margin: 2px;
-     	position: relative;
-     	top: 43px;
-     	right: 50px;
-     }  
-     .btns {
-     	width: 780px;
-     	padding: 10px;
-     	margin: 10px;
-     }
-     .cartBtn {
-     	background-color: rgb(155, 89, 182);
-     	color: white;
-     	border-radius: 3px;
-     	border: 1px solid rgb(155, 89, 182);
-     	font-weight: bold;
-     	font-size: 15px;
-     	padding: 12px;
-     	text-decoration: none;
-     }
-     .orderBtn {
-     	padding: 12px 27px 12px 27px;
-     }
-     #deleteBtn {
-     	background-color: rgb(207, 154, 228);
-        color: white;
-        font-size: 12px;
-        border: 1px solid rgb(207, 154, 228);
-        border-radius: 3px;
-        width: 84px;
-        position: absolute;
-        bottom: 228px;
-        left: 478px;
-     }
-     a:hover {
-     	color:black;
-     }
-     
-     /*장바구니 목록 없을때*/
-     
-     /*전체화면*/
-     
-     .cartouter1 {
-     	margin: auto;
-     	margin-top:250px;
-     }
-     
-     /*안내문구*/
-     .circleimg {
-     	width: 75px;
-     	height: 75px;
-     	border-radius: 50px;
-     	background-color: lightgray;
-     }
-     .carttext2 {
-     	margin-top: -11px;
-     	color: gray;
-     	font-weigth: 400px;
-     }
-             
 </style>
 
 </head>
@@ -165,85 +168,76 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
-            <div class="cartouter" align="center">
-        		<form name="cartList" id="cartList" method="post" action="#">
-            		<table class="table">
-                		<thead class="table-light">
-                    		<tr>
-		                        <th><input type="checkbox" name="cartProd" value="detailProd">&nbsp; 상품정보</th>
-		                        <th>수량</th>
-		                        <th class="prodPrice">상품금액</th>
-		                    </tr>
-		                </thead>
-		                <tbody>
-		                    <tr>
-		                        <td>
-		                            <input type="checkbox" name="cartProd" value="selectProd" class="cartProd"> 
-		                            <img src="resources/images/peng.png">&nbsp;&nbsp; 자바소년단 포토카드
-		                        </td>
-		                        <td><br><br>&nbsp; 2</td>
-		                        <td>
-		                        <div class="originPrice"> <br>4,000 &nbsp;원</div>
-		                        <div class="discountPrice"> 5,000 &nbsp;원</div>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <td>
-		                            <input type="checkbox" name="cartProd" value="selectProd" class="cartProd"> 
-		                            <img src="resources/images/peng.png">&nbsp;&nbsp; 자바소년단 포토카드
-		                        </td>
-		                        <td><br><br>&nbsp; 2</td>
-		                        <td>
-		                        <div class="originPrice"> <br>50,000 &nbsp;원</div>
-		                        <div class="discountPrice"> 40,000 &nbsp;원</div>
-		                        </td>
-		                    </tr>
-		                    <tr>
-		                        <td colspan="3" align="right" class="cartPrice1">
-		                            <div class="cartPrice2">
-		                            	<div class="allProdPrice">총 상품 금액 : 95,000 원</div>
-		                            	<div class="discountProdPrice">직원 할인가 : 76,000 원</div>
-		                            	<br>
-		                            	<div class="resultPrice">결제금액 : 76,000 원</div>
-		                           	</div>
-		                        </td>
-		                    </tr>
-		                </tbody>
-		            </table>
-            		
-            		<div class="btn">
-                		<button type="submit" class="delete" id="deleteBtn">선택상품 삭제</button>
-            		</div>
-        		</form>
-        		
-        		<div class="btns" align="center">
-		            <a href="#" class="orderBtn">주문하기</a>
-		            <a href="#" class="storeBtn">쇼핑 계속하기</a>
-		        </div> 
-        	</div>
-        	
-        	<!-- 장밥구니에 상품이 없을때 보여질 화면 -->
-        	<!--  
-        	<div class="cartouter1" align="center">
-        	
-        		<div class="circlecartimg">
-        			<div class="circleimg">
-            			<div class="fas fa-shopping-cart" style="font-size: 36px; position: relative; top: 20px; right: 2px;"></div>
-        			</div>
-        		</div>
-        	
-        		<div class="carttext">
-		            <h3 class="carttext1">장바구니에 담긴 상품이 없습니다.</h3>
-		            <h5 class="carttext2">원하는 상품을 장바구니에 담아보세요!</h5>
+            <!-- 장바구니 상품 있을 때 보여질 화면 -->
+          	<div class="cartOuter">
+	        	<form name="cartList" id="cartList" method="post" action="#">
+	        		<table class="table">
+	        			<thead class="table-light">
+	        				<tr>
+	        					<th></th>
+	        					<th class="productInfo">상품정보</th>
+	        					<th class="amount">수량</th>
+								<th class="productPrice">상품금액</th>		
+	        				</tr>
+	        			</thead>
+	        			<tbody>
+	        				<tr class="trOne">
+	        					<td>
+	        						<label><input type="checkbox" name="cartProduct" value="product"></label>
+	        					</td>
+	        					<td>
+	        						<p><img src="resources/images/peng.png" align="left" class="productImg">&nbsp;자바소년단 포토카드</p>
+	        					</td>
+	        					<td>2</td>
+	        					<td>
+	        						<div class="originalPrice"> 5,000 원 </div>
+	        						<div> 4,000 원 </div>
+	        					</td>
+	        				</tr>
+	        				<tr>
+	        					<td colspan="4">
+	        						<div class="priceInfo">
+	        							<div>총 상품 금액 : &nbsp;95,000 원</div>
+	        							<div>직원 할인가 : &nbsp;&nbsp;76,000 원</div>
+	        							<br>
+	        							<div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;76,000 원</div>
+	        						</div> 
+	        					</td>	
+	        				</tr>
+	        			</tbody>
+	        		</table>
+	        			<div>
+	        				<button type="submit" class="deleteBtn">선택상품 삭제</button>
+	        			</div>
+	        	</form>
+	        	
+	        	<div class="btns">
+	        		<a href="" class="orderBtn">주문하기</a>&nbsp;&nbsp;&nbsp;
+	        		<a href="" class="storeBtn">쇼핑 계속하기</a>
+	        	</div>
+	        </div> 
+	        
+	        
+	        
+	        <!-- 장바구니 상품없을때 보여질 화면 -->
+	        <!-- 
+	        <div class="cartNoOuter">
+	        	<div class="cartIconOuter">
+	        		<div class="cartIcon">
+			        	<div class="fas fa-shopping-cart" id="shopping-cart"></div>
+			    	</div>
+	        	</div>
+	        	
+		        <div>
+		        	<h3>장바구니에 담긴 상품이 없습니다.</h3>
+		        	<h5 class="cartText">원하는 상품을 장바구니에 담아보세요!</h5>
 		        </div>
-		        <br>
 		        
 		        <div>
-		            <a href="#" class="cartBtn">스토어가기</a>
+		        	<a href="" class="storeBtn2">스토어가기</a>
 		        </div>
-		        
-		      </div>
-		      -->
+	        </div>
+	        -->
 		      
         	</div>
     	</div>

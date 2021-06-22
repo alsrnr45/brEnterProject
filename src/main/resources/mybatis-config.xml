@@ -29,7 +29,7 @@
 		<typeAlias type="com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt" alias="PersonnelMgt"/>
 		<typeAlias type="com.brEnt.brFamily.phoneBook.model.vo.PhoneBook" alias="PhoneBook"/>
 		<typeAlias type="com.brEnt.brFamily.schedule.model.vo.Schedule" alias="Schedule"/>
-		<typeAlias type="com.brEnt.brFamily.store.model.vo.Product" alias="Store"/>
+		<typeAlias type="com.brEnt.brFamily.store.model.vo.Store" alias="Store"/>
 	</typeAliases>
 	
 	<!-- mapper파일 등록 -->

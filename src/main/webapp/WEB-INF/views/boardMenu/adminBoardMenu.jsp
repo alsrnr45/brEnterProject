@@ -45,48 +45,45 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
+	
+	/* 게시판 */
 	    
-	/*전체화면, 검색창*/
-	
-	table, #searchText {
-		font-size: 13px;
-		margin: 10px;
-	}
-	#searchText {
-		width: 200px;
-		height: 30px;
-		margin-top: 90px;
-		margin-left: 200px;
-		float: left;
-	}
-	.searchTag{
-		color: black;
-		decoration: none;
-		position: absolute;
-		margin-top: 93px;
-		margin-left: 378px;
-	}
-	
-	/*리스트*/
-	#menuList {
-		width: 900px;
-		margin-bottom: 415px;
-		margin-right: 18px;
-	}
-	
-	/*페이징바*/
-	.pagination {
-		justify-content: center;
-	}
-	.page-link {
-		color: black;
-	}
-	
-	/*a태그, 버튼*/
-	a:hover {
-		color: gray;
-		cursor: pointer;
-	}
+	.menuOuter {
+	 	font-size:0.8125em;
+	 	margin:auto;
+	 	width:60%;
+	 }
+	 
+	 /* 검색창 */
+	 
+	 .searchTag {
+	 	color:black;
+	 	position:absolute;
+	 	right:56%;
+	 	top:260px;
+	 }
+	 a:hover {
+	 	color:gray;
+	 	cursor:pointer;
+	 }	 
+	 
+	 /* 페이징바 */
+	 
+	 .pagination{justify-content:center;}
+	 .page-link{color:black;}
+	 
+	 /* 버튼 */
+	 
+	 .enrollBtn {
+	 	border: 7px solid rgb(255, 235, 152);
+	 	background:rgb(255, 235, 152);
+	 	font-weight:bold;
+	 	font-size: 1em;
+	 	text-decoration:none;
+	 	color:black;
+	 	border-radius:3px;
+	 	margin-left: 68%;
+	 }
 	
 </style>
 
@@ -107,66 +104,62 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
-            <div class="search">
-    			<div class="searchIcon">
-    				<a class="searchTag"><div class="fa fa-search"></div></a>
-	    			<input type="search" id="searchText" placeholder="검색어를 입력하세요">
-    			</div>
-    		</div>
-    		
-    		<div class="menuOuter" align="center">
-        		<form name="menuList" id="menuList" method="post" action="#">
-            		<table class="table">
-                		<thead class="table-light" align="center">
-                    		<tr>
-                        		<th>번호</th>
-                        		<th>제목</th>
-                        		<th>조회수</th>
-                        		<th>작성일</th>
-                    		</tr>
-                		</thead>
-                		<tbody align="center">
-                    		<tr>
-                        		<td>3</td>
-                        		<td>2021-06-07 ~ 2021-06-11 주간식단</td>
-                        		<td>117</td>
-                        		<td>2021-06-07</td>
-                    		</tr>
-                    		<tr>
-                        		<td>2</td>
-                        		<td>2021-05-31 ~ 2021-06-04 주간식단</td>
-                        		<td>264</td>
-                        		<td>2021-05-31</td>
-                    		</tr>
-                    		<tr>
-                    			<td>1</td>
-                    			<td>2021-05-24 ~ 2021-05-28 주간식단</td>
-                    			<td>310</td>
-                    			<td>2021-05-24</td>
-                    		</tr>
-                		</tbody>
-            		</table>
-        		</form>
-        	</div>
-        	
-        	<nav aria-label="Page navigation example">
-		  		<ul class="pagination">
-		    		<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Previous">
-		        		<span aria-hidden="true">&laquo;</span>
-		      			</a>
-		    		</li>
-		    		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		    		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		    		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		    		<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Next">
-		        		<span aria-hidden="true">&raquo;</span>
-		      			</a>
-		    		</li>
-		  		</ul>
-			</nav>
-			
+        	<div class="menuOuter">
+	        	<div>
+	        		<div>
+	        			<a class="searchTag"><div class="fa fa-search"></div></a>
+	        			<input type="search" id="searchText" placeholder="검색어를 입력하세요">
+	        			<a href="" class="enrollBtn">글쓰기</a>
+	        		</div>
+	        	</div>
+	        	
+	        	<br>
+	        	
+	        	<div>
+	        		<form name="menuList" id="menuList" method="post" action="">
+	        			<table class="table">
+	        				<thead class="table-light" align="center">
+	        					<tr>
+	        						<th>번호</th>
+	        						<th>제목</th>
+	        						<th>조회수</th>
+	        						<th>작성일</th>
+	        					</tr>
+	        				</thead>
+	        				<tbody align="center">
+	        					<tr>
+	        						<td>3</td>
+	        						<td>2021-06-07 ~ 2021-06-11 주간식단</td>
+	        						<td>217</td>
+	        						<td>2021-06-07</td>
+	        					</tr>
+	        				</tbody>
+	        			</table>
+	        		</form>
+	        		
+	        	<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<li class="page-item">
+							<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							</a>
+						</li>
+						<li class="page-item"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item">
+							<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+							</a>
+						</li>
+					</ul>
+				</nav>
+					
+	        	</div>
+        	</div>    
+            
+        </div>   
+		
     </div>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -48,21 +48,22 @@
 	
 	.menuBoardDetailOuter{
 		margin:auto;
-		width:59%;
+		width:60%;
+	}
+	/* 버튼  */
+	.menuBtns{
+		position:relative;
+		bottom:3%;
+		left:77%;
 	}
 	
-	/* 버튼  */
-	
-	.listBtn{
+	.listBtn, .changeBtn, .deleteBtn{
 		text-decoration:none;
-		border: 4px solid rgb(155, 89, 182);
-		background:rgb(155, 89, 182);
-		color:white;
+		border: 4px solid rgb(255, 235, 152);
+		background:rgb(255, 235, 152);
+		color:black;
 		border-radius:3px;
 		font-size:0.8125em;
-		position:relative;
-		bottom:5%;
-		left:92%;
 	}
 	
 	/* 게시판 */
@@ -72,37 +73,24 @@
 	/* 댓글  작성 폼*/
 	#replyContent{
 		font-size:0.8125em;
-		width:85%;
+		width:100%;
 	}  
-	
-	/* 댓글 버튼 */
-	.replyBtn{
-		font-size:0.8125m;
-		border: 19px solid rgb(155, 89, 182);
-		background: rgb(155, 89, 182);
-		border-radius:3px;
-		color:white;
-		position:absolute;
-	} 
-	.replyBtn:hover{
-		color:black;
-	}
 	
 	/* 댓글 내용*/
 	.replyInfo{font-size:0.8125em;}
 	.replyName, .replyCount{font-weight:bold;}
 	.replyDay{color:rgb(181, 180, 180);}
 	
-	/* 본인이 작성한 댓글에만 보여질 버튼 */
-	.btns{position:absolute;}
-	.replyChangeBtn:hover, .replyDeleteBtn:hover{color:gray;}
-	.replychangeBtn, .replyDeleteBtn{
-		border: 1px solid rgb(207, 154, 228);
-		background: rgb(207, 154, 228);
-		border-radius:3px;
-		color:white;
-		font-size:0.75em;
+	/* 댓글 버튼  */
+	.replyDeleteBtn{
+		border: 1px solid rgb(255, 235, 152);
+		background: rgb(255, 235, 152);
+		border-radius: 3px;
+		position:absolute;
+		margin-left:44%;
 	}
+	
+	button:hover, a:hover {color:gray;}
 	
 </style>
 
@@ -124,8 +112,11 @@
         <div id="layoutSidenav_content">
             
             <div class="menuBoardDetailOuter">
-	        	<a href="" class="listBtn">목록으로</a>
-	        	
+        		<div class="menuBtns">
+		        	<a href="" class="listBtn">목록으로</a>
+		        	<a href="" class="changeBtn">수정하기</a>
+		        	<a href="" class="deleteBtn">삭제하기</a>
+	        	</div>
 	        	<div>
 	        		<form name="menuDetailtable" id="menuDetailtable" method="post" action="">
 	        			<table class="table table-bordered">
@@ -152,8 +143,6 @@
 	        		<table border="1" align="center">
 	        			<thead>
 	        				<tr><textarea id="replyContent" cols="50" rows="3" style="resize:none" placeholder="내용을 입력하세요."></textarea></tr>
-	        				&nbsp;
-	        				<tr><button class="replyBtn">댓글등록</button></tr>
 	        			</thead>
 	        			<tbody>
 	        				
@@ -161,21 +150,19 @@
 	        		</table>
 	        		
 	        		<div class="replyInfo">
-	        			<div class="replyCount">댓글(1)</div><br>
-	        				<span class="replyName">김자바</span>
+	        			<span class="replyCount">댓글(1)</span>
+	        				<span>
+	        					<button class="replyDeleteBtn">댓글 삭제</button>
+	        				</span>
+	        				<br><br>
+	        				<input type="checkbox" name="reply" value="reply">
+	        				<span class="replyName">&nbsp;김자바</span>
 			        		<span class="replyDay">&nbsp;&nbsp;2021-06-07 11:30</span>
-			        		<span class="replyContent">배고프당..</span>
-			        	<!-- 본인이 작성한 댓글에만 보여질 버튼 -->	
-	        			<span class="btns">&nbsp;&nbsp;&nbsp;
-		        			<button class="replyChangeBtn">수정</button>
-		        			<button class="replyDeleteBtn">삭제</button>
-	        			</span>
+			        		<br>
+			        		<span class="replyContent">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;배고프당..</span>
+			        	
 	        		</div>	
 	        		</div>
-	        		
-	        		
-	        	</div>
-        	</div>
             
         </div>    
 			

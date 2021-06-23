@@ -100,6 +100,18 @@
 
 			<!-- 상품리스트 -->
 			<div class="listArea">
+				<c:forEach var="s" items="${ list }">
+					<div class="thumbnail" align="center">
+						<input type="hidden" value="">
+						<img src="${ s.pdtFile}" width="300" height="300">
+						<p>
+							${ s.pdtName }<br>
+							<s><em>${ s.orgPrice }원</em></s> &nbsp;&nbsp; ${ s.memPrice }원
+						</p>
+					</div>
+				</c:forEach>
+				
+				<%-- 
 				<div class="thumbnail" align="center">
 					<input type="hidden" value="">
 					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
@@ -140,26 +152,36 @@
 						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
 					</p>
 				</div>
-				<div class="thumbnail" align="center">
-					<input type="hidden" value="">
-					<img src="resources/profileUpfiles/hamster1.jpg" width="300" height="300">
-					<p>
-						BLACKPINK 1st FULL ALBUM<br>
-						<s><em>20000원</em></s> &nbsp;&nbsp; 18000원
-					</p>
-				</div>
+				--%>
 			</div>
 
 			<div id="pagingArea">
-                <ul class="pagination">
-                    <li class="page-item disabled"><a class="page-link" href="#" onclick="return false">&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="return false" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182); color: #fff;">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="return false">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="return false">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="return false">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="return false">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#" onclick="return false">&gt;</a></li>
+			
+				<ul class="pagination">
+                	
+                	<c:choose>
+                		<c:when test="${ pi.currentPage eq 1 }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                    	<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ p }">${ p }</a></li>
+                    </c:forEach>
+                    
+                    <c:choose>
+                    	<c:when test="${ pi.currentPage eq pi.maxPage }">
+	                    	<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+                    	</c:otherwise>
+                    </c:choose>
                 </ul>
+                
             </div>
         </div>
     </div>

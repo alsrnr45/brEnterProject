@@ -24,33 +24,33 @@
 	    outline: 0 none !important;
 	}
 	option:checked {background: rgb(155, 89, 182); color: white;}
-	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; font-size: 13px !important;}
+	select{background: url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; font-size: 13px !important;}
 
 	/* 버튼 */
-	.btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
-	.btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; font-size: small;}
+	.btn-primary {margin: 0 0 0px 950px; background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182);}
+	.btn-outline-secondary {margin: 0 0 3px 15px; color: royalblue; font-size: small;}
 
 	/* 스타일 */
 	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
-	.content {width:1150px; height: 810px; margin: auto; margin-top: 30px; margin-bottom: 30px;}
+	.content {width: 1150px; height: 810px; margin: auto; margin-top: 30px; margin-bottom: 30px;}
 	h6 {margin: 0 0 10px 115px; font-size: 18px;}
 
-	table {text-align: center; font-size:13px; margin: auto;}
-	table>tr,th,td{border:1px lightgray solid;} 
+	table {text-align: center; font-size: 13px; margin: auto;}
+	table>tr,th,td{border: 1px lightgray solid;} 
 
-	.tableType01 th {height: 40px; background-color:rgba(241, 241, 241, 0.75);}
+	.tableType01 th {height: 40px; background-color: rgba(241, 241, 241, 0.75);}
 	
-	.tableType02 th {height: 160px; background-color:rgba(241, 241, 241, 0.75);}
-	.tableType02 img {height:50px;}
+	.tableType02 th {height: 160px; background-color: rgba(241, 241, 241, 0.75);}
+	.tableType02 img {height: 50px;}
 
 	.tableType03 td {text-align: left;}
-	.tableType03 th {background-color:rgba(241, 241, 241, 0.75);}
+	.tableType03 th {background-color: rgba(241, 241, 241, 0.75);}
 
-	.tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
+	.tableType03 input, textarea{width: 100%; border: none; padding-left: 10px;}
 	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
 	
-	a:hover{color:rgb(155, 89, 182);}
+	a:hover{color: rgb(155, 89, 182);}
 	a{text-decoration: none;}
 	
 </style>
@@ -82,8 +82,8 @@
 							<tr>
 								<th width="120px" height="35px;">문서종류</th> 
 								<td width="340px">
-									<select name="approvalFormCode" class="form-control">기획안
-										<option selected>선택</option>
+									<select name="approvalFormCode" class="form-control">
+										<option value="X">선택</option>
 										<option value="PL">기획안</option>
 										<option value="BC">업무연락</option>
 										<option value="OF">연차</option>

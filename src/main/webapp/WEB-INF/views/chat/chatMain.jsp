@@ -16,22 +16,22 @@
     }
     #chatTop {
         height: 10%;
-        background-color:rgb(155, 89, 182);
+        background-color: rgb(155, 89, 182);
     }
     #chatLogo{
-        color:rgb(155, 89, 182);
+        color: rgb(155, 89, 182);
         text-align : center;
-        font-size:15px;
+        font-size: 15px;
     }
     img{
-        border-radius:50px;
+        border-radius: 50px;
     }
     #chatProfile{
-        height:50px;
-        margin-left:10px;
+        height: 50px;
+        margin-left: 10px;
     }
     #chatAddress{
-        margin-left:10px;
+        margin-left: 10px;
     }
 
 </style>

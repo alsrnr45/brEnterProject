@@ -45,47 +45,63 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
-	    
-	/*전체화면, 검색창*/
 	
-	table, #searchText {
-		font-size: 13px;
-		margin: 10px;
-	}
-	#searchText {
-		width: 200px;
-		height: 30px;
-		margin-top: 90px;
-		margin-left: 200px;
-		float: left;
-	}
-	.searchTag{
-		color: black;
-		decoration: none;
-		position: absolute;
-		margin-top: 93px;
-		margin-left: 378px;
+	.menuBoardDetailOuter{
+		margin:auto;
+		width:59%;
 	}
 	
-	/*리스트*/
-	#menuList {
-		width: 900px;
-		margin-bottom: 415px;
-		margin-right: 18px;
+	/* 버튼  */
+	
+	.listBtn{
+		text-decoration:none;
+		border: 4px solid rgb(155, 89, 182);
+		background:rgb(155, 89, 182);
+		color:white;
+		border-radius:3px;
+		font-size:0.8125em;
+		position:relative;
+		bottom:5%;
+		left:92%;
 	}
 	
-	/*페이징바*/
-	.pagination {
-		justify-content: center;
-	}
-	.page-link {
-		color: black;
+	/* 게시판 */
+	#menuDetailtable{font-size:0.8125em;}
+	.menuDay{width:20%;}
+	
+	/* 댓글  작성 폼*/
+	#replyContent{
+		font-size:0.8125em;
+		width:85%;
+	}  
+	
+	/* 댓글 버튼 */
+	.replyBtn{
+		font-size:0.8125m;
+		border: 19px solid rgb(155, 89, 182);
+		background: rgb(155, 89, 182);
+		border-radius:3px;
+		color:white;
+		position:absolute;
+	} 
+	.replyBtn:hover{
+		color:black;
 	}
 	
-	/*a태그, 버튼*/
-	a:hover {
-		color: gray;
-		cursor: pointer;
+	/* 댓글 내용*/
+	.replyInfo{font-size:0.8125em;}
+	.replyName, .replyCount{font-weight:bold;}
+	.replyDay{color:rgb(181, 180, 180);}
+	
+	/* 본인이 작성한 댓글에만 보여질 버튼 */
+	.btns{position:absolute;}
+	.rectifyBtn:hover, .deleteBtn:hover{color:gray;}
+	.rectifyBtn, .deleteBtn{
+		border: 1px solid rgb(207, 154, 228);
+		background: rgb(207, 154, 228);
+		border-radius:3px;
+		color:white;
+		font-size:0.75em;
 	}
 	
 </style>
@@ -107,65 +123,61 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
-            <div class="search">
-    			<div class="searchIcon">
-    				<a class="searchTag"><div class="fa fa-search"></div></a>
-	    			<input type="search" id="searchText" placeholder="검색어를 입력하세요">
-    			</div>
-    		</div>
-    		
-    		<div class="menuOuter" align="center">
-        		<form name="menuList" id="menuList" method="post" action="#">
-            		<table class="table">
-                		<thead class="table-light" align="center">
-                    		<tr>
-                        		<th>번호</th>
-                        		<th>제목</th>
-                        		<th>조회수</th>
-                        		<th>작성일</th>
-                    		</tr>
-                		</thead>
-                		<tbody align="center">
-                    		<tr>
-                        		<td>3</td>
-                        		<td>2021-06-07 ~ 2021-06-11 주간식단</td>
-                        		<td>117</td>
-                        		<td>2021-06-07</td>
-                    		</tr>
-                    		<tr>
-                        		<td>2</td>
-                        		<td>2021-05-31 ~ 2021-06-04 주간식단</td>
-                        		<td>264</td>
-                        		<td>2021-05-31</td>
-                    		</tr>
-                    		<tr>
-                    			<td>1</td>
-                    			<td>2021-05-24 ~ 2021-05-28 주간식단</td>
-                    			<td>310</td>
-                    			<td>2021-05-24</td>
-                    		</tr>
-                		</tbody>
-            		</table>
-        		</form>
+            <div class="menuBoardDetailOuter">
+	        	<a href="" class="listBtn">목록으로</a>
+	        	
+	        	<div>
+	        		<form name="menuDetailtable" id="menuDetailtable" method="post" action="">
+	        			<table class="table table-bordered">
+	        				<thead class="table-active">
+	        					<tr>
+	        						<th class="menuDay">날짜</th>
+	        						<th class="lunch">점심</th>
+	        						<th class="dinner">저녁</th>
+	        					</tr>
+	        				</thead>
+	        				<tbody>
+	        					<tr>
+	        						<td>2021-06-07 (화)</td>
+	        						<td>김치찌개</td>
+	        						<td>된장찌개</td>
+	        					</tr>
+	        				</tbody>
+	        			</table>
+	        		</form>
+	        	</div>	
+	        	<br><br><br>
+	        	
+	        	<div id="replyArea">
+	        		<table border="1" align="center">
+	        			<thead>
+	        				<tr><textarea id="replyContent" cols="50" rows="3" style="resize:none" placeholder="내용을 입력하세요."></textarea></tr>
+	        				&nbsp;
+	        				<tr><button class="replyBtn">댓글등록</button></tr>
+	        			</thead>
+	        			<tbody>
+	        				
+	        			</tbody>
+	        		</table>
+	        		
+	        		<div class="replyInfo">
+	        			<div class="replyCount">댓글(1)</div><br>
+	        				<span class="replyName">김자바</span>
+			        		<span class="replyDay">&nbsp;&nbsp;2021-06-07 11:30</span>
+			        		<span class="replyContent">배고프당..</span>
+			        	<!-- 본인이 작성한 댓글에만 보여질 버튼 -->	
+	        			<span class="btns">&nbsp;&nbsp;&nbsp;
+		        			<button class="rectifyBtn">수정</button>
+		        			<button class="deleteBtn">삭제</button>
+	        			</span>
+	        		</div>	
+	        		</div>
+	        		
+	        		
+	        	</div>
         	</div>
-        	
-        	<nav aria-label="Page navigation example">
-		  		<ul class="pagination">
-		    		<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Previous">
-		        		<span aria-hidden="true">&laquo;</span>
-		      			</a>
-		    		</li>
-		    		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		    		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		    		<li class="page-item"><a class="page-link" href="#">3</a></li>
-		    		<li class="page-item">
-		      			<a class="page-link" href="#" aria-label="Next">
-		        		<span aria-hidden="true">&raquo;</span>
-		      			</a>
-		    		</li>
-		  		</ul>
-			</nav>
+            
+        </div>    
 			
     </div>
 	

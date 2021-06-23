@@ -16,6 +16,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
+
 	/* 폰트 */
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 	* {font-family: 'Noto Sans KR', sans-serif;}
@@ -35,12 +36,12 @@
 	}
 	option:checked {background: rgb(155, 89, 182); color: white;}
 	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
-	p{font-size:15px; text-align: left; margin-top: 7px; margin-left: 15px;}
+	p{font-size: 15px; text-align: left; margin-top: 7px; margin-left: 15px;}
 	
 	/* 페이징바 */
-	.pagination a {color:black;}
+	.pagination a {color: black;}
 	.pagination a:hover, 
-	.pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
+	.pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color: black;}
 	.pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
 	.page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
 	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}

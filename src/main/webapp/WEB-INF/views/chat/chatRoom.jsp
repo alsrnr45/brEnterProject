@@ -19,9 +19,9 @@
         overflow-y: scroll;
     }
     #chatTop{
-        color:rgb(155, 89, 182);
+        color: rgb(155, 89, 182);
         text-align : center;
-        font-size:15px;
+        font-size: 15px;
     }
     #chatForm {
         height: 100%;
@@ -30,8 +30,8 @@
     #msg {
         width: 82%;
         height: 75px;
-        margin-top:5px;
-        border-style:hidden;
+        margin-top: 5px;
+        border-style: hidden;
     }
     #send {
         width: 15%;

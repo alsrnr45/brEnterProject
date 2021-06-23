@@ -12,51 +12,88 @@
 <link href="resources/css/styles.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
-<!-- jQuery 라이브러리 -->
+<!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- alertify -->
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-
-    /* input */
-	input:focus, input[type]:focus, .uneditable-input:focus, button:focus, button:active{
-		border-color: rgba(255, 255, 255, 0) !important; 
-		box-shadow: 0 1px 1px rgba(255, 255, 255, 0) inset, 0 0 8px rgba(255, 255, 255, 0) !important;
-		outline: 0 none !important;
-	}
-    table input{border:0px solid rgba(255, 255, 255, 0) !important; height: 40px;}
-
-    /* button 스타일 */
-	.btn-warning {background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); color: white; margin-left: 30px;}
-    .btn-light {background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215);}
-    .information a {width: 250px; height: 50px;}
-
-	/* */
+    /* button */
+	.btn-info {
+        background-color: rgb(155, 89, 182); 
+        border-color: rgb(155, 89, 182); 
+        color: white; 
+        width: 230px; height: 50px; margin-left: 30px;
+    }
+    .btn-info:hover, .btn-info:focus, .btn-info:active {
+        background-color: rgb(205, 146, 228); 
+        border-color: rgb(155, 89, 182); 
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+        outline: 0 none;
+        color: white; 
+    }
+    .btn-light {
+        background-color: rgb(160, 160, 160); 
+        border-color: rgb(160, 160, 160);
+        color: white;
+        width: 230px; height: 50px;
+    }
+    .btn-light:hover, .btn-light:focus, .btn-light:active {
+        background-color: rgb(215, 215, 215); 
+        border-color: rgb(215, 215, 215);
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(215, 215, 215, 0.6) !important;
+        outline: 0 none;
+        color: white; 
+    }
+    .swal2-confirm {
+        background-color: rgb(160, 160, 160) !important; 
+        border-color: rgb(160, 160, 160) !important;
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(215, 215, 215, 0.6) !important;
+        color: white;
+        width: 130px;
+    }
+    
+	/* 영역 */
+    /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
+    .content{width:1000px; height:450px;}
 	.headArea{width: 1100px; height: 450px; text-align: center; margin: auto; padding-top: 30px;}
-	.headArea>div {float: left;}
+	.detailArea{width:1100px; height:500px; text-align:center; margin:auto; padding: 40px 50px 30px 50px;}
 
+    /* 상품정보 */
+	.headArea>div {float: left;}
     .thumbnail{width: 450px; height: 100%; padding: 20px 0px 25px 50px;}
-    .information{width: 650px; height: 100%; padding: 25px 50px 25px 50px;}
+    .thumbnail img {box-shadow: 0 7px 15px rgb(0 0 0 / 20%);}
+    .information{width: 650px; height: 100%; padding: 20px 50px 25px 50px; }
 
     table th {height:40px; font-size:20px;}
     table td {height:40px; font-size:17px;}
     table{width:100%; text-align:left;}
+    .productInfo table {margin-left: 10px;}
 
-    .totalPrice{text-align:left; padding: 20px 25px 20px 25px;}
-    .totalPrice td {font-size:27px;}
     .calculation{background-color: rgba(224, 224, 224, 0.76); text-align:left; padding: 15px 25px 15px 25px;}
-    #amount{height:30px; padding-left:20px;}
+    .calculation input {width: 75px; text-align: center; padding-left: 15px; margin-top: 5px;}
+    .calculation button {padding-top: 0 !important;}
+    .calculation button:focus {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0) !important;}
+    .finalPrice{text-align:left; padding: 20px 25px 20px 25px;}
+    .finalPrice td {font-size:28px;}
 
-	/* 상품디테일 */
-	.detailArea{width:1100px; height:500px; text-align:center; margin:auto; padding: 25px 50px 25px 50px;}
-    .content{width:1000px; height:450px;}
+    /* 상품 상세정보 */
+    .productDetail{padding: 30px 0 0 0 ; }
+    h6{height:50px; padding-top: 13px; background-color: rgba(224, 224, 224, 0.76); border-top: 1px solid gray; border-bottom: 1px solid gray;}
 
-
-
-    
-    /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 </style>
 
 </head>
@@ -79,23 +116,24 @@
             <!-- 상품 -->
 			<div class="headArea">
 				
+				<input type="hidden" class="pno" value="${ p.pdtNo }">
 				<div class="thumbnail">
-					<img src="resources/profileUpfiles/hamster1.jpg" width="400" height="400">
+					<img src="${ p.pdtFile }" width="400" height="400">
 				</div>
 
 				<div class="information">
                     <div class="productInfo">
                         <table>
                             <tr>
-                                <th colspan="2">BLACKPINK 1st FULL ALBUM</th>
+                                <th colspan="2">${ p.pdtName }</th>
                             </tr>
                             <tr>
                                 <td width="120;">판매가</td>
-                                <td>20000원</td>
+                                <td>${ p.orgPrice }원</td>
                             </tr>
                             <tr>
                                 <td>직원할인가</td>
-                                <td>18000원</td>
+                                <td>${ p.memPrice }원</td>
                             </tr>
                         </table>
                         <hr>
@@ -103,48 +141,81 @@
                     <div class="calculation">
                         <table>
                             <tr>
-                                <td colspan="2">BLACKPINK 1st FULL ALBUM</td>
+                                <td colspan="2">${ p.pdtName }</td>
                             </tr>
                             <tr>
-                                <td><input type="number" id="amount" name="amount" value="1" min="1" max="10"></td>
-                                <td align="right">36000원</td>
+                                <td>
+                                    <button type="button" class="btn" onclick="fnCalCount('m', this);"><i class="fas fa-minus-circle"></i></button>
+                                    <input type="number" name="quantity" value="1" readonly/>
+                                    <button type ="button" class="btn" onclick="fnCalCount('p',this);"><i class="fas fa-plus-circle"></i></button>
+                                </td>
+                                <td class="maxQuantity" hidden>5</td>
+                                <td class="productPrice" hidden>${ p.memPrice }</td>
+                                <td id="totalPrice" align="right">${ p.memPrice }</td>
                             </tr>
                         </table>
                     </div>
-                    <div class="totalPrice">
+                    <div class="finalPrice">
                         <table>
                             <tr>
                                 <td>Total</td>
-                                <td align="right">36000원</td>
+                                <td id="finalPrice" align="right">${ p.memPrice }</td>
                             </tr>
                         </table>
                     </div>
                     <a type="button" class="btn btn-light btn-lg" href="#">장바구니 담기</a>
-                    <a type="button" class="btn btn-warning btn-lg" href="#">바로 구매하기</a>
+                    <a type="button" class="btn btn-info btn-lg" href="order.st">바로 구매하기</a>
                 </div>
 			</div>
             
 			<!-- 상품디테일 -->
 			<div class="detailArea">
-                <div class="content">
-
+                <h6>상품 정보</h6>
+                
+                <div class="productDetail">
+					${ p.pdtDetail }
                 </div>
 			</div>
-			
         </div>
     </div>
 
 	<script>
-        $(function() {
-            $(".thumbnail>img").click(function() {
-            	location.href ="storeDetail.st";		<%--?bno=" + $(this).children(".bno").text();--%>
-                console.log("상품클릭");
-            })
-        });
+        function fnCalCount(type, ths){
+            var $input = $(ths).parents("td").find("input[name='quantity']");
+            var pCount = Number($input.val());
+            var productPrice = Number($(ths).parents("tr").find("td.productPrice").html());
+            var totalPrice = 0;
+            
+            if(type=='p'){
+                if(pCount < 5 ){
+                    $input.val(Number(pCount)+1); 
+                    totalPrice = productPrice * (pCount+1);
+                    document.getElementById("totalPrice").innerHTML = totalPrice;
+                    document.getElementById("finalPrice").innerHTML = totalPrice;
+                }else if(pCount = 6){ 
+                    Swal.fire({
+                        icon: 'error',
+                        text: '최대 주문수량은 5개 입니다.'
+                    });
+                }
+                
+            }else{
+                if(pCount > 1){
+                    $input.val(Number(pCount)-1);    
+                    totalPrice = productPrice * (pCount-1); 
+                    document.getElementById("totalPrice").innerHTML = totalPrice;
+                    document.getElementById("finalPrice").innerHTML = totalPrice;
 
-		$('a.feellink').click(function(e) {
-			e.preventDefault();   
-		});
+                }else if(pCount = 1){
+                    Swal.fire({
+                        icon: 'error',
+                        text: '수량은 1개 이상 입력해 주십시오.'
+                    });
+                    document.getElementById("totalPrice").innerHTML = productPrice;
+                    document.getElementById("finalPrice").innerHTML = productPrice;
+                }
+            }
+        }
     </script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

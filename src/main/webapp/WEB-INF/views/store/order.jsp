@@ -30,6 +30,7 @@
 	/* 스타일 */
 	/* .content div {outline: 1px solid blueviolet;} */
 	.content {height:1000px; padding: 50px 40px 20px 60px;}
+	form {margin: auto;}
 	.content>div {float: left;}
 	.content1 {width:920px; height:100%;}
 	.content2 {width:420px; height:100%; margin: auto;}

@@ -26,18 +26,32 @@
 
    <!-- 작성자 : 김혜미 - 상품 리스트 조회 (페이징처리) -->
    <select id="selectProductList" resultMap="product">
-      select 
-             pdt_no
-           , pdt_ctg
-           , pdt_file
-           , pdt_name
-           , org_price
-             , mem_price
-             , to_char(pdt_enrolldate, 'YYYY-MM-DD') pdt_enrolldate
-        from product
-       where pdt_status = 'Y'
-       order
-          by pdt_no desc
+		select 
+			   pdt_no
+			 , pdt_ctg
+			 , pdt_file
+			 , pdt_name
+			 , org_price
+  			 , mem_price
+  			 , to_char(pdt_enrolldate, 'YYYY-MM-DD') pdt_enrolldate
+		  from product
+		 where pdt_status = 'Y'
+		 order
+			by pdt_no desc
+   </select>
+   
+   <select id="selectProductDetail" resultMap="product" parameterType="_int">
+		select 
+			   pdt_no
+ 			 , pdt_ctg
+			 , pdt_file
+			 , pdt_name
+			 , pdt_detail
+			 , org_price
+			 , mem_price
+			 , pdt_stock
+ 		  from product
+		 where pdt_no = #{pdtNo}
    </select>
    
 </mapper>

@@ -32,11 +32,13 @@ public class StoreServiceImpl implements StoreService {
 
    // 작성자 : 김혜미 -- 상품 상세조회
    @Override
-   public Product selectProductDetail(int pdtNo) {
-      // TODO Auto-generated method stub
-      return null;
+   public Product selectProductDetail(int pno) {
+	   return sDao.selectProductDetail(sqlSession, pno);
    }
 
+
+   
+   
    // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
    @Override
    public ArrayList<Product> selectProductListAdmin(int pdtNo) {
@@ -71,6 +73,7 @@ public class StoreServiceImpl implements StoreService {
       // TODO Auto-generated method stub
       return 0;
    }
+
 
    
 }

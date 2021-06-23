@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -21,7 +22,7 @@ public class StoreController {
    
    // 작성자 : 김혜미 -- 스토어 리스트
    @RequestMapping("storeList.st")
-   public ModelAndView storeList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+   public ModelAndView selectProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 
       int listCount = sService.selectProductListCount();
       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 6);
@@ -37,9 +38,20 @@ public class StoreController {
    
    // 작성자 : 김혜미 -- 스토어 디테일
    @RequestMapping("storeDetail.st")
-   public String storeDetail() {
-      return "store/storeDetail";
+   public String selectProductDetail(int pno, Model model) {
+	   
+		Product p = sService.selectProductDetail(pno); 
+		model.addAttribute("p", p);
+		System.out.println(p);
+		
+		return "store/storeDetail";
+
    }
+   
+   
+   
+   
+   
    
    // 작성자 : 김혜미 -- 결제
    @RequestMapping("order.st")

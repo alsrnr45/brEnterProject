@@ -12,20 +12,25 @@ import com.brEnt.brFamily.store.model.vo.Product;
 @Repository
 public class StoreDao {
 
-   // 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
-   public int selectProductListCount(SqlSessionTemplate sqlSession) {
-      return sqlSession.selectOne("storeMapper.selectProductListCount");
-   }
+	// 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
+	public int selectProductListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("storeMapper.selectProductListCount");
+	}
 
-   // 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
-   public ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	// 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
+	public ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession, PageInfo pi) {
       
-      int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
-      int limit = pi.getProductLimit();
+		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
+		int limit = pi.getProductLimit();
       
-      RowBounds rowBounds = new RowBounds(offset, limit);
+		RowBounds rowBounds = new RowBounds(offset, limit);
       
-      return (ArrayList)sqlSession.selectList("storeMapper.selectProductList", null, rowBounds);
-   }
+		return (ArrayList)sqlSession.selectList("storeMapper.selectProductList", null, rowBounds);
+	}
+
+	
+	public Product selectProductDetail(SqlSessionTemplate sqlSession, int pdtNo) {
+		return sqlSession.selectOne("storeMapper.selectProductDetail", pdtNo);
+	}
 
 }

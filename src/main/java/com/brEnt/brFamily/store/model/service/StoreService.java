@@ -12,16 +12,16 @@ public interface StoreService {
    ArrayList<Product> selectProductList(PageInfo pi);   
    
    // 작성자 : 김혜미 -- 상품 상세조회
-   Product selectProductDetail(int pdtNo);
+   Product selectProductDetail(int pno);
    
    // 작성자 : 김혜미 -- 상품 결제
    
    
    // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
-   ArrayList<Product> selectProductListAdmin(int pdtNo);
+   ArrayList<Product> selectProductListAdmin(int pno);
    
    // 작성자 : 김혜미 -- 상품 상세조회 (관리자)
-   Product selectProductDetailAdmin (int pdtNo);
+   Product selectProductDetailAdmin (int pno);
    
    // 작성자 : 김혜미 -- 상품 등록 (관리자)
    int insertProduct(Product p);

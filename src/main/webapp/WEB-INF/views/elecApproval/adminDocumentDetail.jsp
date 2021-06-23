@@ -36,10 +36,10 @@
 	}
 	option:checked {background: rgb(155, 89, 182); color: white;}
 	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
-	.form-control{width: 200px; height:30px; margin: auto;}
+	.form-control{width: 200px; height: 30px; margin: auto;}
 
 	/* 버튼 */
-	.btn-primary {margin: 0 0 10px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+	.btn-primary {margin: 0 0 10px 950px; background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182);}
 	.btn-light {margin-right: 10px; background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215);}
 	.btn-danger {background-color: rgb(255, 134, 134); border-color: rgb(255, 134, 134); color: black;}
 
@@ -49,23 +49,23 @@
 	.content {width:1150px; height: 860px; margin: auto; margin-top: 30px;}
 	.content_4 {padding: 15px 0 0 500px;}
 
-	table {text-align: center; font-size:13px; margin: auto;}
-	table>tr,th,td{border:1px lightgray solid;} 
+	table {text-align: center; font-size: 13px; margin: auto;}
+	table>tr,th,td{border: 1px lightgray solid;} 
 
 	/* .tableType01 {margin-bottom: 10px;} */
-	.tableType01 th {height: 40px; background-color:rgba(241, 241, 241, 0.75);}
-	.tableType01 img {height:50px;}
+	.tableType01 th {height: 40px; background-color: rgba(241, 241, 241, 0.75);}
+	.tableType01 img {height: 50px;}
 	
-	.tableType02 th {height: 160px; background-color:rgba(241, 241, 241, 0.75);}
-	.tableType02 img {height:60px;}
+	.tableType02 th {height: 160px; background-color: rgba(241, 241, 241, 0.75);}
+	.tableType02 img {height: 60px;}
 
 	.tableType03 td {text-align: left;}
-	.tableType03 th {background-color:rgba(241, 241, 241, 0.75);}
+	.tableType03 th {background-color: rgba(241, 241, 241, 0.75);}
 
-	.tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
+	.tableType03 input, textarea{width: 100%; border: none; padding-left: 10px;}
 	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
 	
-	a:hover{color:rgb(155, 89, 182);}
+	a:hover{color: rgb(155, 89, 182);}
 	a{text-decoration: none;}
 	
 </style>

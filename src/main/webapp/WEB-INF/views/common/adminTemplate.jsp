@@ -38,7 +38,7 @@
 	/* 페이징바 스타일 */
 	.dataTable-pagination a {color:black;}
 	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(250, 246, 222); border-color: #dee2e6; color:black;}
+	.dataTable-pagination a:focus {background: rgb(253, 247, 210); border-color: #dee2e6; color:black;}
 	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);}
 	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
 	    z-index: 3; color: black; background-color: rgb(255,235,152); border-color: #dee2e6;}

@@ -58,7 +58,7 @@
 	/* 자유게시판 디테일 */	
 	.wrap{width: 1200px;}	
 	h1{margin-top: 20px; margin-left: 60px;}  
-    .boardFreeDetailArea, .boardFreeReplyArea{margin-left: 60px;}
+    .boardFreeDetailArea, .boardFreeReplyArea{margin-left: 100px;}
     a:hover{color: rgb(155, 89, 182);}
 	
 </style>
@@ -80,9 +80,9 @@
         	<div id="layoutSidenav_content">
         		<div class="wrap">
 
-                <h1>자유게시판</h1>
+                <h1>자유게시판</h1><hr>
 
-                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:910px;">
+                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:950px;">
                 목록으로</a> 
                 <br><br><br>
 
@@ -117,7 +117,7 @@
                         </table>
                     </div> <br>
 
-                    <div class="boardFreeBtn" style="margin-left:830px;">
+                    <div class="boardFreeBtn" style="margin-left:880px;">
                         <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
                         <a class="btn btn-primary" href="boardFreeUpdate.bf" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
                         수정하기</a>

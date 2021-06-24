@@ -15,6 +15,18 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
+<!-- include libraries(jQuery, bootstrap) -->
+<!--  
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+-->
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <style>
 
 	/* 폰트 */
@@ -55,12 +67,15 @@
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 
-	/* 자유게시판 작성 */
+	/* 자유게시판 작성 */	
 	h1{margin-top: 20px; margin-left: 60px;}  
     #boardFreeEnrollForm>.content_1>table{
     	margin-left: 60px;
         width: 85%;
     }
+    
+    /* summernote textarea */
+    .summernote{margin-left: 100px;}
     
 </style>	
 </head>
@@ -81,7 +96,7 @@
         	<div id="layoutSidenav_content">
         		<div class="wrap">
 
-	                <h1>자유게시판</h1>
+	                <h1>자유게시판</h1><hr>
 	
 	                <div class="content">
 	                    <div class="boardFreeEnrollArea">
@@ -94,23 +109,26 @@
 	                            </div><br><br>
 	                          
 	                            <div class="content_1">
-	                                <table class="boardFreeTable">
-	                                    <tr>
-	                                        <th width="80"><label for="freeTitle">제목</label></th>
-	                                        <td><input type="text" name="freeTitle" id="freeTitle" class="form-control"  required></td>
-	                                    </tr>
-	                                    <tr>
-	                                        <th><label for="freeUpfile">첨부파일</label></th>
-	                                        <td><input type="file" name="freeUpfile" id="freeUpfile" class="form-control-file border" ></td>
-	                                    </tr>
-	                                    <tr>
-	                                        <th colspan="2"><label for="freeContent">내용</label></th>
-	                                    </tr>
-	                                    <tr>
-	                                        <th colspan="2"><textarea class="form-control" required name="freeContent" id="freeContent" rows="15" style="resize:none;"></textarea></th>
-	                                    </tr>
-	                                </table>
+	                            	<div class="summernote">
+		                            	<table class="boardFreeTable">
+		                                    <tr>
+		                                        <th width="80"><label for="freeTitle">제목</label></th>
+		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control"  required></td>
+		                                    </tr>
+		                                    <tr>
+		                                        <th><label for="freeUpfile">첨부파일</label></th>
+		                                        <td><input type="file" name="freeUpfile" id="freeUpfile" class="form-control-file border" ></td>
+		                                    </tr>
+		                                    <tr>
+		                                        <th colspan="2"><label for="freeContent">내용</label></th>
+		                                    </tr>
+		                                    <tr>
+		                                        <th colspan="2"><textarea class="form-control" required name="freeContent" id="summernote" rows="15" style="resize:none;"></textarea></th>
+		                                    </tr>
+		                                </table>
+	                            	</div>	                              
 	                            </div>
+	                            
 	                        </form>
 	                        
 	                    </div>  
@@ -119,6 +137,37 @@
         		</div>
        		</div>      	
     </div>
+    
+    
+    <script>
+        // 썸머노트
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                height: 250,                    	// 에디터 높이
+                lang: "ko-KR",						// 에디터 한글 설정
+                focus: true,                    	// 에디터 커서 이동 
+                minHeight: null,                	// 최소 높이
+                maxHeight: null,               		// 최대 높이   
+                placeholder: '내용을 입력해주세요.',		// placeholder 설정
+                toolbar: [
+                  ['fontname', ['fontname']],
+                  ['fontsize', ['fontsize']],
+                  ['style', ['style']],
+                  ['font', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],  // 굵기, 기울임꼴, 밑줄, 취소 선, 서식지우기
+                  ['color', ['forecolor','color']], 									// 글자색
+                  ['para', ['ul', 'ol', 'paragraph']],									// 글머리 기호, 번호매기기, 문단정렬
+                  ['table', ['table']],													// 표만들기
+                  ['insert', ['link', 'picture', 'video']],								// 링크, 사진, 동영상 첨부
+                  ['view', ['fullscreen', 'codeview', 'help']]							// 코드 보기, 확대해서 보기, 도움말
+                ],
+            	// 추가한 글꼴
+                fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+                // 추가한 폰트 사이즈 
+                fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']          
+            });
+        });
+    </script>
+    
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="resources/js/scripts.js"></script>

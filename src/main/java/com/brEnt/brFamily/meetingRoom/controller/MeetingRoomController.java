@@ -8,6 +8,11 @@ public class MeetingRoomController {
 
 	@RequestMapping("test.mt")
 	public String test() {
-		return "meetingRoom/rsvpListView";
+		return "meetingRoom/rezListView";
+	}
+	
+	@RequestMapping("reservation.mt")
+	public String rezDo() {
+		return "meetingRoom/rezDo";
 	}
 }

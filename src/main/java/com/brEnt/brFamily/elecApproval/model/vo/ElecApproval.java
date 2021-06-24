@@ -1,7 +1,5 @@
 package com.brEnt.brFamily.elecApproval.model.vo;
 
-import java.sql.Date;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,9 +18,9 @@ public class ElecApproval {
 	private String ecTitle;
 	private String ecCnt;
 	private String ecCode;
-	private Date ecEnrollDate;
-	private Date ecUpdateDate;
-	private Date ecCompDate;
+	private String ecEnrollDate;
+	private String ecUpdateDate;
+	private String ecCompDate;
 	private String ecStatus; 
 	
 }

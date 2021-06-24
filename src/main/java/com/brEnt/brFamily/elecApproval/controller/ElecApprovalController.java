@@ -11,6 +11,7 @@ public class ElecApprovalController {
 	public String offEnrollForm() {
 		return "elecApproval/offEnrollForm";
 	}
+	
 	// 작성자 : 김혜미 -- 연차 신청폼
 	@RequestMapping("offCheckForm.ea")
 	public String offCheckForm() {

@@ -18,57 +18,53 @@ public class StoreServiceImpl implements StoreService {
    @Autowired
    private StoreDao sDao;
    
-   // 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 개수 조회
    public int selectProductListCount() {
       return sDao.selectProductListCount(sqlSession);
    }   
 
-   // 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
    public ArrayList<Product> selectProductList(PageInfo pi) {
       return sDao.selectProductList(sqlSession, pi);
    }
 
-   // 작성자 : 김혜미 -- 상품 상세조회
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 상세조회
    public Product selectProductDetail(int pno) {
 	   return sDao.selectProductDetail(sqlSession, pno);
    }
-
-
    
    
-   // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
-   @Override
-   public ArrayList<Product> selectProductListAdmin(int pdtNo) {
-      // TODO Auto-generated method stub
-      return null;
+   @Override // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
+   public ArrayList<Product> selectProductListAdmin() {
+	   return sDao.selectProductListAdmin(sqlSession);
    }
 
-   // 작성자 : 김혜미 -- 상품 상세조회 (관리자)
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 상세조회 (관리자)
    public Product selectProductDetailAdmin(int pdtNo) {
       // TODO Auto-generated method stub
       return null;
    }
 
-   // 작성자 : 김혜미 -- 상품 등록 (관리자)
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 등록 (관리자)
    public int insertProduct(Product p) {
       // TODO Auto-generated method stub
       return 0;
    }
 
-   // 작성자 : 김혜미 -- 상품 수정 (관리자)
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 수정 (관리자)
    public int updateProduct(Product p) {
       // TODO Auto-generated method stub
       return 0;
    }
 
-   // 작성자 : 김혜미 -- 상품 삭제 (관리자)
-   @Override
+   
+   @Override // 작성자 : 김혜미 -- 상품 삭제 (관리자)
    public int deleteProduct(int pdtNo) {
       // TODO Auto-generated method stub
       return 0;

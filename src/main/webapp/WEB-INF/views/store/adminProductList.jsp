@@ -50,7 +50,7 @@
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple" class="productList">
-                                    <thead >
+                                    <thead>
                                         <tr>
                                             <th>상품번호</th>
                                             <th>카테고리</th>
@@ -60,241 +60,17 @@
                                             <th>진열여부</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>128</td>
-                                            <td>Album</td>
-                                            <td>상품128</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>127</td>
-                                            <td>Cherring</td>
-                                            <td>상품127</td>
-                                            <td>50,000</td>
-                                            <td>40,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>126</td>
-                                            <td>Photo</td>
-                                            <td>상품126</td>
-                                            <td>30,000</td>
-                                            <td>27,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>125</td>
-                                            <td>Cherring</td>
-                                            <td>상품125</td>
-                                            <td>10,000</td>
-                                            <td>8,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>124</td>
-                                            <td>Photo</td>
-                                            <td>상품124</td>
-                                            <td>15,000</td>
-                                            <td>12,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>123</td>
-                                            <td>Cherring</td>
-                                            <td>삼품123</td>
-                                            <td>30,000</td>
-                                            <td>27,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>122</td>
-                                            <td>Photo</td>
-                                            <td>상품122</td>
-                                            <td>40,000</td>
-                                            <td>32,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>121</td>
-                                            <td>Cherring</td>
-                                            <td>상품121</td>
-                                            <td>50,000</td>
-                                            <td>40,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>120</td>
-                                            <td>Photo</td>
-                                            <td>상품120</td>
-                                            <td>15,000</td>
-                                            <td>12,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>119</td>
-                                            <td>Photo</td>
-                                            <td>상품119</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>118</td>
-                                            <td>Album</td>
-                                            <td>상품118</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>117</td>
-                                            <td>Photo</td>
-                                            <td>상품117</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>116</td>
-                                            <td>Fashion</td>
-                                            <td>상품116</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>115</td>
-                                            <td>Cherring</td>
-                                            <td>상품115</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>114</td>
-                                            <td>Stationery</td>
-                                            <td>상품114</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>113</td>
-                                            <td>Photo</td>
-                                            <td>상품113</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>112</td>
-                                            <td>Album</td>
-                                            <td>상품112</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>111</td>
-                                            <td>Cherring</td>
-                                            <td>상품111</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>110</td>
-                                            <td>Fashion</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>109</td>
-                                            <td>Album</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>108</td>
-                                            <td>Photo</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>107</td>
-                                            <td>Fashion</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>106</td>
-                                            <td>Album</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>105</td>
-                                            <td>Stationery</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>104</td>
-                                            <td>Photo</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>103</td>
-                                            <td>Album</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>102</td>
-                                            <td>Stationery</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
-                                        <tr>
-                                            <td>101</td>
-                                            <td>Cherring</td>
-                                            <td>상품110</td>
-                                            <td>20,000</td>
-                                            <td>18,000</td>
-                                            <td>Y</td>
-                                        </tr>
+                                    	<c:forEach var="p" items="${ list }">
+                                            <tr>
+                                                <td class="pno">${ p.pdtNo }</td>
+                                                <td>${ p.pdtCtg }</td>
+                                                <td>${ p.pdtName }</td>
+                                                <td>${ p.orgPrice }</td>
+                                                <td>${ p.memPrice }</td>
+                                                <td>${ p.pdtStatus }</td>
+                                            </tr>
+										</c:forEach>
                                     </tbody>
                                 </table>
                             </div>
@@ -307,11 +83,13 @@
     
     <script>
         $(function() {
-            $(".productList>tbody>tr").click(function() {
-            	location.href ="productDetail.admin";		<%--?bno=" + $(this).children(".bno").text();--%>
-                console.log("상품클릭");
-            })
+
+            $(document).on("click", ".productList>tbody>tr", function(){
+                location.href ="productDetail.admin?=pno" + $(this).children(".pno").text();
+            });
+            
         })
+
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -42,16 +42,9 @@ public class StoreController {
 	   
 		Product p = sService.selectProductDetail(pno); 
 		model.addAttribute("p", p);
-		System.out.println(p);
 		
 		return "store/storeDetail";
-
    }
-   
-   
-   
-   
-   
    
    // 작성자 : 김혜미 -- 결제
    @RequestMapping("order.st")
@@ -67,8 +60,14 @@ public class StoreController {
    
    // 작성자 : 김혜미 -- 상품관리 리스트
    @RequestMapping("productList.admin")
-   public String productList() {
-      return "store/adminProductList";
+   public ModelAndView productList(ModelAndView mv) {
+	   
+	  ArrayList<Product> list = sService.selectProductListAdmin();
+	  
+	  mv.addObject("list", list)
+      	.setViewName("store/adminProductList");
+	  
+	  return mv;
    }
    
    // 작성자 : 김혜미 -- 상품관리 디테일

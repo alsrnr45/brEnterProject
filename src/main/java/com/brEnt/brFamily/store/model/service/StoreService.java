@@ -18,7 +18,7 @@ public interface StoreService {
    
    
    // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
-   ArrayList<Product> selectProductListAdmin(int pno);
+   ArrayList<Product> selectProductListAdmin();
    
    // 작성자 : 김혜미 -- 상품 상세조회 (관리자)
    Product selectProductDetailAdmin (int pno);

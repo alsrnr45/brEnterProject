@@ -12,25 +12,32 @@ import com.brEnt.brFamily.store.model.vo.Product;
 @Repository
 public class StoreDao {
 
-	// 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
+	// 작성자 : 김혜미 -- 상품 개수 조회
 	public int selectProductListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("storeMapper.selectProductListCount");
 	}
 
+	
 	// 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
 	public ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession, PageInfo pi) {
-      
 		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
 		int limit = pi.getProductLimit();
-      
+		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-      
+		
 		return (ArrayList)sqlSession.selectList("storeMapper.selectProductList", null, rowBounds);
 	}
 
 	
+	// 작성자 : 김혜미 -- 상품 상세조회
 	public Product selectProductDetail(SqlSessionTemplate sqlSession, int pdtNo) {
 		return sqlSession.selectOne("storeMapper.selectProductDetail", pdtNo);
+	}
+
+	
+	// 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
+	public ArrayList<Product> selectProductListAdmin(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("storeMapper.selectProductListAdmin");
 	}
 
 }

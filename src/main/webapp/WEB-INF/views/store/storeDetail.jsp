@@ -92,7 +92,7 @@
 
     /* 상품 상세정보 */
     .productDetail{padding: 30px 0 0 0 ; }
-    h6{height:50px; padding-top: 13px; background-color: rgba(224, 224, 224, 0.76); border-top: 1px solid gray; border-bottom: 1px solid gray;}
+    h6{height:50px; padding-top: 13px; background-color: rgba(224, 224, 224, 0.4); border-top: 1px solid gray; border-bottom: 1px solid gray;}
 
 </style>
 

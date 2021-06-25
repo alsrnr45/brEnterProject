@@ -97,7 +97,7 @@
 							<th width="120">문서종류</th> 
 							<td width="340">업무연락</td>
 							<th width="120">문서번호</th>
-							<td width="340">BC-20210622-86328</td>
+							<td width="340">BC2021062286328</td>
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>

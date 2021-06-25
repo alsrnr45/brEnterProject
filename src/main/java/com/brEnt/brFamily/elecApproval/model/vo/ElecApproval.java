@@ -18,9 +18,9 @@ public class ElecApproval {
 	private String ecTitle;
 	private String ecCnt;
 	private String ecCode;
-	private String ecEnrollDate;
-	private String ecUpdateDate;
-	private String ecCompDate;
+	private String ecEnrolldate;
+	private String ecUpdatedate;
+	private String ecCompdate;
 	private String ecStatus; 
 	
 }

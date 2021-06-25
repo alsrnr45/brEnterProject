@@ -20,19 +20,14 @@
 	select:focus, select:active{
 	    border-color: rgb(155, 89, 182) !important;
 	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
-	    outline: 0 none !important;
-	}
+	    outline: 0 none !important;}
 	option:checked {background: rgb(155, 89, 182); color: white;}
 	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
 	p{font-size:15px; text-align: left; margin-top: 7px; margin-left: 15px;}
 
 	/* 페이징바 */
 	.pagination a {color:black;}
-	.pagination a:hover, .pagination a:focus {
-		background: rgb(245, 238, 248); 
-		border-color: #dee2e6; 
-		color:black;
-	}
+	.pagination a:hover, .pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
 	.pagination a:active {background-color: rgb(155, 89, 182) !important; box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
 	.page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
 	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
@@ -51,7 +46,11 @@
 	.input-group {width: 250px; margin-left: 640px;}
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem; border: 1px solid #ced4da;}
-
+	.btn-light:focus, .btn-light:active{
+	    border-color: rgb(155, 89, 182) !important;
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+	    outline: 0 none !important;}
+	
 	/* 상품리스트 */
     .thumbnail{width: 320px; display: inline-block; margin: 15px 20px 15px 20px;}
     .thumbnail:hover{cursor:pointer; opacity:0.6;}
@@ -111,18 +110,18 @@
 				<!-- 페이징바 -->
 				<div class="pagingArea">
 					<ul class="pagination">
-						
+					           	
 						<c:choose>
 							<c:when test="${ pi.currentPage eq 1 }">
 								<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+								<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
 							</c:otherwise>
 						</c:choose>
 						
 						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<li class="page-item"><a class="page-link" href="#">${ p }</a></li>
+							<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ p }">${ p }</a></li>
 						</c:forEach>
 						
 						<c:choose>
@@ -130,7 +129,7 @@
 								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="#">&gt;</a></li>
+								<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -142,18 +141,12 @@
 	<script>
         $(function() {
             $(".thumbnail>img").click(function() {
+
+				// console.log(typeof ($(this).prev(".pno").val()));
             	location.href ="storeDetail.st?pno=" + $(this).prev(".pno").val();
             })
         });
-
-	
-	// 	$(function() {
-	// 		$(".pagination>li>a").click(function() {
-	// 			var currentPage = $(ths).siblings("a").val();
-	// 			console.log(currentPage);
-	// 		})
-	// 	});
-    // </script>
+    </script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

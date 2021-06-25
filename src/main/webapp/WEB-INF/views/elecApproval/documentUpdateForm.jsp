@@ -15,6 +15,18 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
+<!-- include libraries(jQuery, bootstrap) -->
+<!--  
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+-->
+
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <style>
 
 	/* 드롭박스 */
@@ -147,35 +159,37 @@
 
 					<div class="content_3">
 						<form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
-							<table class="tableType03">
-								<tr height="40">
-									<th>제목</th>
-									<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="전자결재 문서 제목입니다." placeholder="제목을 입력해주세요." required></td>
-								</tr>
-								<tr height="40">
-									<th width="120">기안자</th>
-									<td width="340"><input type="text" name="" id="" value="김사원" readonly></td>
-									<th width="120">기안 부서</th>
-									<td width="340"><input type="text" name="" id="" value="개발팀" readonly></td>
-								</tr>
-								<tr height="40">									
-									<th>기안 일시</th>
-									<td><input type="text" name="" id="" value="2021-06-11 10:18:07" readonly></td>
-                                    <th height="60">첨부파일</th>
-									<td>
-                                        <input type="file" name="ecUpfile" id="ecUpfile" style="cursor:pointer;">
-                                        <a href="" download=""> &nbsp;&nbsp; test.png</a>
-                                    </td>
-								</tr>
-								<tr height="30">
-									<th colspan="4">상세내용</th>
-								</tr>
-								<tr>
-									<td colspan="4">
-										<input type="text" name="ecTitle" id="ecTitle" value="전자결재 문서 내용입니다." placeholder="내용을 입력해주세요." required style="height:250px;">
-									</td>
-								</tr>
-							</table>   							
+							<div class="summernote">
+								<table class="tableType03">
+									<tr height="40">
+										<th>제목</th>
+										<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="전자결재 문서 제목입니다." placeholder="제목을 입력해주세요." required></td>
+									</tr>
+									<tr height="40">
+										<th width="120">기안자</th>
+										<td width="340"><input type="text" name="" id="" value="김사원" readonly></td>
+										<th width="120">기안 부서</th>
+										<td width="340"><input type="text" name="" id="" value="개발팀" readonly></td>
+									</tr>
+									<tr height="40">									
+										<th>기안 일시</th>
+										<td><input type="text" name="" id="" value="2021-06-11 10:18:07" readonly></td>
+	                                    <th height="60">첨부파일</th>
+										<td>
+	                                        <input type="file" name="ecUpfile" id="ecUpfile" style="cursor:pointer;">
+	                                        <a href="" download=""> &nbsp;&nbsp; test.png</a>
+	                                    </td>
+									</tr>
+									<tr height="30">
+										<th colspan="4">상세내용</th>
+									</tr>
+									<tr>
+										<td colspan="4">
+											<input type="text" name="ecTitle" id="summernote" value="전자결재 문서 내용입니다." placeholder="내용을 입력해주세요." required style="height:250px;">
+										</td>
+									</tr>
+								</table>   	
+							</div>											
 						</form>
 					</div>
 
@@ -184,11 +198,27 @@
         </div>
     </div>
 
+
 	<script>
+		
+		// 썸머노트
+	    $(document).ready(function() {
+	        $('#summernote').summernote({
+	            height: 250,                    // 에디터 높이
+	            minHeight: null,                // 최소 높이
+	            maxHeight: null,                // 최대 높이
+	            focus: true,                    // 에디터 로딩후 포커스를 맞출지 여부
+	            lang: "ko-KR",					// 한글 설정
+	            placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정	            
+	        });
+	    });
+		
+		
 		var len = $('#ecTitle').val().length;
 		$('#ecTitle').focus();
 		$('#ecTitle')[0].setSelectionRange(len, len);
 	</script>
+	
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

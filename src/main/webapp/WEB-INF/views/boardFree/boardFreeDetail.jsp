@@ -137,7 +137,7 @@
                                     댓글<br>등록</button></th>
                             </tr>
                             <tr>
-                            <td colspan="3" height="50">댓글 (<span id="rcount">3</span>) </td> 
+                           		<td colspan="3" height="50">댓글 (<span id="rcount">3</span>) </td> 
                             </tr>
                         </thead>
                         <tbody>

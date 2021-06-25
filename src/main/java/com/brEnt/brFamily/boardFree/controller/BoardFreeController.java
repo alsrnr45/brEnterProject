@@ -1,15 +1,31 @@
 package com.brEnt.brFamily.boardFree.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.brEnt.brFamily.boardFree.model.service.BoardFreeService;
+import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
 
 @Controller
 public class BoardFreeController {
-		
+	
+	@Autowired
+	private BoardFreeService bfService; 
+	
 	// 자유게시판 리스트 
 	@RequestMapping("boardFreeList.bf")
-	public String boardFreeList() { 
-		return "boardFree/boardFreeList"; 
+	public ModelAndView boardFreeList(ModelAndView mv) { 
+		
+		ArrayList<BoardFree> list = bfService.selectBoardFreeList();
+		
+		mv.addObject("list", list)
+		  .setViewName("boardFree/boardFreeList"); 
+		
+		return mv;
 	}
 		
 	// 자유게시판 디테일 
@@ -32,8 +48,14 @@ public class BoardFreeController {
 		
 	// 관리자 자유게시판 리스트 
 	@RequestMapping("adminBoardFreeList.bf")
-	public String adminBoardFreeList() { 
-		return "boardFree/adminBoardFreeList"; 
+	public ModelAndView adminBoardFreeList(ModelAndView mv) { 
+		
+		ArrayList<BoardFree> list = bfService.adminSelectBoardFreeList();
+		
+		mv.addObject("list", list)
+		  .setViewName("boardFree/adminBoardFreeList"); 
+		
+		return mv; 
 	}
 		
 	// 관리자 자유게시판 디테일 

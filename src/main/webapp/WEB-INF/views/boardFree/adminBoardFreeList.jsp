@@ -49,7 +49,11 @@
 	    
 	/* 관리자 자유게시판 리스트 */
 	h1{margin-bottom: 20px;}
-	
+	table{
+  		text-align: center; 
+  		margin: auto;
+  	}
+  	
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -78,107 +82,30 @@
                                 <i class="fas fa-chalkboard"></i>
                             &nbsp; 게시판 관리 > 자유게시판
                             </div>
+                            
                             <div class="card-body">
                                 <table id="datatablesSimple" class="adminBoardFreeList">
                                     <thead>
                                         <tr>
                                             <th><input type="checkbox" id="checkEc"></th>
-                                            <th>문서번호</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>작성일</th>
-                                            <th>조회수</th>
+                                            <th style="text-align:center;">번호</th>
+                                            <th style="text-align:center;">제목</th>
+                                            <th style="text-align:center;">작성자</th>
+                                            <th style="text-align:center;">조회수</th>
+                                            <th style="text-align:center;">작성일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>11</td>
-                                            <td>자유 게시글 11입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>10</td>
-                                            <td>자유 게시글 10입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>9</td>
-                                            <td>자유 게시글 9입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>8</td>
-                                            <td>자유 게시글 8입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>7</td>
-                                            <td>자유 게시글 7입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>6</td>
-                                            <td>자유 게시글 6입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>5</td>
-                                            <td>자유 게시글 5입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>4</td>
-                                            <td>자유 게시글 4입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>3</td>
-                                            <td>자유 게시글 3입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>2</td>
-                                            <td>자유 게시글 2입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="checkbox" id="checkEc"></td>
-                                            <td>1</td>
-                                            <td>자유 게시글 1입니다.</td>
-                                            <td>최사원</td>
-                                            <td>2021-06-10</td>
-                                            <td>10</td>
-                                        </tr>
+                                    	<c:forEach var="bf" items="${ list }">
+	                                       	   <tr>
+	                                       	   	   <th><input type="checkbox" id="checkEc"></td>
+	                                       	       <td class="bfno">${ bf.freeNo }</td>
+	                                       	       <td>${ bf.freeTitle }</td>
+	                                       	       <td>${ bf.memNo }</td>
+	                                       	       <td>${ bf.freeCount }</td>
+	                                       	       <td>${ bf.freeEnrolldate }</td>
+	                                       	   </tr>
+	                                	</c:forEach>
                                     </tbody>
                                     <button type="submit" class="btn btn-danger" style="float:left;">선택삭제</button> 
                                 </table> 
@@ -192,19 +119,21 @@
         
     </div>
     
+    
     <script>
-    $(function() {
-    	$(".adminBoardFreeList>tbody>tr").click(function() {
-        	location.href = "adminBoardFreeDetail.admin";
-            console.log("관리자 자유게시글 클릭");
-        })
-    }); 
+    	$(function() {
+			$(document).on("click", ".adminBoardFreeList>tbody>tr>td", function(){
+        		location.href ="adminBoardFreeDetail.bf?=bfno" + $(this).children(".bfno").text();
+     		});
+		}); 
    	</script>
+    
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="resources/js/datatables-simple-demo.js"></script>
+    
     
 </body>
 </html>

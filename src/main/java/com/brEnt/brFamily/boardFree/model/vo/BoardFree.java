@@ -13,11 +13,11 @@ import lombok.ToString;
 public class BoardFree {
 	
 	private int freeNo;
-	private int memNo;
+	private String memNo;
 	private String freeTitle;
 	private String freeCnt;
-	private String freeEnrollDate;
-	private String freeUpdateDate;
+	private String freeEnrolldate;
+	private String freeUpdatedate;
 	private int freeCount;
 	private String freeStatus; 
 	private String freeFileOrigin;

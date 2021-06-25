@@ -2,20 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardFreeMapper">
 
-	<resultMap id="boardFree" type="BoardFree">
+	<resultMap id="boardFree" type="boardFree">
 		<id column="free_no" property="freeNo"/>
-		<result column="mem_no" property="memNo"/>
+		<result column="id" property="memNo"/>
 		<result column="free_title" property="freeTitle"/>
 		<result column="free_cnt" property="freeCnt"/>
-		<result column="free_enrolldate" property="freeEnrollDate"/>
-		<result column="free_updatedate" property="freeUpdateDate"/>
+		<result column="free_enrolldate" property="freeEnrolldate"/>
+		<result column="free_updatedate" property="freeUpdatedate"/>
 		<result column="free_count" property="freeCount"/>
 		<result column="free_status" property="freeStatus"/>
 		<result column="free_file_origin" property="freeFileOrigin"/>
 		<result column="free_file_update" property="freeFileUpdate"/>
 	</resultMap>
 	
-	<resultMap id="boardFreeReply" type="BoardFreeReply">
+	<resultMap id="boardFreeReply" type="boardFreeReply">
 		<id column="free_reply_no" property="freeReplyNo"/>
 		<result column="free_no" property="freeNo"/>
 		<result column="mem_no" property="memNo"/>
@@ -34,15 +34,13 @@
 		     , id
 		     , free_title
 		     , free_count
-		     , free_enrollDate 		      
+		     , to_char(free_enrolldate, 'YYYY-MM-DD') free_enrolldate		      
 		  from free_board f
 		  join member m on (m.mem_no = f.mem_no)
 		 where free_status = 'Y' 
 		 order
-		    by free_no desc, 
-		       free_enrolldate desc 
+		    by free_no desc
 	</select>
-	
 	
 	
 	

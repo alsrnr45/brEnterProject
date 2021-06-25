@@ -68,13 +68,13 @@
         </div>
 
         <!--컨텐츠-->
-        <div id="layoutSidenav_content">
-        
+        <div id="layoutSidenav_content">   
         	<div class="wrap">
     
-                <h1>자유게시판</h1>
+                <h1>자유게시판</h1><hr>
     
-                <a class="btn btn-primary" href="" style="background-color:lightgray; border-color:lightgray; margin-left:900px;">목록으로</a> 
+                <a class="btn btn-primary" href="" style="background-color:lightgray; border-color:lightgray; margin-left:900px;">
+                목록으로</a> 
                 <br><br><br>
     
                 <div class="content">
@@ -110,7 +110,8 @@
     
                     <div class="boardFreeBtn" style="margin-left:820px;">
                         <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
-                        <a class="btn btn-primary" href="" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">수정하기</a>
+                        <a class="btn btn-primary" href="" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
+                        수정하기</a>
                         <a class="btn btn-danger" href="">삭제하기</a>
                     </div><br><br>
                    

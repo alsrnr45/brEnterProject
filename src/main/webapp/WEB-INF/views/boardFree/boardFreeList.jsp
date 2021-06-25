@@ -91,8 +91,8 @@
 	                                <a class="btn btn-primary" href="boardFreeEnroll.bf" style="background-color:rgb(155, 89, 182); ; border-color:rgb(155, 89, 182);">
 	                                작성하기</a> 
 	                            </div>
+	                            
 	                            <div class="card-body">	                                	                             	
-
 	                                <table id="datatablesSimple" class="boardFreeList">
 	                                    <thead>
 	                                        <tr>
@@ -104,83 +104,15 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                        <tr>
-	                                            <td>11</td>
-	                                            <td>자유게시글 11입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>10</td>
-	                                            <td>자유게시글 10입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>9</td>
-	                                            <td>자유게시글 9입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>8</td>
-	                                            <td>자유게시글 8입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>7</td>
-	                                            <td>자유게시글 7입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>6</td>
-	                                            <td>자유게시글 6입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>5</td>
-	                                            <td>자유게시글 5입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>4</td>
-	                                            <td>자유게시글 4입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>3</td>
-	                                            <td>자유게시글 3입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>2</td>
-	                                            <td>자유게시글 2입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>1</td>
-	                                            <td>자유게시글 1입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>12</td>
-	                                            <td>2021-06-15</td>
-	                                        </tr>
+	                                       <c:forEach var="bf" items="${ list }">
+	                                       	   <tr>
+	                                       	       <td class="bfno">${ bf.freeNo }</td>
+	                                       	       <td>${ bf.freeTitle }</td>
+	                                       	       <td>${ bf.memNo }</td>
+	                                       	       <td>${ bf.freeCount }</td>
+	                                       	       <td>${ bf.freeEnrolldate }</td>
+	                                       	   </tr>
+	                                       </c:forEach>
 	                                    </tbody>	                                                                 
 	                                </table>	                               
 	                            </div>
@@ -190,15 +122,16 @@
             	</main> 
         	</div>
 	</div>
+	
 		
 	<script>
    		$(function() {
-       		$(".boardFreeList>tbody>tr").click(function() {
-            	location.href = "boardFreeDetail.bf";
-            	console.log("자유게시글 클릭");
-        	})
+   			$(document).on("click", ".boardFreeList>tbody>tr", function(){
+            	location.href ="boardFreeDetail.bf?=bfno" + $(this).children(".bfno").text();
+         	});
     	}); 
    	</script>
+   		
    		
    	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="resources/js/scripts.js"></script>

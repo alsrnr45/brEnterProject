@@ -87,8 +87,8 @@
                 <br><br><br>
 
                 <div class="content">
+                
                     <div class="boardFreeDetailArea">
-
                         <table id="boardFreeContnet">
                             <tr style="text-align:center;">
                                 <th width="70">No.</th> 

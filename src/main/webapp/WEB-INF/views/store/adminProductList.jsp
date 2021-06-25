@@ -16,9 +16,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-	/* 스타일 */
-	h1{margin-bottom:20px;}
+	/* 버튼 */
+    .btn-warning {background-color:rgb(255, 227, 115); border-color:rgb(255, 227, 115); margin-left:870px; height:38px; width:100px; text-align:center; }
+    .btn-warning:hover, .btn-warning:focus, .btn-warning:active {background:rgb(253, 247, 210); border-color:rgb(253, 247, 210); box-shadow:0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);}
 
+    /* 영역 */
+    .content{width:1200px; margin:auto;}
+
+    /* 스타일 */
+	h1{margin-bottom:20px;}
     .card {box-shadow: 0 7px 15px rgb(0 0 0 / 40%);}
 </style>
 </head>
@@ -37,7 +43,7 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            <main>
+            <div class="content">
                 <div class="container-fluid px-4">
                     
                     <div class="container-fluid px-4">
@@ -47,6 +53,7 @@
                             <div class="card-header">
                                 <i class="fas fa-store me-1"></i>
                                	 상품조회
+                                <a class="btn btn-warning" href="productEnroll.admin">작성하기</a> 
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple" class="productList">
@@ -77,7 +84,7 @@
                         </div>
                     </div>
                 </div>
-            </main> 
+            </div> 
         </div>
     </div>
     
@@ -85,9 +92,9 @@
         $(function() {
 
             $(document).on("click", ".productList>tbody>tr", function(){
-                location.href ="productDetail.admin?=pno" + $(this).children(".pno").text();
+            	location.href ="productDetail.admin?pno=" + $(this).children().eq(0).text();
             });
-            
+
         })
 
     </script>

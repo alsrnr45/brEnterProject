@@ -69,7 +69,7 @@
 	/* 영역 */
     /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
     .content{width:1000px; height:450px;}
-	.headArea{width: 1100px; height: 450px; text-align: center; margin: auto; padding-top: 30px;}
+	.headArea{width:1100px; height:450px; text-align:center; margin:auto; padding-top: 30px;}
 	.detailArea{width:1100px; height:500px; text-align:center; margin:auto; padding: 40px 50px 30px 50px;}
 
     /* 상품정보 */

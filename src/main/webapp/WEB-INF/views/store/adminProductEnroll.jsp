@@ -21,20 +21,12 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
 	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(255, 227, 14); 
-	box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);
-	outline: 0 none;
-	}
     input{height:40px;}
 
 	/* button 스타일 */
-	.btn-warning {background-color: rgb(255, 227, 115); border-color: rgb(255, 227, 115); margin-right: 75px; height:38px; width:100px; text-align:center;}
+	.btn-warning {background-color:rgb(255, 227, 115); border-color:rgb(255, 227, 115); margin-right:75px; height:38px; width:100px; text-align:center;}
+    .btn-warning:hover, .btn-warning:focus, .btn-warning:active {background:rgb(253, 247, 210); border-color:rgb(253, 247, 210); box-shadow:0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);}
 	.btn-light {background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215); height:38px; width:100px; text-align:center;} 
     	
 	/* 스타일 */
@@ -90,25 +82,25 @@
                             <table align="center">
                                 <tr>
                                     <th><label for="productNo">상품번호</label></th>
-                                    <td><input type="text" id="productNo" class="form-control" name="" value="147" required></td>
+                                    <td><input type="text" id="productNo" class="form-control" name="" value="" required></td>
                                     <th><label for="productCtg">카테고리</label></th>
-                                    <td><input type="text" id="productCtg " class="form-control" name="" value="Album" required></td>
+                                    <td><input type="text" id="productCtg " class="form-control" name="" value="" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="productName">상품명</label></th>
-                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="BLACKPINK 1st FULL ALBUM" required></td>
+                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="originPrice">판매가</label></th>
-                                    <td><input type="text" id="originPrice" class="form-control" name="" value="20000원" required></td>
+                                    <td><input type="text" id="originPrice" class="form-control" name="" value="" required></td>
                                     <th><label for="memberPrice">직원가</label></th>
-                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="18000원" required></td>
+                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="stock">재고</label></th>
-                                    <td><input type="text" id="stock" class="form-control" name="" value="147" required></td>
+                                    <td><input type="text" id="stock" class="form-control" name="" value="" required></td>
                                     <th><label for="status">진열여부</label></th>
-                                    <td><input type="text" id="status " class="form-control" name="" value="Y" required></td>
+                                    <td><input type="text" id="status " class="form-control" name="" value="" required></td>
                                 </tr>
                             </table>                        
                         </div>

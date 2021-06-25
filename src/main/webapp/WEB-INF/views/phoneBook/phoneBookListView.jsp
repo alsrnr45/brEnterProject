@@ -19,6 +19,13 @@
     <script src='resources/scheduleResources/lib/main.js'></script>
     <script src='resources/scheduleResources/lib/locales/ko.js'></script>
     
+    <!-- modal 라이브러리 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
 <title>Insert title here</title>
 
 <style>
@@ -33,6 +40,22 @@
     }
     .btn .btn-primary{
         text-align: inherit;
+    }
+
+    .btn-primary.focus, .btn-primary:focus{
+        background-color: rgba(155, 89, 182, 0.6);
+        border-color: rgba(155, 89, 182, 0.6);
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+    }
+    
+    .btn-check:focus + .btn-primary, .btn-primary:hover{
+        background-color: rgba(155, 89, 182, 0.6);
+        border-color: rgba(155, 89, 182, 0.6);
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+    }
+
+    .modal-backdrop.show{
+        opacity :0;
     }
 </style>
 </head>
@@ -97,52 +120,41 @@
                                 </tfoot>
                             </table>
                             <div class="card-footer">
-                                <a href="popup.pb" class="btn btn-primary" data-toggle="modal" data-target="#myModal">주소록 추가</a>
-                                <a class="btn btn-primary btn-block"  href="">메일발송</a>
-                                <a class="btn btn-primary btn-block">삭제하기</a>
+                                  <!-- Button to Open the Modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                주소록추가
+                                </button>
+                                <a class="btn btn-primary"  href="">메일발송</a>
+                                <a class="btn btn-primary">삭제하기</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main> 
-            
-        </div>
-    </div>
-
+            </main>
+              <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">Modal Heading</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    
+                    </div>
+                    
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                    
+                </div>
+                </div>
+            </div>
+</div>
 </body>
-<script>
-$('[data-target="#myModal"]').on('click', function (e) {
-    e.preventDefault();
-
-    var _linky = $(this).attr('href');
-    var _target = $(this).data('target'); 
-    var $target = $(_target);
-
-    if ($target.length > 0) {
-      
-        $target.find('iframe').attr('src', 'about:blank');
-
-        var _isRemote = false;
-        if (_linky.indexOf('http') > -1) {
-            _isRemote = true;
-        }
-
-        if (!_isRemote) {
-            if (_linky.indexOf('?') > -1) {
-                _linky += '&tmpl=component';
-            } else {
-                _linky += '?tmpl=component';
-            }
-        }
-      
-        $target.find('iframe').attr('src', _linky).load(function() {
-            $target.modal('show');
-        });
-    }
-});
-
-$('body').on('hidden.bs.modal', '.modal', function () {
-    $(this).removeData('bs.modal');
-});
-</script>
 </html>

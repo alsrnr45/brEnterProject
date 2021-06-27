@@ -38,6 +38,11 @@
     .dataTable-table > thead > tr > td, .dataTable-table > thead > tr > th {
         text-align:center;
     }
+
+    .bg-dark{
+        background-color: rgb(155, 89, 182) !important;
+    }
+
     .btn .btn-primary{
         text-align: inherit;
     }
@@ -54,9 +59,51 @@
         box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
     }
 
+    /* modal css */
     .modal-backdrop.show{
         opacity :0;
     }
+
+    .modal-body-content{
+        width:100%;
+        padding: 16px 24px;
+        display:flex;
+        flex-direction: row;
+    }
+
+    .content{
+        display:flex;
+        flex:5;
+    }
+
+    .content, .move-tab, .new-list{
+        box-sizing:border-box;
+        height: 460px;
+    }
+
+    .content-org-tree, .content-list{
+        border: 1px solid #c9c9c9;
+        flex:1;
+    }
+
+    .search-wrap, .scroll-wrap{
+       
+    } 
+
+    .move-tab{
+        text-align:center;
+        flex:1;
+    }
+
+    .content-list{
+       
+    }
+
+    .new-list{
+        border: 1px solid #c9c9c9;
+        flex:4;
+    }
+
 </style>
 </head>
 <body>
@@ -133,28 +180,47 @@
             </main>
               <!-- The Modal -->
             <div class="modal fade" id="myModal">
-                <div class="modal-dialog">
-                <div class="modal-content">
-                
+                <div class="modal-dialog modal-xl">
+                <div class="modal-content"
                     <!-- Modal Header -->
                     <div class="modal-header">
-                    <h4 class="modal-title">Modal Heading</h4>
+                    <h4 class="modal-title">주소록 추가</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
-                    
                     <!-- Modal body -->
                     <div class="modal-body">
-                    
+                        <div class="modal-body-content">
+                            <div class="content">
+                                <div class="content-org-tree">
+                                 트리   
+                                </div>
+                                <div class="content-list">
+                                    <div class="search-wrap">
+                                        <input class="dataTable-input">
+                                    </div>
+                                    <div class="scroll-wrap">
+                                    스크롤랩(실질주소)   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="move-tab">
+                                <span class="btn btn-primary">추가 &gt</span><br><br>
+                                <span class="btn btn-primary">&lt 제외</span>
+                            </div>
+                            <div class="new-list">
+                            뉴리스트
+                            </div>
+                        </div>
+
                     </div>
-                    
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
                     </div>
-                    
-                </div>
                 </div>
             </div>
-</div>
+        </div>
+    </div>
 </body>
 </html>
+

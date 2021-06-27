@@ -44,9 +44,8 @@ public class StoreServiceImpl implements StoreService {
 
    
    @Override // 작성자 : 김혜미 -- 상품 상세조회 (관리자)
-   public Product selectProductDetailAdmin(int pdtNo) {
-      // TODO Auto-generated method stub
-      return null;
+   public Product selectProductDetailAdmin(int pno) {
+	   return sDao.selectProductDetailAdmin(sqlSession, pno);
    }
 
    

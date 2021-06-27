@@ -40,4 +40,10 @@ public class StoreDao {
 		return (ArrayList)sqlSession.selectList("storeMapper.selectProductListAdmin");
 	}
 
+	
+	// 작성자 : 김혜미 -- 상품 상세조회 (관리자)
+	public Product selectProductDetailAdmin(SqlSessionTemplate sqlSession, int pdtNo) {
+		return sqlSession.selectOne("storeMapper.selectProductDetailAdmin", pdtNo);
+	}
+
 }

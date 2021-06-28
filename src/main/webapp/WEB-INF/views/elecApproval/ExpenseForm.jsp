@@ -303,6 +303,9 @@
                                     <ul>뿌바부(사원)</ul>
                                     <ul>키키키(사원)</ul>
                                     <ul>하하하(사원)</ul>
+                                    <ul>하하하(사원)</ul>
+                                    <ul>하하하(사원)</ul>
+                                    <ul>하하하(사원)</ul>
                                 </div>
                                 <div class="modal3">
                                     <button class="btn btn-primary"> > </button>
@@ -321,10 +324,10 @@
                                         </div>
                                     </div>
                                     <div class="modal4_3">
-                                        <ul>안소은</ul>
-                                        <ul>최선희</ul>
-                                        <ul>김혜미</ul>
-                                        <ul>김민국</ul>
+                                        <ul>안소은(사원)</ul>
+                                        <ul>최선희(팀장)</ul>
+                                        <ul>김혜미(부장)</ul>
+                                        <ul>김민국(대표)</ul>
                                     </div>
                                     <div>
                                         <button type="submit" class="btn btn-secondary apply" data-dismiss="modal">적용</button>

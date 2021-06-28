@@ -86,7 +86,7 @@ public class ElecApprovalController {
    // 작성자 : 안소은 -- 지출결의서 폼
    @RequestMapping("expenseForm.ea")
    public String ExpenseForm() {
-      return "elecApproval/ExpenseForm";
+      return "elecApproval/expenseForm";
    }
    
    

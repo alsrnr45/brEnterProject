@@ -91,7 +91,7 @@
             height:500px;
         }
         .signModalOuter ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
-        .signModalOuter ul:hover{cursor:pointer; background: lightskyblue; padding-top:3px;}
+        .signModalOuter ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
         .signModalOuter .btn{
             background:lightslategrey;
             color:white;
@@ -292,6 +292,7 @@
                                     <ul>미디어팀</ul>
                                     <ul>인사팀</ul>
                                     <ul>총무회계팀</ul>
+                                    <ul>대표</ul>
                                 </div>
                                 <div class="modal2">
                                     <ul>안소은(사원)</ul>

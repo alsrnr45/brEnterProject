@@ -34,6 +34,15 @@
 	         .mt-5 {
 			  	margin-top: 20px !important;
 			}
+			.btnLogin{
+				width: 100%; 
+				background-color:#9b59b6; 
+				border-inline-color: none; 
+				border: none transparent;
+			}
+			.btnLogin:hover{
+				background-color: #cf9ae4;
+			}
 	
    	</style>
 </head>
@@ -62,9 +71,7 @@
                                             <label for="inputPassword">Password</label>
                                         </div>
                                         <div class="d-flex align-items-center justify-content-between mt-4 mb-0" style="align-items: flex-start;">
-                                            <a class="btn btn-primary" href="index.html" style="width: 100%; background-color:#9b59b6; border-inline-color: none; border: none transparent;">
-                                            Login
-                                            </a>
+                                            <button type="submit" class="btn btn-primary btnLogin">로그인</button>
                                         </div> 
                                         <div class="form-check mb-3" style="margin-top: 30px;">
                                             <input class="form-check-input" id="inputRememberPassword" type="checkbox" value="" />

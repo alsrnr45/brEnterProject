@@ -73,15 +73,33 @@
                 <li class="nav-item dropdown" style="justify-content: space-between;"> 
                     <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">사원명</a></li>
-                        <li><a class="dropdown-item" href="#!" style="font-size: 13px;">이메일</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        
-                        <!--logout-->
-                        <div class="dropmenu">
-                        	<button class="logout mymenu" >Logout</button><button class="mypage mymenu">MYPAGE</button>
-                        	<!--<li><a class="dropdown-item" href="#!">Logout</a></li> *dropdown-item 사용시 한칸 전부사용됨-->
-                        </div>
+
+                        <c:choose>
+                        	<c:when test="${ empty loginUser }" >
+                        	<!-- 로그인 전 -->
+		                        <li><a class="dropdown-item" href="#!">사원명</a></li>
+		                        <li><a class="dropdown-item" href="#!" style="font-size: 13px;">이메일</a></li>
+		                        <li><hr class="dropdown-divider" /></li> 
+		                    
+		                        <div class="dropmenu">
+		                        	<button class="logout mymenu" >Logout</button>
+		                        	<button class="mypage mymenu">MYPAGE</button>
+	                            </div>
+	                        </c:when>
+	                        <c:otherwise>
+	                        <!-- 로그인 후 -->
+   		                        <li><a class="dropdown-item" href="#!">${ loginUser.memName }</a></li>
+		                        <li><a class="dropdown-item" href="#!" style="font-size:13px;">${ loginUser.id}@brent.com</a></li>
+		                        <li><hr class="dropdown-divider" /></li> 
+		                    
+		                        <div class="dropmenu">
+		                        	<button class="logout mymenu" >Logout</button>
+		                        	<button class="mypage mymenu">MYPAGE</button>
+	                        
+	                        </c:otherwise>
+	                        
+                        </c:choose>
+
                     </ul>
                 </li>
             </ul>

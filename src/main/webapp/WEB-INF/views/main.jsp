@@ -10,7 +10,7 @@
 <body>
 
 
-	<jsp:include page="common/userMain.jsp"/>
+	<jsp:include page="member/login.jsp"/>
 
 	
 	<%-- 

@@ -2,7 +2,64 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 
+	<resultMap id="memberResultSet" type="Member">
+		<id column="mem_no" property="memNo"/> <!-- 프라이머리키 -->
+		<result column="dept_no" property="deptNo"/>
+		<result column="posi_no" property="posiNo"/>
+		<result column="id" property="id"/>
+		<result column="pwd" property="pwd"/>
+		<result column="official_email" property="officeEmail"/>
+		<result column="personal_email" property="personalEmail"/>
+		<result column="mem_name" property="memName"/>
+		<result column="phone" property="phone"/>
+		<result column="post" property="post"/>
+		<result column="road_address" property="roadAddress"/>
+		<result column="detail_address" property="detailAddress"/>
+		<result column="mem_enrolldate" property="memEnrollDate"/>
+		<result column="hiredate" property="hireDate"/>
+		<result column="regi" property="regi"/>
+		<result column="bank" property="bank"/>
+		<result column="account" property="account"/>
+		<result column="profile" property="profile"/>
+		<result column="off_count" property="offCount"/>
+		<result column="accept_status" property="acceptStatus"/>
+		<result column="mem_status" property="memStatus"/>
+		<result column="admin_status" property="adminStatus"/>
+		
+		
+	</resultMap>
 
+	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
+		select 	
+			mem_no
+		  , dept_no
+		  , posi_no
+		  , id
+		  , pwd
+		  , office_email
+		  , personal_email
+		  , mem_name
+		  , phone
+		  , post
+		  , road_address
+		  , detail_address
+		  , mem_enrolldate
+		  , hire_date
+		  , regi
+		  , bank
+		  , account
+		  , profile
+		  , off_count
+		  , accept_status
+		  , mem_status
+		  , admin_status
+		from member
+  		where mem_status = 'Y'
+  		and id = #{id}
+		and pwd = #{pwd}
 
-
+	</select>
+	
+	
+	
 </mapper>

@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
+<!-- JSTL format 태그로 날짜 형식 변경하기 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,7 +94,7 @@
 	                                작성하기</a> 
 	                            </div>
 	                            <div class="card-body">
-	                                <!-- 결재대기인 경우에만 빨간색으로 글자색 변경할 것 -->
+	                               
 	                                <table id="datatablesSimple" class="approvalTotalList">
 	                                    <thead>
 	                                        <tr>
@@ -104,105 +108,47 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                        <tr>
-	                                            <td>BC-20210622-86328</td>
-	                                            <td>업무연락</td>
-	                                            <td>문서 11입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>BC-20210621-86327</td>
-	                                            <td>업무연락</td>
-	                                            <td>문서 10입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>BC-20210620-86326</td>
-	                                            <td>업무연락</td>
-	                                            <td>문서 9입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>PL-20210619-86325</td>
-	                                            <td>기획안</td>
-	                                            <td>문서 8입니다.</td>
-	                                            <td>최부장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>반려</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>PL-20210618-86324</td>
-	                                            <td>기획안</td>
-	                                            <td>문서 7입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>반려</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>ME-20210617-86323</td>
-	                                            <td>회람</td>
-	                                            <td>문서 6입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>결재완료</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>ME-20210616-86322</td>
-	                                            <td>회람</td>
-	                                            <td>문서 5입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>결재완료</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>OF-20210615-86321</td>
-	                                            <td>연차</td>
-	                                            <td>문서 4입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>결재완료</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>OF-20210614-86320</td>
-	                                            <td>연차</td>
-	                                            <td>문서 3입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>결재완료</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>EX-20210613-92101</td>
-	                                            <td>지출결의서</td>
-	                                            <td>문서 2입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>결재완료</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>EX-20210612-92100</td>
-	                                            <td>지출결의서</td>
-	                                            <td>문서 1입니다.</td>
-	                                            <td>최부장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td>2021-06-07</td>
-	                                            <td>결재완료</td>
-	                                        </tr>
+	                                       <c:forEach var="ea" items="${ list }">
+	                                       	   <tr>
+	                                       	   	   <% { int ranNum = (int)(Math.random() * (99999 - 10000 + 1)) + 10000; } %>                                	   
+	                                       	   	   <td class="eano">${ ea.ecCode }${ ea.ecEnrolldate }	                                       	   	  
+	                                       	       
+	                                       	       <!-- 문서 코드에 따른 조건처리 -->
+	                                       	       <td>
+	                                       	       		<c:choose>
+	                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
+	                                       	       				기획안
+	                                       	       			</c:when>
+	                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
+	                                       	       				업무연락
+	                                       	       			</c:when>
+	                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
+	                                       	       				연차
+	                                       	       			</c:when>
+	                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
+	                                       	       				지출결의서
+	                                       	       			</c:when>
+	                                       	       			<c:otherwise>
+	                                       	       				회람 
+	                                       	       			</c:otherwise>
+	                                       	       		</c:choose>
+	                                       	       </td>
+	                                       	        
+	                                       	       <td>${ ea.ecTitle }</td>
+	                                       	       <td>${ ea.ecWriter }</td>
+	                                       	       
+	                                       	       <!-- JSTL 날짜형식 포맷팅 -->
+	                                       	       <td>
+	                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
+	                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
+	                                       	       </td>
+	                                       	       
+	                                       	       <td>${ ea.ecCompdate }</td>
+	                                       	       
+	                                       	       <!-- 결재대기인 경우에만 빨간색으로 글자색 변경할 것 -->
+	                                       	       <td>${ ea.ecStatus }</td>      
+	                                       	   </tr>	
+	                                       </c:forEach>
 	                                    </tbody>
 	                                </table>
 	                            </div>
@@ -217,8 +163,11 @@
     <script>
     	$(function() {
             $(".approvalTotalList>tbody>tr").click(function() {
-            	// 폼마다 디테일 뷰 다름 => 조건 설정 (1: 공문, 기획안, 회람 / 2: 연차 / 3: 지출결의서)
+            	// 폼마다 디테일 뷰 다름 => 조건 설정 (1: 기획안, 업무연락, 회람 / 2: 연차 / 3: 지출결의서)
             	location.href = "documentDetail.ea";
+            	
+             	// 조건1. 업무연락/기획안/회람 
+            	//location.href ="documentDetail.ea?=eano" + $(this).children(".eano").text();
                 console.log("전자결재 문서 클릭");
             })
         })

@@ -19,6 +19,13 @@
     <script src='resources/scheduleResources/lib/main.js'></script>
     <script src='resources/scheduleResources/lib/locales/ko.js'></script>
     
+    <!-- modal 라이브러리 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
 <title>Insert title here</title>
 
 <style>
@@ -31,9 +38,72 @@
     .dataTable-table > thead > tr > td, .dataTable-table > thead > tr > th {
         text-align:center;
     }
+
+    .bg-dark{
+        background-color: rgb(155, 89, 182) !important;
+    }
+
     .btn .btn-primary{
         text-align: inherit;
     }
+
+    .btn-primary.focus, .btn-primary:focus{
+        background-color: rgba(155, 89, 182, 0.6);
+        border-color: rgba(155, 89, 182, 0.6);
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+    }
+    
+    .btn-check:focus + .btn-primary, .btn-primary:hover{
+        background-color: rgba(155, 89, 182, 0.6);
+        border-color: rgba(155, 89, 182, 0.6);
+        box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+    }
+
+    /* modal css */
+    .modal-backdrop.show{
+        opacity :0;
+    }
+
+    .modal-body-content{
+        width:100%;
+        padding: 16px 24px;
+        display:flex;
+        flex-direction: row;
+    }
+
+    .content{
+        display:flex;
+        flex:5;
+    }
+
+    .content, .move-tab, .new-list{
+        box-sizing:border-box;
+        height: 460px;
+    }
+
+    .content-org-tree, .content-list{
+        border: 1px solid #c9c9c9;
+        flex:1;
+    }
+
+    .search-wrap, .scroll-wrap{
+       
+    } 
+
+    .move-tab{
+        text-align:center;
+        flex:1;
+    }
+
+    .content-list{
+       
+    }
+
+    .new-list{
+        border: 1px solid #c9c9c9;
+        flex:4;
+    }
+
 </style>
 </head>
 <body>
@@ -97,52 +167,60 @@
                                 </tfoot>
                             </table>
                             <div class="card-footer">
-                                <a href="popup.pb" class="btn btn-primary" data-toggle="modal" data-target="#myModal">주소록 추가</a>
-                                <a class="btn btn-primary btn-block"  href="">메일발송</a>
-                                <a class="btn btn-primary btn-block">삭제하기</a>
+                                  <!-- Button to Open the Modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                                주소록추가
+                                </button>
+                                <a class="btn btn-primary"  href="">메일발송</a>
+                                <a class="btn btn-primary">삭제하기</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </main> 
-            
+            </main>
+              <!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-xl">
+                <div class="modal-content"
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                    <h4 class="modal-title">주소록 추가</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                        <div class="modal-body-content">
+                            <div class="content">
+                                <div class="content-org-tree">
+                                 트리   
+                                </div>
+                                <div class="content-list">
+                                    <div class="search-wrap">
+                                        <input class="dataTable-input">
+                                    </div>
+                                    <div class="scroll-wrap">
+                                    스크롤랩(실질주소)   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="move-tab">
+                                <span class="btn btn-primary">추가 &gt</span><br><br>
+                                <span class="btn btn-primary">&lt 제외</span>
+                            </div>
+                            <div class="new-list">
+                            뉴리스트
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
 </body>
-<script>
-$('[data-target="#myModal"]').on('click', function (e) {
-    e.preventDefault();
-
-    var _linky = $(this).attr('href');
-    var _target = $(this).data('target'); 
-    var $target = $(_target);
-
-    if ($target.length > 0) {
-      
-        $target.find('iframe').attr('src', 'about:blank');
-
-        var _isRemote = false;
-        if (_linky.indexOf('http') > -1) {
-            _isRemote = true;
-        }
-
-        if (!_isRemote) {
-            if (_linky.indexOf('?') > -1) {
-                _linky += '&tmpl=component';
-            } else {
-                _linky += '?tmpl=component';
-            }
-        }
-      
-        $target.find('iframe').attr('src', _linky).load(function() {
-            $target.modal('show');
-        });
-    }
-});
-
-$('body').on('hidden.bs.modal', '.modal', function () {
-    $(this).removeData('bs.modal');
-});
-</script>
 </html>
+

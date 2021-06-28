@@ -1,10 +1,21 @@
 package com.brEnt.brFamily.elecApproval.controller;
 
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
+import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 
 @Controller
 public class ElecApprovalController {
+	
+	@Autowired
+	private ElecApprovalService eaService;
+	
 	
 	// 작성자 : 김혜미 -- 연차 신청폼
 	@RequestMapping("offEnrollForm.ea")
@@ -20,22 +31,16 @@ public class ElecApprovalController {
 
 	// 작성자 : 최선희 -- 전자결재 전체 리스트 
 	@RequestMapping("approvalTotalList.ea")
-	public String approvalTotalList() {
-		return "elecApproval/approvalTotalList";
-	}
+	public ModelAndView approvalTotalList(ModelAndView mv) {
 		
-	// 작성자 : 최선희 -- 전자결재 진행중인 문서 승인 리스트 
-	@RequestMapping("approvalOkList.ea")
-	public String approvalOkList() {
-		return "elecApproval/approvalOkList";
-	}	
+		ArrayList<ElecApproval> list = eaService.selectApprovalTotalList();
 		
-	// 작성자 : 최선희 -- 전자결재 진행중인 문서 반려 리스트 
-	@RequestMapping("approvalReturnList.ea")
-	public String approvalReturnList() {
-		return "elecApproval/approvalReturnList";
+		mv.addObject("list", list)
+		  .setViewName("elecApproval/approvalTotalList"); 
+		
+		return mv;				
 	}
-			
+	
 	// 작성자 : 최선희 -- 전자결재 진행중인 문서 대기 리스트 
 	@RequestMapping("approvalStandbyList.ea")
 	public String approvalStandbyList() {

@@ -18,7 +18,7 @@
 
                         <!-- 메일 --><br>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#mail" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="far fa-envelope"></i></div>
+                            <div class="sb-nav-link-icon"><i class="far fa-envelope fa-fw"></i></div>
                             	메일
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -34,15 +34,15 @@
 
                         <!-- 주소록 -->
                         <a class="nav-link" href="#">
-                            <div class="sb-nav-link-icon"><i class="far fa-address-book"></i></div>
+                            <div class="sb-nav-link-icon"><i class="far fa-address-book fa-fw"></i></div>
                            	 주소록
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                         </a>
 
                         <!-- 일정관리 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#schedule" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt"></i></div>
-                            일정관리
+                            <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt fa-fw"></i></div>
+                            	일정관리
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="schedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -112,7 +112,7 @@
 
                         <!-- 회의실 -->
                         <a class="nav-link collapsed" href="" data-bs-toggle="collapse" data-bs-target="#meetingRoom" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-handshake"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-handshake fa-fw"></i></div>
                            	 회의실
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                         </a>
@@ -124,8 +124,8 @@
 
                         <!-- 전자결재 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#electronicApproval" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="far fa-clipboard"></i></div>
-                            &nbsp;전자결재
+                            <div class="sb-nav-link-icon"><i class="far fa-clipboard fa-fw"></i></div>
+                            	전자결재
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="electronicApproval" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
@@ -137,7 +137,7 @@
                         
                         <!-- 인사관리 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#personnelManagement" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-users fa-fw"></i></div>
                           	  인사관리
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -152,7 +152,7 @@
 
                         <!-- 게시판 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#board" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chalkboard"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-chalkboard fa-fw"></i></div>
                            	 게시판
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -166,7 +166,7 @@
                         
                         <!-- BR엔터소식 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#brEnterNotice" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-bullhorn"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-bullhorn fa-fw"></i></div>
                             BR엔터소식
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -181,14 +181,14 @@
 
                         <!-- 채팅 -->
                         <a class="nav-link" href="chatMain.ch">
-                            <div class="sb-nav-link-icon"><i class="fas fa-comments"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-comments fa-fw"></i></div>
                             	채팅
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
                         </a>
 
                         <!-- 스토어 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#store" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-store"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-store fa-fw"></i></div>
                             	스토어
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -206,7 +206,7 @@
 
                         <!-- 마이페이지 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#mypage" aria-expanded="false" aria-controls="collapseLayouts">
-                            <div class="sb-nav-link-icon"><i class="fas fa-key"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-key fa-fw"></i></div>
                             	마이페이지
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>

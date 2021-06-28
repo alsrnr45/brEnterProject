@@ -20,7 +20,7 @@ public class StoreController {
    @Autowired
    private StoreService sService;
    
-   // 작성자 : 김혜미 -- 스토어 리스트
+   // 작성자 : 김혜미 -- 스토어 리스트 조회
    @RequestMapping("storeList.st")
    public ModelAndView selectProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
 
@@ -32,11 +32,12 @@ public class StoreController {
       mv.addObject("pi", pi)
         .addObject("list", list)
         .setViewName("store/storeList");
+      System.out.println(list);
       
       return mv;
    }
    
-   // 작성자 : 김혜미 -- 스토어 디테일
+   // 작성자 : 김혜미 -- 스토어 상세조회
    @RequestMapping("storeDetail.st")
    public String selectProductDetail(int pno, Model model) {
 	   
@@ -58,7 +59,7 @@ public class StoreController {
       return "store/orderFinish";
    }
    
-   // 작성자 : 김혜미 -- 상품관리 리스트
+   // 작성자 : 김혜미 -- 상품관리 리스트 조회 (관리자)
    @RequestMapping("productList.admin")
    public ModelAndView productList(ModelAndView mv) {
 	   
@@ -70,10 +71,14 @@ public class StoreController {
 	  return mv;
    }
    
-   // 작성자 : 김혜미 -- 상품관리 디테일
+   // 작성자 : 김혜미 -- 상품관리 상세조회 (관리자)
    @RequestMapping("productDetail.admin")
-   public String productDetail() {
-      return "store/adminProductDetail";
+   public String selectProductDetailAdmin(int pno, Model model) {
+	   
+		Product p = sService.selectProductDetailAdmin(pno); 
+		model.addAttribute("p", p);
+		
+		return "store/adminProductDetail";
    }
    
    // 작성자 : 김혜미 -- 상품관리 등록

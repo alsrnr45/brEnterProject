@@ -15,32 +15,32 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- include summernote css/js -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
 	/* input 스타일 */
 	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(255, 227, 14); 
-	box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);
-	outline: 0 none;
-	}
+    border-color: #ced4da !important; 
+	box-shadow: 0 0 1px rgba(72, 72, 72, 0) inset, 0 0 0px rgba(72, 72, 72, 0) !important;
+	outline: 0 none;}
     input{height:40px; background-color: white !important;}
 
     /* textarea 스타일 */
-    textarea:focus, .uneditable-input:focus {
-	border-color: rgb(255, 227, 14) !important; 
-	box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6) !important;
-	outline: 0 none !important;
-	}
+    /* textarea:focus, .uneditable-input:focus {
+	border-color: #ced4da !important; 
+	box-shadow: 0 0 1px rgba(72, 72, 72, 0) inset, 0 0 0px rgba(72, 72, 72, 0) !important;
+	outline: 0 none !important;} */
     textarea{background-color: white !important; resize: none;}
 
 	/* button 스타일 */
-	.btn-warning {background-color: rgb(255, 227, 115); border-color: rgb(255, 227, 115); margin-right: 75px; height:38px; width:100px; text-align:center;}
-    .btn-light {background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215); height:38px; width:100px; text-align:center;}
+    .btn-light {background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215); height:40px; width:100px; text-align:center;}
+	.btn-warning {background-color: rgb(252, 224, 110); border-color: rgb(255, 224, 110); height:40px; width:100px; text-align:center;}
+	.btn-danger {background-color: rgb(253, 128, 128); border-color: rgb(255, 134, 134); height:40px; width:100px; text-align:center; color: black; }
 	
-	/* 스타일 */
+	/* 영역 */
+	/* .content div {outline: 1px solid blueviolet;} */
 	.content {
 	    width: 1100px; 
 	    height: 660px; 
@@ -48,20 +48,24 @@
 	    background-color:rgb(240, 240, 240); 
 	    box-shadow: 0 7px 15px rgb(0 0 0 / 40%);
 	}
-	
-	/* .content div {outline: 1px solid blueviolet;} */
-    .content1 {width: 100%; height: 250px;}
-    .content2 {width: 100%; height: 325px;}
-    .summernote {width: 950px; height: 290px; margin: 15px 75px 25px 75px; background-color: white;}
+    .infoArea {width:100%; height:240px;}
+    .detailArea {width:100%; height:350px; padding: 15px 75px 25px 75px;}
+    .buttonArea {width:100%; height:70px;  padding: 0px 0 0 700px;}
 
+    .summernote {width:950px; height:320px;}
+	#summernote{height:100%; background-color:white !important; overflow:auto;}
+
+
+    /*  */
 	.productImage, .productInfo {float: left;}
-    .productImage {width: 285px; height: 100%; padding: 40px 0px 0px 75px;}
+    .productImage {width: 285px; height: 100%; padding: 30px 0px 0px 75px;}
     .productImage img {width: 200px; height: 200px;}
 
-    .productInfo {width: 740px; height: 100%; padding-top: 45px;}
+    .productInfo {width: 740px; height: 100%; padding-top: 35px;}
 	.productInfo table {width:100%;}
 	.productInfo>table *{margin-bottom: 10px;}
 	.productInfo>table th {text-align:center; width:130px; font-size: 17px;}
+	
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -80,58 +84,77 @@
         <!-- 컨텐츠 -->
         <div id="layoutSidenav_content">
             <div class="content">
+                <inpu method="post">
                 
-                <form method="post">
-                    <div class="content1">
+                    <div class="infoArea">
 
                         <div class="productImage">                  
-                            <img class="profile" src="resources/profileUpfiles/defaultProfile.jpg" alt="">
+                            <img src="${ p.pdtFile }">
                         </div>
         
                         <div class="productInfo">
                             <table align="center">
                                 <tr>
                                     <th><label for="productNo">상품번호</label></th>
-                                    <td><input type="text" id="productNo" class="form-control" name="" value="147" readonly></td>
+                                    <td><input type="text" id="productNo" class="form-control" name="" value="${ p.pdtNo }" readonly></td>
                                     <th><label for="productCtg">카테고리</label></th>
-                                    <td><input type="text" id="productCtg " class="form-control" name="" value="Album" readonly></td>
+                                    <td><input type="text" id="productCtg " class="form-control" name="" value="${ p.pdtCtg }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="productName">상품명</label></th>
-                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="BLACKPINK 1st FULL ALBUM" readonly></td>
+                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="${ p.pdtName }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="originPrice">판매가</label></th>
-                                    <td><input type="text" id="originPrice" class="form-control" name="" value="20000원" readonly></td>
+                                    <td><input type="text" id="originPrice" class="form-control" name="" value="${ p.orgPrice }원" readonly></td>
                                     <th><label for="memberPrice">직원가</label></th>
-                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="18000원" readonly></td>
+                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="${ p.memPrice }원" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="stock">재고</label></th>
-                                    <td><input type="text" id="stock" class="form-control" name="" value="147" readonly></td>
+                                    <td><input type="text" id="stock" class="form-control" name="" value="${ p.pdtStock }" readonly></td>
                                     <th><label for="status">진열여부</label></th>
-                                    <td><input type="text" id="status " class="form-control" name="" value="Y" readonly></td>
+                                    <td><input type="text" id="status " class="form-control" name="" value="${ p.pdtStatus }" readonly></td>
                                 </tr>
                             </table>                        
                         </div>
-
+                        
                     </div>
 
-                    <div class="content2">
+                    <div class="detailArea">
                         <div class="summernote">
-                            <textarea id="summernote" name="" cols="108" rows="12" class="form-control" readonly></textarea>
-                        </div>
+                            <div  id="summernote" class="form-control" style="background-color: white !important;">${ p.pdtDetail }</div>
+                        </div>                     
                     </div>
 
-                    <div class="buttonArea" style="float:right;">
+                    <div class="buttonArea">
                         <a type="button" class="btn btn-light" href="productList.admin">뒤로가기</a>
                         <a type="button" class="btn btn-warning" href="productUpdate.admin" style="margin-left: 7px;">수정하기</a>
-                    </div>
+                        <a type="button" class="btn btn-danger" href="#" style="margin-left: 7px;">삭제하기</a>
+                    </div>                    
                 </form>
-
             </div>
         </div>
     </div>
+    
+    <script>
+        // 썸머노트
+        $(document).ready(function() {
+
+            $('#summernote').summernote({
+                height: 310,                    // 에디터 높이
+                minHeight: null,                // 최소 높이
+                maxHeight: null,                // 최대 높이
+                focus: true,                    // 에디터 로딩후 포커스를 맞출지 여부
+                lang: "ko-KR",                  // 한글 설정
+                resize: none,
+                toolbar: []                
+            });
+
+            $('#summernote').summernote('disable');
+        });
+
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

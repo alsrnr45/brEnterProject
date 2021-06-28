@@ -39,8 +39,7 @@ public class MemberController {
 		}
 	}
 	*/
-	@RequestMapping("login.me")
-	public String loginMember(Member m)
+	
 	
 	
 	

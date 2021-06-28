@@ -16,6 +16,7 @@ public class BoardFreeController {
 	@Autowired
 	private BoardFreeService bfService; 
 	
+	
 	// 자유게시판 리스트 
 	@RequestMapping("boardFreeList.bf")
 	public ModelAndView boardFreeList(ModelAndView mv) { 

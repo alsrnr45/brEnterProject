@@ -14,6 +14,7 @@ public class ElecApproval {
 	
 	private int ecDocNo;
 	private int memNo;
+	private String ecDocName;
 	private String ecWriter;
 	private String ecTitle;
 	private String ecCnt;

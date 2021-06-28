@@ -111,8 +111,9 @@
 	                                       <c:forEach var="ea" items="${ list }">
 	                                       	   <tr>
 	                                       	   	   <% { int ranNum = (int)(Math.random() * (99999 - 10000 + 1)) + 10000; } %>                                	   
-	                                       	   	   <td class="eano">${ ea.ecCode }${ ea.ecEnrolldate }	                                       	   	  
-	                                       	       
+	                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	  
+	                                       	       <!-- ${ ea.ecCode }${ ea.ecEnrolldate } -->
+	                                       	       	                                       	      	                                     	       
 	                                       	       <!-- 문서 코드에 따른 조건처리 -->
 	                                       	       <td>
 	                                       	       		<c:choose>
@@ -145,7 +146,7 @@
 	                                       	       
 	                                       	       <td>${ ea.ecCompdate }</td>
 	                                       	       
-	                                       	       <!-- 결재대기인 경우에만 빨간색으로 글자색 변경할 것 -->
+	                                       	       <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
 	                                       	       <td>${ ea.ecStatus }</td>      
 	                                       	   </tr>	
 	                                       </c:forEach>

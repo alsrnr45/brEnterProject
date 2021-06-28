@@ -17,6 +17,7 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	@Autowired
 	private BoardFreeDao bfDao; 
 	
+	
 	// 자유게시판 리스트 조회 
 	@Override 
 	public ArrayList<BoardFree> selectBoardFreeList() {		

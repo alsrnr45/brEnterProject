@@ -125,10 +125,8 @@
 	                                    </thead>
 	                                    <tbody>
 	                                       <c:forEach var="ea" items="${ list }">
-	                                       	   <tr>
-	                                       	   	   <% { int ranNum = (int)(Math.random() * (99999 - 10000 + 1)) + 10000; } %>                                	   
-	                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	  
-	                                       	       <!-- ${ ea.ecCode }${ ea.ecEnrolldate } -->
+	                                       	   <tr>                             	   
+	                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	   
 	                                       	       	                                       	      	                                     	       
 	                                       	       <!-- 문서 코드에 따른 조건처리 -->
 	                                       	       <td>

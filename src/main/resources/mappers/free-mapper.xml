@@ -27,6 +27,7 @@
 		<result column="free_reply_status" property="freeReplyStatus"/>
 	</resultMap>
 	
+	
 	<!-- 자유게시판 리스트 조회 -->
 	<select id="selectBoardFreeList" resultMap="boardFree">
 		select 
@@ -43,7 +44,30 @@
 	</select>
 	
 	
-	
+	<!-- 자유게시판 상세 조회 -->
+	<update id="increaseCount" parameterType="_int">
+  		update 
+  			   free_board  
+  		   set free_count = free_count + 1 
+  		 where free_no = #{freeNo} 
+  		   and free_status = 'Y'   	           
+  	</update>
+  	
+  	<select id="selectBoardFree" resultMap="boardFree" parameterType="_int">
+  		select 
+  			   free_no
+  			 , id 
+  		     , free_title
+  		     , free_count
+  		     , free_cnt 
+  		     , free_file_origin
+  		     , free_file_update 
+  		     , to_char(free_enrolldate, 'YYYY-MM-DD') free_enrolldate 
+  		  from free_board f
+  		  join member m on (m.mem_no = f.mem_no) 
+  		 where free_no = #{freeNo} 
+  		   and free_status = 'Y'       
+  	</select>
 	
 	
 </mapper>

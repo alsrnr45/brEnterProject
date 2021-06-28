@@ -5,6 +5,7 @@
 	<resultMap id="elecApproval" type="elecApproval">
 		<id column="ec_doc_no" property="ecDocNo"/>
 		<result column="mem_no" property="memNo"/>
+		<result column="ec_doc_name" property="ecDocName"/>
 		<result column="ec_writer" property="ecWriter"/>
 		<result column="ec_title" property="ecTitle"/>
 		<result column="ec_cnt" property="ecCnt"/>
@@ -20,6 +21,7 @@
 	<select id="selectApprovalTotalList" resultMap="elecApproval">
 		 select 
 		       ec_doc_no
+		     , ec_doc_name
 		     , ec_code
 		     , ec_title  
 		     , ec_writer	     

@@ -104,105 +104,45 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                        <tr>
-	                                            <td>BC-20210622-86328</td>
-	                                            <td>업무연락</td>
-	                                            <td>문서 11입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>BC-20210621-86327</td>
-	                                            <td>업무연락</td>
-	                                            <td>문서 10입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>BC-20210620-86326</td>
-	                                            <td>업무연락</td>
-	                                            <td>문서 9입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>PL-20210619-86325</td>
-	                                            <td>기획안</td>
-	                                            <td>문서 8입니다.</td>
-	                                            <td>최부장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>PL-20210618-86324</td>
-	                                            <td>기획안</td>
-	                                            <td>문서 7입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>ME-20210617-86323</td>
-	                                            <td>회람</td>
-	                                            <td>문서 6입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>ME-20210616-86322</td>
-	                                            <td>회람</td>
-	                                            <td>문서 5입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>OF-20210615-86321</td>
-	                                            <td>연차</td>
-	                                            <td>문서 4입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>OF-20210614-86320</td>
-	                                            <td>연차</td>
-	                                            <td>문서 3입니다.</td>
-	                                            <td>최사원</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>EX-20210613-92101</td>
-	                                            <td>지출결의서</td>
-	                                            <td>문서 2입니다.</td>
-	                                            <td>최과장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
-	                                        <tr>
-	                                            <td>EX-20210612-92100</td>
-	                                            <td>지출결의서</td>
-	                                            <td>문서 1입니다.</td>
-	                                            <td>최부장</td>
-	                                            <td>2021-06-05</td>
-	                                            <td></td>
-	                                            <td style="color:red;">결재대기</td>
-	                                        </tr>
+	                                    	<c:forEach var="ea" items="${ list }">
+		                                        <tr>
+		                                            <td class="eano">${ ea.ecCode }${ ea.ecEnrolldate }
+		                                            
+		                                            <!-- 문서 코드에 따른 조건처리 -->
+	                                       	        <td>
+	                                       	       		<c:choose>
+	                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
+	                                       	       				기획안
+	                                       	       			</c:when>
+	                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
+	                                       	       				업무연락
+	                                       	       			</c:when>
+	                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
+	                                       	       				연차
+	                                       	       			</c:when>
+	                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
+	                                       	       				지출결의서
+	                                       	       			</c:when>
+	                                       	       			<c:otherwise>
+	                                       	       				회람 
+	                                       	       			</c:otherwise>
+	                                       	       		</c:choose>
+	                                       	       </td>
+		                                            
+		                                           <td>${ ea.ecTitle }</td>
+	                                       	       <td>${ ea.ecWriter }</td>
+		                                            
+		                                           <!-- JSTL 날짜형식 포맷팅 -->
+	                                       	       <td>
+	                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
+	                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
+	                                       	       </td>
+		                                           <td>${ ea.ecCompdate }</td> 
+		                                           
+		                                           <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
+	                                       	       <td>${ ea.ecStatus }</td>    
+		                                        </tr>
+	                                       	</c:forEach>
 	                                    </tbody>
 	                                </table>
 	                            </div>

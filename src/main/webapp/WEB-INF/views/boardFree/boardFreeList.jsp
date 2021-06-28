@@ -127,7 +127,7 @@
 	<script>
    		$(function() {
    			$(document).on("click", ".boardFreeList>tbody>tr", function(){
-            	location.href ="boardFreeDetail.bf?=bfno" + $(this).children(".bfno").text();
+            	location.href="boardFreeDetail.bf?bfno=" + $(this).children(".bfno").text();
          	});
     	}); 
    	</script>

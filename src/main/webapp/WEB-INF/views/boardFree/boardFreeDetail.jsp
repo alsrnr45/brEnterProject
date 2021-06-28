@@ -98,20 +98,27 @@
                                 <th width="100">작성일</th>
                             </tr>
                             <tr style="text-align:center;">
-                                <td width="70">1</td> 
-                                <td width="600">자유 게시글 제목입니다.</td>
-                                <td width="100">최사원</td>
-                                <td width="80">12</td>
-                                <td width="100">2021-06-15</td>
+                                <td width="70">${ bf.freeNo }</td> 
+                                <td width="600">${ bf.freeTitle }</td>
+                                <td width="100">${ bf.memNo }</td>
+                                <td width="80">${ bf.freeCount }</td>
+                                <td width="100">${ bf.freeEnrolldate }</td>
                             </tr>
                             <tr>
-                                <td colspan="5" height="50"><i class="fas fa-file-image"></i>&nbsp;
-                                    첨부파일 : <a href="" download="">파일명.jpg</a>
+                                <td colspan="5" height="50"><i class="fas fa-file-image"></i>&nbsp;                                  
+                                    <c:choose>
+			                    		<c:when test="${ empty bf.freeFileOrigin }">
+			                    			첨부파일이 없습니다.
+			                    		</c:when>
+			                    		<c:otherwise>
+			                        		첨부파일 : <a href="${ bf.freeFileUpdate }" download="${ bf.freeFileOrigin }">${ bf.freeFileOrigin }</a>
+			                        	</c:otherwise>
+			                        </c:choose>                
                                 </td>
                             </tr>
                             <tr>
                                 <td colspan="5" style="background-color:rgb(248, 248, 248);"> 
-                                    <p style="height:250px;">자유게시글 내용입니다.</p>
+                                    <p style="height:250px;">${ bf.freeCnt }</p>
                                 </td>
                             </tr>
                         </table>
@@ -123,6 +130,13 @@
                         수정하기</a>
                         <a class="btn btn-danger" href="">삭제하기</a>
                     </div><br><br>
+                    
+                    <form id="postForm" action="" method="post">
+	            	<input type="hidden" name="bfno" value="${ bf.freeNo }">
+	            	<input type="hidden" name="filePath" value="${ bf.freeFileUpdate }"> 
+	            	<!-- 첨부파일 존재 o : "파일 경로" / 첨부파일 존재 x : "" -->
+	            	</form>
+	            	
                 </div>
 
                 <div class="boardFreeReplyArea">

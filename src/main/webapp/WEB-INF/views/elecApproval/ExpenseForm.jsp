@@ -90,8 +90,8 @@
             width:1000px;
             height:500px;
         }
-        .signModalOuter ul{list-style:none; padding-left:0px; height:30px;}
-        .signModalOuter ul:hover{cursor:pointer; background: lightskyblue;}
+        .signModalOuter ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
+        .signModalOuter ul:hover{cursor:pointer; background: lightskyblue; padding-top:3px;}
         .signModalOuter .btn{
             background:lightslategrey;
             color:white;

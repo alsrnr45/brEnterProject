@@ -102,7 +102,7 @@
 									<input type="hidden" id="approvalFormCode" value="">
 								</td>
 								<th width="120px">문서번호</th> 
-								<td width="340px">BC2021061886328</td>
+								<td width="340px">-<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %>	</td>
 							</tr>
 						</table>
 						<br><br>

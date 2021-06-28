@@ -16,7 +16,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- 부트스트랩4 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -27,85 +26,107 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
-	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(155, 89, 182); 
-	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	outline: 0 none;
-	}
-	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
-	}
-	option:checked {background: rgb(155, 89, 182); color: white;}
-	
-	/* 컨텐츠 */
-    .outer{width:1000px; height:100%; margin: auto;}
-    /* 기본설정 */
-    .basicSetting{
-        width:100%;
-        height:50px;
-        border:1px solid lightgray;
-        font-size:13px;
-    }
-    .basicSetting .td1{width:20%; text-align: center;}
-    .basicSetting .td2{width:20%;}
-    .basicSetting .td3{ width:30%;text-align: right;}
-    .basicSetting .td4{
-        width:30%;
-        text-align: center;
-        font-weight: bolder;
-    }
-    /* 결재선 */
-    .outer .signOff{display: inline-block;}
-    .outer .signOff>*{float:left; margin-right:20px;}
-    .outer .signOff h6{margin-top: 4px;}
-    .outer .signOffBtn{
-        border:1px solid lightgray;
-        background: white;
-        color:royalblue;
-        width:80px;
-        height:30px;
-        font-size:11px;
-    }
-    .outer .signLine{
-        text-align: center;
-        width:100%;
-        height:240px;
-        font-size:13px;
-    }
-    .outer .signLine td{border:1px solid lightgray;}
-    .outer .signLine .signTd{height:40%; width:18%;}
-    /* 지출결의서 작성 */
-    .outer .inputTable{
-        width:100%;
-        font-size:15px;
-        font-weight: lighter;
-    }
-    .outer .inputTable td,th{border:1px solid lightgray;}
-    .outer .inputTable th{width:100px;text-align: center;}
-    .outer .inputTable td{ padding:0px 10px 0px 10px;}
-    .outer .inputTable textarea{ border:none;}
-    .outer .btn-warning{
-        background: rgb(155, 89, 182);
-        border:none;
-        color:white;
-        float:right;
-        width:80px;
-        height:40px;
-        font-size: 14px;
-    }
-    .outer input[type=text]{width:100%; height:35px; border:none; font-size: 14px;}
-    .outer textarea{resize: none; font-size: 14px;}
+       /* 폰트 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+        * {font-family: 'Noto Sans KR', sans-serif;}
+        
+        .outer{width:1000px; height:100%; margin: auto;}
+        
+        /* 기본설정 */
+        .basicSetting{
+            width:100%;
+            height:50px;
+            border:1px solid lightgray;
+            font-size:13px;
+        }
+        .basicSetting .td1{width:20%; text-align: center;}
+        .basicSetting .td2{width:20%;}
+        .basicSetting .td3{width:30%; text-align: right;}
+        .basicSetting .td4{width:30%; text-align: center; font-weight: bolder;}
+        
+        /* 결재선 */
+        .outer .signOff{display: inline-block;}
+        .outer .signOff>*{float:left; margin-right:20px;}
+        .outer .signOff h6{margin-top: 4px;}
+        .outer .signOffBtn{
+            border:1px solid lightgray;
+            background: white;
+            color:royalblue;
+            width:80px;
+            height:30px;
+            font-size:11px;
+        }
+        .outer .signLine{
+            text-align: center;
+            width:100%;
+            height:280px;
+            font-size:13px;
+        }
+        .outer .signLine td{border:1px solid lightgray;}
+        .outer .signLine .signTd{width:10%;}
+        
+        /* 지출결의서 작성 */
+        .outer .inputTable{width:100%; font-size:15px; font-weight: lighter;}
+        .outer .inputTable td,th{border:1px solid lightgray;}
+        .outer .inputTable th{width:100px;text-align: center;}
+        .outer .inputTable td{ padding:0px 10px 0px 10px;}
+        .outer .inputTable textarea{ border:none;}
+        .outer .btn-warning{
+            background: rgb(155, 89, 182);
+            border:none;
+            color:white;
+            float:right;
+            width:80px;
+            height:40px;
+            font-size: 14px;
+        }
+        .outer input[type=text]{width:100%; height:35px; border:none; font-size: 14px;}
+        .outer textarea{resize: none; font-size: 14px;}
+        
+        /* 결재선 모달 */
+        .signModalOuter{
+            margin:auto;
+            text-align: center;
+            width:1000px;
+            height:500px;
+        }
+        .signModalOuter ul{list-style:none; padding-left:0px; height:30px;}
+        .signModalOuter ul:hover{cursor:pointer; background: lightskyblue;}
+        .signModalOuter .btn{
+            background:lightslategrey;
+            color:white;
+            border:none;
+            margin-top:10px;
+        }
+        .modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
+        .modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:scroll;}
+        .modal1, .modal2, .modal4{width:30%;}
+        .modal3{width:5%; padding-top:160px;}
+        .modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
+        .modal4 .apply{background:rgb(255, 235, 152); color:black;}
+        .modal4_1{
+            height:10%; 
+            border:1px solid lightgray; 
+            margin-bottom: 17px;
+            padding-top:10px;
+            color:royalblue;
+            text-align: center;
+        }
+        .modal4_2{width:100%; height:30px;}
+        .modal4_2 .btn{
+            width:30px;
+            height:30px;
+            float:right;
+            margin-top:0px;
+            margin-left: 5px;
+        }
+        .modal4_3{
+            height:47%; 
+            border:1px solid lightgray;
+            text-align: center;   
+            padding: 20px;
+        }
 </style>
-
 </head>
 <body class="sb-nav-fixed">
    <!-- 상단바 -->
@@ -122,7 +143,7 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            <form class="outer">
+		<form class="outer">
                 <br><br>
                 <button type="submit" class="btn btn-warning">기안하기</button>
                 <br><br>
@@ -149,72 +170,51 @@
                 </table>
                 <br><br>
 
-               <!-- 결재선 -->
-               <div class="signOff">
+                <!-- 결재선 -->
+                <div class="signOff">
                     <h6>결재선</h6>
-                    <a type="submit" class="btn btn-primary signOffBtn" data-toggle="modal" data-target="#signOffBtn">결재선설정</a>
+                    <a type="button" class="btn btn-primary signOffBtn" data-toggle="modal" data-target="#signOffBtn">결재선설정</a>
                 </div>
                 <table class="signLine">
-                    <tr>
-                        <td rowspan="5" style="width:10%;">기안자</td>
+                    <tr height="15%;">
+                        <td rowspan="6" style="width:5%; font-weight: bold;">기안자</td>
                         <td>개발팀</td>
-                        <td rowspan="5" style="width:10%;">결재자</td>
+                        <td rowspan="6" style="width:5%; font-weight: bold;">결재자</td>
+                        <td>개발팀</td>
                         <td>개발팀</td>
                         <td>개발팀</td>
                         <td>개발팀</td>
                     </tr>
-                    <tr>
+                    <tr height="15%;">
                         <td>사원</td>
-                        <td>팀장</td>
+                        <td>대리</td>
+                        <td>과장</td>
+                        <td>차장</td>
                         <td>부장</td>
-                        <td>대표</td>
                     </tr>
-                    <tr>
+                    <tr height="40%;">
                         <td class="signTd">싸인싸인</td>
                         <td class="signTd"></td>
                         <td class="signTd"></td>
                         <td class="signTd"></td>
+                        <td class="signTd"></td>
                     </tr>
-                    <tr>
+                    <tr height="15%;">
                         <td>2021-06-01</td>
                         <td>2021-06-01</td>
                         <td>2021-06-01</td>
                         <td>2021-06-02</td>
+                        <td>2021-06-02</td>
                     </tr>
-                    <tr>
+                    <tr height="15%;">
                         <td style="color:royalblue;">안소은</td>
-                        <td>김팀장</td>
+                        <td>김대리</td>
+                        <td>김과장</td>
+                        <td>김차장</td>
                         <td>김부장</td>
-                        <td>김대표</td>
                     </tr>
                 </table>
                 <br><br>
-
-                <!-- The Modal -->
-                <div class="modal fade" id="signOffBtn">
-                    <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                    
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                        <h4 class="modal-title">Modal Heading</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        
-                        <!-- Modal body -->
-                        <div class="modal-body">
-                        Modal body..
-                        </div>
-                        
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                        
-                    </div>
-                    </div>
-                </div>
-  
 
                 <!-- 지출결의서 작성 -->
                 <h6>상세입력</h6>
@@ -269,6 +269,74 @@
                 </table>
                 <br>
             </form>
+
+            <!-- The Modal -->
+            <form action="">
+                <div class="modal fade" id="signOffBtn">
+                    <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">결재선 설정</h5>
+                        </div>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body" style="width:100%; height:100%;">
+                            <div class="signModalOuter">
+                                <div class="modal1">
+                                    <ul>개발팀(11)</ul>
+                                    <ul>기획팀</ul>
+                                    <ul>마케팅팀</ul>
+                                    <ul>매니지먼트팀</ul>
+                                    <ul>미디어팀</ul>
+                                    <ul>인사팀</ul>
+                                    <ul>총무회계팀</ul>
+                                </div>
+                                <div class="modal2">
+                                    <ul>안소은(사원)</ul>
+                                    <ul>김혜미(팀장)</ul>
+                                    <ul>최선희(사원)</ul>
+                                    <ul>딩딩딩(팀장)</ul>
+                                    <ul>댕댕댕(사원)</ul>
+                                    <ul>동동동(사원)</ul>
+                                    <ul>뿌바부(사원)</ul>
+                                    <ul>키키키(사원)</ul>
+                                    <ul>하하하(사원)</ul>
+                                </div>
+                                <div class="modal3">
+                                    <button class="btn btn-primary"> > </button>
+                                    <button class="btn btn-primary"> < </button>
+                                </div>
+                                <div class="modal4" align="left">
+                                    <div style="margin-bottom:5px;"><b>기안자</b></div>
+                                    <div class="modal4_1">
+                                        <p>안소은</p>
+                                    </div>
+                                    <div class="modal4_2">
+                                        <b style="float:left;">결재자</b>
+                                        <div>
+                                        <button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
+                                        <button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="modal4_3">
+                                        <ul>안소은</ul>
+                                        <ul>최선희</ul>
+                                        <ul>김혜미</ul>
+                                        <ul>김민국</ul>
+                                    </div>
+                                    <div>
+                                        <button type="submit" class="btn btn-secondary apply" data-dismiss="modal">적용</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </form>
             <br><br><br>
         </div>
     </div>

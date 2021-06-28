@@ -12,82 +12,82 @@ import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 
 @Controller
 public class ElecApprovalController {
-	
-	@Autowired
-	private ElecApprovalService eaService;
-	
-	
-	// 작성자 : 김혜미 -- 연차 신청폼
-	@RequestMapping("offEnrollForm.ea")
-	public String offEnrollForm() {
-		return "elecApproval/offEnrollForm";
-	}
-	
-	// 작성자 : 김혜미 -- 연차 신청폼
-	@RequestMapping("offCheckForm.ea")
-	public String offCheckForm() {
-		return "elecApproval/offCheckForm";
-	}
+   
+   @Autowired
+   private ElecApprovalService eaService;
+   
+   
+   // 작성자 : 김혜미 -- 연차 신청폼
+   @RequestMapping("offEnrollForm.ea")
+   public String offEnrollForm() {
+      return "elecApproval/offEnrollForm";
+   }
+   
+   // 작성자 : 김혜미 -- 연차 신청폼
+   @RequestMapping("offCheckForm.ea")
+   public String offCheckForm() {
+      return "elecApproval/offCheckForm";
+   }
 
-	// 작성자 : 최선희 -- 전자결재 전체 리스트 
-	@RequestMapping("approvalTotalList.ea")
-	public ModelAndView approvalTotalList(ModelAndView mv) {
-		
-		ArrayList<ElecApproval> list = eaService.selectApprovalTotalList();
-		
-		mv.addObject("list", list)
-		  .setViewName("elecApproval/approvalTotalList"); 
-		
-		return mv;				
-	}
-	
-	// 작성자 : 최선희 -- 전자결재 진행중인 문서 대기 리스트 
-	@RequestMapping("approvalStandbyList.ea")
-	public String approvalStandbyList() {
-		return "elecApproval/approvalStandbyList";
-	}
-		
-	// 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
-	@RequestMapping("documentEnrollForm.ea")
-	public String documentEnrollForm() {
-		return "elecApproval/documentEnrollForm";
-	} 
-		
-	// 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
-	@RequestMapping("documentUpdateForm.ea")
-	public String documentUpdateForm() {
-		return "elecApproval/documentUpdateForm";
-	}
-	
-	// 작성자 : 최선희 -- 기획안/업무연락/회람 상세페이지
-	@RequestMapping("documentDetail.ea")
-	public String documentDetail() {
-		return "elecApproval/documentDetail";
-	}
-	
-	// 작성자 : 최선희 -- 관리자 전자결재 전체 리스트 
-	@RequestMapping("adminApprovalTotalList.ea")
-	public String adminApprovalTotalList() {
-		return "elecApproval/adminApprovalTotalList";
-	}
-	
-	// 작성자 : 최선희 -- 관리자 전자결재 진행중인 문서 승인 리스트 
-	@RequestMapping("adminApprovalStandbyList.ea")
-	public String adminApprovalStandbyList() {
-		return "elecApproval/adminApprovalStandbyList";
-	}
-	
-	// 작성자 : 최선희 -- 관리자 기획안/업무연락/회람 상세 페이지
-	@RequestMapping("adminDocumentDetail.ea")
-	public String adminDocumentDetail() {
-		return "elecApproval/adminDocumentDetail";
-	}
-	
-	// 작성자 : 안소은 -- 지출결의서 폼
-	@RequestMapping("expenseForm.ea")
-	public String ExpenseForm() {
-		return "elecApproval/ExpenseForm";
-	}
-	
-	
+   // 작성자 : 최선희 -- 전자결재 전체 리스트 
+   @RequestMapping("approvalTotalList.ea")
+   public ModelAndView approvalTotalList(ModelAndView mv) {
+      
+      ArrayList<ElecApproval> list = eaService.selectApprovalTotalList();
+      
+      mv.addObject("list", list)
+        .setViewName("elecApproval/approvalTotalList"); 
+      
+      return mv;            
+   }
+   
+   // 작성자 : 최선희 -- 전자결재 진행중인 문서 대기 리스트 
+   @RequestMapping("approvalStandbyList.ea")
+   public String approvalStandbyList() {
+      return "elecApproval/approvalStandbyList";
+   }
+      
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
+   @RequestMapping("documentEnrollForm.ea")
+   public String documentEnrollForm() {
+      return "elecApproval/documentEnrollForm";
+   } 
+      
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
+   @RequestMapping("documentUpdateForm.ea")
+   public String documentUpdateForm() {
+      return "elecApproval/documentUpdateForm";
+   }
+   
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 상세페이지
+   @RequestMapping("documentDetail.ea")
+   public String documentDetail() {
+      return "elecApproval/documentDetail";
+   }
+   
+   // 작성자 : 최선희 -- 관리자 전자결재 전체 리스트 
+   @RequestMapping("adminApprovalTotalList.ea")
+   public String adminApprovalTotalList() {
+      return "elecApproval/adminApprovalTotalList";
+   }
+   
+   // 작성자 : 최선희 -- 관리자 전자결재 진행중인 문서 승인 리스트 
+   @RequestMapping("adminApprovalStandbyList.ea")
+   public String adminApprovalStandbyList() {
+      return "elecApproval/adminApprovalStandbyList";
+   }
+   
+   // 작성자 : 최선희 -- 관리자 기획안/업무연락/회람 상세 페이지
+   @RequestMapping("adminDocumentDetail.ea")
+   public String adminDocumentDetail() {
+      return "elecApproval/adminDocumentDetail";
+   }
+   
+   // 작성자 : 안소은 -- 지출결의서 폼
+   @RequestMapping("expenseForm.ea")
+   public String ExpenseForm() {
+      return "elecApproval/ExpenseForm";
+   }
+   
+   
 }

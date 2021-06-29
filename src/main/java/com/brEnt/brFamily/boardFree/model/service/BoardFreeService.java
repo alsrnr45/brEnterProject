@@ -19,6 +19,9 @@ public interface BoardFreeService {
 	ArrayList<BoardFree> adminSelectBoardFreeList(); 
 	
 	
+	// 관리자 자유게시판 상세 조회 
+	int adminIncreaseCount(int freeNo);
+	BoardFree adminSelectBoardFree(int freeNo);
 	
 	
 	

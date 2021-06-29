@@ -30,6 +30,17 @@ public class BoardFreeController {
 		return mv;
 	}
 	
+	// 관리자 자유게시판 리스트 조회
+	@RequestMapping("adminBoardFreeList.bf")
+	public ModelAndView adminBoardFreeList(ModelAndView mv) { 
+			
+		ArrayList<BoardFree> list = bfService.adminSelectBoardFreeList();
+			
+		mv.addObject("list", list)
+		  .setViewName("boardFree/adminBoardFreeList"); 
+			
+		return mv; 
+	}
 	
 	// 자유게시판 상세 조회 
 	@RequestMapping("boardFreeDetail.bf")
@@ -48,6 +59,22 @@ public class BoardFreeController {
 		}		
 	}
 	
+	// 관리자 자유게시판 상세 조회
+	@RequestMapping("adminBoardFreeDetail.bf")
+	public String adminSelectBoardFree(int bfno, Model model) {
+			
+		int result = bfService.adminIncreaseCount(bfno); 
+			
+		if(result > 0) {
+			BoardFree bf = bfService.adminSelectBoardFree(bfno); 
+			model.addAttribute("bf", bf); 
+			return "boardFree/adminBoardFreeDetail"; 
+				
+		}else { 
+			model.addAttribute("errorMsg", "관리자 자유게시글 상세 조회 실패"); 
+			return "common/errorPage"; 
+		}		
+	}
 	
 	// 자유게시판 작성
 	@RequestMapping("boardFreeEnroll.bf")
@@ -62,22 +89,15 @@ public class BoardFreeController {
 		return "boardFree/boardFreeUpdate"; 
 	}
 		
-	// 관리자 자유게시판 리스트 조회
-	@RequestMapping("adminBoardFreeList.bf")
-	public ModelAndView adminBoardFreeList(ModelAndView mv) { 
+	
 		
-		ArrayList<BoardFree> list = bfService.adminSelectBoardFreeList();
-		
-		mv.addObject("list", list)
-		  .setViewName("boardFree/adminBoardFreeList"); 
-		
-		return mv; 
-	}
-		
-	// 관리자 자유게시판 디테일 
-	@RequestMapping("adminBoardFreeDetail.bf")
-	public String adminBoardFreeDetail() { 
-		return "boardFree/adminBoardFreeDetail"; 
-	}
+	
 
+
+
+	
+	
+	
+	
+	
 }

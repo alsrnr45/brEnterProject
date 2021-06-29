@@ -32,7 +32,14 @@ public class BoardFreeDao {
 	}
 	
 	
-	
+	// 관리자 자유게시판 상세 조회
+	public int adminIncreaseCount(SqlSessionTemplate sqlSession, int freeNo) { 
+		return sqlSession.update("boardFreeMapper.increaseCount", freeNo); 
+	}
+		
+	public BoardFree adminSelectBoardFree(SqlSessionTemplate sqlSession, int freeNo) {
+		return sqlSession.selectOne("boardFreeMapper.selectBoardFree", freeNo); 
+	}
 	
 	
 	

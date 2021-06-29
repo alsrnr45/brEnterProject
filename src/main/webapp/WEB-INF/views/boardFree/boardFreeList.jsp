@@ -107,6 +107,7 @@
 	                                       <c:forEach var="bf" items="${ list }">
 	                                       	   <tr>
 	                                       	       <td class="bfno">${ bf.freeNo }</td>
+	                                       	       <!-- 댓글 수 포함해서 제목에 나타나도록 수정할 것 -->
 	                                       	       <td>${ bf.freeTitle }</td>
 	                                       	       <td>${ bf.memNo }</td>
 	                                       	       <td>${ bf.freeCount }</td>

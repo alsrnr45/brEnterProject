@@ -97,14 +97,14 @@
                                     </thead>
                                     <tbody>
                                     	<c:forEach var="bf" items="${ list }">
-	                                       	   <tr>
-	                                       	   	   <th><input type="checkbox" id="checkEc"></td>
-	                                       	       <td class="bfno">${ bf.freeNo }</td>
-	                                       	       <td>${ bf.freeTitle }</td>
-	                                       	       <td>${ bf.memNo }</td>
-	                                       	       <td>${ bf.freeCount }</td>
-	                                       	       <td>${ bf.freeEnrolldate }</td>
-	                                       	   </tr>
+	                                    	<tr>
+	                                       		<th><input type="checkbox" id="checkEc"></td>
+	                                       	    <td class="bfno">${ bf.freeNo }</td>
+	                                       	    <td>${ bf.freeTitle }</td>
+	                                       	    <td>${ bf.memNo }</td>
+	                                       	    <td>${ bf.freeCount }</td>
+	                                       	    <td>${ bf.freeEnrolldate }</td>
+	                                       	</tr>
 	                                	</c:forEach>
                                     </tbody>
                                     <button type="submit" class="btn btn-danger" style="float:left;">선택삭제</button> 
@@ -123,7 +123,7 @@
     <script>
     	$(function() {
 			$(document).on("click", ".adminBoardFreeList>tbody>tr>td", function(){
-        		location.href ="adminBoardFreeDetail.bf?=bfno" + $(this).children(".bfno").text();
+        		location.href ="adminBoardFreeDetail.bf?bfno=" + $(this).siblings().eq(1).text();
      		});
 		}); 
    	</script>

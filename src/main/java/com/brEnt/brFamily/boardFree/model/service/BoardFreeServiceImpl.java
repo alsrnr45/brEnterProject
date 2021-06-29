@@ -24,6 +24,7 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 		return bfDao.selectBoardFreeList(sqlSession);
 	}
 
+	
 	// 자유게시판 상세 조회 
 	@Override
 	public int increaseCount(int freeNo) {
@@ -40,6 +41,18 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	@Override 
 	public ArrayList<BoardFree> adminSelectBoardFreeList() {
 		return bfDao.adminSelectBoardFreeList(sqlSession);
+	}
+	
+	
+	// 관리자 자유게시판 상세 조회
+	@Override
+	public int adminIncreaseCount(int freeNo) {
+		return bfDao.adminIncreaseCount(sqlSession, freeNo);
+	}
+
+	@Override
+	public BoardFree adminSelectBoardFree(int freeNo) {
+		return bfDao.adminSelectBoardFree(sqlSession, freeNo);
 	}
 
 	

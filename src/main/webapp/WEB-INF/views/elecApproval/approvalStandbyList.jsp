@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
+<!-- JSTL format 태그로 날짜 형식 변경하기 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,7 +110,7 @@
 	                                    <tbody>
 	                                    	<c:forEach var="ea" items="${ list }">
 		                                        <tr>
-		                                            <td class="eano">${ ea.ecCode }${ ea.ecEnrolldate }
+		                                            <td class="eano">${ ea.ecDocName }
 		                                            
 		                                            <!-- 문서 코드에 따른 조건처리 -->
 	                                       	        <td>
@@ -137,10 +141,15 @@
 	                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
 	                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
 	                                       	       </td>
+	                                       	       
 		                                           <td>${ ea.ecCompdate }</td> 
 		                                           
 		                                           <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
-	                                       	       <td>${ ea.ecStatus }</td>    
+	                                       	       <td>
+	                                       	       	   <c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">
+	                                       	       	   		<font color="red">결재대기</font>
+	                                       	       	   </c:if>       
+	                                       	       </td>    
 		                                        </tr>
 	                                       	</c:forEach>
 	                                    </tbody>
@@ -155,13 +164,26 @@
     </div>
     
     <script>
+    
     	$(function() {
             $(".approvalTotalList>tbody>tr").click(function() {
             	// 폼마다 디테일 뷰 다름 => 조건 설정 (1: 기획안, 업무연락, 회람 / 2: 연차 / 3: 지출결의서)
             	location.href = "documentDetail.ea";
                 console.log("전자결재 문서 클릭");
             })
-        })
+        });
+    	
+    	$(function() {
+            $(".modal-footer>.selectButton").click(function() {
+
+				var selectOption = document.getElementById("formSelect");
+				selectOption = selectOption.options[selectOption.selectedIndex].value;
+				
+				window.location.href  = selectOption;
+
+            })
+        });
+    	
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

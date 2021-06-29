@@ -45,77 +45,36 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
-	
-	/* 컨텐츠 */
-        .outer{margin:auto; height:800px;}
-        .outer .firstLine{margin:auto; width:100%; height:400px;}
-        .outer .firstLine .workTitle{width:100%; display: inline-block; margin-left:10px;}
-        .outer .firstLine .workTitle>*{
-            width:300px;
-            float:left;
-            text-align: left;
-            margin-right:20px;
-            margin-left:20px;
-        }
-        .outer .firstLine>div{
-            margin:auto;
-            border:1px solid lightgray;
-            border-radius: 10px;
-            float:left;
-            width:300px;
-            height:300px;
-            text-align: center;
-            margin-right:20px;
-            margin-left:22px;
-        }
-        /* 근무계획 */
-        .outer .firstLine .first{padding-top:40px;}
-        .outer .firstLine .first .caleander{
-            width:140px;
-            height:140px;
-            border-radius:10px;
-            margin:auto;
-            padding:10px;
-            background-color: rgb(245, 238, 248);
-        }
-        .outer .caleander .day{background-color: white;}
-        /* 근무체크 */
-        .outer .firstLine .second{padding-top:40px;}
-        .outer .firstLine .second .btn{
-            width:250px;
-            height:60px;
-            margin-bottom:10px;
-            background: rgb(245, 238, 248);
-            color:gray;
-            border: none;
-        }
-        /* 근무현황 */
-        .outer .firstLine .third{color:royalblue;}
-        .outer .firstLine .third .btn{
-            width:100%;
-            height:60px;
-            margin-bottom:13px;
-            background: rgb(245, 238, 248);
-            color:black;
-            border:none;
-        }
-        /* 근무시간 */
-        .outer .secondLine .average{
-            border:1px solid lightgray;
-            border-radius: 10px;
-            margin:auto;
-            width:1000px;
-            height:100px;
-        }
-        .outer .secondLine .average > div{margin-left:20px;}
-        .outer .secondLine .average>*{
-            text-align: center;
-            float:left;
-            width:300px;
-            margin:10px;
-            padding:15px;
-        }
-        .outer .secondLine .average .number{color:royalblue;}
+	    
+	/* 컨텐츠영역 */    
+	.outer{margin:auto; width:1000px;}
+    .outer .wrap{height:350px; width:800px; margin-bottom: 30px;}
+    .outer .wrap>*{
+        height:100%;
+        width:350px;
+        text-align: center;
+        box-sizing: border-box;
+    }
+    .wrap > .artist1{border:1px solid lightgray; float:left;}
+    .wrap > .artist2{border:1px solid lightgray; float:right;}
+    .outer .image{
+        width:100%;
+        height:100%;
+        -webkit-filter: grayscale(100%);
+        filter: gray;
+    }
+    .outer a:hover img{-webkit-filter: grayscale(0%); filter: none;}
+    /* 페이징바 */
+    #pagingArea{ margin-left:250px;}
+    #pagingArea .page-link{
+        background-color: rgb(235, 202, 250);
+        color:white;
+        height:45px;
+        width:45px;
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+    }
 </style>
 
 </head>
@@ -136,58 +95,50 @@
         <div id="layoutSidenav_content">
             <div class="outer">
                 <br><br>
-                <h2><b>근태관리</b></h2>
-                <br><br>
-                <div class="firstLine">
-                    <span class="workTitle">
-                        <h6><b>근무계획</b></h6>
-                        <h6><b>근무체크</b></h6>
-                        <h6><b>근무현황</b></h6>
-                    </span><br>
-                    <div class="first">
-                        <div class=workPlan>
-                            <div class="caleander">
-                                5월
-                                <div class="day">
-                                    <p><h1>20</h1>목요일</p>
-                                </div>
-                            </div>
-                            <br>
-                            <h5>9시출근</h5>
-                            <small>09:00 ~ 18:00 (소정 9시간)</small>
-                        </div>
+                <h1><b>ARTISTS</b></h1>
+                <br><br><br>
+
+                <!-- 아티스트 리스트 -->
+                <div class="wrap">
+                    <div class="artist1">
+                        <a href=""><img class="image" src="../artistUpfiles/BLACKPINK.png" alt=""></a>
                     </div>
-                    <div class="second">
-                        <h2><b>19 : 00 : 20</b></h2>
-                        <br>
-                        <button class="btn btn-primary">출근하기</button>
-                        <button class="btn btn-primary">퇴근하기</button>
-                    </div>
-                    <div class="third">
-                        <button class="btn btn-primary" disabled>출근체크시간</button>
-                        <h2><b>09 : 00</b></h2>
-                        <br>
-                        <button class="btn btn-primary" style="margin-top:5px;" disabled>퇴근체크시간</button>
-                        <h2><b>19 : 00</b></h2>
+                    <div class="artist2">
+                        <a href=""><img class="image" src="../artistUpfiles/BTS.jpeg" alt=""></a>
                     </div>
                 </div>
-                <div class="secondLine">
-                    <h6 style="margin-left:20px;"><b>근무시간</b></h6>
-                    <div class="average">
-                        <div>
-                            <span>근무일수</span> <br>
-                            <span class="number">281</span> 일
-                        </div>
-                        <div>
-                            <span>총근무시간</span> <br>
-                            <span class="number">2,401</span> 시간
-                        </div>
-                        <div>
-                            <span>평균근무시간</span> <br>
-                            <span class="number">9</span> 시간
-                        </div>
+                <div class="wrap">
+                    <div class="artist1">
+                        <a href=""><img class="image" src="../artistUpfiles/EXO.jpeg" alt=""></a>
+                    </div>
+                    <div class="artist2">
+                        <a href=""><img class="image" src="../artistUpfiles/IU.jpeg" alt=""></a>
                     </div>
                 </div>
+                <div class="wrap">
+                    <div class="artist1">
+                        <a href=""><img class="image" src="../artistUpfiles/REDVELVET.png" alt=""></a>
+                    </div>
+                    <div  class="artist2">
+                        <a href=""><img class="image" src="../artistUpfiles/SEVENTEEN.jpeg" alt=""></a>
+                    </div>
+                </div>
+                <br><br><br>
+
+                <!-- 페이징바 -->
+                <div id="pagingArea">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link" href="#"><</a></li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">></a></li>
+                    </ul>
+                </div>
+
+                <br><br><br><br><br>
             </div>
         </div>
     </div>

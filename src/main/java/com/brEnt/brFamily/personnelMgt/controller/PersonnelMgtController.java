@@ -17,4 +17,10 @@ public class PersonnelMgtController {
 	public String offList() {
 		return "personnelMgt/offList";
 	}
+	
+	// 작성자 : 안소은 -- 근태 관리
+	@RequestMapping("attendeanceMgt.pm")
+	public String attendanceManagement() {
+		return "personnelMgt/attendanceManagement";
+	}
 }

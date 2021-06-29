@@ -24,4 +24,12 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
       return eaDao.selectApprovalTotalList(sqlSession); 
    }
 
+   // 작성자 : 안소은 --전자결재 결재선 부서 조회
+   @Override
+   public ArrayList<ElecApproval> selectDept() {
+	  // TODO Auto-generated method stub
+	  return null;
+   }
+   
+
 }

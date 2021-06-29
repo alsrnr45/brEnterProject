@@ -14,4 +14,9 @@ public class ArtistController {
 	public String artlistList() {
 		return "artist/artistList";
 	}
+	
+	@RequestMapping("artistDetail.art")
+	public String artistDetail() {
+		return "artist/artistDetail";
+	}
 }

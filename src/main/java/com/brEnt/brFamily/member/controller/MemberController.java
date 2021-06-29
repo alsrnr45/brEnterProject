@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.member.model.service.MemberService;
 import com.brEnt.brFamily.member.model.vo.Member;
@@ -16,29 +17,42 @@ public class MemberController {
 	private MemberService mService; //변수선언(전역변수 세팅)
 		
 	// 작성자 : 정예빈 -- 로그인 
-	/*
-	@RequestMapping("login.me")
-	public String loginMember(Member m, HttpSession session) {
 
-		Member loginUser = mService.loginMember(m);
-		
-		if(loginUser == null) { //로그인 실패 -> 다시 로그인화면
-			//System.out.println("로그인실패");
-			
+			/*
 			// url 재요청 방식
 			return "redirect:/";
-		
+			session.setAttribute("loginUser",loginUser); -> 로그인회원 세션에 담는것 
 			
-		}else {//로그인성공 -> 메인페이지	
-			//System.out.println("로그인성공");
-			session.setAttribute("loginUser",loginUser);
-			
-			// 포워딩 방식 (/WEB-INF/views/common/errorPage.jsp)
+			// 포워딩 방식 (/WEB-INF/views/common/**.jsp)
 			return "common/userMain";  
+			 */
+	
+	@RequestMapping("login.me")
+	public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+		Member loginUser = mService.loginMember(m);
 		
+		if(loginUser == null) { // 로그인 실패
+			
+			mv.setViewName("redirect:/");
+		
+		}else { // 로그인 성공
+			session.setAttribute("loginUser", loginUser);
+			mv.setViewName("common/userMain");
 		}
+		
+		return mv;
+		
 	}
-	*/
+	
+	@RequestMapping("logout.me")
+	public String logoutMember(HttpSession session) {
+		session.invalidate();
+		return "member/login";
+	}
+	
+		
+	
+		
 	
 	
 	

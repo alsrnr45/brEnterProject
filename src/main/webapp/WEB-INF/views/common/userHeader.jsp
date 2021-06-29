@@ -82,8 +82,8 @@
 		                        <li><hr class="dropdown-divider" /></li> 
 		                    
 		                        <div class="dropmenu">
-		                        	<button class="logout mymenu" >Logout</button>
-		                        	<button class="mypage mymenu">MYPAGE</button>
+		                        	<a href="logout.me" class="logout mymenu" >Logout</a>
+		                        	<a href="" class="mypage mymenu">MYPAGE</a>
 	                            </div>
 	                        </c:when>
 	                        <c:otherwise>
@@ -93,8 +93,8 @@
 		                        <li><hr class="dropdown-divider" /></li> 
 		                    
 		                        <div class="dropmenu">
-		                        	<button class="logout mymenu" >Logout</button>
-		                        	<button class="mypage mymenu">MYPAGE</button>
+		                        	<a href="" class="logout mymenu" >Logout</a>
+		                        	<a href="" class="mypage mymenu">MYPAGE</a>
 	                        
 	                        </c:otherwise>
 	                        

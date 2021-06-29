@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,6 +65,14 @@
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
 
+
+		<!-- 현재날짜 -->
+		<c:set var="today" value="<%=new java.util.Date()%>" />
+		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set> 
+		
+		<!-- 랜덤번호 -->
+		<c:set var="randomNo" value="<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %>" />
+        
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
@@ -88,7 +97,7 @@
 									<input type="hidden" id="approvalFormCode" value="">
 								</td>
 								<th width="120px">문서번호</th> 
-								<td width="340px">OF-20210618-<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %></td>
+								<td width="340px">OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
 							</tr>
 						</table>
 						<br><br>

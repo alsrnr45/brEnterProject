@@ -90,9 +90,9 @@
 									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
 										<option value="documentEnrollForm.ea">기획안</option>
 										<option value="documentEnrollForm.ea">업무연락</option>
-										<option value="documentEnrollForm.ea">회람</option>
-										<option value="expenseForm.ea">지출결의서</option>
 										<option value="offEnrollForm.ea" selected>연차</option>
+										<option value="expenseForm.ea">지출결의서</option>
+										<option value="documentEnrollForm.ea">회람</option>
 									</select>
 									<input type="hidden" id="approvalFormCode" value="">
 								</td>

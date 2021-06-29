@@ -161,7 +161,19 @@
 	                                       	       <td>${ ea.ecCompdate }</td>
 	                                       	       
 	                                       	       <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
-	                                       	       <td>${ ea.ecStatus }</td>      
+	                                       	       <td>
+	                                       	       	   <c:choose>
+		                                       	       	   <c:when test="${ ea.ecStatus eq 'N' }">
+							                           	   		<font color="red">결재대기</font>
+							                           	   </c:when>
+							                           	   <c:when test="${ ea.ecStatus eq 'Y' }">
+							                           	   		결재완료  		
+							                           	   </c:when>
+							                           	   <c:otherwise>
+							                           	   	    반려
+							                           	   </c:otherwise>
+						                           	   </c:choose>
+	                                       	       </td>      
 	                                       	   </tr>	
 	                                       </c:forEach>
 	                                    </tbody>
@@ -195,8 +207,8 @@
 									<option>선택</option>
 									<option value="documentEnrollForm.ea">기획안</option>
 									<option value="documentEnrollForm.ea">업무연락</option>
-									<option value="offEnrollForm.ea">연차</option>
-									<option value="expenseForm.ea">지출결의서</option>
+									<option value="offEnrollForm.ea">연차</option>									
+									<option value="expenseForm.ea">지출결의서</option>									
 									<option value="documentEnrollForm.ea">회람</option>
 								</select>
 							</div>

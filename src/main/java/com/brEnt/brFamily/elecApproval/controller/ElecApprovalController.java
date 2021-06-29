@@ -52,7 +52,7 @@ public class ElecApprovalController {
    public String documentEnrollForm() {
       return "elecApproval/documentEnrollForm";
    } 
-      
+   
    // 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
    @RequestMapping("documentUpdateForm.ea")
    public String documentUpdateForm() {

@@ -89,5 +89,10 @@ public class ElecApprovalController {
       return "elecApproval/expenseForm";
    }
    
+   // 작성자 : 안소은 -- 지출결의서 상세페이지
+   @RequestMapping("expenseDetail.ea")
+   public String expenseDetail() {
+	   return "elecApproval/expenseDetail";
+   }
    
 }

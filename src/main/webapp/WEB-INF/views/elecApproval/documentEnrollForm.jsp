@@ -40,7 +40,7 @@
 
 	/* 버튼 */
 	.btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color: rgb(155, 89, 182);}
-	.btn-outline-secondary {margin: 0 0 3px 15px; color: royalblue; font-size: small;}
+	.btn-outline-secondary {margin: 0 0 3px 15px; color: royalblue; border-color: lightgray; font-size: small;}
 
 	/* 스타일 */
 	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */

@@ -48,7 +48,7 @@
 	    
 	/* 컨텐츠영역 */    
 	.outer{margin:auto; width:1000px;}
-    .outer .wrap{height:350px; width:800px; margin-bottom: 30px;}
+    .outer .wrap{height:350px; width:800px; margin-bottom: 30px; margin:auto;}
     .outer .wrap>*{
         height:100%;
         width:350px;

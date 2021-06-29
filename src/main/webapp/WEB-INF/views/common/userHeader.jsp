@@ -54,6 +54,10 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
+	    
+	.dropCenter{
+		text-align:center;
+	}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -81,21 +85,20 @@
 		                        <li><a class="dropdown-item" href="#!" style="font-size: 13px;">이메일</a></li>
 		                        <li><hr class="dropdown-divider" /></li> 
 		                    
-		                        <div class="dropmenu">
-		                        	<button class="logout mymenu" >Logout</button>
-		                        	<button class="mypage mymenu">MYPAGE</button>
-	                            </div>
+		                        <li><a href="logout.me" class="dropdown-item dropCenter">Logout</a></li>
+		                        <li><a href="#!" class="dropdown-item dropCenter">MYPAGE</a></li>
+	                           
 	                        </c:when>
 	                        <c:otherwise>
 	                        <!-- 로그인 후 -->
    		                        <li><a class="dropdown-item" href="#!">${ loginUser.memName }</a></li>
 		                        <li><a class="dropdown-item" href="#!" style="font-size:13px;">${ loginUser.id}@brent.com</a></li>
-		                        <li><hr class="dropdown-divider" /></li> 
-		                    
-		                        <div class="dropmenu">
-		                        	<button class="logout mymenu" >Logout</button>
-		                        	<button class="mypage mymenu">MYPAGE</button>
-	                        
+		                        	<li><hr class="dropdown-divider" /></li> 
+		                        <li><a href="#!" class="dropdown-item dropCenter" style="color:purple;">ADMIN</a></li>
+		                    		<li><hr class="dropdown-divider" /></li> 
+	                         	<li><a href="#!" class="dropdown-item dropCenter">MYPAGE</a></li>
+           			            <li><a href="logout.me" class="dropdown-item dropCenter">Logout</a></li>
+	                       		
 	                        </c:otherwise>
 	                        
                         </c:choose>

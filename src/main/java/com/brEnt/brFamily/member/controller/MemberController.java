@@ -1,5 +1,7 @@
 package com.brEnt.brFamily.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +57,14 @@ public class MemberController {
 
 	// 작성자 : 김혜미 -- 신규사원 리스트(관리자)
 	@RequestMapping("newMemberList.admin")
-	public String newMemberList() {
-		return "member/adminNewMemberList";
+	public ModelAndView newMemberList(ModelAndView mv) {
+		
+		ArrayList<Member> list = mService.newMemberList();
+		
+		mv.addObject("list", list)
+		  .setViewName("member/adminNewMemberList");
+		
+		return mv;
 	}
 	
 	// 작성자 : 김혜미 -- 신규사원 디테일(관리자)

@@ -31,24 +31,25 @@
 		  from ec_document 		 
 		 where ec_status = 'Y' 
 		 order 
-		    by ec_doc_no desc
+		    by ec_enrolldate desc
 	</select>
 	
 	<!--  
 	<select id="selectApprovalTotalList" resultMap="elecApproval">
 		select 
 		       e.ec_doc_no
+		     , ec_doc_name
 		     , ec_code
 		     , ec_writer
 		     , ec_title
-		     , to_char(ec_enrolldate, 'YYYY-MM-DD') ec_enrolldate
+		     , to_char(ec_enrolldate, 'YYYYMMDD') ec_enrolldate
 		     , to_char(ec_compdate, 'YYYY-MM-DD') ec_compdate 
 		     , a.ec_status
 		  from ec_document e
 		  join approval_path a on (a.ec_doc_no = e.ec_doc_no)
 		 where e.ec_status = 'Y' 
 		 order 
-		    by ec_doc_no desc;
+		    by ec_enrolldate desc
 	</select>
 	-->
 	

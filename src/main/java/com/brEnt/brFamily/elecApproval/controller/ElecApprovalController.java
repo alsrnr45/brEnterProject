@@ -32,7 +32,7 @@ public class ElecApprovalController {
    // 작성자 : 최선희 -- 전자결재 전체 리스트 
    @RequestMapping("approvalTotalList.ea")
    public ModelAndView approvalTotalList(ModelAndView mv) {
-      
+      	 
       ArrayList<ElecApproval> list = eaService.selectApprovalTotalList();
       
       mv.addObject("list", list)

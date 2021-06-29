@@ -78,107 +78,123 @@
         
         	<!-- 컨텐츠 -->
         	<div id="layoutSidenav_content">
-        		<div class="wrap">
+                <div class="wrap">
 
-                <h1>자유게시판</h1><hr>
+                    <h1>자유게시판</h1><hr>
 
-                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:950px;">
-                목록으로</a> 
-                <br><br><br>
+                    <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:960px;">
+                    목록으로</a> 
+                    <br><br><br>
 
-                <div class="content">
-                
-                    <div class="boardFreeDetailArea">
-                        <table id="boardFreeContnet">
-                            <tr style="text-align:center;">
-                                <th width="70">No.</th> 
-                                <th width="600">제목</th>
-                                <th width="100">작성자</th>
-                                <th width="80">조회수</th>
-                                <th width="100">작성일</th>
-                            </tr>
-                            <tr style="text-align:center;">
-                                <td width="70">1</td> 
-                                <td width="600">자유 게시글 제목입니다.</td>
-                                <td width="100">최사원</td>
-                                <td width="80">12</td>
-                                <td width="100">2021-06-15</td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" height="50"><i class="fas fa-file-image"></i>&nbsp;
-                                    첨부파일 : <a href="" download="">파일명.jpg</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="5" style="background-color:rgb(248, 248, 248);"> 
-                                    <p style="height:250px;">자유게시글 내용입니다.</p>
-                                </td>
-                            </tr>
-                        </table>
-                    </div> <br>
+                    <div class="content">
+                    
+                        <div class="boardFreeDetailArea">
+                            <div class="boardFreeTable">
+                                <table id="boardFreeContnet">
+                                    <tr style="text-align:center;">
+                                        <th width="70">No.</th> 
+                                        <th width="600">제목</th>
+                                        <th width="100">작성자</th>
+                                        <th width="80">조회수</th>
+                                        <th width="100">작성일</th>
+                                    </tr>
+                                    <tr style="text-align:center;">
+                                        <td width="70">${ bf.freeNo }</td> 
+                                        <td width="600">${ bf.freeTitle }</td>
+                                        <td width="100">${ bf.memNo }</td>
+                                        <td width="80">${ bf.freeCount }</td>
+                                        <td width="100">${ bf.freeEnrolldate }</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" height="50"><i class="fas fa-file-image"></i>&nbsp;                                  
+                                            <c:choose>
+                                                <c:when test="${ empty bf.freeFileOrigin }">
+                                                    첨부파일이 없습니다.
+                                                </c:when>
+                                                <c:otherwise>
+                                                    첨부파일 : <a href="${ bf.freeFileUpdate }" download="${ bf.freeFileOrigin }">${ bf.freeFileOrigin }</a>
+                                                </c:otherwise>
+                                            </c:choose>                
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="5" style="background-color:rgb(248, 248, 248);"> 
+                                            <p style="height:250px;">${ bf.freeCnt }</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div><br>
 
-                    <div class="boardFreeBtn" style="margin-left:880px;">
-                        <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
-                        <a class="btn btn-primary" href="boardFreeUpdate.bf" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
-                        수정하기</a>
-                        <a class="btn btn-danger" href="">삭제하기</a>
-                    </div><br><br>
-                </div>
+                            <div class="boardFreeBtn" style="margin-left:780px;">
+                                <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
+                                <a class="btn btn-primary" href="boardFreeUpdate.bf" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
+                                수정하기</a>
+                                <a class="btn btn-danger" href="">삭제하기</a>
+                            </div><br><br>
+                            
+                            <form id="postForm" action="" method="post">
+                            <input type="hidden" name="bfno" value="${ bf.freeNo }">
+                            <input type="hidden" name="filePath" value="${ bf.freeFileUpdate }"> 
+                            <!-- 첨부파일 존재 o : "파일 경로" / 첨부파일 존재 x : "" -->
+                            </form>
 
-                <div class="boardFreeReplyArea">
+                        </div>
 
-                    <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)"> <!-- 2행 4열 -->
-                        <thead>
-                            <tr>
-                                <th colspan="2">
-                                    <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none;"></textarea>
-                                </th>
-                                <th style="vertical-align: middle" width="150"><button class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182)">
-                                    댓글<br>등록</button></th>
-                            </tr>
-                            <tr>
-                           		<td colspan="3" height="50">댓글 (<span id="rcount">3</span>) </td> 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th>최사원 <i class="fas fa-heart"></i> 13</th>
-                                <td rowspan="2" width="100">
-                                    <a class="btn btn-primary" href="" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">수정</a>
-                                    <a class="btn btn-danger" href="">삭제</a>
-                                </td>
-                                <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                            </tr>
-                            <tr>
-                                <td width="550" style="font-size:13px;">댓글 3입니다.</td>
-                            </tr>
+                        <div class="boardFreeReplyArea">
 
-                            <tr>
-                                <th>최대리 <i class="fas fa-heart"></i> 13</th>
-                                <td rowspan="2">
-                                   
-                                </td>
-                                <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                            </tr>
-                            <tr>
-                                <td style="font-size:13px;">댓글 2입니다.</td>
-                            </tr>
+                            <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)"> <!-- 2행 4열 -->
+                                <thead>
+                                    <tr>
+                                        <th colspan="2">
+                                            <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none;"></textarea>
+                                        </th>
+                                        <th style="vertical-align: middle" width="150"><button class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182)">
+                                            댓글<br>등록</button></th>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3" height="50">댓글 (<span id="rcount">3</span>) </td> 
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>최사원 <i class="fas fa-heart"></i> 13</th>
+                                        <td rowspan="2" width="100">
+                                            <a class="btn btn-primary" href="" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">수정</a>
+                                            <a class="btn btn-danger" href="">삭제</a>
+                                        </td>
+                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
+                                    </tr>
+                                    <tr>
+                                        <td width="550" style="font-size:13px;">댓글 3입니다.</td>
+                                    </tr>
 
-                            <tr>
-                                <th>최부장 <i class="far fa-heart"></i> </th>
-                                <td rowspan="2">
-                                   
-                                </td>
-                                <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                            </tr>
-                            <tr>
-                                <td  style="font-size:13px;">댓글 1입니다.</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                    <tr>
+                                        <th>최대리 <i class="fas fa-heart"></i> 13</th>
+                                        <td rowspan="2">
+                                        
+                                        </td>
+                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="font-size:13px;">댓글 2입니다.</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th>최부장 <i class="far fa-heart"></i> </th>
+                                        <td rowspan="2">
+                                        
+                                        </td>
+                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
+                                    </tr>
+                                    <tr>
+                                        <td  style="font-size:13px;">댓글 1입니다.</td>
+                                    </tr>
+                                </tbody>                       
+                            </table>   
+                        </div>
+                    </div>             
                 </div>          
-            </div>
-		</div>	
+            </div>	
 	</div>
 
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

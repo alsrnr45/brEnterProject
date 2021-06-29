@@ -16,6 +16,11 @@
 <link href="resources/css/styles.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
+<!-- 부트스트랩4 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -63,6 +68,19 @@
     h1{margin-bottom: 20px;}  
     .approvalTotalList{text-align: center;}
 
+	.modal-body {margin: 30px 0 30px 60px;}
+	.modal-body .modalContent1, .modal-body .modalContent2 {float: left;}
+	h6 {margin: 6px 20px 0 0; font-size: large;}
+	.modalContent2 {width:250px;}
+
+
+
+	/* .modal-dialog{display: inline-block; vertical-align: middle;} */
+	.modal-footer {margin: auto;}
+	.modal-footer button {width:120px;}
+	.btn-primary {background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+	.btn-danger {background-color: rgb(241, 82, 82); border-color: rgb(255, 134, 134);}
+
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -88,10 +106,8 @@
 	
 	                        <div class="card mb-4">
 	                            <div class="card-header">
-	                                <i class="far fa-clipboard"></i>&nbsp;
-	                                문서함 &nbsp;
-	                                <a class="btn btn-primary" href="documentEnrollForm.ea" style="background-color:rgb(155, 89, 182); ; border-color:rgb(155, 89, 182);">
-	                                작성하기</a> 
+	                                <i class="far fa-clipboard"></i>&nbsp;문서함 &nbsp;
+	                                <a class="btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentSelect" style="float: right;">작성하기</a>
 	                            </div>
 	                            <div class="card-body">
 	                               
@@ -109,10 +125,8 @@
 	                                    </thead>
 	                                    <tbody>
 	                                       <c:forEach var="ea" items="${ list }">
-	                                       	   <tr>
-	                                       	   	   <% { int ranNum = (int)(Math.random() * (99999 - 10000 + 1)) + 10000; } %>                                	   
-	                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	  
-	                                       	       <!-- ${ ea.ecCode }${ ea.ecEnrolldate } -->
+	                                       	   <tr>                             	   
+	                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	   
 	                                       	       	                                       	      	                                     	       
 	                                       	       <!-- 문서 코드에 따른 조건처리 -->
 	                                       	       <td>
@@ -158,6 +172,45 @@
 	                </div>
             	</main> 
         	</div>
+
+			<!-- The Modal -->
+			<div class="modal" id="documentSelect">
+				<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+			
+					<!-- Modal Header -->
+					<div class="modal-header">
+					<h4 class="modal-title">문서 종류</h4>
+					</div>
+			
+					<!-- <form action=""> -->
+						<!-- Modal body -->
+						<div class="modal-body">
+							<div class="modalContent1">
+								<h6>문서 선택</h6> 
+							</div>
+
+							<div class="modalContent2">
+								<select class="form-control" id="formSelect">
+									<option value="">선택</option>
+									<option value="BC">업무연락</option>
+									<option value="ME">회람</option>
+									<option value="PL">기획안</option>
+									<option value="EX">지출결의서</option>
+									<option value="offEnrollForm.ea">연차</option>
+								</select>
+							</div>
+						</div>
+						
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
+							<button type="button" class="btn btn-primary selectButton" onchange="goUrl()">선택하기</button>
+						</div>
+					<!-- </form> -->
+				</div>
+				</div>
+			</div>
         	
     </div>
     
@@ -171,7 +224,20 @@
             	//location.href ="documentDetail.ea?=eano" + $(this).children(".eano").text();
                 console.log("전자결재 문서 클릭");
             })
-        })
+        });
+
+
+		$(function() {
+            $(".modal-footer>.selectButton").click(function() {
+
+				var selectOption = document.getElementById("formSelect");
+				selectOption = selectOption.options[selectOption.selectedIndex].value;
+				
+				window.location.href  = selectOption;
+
+            })
+        });
+		
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

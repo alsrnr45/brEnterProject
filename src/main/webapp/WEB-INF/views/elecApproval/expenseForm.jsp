@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,11 +21,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- JSTREE 스크립트-->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-
 <style>
        /* 폰트 */
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
@@ -33,12 +29,7 @@
         .outer{width:1000px; height:100%; margin: auto;}
         
         /* 기본설정 */
-        .basicSetting{
-            width:100%;
-            height:50px;
-            border:1px solid lightgray;
-            font-size:13px;
-        }
+        .basicSetting{width:100%; height:50px; border:1px solid lightgray; font-size:13px;}
         .basicSetting .td1{width:20%; text-align: center;}
         .basicSetting .td2{width:20%;}
         .basicSetting .td3{width:30%; text-align: right;}
@@ -56,12 +47,7 @@
             height:30px;
             font-size:11px;
         }
-        .outer .signLine{
-            text-align: center;
-            width:100%;
-            height:280px;
-            font-size:13px;
-        }
+        .outer .signLine{text-align: center; width:100%; height:280px; font-size:13px;}
         .outer .signLine td{border:1px solid lightgray;}
         .outer .signLine .signTd{width:10%;}
         
@@ -84,20 +70,10 @@
         .outer textarea{resize: none; font-size: 14px;}
         
         /* 결재선 모달 */
-        .signModalOuter{
-            margin:auto;
-            text-align: center;
-            width:1000px;
-            height:500px;
-        }
+        .signModalOuter{ margin:auto; text-align: center; width:1000px; height:500px;}
         .signModalOuter ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
         .signModalOuter ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
-        .signModalOuter .btn{
-            background:lightslategrey;
-            color:white;
-            border:none;
-            margin-top:10px;
-        }
+        .signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
         .modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
         .modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:scroll;}
         .modal1, .modal2, .modal4{width:30%;}
@@ -113,19 +89,8 @@
             text-align: center;
         }
         .modal4_2{width:100%; height:30px;}
-        .modal4_2 .btn{
-            width:30px;
-            height:30px;
-            float:right;
-            margin-top:0px;
-            margin-left: 5px;
-        }
-        .modal4_3{
-            height:47%; 
-            border:1px solid lightgray;
-            text-align: center;   
-            padding: 20px;
-        }
+        .modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
+        .modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 20px;}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -140,12 +105,19 @@
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
+        
+        <!-- 현재날짜 -->
+		<c:set var="today" value="<%=new java.util.Date()%>" />
+		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set> 
+		
+		<!-- 랜덤번호 -->
+		<c:set var="randomNo" value="<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %>" />
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
 		<form class="outer">
                 <br><br>
-                <button type="submit" class="btn btn-warning">기안하기</button>
+                <button type="submit" class="btn btn-warning" href="">기안하기</button>
                 <br><br>
                 <!-- 기본설정 -->
                 <h6>기본설정</h6>
@@ -155,17 +127,16 @@
                         <td class="td2">
                             <div class="form-group">
                                 <select class="form-control" style="font-size: 13px;">
-                                    <option value="X">선택</option>
-                                    <option value="PL">기획안</option>
-                                    <option value="BC">업무연락</option>
-                                    <option value="OF">연차</option>
-                                    <option value="EX" selected>지출결의서</option>
-                                    <option value="ME">회람</option>
+                                    <option value="documentEnrollForm.ea">기획안</option>
+                                    <option value="documentEnrollForm.ea">업무연락</option>
+                                    <option value="offEnrollForm.ea">연차</option>
+                                    <option value="expenseForm.ea" selected>지출결의서</option>
+                                    <option value="documentEnrollForm.ea">회람</option>
                                 </select>
                               </div>
                         </td>
                         <td class="td3">문서번호</td>
-                        <td class="td4">EX-20210618-86328</td>
+                        <td class="td4">EX-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
                     </tr>
                 </table>
                 <br><br>
@@ -337,6 +308,11 @@
                                 </div>
                             </div>    
                         </div>
+                        
+                        <!-- 결재선 ajax -->
+                        <script type="text/javascript">
+                        	
+                        </script>
                     </div>
                     </div>
                 </div>
@@ -344,6 +320,7 @@
             <br><br><br>
         </div>
     </div>
+	
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

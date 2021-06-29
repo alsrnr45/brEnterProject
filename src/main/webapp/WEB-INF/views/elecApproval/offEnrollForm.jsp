@@ -28,8 +28,8 @@
 
 	/* 버튼 */
 	.btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
-	.btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; font-size: 12px;}
-	.btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; font-size: 12px; background-color: white; box-shadow: none !important;}
+	.btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px;}
+	.btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
 
 
 	/* 스타일 */

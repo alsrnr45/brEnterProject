@@ -213,6 +213,7 @@
 		var len = $('#ecTitle').val().length;
 		$('#ecTitle').focus();
 		$('#ecTitle')[0].setSelectionRange(len, len);
+		
 	</script>
 	
 	

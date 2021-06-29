@@ -162,16 +162,16 @@
 	                                       	       
 	                                       	       <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
 	                                       	       <td>
-	                                       	       	   <c:choose>
-		                                       	       	   <c:when test="${ ea.ecStatus eq 'N' }">
+	                                       	       	   <c:choose>	             
+		                                       	       	   <c:when test="${ empty ea.ecCanceldate && empty ea.ecCompdate  }">
 							                           	   		<font color="red">결재대기</font>
 							                           	   </c:when>
-							                           	   <c:when test="${ ea.ecStatus eq 'Y' }">
-							                           	   		결재완료  		
+							                           	   <c:when test="${ !empty ea.ecCanceldate && !empty ea.ecCompdate }">
+							                           	   		반려  		
 							                           	   </c:when>
-							                           	   <c:otherwise>
-							                           	   	    반려
-							                           	   </c:otherwise>
+							                           	   <c:when test="${ empty ea.ecCanceldate && !empty ea.ecCompdate }">
+							                           	   		결재완료
+							                           	   </c:when>
 						                           	   </c:choose>
 	                                       	       </td>      
 	                                       	   </tr>	
@@ -227,12 +227,13 @@
     </div>
     
     <script>
+    
     	$(function() {
             $(".approvalTotalList>tbody>tr").click(function() {
             	// 폼마다 디테일 뷰 다름 => 조건 설정 (1: 기획안, 업무연락, 회람 / 2: 연차 / 3: 지출결의서)
             	location.href = "documentDetail.ea";
             	
-             	// 조건1. 업무연락/기획안/회람 
+             	// 조건1. 기획안/업무연락/회람 
             	//location.href ="documentDetail.ea?=eano" + $(this).children(".eano").text();
                 console.log("전자결재 문서 클릭");
             })

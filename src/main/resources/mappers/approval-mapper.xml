@@ -13,28 +13,13 @@
 		<result column="ec_enrolldate" property="ecEnrolldate"/>
 		<result column="ec_updatedate" property="ecUpdatedate"/>
 		<result column="ec_compdate" property="ecCompdate"/>
+		<result column="ec_canceldate" property="ecCanceldate"/>
 		<result column="ec_status" property="ecStatus"/>	
 	</resultMap>
 	
 	
 	<!-- 전자결재 전체 리스트 조회 -->
-	<!--
-	<select id="selectApprovalTotalList" resultMap="elecApproval">
-		 select 
-		       ec_doc_no
-		     , ec_doc_name
-		     , ec_code
-		     , ec_title  
-		     , ec_writer	     
-		     , to_char(ec_enrolldate, 'YYYYMMDD') ec_enrolldate
-		     , to_char(ec_compdate, 'YYYY-MM-DD') ec_compdate
-		     , ec_status
-		  from ec_document 		 
-		 where ec_status = 'Y' 
-		 order 
-		    by ec_enrolldate desc
-	</select>
-	-->
+	
 	
 	<select id="selectApprovalTotalList" resultMap="elecApproval">
 		select 
@@ -45,9 +30,14 @@
 		     , ec_title
 		     , to_char(ec_enrolldate, 'YYYYMMDD') ec_enrolldate
 		     , to_char(ec_compdate, 'YYYY-MM-DD') ec_compdate 
-		     , a.ec_status
+		     , ec_canceldate
+		     , (select a.ec_status
+		          from approval_path a
+		         where ec_turn = (select max(ec_turn)
+		                            from approval_path ap
+		                           where e.ec_doc_no = ap.ec_doc_no)
+		           and e.ec_doc_no = a.ec_doc_no)
 		  from ec_document e
-		  join approval_path a on (a.ec_doc_no = e.ec_doc_no)
 		 where e.ec_status = 'Y' 
 		 order 
 		    by ec_enrolldate desc

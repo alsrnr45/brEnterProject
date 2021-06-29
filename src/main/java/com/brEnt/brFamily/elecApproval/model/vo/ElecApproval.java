@@ -22,6 +22,7 @@ public class ElecApproval {
 	private String ecEnrolldate;
 	private String ecUpdatedate;
 	private String ecCompdate;
+	private String ecCanceldate;
 	private String ecStatus; 
 	
 }

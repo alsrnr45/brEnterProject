@@ -192,11 +192,11 @@
 
 							<div class="modalContent2">
 								<select class="form-control" id="formSelect">
-									<option value="">선택</option>
-									<option value="BC">업무연락</option>
-									<option value="ME">회람</option>
-									<option value="PL">기획안</option>
-									<option value="EX">지출결의서</option>
+									<option>선택</option>
+									<option value="documentEnrollForm.ea">업무연락</option>
+									<option value="documentEnrollForm.ea">회람</option>
+									<option value="documentEnrollForm.ea">기획안</option>
+									<option value="expenseForm.ea">지출결의서</option>
 									<option value="offEnrollForm.ea">연차</option>
 								</select>
 							</div>

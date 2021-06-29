@@ -78,18 +78,17 @@
 							<tr>
 								<th width="120px" height="35px;">문서종류</th> 
 								<td width="340px">
-									<select name="approvalFormCode" class="form-control">기획안
-										<option value selected>선택</option>
-										<option value="PL">기획안</option>
-										<option value="BC" >업무연락</option>
-										<option value="OF">연차</option>
-										<option value="EX">지출결의서</option>
-										<option value="ME">회람</option>
+									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
+										<option value="documentEnrollForm.ea">기획안</option>
+										<option value="documentEnrollForm.ea">업무연락</option>
+										<option value="documentEnrollForm.ea">회람</option>
+										<option value="expenseForm.ea">지출결의서</option>
+										<option value="offEnrollForm.ea" selected>연차</option>
 									</select>
 									<input type="hidden" id="approvalFormCode" value="">
 								</td>
 								<th width="120px">문서번호</th> 
-								<td width="340px">OF-20210618-86328</td>
+								<td width="340px">OF-20210618-<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %></td>
 							</tr>
 						</table>
 						<br><br>
@@ -183,6 +182,10 @@
 		var len = $('#ecTitle').val().length;
 		$('#ecTitle').focus();
 		$('#ecTitle')[0].setSelectionRange(len, len);
+
+		function moveurl(url) { 
+    		location.href = url;
+		};
 	</script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

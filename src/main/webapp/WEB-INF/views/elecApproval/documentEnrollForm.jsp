@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,14 +15,6 @@
 
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-
-<!-- include libraries(jQuery, bootstrap) -->
-<!--  
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
--->
 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -39,9 +32,11 @@
 	select{background: url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; font-size: 13px !important;}
 
 	/* 버튼 */
-	.btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color: rgb(155, 89, 182);}
-	.btn-outline-secondary {margin: 0 0 3px 15px; color: royalblue; border-color: lightgray; font-size: small;}
-
+	.btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+	.btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px;}
+	.btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
+	
+	
 	/* 스타일 */
 	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
@@ -76,7 +71,15 @@
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
-
+		
+		
+		<!-- 현재날짜 -->
+		<c:set var="today" value="<%=new java.util.Date()%>" />
+		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set> 
+		
+		<!-- 랜덤번호 -->
+		<c:set var="randomNo" value="<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %>" />
+		
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
@@ -91,19 +94,19 @@
 							<tr>
 								<th width="120px" height="35px;">문서종류</th> 
 								<td width="340px">
-									<select name="approvalFormCode" class="form-control">
-										<option value="X">선택</option>
-										<option value="PL">기획안</option>
-										<option value="BC">업무연락</option>
-										<option value="OF">연차</option>
-										<option value="EX">지출결의서</option>
-										<option value="ME">회람</option>
+									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
+										<option value="documentEnrollForm.ea">기획안</option>
+										<option value="documentEnrollForm.ea">업무연락</option>
+										<option value="offEnrollForm.ea">연차</option>
+										<option value="expenseForm.ea">지출결의서</option>
+										<option value="documentEnrollForm.ea">회람</option>
 									</select>
 									<input type="hidden" id="approvalFormCode" value="">
 								</td>
 								<th width="120px">문서번호</th> 
 								<td width="340px">
-									${ ea.ecCode }-${ ea.ecEnrolldate }-<%= (int)(Math.random() * (99999 - 10000 + 1)) + 10000 %>
+									<!-- 문서종류에 따른 코드 변경 조건처리하기 -->
+									-<c:out value="${date}"/>-<c:out value="${randomNo}"/>
 								</td>
 							</tr>
 						</table>
@@ -213,6 +216,11 @@
 		var len = $('#ecTitle').val().length;
 		$('#ecTitle').focus();
 		$('#ecTitle')[0].setSelectionRange(len, len);
+		
+		function moveurl(url) { 
+    		location.href = url;
+		};
+		
 	</script>
 	
 	

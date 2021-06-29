@@ -49,21 +49,7 @@ public class MemberController {
 		session.invalidate();
 		return "member/login";
 	}
-	
 		
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 

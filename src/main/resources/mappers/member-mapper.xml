@@ -130,6 +130,24 @@
 		 where mem_no = #{memNo}
 	</select>
 	
+	<select id="newMemberDetail" resultMap="member" parameterType="_int">
+		select 
+		       mem_no
+             , mem_name
+		     , phone
+             , bank
+             , regi
+             , office_email
+             , personal_email
+             , post
+             , road_address
+             , detail_address
+             , to_char(to_date(mem_enrolldate, 'MM/DD/YYYY'), 'YYYY-MM-DD') mem_enrolldate
+             , accept_status
+		  from member
+		 where mem_no = #{memNo}
+	</select>
+	
 	
 	
 	

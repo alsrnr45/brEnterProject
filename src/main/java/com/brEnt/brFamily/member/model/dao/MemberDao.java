@@ -32,6 +32,10 @@ public class MemberDao {
 	public Member memberDetail(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.memberDetail", memNo);
 	}
+
+	public Member newMemberDetail(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.newMemberDetail", memNo);
+	}
 	
 	
 	

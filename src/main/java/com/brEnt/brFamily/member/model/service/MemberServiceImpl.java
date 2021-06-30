@@ -58,9 +58,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override // 작성자 : 김혜미 -- 신규사원 상세조회
-	public Member selectNewMemberDetail(Member m) {
-		// TODO Auto-generated method stub
-		return null;
+	public Member newMemberDetail(int mno) {
+		return mDao.newMemberDetail(sqlSession, mno);
 	}
 
 	@Override // 작성자 : 김혜미 -- 사원 리스트 조회

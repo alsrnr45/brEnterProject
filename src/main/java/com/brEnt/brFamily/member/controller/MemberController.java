@@ -61,7 +61,7 @@ public class MemberController {
 	public ModelAndView newMemberList(ModelAndView mv) {
 		
 		ArrayList<Member> list = mService.newMemberList();
-		
+		System.out.println(list);
 		mv.addObject("list", list)
 		  .setViewName("member/adminNewMemberList");
 		
@@ -70,7 +70,11 @@ public class MemberController {
 	
 	// 작성자 : 김혜미 -- 신규사원 디테일(관리자)
 	@RequestMapping("newMemberDetail.admin")
-	public String newMemberDetail() {
+	public String newMemberDetail(int mno, Model model) {
+		
+		Member m = mService.newMemberDetail(mno);
+		model.addAttribute("m", m);
+		
 		return "member/adminNewMemberDetail";
 	}
 	
@@ -79,7 +83,6 @@ public class MemberController {
 	public ModelAndView memberList(ModelAndView mv) {
 		
 		ArrayList<Member> list = mService.memberList();
-//		System.out.println(list);
 		mv.addObject("list", list)
 		  .setViewName("member/adminMemberList");
 		
@@ -95,6 +98,8 @@ public class MemberController {
 		
 		return "member/adminMemberDetail";
 	}
+	
+	
 	
 
 	

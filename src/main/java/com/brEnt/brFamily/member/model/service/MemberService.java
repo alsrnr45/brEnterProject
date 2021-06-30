@@ -27,7 +27,7 @@ public interface MemberService {
 	ArrayList<Member> newMemberList();
 
 	// 작성자 : 김혜미 -- 신규사원 상세조회
-	Member selectNewMemberDetail(Member m);
+	Member newMemberDetail(int mno);
 	
 	// 작성자 : 김혜미 -- 사원 리스트 조회
 	ArrayList<Member> memberList();

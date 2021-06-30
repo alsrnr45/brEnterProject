@@ -30,7 +30,7 @@ public interface MemberService {
 	Member selectNewMemberDetail(Member m);
 	
 	// 작성자 : 김혜미 -- 사원 리스트 조회
-	ArrayList<Member> selectMemberList();
+	ArrayList<Member> memberList();
 
 	// 작성자 : 김혜미 -- 사원 상세조회
 	Member selectMemberDetail(Member m);

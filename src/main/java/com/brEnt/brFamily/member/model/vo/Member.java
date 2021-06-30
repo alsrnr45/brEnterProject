@@ -34,4 +34,7 @@ public class Member {
 	private String acceptStatus;
 	private String memStatus;
 	private String adminStatus;
+	
+	private String deptName;
+	private String posiName;
 }

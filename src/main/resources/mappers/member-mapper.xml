@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="memberMapper">
 
-	<resultMap id="memberResultSet" type="Member">
+	<resultMap id="member" type="Member">
 		<id column="mem_no" property="memNo"/> <!-- 프라이머리키 -->
 		<result column="dept_no" property="deptNo"/>
 		<result column="posi_no" property="posiNo"/>
@@ -44,7 +44,7 @@
 	</resultMap>
 	
 
-	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
+	<select id="loginMember" resultMap="member" parameterType="Member">
 		select 	
 			mem_no
 		  , dept_no
@@ -75,7 +75,7 @@
 	</select>
 	
 	
-	<select id="newMemberList" resultMap="memberResultSet">
+	<select id="newMemberList" resultMap="member">
 		select 
 		       mem_no
 		     , mem_name
@@ -89,7 +89,7 @@
 	</select>
 	
 	
-	<select id="memberList" resultMap="memberResultSet">
+	<select id="memberList" resultMap="member">
 		select 
 		       mem_no
              , dept_name

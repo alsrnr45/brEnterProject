@@ -16,7 +16,7 @@
 		<result column="road_address" property="roadAddress"/>
 		<result column="detail_address" property="detailAddress"/>
 		<result column="mem_enrolldate" property="memEnrollDate"/>
-		<result column="hiredate" property="hireDate"/>
+		<result column="hire_date" property="hireDate"/>
 		<result column="regi" property="regi"/>
 		<result column="bank" property="bank"/>
 		<result column="account" property="account"/>
@@ -102,8 +102,35 @@
           join position p on (m.posi_no = p.posi_no)
 		 where mem_status = 'Y'
 		 order
-			by mem_enrolldate desc
+			by mem_no
 	</select>
+	
+	<select id="memberDetail" resultMap="member" parameterType="_int">
+		select 
+		       mem_no
+             , profile
+             , mem_name
+             , dept_name
+             , posi_name
+		     , phone
+		     , to_char(to_date(hire_date, 'MM/DD/YYYY'), 'YYYY-MM-DD') hire_date
+             , bank
+             , account
+             , regi
+             , office_email
+             , personal_email
+             , post
+             , road_address
+             , detail_address
+             , mem_status
+             , admin_status
+		  from member m
+          join dept d on (m.dept_no = d.dept_no)
+          join position p on (m.posi_no = p.posi_no)
+		 where mem_no = #{memNo}
+	</select>
+	
+	
 	
 	
 </mapper>

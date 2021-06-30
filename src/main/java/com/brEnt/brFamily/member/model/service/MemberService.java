@@ -33,7 +33,7 @@ public interface MemberService {
 	ArrayList<Member> memberList();
 
 	// 작성자 : 김혜미 -- 사원 상세조회
-	Member selectMemberDetail(Member m);
+	Member memberDetail(int mno);
 
 	
 }

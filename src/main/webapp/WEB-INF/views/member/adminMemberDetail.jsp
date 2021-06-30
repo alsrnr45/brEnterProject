@@ -83,7 +83,7 @@
                 <form id="personalInformation" action="" method="post">
                     <div class="content1">
                         <div class="box">
-                            <img class="profile" src="resources/profileUpfiles/hamster1.jpg">
+                            <img class="profile" src="${ m.profile }">
                         </div>
                         <input type="file" name="" hidden>
                     </div>
@@ -94,60 +94,60 @@
                             <table align="center">
                                 <tr>
                                     <th><label for="userName">사원명</label></th>
-                                    <td><input type="text" id="userName" class="form-control" name="" value="햄토리" required></td>
+                                    <td><input type="text" id="userName" class="form-control" name="" value="${ m.memName }" required></td>
                                     <th><label for="userNo">사원번호</label></th>
-                                    <td><input type="text" id="userNo" class="form-control" name="" value="150" readonly></td>
+                                    <td><input type="text" id="userNo" class="form-control" name="" value="${ m.memNo }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="deptName">부서명</label></th>
-                                    <td><input type="text" id="deptName" class="form-control" name="" value="개발팀" required></td>
+                                    <td><input type="text" id="deptName" class="form-control" name="" value="${ m.deptName }" required></td>
                                     <th><label for="posiName">직급명</label></th>
-                                    <td><input type="text" id="posiName" class="form-control" name="" value="부장" required></td>
+                                    <td><input type="text" id="posiName" class="form-control" name="" value="${ m.posiName }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="phnoe">연락처</label></th>
-                                    <td><input type="text" id="phnoe" class="form-control" name="" value="010-2574-2864" required></td>
+                                    <td><input type="text" id="phnoe" class="form-control" name="" value="${ m.phone }" required></td>
                                     <th><label for="hireDate">입사일</label></th>
-                                    <td><input type="text" id="hireDate" class="form-control" name="" value="2020.12.14" required></td>
+                                    <td><input type="text" id="hireDate" class="form-control" name="" value="${ m.hireDate }" required></td>
                                     
                                 </tr>
                                 <tr>
                                     <th><label for="account">계좌번호</label></th>
                                     <td>
                                         <div class="input-group mb-3">
-                                            <input type="text" id="account" class="form-control" name="" value="369272-01-6492064" style="width: 100px;" required>
+                                            <input type="text" id="account" class="form-control" name="" value="${ m.account }" style="width: 100px;" required>
                                             <div class="input-group-append">
-                                                <span class="input-group-text">보람은행</span>
+                                                <span class="input-group-text">${ m.bank }</span>
                                             </div>
                                         </div>
                                     </td>
                                     <th><label for="regi">주민등록번호</label></th>
-                                    <td colspan="3"><input type="text" id="regi" class="form-control" name="" value="010101-2345678" required></td>
+                                    <td colspan="3"><input type="text" id="regi" class="form-control" name="" value="${ m.regi }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="officeEmail">사내이메일</label></th>
-                                    <td><input type="text" id="officeEmail" class="form-control" name="" value="hamster@br.com" required></td>
+                                    <td><input type="text" id="officeEmail" class="form-control" name="" value="${ m.officeEmail }" required></td>
                                     <th><label for="personalEmail">개인이메일</label></th>
-                                    <td><input type="text" id="personalEmail" class="form-control" name="" value="hamster@gamil.com" required></td>
+                                    <td><input type="text" id="personalEmail" class="form-control" name="" value="${ m.personalEmail }" required></td>
                                 </tr><tr>
                                     <th><label for="address">주소</label></th>
-                                    <td><input type="text" id="address" class="form-control" name="" value="06234" required></td>
+                                    <td><input type="text" id="address" class="form-control" name="" value="${ m.post }" required></td>
                                     <td style="padding-left: 7px;"><button class="btn btn-secondary">주소검색</button></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <th><label for="content"></label></th>
-                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="서울 강남구 테헤란로14길 6 (역삼동) 남도빌딩" required></td>
+                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="${ m.roadAddress }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="content"></label></th>
-                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="1층" required></td>
+                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="${ m.detailAddress }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="userStatus">회원상태</label></th>
-                                    <td><input type="text" id="userStatus" class="form-control" name="" value="Y" required></td>
+                                    <td><input type="text" id="userStatus" class="form-control" name="" value="${ m.memStatus }" required></td>
                                     <th><label for="adminStatus">관리자권한</label></th>
-                                    <td><input type="text" id="adminStatus" class="form-control" name="" value="N" required></td>
+                                    <td><input type="text" id="adminStatus" class="form-control" name="" value="${ m.adminStatus }" required></td>
                                 </tr>
                             </table>
 

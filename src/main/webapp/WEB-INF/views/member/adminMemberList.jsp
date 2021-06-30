@@ -112,11 +112,12 @@
     
 	<script>
 	$(function() {
-	    $(".memberList>tbody>tr").click(function() {
-	        location.href ="memberDetail.admin";		<%--?bno=" + $(this).children(".bno").text();--%>
-	        console.log("사원클릭");
-		})
-	})
+	
+	     $(document).on("click", ".memberList>tbody>tr", function(){
+	     	location.href ="memberDetail.admin?mno=" + $(this).children().eq(0).text();
+	     });
+	
+	 })
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

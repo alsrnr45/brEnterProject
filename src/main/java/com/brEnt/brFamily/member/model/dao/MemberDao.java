@@ -26,6 +26,12 @@ public class MemberDao {
 	public ArrayList<Member> memberList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.memberList");
 	}
+
+
+
+	public Member memberDetail(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.memberDetail", memNo);
+	}
 	
 	
 	

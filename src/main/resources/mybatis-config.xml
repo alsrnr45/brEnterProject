@@ -24,6 +24,8 @@
 		<typeAlias type="com.brEnt.brFamily.mail.model.vo.Mail" alias="Mail"/>
 		<typeAlias type="com.brEnt.brFamily.meetingRoom.model.vo.MeetingRoom" alias="MeetingRoom"/>
 		<typeAlias type="com.brEnt.brFamily.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.brEnt.brFamily.member.model.vo.Dept" alias="Dept"/>
+		<typeAlias type="com.brEnt.brFamily.member.model.vo.Position" alias="Position"/>		
 		<typeAlias type="com.brEnt.brFamily.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.brEnt.brFamily.notice.model.vo.NoticeReply" alias="NoticeReply"/>
 		<typeAlias type="com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt" alias="PersonnelMgt"/>

@@ -75,8 +75,14 @@ public class MemberController {
 	
 	// 작성자 : 김혜미 -- 사원 리스트(관리자)
 	@RequestMapping("memberList.admin")
-	public String memberList() {
-		return "member/adminMemberList";
+	public ModelAndView memberList(ModelAndView mv) {
+		
+		ArrayList<Member> list = mService.memberList();
+		System.out.println(list);
+		mv.addObject("list", list)
+		  .setViewName("member/adminMemberList");
+		
+		return mv;
 	}	
 
 	// 작성자 : 김혜미 -- 사원 디테일(관리자)

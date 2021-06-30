@@ -92,12 +92,12 @@
                                 <tbody>
 	                                <c:forEach var="m" items="${ list }">
 	                                    <tr>
-	                                        <td>128</td>
-	                                        <td>개발팀</td>
-	                                        <td>사원</td>
-	                                        <td>김자바</td>
-	                                        <td>010-0000-0000</td>
-	                                        <td>kimjava@br.com</td>
+											<td class="mno">${ m.memNo }</td>
+	                                        <td>${ m.deptName }</td>
+	                                        <td>${ m.posiName }</td>
+	                                        <td>${ m.memName }</td>
+	                                        <td>${ m.phone }</td>
+	                                        <td>${ m.officeEmail }</td>
 	                                    </tr>
 									</c:forEach>
                                 </tbody>

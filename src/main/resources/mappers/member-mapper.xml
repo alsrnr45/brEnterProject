@@ -25,7 +25,24 @@
 		<result column="accept_status" property="acceptStatus"/>
 		<result column="mem_status" property="memStatus"/>
 		<result column="admin_status" property="adminStatus"/>
+		<result column="dept_name" property="deptName"/>
+		<result column="posi_name" property="posiName"/>
 	</resultMap>
+	
+	
+	<resultMap id="dept" type="Dept">
+		<id column="dept_no" property="deptNo"/>
+		<result column="dept_name" property="deptName"/>
+	</resultMap>
+	
+	
+	<resultMap id="posi" type="Position">
+		<id column="posi_no" property="posiNo"/>
+		<result column="posi_name" property="posiName"/>
+		<result column="base_salary" property="baseSalary"/>
+		<result column="hourly_pay" property="hourlyPay"/>
+	</resultMap>
+	
 
 	<select id="loginMember" resultMap="memberResultSet" parameterType="Member">
 		select 	
@@ -64,9 +81,26 @@
 		     , mem_name
 		     , phone
 		     , office_email
-		     , mem_enrolldate
+		     , to_char(to_date(mem_enrolldate, 'MM/DD/YYYY'), 'YYYY-MM-DD') mem_enrolldate
 		  from member
 		 where accept_status = 'N'
+		 order
+			by mem_enrolldate desc
+	</select>
+	
+	
+	<select id="memberList" resultMap="memberResultSet">
+		select 
+		       mem_no
+             , dept_name
+             , posi_name
+		     , mem_name
+		     , phone
+		     , office_email
+		  from member m
+          join dept d on (m.dept_no = d.dept_no)
+          join position p on (m.posi_no = p.posi_no)
+		 where mem_status = 'Y'
 		 order
 			by mem_enrolldate desc
 	</select>

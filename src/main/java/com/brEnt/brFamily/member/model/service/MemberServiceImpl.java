@@ -64,9 +64,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override // 작성자 : 김혜미 -- 사원 리스트 조회
-	public ArrayList<Member> selectMemberList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Member> memberList() {
+		return mDao.memberList(sqlSession);
 	}
 
 	@Override // 작성자 : 김혜미 -- 사원 상세조회

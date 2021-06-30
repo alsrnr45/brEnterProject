@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.member.model.vo.Dept;
 
 @Controller
 public class ElecApprovalController {
@@ -85,14 +86,23 @@ public class ElecApprovalController {
    
    // 작성자 : 안소은 -- 지출결의서 폼
    @RequestMapping("expenseForm.ea")
-   public String expenseForm() {
-      return "elecApproval/expenseForm";
+   public ModelAndView expenseForm(ModelAndView mv) {
+	   ArrayList<Dept> list = eaService.selectDept();
+	   System.out.println(list);
+	   mv.addObject("list", list)
+	   	 .setViewName("elecApproval/expenseForm");
+	   
+	   return mv;
+	   
    }
-   
+
    // 작성자 : 안소은 -- 지출결의서 상세페이지
    @RequestMapping("expenseDetail.ea")
    public String expenseDetail() {
 	   return "elecApproval/expenseDetail";
    }
+
+  
+   
    
 }

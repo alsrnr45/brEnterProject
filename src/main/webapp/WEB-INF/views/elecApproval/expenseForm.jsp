@@ -256,14 +256,9 @@
                         <div class="modal-body" style="width:100%; height:100%;">
                             <div class="signModalOuter">
                                 <div class="modal1">
-                                    <ul>개발팀(11)</ul>
-                                    <ul>기획팀</ul>
-                                    <ul>마케팅팀</ul>
-                                    <ul>매니지먼트팀</ul>
-                                    <ul>미디어팀</ul>
-                                    <ul>인사팀</ul>
-                                    <ul>총무회계팀</ul>
-                                    <ul>대표</ul>
+                                	<c:forEach var="dept" items="${ list }">
+                                			<ul>${ dept.deptName }</ul>
+                                    </c:forEach>
                                 </div>
                                 <div class="modal2">
                                     <ul>안소은(사원)</ul>

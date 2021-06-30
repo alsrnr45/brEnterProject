@@ -3,6 +3,7 @@ package com.brEnt.brFamily.elecApproval.model.service;
 import java.util.ArrayList;
 
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.member.model.vo.Dept;
 
 public interface ElecApprovalService {
    
@@ -10,6 +11,6 @@ public interface ElecApprovalService {
     ArrayList<ElecApproval> selectApprovalTotalList(); 
    
     // 작성자 : 안소은 -- 전자결재 결재선 부서조회
-    ArrayList<ElecApproval> selectDept();
+    ArrayList<Dept> selectDept();
    
 }

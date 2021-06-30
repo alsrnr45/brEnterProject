@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.elecApproval.model.dao.ElecApprovalDao;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.member.model.vo.Dept;
 
 @Service
 public class ElecApprovalServiceImpl implements ElecApprovalService {
@@ -26,9 +27,8 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 
    // 작성자 : 안소은 --전자결재 결재선 부서 조회
    @Override
-   public ArrayList<ElecApproval> selectDept() {
-	  // TODO Auto-generated method stub
-	  return null;
+   public ArrayList<Dept> selectDept() {
+	  return eaDao.selectDept(sqlSession);
    }
    
 

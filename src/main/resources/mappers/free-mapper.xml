@@ -94,7 +94,16 @@
   	</insert>
 	
 	
-	
+	<!-- 자유게시판 수정 -->
+	<update id="updateBoardFree" parameterType="boardFree">
+  		update
+  			   free_board
+  		   set free_title = #{freeTitle} 
+  		     , free_cnt = #{freeCnt} 
+  		     , free_file_origin = #{freeFileOrigin} 
+  		     , free_file_update = #{freeFileUpdate} 
+  		 where free_no = #{freeNo}     	   
+  	</update>
 	
 	
 	

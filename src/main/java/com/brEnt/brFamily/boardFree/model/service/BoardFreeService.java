@@ -28,4 +28,10 @@ public interface BoardFreeService {
 	int	insertBoardFree(BoardFree bf); 
 	
 	
+	// 자유게시판 수정
+	int updateBoardFree(BoardFree bf); 
+	
+	
+	
+	
 }

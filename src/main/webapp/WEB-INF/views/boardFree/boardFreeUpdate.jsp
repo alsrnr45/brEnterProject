@@ -94,26 +94,36 @@
 	                <div class="content">
 	                    <div class="boardFreeUpdateArea">
 	
-	                        <form id="boardFreeUpdateForm" method="post" action="" enctype="multipart/form-data">                        
+	                        <form id="boardFreeUpdateForm" method="post" action="updateBoardFree.bf" enctype="multipart/form-data">                        
+	                            
+	                            <input type="hidden" name="freeNo" value="${ bf.freeNo }">
+	                            
 	                            <div style="margin-left:870px;">
 	                                <button type="submit" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
 	                                    수정하기</button>
-	                                    <a class="btn btn-primary" href="" style="background-color:lightgray; border-color:lightgray;">목록으로</a>
+	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray;">
+	                                	목록으로</a>
 	                            </div><br><br>
-	
+																
 	                            <div class="content_1">
 	                            	<div class="summernote">
 	                            		<table class="boardFreeTable">
 		                                  	<tr>
 		                                        <th width="80"><label for="freeTitle">제목</label></th>
-		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control"  value="자유게시글 제목" required></td>
+		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control"  value="${ bf.freeTitle }" required></td>
 		                                    </tr>
 		                                    <tr>
-		                                        <th><label for="freeUpfile">첨부파일</label></th>
+		                                        <th><label for="upfile">첨부파일</label></th>
 		                                        <td>
-		                                            <input type="file" name="freeUpfile" id="freeUpfile" class="form-control-file border"  style="cursor:pointer;"><br>
-		                                            현재 업로드된 파일 : 
-		                                            <a href="" download="">test1.png</a>
+		                                            <input type="file" name="reupfile" id="upfile" class="form-control-file border"  style="cursor:pointer;"><br>
+		                                            
+		                                            <c:if test="${ !empty bf.freeFileOrigin }">
+			                                            현재 업로드된 파일 : 
+			                                            <a href="${ bf.freeFileUpdate }" download="${ bf.freeFileOrigin }">${ bf.freeFileOrigin }</a>
+			                                            <input type="hidden" name="freeFileOrigin" value="${ bf.freeFileOrigin }">
+	                        							<input type="hidden" name="freeFileUpdate" value="${ bf.freeFileUpdate }">
+                        							</c:if>
+                        							
 		                                        </td>
 		                                    </tr>
 		                                    <tr>
@@ -121,7 +131,7 @@
 		                                    </tr>
 		                                    <tr>
 		                                        <th colspan="2">
-		                                            <textarea class="form-control" required name="freeContent" id="summernote" rows="15" style="resize:none;">자유게시글 내용입니다.</textarea>
+		                                            <textarea class="form-control" required name="freeCnt" id="summernote" rows="15" style="resize:none;">${ bf.freeCnt }</textarea>
 		                                        </th>
 		                                    </tr>
 	                                    </table>

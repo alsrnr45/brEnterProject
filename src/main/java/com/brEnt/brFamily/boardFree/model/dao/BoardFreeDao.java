@@ -48,6 +48,11 @@ public class BoardFreeDao {
 	}
 	
 	
+	// 자유게시판 수정 
+	public int updateBoardFree(SqlSessionTemplate sqlSession, BoardFree bf) { 
+		return sqlSession.update("boardFreeMapper.updateBoardFree", bf); 
+	}
+	
 	
 	
 	

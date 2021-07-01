@@ -63,6 +63,13 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	}
 
 	
+	// 자유게시판 수정
+	@Override
+	public int updateBoardFree(BoardFree bf) {
+		return bfDao.updateBoardFree(sqlSession, bf);
+	}
+
+	
 	
 	
 	

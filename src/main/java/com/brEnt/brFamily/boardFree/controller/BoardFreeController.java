@@ -122,11 +122,56 @@ public class BoardFreeController {
 		
 		
 	// 자유게시판 수정 
-	@RequestMapping("boardFreeUpdate.bf")
-	public String boardFreeUpdate() {
+	@RequestMapping("updateBoardFreeForm.bf")
+	public String updateBoardFreeForm(int bfno, HttpSession session, Model model) { 
+		//BoardFree bf = bfService.selectBoardFree(bfno); 
+		//model.addAttribute("bf", bf); 
+		model.addAttribute("bf", bfService.selectBoardFree(bfno)); 
 		return "boardFree/boardFreeUpdate"; 
 	}
+	
+	@RequestMapping("updateBoardFree.bf")
+	public String updateBoardFree(BoardFree bf, MultipartFile reupfile, HttpSession session, Model model) { 
+	
+		if(!reupfile.getOriginalFilename().equals("")) { // 새로 넘어온 첨부파일이 있을 경우 
+			 
+			// 새로 넘어온 첨부파일이 있는데 기존의 첨부파일이 있을 경우 => 서버에 업로드되어있는 기존의 파일 찾아서 지울 것 
+			if(bf.getFreeFileUpdate() != null) {
+				new File(session.getServletContext().getRealPath(bf.getFreeFileUpdate())).delete(); 
+			}
+			
+			// 새로 넘어온 첨부파일 서버에 업로드 
+			String changeName = saveFile(session, reupfile); 
+			bf.setFreeFileOrigin(reupfile.getOriginalFilename());
+			bf.setFreeFileUpdate("resources/freeUpfiles/" + changeName);
+		}
 		
+		/*
+		 * case 1. 새로 첨부된 파일 x, 기존의 첨부파일 x 
+		 * 		=> freeFileOrigin : null, freeFileUpdate : null 
+		 * 
+		 * case 2. 새로 첨부된 파일 x, 기존의 첨부파일 o 
+		 * 		=> freeFileOrigin : 기존의 첨부파일 원본명, freeFileUpdate : 기존의 첨부파일 수정명 
+		 * 
+		 * case 3. 새로 첨부된 파일 o, 기존의 첨부파일 x 
+		 * 		=> freeFileOrigin : 새로운 첨부파일 원본명, freeFileUpdate : 새로운 첨부파일 수정명 
+		 * 
+		 * case 4. 새로 첨부된 파일 o, 기존의 첨부파일 o
+		 * 		=> freeFileOrigin : 새로운 첨부파일 원본명, freeFileUpdate : 새로운 첨부파일 수정명 
+		 */
+		int result = bfService.updateBoardFree(bf); 
+		
+		if(result > 0) { // 성공 => boardFreeDetail.bf?bfno=글번호     url 재요청 => 상세보기 페이지 
+			session.setAttribute("alertMsg", "게시글이 성공적으로 수정되었습니다."); 
+			return "redirect:boardFreeDetail.bf?bfno=" + bf.getFreeNo();
+			
+		}else { // 실패 => 에러 문구 담아서 => 에러 페이지 포워딩  
+			model.addAttribute("errorMsg", "게시글 수정 실패"); 
+			return "common/errorPage"; 
+		}
+		
+	}
+	
 	
 	// 전달받은 첨부파일 수정명 작업해서 서버에 업로드시킨 후 해당 수정된 파일명(서버에 업로드된 파일명)을 반환하는 메소드 
 	public String saveFile(HttpSession session, MultipartFile upfile) {
@@ -151,7 +196,8 @@ public class BoardFreeController {
 				
 	}	
 	
-
+	
+	// 자유게시판 삭제 
 
 
 	

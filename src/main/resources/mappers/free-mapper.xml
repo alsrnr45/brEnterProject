@@ -70,4 +70,40 @@
   	</select>
 	
 	
+	<!-- 자유게시판 작성 -->
+	<insert id="insertBoardFree" parameterType="boardFree">
+  		insert
+  		  into free_board 
+  		  (
+  		    free_no
+  		  , free_title
+  		  , mem_no
+  		  , free_cnt 
+  		  , free_file_origin
+  		  , free_file_update 
+  		  )
+  		  values
+  		  ( 
+  		    seq_frno.nextval 
+  		  , #{freeTitle}
+  		  , #{memNo}
+  		  , #{freeCnt}   		  
+  		  , #{freeFileOrigin}
+  		  , #{freeFileUpdate} 
+  		  )
+  	</insert>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </mapper>

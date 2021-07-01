@@ -42,6 +42,14 @@ public class BoardFreeDao {
 	}
 	
 	
+	// 자유게시판 작성
+	public int insertBoardFree(SqlSessionTemplate sqlSession, BoardFree bf) {		
+		return sqlSession.insert("boardFreeMapper.insertBoardFree", bf); 
+	}
+	
+	
+	
+	
 	
 	
 }

@@ -101,29 +101,34 @@
 	                <div class="content">
 	                    <div class="boardFreeEnrollArea">
 	
-	                        <form id="boardFreeEnrollForm" method="post" action="" enctype="multipart/form-data">
+	                        <form id="boardFreeEnrollForm" method="post" action="insertBoardFree.bf" enctype="multipart/form-data">
+	                            
 	                            <div style="margin-left:870px;">
 	                                <button type="submit" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
 	                                    등록하기</button>
-	                                <a class="btn btn-primary" href="" style="background-color:lightgray; border-color:lightgray;">목록으로</a>
+	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray;">목록으로</a>
 	                            </div><br><br>
-	                          
+	                            
+	                          	
 	                            <div class="content_1">
 	                            	<div class="summernote">
 		                            	<table class="boardFreeTable">
 		                                    <tr>
 		                                        <th width="80"><label for="freeTitle">제목</label></th>
-		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control"  required></td>
+		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control" required></td>
+		                                    </tr>	
+		                                    <tr>
+						                        <td><input type="hidden" id="memNo" class="form-control" value="${ loginUser.memNo }" name="memNo" readonly></td>
+						                    </tr>	                                    
+		                                    <tr>
+		                                        <th><label for="upfile">첨부파일</label></th>
+		                                        <td><input type="file" name="upfile" id="upfile" class="form-control-file border" ></td>
 		                                    </tr>
 		                                    <tr>
-		                                        <th><label for="freeUpfile">첨부파일</label></th>
-		                                        <td><input type="file" name="freeUpfile" id="freeUpfile" class="form-control-file border" ></td>
+		                                        <th colspan="2"><label for="freeCnt">내용</label></th>
 		                                    </tr>
 		                                    <tr>
-		                                        <th colspan="2"><label for="freeContent">내용</label></th>
-		                                    </tr>
-		                                    <tr>
-		                                        <th colspan="2"><textarea class="form-control" required name="freeContent" id="summernote" rows="15" style="resize:none;"></textarea></th>
+		                                        <th colspan="2"><textarea class="form-control" required name="freeCnt" id="summernote" rows="15" style="resize:none;"></textarea></th>
 		                                    </tr>
 		                                </table>
 	                            	</div>	                              

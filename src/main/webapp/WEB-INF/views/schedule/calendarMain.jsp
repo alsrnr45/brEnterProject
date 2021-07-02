@@ -22,30 +22,77 @@
     <script src='resources/scheduleResources/lib/main.js'></script>
     <script src='resources/scheduleResources/lib/locales/ko.js'></script>
     <script>
-
+      // 스케줄 구현 js 모음집
       document.addEventListener('DOMContentLoaded', function() {
         var calendarEl = document.getElementById('calendar');
-        
-       
 
         var calendar = new FullCalendar.Calendar(calendarEl, {
+          locale:"ko", //언어변경
           headerToolbar: {
             left: 'prev,next today',
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
           },
-          // 오늘 날짜 뿌려주기
-          initialDate: new Date(),
+          initialDate: new Date(), // 오늘 날짜 뿌려주기
           navLinks: true, // can click day/week names to navigate views
           businessHours: true, // display business hours
           editable: true,
           selectable: true,
+          selectMirror: true,
+          // 날짜 선택시 실행할 함수(ajax로 해보자)
+          select: function insertSch() {
+            // 일정만들기 페이지 호출
+            $.ajax({
+            	url:"enroll.sch",
+            	type:'POST',
+            	data:new Date(),
+            	success: console.log("성공"),
+            	error: console.log("실패")
+            })
+            
+            
+            /*
+            var title = prompt('Event Title:');
+            if (title) {
+              calendar.addEvent({
+                title: title,
+                start: arg.start,
+                end: arg.end,
+                allDay: arg.allDay
+              })
+            }
+            
+            calendar.unselect()
+            */
+          },
+          // 이벤트 클릭시 실행할 함수
+          eventClick: function updateSch(arg) {
+            // 수정하기 페이지 호출
+            //arg.event.remove() 이벤트 없애는 함수
+            
+            
+          },
           events: [
+        	<c:forEach var="s" items="${list}">
             {
-              title: 'Business Lunch',
-              start: new Date(),
-              constraint: 'businessHours'
+              id: '${ s.schNo }',
+              title: '${ s.schTitle }',
+              start: '${ s.startDate }',
+              end: '${ s.endDate }',
+              description: '${s.schContent}',
+           	  <c:choose>
+	              <c:when test="${s.schStatus eq '전체'}">
+	              color: '#257e4a'
+	              </c:when>
+	              <c:when test="${s.schStatus eq '부서'}">
+	              color: '#dc3545'
+	              </c:when>
+	              <c:otherwise>
+	              color: '#6f42c1' 
+	              </c:otherwise>
+			        </c:choose>
             },
+            </c:forEach>
             {
               title: 'Meeting',
               start: '2020-09-13T11:00:00',
@@ -65,14 +112,8 @@
             // areas where "Meeting" must be dropped
             {
               groupId: 'availableForMeeting',
-              start: '2020-09-11T10:00:00',
-              end: '2020-09-11T16:00:00',
-              display: 'background'
-            },
-            {
-              groupId: 'availableForMeeting',
-              start: '2020-09-13T10:00:00',
-              end: '2020-09-13T16:00:00',
+              start: '2021-07-01T10:00:00',
+              end: '2021-07-6T16:00:00',
               display: 'background'
             },
     
@@ -83,23 +124,18 @@
               overlap: false,
               display: 'background',
               color: '#ff9f89'
-            },
-            {
-              start: '2020-09-06',
-              end: '2020-09-08',
-              overlap: false,
-              display: 'background',
-              color: '#ff9f89'
             }
-          ]
+          ],
         });
-    
+
         calendar.render();
       });
-    
+
+
     </script>
 
     <style>
+
     body {
       margin: 40px 10px;
       padding: 0;
@@ -108,31 +144,46 @@
     }
 
     #calendar {
-      max-width: 900px;
-      margin-top: 50px;
-      margin-right: 300px;
-      margin-left: 300px;
+      max-width: 1700px;
+      max-height: 720px;
+
     }
+
     </style>
 </head>
 <body>
-   <!-- 상단바 -->
-    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<jsp:include page="../common/userHeader.jsp"/>
-    </nav>
-    
-    <div id="layoutSidenav">
-        
-        <!-- 메뉴바 -->
-        <div id="layoutSidenav_nav">
-            <jsp:include page="../common/userMenu.jsp"/>
-        </div>
 
-        <!--컨텐츠-->
-        <div id="layoutSidenav_content">
-            
-            <div class="full" id='calendar'></div>
-        </div>
-    </div>
+	<c:choose>
+		<c:when test="${ empty loginUser }" >
+		<!-- 로그인 전 -->
+   		</c:when>
+   		<c:otherwise>
+			<!-- 상단바 -->
+			<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+				<jsp:include page="../common/userHeader.jsp"/>
+			</nav>
+    
+			<div id="layoutSidenav">
+				<!-- 메뉴바 -->
+				<div id="layoutSidenav_nav">
+		            <jsp:include page="../common/userMenu.jsp"/>
+				</div>
+
+				<!--컨텐츠-->
+				<div id="layoutSidenav_content">
+	       			<!-- 로그인 후 -->
+					<div class="full" id='calendar'></div>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </body>
+	<script>
+  // 아쒸 이거 안되네 나중에하자
+      $( document ).ready(function() {
+        $('fc-listMonth-button fc-button fc-button-primary').click(function(){
+          $('fc-list-event-title').append('<li>Test3</li>');
+        })
+      });
+	</script>
 </html>

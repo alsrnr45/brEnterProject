@@ -104,6 +104,24 @@
         flex:4;
     }
 
+    ul, li{
+        list-style : none;
+    }
+
+    .open{
+        color:rgba(155, 89, 182);
+        style:none;
+    }
+
+    .close{
+        font-family: 'Noto Sans KR', sans-serif
+        
+    }
+
+    .open:hover, .close:hover {
+        style:none;
+    }
+
 </style>
 </head>
 <body>
@@ -181,46 +199,86 @@
               <!-- The Modal -->
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog modal-xl">
-                <div class="modal-content"
-                    <!-- Modal Header -->
-                    <div class="modal-header">
-                    <h4 class="modal-title">주소록 추가</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <!-- Modal body -->
-                    <div class="modal-body">
-                        <div class="modal-body-content">
-                            <div class="content">
-                                <div class="content-org-tree">
-                                 트리   
-                                </div>
-                                <div class="content-list">
-                                    <div class="search-wrap">
-                                        <input class="dataTable-input">
-                                    </div>
-                                    <div class="scroll-wrap">
-                                    스크롤랩(실질주소)   
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="move-tab">
-                                <span class="btn btn-primary">추가 &gt</span><br><br>
-                                <span class="btn btn-primary">&lt 제외</span>
-                            </div>
-                            <div class="new-list">
-                            뉴리스트
-                            </div>
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                        <h4 class="modal-title">주소록 추가</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="modal-body-content">
+                                <div class="content">
+                                    <div class="content-org-tree">
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="open"><i class="fas fa-plus-square"></i>br엔터</a>
+                                                <ul>
+                                                    <li><a href="#" class="open"><i class="fas fa-plus-square"></i>기획팀</a></li>
+                                                    <li><a href="#" class="open"><i class="fas fa-plus-square"></i>총무팀</a></li>
+                                                    <li><a href="#" class="open"><i class="fas fa-plus-square"></i>인사팀</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="content-list">
+                                        <div class="search-wrap">
+                                            <input class="dataTable-input">
+                                        </div>
+                                        <div class="scroll-wrap">
+                                        스크롤랩(실질주소)   
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="move-tab">
+                                    <span class="btn btn-primary">추가 &gt</span><br><br>
+                                    <span class="btn btn-primary">&lt 제외</span>
+                                </div>
+                                <div class="new-list">
+                                    
+                                </div>
+                            </div>
 
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-</html>
+<script>
 
+var opener = $("a.open");
+var nested = $("a.open").parent().find("li");
+var nestedCont = $("li > ul > li").parent();
+var that;
+
+var tree = {
+  init : function () {
+    nestedCont.hide();
+    $("li:last-child").addClass("end");
+    $("a.open").each( function () {
+      $(opener).click(function ( target ) {
+       tree.click(this);
+      });
+     return false;
+    })
+  },
+  click : function ( _tar ) {
+   that = _tar;
+   $(that).next().show();
+   $(that).prev().toggleClass("close");
+   $(that).toggleClass("close");
+   if (!$(that).hasClass("close")) {
+     $(that).next().hide();      
+   }
+  }
+ }
+ tree.init();
+
+</script>
+</html>

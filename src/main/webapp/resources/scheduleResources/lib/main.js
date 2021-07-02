@@ -1,5 +1,5 @@
 /*!
-FullCalendar v5.7.2
+FullCalendar v5.8.0
 Docs & License: https://fullcalendar.io/
 (c) 2021 Adam Shaw
 */
@@ -4100,7 +4100,7 @@ var FullCalendar = (function (exports) {
     var globalLocales = [];
 
     var RAW_EN_LOCALE = {
-        code: 'ko',
+        code: 'en',
         week: {
             dow: 0,
             doy: 4, // 4 days need to be within the year to be considered the first week
@@ -4111,12 +4111,12 @@ var FullCalendar = (function (exports) {
             next: 'next',
             prevYear: 'prev year',
             nextYear: 'next year',
-            year: '연간',
-            today: '오늘',
-            month: '월간',
-            week: '주간',
-            day: '일간',
-            list: '목록',
+            year: 'year',
+            today: 'today',
+            month: 'month',
+            week: 'week',
+            day: 'day',
+            list: 'list',
         },
         weekText: 'W',
         allDayText: 'all-day',
@@ -4124,7 +4124,7 @@ var FullCalendar = (function (exports) {
         noEventsText: 'No events to display',
     };
     function organizeRawLocales(explicitRawLocales) {
-        var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'ko';
+        var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'en';
         var allRawLocales = globalLocales.concat(explicitRawLocales);
         var rawLocaleMap = {
             en: RAW_EN_LOCALE, // necessary?
@@ -5971,12 +5971,7 @@ var FullCalendar = (function (exports) {
             case 'CHANGE_VIEW_TYPE':
                 return dateProfileGenerator.build(action.dateMarker || currentDate);
             case 'CHANGE_DATE':
-                if (!currentDateProfile.activeRange ||
-                    !rangeContainsMarker(currentDateProfile.currentRange, action.dateMarker) // don't move if date already in view
-                ) {
-                    return dateProfileGenerator.build(action.dateMarker);
-                }
-                break;
+                return dateProfileGenerator.build(action.dateMarker);
             case 'PREV':
                 dp = dateProfileGenerator.buildPrev(currentDateProfile, currentDate);
                 if (dp.isValid) {
@@ -6980,7 +6975,9 @@ var FullCalendar = (function (exports) {
             }
             currentDate = reduceCurrentDate(currentDate, action);
             dateProfile = reduceDateProfile(dateProfile, action, currentDate, currentViewData.dateProfileGenerator);
-            if (!rangeContainsMarker(dateProfile.currentRange, currentDate)) {
+            if (action.type === 'PREV' || // TODO: move this logic into DateProfileGenerator
+                action.type === 'NEXT' || // "
+                !rangeContainsMarker(dateProfile.currentRange, currentDate)) {
                 currentDate = dateProfile.currentRange.start;
             }
             var eventSources = reduceEventSources(state.eventSources, action, dateProfile, calendarContext);
@@ -7342,16 +7339,11 @@ var FullCalendar = (function (exports) {
             this.entriesByLevel = []; // parallel with levelCoords
             this.stackCnts = {}; // TODO: use better technique!?
         }
-        SegHierarchy.prototype.addSegs = function (segInputs) {
+        SegHierarchy.prototype.addSegs = function (inputs) {
             var hiddenEntries = [];
-            for (var _i = 0, segInputs_1 = segInputs; _i < segInputs_1.length; _i++) {
-                var segInput = segInputs_1[_i];
-                this.insertEntry({
-                    segInput: segInput,
-                    spanStart: segInput.spanStart,
-                    spanEnd: segInput.spanEnd,
-                    thickness: segInput.thickness,
-                }, hiddenEntries);
+            for (var _i = 0, inputs_1 = inputs; _i < inputs_1.length; _i++) {
+                var input = inputs_1[_i];
+                this.insertEntry(input, hiddenEntries);
             }
             return hiddenEntries;
         };
@@ -7367,6 +7359,7 @@ var FullCalendar = (function (exports) {
             return (this.maxCoord === -1 || insertion.levelCoord + entry.thickness <= this.maxCoord) &&
                 (this.maxStackCnt === -1 || insertion.stackCnt < this.maxStackCnt);
         };
+        // returns number of new entries inserted
         SegHierarchy.prototype.handleInvalidInsertion = function (insertion, entry, hiddenEntries) {
             if (this.allowReslicing && insertion.touchingEntry) {
                 return this.splitEntry(entry, insertion.touchingEntry, hiddenEntries);
@@ -7377,72 +7370,97 @@ var FullCalendar = (function (exports) {
         SegHierarchy.prototype.splitEntry = function (entry, barrier, hiddenEntries) {
             var partCnt = 0;
             var splitHiddenEntries = [];
-            if (entry.spanStart < barrier.spanStart) {
-                partCnt += this.insertEntry(__assign(__assign({}, entry), { spanStart: entry.spanStart, spanEnd: barrier.spanStart }), splitHiddenEntries);
+            var entrySpan = entry.span;
+            var barrierSpan = barrier.span;
+            if (entrySpan.start < barrierSpan.start) {
+                partCnt += this.insertEntry({
+                    index: entry.index,
+                    thickness: entry.thickness,
+                    span: { start: entrySpan.start, end: barrierSpan.start },
+                }, splitHiddenEntries);
             }
-            if (barrier.spanEnd < entry.spanEnd) {
-                partCnt += this.insertEntry(__assign(__assign({}, entry), { spanStart: barrier.spanEnd, spanEnd: entry.spanEnd }), splitHiddenEntries);
+            if (entrySpan.end > barrierSpan.end) {
+                partCnt += this.insertEntry({
+                    index: entry.index,
+                    thickness: entry.thickness,
+                    span: { start: barrierSpan.end, end: entrySpan.end },
+                }, splitHiddenEntries);
             }
             if (partCnt) {
-                hiddenEntries.push.apply(hiddenEntries, __spreadArray([__assign(__assign({}, entry), { spanStart: Math.max(barrier.spanStart, entry.spanStart), spanEnd: Math.min(barrier.spanEnd, entry.spanEnd) })], splitHiddenEntries));
+                hiddenEntries.push.apply(hiddenEntries, __spreadArray([{
+                        index: entry.index,
+                        thickness: entry.thickness,
+                        span: intersectSpans(barrierSpan, entrySpan), // guaranteed to intersect
+                    }], splitHiddenEntries));
                 return partCnt;
             }
             hiddenEntries.push(entry);
             return 0;
         };
         SegHierarchy.prototype.insertEntryAt = function (entry, insertion) {
-            var nextLevel = insertion.nextLevel;
-            // create a new level
-            if (!nextLevel || this.levelCoords[nextLevel - 1] < insertion.levelCoord) {
-                insertAt(this.levelCoords, nextLevel, insertion.levelCoord);
-                insertAt(this.entriesByLevel, nextLevel, [entry]);
-                // insert into existing level
+            var _a = this, entriesByLevel = _a.entriesByLevel, levelCoords = _a.levelCoords;
+            var destLevel = insertion.level;
+            if (destLevel >= levelCoords.length || // level doesn't exist yet
+                levelCoords[destLevel] > insertion.levelCoord // destLevel needs to be pushed forward to make way
+            ) {
+                // create a new level
+                insertAt(levelCoords, destLevel, insertion.levelCoord);
+                insertAt(entriesByLevel, destLevel, [entry]);
             }
             else {
-                insertAt(this.entriesByLevel[nextLevel - 1], insertion.lateralEnd, entry);
+                // insert into existing level
+                insertAt(entriesByLevel[destLevel], insertion.lateralEnd, entry);
             }
             this.stackCnts[buildEntryKey(entry)] = insertion.stackCnt;
         };
         SegHierarchy.prototype.findInsertion = function (newEntry) {
             var _a = this, levelCoords = _a.levelCoords, entriesByLevel = _a.entriesByLevel, stackCnts = _a.stackCnts, strictOrder = _a.strictOrder;
             var levelCnt = levelCoords.length;
-            var level; // running value while iterating all segs
-            var levelCoord; // "
-            var lateralStart = 0; // "
-            var lateralEnd = 0; // "
-            var resCoord = 0; // the levelCoord for newSeg
-            var touchingEntry = null;
-            for (level = 0; level < levelCnt; level += 1) {
-                levelCoord = levelCoords[level];
-                // if the current level is past the placed entry, we have found a good
-                // empty space and can stop. only if not strict-ordering mode.
-                if (!strictOrder && levelCoord >= resCoord + newEntry.thickness) {
+            var resLevelCoord = 0;
+            var resLevel = 0;
+            var lateralStart = 0;
+            var lateralEnd = 0;
+            var touchingLevel = -1;
+            var touchingEntry = null; // last touch entry
+            for (var level = 0; level < levelCnt; level += 1) {
+                var levelCoord = levelCoords[level];
+                // if the current level is past the placed entry, we have found a good empty space and can stop.
+                // if strictOrder, keep finding more lateral intersections.
+                if (!strictOrder && levelCoord >= resLevelCoord + newEntry.thickness) {
                     break;
                 }
                 var entries = entriesByLevel[level];
                 var entry = void 0;
-                var searchRes = binarySearch(entries, newEntry.spanStart, getEntrySpanEnd);
+                var searchRes = binarySearch(entries, newEntry.span.start, getEntrySpanEnd);
                 lateralStart = searchRes[0] + searchRes[1]; // if exact match (which doesn't collide), go to next one
-                lateralEnd = lateralStart;
+                lateralEnd = lateralStart; // also functions as a moving index
                 while ( // loop through entries that horizontally intersect
                 (entry = entries[lateralEnd]) && // but not past the whole entry list
-                    entry.spanStart < newEntry.spanEnd) {
-                    if (strictOrder ||
+                    entry.span.start < newEntry.span.end // and not entirely past newEntry
+                ) {
+                    if (strictOrder || // strict-mode doesn't care about vert intersection. record touch and keep pushing down
                         ( // vertically intersects?
-                        resCoord < levelCoord + entry.thickness &&
-                            resCoord + newEntry.thickness > levelCoord)) {
+                        resLevelCoord < levelCoord + entry.thickness &&
+                            resLevelCoord + newEntry.thickness > levelCoord)) {
                         // push down the potential destination
+                        resLevelCoord = levelCoord + entry.thickness; // move to bottom of colliding entry
+                        touchingLevel = level;
                         touchingEntry = entry;
-                        resCoord = levelCoord + entry.thickness; // move to bottom of colliding entry
                     }
                     lateralEnd += 1;
                 }
+                // regardless of whether there were collisions in the current level,
+                // keep updating the final-destination level until it goes past the final-destination coord.
+                if (levelCoord < resLevelCoord) {
+                    resLevel = level + 1;
+                }
             }
             return {
-                levelCoord: resCoord,
-                nextLevel: level,
+                level: resLevel,
+                levelCoord: resLevelCoord,
                 lateralStart: lateralStart,
                 lateralEnd: lateralEnd,
+                touchingLevel: touchingLevel,
                 touchingEntry: touchingEntry,
                 stackCnt: touchingEntry ? stackCnts[buildEntryKey(touchingEntry)] + 1 : 0,
             };
@@ -7465,10 +7483,10 @@ var FullCalendar = (function (exports) {
         return SegHierarchy;
     }());
     function getEntrySpanEnd(entry) {
-        return entry.spanEnd;
+        return entry.span.end;
     }
     function buildEntryKey(entry) {
-        return entry.segInput.index + ':' + entry.spanStart;
+        return entry.index + ':' + entry.span.start;
     }
     // returns groups with entries sorted by input order
     function groupIntersectingEntries(entries) {
@@ -7477,17 +7495,15 @@ var FullCalendar = (function (exports) {
             var entry = entries_2[_i];
             var filteredMerges = [];
             var hungryMerge = {
-                spanStart: entry.spanStart,
-                spanEnd: entry.spanEnd,
+                span: entry.span,
                 entries: [entry],
             };
             for (var _a = 0, merges_1 = merges; _a < merges_1.length; _a++) {
                 var merge = merges_1[_a];
-                if (merge.spanStart < hungryMerge.spanEnd && merge.spanEnd > hungryMerge.spanStart) { // collides?
+                if (intersectSpans(merge.span, hungryMerge.span)) {
                     hungryMerge = {
-                        spanStart: Math.min(merge.spanStart, hungryMerge.spanStart),
-                        spanEnd: Math.max(merge.spanEnd, hungryMerge.spanEnd),
-                        entries: merge.entries.concat(hungryMerge.entries), // keep preexisting merge's items first. maintains order
+                        entries: merge.entries.concat(hungryMerge.entries),
+                        span: joinSpans(merge.span, hungryMerge.span),
                     };
                 }
                 else {
@@ -7498,6 +7514,20 @@ var FullCalendar = (function (exports) {
             merges = filteredMerges;
         }
         return merges;
+    }
+    function joinSpans(span0, span1) {
+        return {
+            start: Math.min(span0.start, span1.start),
+            end: Math.max(span0.end, span1.end),
+        };
+    }
+    function intersectSpans(span0, span1) {
+        var start = Math.max(span0.start, span1.start);
+        var end = Math.min(span0.end, span1.end);
+        if (start < end) {
+            return { start: start, end: end };
+        }
+        return null;
     }
     // general util
     // ---------------------------------------------------------------------------------------------------------------------
@@ -9525,7 +9555,7 @@ var FullCalendar = (function (exports) {
 
     // exports
     // --------------------------------------------------------------------------------------------------
-    var version = '5.7.2'; // important to type it, so .d.ts has generic string
+    var version = '5.8.0'; // important to type it, so .d.ts has generic string
 
     var Calendar = /** @class */ (function (_super) {
         __extends(Calendar, _super);
@@ -12082,9 +12112,11 @@ var FullCalendar = (function (exports) {
             if (eventHeight != null) {
                 segInputs.push({
                     index: i,
-                    spanStart: seg.firstCol,
-                    spanEnd: seg.lastCol + 1,
                     thickness: eventHeight,
+                    span: {
+                        start: seg.firstCol,
+                        end: seg.lastCol + 1,
+                    },
                 });
             }
             else {
@@ -12122,15 +12154,16 @@ var FullCalendar = (function (exports) {
         }
         for (var _b = 0, hiddenEntries_1 = hiddenEntries; _b < hiddenEntries_1.length; _b++) {
             var hiddenEntry = hiddenEntries_1[_b];
-            var seg = segs[hiddenEntry.segInput.index];
-            multiColPlacements[hiddenEntry.spanStart].push({
-                seg: seg,
+            var seg = segs[hiddenEntry.index];
+            var hiddenSpan = hiddenEntry.span;
+            multiColPlacements[hiddenSpan.start].push({
+                seg: resliceSeg(seg, hiddenSpan.start, hiddenSpan.end, cells),
                 isVisible: false,
                 isAbsolute: true,
                 absoluteTop: 0,
                 marginTop: 0,
             });
-            for (var col = hiddenEntry.spanStart; col < hiddenEntry.spanEnd; col += 1) {
+            for (var col = hiddenSpan.start; col < hiddenSpan.end; col += 1) {
                 moreCnts[col] += 1;
                 singleColPlacements[col].push({
                     seg: resliceSeg(seg, col, col + 1, cells),
@@ -12161,7 +12194,7 @@ var FullCalendar = (function (exports) {
             var currentMarginTop = 0;
             for (var _i = 0, rects_1 = rects; _i < rects_1.length; _i++) {
                 var rect = rects_1[_i];
-                var seg = segs[rect.segInput.index];
+                var seg = segs[rect.index];
                 singlePlacements.push({
                     seg: resliceSeg(seg, col, col + 1, cells),
                     isVisible: true,
@@ -12177,16 +12210,16 @@ var FullCalendar = (function (exports) {
             currentMarginTop = 0;
             for (var _a = 0, rects_2 = rects; _a < rects_2.length; _a++) {
                 var rect = rects_2[_a];
-                var seg = segs[rect.segInput.index];
-                var isAbsolute = rect.spanEnd - rect.spanStart > 1; // multi-column?
-                var isFirstCol = rect.spanStart === col;
+                var seg = segs[rect.index];
+                var isAbsolute = rect.span.end - rect.span.start > 1; // multi-column?
+                var isFirstCol = rect.span.start === col;
                 currentMarginTop += rect.levelCoord - currentHeight; // amount of space since bottom of previous seg
                 currentHeight = rect.levelCoord + rect.thickness; // height will now be bottom of current seg
                 if (isAbsolute) {
                     currentMarginTop += rect.thickness;
                     if (isFirstCol) {
                         multiPlacements.push({
-                            seg: resliceSeg(seg, rect.spanStart, rect.spanEnd, cells),
+                            seg: resliceSeg(seg, rect.span.start, rect.span.end, cells),
                             isVisible: true,
                             isAbsolute: true,
                             absoluteTop: rect.levelCoord,
@@ -12196,7 +12229,7 @@ var FullCalendar = (function (exports) {
                 }
                 else if (isFirstCol) {
                     multiPlacements.push({
-                        seg: resliceSeg(seg, rect.spanStart, rect.spanEnd, cells),
+                        seg: resliceSeg(seg, rect.span.start, rect.span.end, cells),
                         isVisible: true,
                         isAbsolute: false,
                         absoluteTop: 0,
@@ -12218,7 +12251,7 @@ var FullCalendar = (function (exports) {
         }
         for (var _i = 0, rects_3 = rects; _i < rects_3.length; _i++) {
             var rect = rects_3[_i];
-            for (var col = rect.spanStart; col < rect.spanEnd; col += 1) {
+            for (var col = rect.span.start; col < rect.span.end; col += 1) {
                 rectsByEachCol[col].push(rect);
             }
         }
@@ -12264,17 +12297,17 @@ var FullCalendar = (function (exports) {
         };
         DayGridSegHierarchy.prototype.handleInvalidInsertion = function (insertion, entry, hiddenEntries) {
             var _a = this, entriesByLevel = _a.entriesByLevel, forceHidden = _a.forceHidden;
-            var level = insertion.nextLevel - 1;
-            if (this.hiddenConsumes && level >= 0) {
+            var touchingLevel = insertion.touchingLevel;
+            if (this.hiddenConsumes && touchingLevel >= 0) {
                 for (var lateral = insertion.lateralStart; lateral < insertion.lateralEnd; lateral += 1) {
-                    var leadingEntry = entriesByLevel[level][lateral];
+                    var leadingEntry = entriesByLevel[touchingLevel][lateral];
                     if (this.allowReslicing) {
-                        var placeholderEntry = __assign(__assign({}, leadingEntry), { spanStart: Math.max(leadingEntry.spanStart, entry.spanStart), spanEnd: Math.min(leadingEntry.spanEnd, entry.spanEnd) });
+                        var placeholderEntry = __assign(__assign({}, leadingEntry), { span: intersectSpans(leadingEntry.span, entry.span) });
                         var placeholderEntryId = buildEntryKey(placeholderEntry);
-                        if (!forceHidden[placeholderEntryId]) {
+                        if (!forceHidden[placeholderEntryId]) { // if not already hidden
                             forceHidden[placeholderEntryId] = true;
-                            entriesByLevel[level][lateral] = placeholderEntry;
-                            this.splitEntry(leadingEntry, entry, hiddenEntries); // split up the leadingEntry
+                            entriesByLevel[touchingLevel][lateral] = placeholderEntry; // replace leadingEntry with our placeholder
+                            this.splitEntry(leadingEntry, entry, hiddenEntries); // split up the leadingEntry, reinsert it
                         }
                     }
                     else {
@@ -13226,7 +13259,7 @@ var FullCalendar = (function (exports) {
     }
 
     // segInputs assumed sorted
-    function computeFgSegPlacements(segInputs, strictOrder, maxStackCnt) {
+    function buildPositioning(segInputs, strictOrder, maxStackCnt) {
         var hierarchy = new SegHierarchy();
         if (strictOrder != null) {
             hierarchy.strictOrder = strictOrder;
@@ -13291,12 +13324,12 @@ var FullCalendar = (function (exports) {
         for (; level < levelCnt; level += 1) {
             var entries = entriesByLevel[level];
             var entry = void 0;
-            var searchIndex = binarySearch(entries, subjectEntry.spanStart, getEntrySpanEnd);
+            var searchIndex = binarySearch(entries, subjectEntry.span.start, getEntrySpanEnd);
             var lateralStart = searchIndex[0] + searchIndex[1]; // if exact match (which doesn't collide), go to next one
             var lateralEnd = lateralStart;
             while ( // loop through entries that horizontally intersect
             (entry = entries[lateralEnd]) && // but not past the whole seg list
-                entry.spanStart < subjectEntry.spanEnd) {
+                entry.span.start < subjectEntry.span.end) {
                 lateralEnd += 1;
             }
             if (lateralStart < lateralEnd) {
@@ -13369,6 +13402,57 @@ var FullCalendar = (function (exports) {
         };
     }
 
+    function computeSegVCoords(segs, colDate, slatCoords, eventMinHeight) {
+        if (slatCoords === void 0) { slatCoords = null; }
+        if (eventMinHeight === void 0) { eventMinHeight = 0; }
+        var vcoords = [];
+        if (slatCoords) {
+            for (var i = 0; i < segs.length; i += 1) {
+                var seg = segs[i];
+                var spanStart = slatCoords.computeDateTop(seg.start, colDate);
+                var spanEnd = Math.max(spanStart + (eventMinHeight || 0), // :(
+                slatCoords.computeDateTop(seg.end, colDate));
+                vcoords.push({
+                    start: Math.round(spanStart),
+                    end: Math.round(spanEnd), //
+                });
+            }
+        }
+        return vcoords;
+    }
+    function computeFgSegPlacements(segs, segVCoords, // might not have for every seg
+    eventOrderStrict, eventMaxStack) {
+        var segInputs = [];
+        var dumbSegs = []; // segs without coords
+        for (var i = 0; i < segs.length; i += 1) {
+            var vcoords = segVCoords[i];
+            if (vcoords) {
+                segInputs.push({
+                    index: i,
+                    thickness: 1,
+                    span: vcoords,
+                });
+            }
+            else {
+                dumbSegs.push(segs[i]);
+            }
+        }
+        var _a = buildPositioning(segInputs, eventOrderStrict, eventMaxStack), segRects = _a.segRects, hiddenGroups = _a.hiddenGroups;
+        var segPlacements = [];
+        for (var _i = 0, segRects_1 = segRects; _i < segRects_1.length; _i++) {
+            var segRect = segRects_1[_i];
+            segPlacements.push({
+                seg: segs[segRect.index],
+                rect: segRect,
+            });
+        }
+        for (var _b = 0, dumbSegs_1 = dumbSegs; _b < dumbSegs_1.length; _b++) {
+            var dumbSeg = dumbSegs_1[_b];
+            segPlacements.push({ seg: dumbSeg, rect: null });
+        }
+        return { segPlacements: segPlacements, hiddenGroups: hiddenGroups };
+    }
+
     var DEFAULT_TIME_FORMAT$1 = createFormatter({
         hour: 'numeric',
         minute: '2-digit',
@@ -13410,9 +13494,9 @@ var FullCalendar = (function (exports) {
         function TimeCol() {
             var _this = _super !== null && _super.apply(this, arguments) || this;
             _this.sortEventSegs = memoize(sortEventSegs);
-            _this.computeFgSegPlacements = memoize(computeFgSegPlacements); // only for non-print, non-mirror
             return _this;
         }
+        // TODO: memoize event-placement?
         TimeCol.prototype.render = function () {
             var _this = this;
             var _a = this, props = _a.props, context = _a.context;
@@ -13432,7 +13516,7 @@ var FullCalendar = (function (exports) {
                         _this.renderFillSegs(props.businessHourSegs, 'non-business'),
                         _this.renderFillSegs(props.bgEventSegs, 'bg-event'),
                         _this.renderFillSegs(props.dateSelectionSegs, 'highlight')),
-                    createElement("div", { className: "fc-timegrid-col-events" }, _this.renderFgSegs(sortedFgSegs, interactionAffectedInstances)),
+                    createElement("div", { className: "fc-timegrid-col-events" }, _this.renderFgSegs(sortedFgSegs, interactionAffectedInstances, false, false, false)),
                     createElement("div", { className: "fc-timegrid-col-events" }, _this.renderFgSegs(mirrorSegs, {}, Boolean(props.eventDrag), Boolean(props.eventResize), Boolean(isSelectMirror))),
                     createElement("div", { className: "fc-timegrid-now-indicator-container" }, _this.renderNowIndicator(props.nowIndicatorSegs)),
                     createElement(TimeColMisc, { date: props.date, dateProfile: props.dateProfile, todayRange: props.todayRange, extraHookProps: props.extraHookProps })))); }));
@@ -13442,68 +13526,46 @@ var FullCalendar = (function (exports) {
             if (props.forPrint) {
                 return renderPlainFgSegs(sortedFgSegs, props);
             }
-            if (props.slatCoords) {
-                return this.renderPositionedFgSegs(sortedFgSegs, segIsInvisible, isDragging, isResizing, isDateSelecting);
-            }
-            return null;
+            return this.renderPositionedFgSegs(sortedFgSegs, segIsInvisible, isDragging, isResizing, isDateSelecting);
         };
         TimeCol.prototype.renderPositionedFgSegs = function (segs, // if not mirror, needs to be sorted
         segIsInvisible, isDragging, isResizing, isDateSelecting) {
             var _this = this;
-            var _a = this.context.options, eventMaxStack = _a.eventMaxStack, eventShortHeight = _a.eventShortHeight, eventOrderStrict = _a.eventOrderStrict;
-            var _b = this.props, eventSelection = _b.eventSelection, todayRange = _b.todayRange, nowDate = _b.nowDate;
+            var _a = this.context.options, eventMaxStack = _a.eventMaxStack, eventShortHeight = _a.eventShortHeight, eventOrderStrict = _a.eventOrderStrict, eventMinHeight = _a.eventMinHeight;
+            var _b = this.props, date = _b.date, slatCoords = _b.slatCoords, eventSelection = _b.eventSelection, todayRange = _b.todayRange, nowDate = _b.nowDate;
             var isMirror = isDragging || isResizing || isDateSelecting;
-            var segInputs = this.buildSegInputs(segs);
-            var _c = isMirror ? computeFgSegPlacements(segInputs) : // don't use memoized
-                this.computeFgSegPlacements(segInputs, eventOrderStrict, eventMaxStack), segRects = _c.segRects, hiddenGroups = _c.hiddenGroups;
+            var segVCoords = computeSegVCoords(segs, date, slatCoords, eventMinHeight);
+            var _c = computeFgSegPlacements(segs, segVCoords, eventOrderStrict, eventMaxStack), segPlacements = _c.segPlacements, hiddenGroups = _c.hiddenGroups;
             return (createElement(Fragment, null,
                 this.renderHiddenGroups(hiddenGroups, segs),
-                segRects.map(function (segRect) {
-                    var seg = segs[segRect.segInput.index];
+                segPlacements.map(function (segPlacement) {
+                    var seg = segPlacement.seg, rect = segPlacement.rect;
                     var instanceId = seg.eventRange.instance.instanceId;
-                    var positionCss = __assign(__assign({}, _this.computeSegTopBottomCss(segRect.segInput)), (isMirror ? { left: 0, right: 0 } : _this.computeSegLeftRightCss(segRect)));
-                    return (createElement("div", { className: 'fc-timegrid-event-harness' + (segRect.stackForward > 0 ? ' fc-timegrid-event-harness-inset' : ''), key: instanceId, style: __assign({ visibility: segIsInvisible[instanceId] ? 'hidden' : '' }, positionCss) },
-                        createElement(TimeColEvent, __assign({ seg: seg, isDragging: isDragging, isResizing: isResizing, isDateSelecting: isDateSelecting, isSelected: instanceId === eventSelection, isShort: (segRect.spanEnd - segRect.spanStart) < eventShortHeight }, getSegMeta(seg, todayRange, nowDate)))));
+                    var isVisible = isMirror || Boolean(!segIsInvisible[instanceId] && rect);
+                    var vStyle = computeSegVStyle(rect && rect.span);
+                    var hStyle = (!isMirror && rect) ? _this.computeSegHStyle(rect) : { left: 0, right: 0 };
+                    var isInset = Boolean(rect) && rect.stackForward > 0;
+                    var isShort = Boolean(rect) && (rect.span.end - rect.span.start) < eventShortHeight; // look at other places for this problem
+                    return (createElement("div", { className: 'fc-timegrid-event-harness' +
+                            (isInset ? ' fc-timegrid-event-harness-inset' : ''), key: instanceId, style: __assign(__assign({ visibility: isVisible ? '' : 'hidden' }, vStyle), hStyle) },
+                        createElement(TimeColEvent, __assign({ seg: seg, isDragging: isDragging, isResizing: isResizing, isDateSelecting: isDateSelecting, isSelected: instanceId === eventSelection, isShort: isShort }, getSegMeta(seg, todayRange, nowDate)))));
                 })));
         };
         // will already have eventMinHeight applied because segInputs already had it
         TimeCol.prototype.renderHiddenGroups = function (hiddenGroups, segs) {
-            var _this = this;
             var _a = this.props, extraDateSpan = _a.extraDateSpan, dateProfile = _a.dateProfile, todayRange = _a.todayRange, nowDate = _a.nowDate, eventSelection = _a.eventSelection, eventDrag = _a.eventDrag, eventResize = _a.eventResize;
             return (createElement(Fragment, null, hiddenGroups.map(function (hiddenGroup) {
-                var positionCss = _this.computeSegTopBottomCss(hiddenGroup);
+                var positionCss = computeSegVStyle(hiddenGroup.span);
                 var hiddenSegs = compileSegsFromEntries(hiddenGroup.entries, segs);
                 return (createElement(TimeColMoreLink, { key: buildIsoString(computeEarliestSegStart(hiddenSegs)), hiddenSegs: hiddenSegs, top: positionCss.top, bottom: positionCss.bottom, extraDateSpan: extraDateSpan, dateProfile: dateProfile, todayRange: todayRange, nowDate: nowDate, eventSelection: eventSelection, eventDrag: eventDrag, eventResize: eventResize }));
             })));
         };
-        TimeCol.prototype.buildSegInputs = function (segs) {
-            var _a = this.props, date = _a.date, slatCoords = _a.slatCoords;
-            var eventMinHeight = this.context.options.eventMinHeight;
-            var segInputs = [];
-            for (var i = 0; i < segs.length; i += 1) {
-                var seg = segs[i];
-                var spanStart = slatCoords.computeDateTop(seg.start, date);
-                var spanEnd = Math.max(spanStart + (eventMinHeight || 0), // yuck
-                slatCoords.computeDateTop(seg.end, date));
-                segInputs.push({
-                    index: i,
-                    spanStart: Math.round(spanStart),
-                    spanEnd: Math.round(spanEnd),
-                    thickness: 1,
-                });
-            }
-            return segInputs;
-        };
         TimeCol.prototype.renderFillSegs = function (segs, fillType) {
-            var _this = this;
-            var props = this.props;
-            if (!props.slatCoords) {
-                return null;
-            }
-            var segInputs = this.buildSegInputs(segs);
-            var children = segInputs.map(function (segInput) {
-                var seg = segs[segInput.index];
-                return (createElement("div", { key: buildEventRangeKey(seg.eventRange), className: "fc-timegrid-bg-harness", style: _this.computeSegTopBottomCss(segInput) }, fillType === 'bg-event' ?
+            var _a = this, props = _a.props, context = _a.context;
+            var segVCoords = computeSegVCoords(segs, props.date, props.slatCoords, context.options.eventMinHeight); // don't assume all populated
+            var children = segVCoords.map(function (vcoords, i) {
+                var seg = segs[i];
+                return (createElement("div", { key: buildEventRangeKey(seg.eventRange), className: "fc-timegrid-bg-harness", style: computeSegVStyle(vcoords) }, fillType === 'bg-event' ?
                     createElement(BgEvent, __assign({ seg: seg }, getSegMeta(seg, props.todayRange, props.nowDate))) :
                     renderFill(fillType)));
             });
@@ -13518,17 +13580,11 @@ var FullCalendar = (function (exports) {
                 // key doesn't matter. will only ever be one
                 key: i }, function (rootElRef, classNames, innerElRef, innerContent) { return (createElement("div", { ref: rootElRef, className: ['fc-timegrid-now-indicator-line'].concat(classNames).join(' '), style: { top: slatCoords.computeDateTop(seg.start, date) } }, innerContent)); })); });
         };
-        TimeCol.prototype.computeSegTopBottomCss = function (segLike) {
-            return {
-                top: segLike.spanStart,
-                bottom: -segLike.spanEnd,
-            };
-        };
-        TimeCol.prototype.computeSegLeftRightCss = function (segRect) {
+        TimeCol.prototype.computeSegHStyle = function (segHCoords) {
             var _a = this.context, isRtl = _a.isRtl, options = _a.options;
             var shouldOverlap = options.slotEventOverlap;
-            var nearCoord = segRect.levelCoord; // the left side if LTR. the right side if RTL. floating-point
-            var farCoord = segRect.levelCoord + segRect.thickness; // the right side if LTR. the left side if RTL. floating-point
+            var nearCoord = segHCoords.levelCoord; // the left side if LTR. the right side if RTL. floating-point
+            var farCoord = segHCoords.levelCoord + segHCoords.thickness; // the right side if LTR. the left side if RTL. floating-point
             var left; // amount of space from left edge, a fraction of the total width
             var right; // amount of space from right edge, a fraction of the total width
             if (shouldOverlap) {
@@ -13544,11 +13600,11 @@ var FullCalendar = (function (exports) {
                 right = 1 - farCoord;
             }
             var props = {
-                zIndex: segRect.stackDepth + 1,
+                zIndex: segHCoords.stackDepth + 1,
                 left: left * 100 + '%',
                 right: right * 100 + '%',
             };
-            if (shouldOverlap && !segRect.stackForward) {
+            if (shouldOverlap && !segHCoords.stackForward) {
                 // add padding to the edge so that forward stacked events don't cover the resizer's icon
                 props[isRtl ? 'marginLeft' : 'marginRight'] = 10 * 2; // 10 is a guesstimate of the icon's width
             }
@@ -13567,8 +13623,17 @@ var FullCalendar = (function (exports) {
                 createElement(TimeColEvent, __assign({ seg: seg, isDragging: false, isResizing: false, isDateSelecting: false, isSelected: instanceId === eventSelection, isShort: false }, getSegMeta(seg, todayRange, nowDate)))));
         })));
     }
+    function computeSegVStyle(segVCoords) {
+        if (!segVCoords) {
+            return { top: '', bottom: '' };
+        }
+        return {
+            top: segVCoords.start,
+            bottom: -segVCoords.end,
+        };
+    }
     function compileSegsFromEntries(segEntries, allSegs) {
-        return segEntries.map(function (segEntry) { return allSegs[segEntry.segInput.index]; });
+        return segEntries.map(function (segEntry) { return allSegs[segEntry.index]; });
     }
 
     var TimeColsContent = /** @class */ (function (_super) {
@@ -13890,8 +13955,7 @@ var FullCalendar = (function (exports) {
     };
 
     var timeGridPlugin = createPlugin({
-        // 기본적으로 오늘 날짜 뿌려주기
-        initialView: new Date(),
+        initialView: 'timeGridWeek',
         optionRefiners: OPTION_REFINERS$2,
         views: {
             timeGrid: {
@@ -13967,7 +14031,7 @@ var FullCalendar = (function (exports) {
                 buildTimeContent(seg, timeFormat, context),
                 createElement("td", { className: "fc-list-event-graphic" },
                     createElement("span", { className: "fc-list-event-dot", style: { borderColor: hookProps.borderColor || hookProps.backgroundColor } })),
-                createElement("td", { className: "fc-list-event-title", ref: innerElRef }, innerContent))); }));
+                createElement("td", { className: "fc-list-event-title", ref: innerElRef }, innerContent ))); }));
         };
         return ListViewEventRow;
     }(BaseComponent));
@@ -14574,6 +14638,7 @@ var FullCalendar = (function (exports) {
     exports.interactionSettingsToStore = interactionSettingsToStore;
     exports.intersectRanges = intersectRanges;
     exports.intersectRects = intersectRects;
+    exports.intersectSpans = intersectSpans;
     exports.isArraysEqual = isArraysEqual;
     exports.isColPropsEqual = isColPropsEqual;
     exports.isDateSelectionValid = isDateSelectionValid;
@@ -14584,6 +14649,7 @@ var FullCalendar = (function (exports) {
     exports.isPropsEqual = isPropsEqual;
     exports.isPropsValid = isPropsValid;
     exports.isValidDate = isValidDate;
+    exports.joinSpans = joinSpans;
     exports.listenBySelector = listenBySelector;
     exports.mapHash = mapHash;
     exports.memoize = memoize;

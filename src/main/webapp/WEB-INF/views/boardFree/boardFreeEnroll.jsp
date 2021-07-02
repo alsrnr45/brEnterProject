@@ -104,7 +104,7 @@
 	                        <form id="boardFreeEnrollForm" method="post" action="insertBoardFree.bf" enctype="multipart/form-data">
 	                            
 	                            <div style="margin-left:870px;">
-	                                <button type="submit" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
+	                                <button type="submit" onclick="return validate()" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
 	                                    등록하기</button>
 	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray;">목록으로</a>
 	                            </div><br><br>
@@ -145,6 +145,35 @@
     
     
     <script>
+    
+ 		// 글등록 유효성 체크
+    	function validate(){
+    	
+	    	var summernote = document.getElementById("summernote");
+	    	var regExp = /[\S+$]/; // 공백을 제외한 모든 문자로 1글자 이상 등록
+    	   	
+	    	if(!regExp.test(summernote.value)){
+	    		alert("내용을 입력해주세요.");
+	    	
+	    		summernote.value="";
+	    		summernote.focus();
+	    		
+	    		return false;
+	    	}
+	    	
+	
+	    	var result = confirm("게시글을 등록하시겠습니까?");
+	    	if(result){
+	    		//alert("게시글이 등록되었습니다.");
+	    		
+	    	} else {
+	    		alert("게시글 등록이 취소되었습니다.");
+	    		return false;
+	    	}       
+	    
+	    }
+    
+       
         // 썸머노트
         $(document).ready(function() {
             $('#summernote').summernote({

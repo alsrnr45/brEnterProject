@@ -127,8 +127,8 @@
 							
 							
 							<c:if test="${ loginUser.id eq bf.memNo }">	
-	                            <div class="boardFreeBtn" style="margin-left:780px;">
-	                                <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
+							
+	                            <div class="boardFreeBtn" style="margin-left:780px;">   
 	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
 	                                수정하기</a>
 	                                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
@@ -137,7 +137,6 @@
 	                            <form id="postForm" action="" method="post">
 		                            <input type="hidden" name="bfno" value="${ bf.freeNo }">
 		                            <input type="hidden" name="filePath" value="${ bf.freeFileUpdate }"> 
-	                            	<!-- 첨부파일 존재 o : "파일 경로" / 첨부파일 존재 x : "" -->
 	                            </form>
 								
 								<script>
@@ -145,10 +144,19 @@
 					            		if(num == 1){ // 수정하기 클릭 시 
 					            			$("#postForm").attr("action", "updateBoardFreeForm.bf").submit();
 					            		}else { // 삭제하기 클릭 시 
-					            			$("#postForm").attr("action", "").submit();  
+					            			var result = confirm("게시글을 삭제하시겠습니까?"); 
+					            			if(result){
+					            				$("#postForm").attr("action", "deleteBoardFree.bf").submit();
+					            				return true;   
+					            			} else{
+					            				alert("삭제가 취소되었습니다.")
+					            				return false; 
+					            			}
+					            			
 					            		}
 					            	}
 					            </script>
+					            
 				            </c:if>
                         </div>
 

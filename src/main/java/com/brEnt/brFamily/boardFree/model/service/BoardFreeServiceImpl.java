@@ -70,6 +70,13 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	}
 
 	
+	// 자유게시판 삭제
+	@Override
+	public int deleteBoardFree(int freeNo) {
+		return bfDao.deleteBoardFree(sqlSession, freeNo); 
+	}
+
+	
 	
 	
 	

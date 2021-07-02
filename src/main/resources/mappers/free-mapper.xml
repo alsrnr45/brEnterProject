@@ -106,12 +106,22 @@
   	</update>
 	
 	
+	<!-- 자유게시판 삭제 -->
+	<update id="deleteBoardFree" parameterType="_int">
+  		update 
+  			   free_board 
+  		   set free_status = 'N' 
+  		 where free_no = #{freeNo} 
+  	</update>
 	
 	
+	<!-- 댓글 리스트 조회 -->
 	
+	<!-- 댓글 작성 -->
 	
+	<!-- 댓글 수정 -->
 	
-	
+	<!-- 댓글 삭제 -->
 	
 	
 	

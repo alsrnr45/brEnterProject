@@ -198,9 +198,32 @@ public class BoardFreeController {
 	
 	
 	// 자유게시판 삭제 
-
-
+	@RequestMapping("deleteBoardFree.bf")
+	public String deleteBoardFree(int bfno, String filePath, 
+				  				  HttpSession session, Model model) {
+			// filePath : 첨부파일 존재했다면 	  "resources/freeUpfiles/xxxxxx.pdf" 
+			// filePath : 첨부파일 존재하지 않았다면 "" 
 	
+		int result = bfService.deleteBoardFree(bfno); 
+	
+		if(result > 0) {
+	
+			// 첨부파일이 있을 경우 => 서버에 업로드된 파일 찾아서 삭제 
+			if(!filePath.equals("")) {
+				new File(session.getServletContext().getRealPath(filePath)).delete(); 
+			}
+			
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:boardFreeList.bf"; 
+	
+		}else { 
+		
+			model.addAttribute("errorMsg", "게시글 삭제 실패"); 
+			return "common/errorPage";
+
+		}
+	
+	}
 	
 	
 	

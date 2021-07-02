@@ -32,6 +32,9 @@ public interface BoardFreeService {
 	int updateBoardFree(BoardFree bf); 
 	
 	
+	// 자유게시판 삭제
+	int deleteBoardFree(int freeNo);
+	
 	
 	
 }

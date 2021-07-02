@@ -54,6 +54,10 @@ public class BoardFreeDao {
 	}
 	
 	
+	// 자유게시판 삭제 
+	public int deleteBoardFree(SqlSessionTemplate sqlSession, int freeNo) { 
+		return sqlSession.update("boardFreeMapper.deleteBoardFree", freeNo); 
+	}
 	
 	
 	

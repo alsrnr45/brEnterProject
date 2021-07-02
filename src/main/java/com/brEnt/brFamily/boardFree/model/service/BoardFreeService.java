@@ -36,5 +36,4 @@ public interface BoardFreeService {
 	int deleteBoardFree(int freeNo);
 	
 	
-	
 }

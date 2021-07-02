@@ -5,11 +5,14 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.member.model.vo.Dept;
+import com.brEnt.brFamily.member.model.vo.Member;
+import com.google.gson.Gson;
 
 @Controller
 public class ElecApprovalController {
@@ -87,10 +90,15 @@ public class ElecApprovalController {
    // 작성자 : 안소은 -- 지출결의서 폼
    @RequestMapping("expenseForm.ea")
    public ModelAndView expenseForm(ModelAndView mv) {
+	   
 	   ArrayList<Dept> list = eaService.selectDept();
-	   System.out.println(list);
+	   //System.out.println(list);
 	   mv.addObject("list", list)
 	   	 .setViewName("elecApproval/expenseForm");
+	   
+	   ArrayList<Member> mlist = eaService.selectMember();
+	   mv.addObject("mlist", mlist)
+	     .setViewName("elecApproval/expenseForm");
 	   
 	   return mv;
 	   
@@ -101,7 +109,14 @@ public class ElecApprovalController {
    public String expenseDetail() {
 	   return "elecApproval/expenseDetail";
    }
-
+   
+   // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
+   @ResponseBody
+   @RequestMapping("memberList.ea")
+   public String ajaxSelectMember(int memNo) {
+	   System.out.println(memNo);
+	   return new Gson().toJson(eaService.selectMemberList(memNo));
+   }
   
    
    

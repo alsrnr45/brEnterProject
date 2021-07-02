@@ -257,22 +257,13 @@
                             <div class="signModalOuter">
                                 <div class="modal1">
                                 	<c:forEach var="dept" items="${ list }">
-                                			<ul>${ dept.deptName }</ul>
+                                			<ul onclick="dept();">${ dept.deptName }(${ mList.mem_count })</ul>
                                     </c:forEach>
                                 </div>
                                 <div class="modal2">
-                                    <ul>안소은(사원)</ul>
-                                    <ul>김혜미(팀장)</ul>
-                                    <ul>최선희(사원)</ul>
-                                    <ul>딩딩딩(팀장)</ul>
-                                    <ul>댕댕댕(사원)</ul>
-                                    <ul>동동동(사원)</ul>
-                                    <ul>뿌바부(사원)</ul>
-                                    <ul>키키키(사원)</ul>
-                                    <ul>하하하(사원)</ul>
-                                    <ul>하하하(사원)</ul>
-                                    <ul>하하하(사원)</ul>
-                                    <ul>하하하(사원)</ul>
+                                	<c:forEach var="mem" items="${ mlist }">
+                                    	<ul onclick="deptName();">${ mem.memName }(${ mem.posiName })</ul>
+                                    </c:forEach>
                                 </div>
                                 <div class="modal3">
                                     <button class="btn btn-primary"> > </button>
@@ -303,11 +294,23 @@
                                 </div>
                             </div>    
                         </div>
-                        
-                        <!-- 결재선 ajax -->
+                        /*
+                        <!-- 결재선 ajax 
                         <script type="text/javascript">
-                        	
+                        	function deptName(){
+                                $.ajax({
+                                    url:"memberList.ea",
+                                    data:{memNo : ${mem.memNo}},
+                                    success:function(memNo){
+                                        alert(memNo);
+                                    },error:function(){
+                                        console.log("실패");
+                                    }
+                                });
+                            }
                         </script>
+                        -->
+                        
                     </div>
                     </div>
                 </div>

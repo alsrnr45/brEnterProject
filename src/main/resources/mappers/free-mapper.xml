@@ -70,4 +70,59 @@
   	</select>
 	
 	
+	<!-- 자유게시판 작성 -->
+	<insert id="insertBoardFree" parameterType="boardFree">
+  		insert
+  		  into free_board 
+  		  (
+  		    free_no
+  		  , free_title
+  		  , mem_no
+  		  , free_cnt 
+  		  , free_file_origin
+  		  , free_file_update 
+  		  )
+  		  values
+  		  ( 
+  		    seq_frno.nextval 
+  		  , #{freeTitle}
+  		  , #{memNo}
+  		  , #{freeCnt}   		  
+  		  , #{freeFileOrigin}
+  		  , #{freeFileUpdate} 
+  		  )
+  	</insert>
+	
+	
+	<!-- 자유게시판 수정 -->
+	<update id="updateBoardFree" parameterType="boardFree">
+  		update
+  			   free_board
+  		   set free_title = #{freeTitle} 
+  		     , free_cnt = #{freeCnt} 
+  		     , free_file_origin = #{freeFileOrigin} 
+  		     , free_file_update = #{freeFileUpdate} 
+  		 where free_no = #{freeNo}     	   
+  	</update>
+	
+	
+	<!-- 자유게시판 삭제 -->
+	<update id="deleteBoardFree" parameterType="_int">
+  		update 
+  			   free_board 
+  		   set free_status = 'N' 
+  		 where free_no = #{freeNo} 
+  	</update>
+	
+	
+	<!-- 댓글 리스트 조회 -->
+	
+	<!-- 댓글 작성 -->
+	
+	<!-- 댓글 수정 -->
+	
+	<!-- 댓글 삭제 -->
+	
+	
+	
 </mapper>

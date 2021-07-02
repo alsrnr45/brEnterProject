@@ -141,11 +141,21 @@
     </div>
     
 	<script>
+	<%--
 	$(function() {
 	    $(".newMemberList>tbody>tr").click(function() {
-	        location.href ="newMemberDetail.admin";		<%--?bno=" + $(this).children(".bno").text();--%>
+	        location.href ="newMemberDetail.admin";
 	        console.log("신규사원클릭");
 		})
+	})
+	--%>
+	
+	$(function() {
+
+		$(document).on("click", ".newMemberList>tbody>tr", function(){
+			location.href ="newMemberDetail.admin?mno=" + $(this).children().eq(0).text();
+		});
+	
 	})
     </script>
     

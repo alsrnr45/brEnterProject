@@ -55,9 +55,27 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 		return bfDao.adminSelectBoardFree(sqlSession, freeNo);
 	}
 
+
+	// 자유게시판 작성
+	@Override
+	public int insertBoardFree(BoardFree bf) {
+		return bfDao.insertBoardFree(sqlSession, bf); 
+	}
+
 	
+	// 자유게시판 수정
+	@Override
+	public int updateBoardFree(BoardFree bf) {
+		return bfDao.updateBoardFree(sqlSession, bf);
+	}
+
 	
-	
+	// 자유게시판 삭제
+	@Override
+	public int deleteBoardFree(int freeNo) {
+		return bfDao.deleteBoardFree(sqlSession, freeNo); 
+	}
+
 	
 	
 	

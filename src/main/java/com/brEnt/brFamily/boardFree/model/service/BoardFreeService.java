@@ -24,7 +24,16 @@ public interface BoardFreeService {
 	BoardFree adminSelectBoardFree(int freeNo);
 	
 	
+	// 자유게시판 작성 
+	int	insertBoardFree(BoardFree bf); 
 	
+	
+	// 자유게시판 수정
+	int updateBoardFree(BoardFree bf); 
+	
+	
+	// 자유게시판 삭제
+	int deleteBoardFree(int freeNo);
 	
 	
 }

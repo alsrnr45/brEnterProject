@@ -95,9 +95,9 @@
                             <table align="center">
                                 <tr>
                                     <th><label for="userName">사원명</label></th>
-                                    <td><input type="text" id="userName" class="form-control" name="" value="햄토리" required></td>
+                                    <td><input type="text" id="userName" class="form-control" name="" value="${ m.memName }" required></td>
                                     <th><label for="userNo">사원번호</label></th>
-                                    <td><input type="text" id="userNo" class="form-control" name="" value="150" readonly></td>
+                                    <td><input type="text" id="userNo" class="form-control" name="" value="${ m.memNo }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="deptName">부서명</label></th>
@@ -107,7 +107,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="phnoe">연락처</label></th>
-                                    <td><input type="text" id="phnoe" class="form-control" name="" value="010-2574-2864" required></td>
+                                    <td><input type="text" id="phnoe" class="form-control" name="" value="${ m.phone }" required></td>
                                     <th><label for="hireDate">입사일</label></th>
                                     <td><input type="text" id="hireDate" class="form-control" name="" value="" required></td>
                                     
@@ -118,37 +118,37 @@
                                         <div class="input-group mb-3">
                                             <input type="text" id="account" class="form-control" name="" value="" style="width: 100px;" required>
                                             <div class="input-group-append">
-                                                <span class="input-group-text">보람은행</span>
+                                                <span class="input-group-text">${ m.bank }</span>
                                             </div>
                                         </div>
                                     </td>
                                     <th><label for="regi">주민등록번호</label></th>
-                                    <td colspan="3"><input type="text" id="regi" class="form-control" name="" value="010101-2345678" required></td>
+                                    <td colspan="3"><input type="text" id="regi" class="form-control" name="" value="${ m.regi }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="officeEmail">사내이메일</label></th>
-                                    <td><input type="text" id="officeEmail" class="form-control" name="" value="hamster@br.com" required></td>
+                                    <td><input type="text" id="officeEmail" class="form-control" name="" value="${ m.officeEmail }" required></td>
                                     <th><label for="personalEmail">개인이메일</label></th>
-                                    <td><input type="text" id="personalEmail" class="form-control" name="" value="hamster@gamil.com" required></td>
+                                    <td><input type="text" id="personalEmail" class="form-control" name="" value="${ m.personalEmail }" required></td>
                                 </tr><tr>
                                     <th><label for="address">주소</label></th>
-                                    <td><input type="text" id="address" class="form-control" name="" value="06234" required></td>
+                                    <td><input type="text" id="address" class="form-control" name="" value="${ m.post }" required></td>
                                     <td style="padding-left: 7px;"><button class="btn btn-secondary">주소검색</button></td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <th><label for=""></label></th>
-                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="서울 강남구 테헤란로14길 6 (역삼동) 남도빌딩" required></td>
+                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="${ m.roadAddress }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for=""></label></th>
-                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="1층" required></td>
+                                    <td colspan="3"><input type="text" id="address" class="form-control" name="" value="${ m.detailAddress }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="enrollDate">가입신청일</label></th>
-                                    <td><input type="text" id="enrollDate" class="form-control" name="" value="2021.06.07" required></td>
+                                    <td><input type="text" id="enrollDate" class="form-control" name="" value="${ m.memEnrollDate }" required></td>
                                     <th><label for="acceptStatus">승인여부</label></th>
-                                    <td><input type="text" id="acceptStatus" class="form-control" name="" value="N" required></td>
+                                    <td><input type="text" id="acceptStatus" class="form-control" name="" value="${ m.acceptStatus }" required></td>
                                 </tr>
                             </table>
 

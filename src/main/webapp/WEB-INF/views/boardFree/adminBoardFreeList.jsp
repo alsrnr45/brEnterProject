@@ -83,33 +83,35 @@
                             &nbsp; 게시판 관리 > 자유게시판
                             </div>
                             
-                            <div class="card-body">
-                                <table id="datatablesSimple" class="adminBoardFreeList">
-                                    <thead>
-                                        <tr>
-                                            <th><input type="checkbox" id="checkEc"></th>
-                                            <th style="text-align:center;">번호</th>
-                                            <th style="text-align:center;">제목</th>
-                                            <th style="text-align:center;">작성자</th>
-                                            <th style="text-align:center;">조회수</th>
-                                            <th style="text-align:center;">작성일</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    	<c:forEach var="bf" items="${ list }">
-	                                    	<tr>
-	                                       		<th><input type="checkbox" id="checkEc"></td>
-	                                       	    <td class="bfno">${ bf.freeNo }</td>
-	                                       	    <td>${ bf.freeTitle }</td>
-	                                       	    <td>${ bf.memNo }</td>
-	                                       	    <td>${ bf.freeCount }</td>
-	                                       	    <td>${ bf.freeEnrolldate }</td>
-	                                       	</tr>
-	                                	</c:forEach>
-                                    </tbody>
-                                    <button type="submit" class="btn btn-danger" style="float:left;">선택삭제</button> 
-                                </table> 
-                            </div>
+                            <form id="deleteBoardFree" method="post" >
+	                            <div class="card-body">
+	                                <table id="datatablesSimple" class="adminBoardFreeList">
+	                                    <thead>
+	                                        <tr>
+	                                            <th><input type="checkbox"></th>
+	                                            <th style="text-align:center;">번호</th>
+	                                            <th style="text-align:center;">제목</th>
+	                                            <th style="text-align:center;">작성자</th>
+	                                            <th style="text-align:center;">조회수</th>
+	                                            <th style="text-align:center;">작성일</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                    	<c:forEach var="bf" items="${ list }">
+		                                    	<tr>
+		                                       		<th><input type="checkbox" name="bfno" id="bfno" value="${ bf.freeNo }"></th>
+		                                       	    <td>${ bf.freeNo }</td>
+		                                       	    <td>${ bf.freeTitle }</td>
+		                                       	    <td>${ bf.memNo }</td>
+		                                       	    <td>${ bf.freeCount }</td>
+		                                       	    <td>${ bf.freeEnrolldate }</td>
+		                                       	</tr>
+		                                	</c:forEach>
+	                                    </tbody>
+	                                    <button type="submit" onclick="return check();" class="btn btn-danger" style="float:left;">선택 삭제</button> 
+	                                </table> 
+	                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -126,6 +128,26 @@
         		location.href ="adminBoardFreeDetail.bf?bfno=" + $(this).siblings().eq(1).text();
      		});
 		}); 
+    	
+    	
+    	function check(){    		
+    		if($("input:checkbox[id='bfno']").is(":checked") == true) {
+     				var result = confirm("선택한 게시글을 삭제하시겠습니까?");
+         			if(result){
+         				$("#deleteBoardFree").attr("action", "adminDeleteBoardFree.bf").submit(); 
+         				
+                    } else {
+                    	alert("삭제가 취소되었습니다");
+                    	return false;
+                    }
+         			
+         	//체크박스 선택 안하고 삭제 누를 시 알람 띄우기		
+     		} else { 
+     			alert("게시글을 선택해주세요.");
+     			return false;
+     		}
+     				
+		}
    	</script>
     
     

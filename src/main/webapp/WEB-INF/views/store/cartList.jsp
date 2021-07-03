@@ -49,24 +49,14 @@
 	/* 장바구니 목록 있을때 */
 	    
 	/* 테이블 */    
-	.cartOuter {
-		margin:auto;	
-	}  
+	.cartOuter {margin:auto;}  
 	.table-light, .trOne {
 		font-size:0.875em;
 	}
-	.productInfo {
-		width: 60%;
-	}
-	.amount {
-		width: 27%;
-	}
-	.productPrice {
-		width: 15%;
-	}
-	.productImg {
-		width:10%;
-	}
+	.productInfo {width: 60%;}
+	.amount {width: 27%;}
+	.productPrice {width: 15%;}
+	.productImg {width:10%;}
 	.originalPrice {
 		color:gray;
 		text-decoration: line-through;
@@ -89,9 +79,7 @@
 		position:relative;
 		bottom:13px;
 	}
-	.btns {
-		padding:0 0 0 250px;
-	}
+	.btns {padding:0 0 0 250px;}
 	.orderBtn, .storeBtn {
 		border: 15px solid rgb(155, 89, 182);
 		background-color: rgb(155, 89, 182);
@@ -101,15 +89,11 @@
 		font-size:0.875em;
 		font-weight:bold;
 	}
-	a:hover {
-		color:black;
-	}
+	a:hover {color:black;}
 	
 	/*장바구니 목록 없을때*/
 	
-	.cartNoOuter {
-		margin:auto;
-	}
+	.cartNoOuter {margin:auto;}
 	
 	/*아이콘*/
 	.cartIconOuter {
@@ -155,89 +139,93 @@
 <body class="sb-nav-fixed">
    <!-- 상단바 -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<jsp:include page="userHeader.jsp"/>
+		<jsp:include page="../common/userHeader.jsp"/>
     </nav>
     
     <div id="layoutSidenav">
         
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
-            <jsp:include page="userMenu.jsp"/>
+            <jsp:include page="../common/userMenu.jsp"/>
         </div>
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
-            <!-- 장바구니 상품 있을 때 보여질 화면 -->
-          	<div class="cartOuter">
-	        	<form name="cartList" id="cartList" method="post" action="#">
-	        		<table class="table">
-	        			<thead class="table-light">
-	        				<tr>
-	        					<th></th>
-	        					<th class="productInfo">상품정보</th>
-	        					<th class="amount">수량</th>
-								<th class="productPrice">상품금액</th>		
-	        				</tr>
-	        			</thead>
-	        			<tbody>
-	        				<tr class="trOne">
-	        					<td>
-	        						<label><input type="checkbox" name="cartProduct" value="product"></label>
-	        					</td>
-	        					<td>
-	        						<p><img src="resources/images/peng.png" align="left" class="productImg">&nbsp;자바소년단 포토카드</p>
-	        					</td>
-	        					<td>2</td>
-	        					<td>
-	        						<div class="originalPrice"> 5,000 원 </div>
-	        						<div> 4,000 원 </div>
-	        					</td>
-	        				</tr>
-	        				<tr>
-	        					<td colspan="4">
-	        						<div class="priceInfo">
-	        							<div>총 상품 금액 : &nbsp;95,000 원</div>
-	        							<div>직원 할인가 : &nbsp;&nbsp;76,000 원</div>
-	        							<br>
-	        							<div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;76,000 원</div>
-	        						</div> 
-	        					</td>	
-	        				</tr>
-	        			</tbody>
-	        		</table>
-	        			<div>
-	        				<button type="submit" class="deleteBtn">선택상품 삭제</button>
-	        			</div>
-	        	</form>
+            <!-- 장바구니 상품없을때 보여질 화면 -->
+	        <c:choose>
+	        	<c:when test="">
+	        		<div class="cartNoOuter">
+	        			<div class="cartIconOuter">
+	        				<div class="cartIcon">
+	        					<div class="fas fa-shopping-cart" id="shopping-cart"></div>
+						    </div>
+				        </div>
+			 
+				    	<div>
+				    		<h3>장바구니에 담긴 상품이 없습니다.</h3>
+				        	<h5 class="cartText">원하는 상품을 장바구니에 담아보세요!</h5>
+				        </div>
+				        
+				        <div>
+				        	<a href="" class="storeBtn2">스토어가기</a>
+				        </div>
+					</div>
+		        </c:when>	
+		        
+	            <c:otherwise>
+		            <!-- 장바구니 상품 있을 때 보여질 화면 -->
+		          	<div class="cartOuter">
+			        	<form name="cartList" id="cartList" method="post" action="cartList2.pro">
+			        		<table class="table">
+			        			<thead class="table-light">
+			        				<tr>
+			        					<th></th>
+			        					<th class="productInfo">상품정보</th>
+			        					<th class="amount">수량</th>
+										<th class="productPrice">상품금액</th>		
+			        				</tr>
+			        			</thead>
+			        			<tbody>
+			        				<c:forEach var="" items="">
+			        				<tr class="trOne">
+			        					<td>
+			        						<label><input type="checkbox" name="cartProduct" value="product"></label>
+			        					</td>
+			        					<td>
+			        						<p><img src="resources/images/peng.png" align="left" class="productImg">&nbsp;자바소년단 포토카드</p>
+			        					</td>
+			        					<td>2</td>
+			        					<td>
+			        						<div class="originalPrice"> 5,000 원 </div>
+			        						<div> 4,000 원 </div>
+			        					</td>
+			        				</tr>
+			        				</c:forEach>
+			        				<tr>
+			        					<td colspan="4">
+			        						<div class="priceInfo">
+			        							<div>총 상품 금액 : &nbsp;95,000 원</div>
+			        							<div>직원 할인가 : &nbsp;&nbsp;76,000 원</div>
+			        							<br>
+			        							<div>결제금액 : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;76,000 원</div>
+			        						</div> 
+			        					</td>	
+			        				</tr>
+			        			</tbody>
+			        		</table>
+			        			<div>
+			        				<button type="submit" class="deleteBtn">선택상품 삭제</button>
+			        			</div>
+			        	</form>
+		        	</c:otherwise>
+	        	</c:choose>
 	        	
 	        	<div class="btns">
 	        		<a href="" class="orderBtn">주문하기</a>&nbsp;&nbsp;&nbsp;
 	        		<a href="" class="storeBtn">쇼핑 계속하기</a>
 	        	</div>
 	        </div> 
-	        
-	        
-	        
-	        <!-- 장바구니 상품없을때 보여질 화면 -->
-	        <!-- 
-	        <div class="cartNoOuter">
-	        	<div class="cartIconOuter">
-	        		<div class="cartIcon">
-			        	<div class="fas fa-shopping-cart" id="shopping-cart"></div>
-			    	</div>
-	        	</div>
-	        	
-		        <div>
-		        	<h3>장바구니에 담긴 상품이 없습니다.</h3>
-		        	<h5 class="cartText">원하는 상품을 장바구니에 담아보세요!</h5>
-		        </div>
-		        
-		        <div>
-		        	<a href="" class="storeBtn2">스토어가기</a>
-		        </div>
-	        </div>
-	        -->
 		      
         	</div>
     	</div>

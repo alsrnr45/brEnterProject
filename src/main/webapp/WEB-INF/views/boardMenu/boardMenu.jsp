@@ -72,14 +72,14 @@
 <body class="sb-nav-fixed">
    <!-- 상단바 -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<jsp:include page="userHeader.jsp"/>
+		<jsp:include page="../common/userHeader.jsp"/>
     </nav>
     
     <div id="layoutSidenav">
         
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
-            <jsp:include page="userMenu.jsp"/>
+            <jsp:include page="../common/userMenu.jsp"/>
         </div>
 
         <!--컨텐츠-->

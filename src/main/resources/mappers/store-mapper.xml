@@ -89,6 +89,26 @@
 		 where pdt_no = #{ pdtNo }
 	</select>
    
+   <!-- 작성자 : 박지은 - 장바구니 목록 조회 -->
+   <select id="cartList" parameterType="int" resultType="com.brEnt.brFamily.store.model.vo.Cart">
+   		select
+   			   c.cart_no as cartNo
+   			 , c.mem_no as memNo
+   			 , c.pdt_no as pdtNo
+   			 , c.pdt_count as pdtCount
+   			 , c.insert_date as insertDate
+   			 , p.pdt_ctg as pdtCtg
+   			 , p.pdt_file as pdtFile
+   			 , p.pdt_name as pdtName
+   			 , p.org_price as orgPrice
+   			 , p.mem_price as memPrice
+   			 , p.pdt_stock as pdtStock
+   			 , p.pdt_enrolldate as pdtEnrolldate
+   			 , p.pdt_status as pdtStatus
+		  from cart c, product p
+		 where c.pdt_no = p.pdt_no
+		   and c.mem_no = #{memNo}
+   </select>
    
 
 </mapper>

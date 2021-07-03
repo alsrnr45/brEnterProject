@@ -32,6 +32,7 @@
 		<typeAlias type="com.brEnt.brFamily.phoneBook.model.vo.PhoneBook" alias="PhoneBook"/>
 		<typeAlias type="com.brEnt.brFamily.schedule.model.vo.Schedule" alias="Schedule"/>
 		<typeAlias type="com.brEnt.brFamily.store.model.vo.Product" alias="Product"/>
+		<typeAlias type="com.brEnt.brFamily.store.model.vo.Cart" alias="Cart"/>
 	</typeAliases>
 	
 	<!-- mapper파일 등록 -->

@@ -18,22 +18,45 @@ public interface MemberService {
 	int updateMember(Member m);
 	
 	// 4. 회원 탈퇴용 서비스
-	int deleteMember(String Id);
+	//int deleteMember(String Id);
 	
 	// 5. 아이디 중복체크용 서비스
 	int idCheck(String Id);
 	
+	
+	//////////// 신규사원 ////////////
 	// 작성자 : 김혜미 -- 신규사원 리스트 조회
 	ArrayList<Member> newMemberList();
 
 	// 작성자 : 김혜미 -- 신규사원 상세조회
 	Member newMemberDetail(int mno);
 	
+	// 작성자 : 김혜미 -- 신규사원 등록
+	int enrollNewMember(Member m);
+	
+	// 작성자 : 김혜미 -- 신규사원 반려
+	int cancelNewMmeber(Member m);
+	
+	
+	//////////// 신규사원 ////////////
 	// 작성자 : 김혜미 -- 사원 리스트 조회
 	ArrayList<Member> memberList();
 
 	// 작성자 : 김혜미 -- 사원 상세조회
 	Member memberDetail(int mno);
+	
+	// 작성자 : 김혜미 -- 사원 수정폼
+	Member memberUpdateForm(int mno);
+	
+	// 작성자 : 김혜미 -- 사원 수정
+	int updateMmeber(Member m);
+	
+	// 작성자 : 김혜미 -- 사원 탈퇴
+	int deleteMember(int mno);
+	
+	
+		
+	
 
 	
 }

@@ -148,7 +148,73 @@
 		 where mem_no = #{memNo}
 	</select>
 	
+	<select id="enrollNewMember" parameterType="member">
+		update  
+		       member
+		   set dept_no = #{deptNo}
+		     , posi_no = #{posiNo}
+		     , hire_date = #{hireDate}
+		     , account = #{account}
+		     , regi = #{regi}
+		     , accept_status = 'Y'
+		 where mem_no = #{memNo}
+	</select>
 	
+	
+	
+	
+
+	<select id="memberUpdateForm" resultMap="member" parameterType="_int">
+		select 
+		       mem_no
+             , profile
+             , mem_name
+             , dept_name
+             , posi_name
+		     , phone
+		     , to_char(to_date(hire_date, 'MM/DD/YYYY'), 'YYYY-MM-DD') hire_date
+             , bank
+             , account
+             , regi
+             , office_email
+             , personal_email
+             , post
+             , road_address
+             , detail_address
+             , mem_status
+             , admin_status
+		  from member m
+          join dept d on (m.dept_no = d.dept_no)
+          join position p on (m.posi_no = p.posi_no)
+		 where mem_no = #{memNo}
+	</select>
+
+	
+	
+	<update id="updateMember" parameterType="member">
+		update
+			   member
+		   set
+               profile = #{profile}
+             , mem_name = #{memName}
+             , dept_name = #{deptName}
+             , posi_name = #{posiName}
+		     , phone = #{phone}
+		     , to_char(to_date(hire_date, 'MM/DD/YYYY'), 'YYYY-MM-DD') hire_date = #{hireDate}
+             , account = #{account}
+             , regi = #{regi}
+             , office_email = #{officeEmail}
+             , personal_email = #{personalEmail}
+             , post = #{post}
+             , road_address = #{roadAddress}
+             , detail_address= #{detailAddress}
+             , mem_status = #{memStatus}
+             , admin_status = #{adminStatus}
+		  from member m
+          join dept d on (m.dept_no = d.dept_no)
+          join position p on (m.posi_no = p.posi_no)
+		 where mem_no = #{memNo}   
+	</update>
 	
 	
 </mapper>

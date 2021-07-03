@@ -1,6 +1,10 @@
 package com.brEnt.brFamily.member.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,8 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
 import com.brEnt.brFamily.member.model.service.MemberService;
 import com.brEnt.brFamily.member.model.vo.Member;
 
@@ -56,12 +62,13 @@ public class MemberController {
 	
 	
 
+	////////////// 신규사원  //////////////
 	// 작성자 : 김혜미 -- 신규사원 리스트(관리자)
 	@RequestMapping("newMemberList.admin")
 	public ModelAndView newMemberList(ModelAndView mv) {
 		
 		ArrayList<Member> list = mService.newMemberList();
-		System.out.println(list);
+//		System.out.println(list);
 		mv.addObject("list", list)
 		  .setViewName("member/adminNewMemberList");
 		
@@ -77,7 +84,35 @@ public class MemberController {
 		
 		return "member/adminNewMemberDetail";
 	}
+
+	@RequestMapping("enrollNewMember.admin")
+	public String enrollNewMember(Member m, MultipartFile upfile, HttpSession session, Model model) {
+		
+		// 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 bf에 추가로 담기 
+		if(!upfile.getOriginalFilename().equals("")) { 
+			
+			String changeName = saveFile(session, upfile); 
+			
+			m.setProfile("resources/profileUpfiles/" + changeName); // 업로드된파일명 + 파일명
+			
+		}
+		
+		int result = mService.enrollNewMember(m);
+		System.out.println(m);
+		
+//		// 성공했을 경우 
+//		if(result > 0) { 
+			session.setAttribute("alertMsg", "성공적으로 게시글이 작성되었습니다.");
+			return "redirect:newMemberList.admin";
+		// 실패했을 경우 
+//		}else { 
+//			model.addAttribute("errorMsg", "게시글 작성 실패"); 
+//			return "common/errorPage"; 
+//		}
+	}
 	
+	
+	//////////////// 사원  ///////////////
 	// 작성자 : 김혜미 -- 사원 리스트(관리자)
 	@RequestMapping("memberList.admin")
 	public ModelAndView memberList(ModelAndView mv) {
@@ -98,6 +133,75 @@ public class MemberController {
 		
 		return "member/adminMemberDetail";
 	}
+	
+	// 작성자 : 김혜미 -- 사원 수정폼(관리자)
+	@RequestMapping("memberUpdateForm.admin")
+	public String memberUpdateForm(int mno, Model model) {
+		
+		Member m = mService.memberUpdateForm(mno);
+		model.addAttribute("m", m);
+		
+		return "member/adminMemberUpdateForm";
+	}
+	
+//	@RequestMapping("delete.me")
+//	public String deleteMember(String userPwd, HttpSession session, Model model) {
+//		
+//		Member loginUser = (Member)session.getAttribute("loginUser");
+//		// 아이디, 비번(암호문), 이메일, 주소, ....
+//		
+//		if(bcryptPasswordEncoder.matches(userPwd, loginUser.getUserPwd())) {
+//			// 비밀번호 일치 => 본인 맞음
+//			int result = mService.deleteMember(loginUser.getUserId());
+//			
+//			if(result > 0) {
+//				session.removeAttribute("loginUser");
+//				session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다. 그동안 이용해주셔서 감사합니다.");
+//				
+//				// => 메인페이지
+//				return "redirect:/";
+//				
+//			}else { // => 에러페이지
+//				model.addAttribute("errorMsg", "회원탈퇴 실패");
+//				return "common/errorPage";
+//			}
+//			
+//			
+//		}else {
+//			// 비밀번호 일치 x
+//			session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+//			return "redirect:myPage.me";
+//		}
+//		
+//	}
+	
+	
+	
+	
+	
+	
+	// 작성자 : 김혜미 -- 첨부파일명 수정 
+	public String saveFile(HttpSession session, MultipartFile upfile) {
+		
+		String savePath = session.getServletContext().getRealPath("/resources/profileUpfiles/");
+				
+		String originName = upfile.getOriginalFilename(); // 원본명 ("aaa.jpg") 
+				
+		String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		int ranNum = (int)(Math.random() * 900000 + 10000); 
+		String ext = originName.substring(originName.lastIndexOf(".")); 
+				
+		String changeName = currentTime + ranNum + ext;
+				
+		try {
+			upfile.transferTo(new File(savePath + changeName));
+		} catch (IllegalStateException | IOException e) {
+			e.printStackTrace();
+		}
+				
+		return changeName;
+	}	
+	
 	
 	
 	

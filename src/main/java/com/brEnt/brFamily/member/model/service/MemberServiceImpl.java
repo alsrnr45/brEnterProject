@@ -39,11 +39,11 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
-	@Override
-	public int deleteMember(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//	@Override
+//	public int deleteMember(String userId) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
 
 	@Override
 	public int idCheck(String userId) {
@@ -51,7 +51,11 @@ public class MemberServiceImpl implements MemberService {
 		return 0;
 	}
 
+
 	
+	
+	
+	///////////////// 신규사원  /////////////////
 	@Override // 작성자 : 김혜미 -- 신규사원 리스트 조회
 	public ArrayList<Member> newMemberList() {
 		return mDao.newMemberList(sqlSession);
@@ -62,6 +66,19 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.newMemberDetail(sqlSession, mno);
 	}
 
+	@Override // 작성자 : 김혜미 -- 신규사원 등록
+	public int enrollNewMember(Member m) {
+		return mDao.enrollNewMember(sqlSession, m); 
+	}
+	
+	@Override // 작성자 : 김혜미 -- 신규사원 반려
+	public int cancelNewMmeber(Member m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+	///////////////// 사원  /////////////////
 	@Override // 작성자 : 김혜미 -- 사원 리스트 조회
 	public ArrayList<Member> memberList() {
 		return mDao.memberList(sqlSession);
@@ -71,6 +88,24 @@ public class MemberServiceImpl implements MemberService {
 	public Member memberDetail(int mno) {
 		return mDao.memberDetail(sqlSession, mno);
 	}
+	
+	@Override // 작성자 : 김혜미 -- 사원 수정폼
+	public Member memberUpdateForm(int mno) {
+		return mDao.memberUpdateForm(sqlSession, mno);
+	}
+
+	@Override // 작성자 : 김혜미 -- 사원 수정
+	public int updateMmeber(Member m) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override // 작성자 : 김혜미 -- 사원 탈퇴
+	public int deleteMember(int mno) {
+		return mDao.deleteMember(sqlSession, mno);
+	}
+
+
 
 	
 	

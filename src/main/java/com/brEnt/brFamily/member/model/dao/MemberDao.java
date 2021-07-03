@@ -33,8 +33,26 @@ public class MemberDao {
 		return sqlSession.selectOne("memberMapper.memberDetail", memNo);
 	}
 
+	
 	public Member newMemberDetail(SqlSessionTemplate sqlSession, int memNo) {
 		return sqlSession.selectOne("memberMapper.newMemberDetail", memNo);
+	}
+
+	
+	public Member memberUpdateForm(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("memberMapper.memberUpdateForm", memNo);
+	}
+
+
+
+	public int deleteMember(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.update("memberMapper.deleteMember", memNo);
+	}
+
+
+
+	public int enrollNewMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.enrollNewMember", m); 
 	}
 	
 	

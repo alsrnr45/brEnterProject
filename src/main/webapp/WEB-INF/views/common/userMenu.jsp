@@ -142,7 +142,7 @@
                                 <a class="nav-link" href="storeList.st">Photo</a>
                                 <a class="nav-link" href="storeList.st">Fashion</a>
                                 <a class="nav-link" href="storeList.st">Stationery</a>
-                                <a class="nav-link" href="#">Cart</a>
+                                <a class="nav-link" href="cartList.pro">Cart</a>
                                 <a class="nav-link" href="#">Offline Store</a>
                             </nav>
                         </div>
@@ -157,7 +157,7 @@
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="#">개인정보 설정</a>
                                 <a class="nav-link" href="#">비밀번호 변경</a>
-                                <a class="nav-link" href="#">주문내역 조회</a>
+                                <a class="nav-link" href="orderlist.mp">주문내역 조회</a>
                             </nav>
                         </div>
 

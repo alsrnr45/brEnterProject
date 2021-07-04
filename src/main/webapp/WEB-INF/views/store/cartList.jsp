@@ -246,7 +246,7 @@
 				        	
 				        	<div class="btns">
 				        		<a href="" class="orderBtn">주문하기</a>&nbsp;&nbsp;&nbsp;
-				        		<a href="" class="storeBtn">쇼핑 계속하기</a>
+				        		<a href="storeList.st" class="storeBtn">쇼핑 계속하기</a>
 				        	</div>
 		        	</c:otherwise>
 	        	</c:choose>

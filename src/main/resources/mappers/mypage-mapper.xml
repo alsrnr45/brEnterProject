@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mypageMapper">
+
+<!-- 작성자 : 박지은 - 주문내역 조회 -->
+<select id="orderList" parameterType="int" resultType="com.brEnt.brFamily.myPage.model.vo.OrderList">
+   		select
+   			   l.order_no as order_no
+   			 , l.pdt_no as pdt_no
+   			 , l.pdt_count as pdt_count
+   			 , f.mem_no as mem_no
+   			 , f.order_receiver as order_receiver
+   			 , f.post_code as post_code
+   			 , f.road_address as road_address
+   			 , f.detail_address as detail_address
+   			 , f.receiver_phone as receiver_phone
+   			 , f.ship_message as ship_message
+   			 , f.total_price as total_price
+   			 , f.pay_method as pay_method
+		  from order_list l, order_form f
+		 where l.order_no = f.order_no
+		   and f.mem_no = #{memNo}
+   </select>
+
+
+
+
+
+</mapper>

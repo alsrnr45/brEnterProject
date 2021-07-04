@@ -165,7 +165,7 @@
 	        	
 	        	<div clss="btn">
 	        		<br>
-	        		<a href="" class="storeBtn">스토어 가기</a>
+	        		<a href="storeList.st" class="storeBtn">스토어 가기</a>
 	        	</div>
 	        </div> 
         	

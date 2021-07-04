@@ -12,6 +12,11 @@
 <link href="resources/css/styles.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
+<!-- 부트스트랩4 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -54,7 +59,7 @@
 	/* .content div {outline: 1px solid blueviolet;} */
 	.content div {float: left;}
 	.content1 {width: 250px; height: 100%; padding: 52px 0px 50px 50px;}
-	.productImage {width: 200px; height: 200px; border-radius: 70%; overflow: hidden;}
+	.productImage {width: 200px; height: 200px; border-radius: 70%; overflow: hidden; box-shadow: 0 7px 15px rgb(0 0 0 / 20%);}
 	.titleImg {width: 100%; height: 100%; object-fit: cover;}
 	
 	.content2 {width: 850px; height: 100%; padding: 52px 0px 50px 0px;}
@@ -197,7 +202,7 @@
 
                             <div style="float:right; margin-top: 15px;">
                                 <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);">뒤로가기</button>
-                                <button type="button" class="btn btn-warning" style="margin-left: 7px;">반려하기</button>
+                                <button type="button" class="btn btn-warning"  data-toggle="modal" data-target="#returnForm" style="margin-left: 7px;">반려하기</button>
                                 <button type="submit" class="btn btn-danger" style="margin-left: 7px;">등록하기</button>
                             </div>
                         </div><!--information-->
@@ -205,6 +210,34 @@
                 </form>
 
              </div><!--content-->
+        </div>
+    </div>
+    
+    
+    <!-- 반려하기 버튼 클릭시 보여질 Modal -->
+    <div class="modal" id="returnForm">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            
+                <!-- Modal Header -->
+                <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+                <!-- Modal body -->
+                <div class="modal-body" align="center">
+                
+                    <b>정말로 반려처리 하시겠습니까?</b><br><br>
+
+                    <form action="returnMember.admin" method="post">
+                    	<input type="hidden" name="mno" value="${ m.memNo }">
+                        <button type="submit" class="btn btn-danger">반려하기</button>
+                    </form>
+
+                </div>
+                
+            </div>
         </div>
     </div>
     

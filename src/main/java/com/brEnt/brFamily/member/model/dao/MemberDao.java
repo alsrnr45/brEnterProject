@@ -54,6 +54,12 @@ public class MemberDao {
 	public int enrollNewMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("memberMapper.enrollNewMember", m); 
 	}
+
+
+
+	public int returnMember(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.update("memberMapper.returnMember", memNo);
+	}
 	
 	
 	

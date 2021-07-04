@@ -72,9 +72,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override // 작성자 : 김혜미 -- 신규사원 반려
-	public int cancelNewMmeber(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int returnMember(int mno) {
+		return mDao.returnMember(sqlSession, mno);
 	}
 
 	

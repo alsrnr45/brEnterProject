@@ -59,6 +59,13 @@
 </head>
 <body class="sb-nav-fixed">
     
+    <c:if test="${ !empty alertMsg }">
+		<script>
+			alertify.alert("${alertMsg}");
+		</script>
+		<c:remove var="alertMsg" scope="session"/>
+	</c:if>
+	
 	<!-- 상단바 -->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark2">
 	    <!-- Navbar Brand-->

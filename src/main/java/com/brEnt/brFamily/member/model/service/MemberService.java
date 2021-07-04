@@ -25,7 +25,7 @@ public interface MemberService {
 	
 	
 	//////////// 신규사원 ////////////
-	// 작성자 : 김혜미 -- 신규사원 리스트 조회
+	// 작성자 : 김혜미 -- 신규사원 리스트조회
 	ArrayList<Member> newMemberList();
 
 	// 작성자 : 김혜미 -- 신규사원 상세조회
@@ -35,11 +35,11 @@ public interface MemberService {
 	int enrollNewMember(Member m);
 	
 	// 작성자 : 김혜미 -- 신규사원 반려
-	int cancelNewMmeber(Member m);
+	int returnMember(int mno);
 	
 	
 	//////////// 신규사원 ////////////
-	// 작성자 : 김혜미 -- 사원 리스트 조회
+	// 작성자 : 김혜미 -- 사원 리스트조회
 	ArrayList<Member> memberList();
 
 	// 작성자 : 김혜미 -- 사원 상세조회
@@ -53,6 +53,8 @@ public interface MemberService {
 	
 	// 작성자 : 김혜미 -- 사원 탈퇴
 	int deleteMember(int mno);
+
+	
 	
 	
 		

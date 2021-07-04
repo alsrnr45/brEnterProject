@@ -62,8 +62,9 @@ public class MemberController {
 	
 	
 
+	
 	////////////// 신규사원  //////////////
-	// 작성자 : 김혜미 -- 신규사원 리스트(관리자)
+	// 작성자 : 김혜미 -- 신규사원 리스트
 	@RequestMapping("newMemberList.admin")
 	public ModelAndView newMemberList(ModelAndView mv) {
 		
@@ -75,7 +76,8 @@ public class MemberController {
 		return mv;
 	}
 	
-	// 작성자 : 김혜미 -- 신규사원 디테일(관리자)
+	
+	// 작성자 : 김혜미 -- 신규사원 디테일
 	@RequestMapping("newMemberDetail.admin")
 	public String newMemberDetail(int mno, Model model) {
 		
@@ -85,6 +87,8 @@ public class MemberController {
 		return "member/adminNewMemberDetail";
 	}
 
+	
+	// 작성자 : 김혜미 -- 신규사원 등록
 	@RequestMapping("enrollNewMember.admin")
 	public String enrollNewMember(Member m, MultipartFile upfile, HttpSession session, Model model) {
 		
@@ -92,13 +96,9 @@ public class MemberController {
 		if(!upfile.getOriginalFilename().equals("")) { 
 			
 			String changeName = saveFile(session, upfile); 
-			
 			m.setProfile("resources/profileUpfiles/" + changeName); // 업로드된파일명 + 파일명
-			
 		}
-		
 		int result = mService.enrollNewMember(m);
-		System.out.println(m);
 		
 //		// 성공했을 경우 
 //		if(result > 0) { 
@@ -112,6 +112,16 @@ public class MemberController {
 	}
 	
 	
+	// 작성자 : 김혜미 -- 신규사원 반려
+	@RequestMapping("returnMember.admin")
+	public String returnMember(int mno, Model model) {
+		
+		int result = mService.returnMember(mno);
+		
+//		session.setAttribute("alertMsg","성공적으로 반려되었습니다.");
+		return "redirect:newMemberList.admin";
+	}
+
 	//////////////// 사원  ///////////////
 	// 작성자 : 김혜미 -- 사원 리스트(관리자)
 	@RequestMapping("memberList.admin")
@@ -144,6 +154,11 @@ public class MemberController {
 		return "member/adminMemberUpdateForm";
 	}
 	
+	
+	
+	
+	
+	
 //	@RequestMapping("delete.me")
 //	public String deleteMember(String userPwd, HttpSession session, Model model) {
 //		
@@ -174,11 +189,7 @@ public class MemberController {
 //		}
 //		
 //	}
-	
-	
-	
-	
-	
+
 	
 	// 작성자 : 김혜미 -- 첨부파일명 수정 
 	public String saveFile(HttpSession session, MultipartFile upfile) {

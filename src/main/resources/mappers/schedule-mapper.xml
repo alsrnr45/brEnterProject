@@ -32,4 +32,48 @@
 			or (sch_status = '개인' and mem_no = #{memNo}) 
 			or (sch_status = '부서' and dept_no like '%' || #{deptNo} || '%')
 	</select>
+	
+	<insert id="planSch" parameterType="Schedule">
+		insert
+		  into schedule
+		     ( sch_no
+		     , mem_no
+		     , dept_no
+		     , sch_title
+		     , sch_cnt
+		     , start_date
+		     , end_date
+		     , attendance
+		     , sch_ctg
+		     , sch_status
+		   	 )
+		   	   values
+		   	 ( seq_schno.nextval
+		   	 , #{memNo}
+		   	 , #{deptNo}
+		   	 , #{schTitle}
+		   	 , #{schContent}
+		   	 , #{startDate}
+		   	 , #{endDate}
+		   	 , #{attendance}
+		   	 , #{schCategory}
+		   	 , #{schStatus}
+		   	 )
+	</insert>
+	
+	<select id="reqUpdateSch" parameterType="int" resultMap="schedule">
+		select 
+		       sch_no
+		     , mem_no
+		     , dept_no
+		     , sch_title
+		     , sch_cnt
+		     , start_date
+		     , end_date
+		     , attendance
+		     , sch_ctg
+		     , sch_status
+		  from schedule
+		 where sch_no = #{schNo}
+	</select>	
 </mapper>

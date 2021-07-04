@@ -40,16 +40,25 @@
           selectable: true,
           selectMirror: true,
           // 날짜 선택시 실행할 함수(ajax로 해보자)
-          select: function insertSch() {
+          select: function insertSch(date) {
+        	  window.location = '/brFamily/enroll.sch?selected_date=' + date.startStr
+        	
             // 일정만들기 페이지 호출
+            /*
             $.ajax({
             	url:"enroll.sch",
             	type:'POST',
-            	data:new Date(),
-            	success: console.log("성공"),
-            	error: console.log("실패")
+            	data:{
+            		nowDate:new Date()
+            	},
+            	success: function(data){
+            		
+            	},
+            	error: function(){
+            		console.log("일정만들기 ajax 호출 실패");
+            	}
             })
-            
+            */
             
             /*
             var title = prompt('Event Title:');
@@ -67,6 +76,36 @@
           },
           // 이벤트 클릭시 실행할 함수
           eventClick: function updateSch(arg) {
+       
+        	var f = document.createElement('form');
+        	
+        	var data;
+        	data = document.createElement('input');
+        	data.setAttribute('type', 'hidden');
+        	data.setAttribute('name', 'schNo');
+        	data.setAttribute('value', arg.event._def.publicId );
+        	
+        	f.setAttribute('method', 'post');
+       	    f.setAttribute('action', 'requestUpdate.sch');
+       	    document.body.appendChild(f);
+       	    f.submit();
+
+            //var schNo = arg.event._def.publicId;
+            //location.href="/brFamily/enroll.sch?schNo=" + arg.event._def.publicId;
+
+            /*
+            arg.event._def.publicId 
+            arg.event.title schTitle
+            arg.event.start startDate
+            arg.event.end endDate
+            arg.event._def.extendedProps.description schContent
+            arg.event.ui.backgroundColor == "#257e4a"
+            */
+            
+           // 개인일정만 수정가능하도록 
+
+
+
             // 수정하기 페이지 호출
             //arg.event.remove() 이벤트 없애는 함수
             

@@ -88,7 +88,7 @@
 		 where m.dept_no = ${memNo}
 	</select>
 	
-	<!-- 작성자 : 안소은 = 결재선 부서별 사원수 조회 
+	<!-- 작성자 : 안소은 = 결재선 부서별 사원 수 조회 
 	<select id="memCount" resultMap="member">
 		select 
 		       count(mem_no) 

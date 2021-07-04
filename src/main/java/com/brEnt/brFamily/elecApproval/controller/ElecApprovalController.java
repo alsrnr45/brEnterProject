@@ -114,7 +114,7 @@ public class ElecApprovalController {
    @ResponseBody
    @RequestMapping("memberList.ea")
    public String ajaxSelectMember(int memNo) {
-	   System.out.println(memNo);
+	   // System.out.println(memNo);
 	   return new Gson().toJson(eaService.selectMemberList(memNo));
    }
   

@@ -52,6 +52,7 @@
 		<mapper resource="/mappers/phoneBook-mapper.xml" />
 		<mapper resource="/mappers/schedule-mapper.xml" />
 		<mapper resource="/mappers/store-mapper.xml" />
+		<mapper resource="/mappers/mypage-mapper.xml" />
 	</mappers>
 
 

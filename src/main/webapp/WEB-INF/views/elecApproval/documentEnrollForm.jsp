@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,11 @@
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+<!-- 부트스트랩4 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
 
@@ -57,6 +63,28 @@
 	.tableType03 input, textarea{width: 100%; border: none; padding-left: 10px;}
 	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
 	
+	 /* 결재선 모달 */
+	.signModalOuter{ margin:auto; text-align: center; width:1000px; height:500px;}
+	.signModalOuter ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
+	.signModalOuter ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
+	.signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
+	.modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
+	.modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:scroll;}
+	.modal1, .modal2, .modal4{width:30%;}
+	.modal3{width:5%; padding-top:160px;}
+	.modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
+	.modal4 .apply{background:rgb(255, 235, 152); color:black;}
+	.modal4_1{
+	    height:10%; 
+	    border:1px solid lightgray; 
+	    margin-bottom: 17px;
+	    padding-top:10px;
+	    color:royalblue;
+	    text-align: center;
+	}
+	.modal4_2{width:100%; height:30px;}
+	.modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
+	.modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 20px;}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -71,8 +99,7 @@
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
-		
-		
+			
 		<!-- 현재날짜 -->
 		<c:set var="today" value="<%=new java.util.Date()%>" />
 		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set> 
@@ -94,7 +121,7 @@
 							<tr>
 								<th width="120px" height="35px;">문서종류</th> 
 								<td width="340px">
-									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
+									<select class="form-control" name="approvalFormCode url" id="approvalFormCode" onchange="moveurl(this.value);">
 										<option value="documentEnrollForm.ea">기획안</option>
 										<option value="documentEnrollForm.ea">업무연락</option>
 										<option value="offEnrollForm.ea">연차</option>
@@ -105,8 +132,7 @@
 								</td>
 								<th width="120px">문서번호</th> 
 								<td width="340px">
-									<!-- 문서종류에 따른 코드 변경 조건처리하기 -->
-									-<c:out value="${date}"/>-<c:out value="${randomNo}"/>
+									${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>
 								</td>
 							</tr>
 						</table>
@@ -114,12 +140,12 @@
 					</div>
 
 					<div class="content_2">
-						<h6>결재선<button class="btn btn-outline-secondary btn-sm" onclick="">결재선 설정</button></h6>
+						<h6>결재선<button type="button" class="btn btn-outline-secondary btn-sm signOffBtn" data-toggle="modal" data-target="#signOffBtn">결재선 설정</button></h6>
 						
 						<table class="tableType02">
 							<tr height="35">
 								<th rowspan="5" width="120">기안자</th>
-								<td width="136">개발팀</td>
+								<td width="136">${ loginUser.deptName }</td>
 								<th rowspan="5" width="120">결재자</th>
 								<td width="136">개발팀</td>
 								<td width="136">개발팀</td>
@@ -127,7 +153,7 @@
 								<td width="136"></td>
 							</tr>
 							<tr height="35">
-								<td>사원</td>
+								<td>${ loginUser.posiName}</td>
 								<td>과장</td>
 								<td>차장</td>
 								<td>부장</td>
@@ -142,14 +168,14 @@
 								<td></td>
 							</tr>
 							<tr height="35">
-								<td>2021-06-11</td>
+								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></td>
 								<td>2021-06-11</td>
 								<td>2021-06-11</td>
 								<td>2021-06-11</td>
 								<td></td>
 							</tr>
 							<tr height="35">
-								<td style="color: royalblue;">김사원</td>
+								<td style="color: royalblue;">${ loginUser.memName }</td>
 								<td>박차장</td>
 								<td>이과장</td>
 								<td>오부장</td>
@@ -198,6 +224,79 @@
     </div>
 	
 	
+	<!-- The Modal -->
+ 	<form action="">
+		<div class="modal fade" id="signOffBtn">
+			<div class="modal-dialog modal-xl">
+				<div class="modal-content">
+	              
+					<!-- Modal Header -->
+					<div class="modal-header">
+						<h5 class="modal-title">결재선 설정</h5>
+					</div>
+					
+					<!-- Modal body -->
+					<div class="modal-body" style="width:100%; height:100%;">
+						<div class="signModalOuter">
+							<div class="modal1">
+								<c:forEach var="dept" items="${ list }">
+									<ul id="deptName" onclick="dept();">${ dept.deptName }</ul>
+								</c:forEach>
+							</div>
+							<div class="modal2">
+								<ul onclick="deptName();"></ul>
+							</div>
+		 					<div class="modal3">
+								<button class="btn btn-primary"> > </button>
+								<button class="btn btn-primary"> < </button>
+							</div>
+							<div class="modal4" align="left">
+								<div style="margin-bottom:5px;"><b>기안자</b></div>
+								<div class="modal4_1">
+		 							<p>${ loginUser.memName }</p>
+								</div>
+								<div class="modal4_2">
+		 							<b style="float:left;">결재자</b>
+		 							<div>
+		 							<button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
+		 							<button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
+		 							</div>
+								</div>
+								<div class="modal4_3">
+		 							<ul>안소은(사원)</ul>
+		 							<ul>최선희(팀장)</ul>
+		 							<ul>김혜미(부장)</ul>
+		 							<ul>김민국(대표)</ul>
+								</div>
+								<div>
+		 							<button type="submit" class="btn btn-secondary apply" data-dismiss="modal">적용</button>
+		 							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+								</div>
+							</div>
+						</div>    
+					</div>
+					
+					 <script type="text/javascript">
+                        	function dept(){
+                                $.ajax({
+                                    url:"memberList.ea",
+                                    data:{deptNo:${dept.deptNo}),
+                                    success:function(list){
+                                    	$(".modal2 ul").html(list);
+                                    },error:function(){
+                                        console.log("실패");
+                                    }
+                                });
+                            }
+                     </script>
+					
+					
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	
 	<script>
 	
 		// 썸머노트
@@ -221,6 +320,19 @@
     		location.href = url;
 		};
 		
+		function dept(){
+	          $.ajax({
+	              url:"memberList.ea",
+	              data:{deptNo : ${ dept.deptNo }),
+	              success:function(list){
+	              	$(".modal2 ul").html(list);
+	              },error:function(){
+	                  console.log("실패");
+	              }
+	          });
+	      }
+	          
+	          
 	</script>
 	
 	

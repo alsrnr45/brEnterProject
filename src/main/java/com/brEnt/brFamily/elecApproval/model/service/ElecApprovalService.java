@@ -18,5 +18,6 @@ public interface ElecApprovalService {
     ArrayList<Member> selectMember();
    
     // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
-    ArrayList<Member> selectMemberList(int memNo);
+    ArrayList<Member> selectMemberList(int deptNo);
+    
 }

@@ -113,9 +113,9 @@ public class ElecApprovalController {
    // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
    @ResponseBody
    @RequestMapping("memberList.ea")
-   public String ajaxSelectMember(int memNo) {
-	   // System.out.println(memNo);
-	   return new Gson().toJson(eaService.selectMemberList(memNo));
+   public String ajaxSelectMember(int deptNo) {
+	   System.out.println(deptNo);
+	   return new Gson().toJson(eaService.selectMemberList(deptNo));
    }
   
    

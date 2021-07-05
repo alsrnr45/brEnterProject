@@ -58,11 +58,16 @@ public class ElecApprovalController {
       return "elecApproval/approvalStandbyList";
    }
       
-   // 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
+   // 작성자 : 최선희 — 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
-   public String documentEnrollForm(String code, Model model) {
-	   model.addAttribute("code", code);  
-      return "elecApproval/documentEnrollForm";
+   public ModelAndView documentEnrollForm(String code, ModelAndView mv) {   
+	   ArrayList<Dept> list = eaService.selectDept();
+	   //System.out.println(list);
+	   mv.addObject("list", list)
+	     .addObject("code", code)
+	     .setViewName("elecApproval/documentEnrollForm");
+	   
+	   return mv;
    }
    
    // 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
@@ -100,7 +105,6 @@ public class ElecApprovalController {
    public ModelAndView expenseForm(ModelAndView mv) {
 	   
 	   ArrayList<Dept> list = eaService.selectDept();
-	   //System.out.println(list);
 	   mv.addObject("list", list)
 	   	 .setViewName("elecApproval/expenseForm");
 	   
@@ -118,7 +122,6 @@ public class ElecApprovalController {
    @ResponseBody
    @RequestMapping("memberList.ea")
    public String ajaxSelectMember(int deptNo) {
-	   System.out.println(deptNo);
 	   return new Gson().toJson(eaService.selectMemberList(deptNo));
    }
   

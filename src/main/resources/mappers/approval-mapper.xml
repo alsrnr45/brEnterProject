@@ -66,20 +66,19 @@
 	      from dept
 	</select>
 	
-	<!-- 결재선 사원, 부서명, 직급 조회 -->
-	<select id="selectMember" resultMap="member">
-		select
-		       mem_no
-		     , mem_name
+	<!-- 결재선 부서별 사원 수 조회 --> 
+	<select id="memCount" resultMap="member">
+		select 
+		       count(mem_no) memCount
 		     , dept_name
-		     , posi_name
-		  from member m
-		  join dept d on (m.dept_no = d.dept_no)
-		  join position p on(m.posi_no = p.posi_no)
-		 where m.dept_no = d.dept_no
+		  from dept d
+		  join member m on (m.dept_no = d.dept_no)
+		 where m.dept_no = d.dept_no 
+		 group 
+		    by dept_name
 	</select>
 	
-	<!-- 결재선 부서별 사원 조회 -->
+	<!-- 결재선 해당 부서 사원 조회용 AJAX -->
 	<select id="selectMemberList" resultMap="member">
 		select
 		       mem_name
@@ -89,18 +88,7 @@
 		 where m.dept_no = #{deptNo}
 	</select>
 	
-	<!-- 결재선 부서별 사원 수 조회 
-	<select id="memCount" resultMap="member">
-		select 
-		       count(mem_no) 
-		     , dept_name
-		  from member m
-		  join dept d on (m.dept_no = d.dept_no)
-		 where m.dept_no = d.dept_no 
-		 group 
-		    by dept_name;
-	</select>
-	-->
+	
 	
 	
 	

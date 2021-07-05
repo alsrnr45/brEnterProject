@@ -126,7 +126,7 @@
                         <td class="td1">문서종류</td>
                         <td class="td2">
                             <div class="form-group">
-                                <select class="form-control" style="font-size: 13px;">
+                                <select class="form-control" style="font-size: 13px;"  onchange="moveurl(this.value);">
                                     <option value="documentEnrollForm.ea">기획안</option>
                                     <option value="documentEnrollForm.ea">업무연락</option>
                                     <option value="offEnrollForm.ea">연차</option>
@@ -257,7 +257,7 @@
                             <div class="signModalOuter">
                                 <div class="modal1">
                                 	<c:forEach var="dept" items="${ list }">
-                                			<ul id="deptName" onclick="dept();">${ dept.deptName }(${ mList.mem_count })</ul>
+                                			<ul id="deptName" onclick="dept();">${ dept.deptName }(${ mCount.memCount })</ul>
                                     </c:forEach>
                                 </div>
                                 <div class="modal2">
@@ -297,7 +297,7 @@
                         	function dept(){
                                 $.ajax({
                                     url:"memberList.ea",
-                                    data:{deptNo : ${ dept.deptNo }),
+                                    data:{deptNo:${dept.deptNo}),
                                     success:function(list){
                                     	$(".modal2 ul").html(list);
                                     },error:function(){
@@ -316,6 +316,15 @@
         </div>
     </div>
 	
+	<script>
+      var len = $('#ecTitle').val().length;
+      $('#ecTitle').focus();
+      $('#ecTitle')[0].setSelectionRange(len, len);
+
+      function moveurl(url) { 
+          location.href = url;
+      };
+   	</script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

@@ -14,8 +14,8 @@ public interface ElecApprovalService {
     // 작성자 : 안소은 -- 전자결재 결재선 부서조회
     ArrayList<Dept> selectDept();
     
-    // 작성자 : 안소은 -- 전자결재 결재선 멤버조회
-    ArrayList<Member> selectMember();
+    // 작성자 : 안소은 -- 결재선 부서별 사원 수 조회
+    ArrayList<Member> memCount();
    
     // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
     ArrayList<Member> selectMemberList(int deptNo);

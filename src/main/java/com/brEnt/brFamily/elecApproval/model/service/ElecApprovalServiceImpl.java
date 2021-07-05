@@ -32,10 +32,10 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 	  return eaDao.selectDept(sqlSession);
    }
 
-   // 작성자 : 안소은 -- 결재선 사원 리스트 조회
+   // 작성자 : 안소은 -- 결재선 부서별 사원 수 조회
    @Override
-   public ArrayList<Member> selectMember() {
-	   return eaDao.selectMember(sqlSession);
+   public ArrayList<Member> memCount() {
+	   return eaDao.memCount(sqlSession);
    }
 
    // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX

@@ -156,8 +156,8 @@
 	                     </tr>
 	                     <!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 	                     <tr height="80" style="color:gray;">
-	                        <td></td>
-	                        <td><img src="resources/images/approval_Ok.png"></td>
+	                        <td><img src="resources/elecApprovalUpfiles/check1.png"></td>
+	                        <td><img src="resources/elecApprovalUpfiles/check2.png"></td>
 	                        <td></td>
 	                        <td></td>
 	                        <td></td>
@@ -249,7 +249,7 @@
 							<div class="modal4" align="left">
 								<div style="margin-bottom:5px;"><b>기안자</b></div>
 								<div class="modal4_1">
-		 							<p>안소은</p>
+		 							<p>${ loginUser.memName }</p>
 								</div>
 								<div class="modal4_2">
 		 							<b style="float:left;">결재자</b>
@@ -288,7 +288,7 @@
       function dept(){
           $.ajax({
               url:"memberList.ea",
-              data:{deptNo : ${ dept.deptNo }),
+              data:{deptNo : ${ dept.deptNo }},
               success:function(list){
               	$(".modal2 ul").html(list);
               },error:function(){

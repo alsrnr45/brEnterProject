@@ -251,13 +251,17 @@
                         <div class="modal-header">
                             <h5 class="modal-title">결재선 설정</h5>
                         </div>
+	                      
+	                    <c:forEach var="count" items="${ mCount }">
+                        	<input type="hidden" name="memCount" value="${ mCount.memCount }">
+                        </c:forEach>
                         
                         <!-- Modal body -->
                         <div class="modal-body" style="width:100%; height:100%;">
                             <div class="signModalOuter">
                                 <div class="modal1">
                                 	<c:forEach var="dept" items="${ list }">
-                                			<ul id="deptName" onclick="dept();">${ dept.deptName }(${ mCount.memCount })</ul>
+                                			<ul id="deptName" onclick="dept();">${ dept.deptName }(${ dept.count })</ul>
                                     </c:forEach>
                                 </div>
                                 <div class="modal2">
@@ -297,7 +301,7 @@
                         	function dept(){
                                 $.ajax({
                                     url:"memberList.ea",
-                                    data:{deptNo:${dept.deptNo}),
+                                    data:{deptNo:${dept.deptNo}},
                                     success:function(list){
                                     	$(".modal2 ul").html(list);
                                     },error:function(){
@@ -305,6 +309,9 @@
                                     }
                                 });
                             }
+                        	function $("#deptName"){
+                        		
+                        	}
                         </script>
                         
                         

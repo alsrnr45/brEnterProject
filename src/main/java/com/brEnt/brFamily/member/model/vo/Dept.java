@@ -14,5 +14,6 @@ public class Dept {
 
 	private int deptNo;
 	private String deptName;
+	private int count;
 	
 }

@@ -31,10 +31,6 @@ public class ElecApprovalController {
       mv.addObject("list", list)
           .setViewName("elecApproval/offEnrollForm");
       
-      ArrayList<Member> mCount = eaService.memCount();
-	  mv.addObject("mCount", mCount)
-        .setViewName("elecApproval/offEnrollForm");
-      
       return mv;
    }
    
@@ -61,21 +57,12 @@ public class ElecApprovalController {
    public String approvalStandbyList() {
       return "elecApproval/approvalStandbyList";
    }
-  
+      
    // 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
-   public ModelAndView documentEnrollForm(String code, ModelAndView mv) {   
-      ArrayList<Dept> list = eaService.selectDept();
-      //System.out.println(list);
-      mv.addObject("list", list)
-      	.addObject("code", code)
-        .setViewName("elecApproval/documentEnrollForm");
-      
-      ArrayList<Member> mCount = eaService.memCount();
-	  mv.addObject("mCount", mCount)
-        .setViewName("elecApproval/documentEnrollForm");
-      
-      return mv;
+   public String documentEnrollForm(String code, Model model) {
+	   model.addAttribute("code", code);  
+      return "elecApproval/documentEnrollForm";
    }
    
    // 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
@@ -116,12 +103,6 @@ public class ElecApprovalController {
 	   //System.out.println(list);
 	   mv.addObject("list", list)
 	   	 .setViewName("elecApproval/expenseForm");
-	   
-	   // 결재선 부서별 사원 수 조회
-	   ArrayList<Member> mCount = eaService.memCount();
-	   //System.out.println(mCount);
-	   mv.addObject("mCount", mCount)
-	     .setViewName("elecApproval/expenseForm");
 	   
 	   return mv;
 	   

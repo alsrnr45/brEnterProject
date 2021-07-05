@@ -22,11 +22,6 @@ public class ElecApprovalDao {
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectDept");
 	}
 	
-	// 작성자 : 안소은 -- 결재선 부서별 사원 수 조회
-	public ArrayList<Member> memCount(SqlSessionTemplate sqlSession){
-		return (ArrayList)sqlSession.selectList("approvalMapper.memCount");
-	}
-	
 	// 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession, int deptNo){
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectMemberList", deptNo);

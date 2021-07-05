@@ -20,6 +20,7 @@
 	<resultMap type="Dept" id="dept">
 		<id column="dept_no" property="deptNo" />
 		<result column="dept_name" property="deptName" />
+		<result column="count" property="count"/>
 	</resultMap>
 	
 	<resultMap type="Member" id="member">
@@ -63,19 +64,10 @@
 		select
 			   dept_no
 			 , dept_name
-	      from dept
-	</select>
-	
-	<!-- 결재선 부서별 사원 수 조회 --> 
-	<select id="memCount" resultMap="member">
-		select 
-		       count(mem_no) memCount
-		     , dept_name
-		  from dept d
-		  join member m on (m.dept_no = d.dept_no)
-		 where m.dept_no = d.dept_no 
-		 group 
-		    by dept_name
+			 , (select count(*)
+			 	  from member m
+			 	 where d.dept_no = m.dept_no) count
+	      from dept d
 	</select>
 	
 	<!-- 결재선 해당 부서 사원 조회용 AJAX -->

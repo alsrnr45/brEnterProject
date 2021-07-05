@@ -62,14 +62,6 @@ public class ElecApprovalController {
       return "elecApproval/approvalStandbyList";
    }
   
-   /*
-   // 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
-   @RequestMapping("documentEnrollForm.ea")
-   public String documentEnrollForm(String code, Model model) {
-	   model.addAttribute("code", code);  
-      return "elecApproval/documentEnrollForm";
-   }*/
-   
    // 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
    public ModelAndView documentEnrollForm(String code, ModelAndView mv) {   

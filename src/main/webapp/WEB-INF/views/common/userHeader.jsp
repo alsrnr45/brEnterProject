@@ -94,7 +94,7 @@
    		                        <li><a class="dropdown-item" href="#!">${ loginUser.memName }</a></li>
 		                        <li><a class="dropdown-item" href="#!" style="font-size:13px;">${ loginUser.id}@brent.com</a></li>
 		                        	<li><hr class="dropdown-divider" /></li> 
-		                        <li><a href="#!" class="dropdown-item dropCenter" style="color:purple;">ADMIN</a></li>
+		                        <li><a href="newMemberList.admin" class="dropdown-item dropCenter" style="color:purple;">ADMIN</a></li>
 		                    		<li><hr class="dropdown-divider" /></li> 
 	                         	<li><a href="#!" class="dropdown-item dropCenter">MYPAGE</a></li>
            			            <li><a href="logout.me" class="dropdown-item dropCenter">Logout</a></li>

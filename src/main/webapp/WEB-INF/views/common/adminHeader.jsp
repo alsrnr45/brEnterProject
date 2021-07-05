@@ -81,8 +81,8 @@
 	            <li class="nav-item dropdown" style="justify-content: space-between;"> 
 	                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
 	                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-	                    <li><a class="dropdown-item" href="#!">사원명</a></li>
-	                    <li><a class="dropdown-item" href="#!" style="font-size: 13px;">이메일</a></li>
+	                    <li><a class="dropdown-item" href="#!">${ loginUser.memName }</a></li>
+	                    <li><a class="dropdown-item" href="#!" style="font-size: 13px;">${ loginUser.id}@brent.com</a></li>
 	                    <li><hr class="dropdown-divider" /></li>
 	                   
 	                   <!--logout-->

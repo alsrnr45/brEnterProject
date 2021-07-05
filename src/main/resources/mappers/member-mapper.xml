@@ -47,8 +47,8 @@
 	<select id="loginMember" resultMap="member" parameterType="Member">
 		select 	
 			mem_no
-		  , dept_no
-		  , posi_no
+		  , m.dept_no
+		  , m.posi_no
 		  , id
 		  , pwd
 		  , office_email
@@ -68,7 +68,11 @@
 		  , accept_status
 		  , mem_status
 		  , admin_status
-		from member
+		  , dept_name
+          , posi_name
+		from member m
+        join dept d on (m.dept_no = d.dept_no)
+        join position p on (m.posi_no = p.posi_no)
   		where mem_status = 'Y'
   		and id = #{id}
 		and pwd = #{pwd}
@@ -136,11 +140,6 @@
 		 where mem_no = #{memNo}
 	</select>
 	
-	
-	
-	
-	
-	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 	<!-- 사원 리스트조회 -->
 	<select id="memberList" resultMap="member">
 		select 

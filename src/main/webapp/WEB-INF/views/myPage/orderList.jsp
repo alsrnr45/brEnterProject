@@ -68,6 +68,10 @@
 	.productImg {
 		width:10%;
 	}
+	#orderList{
+		width:70%;
+		margin-left: 15%;
+	}
 	
 	/* 버튼 */
 	.storeBtn {
@@ -116,6 +120,7 @@
 		margin-bottom:15%;
 		margin-left:4%;
 	}
+	
     
 </style>
 
@@ -134,61 +139,65 @@
         </div>
 
         <!--컨텐츠-->
+      
         <div id="layoutSidenav_content">
             
-            <!-- 주문목록 있을 때 보여질 화면 -->  
-          	<div class="orderOuter">
-	        	<form name="" id="" method="post" action="#">
-	        		<table class="table">
-	        			<thead class="table-light">
-	        				<tr>
-	        					<th class="productInfo">상품정보</th>
-	        					<th class="amount">수량</th>
-	        					<th class="resultPrice">결제금액</th>
-								<th>배송상태</th>		
-	        				</tr>
-	        			</thead>
-	        			<tbody>
-	        				<tr>
-	        					<td>
-	        						<p><img src="resources/images/peng.png" class="productImg" align="left">&nbsp;자바소년단 포토카드</p>
-	        					</td>
-	        					<td>2</td>
-	        					<td><div>4,000 원</div></td>
-	        					<td>
-	        						<div>배송중</div>
-	        					</td>
-	        				</tr>
-	        			</tbody>
-	        		</table>
-	        	</form>
-	        	
-	        	<div clss="btn">
-	        		<br>
-	        		<a href="storeList.st" class="storeBtn">스토어 가기</a>
-	        	</div>
-	        </div> 
-        	
-        	
-        	<!-- 주문내역 없을때 보여질 화면 -->
-        	<!--  
-        	<div class="orderNoOuter">
-        		<div class="orderIconOuter">
-        			<div class="orderIcon">
-        				<div class="fas fa-clipboard-list" id="order-list"></div>
-        			</div>
-        		</div>
-        		
-        		<div>
-        			<h4>주문내역이 없습니다.</h4>
-        		</div>
-        		
-        		<br>
-	        	<div>
-	        		<a href="" class="storeBtn2">스토어가기</a>
-	        	</div>
-	        </div>
-	        -->
+            <c:set var="list" value="${orderList}" />
+            	<c:choose>
+            		<c:when test="${empty list}">
+		            <!-- 주문내역 없을때 보여질 화면 -->
+		        	<div class="orderNoOuter">
+		        		<div class="orderIconOuter">
+		        			<div class="orderIcon">
+		        				<div class="fas fa-clipboard-list" id="order-list"></div>
+		        			</div>
+		        		</div>
+		        		
+		        		<div>
+		        			<h4>주문내역이 없습니다.</h4>
+		        		</div>
+		        		
+		        		<br>
+			        	<div>
+			        		<a href="storeList.st" class="storeBtn2">스토어가기</a>
+			        	</div>
+			        </div>
+			        </c:when>
+			        <c:otherwise>
+            
+		            <!-- 주문목록 있을 때 보여질 화면 -->  
+		          	<div class="orderOuter">
+			        	<form name="" id="orderList" method="post" action="#">
+			        		<table class="table">
+			        			<thead class="table-light">
+			        				<tr>
+			        					<th class="productInfo">상품정보</th>
+			        					<th class="amount">수량</th>
+			        					<th class="resultPrice">결제금액</th>	
+			        				</tr>
+			        			</thead>
+			        			<tbody>
+			        				<c:forEach items="${orderList}" var="orderList">
+			        				<tr>
+			        					<td>
+			        						<p><img src="${orderList.pdt_file}" class="productImg" align="left">&nbsp;${orderList.pdt_name}</p>
+			        					</td>
+			        					<td>${orderList.pdt_count}</td>
+			        					<td><div>${orderList.mem_price}</div></td>
+			        				</tr>
+			        				</c:forEach>
+			        			</tbody>
+			        		</table>
+			        	</form>
+			        	
+			        	<div clss="btn">
+			        		<br>
+			        		<a href="storeList.st" class="storeBtn">스토어 가기</a>
+			        	</div>
+			        </div> 
+			        </c:otherwise>
+			     </c:choose>
+			     
             
         </div>
    

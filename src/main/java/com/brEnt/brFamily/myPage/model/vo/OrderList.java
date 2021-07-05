@@ -17,9 +17,9 @@ public class OrderList {
 	private int order_no; // 주문번호
 	private int pdt_no; // 상품번호
 	private int pdt_count; // 수량
-	private int mem_no; // 주문번호
-	private String order_receiver; // 사원번호 
-	private String post_code; // 수령자
+	private int mem_no; // 사원번호
+	private String order_receiver; // 수령자
+	private String post_code; // 우편번호
 	private String road_address; // 도로명주소
 	private String detail_address; // 상세주소
 	private String receiver_phone; // 연락처

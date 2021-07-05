@@ -126,8 +126,8 @@
                             </div><br>
 							
 							
-							<c:if test="${ loginUser.id eq bf.memNo }">	
-							
+							<!-- 로그인한 유저와 게시글 작성한 멤버 번호가 일치할 경우에만 수정/삭제 버튼 보이도록 -->
+							<c:if test="${ loginUser.id eq bf.memNo }">							
 	                            <div class="boardFreeBtn" style="margin-left:780px;">   
 	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
 	                                수정하기</a>
@@ -163,61 +163,105 @@
 
                         <div class="boardFreeReplyArea">
 
-                            <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)"> <!-- 2행 4열 -->
+                            <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)">
                                 <thead>
                                     <tr>
                                         <th colspan="2">
-                                            <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none;"></textarea>
+                                            <textarea class="form-control" name="freeReplyCnt" id="freeReplyCnt" cols="55" rows="2" style="resize:none;"></textarea>
                                         </th>
-                                        <th style="vertical-align: middle" width="150"><button class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182)">
+                                        <th style="vertical-align: middle" width="150"><button class="btn btn-secondary" onclick="addReply();" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182)">
                                             댓글<br>등록</button></th>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" height="50">댓글 (<span id="rcount">3</span>) </td> 
+                                        <td colspan="3" height="50">댓글 (<span id="rcount">0</span>) </td> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th>최사원 <i class="fas fa-heart"></i> 13</th>
-                                        <td rowspan="2" width="100">
-                                            <a class="btn btn-primary" href="" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">수정</a>
-                                            <a class="btn btn-danger" href="">삭제</a>
-                                        </td>
-                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="550" style="font-size:13px;">댓글 3입니다.</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>최대리 <i class="fas fa-heart"></i> 13</th>
-                                        <td rowspan="2">
-                                        
-                                        </td>
-                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:13px;">댓글 2입니다.</td>
-                                    </tr>
-
-                                    <tr>
-                                        <th>최부장 <i class="far fa-heart"></i> </th>
-                                        <td rowspan="2">
-                                        
-                                        </td>
-                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td  style="font-size:13px;">댓글 1입니다.</td>
-                                    </tr>
+                                    
                                 </tbody>                       
                             </table>   
                         </div>
+                        
                     </div>             
                 </div>          
             </div>	
 	</div>
-
+	
+	
+	<script>
+		$(function(){
+			selectReplyList();
+			
+			setInterval(selectReplyList, 1000);
+		})
+		
+		
+		// 댓글 리스트 조회용 ajax 
+		function selectReplyList(){
+			$.ajax({
+				url:"rlist.bf", 
+				data:{bfno:${bf.freeNo}},
+				success:function(list){
+					// console.log(list);
+					// style="background-color:rgb(255, 221, 136); border-color:"rgb(255, 231, 136);"
+					var value="";
+					$.each(list, function(i, obj){
+						value += "<tr>"
+							   +    "<th>" + obj.memNo + "&nbsp;" + obj.freeReplyLike + "</th>"
+							   
+						       +    '<td rowspan="2" width="100">' + 
+						       +     	+ "<button>" + '수정' + "</button>" 
+						       +        + "<button>" + '삭제' + "</button>"
+						       +    "</td>"
+						       
+						       +    '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
+						       + "</tr>"
+						       + "<tr>"
+						       +    '"<td width="550">' + obj.freeReplyCnt + "</td>"
+						       + "</tr>";
+					})
+					
+					$("#replyArea tbody").html(value); 
+					$("#rcount").text(list.length); 
+					
+				},error:function(){
+					console.log("댓글 리스트 조회용 ajax 실패"); 
+				}
+			})
+		}
+		
+		
+		
+		// 댓글 작성 ajax 
+		function addReply(){
+			
+			if($("#freeReplyCnt").val().trim().length != 0){ // 댓글 작성되어 있을 경우 
+				
+				$.ajax({
+					url:"rinsert.bf",
+					data:{
+						freeReplyCnt:$("#freeReplyCnt").val(),
+						freeNo:${bf.freeNo}, 
+						memNo:'${loginUser.memNo}' 
+					},
+					success:function(status){
+						if(status == "success"){
+							$("#freeReplyCnt").val(""); 
+							selectReplyList(); 
+						}
+					},error:function(){
+						console.log("댓글 작성용 ajax 통신 실패"); 
+					}
+				})
+					
+				
+			}else { // 댓글 미작성일 경우 => alert 
+				alert("댓글 작성 후 버튼을 눌러주세요.");
+			}
+				
+		}	
+	</script>
+	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="resources/js/scripts.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.boardFree.model.vo.BoardFreeReply;
 
 @Repository 
 public class BoardFreeDao {
@@ -58,6 +59,25 @@ public class BoardFreeDao {
 	public int deleteBoardFree(SqlSessionTemplate sqlSession, int freeNo) { 
 		return sqlSession.update("boardFreeMapper.deleteBoardFree", freeNo); 
 	}
+	
+	
+	// 댓글 리스트 조회 
+	public ArrayList<BoardFreeReply> selectReplyList(SqlSessionTemplate sqlSession, int freeNo){
+		return (ArrayList)sqlSession.selectList("boardFreeMapper.selectReplyList", freeNo);
+	}
+	
+			
+	// 댓글 작성 
+	public int insertReply(SqlSessionTemplate sqlSession, BoardFreeReply r) {
+		return sqlSession.insert("boardFreeMapper.insertReply", r); 
+	
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }

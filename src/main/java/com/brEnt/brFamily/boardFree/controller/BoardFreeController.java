@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.boardFree.model.service.BoardFreeService;
 import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.boardFree.model.vo.BoardFreeReply;
+import com.google.gson.Gson;
 
 @Controller
 public class BoardFreeController {
@@ -246,6 +249,28 @@ public class BoardFreeController {
 	
 	}
 	
+		
+	// 댓글 리스트 조회 
+	@ResponseBody
+	@RequestMapping(value="rlist.bf", produces="application/json; charset=utf-8")
+	public String selectReplyList(int bfno) {
+		//ArrayList<BoardFreeReply> list = bfService.selectReplyList(bfno); 
+		//return new Gson().toJson(list);
+		return new Gson().toJson(bfService.selectReplyList(bfno)); 
+	}
+	
+	
+	// 댓글 작성 
+	@ResponseBody
+	@RequestMapping("rinsert.bf")
+	public String insertReply(BoardFreeReply r) {
+		int result = bfService.insertReply(r); 
+		if(result > 0) {
+			return "success"; 
+		}else { 
+			return "fail"; 
+		}
+	}
 	
 	
 	

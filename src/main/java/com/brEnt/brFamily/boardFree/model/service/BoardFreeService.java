@@ -3,6 +3,7 @@ package com.brEnt.brFamily.boardFree.model.service;
 import java.util.ArrayList;
 
 import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.boardFree.model.vo.BoardFreeReply;
 
 public interface BoardFreeService {
 	
@@ -34,6 +35,17 @@ public interface BoardFreeService {
 	
 	// 자유게시판 삭제
 	int deleteBoardFree(int freeNo);
+	
+		
+	// 댓글 리스트 조회 
+	ArrayList<BoardFreeReply> selectReplyList(int freeNo); 
+	
+		
+	// 댓글 작성 
+	int insertReply(BoardFreeReply r); 
+	
+	
+	
 	
 	
 }

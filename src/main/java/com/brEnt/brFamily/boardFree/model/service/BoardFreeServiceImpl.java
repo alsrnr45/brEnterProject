@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.boardFree.model.dao.BoardFreeDao;
 import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.boardFree.model.vo.BoardFreeReply;
 
 @Service
 public class BoardFreeServiceImpl implements BoardFreeService {
@@ -75,6 +76,23 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	public int deleteBoardFree(int freeNo) {
 		return bfDao.deleteBoardFree(sqlSession, freeNo); 
 	}
+
+	
+	// 댓글 리스트 조회 
+	@Override
+	public ArrayList<BoardFreeReply> selectReplyList(int freeNo) {
+		return bfDao.selectReplyList(sqlSession, freeNo); 
+	}
+	
+	
+	// 댓글 작성
+	@Override
+	public int insertReply(BoardFreeReply r) {
+		return bfDao.insertReply(sqlSession, r);
+	}
+
+
+	
 
 	
 	

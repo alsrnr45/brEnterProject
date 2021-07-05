@@ -29,7 +29,6 @@ public class OrderListController {
 		List<OrderList> orderList = olService.orderList(memNo);
 		
 		m.addAttribute("orderList",orderList);
-		System.out.println(orderList);
 	return "myPage/orderList";
 	}
 }

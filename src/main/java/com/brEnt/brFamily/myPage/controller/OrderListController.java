@@ -28,8 +28,7 @@ public class OrderListController {
 		int memNo = loginUser.getMemNo();
 		List<OrderList> orderList = olService.orderList(memNo);
 		
-		m.addAttribute("oderList",orderList);
-		
+		m.addAttribute("orderList",orderList);
 	return "myPage/orderList";
 	}
 }

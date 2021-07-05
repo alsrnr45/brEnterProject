@@ -176,7 +176,7 @@
             <c:set var="list" value="${cartList}" />
 		        <c:choose>
 		        	<c:when test="${empty list}">
-            <!-- 장바구니 상품없을때 보여질 화면 -->
+            		<!-- 장바구니 상품없을때 보여질 화면 -->
              
         			<div class="cartNoOuter">
 	        			<div class="cartIconOuter">
@@ -191,17 +191,17 @@
 				        </div>
 				        
 				        <div>
-				        	<a href="" class="storeBtn2">스토어가기</a>
+				        	<a href="storeList.st" class="storeBtn2">스토어가기</a>
 				        </div>
 					</div>
 					</c:when>
 					<c:otherwise>
 		       
 		        
-			            <!-- 장바구니 상품 있을 때 보여질 화면 -->
-			          	<div class="cartOuter">
-				        	<form name="cartList" id="cartList" method="post" action="">
-				        		<table class="table">
+			        <!-- 장바구니 상품 있을 때 보여질 화면 -->
+			        <div class="cartOuter">
+			        	<form name="cartList" id="cartList" method="post" action="">
+			        		<table class="table">
 				        			<thead class="table-light">
 				        				<tr>
 				        					<th></th>
@@ -211,7 +211,7 @@
 				        				</tr>
 				        			</thead>
 				        			<tbody>
-	            	<c:forEach items="${cartList}" var="cartList">
+	            						<c:forEach items="${cartList}" var="cartList">
 				        				<tr class="trOne">
 				        					<td>
 				        						<label><input type="checkbox" name="cartProduct" value="product"></label>
@@ -225,7 +225,7 @@
 				        						<div>${cartList.memPrice }</div>
 				        					</td>
 				        				</tr>
-			        	</c:forEach>
+			        					</c:forEach>
 				        				<tr>
 				        					<td colspan="4">
 				        						<div class="priceInfo">

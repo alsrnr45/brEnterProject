@@ -14,17 +14,20 @@ import lombok.ToString;
 
 public class OrderList {
 
-	private int order_no; 
-	private int pdt_no; 
-	private int pdt_count; 
-	private int mem_no; 
-	private String order_receiver; 
-	private String post_code;
-	private String road_address;
-	private String detail_address;
-	private String receiver_phone;
-	private String ship_message;
-	private int total_price;
-	private String pay_method;
+	private int order_no; // 주문번호
+	private int pdt_no; // 상품번호
+	private int pdt_count; // 수량
+	private int mem_no; // 주문번호
+	private String order_receiver; // 사원번호 
+	private String post_code; // 수령자
+	private String road_address; // 도로명주소
+	private String detail_address; // 상세주소
+	private String receiver_phone; // 연락처
+	private String ship_message; // 배송메세지
+	private int total_price; // 총가격
+	private String pay_method; // 결제수단
+	private String pdt_name; // 상품명
+	private String pdt_file; // 상품사진
+	private int mem_price; // 직원가
 	
 }

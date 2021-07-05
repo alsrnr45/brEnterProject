@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -23,8 +24,18 @@ public class ElecApprovalController {
    
    // 작성자 : 김혜미 -- 연차 신청폼
    @RequestMapping("offEnrollForm.ea")
-   public String offEnrollForm() {
-      return "elecApproval/offEnrollForm";
+   public ModelAndView offEnrollForm(ModelAndView mv) {
+      
+      ArrayList<Dept> list = eaService.selectDept();
+      //System.out.println(list);
+      mv.addObject("list", list)
+          .setViewName("elecApproval/offEnrollForm");
+      
+      ArrayList<Member> mCount = eaService.memCount();
+	  mv.addObject("mCount", mCount)
+        .setViewName("elecApproval/offEnrollForm");
+      
+      return mv;
    }
    
    // 작성자 : 김혜미 -- 연차 신청폼
@@ -53,9 +64,10 @@ public class ElecApprovalController {
       
    // 작성자 : 최선희 -- 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
-   public String documentEnrollForm() {
+   public String documentEnrollForm(String code, Model model) {
+	   model.addAttribute("code", code);  
       return "elecApproval/documentEnrollForm";
-   } 
+   }
    
    // 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
    @RequestMapping("documentUpdateForm.ea")
@@ -87,7 +99,7 @@ public class ElecApprovalController {
       return "elecApproval/adminDocumentDetail";
    }
    
-   // 작성자 : 안소은 -- 지출결의서 폼
+   // 작성자 : 안소은 — 지출결의서 폼
    @RequestMapping("expenseForm.ea")
    public ModelAndView expenseForm(ModelAndView mv) {
 	   
@@ -96,21 +108,23 @@ public class ElecApprovalController {
 	   mv.addObject("list", list)
 	   	 .setViewName("elecApproval/expenseForm");
 	   
-	   ArrayList<Member> mlist = eaService.selectMember();
-	   mv.addObject("mlist", mlist)
+	   // 결재선 부서별 사원 수 조회
+	   ArrayList<Member> mCount = eaService.memCount();
+	   System.out.println(mCount);
+	   mv.addObject("mCount", mCount)
 	     .setViewName("elecApproval/expenseForm");
 	   
 	   return mv;
 	   
    }
 
-   // 작성자 : 안소은 -- 지출결의서 상세페이지
+   // 작성자 : 안소은 — 지출결의서 상세페이지
    @RequestMapping("expenseDetail.ea")
    public String expenseDetail() {
 	   return "elecApproval/expenseDetail";
    }
    
-   // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
+   // 작성자 : 안소은 — 결재선 해당 부서 사원 조회용 AJAX
    @ResponseBody
    @RequestMapping("memberList.ea")
    public String ajaxSelectMember(int deptNo) {

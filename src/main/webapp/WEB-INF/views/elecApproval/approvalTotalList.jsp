@@ -67,12 +67,12 @@
 	/* 전자결재 전체 리스트 */
     h1{margin-bottom: 20px;}  
     .approvalTotalList{text-align: center;}
-
+	.approvalTotalList>tbody>tr:hover{cursor:pointer;}
+	
 	.modal-body {margin: 30px 0 30px 60px;}
 	.modal-body .modalContent1, .modal-body .modalContent2 {float: left;}
 	h6 {margin: 6px 20px 0 0; font-size: large;}
 	.modalContent2 {width:250px;}
-
 
 
 	/* .modal-dialog{display: inline-block; vertical-align: middle;} */
@@ -95,7 +95,7 @@
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
-        
+
         	<!-- 컨텐츠 -->
         	<div id="layoutSidenav_content">
         		<main>
@@ -149,7 +149,7 @@
 	                                       	       		</c:choose>
 	                                       	       </td>
 	                                       	        
-	                                       	       <td>${ ea.ecTitle }</td>
+	                                       	       <td>${ ea.ecTitle }<input id="ecCode" type="hidden" value="${ ea.ecCode }"></td>
 	                                       	       <td>${ ea.ecWriter }</td>
 	                                       	       
 	                                       	       <!-- JSTL 날짜형식 포맷팅 -->
@@ -173,7 +173,7 @@
 							                           	   		결재완료
 							                           	   </c:when>
 						                           	   </c:choose>
-	                                       	       </td>      
+	                                       	       </td>
 	                                       	   </tr>	
 	                                       </c:forEach>
 	                                    </tbody>
@@ -229,13 +229,27 @@
     <script>
     
     	$(function() {
-            $(".approvalTotalList>tbody>tr").click(function() {
-            	// 폼마다 디테일 뷰 다름 => 조건 설정 (1: 기획안, 업무연락, 회람 / 2: 연차 / 3: 지출결의서)
-            	location.href = "documentDetail.ea";
+    		
+    		$(document).on("click", ".approvalTotalList>tbody>tr", function(){
+            //$(".approvalTotalList>tbody>tr").click(function() {
+            	// 폼마다 디테일 뷰 다름 
+            	//location.href = "documentDetail.ea";
             	
-             	// 조건1. 기획안/업무연락/회람 
-            	//location.href ="documentDetail.ea?=eano" + $(this).children(".eano").text();
-                console.log("전자결재 문서 클릭");
+            	var ecCode = $(this).find("#ecCode").val()
+				console.log(ecCode);
+            	
+            	// 조건1. 연차
+            	if(ecCode == "OF") {
+            		location.href ="offCheckForm.ea";
+	             	
+            	// 조건2. 지출결의서 
+            	}else if (ecCode == "EX") {	
+	             	location.href ="expenseDetail.ea";
+	            
+	            // 조건3. 기획안/업무연락/회람 
+            	}else { 
+	             	location.href ="documentDetail.ea";
+            	}   	
             })
         });
 

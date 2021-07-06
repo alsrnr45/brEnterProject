@@ -120,7 +120,7 @@ public class ElecApprovalController {
    
    // 작성자 : 안소은 — 결재선 해당 부서 사원 조회용 AJAX
    @ResponseBody
-   @RequestMapping("memberList.ea")
+   @RequestMapping(value="memberList.ea", produces="application/json; charset=utf-8")
    public String ajaxSelectMember(int deptNo) {
 	   return new Gson().toJson(eaService.selectMemberList(deptNo));
    }

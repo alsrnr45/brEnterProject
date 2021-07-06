@@ -71,7 +71,7 @@
 	</select>
 	
 	<!-- 결재선 해당 부서 사원 조회용 AJAX -->
-	<select id="selectMemberList" resultMap="member">
+	<select id="selectMemberList" resultMap="member" resultType="_int">
 		select
 		       mem_name
 		     , posi_name

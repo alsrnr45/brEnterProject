@@ -95,10 +95,10 @@
 		<!-- 현재날짜 -->
 		<c:set var="today" value="<%=new java.util.Date()%>" />
 		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd HH:mm:ss" /></c:set>
+		
+		<!-- 오늘 요일 -->
 		<c:set var="now" value="<%=new java.util.Date() %>"/>
 		<fmt:formatDate value="${now}" pattern="E" var="day" />
-
-
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <div class="second">
-                        <h2><b id="dpTime"></b></h2>
+                        <h2><b id="dpTime">00 : 00 : 00</b></h2>
                         <br>
                         <button class="btn btn-primary checkIn">출근하기</button>
                         <button class="btn btn-primary checkOut">퇴근하기</button>

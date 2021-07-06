@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment</title>
+<title>expenseForm</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -26,7 +27,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
         * {font-family: 'Noto Sans KR', sans-serif;}
         
-        .outer{width:1000px; height:100%; margin: auto;}
+        .outer{width:1000px; height:1200px; margin: auto;}
         
         /* 기본설정 */
         .basicSetting{width:100%; height:50px; border:1px solid lightgray; font-size:13px;}
@@ -50,6 +51,7 @@
         .outer .signLine{text-align: center; width:100%; height:280px; font-size:13px;}
         .outer .signLine td{border:1px solid lightgray;}
         .outer .signLine .signTd{width:10%;}
+        .outer .signLine .signTd img{height:60px; width:60px;}
         
         /* 지출결의서 작성 */
         .outer .inputTable{width:100%; font-size:15px; font-weight: lighter;}
@@ -69,28 +71,37 @@
         .outer input[type=text]{width:100%; height:35px; border:none; font-size: 14px;}
         .outer textarea{resize: none; font-size: 14px;}
         
-        /* 결재선 모달 */
-        .signModalOuter{ margin:auto; text-align: center; width:1000px; height:500px;}
-        .signModalOuter ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
-        .signModalOuter ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
-        .signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
-        .modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
-        .modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:scroll;}
-        .modal1, .modal2, .modal4{width:30%;}
-        .modal3{width:5%; padding-top:160px;}
-        .modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
-        .modal4 .apply{background:rgb(255, 235, 152); color:black;}
-        .modal4_1{
-            height:10%; 
-            border:1px solid lightgray; 
-            margin-bottom: 17px;
-            padding-top:10px;
-            color:royalblue;
-            text-align: center;
-        }
-        .modal4_2{width:100%; height:30px;}
-        .modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
-        .modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 20px;}
+		/* 결재선 모달 */
+	   	.signModalOuter{ margin:auto; text-align: center; width:1000px; height:500px;}
+	   	.signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
+	    
+	    .modal1 ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
+	    .modal1 ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
+	    .modal1>ul.on1 {cursor:pointer; background: rgb(170, 218, 248);}
+    	.modal2>ul>li.on2 {cursor:pointer; background: rgb(170, 218, 248);}
+	    .modal2 ul {padding: 4px 0 0 0;}
+	    .modal2 li {list-style:none; margin-bottom:13px; padding-bottom: 3px;}
+	    .modal2 li:hover{cursor:pointer; background: rgb(170, 218, 248); margin-bottom:13px; padding-bottom: 3px;}
+	    
+	    .modal1 {padding-top:37px;}
+	    .modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
+	    .modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:auto;}
+	    .modal1, .modal2, .modal4{width:30%;}
+	    .modal3{width:5%; padding-top:160px;}
+	    .modal3 .btn-primary {margin-left: 0px;}
+	    .modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
+	    .modal4 .apply{background:rgb(255, 235, 152); color:black;}
+	    .modal4_1{
+	        height:10%; 
+	        border:1px solid lightgray; 
+	        margin-bottom: 17px;
+	        padding-top:10px;
+	        color:royalblue;
+	        text-align: center;
+	    }
+	    .modal4_2{width:100%; height:30px;}
+	    .modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
+	    .modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 25px 20px 20px 0;}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -133,6 +144,7 @@
                                     <option value="expenseForm.ea" selected>지출결의서</option>
                                     <option value="documentEnrollForm.ea">회람</option>
                                 </select>
+                                <input type="hidden" id="approvalFormCode" value="">
                               </div>
                         </td>
                         <td class="td3">문서번호</td>
@@ -164,11 +176,11 @@
                         <td>부장</td>
                     </tr>
                     <tr height="40%;">
-                        <td class="signTd">싸인싸인</td>
-                        <td class="signTd"></td>
-                        <td class="signTd"></td>
-                        <td class="signTd"></td>
-                        <td class="signTd"></td>
+                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check1.png"></td>
+                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
+                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
+                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
+                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
                     </tr>
                     <tr height="15%;">
                         <td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
@@ -261,11 +273,11 @@
                             <div class="signModalOuter">
                                 <div class="modal1">
                                 	<c:forEach var="dept" items="${ list }">
-                                			<ul id="deptName" onclick="dept();">${ dept.deptName }(${ dept.count })</ul>
+                                		<ul id="dept">${ dept.deptName }(${ dept.count }) <input type="hidden" name=" deptNo" class="deptNo" value="${ dept.deptNo }" ></ul>
                                     </c:forEach>
                                 </div>
                                 <div class="modal2">
-                                    <ul onclick="deptName();"></ul>
+                                    <ul></ul>
                                 </div>
                                 <div class="modal3">
                                     <button class="btn btn-primary"> > </button>
@@ -296,43 +308,65 @@
                                 </div>
                             </div>    
                         </div>
-                        
-                        <script type="text/javascript">
-                        	function dept(){
-                                $.ajax({
-                                    url:"memberList.ea",
-                                    data:{deptNo:${dept.deptNo}},
-                                    success:function(list){
-                                    	$(".modal2 ul").html(list);
-                                    },error:function(){
-                                        console.log("실패");
-                                    }
-                                });
-                            }
-                        	function $("#deptName"){
-                        		
-                        	}
-                        </script>
-                        
-                        
                     </div>
                     </div>
                 </div>
                 </form>
-            <br><br><br>
+                <!-- //The Modal -->
+                
         </div>
     </div>
+    
+	<!-- 결재선 AJAX용 script -->
+    <script type="text/javascript">
+	    $(function(){
+	         $(".modal1>ul").click(function(){
+	        	 var deptNo = $(this).children(".deptNo").val();
+	         	 var json = JSON.parse(deptNo);
+		         $.ajax({
+		                  url:"memberList.ea",
+		                  data:{deptNo:deptNo},
+		                  success:function(list){
+		                  	var value="";
+		                	$.each(list, function(i, obj){
+		                  	value += "<li>"
+		                          + obj.memName + "(" + obj.posiName + ")"
+		                          + "</li>"
+		                	})
+		                  $(".modal2 ul").html(value);
+		                  },error:function(){
+		                      console.log("실패");
+		                  }
+		         });
+	      	})
+	   });
+	   							
+	   $(function(){
+			$(".modal1>ul").click(function(){
+				$('.modal1>ul').click(function(){
+					$('.modal1>ul').removeClass()
+					$(this).addClass('on1')
+				})
+			})
+		});
 	
+		$(function(){
+			$(".modal2>ul>li").click(function(){
+				console.log("클릭");
+				$('.modal2>ul>li').click(function(){
+					$('.modal2>ul>li').removeClass()
+					$(this).addClass('on2')
+				})
+			})
+		});		
+	</script>
+	
+	<!-- 클릭된 폼으로 이동용 script -->
 	<script>
-      var len = $('#ecTitle').val().length;
-      $('#ecTitle').focus();
-      $('#ecTitle')[0].setSelectionRange(len, len);
-
-      function moveurl(url) { 
-          location.href = url;
-      };
+		function moveurl(url) { 
+		    location.href = url;
+		};
    	</script>
-	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

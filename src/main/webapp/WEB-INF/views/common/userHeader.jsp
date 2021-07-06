@@ -84,23 +84,29 @@
 		                        <li><a class="dropdown-item" href="#!">사원명</a></li>
 		                        <li><a class="dropdown-item" href="#!" style="font-size: 13px;">이메일</a></li>
 		                        <li><hr class="dropdown-divider" /></li> 
-		                    
 		                        <li><a href="logout.me" class="dropdown-item dropCenter">Logout</a></li>
 		                        <li><a href="#!" class="dropdown-item dropCenter">MYPAGE</a></li>
+	    
 	                           
 	                        </c:when>
 	                        <c:otherwise>
-	                        <!-- 로그인 후 -->
+            			  	<!-- 사용자-로그인 후  -->
    		                        <li><a class="dropdown-item" href="#!">${ loginUser.memName }</a></li>
 		                        <li><a class="dropdown-item" href="#!" style="font-size:13px;">${ loginUser.id}@brent.com</a></li>
 		                        	<li><hr class="dropdown-divider" /></li> 
-		                        <li><a href="newMemberList.admin" class="dropdown-item dropCenter" style="color:purple;">ADMIN</a></li>
-		                    		<li><hr class="dropdown-divider" /></li> 
+			                        	
+			                        	<!-- 관리자 로그인 경우 -->
+			                        	<c:if test="${loginUser.adminStatus eq 'Y'}">
+			                    			<li><a href="newMemberList.admin" class="dropdown-item dropCenter" style="color:purple;">ADMIN</a></li>
+		                        			<li><hr class="dropdown-divider" /></li> 
+			                        	</c:if>
+		                    	
 	                         	<li><a href="#!" class="dropdown-item dropCenter">MYPAGE</a></li>
            			            <li><a href="logout.me" class="dropdown-item dropCenter">Logout</a></li>
+           			            
+           			            
 	                       		
 	                        </c:otherwise>
-	                        
                         </c:choose>
 
                     </ul>

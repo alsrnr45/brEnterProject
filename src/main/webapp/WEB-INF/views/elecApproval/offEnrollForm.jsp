@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
@@ -61,26 +61,41 @@
    
     /* 결재선 모달 */
 	.signModalOuter{ margin:auto; text-align: center; width:1000px; height:500px;}
-	.signModalOuter ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
-	.signModalOuter ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
-	.signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
-	.modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
-	.modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:scroll;}
-	.modal1, .modal2, .modal4{width:30%;}
-	.modal3{width:5%; padding-top:160px;}
-	.modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
-	.modal4 .apply{background:rgb(255, 235, 152); color:black;}
-	.modal4_1{
-	    height:10%; 
-	    border:1px solid lightgray; 
-	    margin-bottom: 17px;
-	    padding-top:10px;
-	    color:royalblue;
-	    text-align: center;
-	}
-	.modal4_2{width:100%; height:30px;}
-	.modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
-	.modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 20px;}
+    .signModalOuter .modal1 ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
+    /*
+    .signModalOuter .modal1 ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
+    .modal1>ul:hover>a .modal1>ul:focus>a, .modal1>ul:active>a, .modal1>ul:visited>a {cursor:pointer; background: rgb(170, 218, 248) !important; padding-top:3px;}
+    */
+    .modal1>ul.on1 {cursor:pointer; background: rgb(170, 218, 248);}
+    .modal2>ul>li.on2 {cursor:pointer; background: rgb(170, 218, 248);}
+    
+    
+    .signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
+    .modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
+    .modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:auto;}
+    .modal1, .modal2, .modal4{width:30%;}
+    .modal3{width:5%; padding-top:160px;}
+    .modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
+    .modal4 .apply{background:rgb(255, 235, 152); color:black;}
+    .modal4_1{
+        height:10%; 
+        border:1px solid lightgray; 
+        margin-bottom: 17px;
+        padding-top:10px;
+        color:royalblue;
+        text-align: center;
+    }
+    .modal4_2{width:100%; height:30px;}
+    .modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
+    .modal4_3{height:47%; border:1px solid lightgray; text-align: center; padding: 25px 20px 20px 0;}
+	
+	.modal1 {padding-top:37px;}
+	.modal2 ul {padding: 4px 0 0 0;}
+	.modal2 li {list-style:none; margin-bottom:13px; padding-bottom: 3px;}
+	/*
+	.modal2 li:hover{cursor:pointer; background: rgb(170, 218, 248); margin-bottom:13px; padding-bottom: 3px;}
+	*/
+	.modal3 .btn-primary {margin-left: 0px;}
 </style>
 
 </head>
@@ -180,9 +195,8 @@
 	                  <br>
 	               </div>
 	
-	               <div class="content_3">
-	                  <form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
-	                     <table class="tableType03">
+					 <div class="content_3">
+						<table class="tableType03">
 	                        <tr height="40">
 	                           <th>제목</th>
 	                           <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." placeholder="제목을 입력해주세요." required></td>
@@ -207,9 +221,7 @@
 	                              <input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." placeholder="내용을 입력해주세요." required style="height:250px;">
 	                           </td>
 	                        </tr>
-	                     </table>   
-	                     
-	                  </form>
+						</table>   
 	               </div>
 	
 	            </form>
@@ -231,21 +243,23 @@
 					
 					<!-- Modal body -->
 					<div class="modal-body" style="width:100%; height:100%;">
-						<div class="signModalOuter">
-							<div class="modal1">
-								<c:forEach var="dept" items="${ list }">
-									<ul onclick="dept();">${ dept.deptName }(${fn:length(list)})</ul>
-								</c:forEach>
-							</div>
-							<div class="modal2">
-								<c:forEach var="mem" items="${ mlist }">
-									<ul onclick="deptName();">${ mem.memName }(${ mem.posiName })</ul>
-								</c:forEach>
-							</div>
-		 					<div class="modal3">
-								<button class="btn btn-primary"> > </button>
-								<button class="btn btn-primary"> < </button>
-							</div>
+                            <div class="signModalOuter">
+                                <div class="modal1">
+                                	<c:forEach var="dept" items="${ list }">
+                               			<ul id="dept">
+                               				<a>${ dept.deptName }(${ dept.count })</a>
+                               				<input type="hidden" name="deptNo" class="deptNo" value="${ dept.deptNo }">
+                               			</ul>
+                                    </c:forEach>
+                                </div>
+                                <div class="modal2">
+                                    <ul>
+                                    </ul>
+                                </div>
+                                <div class="modal3">
+                                    <button class="btn btn-primary"> > </button>
+                                    <button class="btn btn-primary"> < </button>
+                                </div>
 							<div class="modal4" align="left">
 								<div style="margin-bottom:5px;"><b>기안자</b></div>
 								<div class="modal4_1">
@@ -276,28 +290,63 @@
 		</div>
 	</form>
 
-   <script>
-      var len = $('#ecTitle').val().length;
-      $('#ecTitle').focus();
-      $('#ecTitle')[0].setSelectionRange(len, len);
+	<script type="text/javascript">
+		var len = $('#ecTitle').val().length;
+		$('#ecTitle').focus();
+		$('#ecTitle')[0].setSelectionRange(len, len);
 
-      function moveurl(url) { 
-          location.href = url;
-      };
-      
-      function dept(){
-          $.ajax({
-              url:"memberList.ea",
-              data:{deptNo : ${ dept.deptNo }},
-              success:function(list){
-              	$(".modal2 ul").html(list);
-              },error:function(){
-                  console.log("실패");
-              }
-          });
-      }
-      
-      
+		function moveurl(url) { 
+			location.href = url;
+		};
+
+		$(function(){
+			$(".modal1>ul").click(function(){
+  			
+			var deptNo = $(this).children(".deptNo").val();
+			var json = JSON.parse(deptNo);
+  			
+			$.ajax({
+                  url:"memberList.ea",
+                  data:{deptNo:deptNo},
+                  success:function(list){
+                  	//console.log(list);
+                	
+                  	var value="";
+    				$.each(list, function(i, obj){
+						value += "<li>" + obj.memName + "(" + obj.posiName + ")" + "</li>"
+    				})
+                  	
+    				console.log(value);
+                  	$(".modal2 ul").html(value);
+                  	
+	                  },error:function(){
+	                      console.log("실패");
+	                  }
+	                  
+	                  
+				});
+			
+			
+			$('.modal2>ul>li').click(function(){
+				$('.modal2>ul>li').removeClass()
+				$(this).addClass('on2')
+			})
+		});
+
+		$(function(){
+			$(".modal1>ul").click(function(){
+		
+				$('.modal1>ul').click(function(){
+					$('.modal1>ul').removeClass()
+					$(this).addClass('on1')
+				})
+				
+			})
+		});
+		
+
+		
+		
    </script>
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

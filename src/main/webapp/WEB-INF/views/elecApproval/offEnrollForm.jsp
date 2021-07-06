@@ -195,8 +195,9 @@
 	                  <br>
 	               </div>
 	
-					 <div class="content_3">
-						<table class="tableType03">
+	               <div class="content_3">
+	                  <form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
+	                     <table class="tableType03">
 	                        <tr height="40">
 	                           <th>제목</th>
 	                           <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." placeholder="제목을 입력해주세요." required></td>
@@ -221,7 +222,9 @@
 	                              <input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." placeholder="내용을 입력해주세요." required style="height:250px;">
 	                           </td>
 	                        </tr>
-						</table>   
+	                     </table>   
+	                     
+	                  </form>
 	               </div>
 	
 	            </form>
@@ -322,14 +325,7 @@
 	                  },error:function(){
 	                      console.log("실패");
 	                  }
-	                  
-	                  
 				});
-			
-			
-			$('.modal2>ul>li').click(function(){
-				$('.modal2>ul>li').removeClass()
-				$(this).addClass('on2')
 			})
 		});
 
@@ -344,7 +340,18 @@
 			})
 		});
 		
-
+		$(function(){
+			$(".modal2>ul>li").click(function(){
+				console.log("클릭");
+		
+				$('.modal2>ul>li').click(function(){
+					$('.modal2>ul>li').removeClass()
+					$(this).addClass('on2')
+				})
+				
+			})
+		});
+		
 		
 		
    </script>

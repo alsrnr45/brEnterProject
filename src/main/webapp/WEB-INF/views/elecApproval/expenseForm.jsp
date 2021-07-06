@@ -126,7 +126,7 @@
                         <td class="td1">문서종류</td>
                         <td class="td2">
                             <div class="form-group">
-                                <select class="form-control" style="font-size: 13px;">
+                                <select class="form-control" style="font-size: 13px;"  onchange="moveurl(this.value);">
                                     <option value="documentEnrollForm.ea">기획안</option>
                                     <option value="documentEnrollForm.ea">업무연락</option>
                                     <option value="offEnrollForm.ea">연차</option>
@@ -149,7 +149,7 @@
                 <table class="signLine">
                     <tr height="15%;">
                         <td rowspan="6" style="width:5%; font-weight: bold;">기안자</td>
-                        <td>개발팀</td>
+                        <td>${ loginUser.deptName }</td>
                         <td rowspan="6" style="width:5%; font-weight: bold;">결재자</td>
                         <td>개발팀</td>
                         <td>개발팀</td>
@@ -157,7 +157,7 @@
                         <td>개발팀</td>
                     </tr>
                     <tr height="15%;">
-                        <td>사원</td>
+                        <td>${ loginUser.posiName }</td>
                         <td>대리</td>
                         <td>과장</td>
                         <td>차장</td>
@@ -171,14 +171,14 @@
                         <td class="signTd"></td>
                     </tr>
                     <tr height="15%;">
-                        <td>2021-06-01</td>
+                        <td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
                         <td>2021-06-01</td>
                         <td>2021-06-01</td>
                         <td>2021-06-02</td>
                         <td>2021-06-02</td>
                     </tr>
                     <tr height="15%;">
-                        <td style="color:royalblue;">안소은</td>
+                        <td style="color:royalblue;">${ loginUser.memName }</td>
                         <td>김대리</td>
                         <td>김과장</td>
                         <td>김차장</td>
@@ -251,19 +251,21 @@
                         <div class="modal-header">
                             <h5 class="modal-title">결재선 설정</h5>
                         </div>
+	                      
+	                    <c:forEach var="count" items="${ mCount }">
+                        	<input type="hidden" name="memCount" value="${ mCount.memCount }">
+                        </c:forEach>
                         
                         <!-- Modal body -->
                         <div class="modal-body" style="width:100%; height:100%;">
                             <div class="signModalOuter">
                                 <div class="modal1">
                                 	<c:forEach var="dept" items="${ list }">
-                                			<ul onclick="dept();">${ dept.deptName }(${ mList.mem_count })</ul>
+                                			<ul id="deptName" onclick="dept();">${ dept.deptName }(${ dept.count })</ul>
                                     </c:forEach>
                                 </div>
                                 <div class="modal2">
-                                	<c:forEach var="mem" items="${ mlist }">
-                                    	<ul onclick="deptName();">${ mem.memName }(${ mem.posiName })</ul>
-                                    </c:forEach>
+                                    <ul onclick="deptName();"></ul>
                                 </div>
                                 <div class="modal3">
                                     <button class="btn btn-primary"> > </button>
@@ -272,7 +274,7 @@
                                 <div class="modal4" align="left">
                                     <div style="margin-bottom:5px;"><b>기안자</b></div>
                                     <div class="modal4_1">
-                                        <p>안소은</p>
+                                        <p>${ loginUser.memName }</p>
                                     </div>
                                     <div class="modal4_2">
                                         <b style="float:left;">결재자</b>
@@ -294,22 +296,24 @@
                                 </div>
                             </div>    
                         </div>
-                        /*
-                        <!-- 결재선 ajax 
+                        
                         <script type="text/javascript">
-                        	function deptName(){
+                        	function dept(){
                                 $.ajax({
                                     url:"memberList.ea",
-                                    data:{memNo : ${mem.memNo}},
-                                    success:function(memNo){
-                                        alert(memNo);
+                                    data:{deptNo:${dept.deptNo}},
+                                    success:function(list){
+                                    	$(".modal2 ul").html(list);
                                     },error:function(){
                                         console.log("실패");
                                     }
                                 });
                             }
+                        	function $("#deptName"){
+                        		
+                        	}
                         </script>
-                        -->
+                        
                         
                     </div>
                     </div>
@@ -319,6 +323,15 @@
         </div>
     </div>
 	
+	<script>
+      var len = $('#ecTitle').val().length;
+      $('#ecTitle').focus();
+      $('#ecTitle')[0].setSelectionRange(len, len);
+
+      function moveurl(url) { 
+          location.href = url;
+      };
+   	</script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

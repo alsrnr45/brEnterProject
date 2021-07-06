@@ -14,12 +14,12 @@ public class BoardFreeReply {
 	
 	private int freeReplyNo;
 	private int freeNo;
-	private int memNo;
+	private String memNo;
 	private int freeReplyCount; 
 	private String freeReplyCnt;
 	private String freeReplyEnroll;
 	private String freeReplyUpdate;
-	private int freeReplyLike; 			// 자유 댓글 좋아요 수 
+	private int freeReplyLike; 			
 	private String freeReplyStatus; 
 		
 }

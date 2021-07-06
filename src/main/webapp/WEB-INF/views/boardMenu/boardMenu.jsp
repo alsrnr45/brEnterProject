@@ -51,7 +51,14 @@
 	.menuOuter {
 		font-size:0.8125em;
 		margin:auto;
-		width:60%;
+		width:57%;
+	}
+	.boardMenuTitle{
+		cursor:pointer;
+		width:30%;
+	}
+	.boardMenuEnrolldateh, .boardMenuEnrolldated {
+		width:25%;
 	}
 	
 	/* 검색창 */
@@ -85,6 +92,8 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
+        <c:set var="list" value="${boardMenuList}" />
+        	    
         <div class="menuOuter">
 	    	<div>
 	        	<div>
@@ -103,19 +112,28 @@
 	        					<th>번호</th>
 	        					<th>제목</th>
 	        					<th>조회수</th>
-	        					<th>작성일</th>
+	        					<th class="boardMenuEnrolldateh">작성일</th>
 	        				</tr>
 	        			</thead>
 	        			<tbody align="center">
+	        				<c:forEach items="${boardMenuList}" var="boardMenuList">
 	        				<tr>
-	        					<td>1</td>
-	        					<td>2021-06-07 ~ 2021-06-11 주간식단</td>
-	        					<td>217</td>
-	        					<td>2021-06-07</td>
+	        					<td>${boardMenuList.weekmenuNo}</td>
+	        					<td class="boardMenuTitle">${boardMenuList.weekmenuTitle}</td>
+	        					<td>${boardMenuList.weekmenuCount}</td>
+	        					<td class="boardMenuEnrolldated">${boardMenuList.weekmenuEnrolldate}</td>
 	        				</tr>
+	        				</c:forEach>
 	        			</tbody>
 	        		</table>
 	        	</form>
+	        	<script>
+	        		$(function(){
+	        			$("#menuList .boardMenuTitle").click(function(){
+	        				location.href="" + $(this).children("").text();
+	        			})
+	        		})
+	        	</script>
 	        		
 	        <nav aria-label="Page navigation example">
 				<ul class="pagination">

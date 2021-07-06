@@ -108,7 +108,8 @@
 		                                       	</tr>
 		                                	</c:forEach>
 	                                    </tbody>
-	                                    <button type="submit" onclick="return check();" class="btn btn-danger" style="float:left;">선택 삭제</button> 
+	                                    <button type="submit" onclick="return check();" class="btn btn-danger" style="float: left;">
+	                                    	선택 삭제</button>
 	                                </table> 
 	                            </div>
                             </form>
@@ -137,7 +138,7 @@
          				$("#deleteBoardFree").attr("action", "adminDeleteBoardFree.bf").submit(); 
          				
                     } else {
-                    	alert("삭제가 취소되었습니다");
+                    	alert("삭제가 취소되었습니다.");
                     	return false;
                     }
          			

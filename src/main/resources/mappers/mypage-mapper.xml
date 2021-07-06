@@ -4,22 +4,40 @@
 
 <!-- 작성자 : 박지은 - 주문내역 조회 -->
 <select id="orderList" parameterType="int" resultType="com.brEnt.brFamily.myPage.model.vo.OrderList">
-   		select
-   			   l.order_no as order_no
-   			 , l.pdt_no as pdt_no
-   			 , l.pdt_count as pdt_count
-   			 , f.mem_no as mem_no
-   			 , f.order_receiver as order_receiver
-   			 , f.post_code as post_code
-   			 , f.road_address as road_address
-   			 , f.detail_address as detail_address
-   			 , f.receiver_phone as receiver_phone
-   			 , f.ship_message as ship_message
-   			 , f.total_price as total_price
-   			 , f.pay_method as pay_method
-		  from order_list l, order_form f
-		 where l.order_no = f.order_no
-		   and f.mem_no = #{memNo}
+      select
+         o.order_no as order_no
+         , o.pdt_no as pdt_no
+         , o.pdt_count as pdt_count
+         , o.mem_no as mem_no
+            , o.order_receiver as order_receiver
+            , o.post_code as post_code
+            , o.road_address as road_address
+            , o.detail_address as detail_address
+            , o.receiver_phone as receiver_phone
+            , o.ship_message as ship_message
+            , o.total_price as total_price
+            , o.pay_method as pay_method
+         , p.pdt_name as pdt_name
+         , p.pdt_file as pdt_file
+         , p.mem_price as mem_price
+        from  ( select
+                  l.order_no as order_no
+               , l.pdt_no as pdt_no
+                , l.pdt_count as pdt_count
+                , f.mem_no as mem_no
+                , f.order_receiver as order_receiver
+                , f.post_code as post_code
+                , f.road_address as road_address
+                , f.detail_address as detail_address
+                , f.receiver_phone as receiver_phone
+                , f.ship_message as ship_message
+                , f.total_price as total_price
+               , f.pay_method as pay_method
+           from order_list l, order_form f
+             where l.order_no = f.order_no
+         and f.mem_no = #{memNo} ) o , product p
+         where o.pdt_no = p.pdt_no
+         and 1 = 1
    </select>
 
 

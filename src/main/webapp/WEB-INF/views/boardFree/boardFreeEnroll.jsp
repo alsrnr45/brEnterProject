@@ -106,10 +106,10 @@
 	                            <div style="margin-left:870px;">
 	                                <button type="submit" onclick="return validate()" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
 	                                    등록하기</button>
-	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray;">목록으로</a>
+	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray;">
+	                                	목록으로</a>
 	                            </div><br><br>
-	                            
-	                          	
+	                            	                          	
 	                            <div class="content_1">
 	                            	<div class="summernote">
 		                            	<table class="boardFreeTable">

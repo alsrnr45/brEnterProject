@@ -20,6 +20,7 @@
 	<resultMap type="Dept" id="dept">
 		<id column="dept_no" property="deptNo" />
 		<result column="dept_name" property="deptName" />
+		<result column="count" property="count"/>
 	</resultMap>
 	
 	<resultMap type="Member" id="member">
@@ -57,49 +58,29 @@
 		    by ec_enrolldate desc
 	</select>
 	
-	<!-- 작성자 : 안소은 = 결재선 부서 리스트 조회 -->
+	<!--           작성자 : 안소은            -->
+	<!-- 결재선 부서 리스트 조회 -->
 	<select id="selectDept" resultMap="dept">
 		select
 			   dept_no
 			 , dept_name
-	      from dept
+			 , (select count(*)
+			 	  from member m
+			 	 where d.dept_no = m.dept_no) count
+	      from dept d
 	</select>
 	
-	<!-- 작성자 : 안소은 / 결재선 사원, 부서명, 직급 조회 -->
-	<select id="selectMember" resultMap="member">
-		select
-		       mem_no
-		     , mem_name
-		     , dept_name
-		     , posi_name
-		  from member m
-		  join dept d on (m.dept_no = d.dept_no)
-		  join position p on(m.posi_no = p.posi_no)
-		 where m.dept_no = d.dept_no
-	</select>
-	
-	<!-- 작성자 : 안소은 / 결재선 부서별 사원 조회 -->
+	<!-- 결재선 해당 부서 사원 조회용 AJAX -->
 	<select id="selectMemberList" resultMap="member">
 		select
 		       mem_name
 		     , posi_name
 		  from member m
 		  join position p on(m.posi_no = p.posi_no)
-		 where m.dept_no = ${memNo}
+		 where m.dept_no = #{deptNo}
 	</select>
 	
-	<!-- 작성자 : 안소은 = 결재선 부서별 사원 수 조회 
-	<select id="memCount" resultMap="member">
-		select 
-		       count(mem_no) 
-		     , dept_name
-		  from member m
-		  join dept d on (m.dept_no = d.dept_no)
-		 where m.dept_no = d.dept_no 
-		 group 
-		    by dept_name;
-	</select>
-	-->
+	
 	
 	
 	

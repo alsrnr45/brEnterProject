@@ -125,7 +125,7 @@
 		       member
 		   set dept_no = #{deptNo}
 		     , posi_no = #{posiNo}
-		     , hire_date = to_char(#{hireDate}, 'MM/DD/YYYY') hireDate}  <!-- 질문 -->
+		     , hire_date = to_char(to_date(#{hireDate}, 'YYYY-MM-DD'), 'MM/DD/YYYY')  <!-- 질문 -->
 		     , account = #{account}
 		     , regi = #{regi}
 		     , accept_status = 'Y'

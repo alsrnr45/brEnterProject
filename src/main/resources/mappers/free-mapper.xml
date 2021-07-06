@@ -18,7 +18,7 @@
 	<resultMap id="boardFreeReply" type="boardFreeReply">
 		<id column="free_reply_no" property="freeReplyNo"/>
 		<result column="free_no" property="freeNo"/>
-		<result column="mem_no" property="memNo"/>
+		<result column="id" property="memNo"/>
 		<result column="free_reply_count" property="freeReplyCount"/>
 		<result column="free_reply_cnt" property="freeReplyCnt"/>
 		<result column="free_reply_enroll" property="freeReplyEnroll"/>
@@ -116,8 +116,41 @@
 	
 	
 	<!-- 댓글 리스트 조회 -->
+	<select id="selectReplyList" resultMap="boardFreeReply" parameterType="_int">
+  		select 
+  			   free_reply_no
+  			 , free_reply_cnt
+  			 , id 
+  			 , free_reply_like
+  			 , to_char(free_reply_enroll, 'YYYY-MM-DD') free_reply_enroll
+  		  from free_reply f
+  		  join member m on (m.mem_no = f.mem_no) 
+  		 where free_reply_status = 'Y' 
+  		   and free_no = #{freeNo}  
+  		  order 
+  		     by free_reply_no desc  
+  	</select>
+	
 	
 	<!-- 댓글 작성 -->
+	<insert id="insertReply" parameterType="boardFreeReply">
+  		insert
+  		  into free_reply
+  		  (
+  		    free_reply_no
+  		  , free_reply_cnt
+  		  , free_no
+  		  , mem_no
+  		  )
+  		  values 
+  		  (
+  		    seq_frrno.nextval 
+  		  , #{freeReplyCnt}
+  		  , #{freeNo}
+  		  , #{memNo}
+  		  ) 		  
+  	</insert>
+	
 	
 	<!-- 댓글 수정 -->
 	

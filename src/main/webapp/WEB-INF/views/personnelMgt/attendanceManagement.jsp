@@ -47,7 +47,7 @@
             border-radius:10px;
             margin:auto;
             padding:10px;
-            background-color: #f7e5b2;
+            background-color: rgb(253, 255, 157);
         }
         .outer .caleander .day{background-color: white;}
         /* 근무체크 */
@@ -61,7 +61,7 @@
         .outer .firstLine .third .btn{
             width:100%;
             height:60px;
-            background: rgb(245, 238, 248);
+            background: rgb(177, 201, 245);
             color:black;
             border:none;
         }
@@ -150,7 +150,7 @@
                         </div>
                         <div>
                             <span>총근무시간</span> <br>
-                            <span class="number">2,401</span> 시간
+                            <span class="number">${ p.totalTime }</span> 시간
                         </div>
                         <div>
                             <span>평균근무시간</span> <br>
@@ -161,6 +161,8 @@
             </div>
         </div>
     </div>
+    
+    <!-- 실시간으로 시간을 구해오기 위한 script -->
 	<script type="text/javascript">
     	setInterval("dpTime()",1000); 
     	function dpTime(){ 

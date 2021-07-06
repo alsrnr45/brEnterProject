@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,36 +17,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
-	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(155, 89, 182); 
-	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	outline: 0 none;
-	}
-	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
-	}
-	option:checked {background: rgb(155, 89, 182); color: white;}
-	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color:black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(155, 89, 182);
-	    box-shadow: none;} 
-	
 	/* 컨텐츠 */
         .outer{margin:auto; height:800px;}
         .outer .firstLine{margin:auto; width:100%; height:400px;}
@@ -76,25 +47,20 @@
             border-radius:10px;
             margin:auto;
             padding:10px;
-            background-color: rgb(245, 238, 248);
+            background-color: #f7e5b2;
         }
         .outer .caleander .day{background-color: white;}
         /* 근무체크 */
         .outer .firstLine .second{padding-top:40px;}
-        .outer .firstLine .second .btn{
-            width:250px;
-            height:60px;
-            margin-bottom:10px;
-            background: rgb(245, 238, 248);
-            color:gray;
-            border: none;
-        }
+        .outer .firstLine .second .btn{width:250px; height:60px; margin-bottom:10px; border: none;}
+        .outer .firstLine .second .checkIn{background:rgb(252, 152, 185);}
+        .outer .firstLine .second .checkOut{background:rgb(16, 185, 115);}
         /* 근무현황 */
-        .outer .firstLine .third{color:royalblue;}
+        .outer .firstLine .third_1{margin-top:20px;}
+        .outer .firstLine .third_2{margin-top:18px;}
         .outer .firstLine .third .btn{
             width:100%;
             height:60px;
-            margin-bottom:13px;
             background: rgb(245, 238, 248);
             color:black;
             border:none;
@@ -108,13 +74,7 @@
             height:100px;
         }
         .outer .secondLine .average > div{margin-left:20px;}
-        .outer .secondLine .average>*{
-            text-align: center;
-            float:left;
-            width:300px;
-            margin:10px;
-            padding:15px;
-        }
+        .outer .secondLine .average>*{text-align: center; float:left; width:300px; margin:10px; padding:15px;}
         .outer .secondLine .average .number{color:royalblue;}
 </style>
 
@@ -131,7 +91,11 @@
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
-
+		
+		<!-- 현재날짜 -->
+		<c:set var="today" value="<%=new java.util.Date()%>" />
+		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd HH:mm:ss" /></c:set>
+		
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             <div class="outer">
@@ -147,9 +111,9 @@
                     <div class="first">
                         <div class=workPlan>
                             <div class="caleander">
-                                5월
+                                <fmt:formatDate value="${today}" pattern="MM" />
                                 <div class="day">
-                                    <p><h1>20</h1>목요일</p>
+                                    <p><h1><fmt:formatDate value="${today}" pattern="dd" /></h1>목요일</p>
                                 </div>
                             </div>
                             <br>
@@ -158,17 +122,39 @@
                         </div>
                     </div>
                     <div class="second">
-                        <h2><b>19 : 00 : 20</b></h2>
+                        <h2><b id="dpTime"></b></h2>
                         <br>
-                        <button class="btn btn-primary">출근하기</button>
-                        <button class="btn btn-primary">퇴근하기</button>
+                        <button class="btn btn-primary checkIn">출근하기</button>
+                        <button class="btn btn-primary checkOut">퇴근하기</button>
                     </div>
+                    <script type="text/javascript">
+                    	setInterval("dpTime()",1000); 
+                    	function dpTime(){ 
+                    		var now = new Date(); 
+                    		hours = now.getHours(); 
+                    		minutes = now.getMinutes(); 
+                    		seconds = now.getSeconds(); 
+                    		if (hours > 24){
+                    			hours -= 12; 
+                    		}else{ 
+                    		} if (hours < 10){ 
+                    			hours = "0" + hours; 
+                    		} if (minutes < 10){ 
+                    			minutes = "0" + minutes; 
+                    		} if (seconds < 10){ 
+                    			seconds = "0" + seconds; 
+                    		} 
+                    		document.getElementById("dpTime").innerHTML 
+                    		= hours + " : " + minutes + " : " + seconds; 
+                    	} 
+                    </script>
+
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
-                        <h2><b>09 : 00</b></h2>
+                        <h2 class="third_1"><b>09 : 00</b></h2>
                         <br>
                         <button class="btn btn-primary" style="margin-top:5px;" disabled>퇴근체크시간</button>
-                        <h2><b>19 : 00</b></h2>
+                        <h2 class="third_2"><b>19 : 00</b></h2>
                     </div>
                 </div>
                 <div class="secondLine">

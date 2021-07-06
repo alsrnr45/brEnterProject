@@ -23,4 +23,7 @@ public class PersonnelMgtController {
 	public String attendanceManagement() {
 		return "personnelMgt/attendanceManagement";
 	}
+	
+	
+	
 }

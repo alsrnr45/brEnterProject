@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="personnelMgtMapper">
+
+	<resultMap type="PersonnelMgt" id="attend">
+		<id column="attend_no" property="attendNo" />
+		<result column="mem_no" property="memNo" />
+		<result column="today" property="today" />
+		<result column="check_in" property="checkIn" />
+		<result column="check_out" property="checkOut" />
+		<result column="total_time" property="totalTime" />
+	</resultMap>
+
+
 </mapper>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment</title>
+<title>attendanceManagement</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -95,7 +95,11 @@
 		<!-- 현재날짜 -->
 		<c:set var="today" value="<%=new java.util.Date()%>" />
 		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd HH:mm:ss" /></c:set>
-		
+		<c:set var="now" value="<%=new java.util.Date() %>"/>
+		<fmt:formatDate value="${now}" pattern="E" var="day" />
+
+
+
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             <div class="outer">
@@ -111,9 +115,9 @@
                     <div class="first">
                         <div class=workPlan>
                             <div class="caleander">
-                                <fmt:formatDate value="${today}" pattern="MM" />
+                                <fmt:formatDate value="${today}" pattern="M" />월
                                 <div class="day">
-                                    <p><h1><fmt:formatDate value="${today}" pattern="dd" /></h1>목요일</p>
+                                    <p><h1><fmt:formatDate value="${today}" pattern="dd" /></h1>${ day }요일</p>
                                 </div>
                             </div>
                             <br>
@@ -127,27 +131,7 @@
                         <button class="btn btn-primary checkIn">출근하기</button>
                         <button class="btn btn-primary checkOut">퇴근하기</button>
                     </div>
-                    <script type="text/javascript">
-                    	setInterval("dpTime()",1000); 
-                    	function dpTime(){ 
-                    		var now = new Date(); 
-                    		hours = now.getHours(); 
-                    		minutes = now.getMinutes(); 
-                    		seconds = now.getSeconds(); 
-                    		if (hours > 24){
-                    			hours -= 12; 
-                    		}else{ 
-                    		} if (hours < 10){ 
-                    			hours = "0" + hours; 
-                    		} if (minutes < 10){ 
-                    			minutes = "0" + minutes; 
-                    		} if (seconds < 10){ 
-                    			seconds = "0" + seconds; 
-                    		} 
-                    		document.getElementById("dpTime").innerHTML 
-                    		= hours + " : " + minutes + " : " + seconds; 
-                    	} 
-                    </script>
+                    
 
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
@@ -177,7 +161,27 @@
             </div>
         </div>
     </div>
-	
+	<script type="text/javascript">
+    	setInterval("dpTime()",1000); 
+    	function dpTime(){ 
+    		var now = new Date(); 
+    		hours = now.getHours(); 
+    		minutes = now.getMinutes(); 
+    		seconds = now.getSeconds(); 
+    		if (hours > 24){
+    			hours -= 24; 
+    		} else{ 
+    		} if (hours < 10){ 
+    			hours = "0" + hours; 
+    		} if (minutes < 10){ 
+    			minutes = "0" + minutes; 
+    		} if (seconds < 10){ 
+    			seconds = "0" + seconds; 
+    		} 
+    		document.getElementById("dpTime").innerHTML 
+    		= hours + " : " + minutes + " : " + seconds; 
+    	}
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

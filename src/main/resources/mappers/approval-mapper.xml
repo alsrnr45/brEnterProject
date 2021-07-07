@@ -17,6 +17,26 @@
 		<result column="ec_status" property="ecStatus"/>	
 	</resultMap>
 	
+	<resultMap id="off" type="off">
+		<id column="ec_doc_no" property="ecDocNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ec_doc_name" property="ecDocName"/>
+		<result column="ec_writer" property="ecWriter"/>
+		<result column="ec_title" property="ecTitle"/>
+		<result column="ec_cnt" property="ecCnt"/>
+		<result column="ec_code" property="ecCode"/>
+		<result column="ec_enrolldate" property="ecEnrolldate"/>
+		<result column="ec_updatedate" property="ecUpdatedate"/>
+		<result column="ec_compdate" property="ecCompdate"/>
+		<result column="ec_canceldate" property="ecCanceldate"/>
+		<result column="ec_status" property="ecStatus"/>	
+		<result column="off_start" property="offStrat"/>	
+		<result column="off_end" property="offEnd"/>	
+		<result column="off_reason" property="offReason"/>	
+		<result column="dept_name" property="deptName"/>	
+		<result column="posi_name" property="posiName"/>	
+	</resultMap>
+	
 	<resultMap type="Dept" id="dept">
 		<id column="dept_no" property="deptNo" />
 		<result column="dept_name" property="deptName" />
@@ -79,6 +99,45 @@
 		  join position p on(m.posi_no = p.posi_no)
 		 where m.dept_no = #{deptNo}
 	</select>
+	
+	
+	<insert id="offInsert" parameterType="Off">
+		insert all
+		  into ec_document
+		     (
+             ec_doc_no
+           , mem_no
+           , ec_writer
+           , ec_title
+           , ec_cnt
+           , ec_code
+           , ec_enrolldate
+           , ec_status
+           , ec_doc_name
+           )
+		  
+		values 
+		     (
+		       SEQ_ECNO.NEXTVAL
+		     , #{memNo}
+		     , #{ecWriter}
+		     , #{ecTitle}
+		     , #{ecCnt}
+		     , #{ecCode}
+		     , DEFAULT
+		     , DEFAULT
+		     , #{ecDocName}
+		     )
+		  into off
+		values
+		     (
+		       SEQ_ECNO.NEXTVAL
+		     , #{offStart}
+		     , #{offEnd}
+		     )
+		select *
+		from dual
+	</insert>
 	
 	
 	

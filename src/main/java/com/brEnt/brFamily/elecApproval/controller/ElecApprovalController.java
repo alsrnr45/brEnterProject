@@ -2,6 +2,8 @@ package com.brEnt.brFamily.elecApproval.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
-import com.brEnt.brFamily.member.model.vo.Member;
 import com.google.gson.Gson;
 
 @Controller
@@ -34,12 +36,26 @@ public class ElecApprovalController {
       return mv;
    }
    
-   // 작성자 : 김혜미 -- 연차 신청폼
+
+   // 작성자 : 김혜미 -- 연차 확인폼
    @RequestMapping("offCheckForm.ea")
    public String offCheckForm() {
       return "elecApproval/offCheckForm";
    }
+   
+   
+   // 작성자 : 김혜미 -- 연차 신청
+   @RequestMapping("offInsert.ea")
+   public String offInsert(Off o, Model model) {
+	   System.out.println(o);
+	   
+	   int result = eaService.offInsert(o); 
+	
+	   return "redirect:approvalTotalList.ea";
+   }
 
+
+   
    // 작성자 : 최선희 -- 전자결재 전체 리스트 
    @RequestMapping("approvalTotalList.ea")
    public ModelAndView approvalTotalList(ModelAndView mv) {
@@ -52,12 +68,14 @@ public class ElecApprovalController {
       return mv;            
    }
    
+   
    // 작성자 : 최선희 -- 전자결재 진행중인 문서 대기 리스트 
    @RequestMapping("approvalStandbyList.ea")
    public String approvalStandbyList() {
       return "elecApproval/approvalStandbyList";
    }
       
+   
    // 작성자 : 최선희 — 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
    public ModelAndView documentEnrollForm(String code, ModelAndView mv) {   
@@ -82,24 +100,6 @@ public class ElecApprovalController {
       return "elecApproval/documentDetail";
    }
    
-   // 작성자 : 최선희 -- 관리자 전자결재 전체 리스트 
-   @RequestMapping("adminApprovalTotalList.ea")
-   public String adminApprovalTotalList() {
-      return "elecApproval/adminApprovalTotalList";
-   }
-   
-   // 작성자 : 최선희 -- 관리자 전자결재 진행중인 문서 승인 리스트 
-   @RequestMapping("adminApprovalStandbyList.ea")
-   public String adminApprovalStandbyList() {
-      return "elecApproval/adminApprovalStandbyList";
-   }
-   
-   // 작성자 : 최선희 -- 관리자 기획안/업무연락/회람 상세 페이지
-   @RequestMapping("adminDocumentDetail.ea")
-   public String adminDocumentDetail() {
-      return "elecApproval/adminDocumentDetail";
-   }
-   
    // 작성자 : 안소은 — 지출결의서 폼
    @RequestMapping("expenseForm.ea")
    public ModelAndView expenseForm(ModelAndView mv) {
@@ -109,7 +109,6 @@ public class ElecApprovalController {
 	   	 .setViewName("elecApproval/expenseForm");
 	   
 	   return mv;
-	   
    }
 
    // 작성자 : 안소은 — 지출결의서 상세페이지

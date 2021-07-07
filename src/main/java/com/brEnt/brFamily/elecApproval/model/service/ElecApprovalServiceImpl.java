@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.elecApproval.model.dao.ElecApprovalDao;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
 import com.brEnt.brFamily.member.model.vo.Member;
 
@@ -37,6 +38,12 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    public ArrayList<Member> selectMemberList(int deptNo) {
 	   return eaDao.selectMemberList(sqlSession, deptNo);
    }
+
+   // 작성자 : 김혜미 -- 연차 신청
+	@Override
+	public int offInsert(Off o) {
+		return eaDao.offInsert(sqlSession, o);
+	}
 
 
    

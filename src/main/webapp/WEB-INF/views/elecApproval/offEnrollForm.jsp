@@ -123,29 +123,30 @@
         <div id="layoutSidenav_content">
             
 			<div class="content">
-	            <form action="">
+	            <form action="offInsert.ea">
 	
-	               <button class="btn btn-primary" href="">기안하기</button>
+					<button class="btn btn-primary" href="">기안하기</button>
 	
-	               <div class="content_1">
-	                  <h6>기본 설정</h6>
-	                  <table class="tableType01">
-	                     <tr>
-	                        <th width="120px" height="35px;">문서종류</th> 
-	                        <td width="340px">
-	                           <select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
-	                              <option value="documentEnrollForm.ea">기획안</option>
-	                              <option value="documentEnrollForm.ea">업무연락</option>
-	                              <option value="offEnrollForm.ea" selected>연차</option>
-	                              <option value="expenseForm.ea">지출결의서</option>
-	                              <option value="documentEnrollForm.ea">회람</option>
-	                           </select>
-	                           <input type="hidden" id="approvalFormCode" value="">
-	                        </td>
-	                        <th width="120px">문서번호</th> 
-	                        <td width="340px">OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
-	                     </tr>
-	                  </table>
+						<div class="content_1">
+						<h6>기본 설정</h6>
+						
+						<table class="tableType01">
+	                    	<tr>
+		                        <th width="120px" height="35px;">문서종류</th> 
+		                        <td width="340px">
+		                           <select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
+		                              <option value="documentEnrollForm.ea">기획안</option>
+		                              <option value="documentEnrollForm.ea">업무연락</option>
+		                              <option value="offEnrollForm.ea" selected>연차</option>
+		                              <option value="expenseForm.ea">지출결의서</option>
+		                              <option value="documentEnrollForm.ea">회람</option>
+		                           </select>
+										<input type="hidden" name="ecCode" value="OF">
+		                        </td>
+			                    <th width="120px">문서번호<input type="hidden" name="ecDocName" value="OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
+			                    <td width="340px">OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
+							</tr>
+						</table>
 	                  <br><br>
 	               </div>
 	
@@ -159,35 +160,35 @@
 	                        <th rowspan="5" width="120">결재자</th>
 	                        <td width="136">개발팀</td>
 	                        <td width="136">개발팀</td>
-	                        <td width="136">개발팀</td>
+	                        <td width="136"></td>
 	                        <td width="136"></td>
 	                     </tr>
 	                     <tr height="35">
 	                        <td>${ loginUser.posiName }</td>
+	                        <td>대리</td>
 	                        <td>과장</td>
-	                        <td>차장</td>
-	                        <td>부장</td>
+	                        <td></td>
 	                        <td></td>
 	                     </tr>
 	                     <!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 	                     <tr height="80" style="color:gray;">
 	                        <td><img src="resources/elecApprovalUpfiles/check1.png"></td>
 	                        <td><img src="resources/elecApprovalUpfiles/check2.png"></td>
-	                        <td></td>
+	                        <td><img src="resources/elecApprovalUpfiles/check2.png"></td>
 	                        <td></td>
 	                        <td></td>
 	                     </tr>
 	                     <tr height="35">
 	                        <td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
-	                        <td>2021-06-11</td>
-	                        <td>2021-06-11</td>
-	                        <td>2021-06-11</td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
 	                        <td></td>
 	                     </tr>
 	                     <tr height="35">
 	                        <td style="color: royalblue;">${ loginUser.memName }</td>
-	                        <td>박과장</td>
-	                        <td></td>
+	                        <td>최선희</td>
+	                        <td>박지은</td>
 	                        <td></td>
 	                        <td></td>
 	                     </tr>
@@ -195,38 +196,41 @@
 	                  <br>
 	               </div>
 	
-	               <div class="content_3">
-	                  <form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
-	                     <table class="tableType03">
+					<div class="content_3">
+						<table class="tableType03">
 	                        <tr height="40">
 	                           <th>제목</th>
 	                           <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." placeholder="제목을 입력해주세요." required></td>
 	                        </tr>
 	                        <tr height="40">
 	                           <th width="120">기안자</th>
-	                           <td width="340"><input type="text" name="" id="" value="${ loginUser.memName }" readonly></td>
+	                           <td width="340">
+	                           		<input type="text" name="ecWriter" value="${ loginUser.memName }" readonly>
+	                           		<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+	                           	</td>
 	                           <th width="120">기안 부서</th>
-	                           <td width="340"><input type="text" name="" id="" value="${ loginUser.deptName }" readonly></td>
+	                           <td width="340"><input type="text" value="${ loginUser.deptName }" readonly></td>
 	                        </tr>
 	                        <tr height="40">
-	                           <th>연차신청일</th>
-	                           <td><input type="date" name="" id="" value="2021-06-24" required style="width:130px;"></td>
-	                           <th>기안 일시</th>
-	                           <td><input type="text" name="" id="" value="2021-06-11 10:18:07" readonly></td>
+								<th>연차신청일</th>
+								<td>
+									<input type="date" name="offStart" id="" value="2021-06-24" required style="width:130px; margin-right:25px">  
+									 ~
+	                           		<input type="date" name="offEnd" id="" value="2021-06-24" required style="width:130px; margin-left:25px;">
+								</td>
+								<th>기안 일시</th>
+								<td><input type="text" name="ecEnrolldate" id="" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />" readonly></td>
 	                        </tr>
 	                        <tr height="30">
 	                           <th colspan="4">상세내용</th>
 	                        </tr>
 	                        <tr>
 	                           <td colspan="4">
-	                              <input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." placeholder="내용을 입력해주세요." required style="height:250px;">
+	                              <input type="text" name="ecCnt" id="ecCnt" placeholder="내용을 입력해주세요." required style="height:250px;">
 	                           </td>
 	                        </tr>
-	                     </table>   
-	                     
-	                  </form>
-	               </div>
-	
+						</table>   
+					</div>
 	            </form>
 			</div>
 		</div>
@@ -294,13 +298,6 @@
 	</form>
 
 	<script type="text/javascript">
-		var len = $('#ecTitle').val().length;
-		$('#ecTitle').focus();
-		$('#ecTitle')[0].setSelectionRange(len, len);
-
-		function moveurl(url) { 
-			location.href = url;
-		};
 
 		$(function(){
 			$(".modal1>ul").click(function(){
@@ -332,27 +329,31 @@
 		$(function(){
 			$(".modal1>ul").click(function(){
 		
-				$('.modal1>ul').click(function(){
-					$('.modal1>ul').removeClass()
-					$(this).addClass('on1')
-				})
-				
+				$('.modal1>ul').removeClass()
+				$(this).addClass('on1')
+
 			})
 		});
 		
 		$(function(){
 			$(".modal2>ul>li").click(function(){
-				console.log("클릭");
 		
-				$('.modal2>ul>li').click(function(){
-					$('.modal2>ul>li').removeClass()
-					$(this).addClass('on2')
-				})
+				$('.modal2>ul>li').removeClass()
+				$(this).addClass('on2')
 				
 			})
 		});
 		
 		
+		// 
+		function moveurl(url) { 
+			location.href = url;
+		};
+		
+		
+		var len = $('#ecCnt').val().length;
+		$('#ecCnt').focus();
+		$('#ecCnt')[0].setSelectionRange(len, len);
 		
    </script>
    

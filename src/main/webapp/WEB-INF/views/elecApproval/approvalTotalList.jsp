@@ -123,57 +123,60 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
+	                                       <!-- 로그인한 유저가 올린 문서만 보이도록 조건 처리 -->                                         
 	                                       <c:forEach var="ea" items="${ list }">
-	                                       	   <tr>                             	   
-	                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	   
-	                                       	       	                                       	      	                                     	       
-	                                       	       <!-- 문서 코드에 따른 조건처리 -->
-	                                       	       <td>
-	                                       	       		<c:choose>
-	                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
-	                                       	       				기획안
-	                                       	       			</c:when>
-	                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
-	                                       	       				업무연락
-	                                       	       			</c:when>
-	                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
-	                                       	       				연차
-	                                       	       			</c:when>
-	                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
-	                                       	       				지출결의서
-	                                       	       			</c:when>
-	                                       	       			<c:otherwise>
-	                                       	       				회람 
-	                                       	       			</c:otherwise>
-	                                       	       		</c:choose>
-	                                       	       </td>
-	                                       	        
-	                                       	       <td>${ ea.ecTitle }<input id="ecCode" type="hidden" value="${ ea.ecCode }"></td>
-	                                       	       <td>${ ea.ecWriter }</td>
-	                                       	       
-	                                       	       <!-- JSTL 날짜형식 포맷팅 -->
-	                                       	       <td>
-	                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
-	                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
-	                                       	       </td>
-	                                       	       
-	                                       	       <td>${ ea.ecCompdate }</td>
-	                                       	       
-	                                       	       <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
-	                                       	       <td>
-	                                       	       	   <c:choose>	             
-		                                       	       	   <c:when test="${ empty ea.ecCanceldate && empty ea.ecCompdate  }">
-							                           	   		<font color="red">결재대기</font>
-							                           	   </c:when>
-							                           	   <c:when test="${ !empty ea.ecCanceldate && !empty ea.ecCompdate }">
-							                           	   		반려  		
-							                           	   </c:when>
-							                           	   <c:when test="${ empty ea.ecCanceldate && !empty ea.ecCompdate }">
-							                           	   		결재완료
-							                           	   </c:when>
-						                           	   </c:choose>
-	                                       	       </td>
-	                                       	   </tr>	
+	                                       	   <c:if test="${ loginUser.memName eq ea.ecWriter }">							
+		                                       	   <tr>                             	   
+		                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	   
+		                                       	       	                                       	      	                                     	       
+		                                       	       <!-- 문서 코드에 따른 조건처리 -->
+		                                       	       <td>
+		                                       	       		<c:choose>
+		                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
+		                                       	       				기획안
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
+		                                       	       				업무연락
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
+		                                       	       				연차
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
+		                                       	       				지출결의서
+		                                       	       			</c:when>
+		                                       	       			<c:otherwise>
+		                                       	       				회람 
+		                                       	       			</c:otherwise>
+		                                       	       		</c:choose>
+		                                       	       </td>
+		                                       	        
+		                                       	       <td>${ ea.ecTitle }<input id="ecCode" type="hidden" value="${ ea.ecCode }"></td>
+		                                       	       <td>${ ea.ecWriter }</td>
+		                                       	       
+		                                       	       <!-- JSTL 날짜형식 포맷팅 -->
+		                                       	       <td>
+		                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
+		                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
+		                                       	       </td>
+		                                       	       
+		                                       	       <td>${ ea.ecCompdate }</td>
+		                                       	       
+		                                       	       <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
+		                                       	       <td>
+		                                       	       	   <c:choose>	             
+			                                       	       	   <c:when test="${ empty ea.ecCanceldate && empty ea.ecCompdate  }">
+								                           	   		<font color="red">결재대기</font>
+								                           	   </c:when>
+								                           	   <c:when test="${ !empty ea.ecCanceldate && !empty ea.ecCompdate }">
+								                           	   		반려  		
+								                           	   </c:when>
+								                           	   <c:when test="${ empty ea.ecCanceldate && !empty ea.ecCompdate }">
+								                           	   		결재완료
+								                           	   </c:when>
+							                           	   </c:choose>
+		                                       	       </td>
+		                                       	   </tr>
+	                                       	   </c:if>	
 	                                       </c:forEach>
 	                                    </tbody>
 	                                </table>

@@ -72,8 +72,8 @@
                         </a>
                         <div class="collapse" id="electronicApproval" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="approvalTotalList.ea">문서함</a>
-                                <a class="nav-link" href="approvalStandbyList.ea">진행중인 문서</a>     
+                                <a class="nav-link" href="approvalTotalList.ea">기안 문서함</a>
+                                <a class="nav-link" href="approvalStandbyList.ea">결재대기 문서함</a>     
                             </nav>
                         </div>
                         

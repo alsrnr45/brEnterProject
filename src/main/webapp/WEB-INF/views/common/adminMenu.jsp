@@ -26,20 +26,7 @@
 	                        <a class="nav-link" href="newMemberList.admin">신규사원관리</a>
 	                        <a class="nav-link" href="memberList.admin">기존사원관리</a>
 	                    </nav>
-	                </div>        
-	
-	                <!-- 전자결재 -->
-	                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#electronicApproval" aria-expanded="false" aria-controls="collapseLayouts">
-	                    <div class="sb-nav-link-icon"><i class="far fa-clipboard"></i></div>
-	                    &nbsp;전자결재
-	                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-	                </a>
-	                <div class="collapse" id="electronicApproval" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-	                    <nav class="sb-sidenav-menu-nested nav">
-	                        <a class="nav-link" href="adminApprovalTotalList.ea">문서함</a>
-	                        <a class="nav-link" href="adminApprovalStandbyList.ea">진행중인 문서</a>
-	                    </nav>
-	                </div>    
+	                </div>        								
 	
 	                <!-- 게시판 -->
 	                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#board" aria-expanded="false" aria-controls="collapseLayouts">

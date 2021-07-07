@@ -100,6 +100,7 @@
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
                                 <a class="btn btn-primary btn-block" href="">메일쓰기</a>
+                                <a class="btn btn-primary btn-block">다시쓰기</a>
                                 <a class="btn btn-primary btn-block">삭제하기</a>
                             </div>
                         </div>

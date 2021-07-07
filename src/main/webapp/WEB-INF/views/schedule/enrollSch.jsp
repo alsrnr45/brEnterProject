@@ -200,10 +200,10 @@
                                         <span class="input-explain">참석자</span><input class="dataTable-input" id="attendance" name="attendance" value="${s.attendance}" type="number" min=0 placeholder="ex) 10"/>&nbsp;명 
                                         <label for="attendance"></label>
                                         <br><br>
-                                        <span class="input-explain">일정유형</span><input class="dataTable-input" id="schCategory" name="schCategory" value="${s.schCategory }" type="text" min=0 placeholder="ex) 회의"/>&nbsp;
+                                        <span class="input-explain">일정유형</span><input class="dataTable-input" id="schCategory" name="schCategory" value="${s.schCategory}" type="text" min=0 placeholder="ex) 회의"/>&nbsp;
                                         <label for="schCategory"></label>
                                         <br><br>내용<br>
-                                        <textarea class="dataTable-input" id="schContent" name="schContent" value="${s.schContent }" rows="5px"></textarea>
+                                        <textarea class="dataTable-input" id="schContent" name="schContent" value="${s.schContent}" rows="5px"></textarea>
                                         <br><br>
                                         <!-- 이미지/파일 버튼 다시 만들기-->
                                         <span class="input-explain">파일첨부</span>
@@ -211,10 +211,13 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center py-3">
-                                    <div class="small"><a class="btn btn-primary btn-block" id="planSch" onclick="planSchSubmit();">일정만들기</a></div>
-                                    <c:if test="">
-                                    <div class="small"><a class="btn btn-primary btn-block" id="updateSch" onclick="">수정하기</a></div>
-                                    </c:if>
+                                    <div class="small">
+                                    	<a class="btn btn-primary btn-block" id="planSch" onclick="planSchSubmit();">일정만들기</a>
+                                 	    <c:if test="${ !empty s.schNo }">
+                                    		<a class="btn btn-primary btn-block" id="updateSch" onclick="">수정하기</a>
+                                    	</c:if>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>

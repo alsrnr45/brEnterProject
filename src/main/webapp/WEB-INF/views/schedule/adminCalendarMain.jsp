@@ -41,7 +41,7 @@
           selectMirror: true,
           // 날짜 선택시 실행할 함수(ajax로 해보자)
           select: function insertSch(date) {
-        	  window.location = '/brFamily/enroll.sch?selected_date=' + date.startStr
+        	  window.location = '/brFamily/adminEnroll.sch?selected_date=' + date.startStr
         	
             // 일정만들기 페이지 호출
             /*
@@ -76,18 +76,11 @@
           },
           // 이벤트 클릭시 실행할 함수
           eventClick: function reqUpdateSch(arg) {
-        	  $("#reqSchNo").val(arg.event._def.publicId);
-        	  $("#reqUpForm").submit();
-     		
-        	 /* 
+     
         	var f = document.createElement('form');
         	
         	var data;
         	data = document.createElement('input');
-        	data.type = 'hidden';
-        	data.name = 'schNo';
-        	data.value = arg.event._def.publicId;
-        	
         	data.setAttribute('type', 'hidden');
         	data.setAttribute('name', 'schNo');
         	data.setAttribute('value', arg.event._def.publicId );
@@ -96,7 +89,6 @@
        	    f.setAttribute('action', 'requestUpdate.sch');
        	    document.body.appendChild(f);
        	    f.submit();
-       	    */
 
             //var schNo = arg.event._def.publicId;
             //location.href="/brFamily/enroll.sch?schNo=" + arg.event._def.publicId;
@@ -182,6 +174,37 @@
     </script>
 
     <style>
+    
+     #layoutAuthentication_content{
+         margin: auto;
+     }
+
+     .col-lg-5{
+         width:1000px;
+     }
+
+
+     .dataTable-input{
+         display: inline-block;
+     }
+
+     .input-explain{
+         display: inline-block;
+         width:70px;
+     }
+
+     #schTitle, #attendance, #schCategory, #schContent{
+         width: 60%;
+     }
+
+     #startDate, #endDate, #startTime, #endTime, #schStatus{
+         height:40px; width:130px;
+     }
+
+     #schContent{
+         resize: none;
+         width:68%
+     }
 
     body {
       margin: 40px 10px;
@@ -200,25 +223,21 @@
 </head>
 <body>
 
-	<form id="reqUpForm" action="requestUpdate.sch" method="post">
-		<input id="reqSchNo" type="hidden" name="schNo" >
-	</form>
-
 	<c:choose>
 		<c:when test="${ empty loginUser }" >
 		<!-- 로그인 전 -->
    		</c:when>
    		<c:otherwise>
 			<!-- 상단바 -->
-			<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-				<jsp:include page="../common/userHeader.jsp"/>
-			</nav>
+	       	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+				<jsp:include page="../common/adminHeader.jsp"/>
+		    </nav>
     
 			<div id="layoutSidenav">
 				<!-- 메뉴바 -->
-				<div id="layoutSidenav_nav">
-		            <jsp:include page="../common/userMenu.jsp"/>
-				</div>
+	        <div id="layoutSidenav_nav">
+	            <jsp:include page="../common/adminMenu.jsp"/>
+	        </div>
 
 				<!--컨텐츠-->
 				<div id="layoutSidenav_content">

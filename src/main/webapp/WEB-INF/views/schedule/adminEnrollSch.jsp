@@ -81,8 +81,17 @@
                                         <input class="dataTable-input" id="schTitle" type="text"/><br>
                                         <label for="schTitle"></label><br>
                                     <!-- 시작시간대보다 마감시간이 앞서서는 안됨-->
-                                        <span class="input-explain">시간대</span>&nbsp;<input id="startDate" type="date" style="height:40px; width:140px;"/>
-                                        <label for="startDate"></label>
+                                        <c:choose>
+                                            <c:when test="${ !empty selected_date}">
+                                                <span class="input-explain">시간대</span>&nbsp;<input id="startYMD" name="startYMD" type="date" style="height:40px; width:140px;" value="${selected_date}" required/>
+                                            </c:when>
+                                            <c:when test="${!empty s.startDate}">
+                                            	<span class="input-explain">시간대</span>&nbsp;<input id="startYMD" name="startYMD" type="date" style="height:40px; width:140px;" value="${s.startDate}" required/>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="input-explain">시간대</span>&nbsp;<input id="startYMD" name="startYMD" type="date" style="height:40px; width:140px;" value="" required/>
+                                            </c:otherwise>
+                                        </c:choose>
                                         <!-- 시간대 고를 때 default를 현재 시간 값으로 만들고 싶음-->
                                         <select id="startTime">
                                             <option value="" selected>기본값</option>
@@ -167,17 +176,20 @@
                                             }                                
                                             </script>
                                         </select>
+                                        <input hidden id="startDate" name="startDate" value="${s.startDate}" />
+                                        <input hidden id="endDate" name="endDate" value="${s.endDate}" />
                                         <br><br>
-                                        <span class="input-explain">참석자</span><input class="dataTable-input" id="attendance" type="number" min=0 placeholder="ex) 10"/>&nbsp;명 
+                                        <span class="input-explain">참석자</span><input class="dataTable-input" id="attendance" name="attendance" value="${s.attendance}" type="number" min=0 placeholder="ex) 10"/>&nbsp;명 
                                         <label for="attendance"></label>
                                         <br><br>
-                                        <span class="input-explain">일정유형</span><input class="dataTable-input" id="schCategory" type="text" min=0 placeholder="ex) 회의"/>&nbsp;
+                                        <span class="input-explain">일정유형</span><input class="dataTable-input" id="schCategory" name="schCategory" value="${s.schCategory}" type="text" min=0 placeholder="ex) 회의"/>&nbsp;
                                         <label for="schCategory"></label>
                                         <br><br>
                                         <span class="input-explain">일정구분</span>
-                                        <select class="dataTable-input" id="schStatus">
-                                            <option value="" selected>전체</option>
-                                            <option value="">부서</option>
+                                        <select class="dataTable-input" id="schStatus" name="schStatus">
+                                            <option value="전체" selected>전체</option>
+                                            <option value="부서">부서</option>
+                                            <option value="개인">개인</option>
                                         </select>
                                         <br><br>
                                         내용<br>

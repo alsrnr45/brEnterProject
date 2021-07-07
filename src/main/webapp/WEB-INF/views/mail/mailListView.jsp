@@ -71,17 +71,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<c:forEach var="m" items="${list}">
                                     <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td><input type="button" hidden><i class="far fa-star"></i></input></td>
-                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->
-                                        <th><i class="far fa-envelope"></i></th>
-                                        <!-- <th><i class="far fa-envelope-open"></i></th>-->
-                                        <td>kimjava@br.com</td>
-                                        <td>제목입니다</td>
-                                        <td>2021.06.04</td>
-                                        <td>Y</td>
+                                        <td><input type="checkbox" name="" id="${m.mailNo}"></td>
+                                        <c:choose>
+	                                        <c:when test="${ m.bookmark eq 'N' }">
+	                                        <td><input type="button" hidden><i class="far fa-star"></i></td>
+	                                        </c:when>
+	                                        <c:otherwise>
+	                                        <!--  
+	                                        <th><button onclick="important()"><i class="fas fa-star"></i></button></th>
+	                                        -->
+	                                        </c:otherwise>
+	                                    </c:choose>
+	                                    <c:choose>	                                   
+	                                        <c:when test="${ m.receiveStatus eq 'N'}">
+	                                        <th><i class="far fa-envelope"></i></th>
+	                                        </c:when>
+	                                        <c:otherwise>
+	                                        <th><i class="far fa-envelope-open"></i></th>
+	                                        </c:otherwise>
+                                        </c:choose>
+                                        <td>${ m.mailWriter }</td>
+                                        <td>${ m.mailTitle }</td>
+                                        <td>${ m.mailSendDate }</td>
+                                        <c:choose>
+                                        	<c:when test="${ m.mailFNo }">
+                                        	<td>Y</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        	<td>N</td>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </tr>
+                                	</c:forEach>
                                 </tbody>
                                 <tfoot>
                                     <tr>

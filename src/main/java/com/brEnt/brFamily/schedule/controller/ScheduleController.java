@@ -49,12 +49,10 @@ public class ScheduleController {
 	
 	// 2. 일정 만들기 페이지 이동
 	@RequestMapping("enroll.sch")
-	public String enrollSch(String selected_date, int schNo, Model model) {
+	public String enrollSch(String selected_date, Model model) {
 		if(selected_date != null) {
-			
 			model.addAttribute("selected_date", selected_date);
 			return "schedule/enrollSch";
-			
 		} else {
 			return "schedule/enrollSch";
 		}
@@ -119,10 +117,28 @@ public class ScheduleController {
 		return changeName;
 	}
 
+	@RequestMapping("adminCalendar.sch")
+	public ModelAndView adminCalendar(HttpSession session, ModelAndView mv) {
+		// /WEB-INF/views/
+		Map<String, Integer> map = new HashMap<String, Integer>();
+
+		map.put("memNo", ((Member)session.getAttribute("loginUser")).getMemNo());
+		map.put("deptNo", ((Member)session.getAttribute("loginUser")).getDeptNo());
+		
+		ArrayList<Schedule> list = sService.selectList(map);
+		
+		mv.addObject("list", list)
+		  .setViewName("schedule/adminCalendarMain");
+		
+		return mv;
+	}
+	
 	@RequestMapping("adminEnroll.sch")
 	public String adminEnrollSch() {
 		return "schedule/adminEnrollSch";
 	}
+	
+
 	
 	@RequestMapping("min.sch")
 	public String minSch() {

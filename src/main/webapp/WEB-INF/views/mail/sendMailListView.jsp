@@ -58,25 +58,69 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
-                                        <th>보낸사람</th>
+                                        <th>받은 사람</th>
                                         <th>제목</th>
                                         <th>일시</th>
                                         <th>첨부파일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<c:forEach var="s" items="${list}">
                                     <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td><input type="button" hidden><i class="far fa-star"></i></input></td>
-                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->                                        
-                                        <th><i class="far fa-envelope"></i></th>
-                                        <!-- <th><i class="far fa-envelope-open"></i></th>-->
-                                        <td>kimjava@br.com</td>
-                                        <td>제목입니다</td>
-                                        <td>2021.06.04</td>
-                                        <td>Y</td>
+                                        <td><input type="checkbox" name="" id="mailCheck_${s.mailNo}" ></td>
+	                                    
+
+                      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        <div class="collapse" id="mail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="receive.mail">받은 메일함</a>
+                                <a class="nav-link" href="send.mail">보낸 메일함</a>
+                                <a class="nav-link" href="temp.mail">임시 보관함</a>
+                                <a class="nav-link" href="bin.mail">휴지통</a>
+                            </nav>
+                        </div>
+	                                    
+	                                    
+	                                    
+	                                    
+	                                    
+	                                    
+	                                    <c:choose>
+                                    		<c:when test="${ s.receiverCount > 1}">
+                                    			<td>${s.receiverCount} 명 중 ${receiveStatusYCount} 명 읽음 </td>
+                                       			<c:choose>
+                                       				<c:when test="${s.receiveStatus eq 'N' }">
+                                       					<td><i class="far fa-envelope"></i>${s.mailReceiver}</td>
+                                       				</c:when>
+                                       				<c:otherwise>
+                                       					<td><i class="far fa-envelope-open"></i>${s.mailReceiver}</td>
+                                       				</c:otherwise>
+                                       			</c:choose>
+                                        	</c:when>
+	                                    	<c:otherwise>
+	                                    	        <c:choose>
+                                        				<c:when test="${s.receiveStatus eq 'N' }">
+                                        					<td>${s.mailReceiver}<i class="far fa-envelope"></i></td>
+                                        				</c:when>
+                                        				<c:otherwise>
+                                        					<td>${s.mailReceiver}<i class="far fa-envelope-open"></i></td>
+                                        				</c:otherwise>
+                                        			</c:choose>
+	                                    	</c:otherwise>
+                                        </c:choose>
+                                        <td>${ s.mailReceiver }</td>
+                                        <td>${ s.mailTitle }</td>
+                                        <td>${ s.mailSendDate }</td>
+                                        <c:choose>
+                                        	<c:when test="${ s.mfIsHave != 0 }">
+                                        	<td>Y</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        	<td>N</td>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </tr>
+                                	</c:forEach>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -89,12 +133,11 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <div class="card-footer">
+                            <div class="card-footer">/
                                 <a class="btn btn-primary btn-block">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
                                 <a class="btn btn-primary btn-block">메일쓰기</a>
-                                <a class="btn btn-primary btn-block">다시쓰기</a>
                                 <a class="btn btn-primary btn-block">삭제하기</a>
                             </div>
                         </div>

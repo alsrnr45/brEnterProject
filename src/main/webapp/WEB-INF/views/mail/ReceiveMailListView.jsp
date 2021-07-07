@@ -1,4 +1,3 @@
-@@ -0,0 +1,111 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -51,7 +50,7 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">받은 메일함</h1>
+                    <h1 class="mt-4">받은 메일 보기</h1>
                     <br>
                     <div class="card mb-4">
                         <div class="card-header">
@@ -72,17 +71,40 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                	<c:forEach var="r" items="${list}">
                                     <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td><input type="button" hidden><i class="far fa-star"></i></input></td>
-                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->                                        
-                                        <th><i class="far fa-envelope"></i></th>
-                                        <!-- <th><i class="far fa-envelope-open"></i></th>-->
-                                        <td>kimjava@br.com</td>
-                                        <td>제목입니다</td>
-                                        <td>2021.06.04</td>
-                                        <td>Y</td>
+                                        <td><input type="checkbox" name="" id="mailCheck_${r.mailNo}"></td>
+                                        <c:choose>
+	                                        <c:when test="${ r.bookmark eq 'N' }">
+	                                        <td><input type="button" hidden><i class="far fa-star"></i></td>
+	                                        </c:when>
+	                                        <c:otherwise>
+	                                        <!--  
+	                                        <th><button onclick="important()"><i class="fas fa-star"></i></button></th>
+	                                        -->
+	                                        </c:otherwise>
+	                                    </c:choose>
+	                                    <c:choose>	                                   
+	                                        <c:when test="${ r.receiveStatus eq 'N'}">
+	                                        <th><i class="far fa-envelope"></i></th>
+	                                        </c:when>
+	                                        <c:otherwise>
+	                                        <th><i class="far fa-envelope-open"></i></th>
+	                                        </c:otherwise>
+                                        </c:choose>
+                                        <td>${ r.mailWriter }</td>
+                                        <td>${ r.mailTitle }</td>
+                                        <td>${ r.mailSendDate }</td>
+                                        <c:choose>
+                                        	<c:when test="${ r.mfIsHave != 0 }">
+                                        	<td>Y</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        	<td>N</td>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </tr>
+                                	</c:forEach>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -99,7 +121,7 @@
                                 <a class="btn btn-primary btn-block">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
-                                <a class="btn btn-primary btn-block">메일쓰기</a>
+                                <a class="btn btn-primary btn-block"  href="enroll.mail">메일쓰기</a>
                                 <a class="btn btn-primary btn-block">삭제하기</a>
                             </div>
                         </div>

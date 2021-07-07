@@ -1,4 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="mailMapper">
+
+	<resultMap type="ReceiveMail" id="receiveMail">
+		<result column="mail_no" property="mailNo" />
+		<result column="mail_writer" property="mailWriter" />
+		<result column="mail_receiver" property="mailRecevier" />
+		<result column="recycle_bin_status" property="recycleBinStatus" />
+		<result column="receive_status" property="receiveStatus" />
+		<result column="bookmark" property="bookmark" />
+		<result column="mail_title" property="mailTitle" />
+		<result column="mail_send_date" property="mailSendDate" />
+		<result column="mail_file_no" property="mailFNo" />
+		<result column="mail_filesize" property="mailFSize" />
+		<result column="mf_Is_Have" property="mfIsHave" />
+		<result column="receiverCount" property="receiverCount" />
+		<result column="receiverYCount" property="receiverYCount" />
+	</resultMap>
+	
+	<resultMap type="SendMail" id="sendMail">
+		<result column="mail_no" property="mailNo" />
+		<result column="mem_no" property="memNo" />
+		<result column="mail_writer" property="mailWriter" />
+		<result column="mail_receiver" property="mailReceiver" />
+		<result column="mail_title" property="mailTitle" />
+		<result column="mail_cnt" property="mailContent" />
+		<result column="mail_send_date" property="mailSendDate" />
+		<result column="temp_box" property="tempBox" />
+		<result column="receive_status" property="receiveStatus" />
+		<result column="mf_Is_Have" property="mfIsHave" />
+	</resultMap>
+	
+	<resultMap type="MailFile" id="mailFile">
+		<result column="mail_file_no" property="mailFNo" />
+		<result column="mail_no" property="mailNo" />
+		<result column="mail_origin" property="mailOrigin" />
+		<result column="mail_update" property="mailUpdate" />
+		<result column="mail_file_path" property="mailFPath" />
+		<result column="mail_filesize" property="mailFSize" />
+		<result column="mail_filetype" property="mailFType" />
+	</resultMap>
+	
+	<select id="receiveMailListView" parameterType="string" resultMap="receiveMail">
+		select 
+		       r.mail_no
+		     , r.mail_writer
+		     , r.mail_receiver
+		     , r.recycle_bin_status
+		     , r.receive_status
+		     , r.bookmark
+		     , s.mail_title
+		     , s.mail_send_Date
+		     , (select count(*)
+		          from mail_file mf
+		         where mf.mail_no = r.mail_no) mf_Is_Have
+		  from receive_mail r
+		  join send_mail s
+		    on (r.mail_no = s.mail_no) 
+		 where r.mail_receiver ='${email}'
+	</select>
+	
+	<select id="sendMailListView" parameterType="string" resultMap="sendMail">
+		select 
+		       s.mail_no
+		     , s.mem_no
+		     , s.mail_writer
+		     , s.mail_title
+		     , s.mail_send_Date
+		     , s.temp_box
+             , r.mail_receiver
+             , r.receive_status
+             , (select count(*)
+             	  from receive_mail r
+             	 where r.mail_no = s.mail_no) receiverCount
+             , (select count(*)
+             	  from receive_mail r
+             	 where r.mail_no = s.mail_no
+             	   and r.receiveStatus = 'Y') receiverYCount
+		     , (select count(*)
+		          from mail_file mf
+		         where mf.mail_no = s.mail_no) mf_Is_Have
+		  from send_mail s
+          join receive_mail r
+            on (s.mail_no = r.mail_no)
+		 where s.mail_writer ='${email}'
+		   and s.temp_box = 'N'
+	</select>
 </mapper>

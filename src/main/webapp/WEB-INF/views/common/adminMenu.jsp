@@ -72,15 +72,14 @@
 	                
 	                <!-- 일정관리 -->
 	                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#adminSchedule" aria-expanded="false" aria-controls="collapseLayouts">
-	                    <div class="sb-nav-link-icon"><i class="fas fa-bullhorn"></i></div>
-	                    BR엔터소식
+	                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt fa-fw"></i></div>
+	                    일정관리
 	                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 	                </a>
 	                <div class="collapse" id="adminSchedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                    <nav class="sb-sidenav-menu-nested nav">
-	                        <a class="nav-link" href="#">전체일정보기</a>
-	                        <a class="nav-link" href="#">일정만들기</a>
-	                        <a class="nav-link" href="#">Admin Calendar</a>
+	                        <a class="nav-link" href="adminCalendar.sch">관리자 전체일정보기</a>
+	                        <a class="nav-link" href="adminEnroll.sch">관리자 일정만들기</a>
 	                    </nav>
 	                </div>
 	

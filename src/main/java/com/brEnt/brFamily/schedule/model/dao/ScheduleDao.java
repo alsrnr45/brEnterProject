@@ -24,8 +24,7 @@ public class ScheduleDao {
 	}
 
 	public Schedule reqUpdateSch(SqlSessionTemplate sqlSession, int schNo) {
-		
-		return (Schedule) sqlSession.selectList("scheduleMapper.reqUpdateSch", schNo);
+		return (Schedule) sqlSession.selectOne("scheduleMapper.reqUpdateSch", schNo);
 	}
 
 }

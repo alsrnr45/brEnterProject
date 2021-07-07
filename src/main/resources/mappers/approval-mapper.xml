@@ -100,22 +100,21 @@
 		 where m.dept_no = #{deptNo}
 	</select>
 	
-	
+	<!-- 작성자 : 김혜미 - 연차 신청 -->
 	<insert id="offInsert" parameterType="Off">
 		insert all
 		  into ec_document
 		     (
-             ec_doc_no
-           , mem_no
-           , ec_writer
-           , ec_title
-           , ec_cnt
-           , ec_code
-           , ec_enrolldate
-           , ec_status
-           , ec_doc_name
-           )
-		  
+               ec_doc_no
+             , mem_no
+             , ec_writer
+             , ec_title
+             , ec_cnt
+             , ec_code
+             , ec_enrolldate
+             , ec_status
+             , ec_doc_name
+             )
 		values 
 		     (
 		       SEQ_ECNO.NEXTVAL
@@ -129,12 +128,33 @@
 		     , #{ecDocName}
 		     )
 		  into off
+		  	 (
+		  	   ec_doc_no
+		  	 , off_start
+		  	 , off_end
+		  	 )
 		values
 		     (
 		       SEQ_ECNO.NEXTVAL
 		     , #{offStart}
 		     , #{offEnd}
 		     )
+		  into approval_path
+		     (
+		       approval_path_no
+		     , ec_doc_no
+		     , mem_no
+		     , ec_turn
+		     , ec_status
+		     )
+		values
+			 (
+			   SEQ_APNO.NEXTVAL
+			 , SEQ_ECNO.NEXTVAL
+			 , 7
+			 , 1
+			 , DEFAULT
+			 )
 		select *
 		from dual
 	</insert>

@@ -111,7 +111,7 @@
         <div id="layoutSidenav_content">
             
 			<div class="content">
-				<form action="">
+				<form action="" method="post" enctype="multipart/form-data">
 
 					<button class="btn btn-primary" href="">기안하기</button>
 
@@ -186,7 +186,7 @@
 					</div>
 
 					<div class="content_3">
-						<form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
+						<div id="ecDetailForm">
 							<div class="summernote">
 								<table class="tableType03">
 									<tr height="40">
@@ -215,7 +215,7 @@
 									</tr>
 								</table>   		
 							</div>												
-						</form>
+						</div>
 					</div>
 
 				</form>

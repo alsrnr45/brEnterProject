@@ -74,7 +74,6 @@
 	h6 {margin: 6px 20px 0 0; font-size: large;}
 	.modalContent2 {width:250px;}
 
-
 	/* .modal-dialog{display: inline-block; vertical-align: middle;} */
 	.modal-footer {margin: auto;}
 	.modal-footer button {width:120px;}
@@ -232,9 +231,8 @@
     		
     		$(document).on("click", ".approvalTotalList>tbody>tr", function(){
             //$(".approvalTotalList>tbody>tr").click(function() {
-            	// 폼마다 디테일 뷰 다름 
-            	//location.href = "documentDetail.ea";
             	
+            	// 폼마다 디테일 뷰 다름 
             	var ecCode = $(this).find("#ecCode").val()
 				console.log(ecCode);
             	
@@ -248,7 +246,7 @@
 	            
 	            // 조건3. 기획안/업무연락/회람 
             	}else { 
-	             	location.href ="documentDetail.ea";
+	             	location.href ="documentDetail.ea?eano=" + $(this).children(".eano").text();
             	}   	
             })
         });

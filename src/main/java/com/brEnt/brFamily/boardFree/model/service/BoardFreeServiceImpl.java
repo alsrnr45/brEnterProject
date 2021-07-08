@@ -78,6 +78,12 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	}
 
 	
+	// 관리자 댓글 리스트 조회 
+	@Override
+	public ArrayList<BoardFreeReply> adminSelectReplyList(int freeNo) {
+		return bfDao.adminSelectReplyList(sqlSession, freeNo); 
+	}
+	
 	// 댓글 리스트 조회 
 	@Override
 	public ArrayList<BoardFreeReply> selectReplyList(int freeNo) {
@@ -92,9 +98,18 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	}
 
 
+	// 댓글 수정 
+	@Override
+	public int updateReply(BoardFreeReply r) {
+		return bfDao.updateReply(sqlSession, r);
+	}
+	
+	
+	// 댓글 삭제 
+	@Override
+	public int deleteReply(int freeReplyNo) {
+		return bfDao.deleteReply(sqlSession, freeReplyNo); 
+	}
 	
 
-	
-	
-	
 }

@@ -61,6 +61,12 @@ public class BoardFreeDao {
 	}
 	
 	
+	// 관리자 댓글 리스트 조회 
+	public ArrayList<BoardFreeReply> adminSelectReplyList(SqlSessionTemplate sqlSession, int freeNo){
+		return (ArrayList)sqlSession.selectList("boardFreeMapper.selectReplyList", freeNo);
+	}
+	
+	
 	// 댓글 리스트 조회 
 	public ArrayList<BoardFreeReply> selectReplyList(SqlSessionTemplate sqlSession, int freeNo){
 		return (ArrayList)sqlSession.selectList("boardFreeMapper.selectReplyList", freeNo);
@@ -74,10 +80,16 @@ public class BoardFreeDao {
 	}
 	
 	
+	// 댓글 수정 
+	public int updateReply(SqlSessionTemplate sqlSession, BoardFreeReply r) { 
+		return sqlSession.update("boardFreeMapper.updateReply", r); 
+	}
 	
 	
-	
-	
+	// 댓글 삭제 
+	public int deleteReply(SqlSessionTemplate sqlSession, int freeReplyNo) { 
+		return sqlSession.update("boardFreeMapper.deleteReply", freeReplyNo); 
+	}
 	
 	
 }

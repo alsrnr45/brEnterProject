@@ -15,13 +15,11 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
 <!-- include libraries(jQuery, bootstrap) -->
 <!--  
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
-
 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -49,23 +47,6 @@
 	option:checked {background: rgb(155, 89, 182); color: white;}
 	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
 	p{font-size: 15px; text-align: left; margin-top: 7px; margin-left: 15px;}
-	
-	/* 페이징바 */
-	.pagination a {color: black;}
-	.pagination a:hover, 
-	.pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color: black;}
-	.pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.pagination .active a, .pagination .active a:focus, .pagination .active a:hover {background-color: rgb(155, 89, 182); box-shadow: none;} 
-	#pagingArea{margin: auto;}
-
-	/* 카테고리, 검색창 */
-	.headArea{width: 1200px; height: 100px; text-align: center; margin: auto; padding: 50px 85px 0px 85px;}
-	.headArea>div {float: left;}
-	.input-group {width: 250px; margin-left: 630px;}
-	#form-group {width: 150px;}
-	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 
 	/* 자유게시판 작성 */	
 	h1{margin-top: 20px; margin-left: 60px;}  

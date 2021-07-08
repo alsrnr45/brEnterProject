@@ -249,7 +249,17 @@ public class BoardFreeController {
 	
 	}
 	
-		
+	
+	// 관리자 댓글 리스트 조회 
+	@ResponseBody
+	@RequestMapping(value="adminRlist.bf", produces="application/json; charset=utf-8")
+	public String adminSelectReplyList(int bfno) {
+		//ArrayList<BoardFreeReply> list = bfService.selectReplyList(bfno); 
+		//return new Gson().toJson(list);
+		return new Gson().toJson(bfService.adminSelectReplyList(bfno)); 
+	}
+	
+	
 	// 댓글 리스트 조회 
 	@ResponseBody
 	@RequestMapping(value="rlist.bf", produces="application/json; charset=utf-8")
@@ -273,14 +283,30 @@ public class BoardFreeController {
 	}
 	
 	
+	// 댓글 수정 
+	@ResponseBody
+	@RequestMapping(value="rupdate.bf", produces="application/json; charset=utf-8")
+	public String updateReply(BoardFreeReply r) {
+		int result = bfService.updateReply(r); 
+		if(result > 0) {
+			return "success";
+		}else {
+			return "fail";
+		}		
+	}
 	
+
+	// 댓글 삭제 
+	@ResponseBody
+	@RequestMapping("rdelete.bf")
+	public String deleteReply(int freeReplyNo) { 
+		int result = bfService.deleteReply(freeReplyNo); 
+		if(result > 0) {
+			return "success"; 
+		}else { 
+			return "fail"; 
+		}
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
+		
 }

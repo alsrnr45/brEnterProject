@@ -42,23 +42,6 @@
 	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
 	p{font-size: 15px; text-align: left; margin-top: 7px; margin-left: 15px;}
 	
-	/* 페이징바 */
-	.pagination a {color: black;}
-	.pagination a:hover, 
-	.pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color: black;}
-	.pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.pagination .active a, .pagination .active a:focus, .pagination .active a:hover {background-color: rgb(155, 89, 182); box-shadow: none;} 
-	#pagingArea{margin: auto;}
-
-	/* 카테고리, 검색창 */
-	.headArea{width: 1200px; height: 100px; text-align: center; margin: auto; padding: 50px 85px 0px 85px;}
-	.headArea>div {float: left;}
-	.input-group {width: 250px; margin-left: 630px;}
-	#form-group {width: 150px;}
-	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
-	
 	/* 자유게시판 수정 */
 	h1{margin-top: 20px; margin-left: 60px;}  	
     #boardFreeUpdateForm>.content_1>table{

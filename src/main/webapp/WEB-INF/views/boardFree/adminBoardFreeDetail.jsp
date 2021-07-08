@@ -21,31 +21,20 @@
 	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
 	* {font-family: 'Noto Sans KR', sans-serif;}
 	
-	/* input 스타일 */
+	/* input */
 	input:focus, input[type]:focus, .uneditable-input:focus {
 	border-color: rgb(255, 227, 14); 
 	box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);
 	outline: 0 none;
 	}
 	
-	/* 드롭박스 스타일 */
+	/* 드롭박스 */
 	.dataTable-selector:focus, .dataTable-selector:active{
 	    border-color: rgb(255, 227, 14); 
 	    box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);
 	    outline: 0 none;
 	}
 	option:checked {background: rgb(255,235,152);}
-	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color: black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(250, 246, 222); border-color: #dee2e6; color: black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(255, 247, 23, 0.075) inset, 0 0 8px rgba(182, 174, 89, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
-	    z-index: 3; color: black; background-color: rgb(255,235,152); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(255, 232, 141);
-	    box-shadow: none;}
 	    
 	/* 관리자 자유게시판 디테일 */
 	.wrap{width: 1200px;}
@@ -117,18 +106,10 @@
                                     </tr>
                                 </table>
                             </div><br>
-
-                            <div class="boardFreeBtn" style="margin-left:780px;">
-                                <!-- 수정하기, 삭제하기 버튼은 이 글이 본인 글일 경우만 보여져야 됨 -->
-                                <a class="btn btn-primary" href="" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
-                                수정하기</a>
-                                <a class="btn btn-danger" href="">삭제하기</a>
-                            </div><br><br>
                             
                             <form id="postForm" action="" method="post">
-                            <input type="hidden" name="bfno" value="${ bf.freeNo }">
-                            <input type="hidden" name="filePath" value="${ bf.freeFileUpdate }"> 
-                            <!-- 첨부파일 존재 o : "파일 경로" / 첨부파일 존재 x : "" -->
+	                            <input type="hidden" name="bfno" value="${ bf.freeNo }">
+	                            <input type="hidden" name="filePath" value="${ bf.freeFileUpdate }"> 
                             </form>
                             
                         </div>
@@ -136,48 +117,22 @@
 
                         <div class="adBoardFreeReplyArea">                                                   
                             <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)"> 
-                                <thead>
-                                    <tr>
-                                        <th colspan="2" width="500">
-                                            <textarea class="form-control" name="" id="content" cols="55" rows="2" style="resize:none;"></textarea>
+                                <thead> 
+                                	<tr>
+                                        <th colspan="3">
+                                            <textarea class="form-control" name="freeReplyCnt" id="freeReplyCnt" cols="55" rows="2" style="resize:none;" readonly></textarea>
                                         </th>
-                                        <th style="vertical-align: middle" width="150"><button class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182)">
-                                            댓글<br>등록</button></th>
+                                        <th colspan="3" style="vertical-align: middle" width="150"><button class="btn btn-secondary" onclick="addReply();" readonly style="background-color:rgb(255, 232, 141); border-color:rgb(255, 232, 141)">
+                                            댓글<br>등록</button></th><br>
                                     </tr>
-                                    <tr>
-                                        <td colspan="2" height="50">댓글 (<span id="rcount">3</span>)</td> 
-                                        <td>
+                                	<tr>
+                                        <td colspan="6" height="50">댓글 (<span id="rcount">0</span>)
                                             <button class="btn btn-danger">댓글 삭제</button>
-                                        </td>
+                                        </td> 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th width="35" rowspan="2"><input type="checkbox" id="checkFreeReply"></th>
-                                        <th>최사원 <i class="fas fa-heart"></i> 13</th>
-                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td width="550" style="font-size:13px;">댓글 3입니다.</td>
-                                    </tr>       
-
-                                    <tr>
-                                        <th rowspan="2"><input type="checkbox" id="checkFreeReply"></th>
-                                        <th>최대리 <i class="fas fa-heart"></i> 13</th>
-                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td style="font-size:13px;">댓글 2입니다.</td>
-                                    </tr>
-                
-                                    <tr>
-                                        <th rowspan="2"><input type="checkbox" id="checkFreeReply"></th>
-                                        <th>최부장 <i class="far fa-heart"></i> </th>
-                                        <td rowspan="2" style="color:gray;">2020-04-10 15:35</td>
-                                    </tr>
-                                    <tr>
-                                        <td  style="font-size:13px;">댓글 1입니다.</td>
-                                    </tr>
+                                  
                                 </tbody>
                             </table>     
                         </div>   
@@ -185,6 +140,45 @@
                 </div>    
             </div>        
     </div>
+    
+    
+    
+    <script>
+	    $(function(){
+			selectReplyList();
+			
+			setInterval(selectReplyList, 1000);
+		})
+    
+    	
+		// 댓글 리스트 조회 ajax 
+    	function selectReplyList(){
+			$.ajax({
+				url:"adminRlist.bf", 
+				data:{bfno:${bf.freeNo}},
+				success:function(list){
+					// console.log(list);
+					var value="";
+					$.each(list, function(i, obj){
+						value += "<tr>"
+							   +    '"<th colspan="5">' + '<input type="checkbox" name="rno" id="rno" value="${ r.freeReplyNo }">' + "&nbsp;" + obj.memNo + "</th>"						      						            						   
+						       +    '"<td style="color:gray;" >' + obj.freeReplyEnroll + "</td>" 
+						       + "</tr>"
+						       + "<tr>"
+						       +    '"<td colspan="6" style="width:900px;">' + obj.freeReplyCnt + "</td>"
+						       + "</tr>";
+					})
+						
+					$("#replyArea tbody").html(value); 
+					$("#rcount").text(list.length); 
+						
+				},error:function(){
+					console.log("댓글 리스트 조회용 ajax 실패"); 
+				}
+			})
+	    }
+    </script>
+    
     
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="resources/js/scripts.js"></script>

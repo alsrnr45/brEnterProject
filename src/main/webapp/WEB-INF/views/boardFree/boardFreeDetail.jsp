@@ -38,23 +38,6 @@
 	select{background: url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
 	p{font-size: 15px; text-align: left; margin-top: 7px; margin-left: 15px;}
 	
-	/* 페이징바 */
-	.pagination a {color: black;}
-	.pagination a:hover, 
-	.pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color: black;}
-	.pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.pagination .active a, .pagination .active a:focus, .pagination .active a:hover {background-color: rgb(155, 89, 182); box-shadow: none;} 
-	#pagingArea{margin: auto;}
-
-	/* 카테고리, 검색창 */
-	.headArea{width: 1200px; height: 100px; text-align: center; margin: auto; padding: 50px 85px 0px 85px;}
-	.headArea>div {float: left;}
-	.input-group {width: 250px; margin-left: 630px;}
-	#form-group {width: 150px;}
-	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
-	
 	/* 자유게시판 디테일 */	
 	.wrap{width: 1200px;}	
 	h1{margin-top: 20px; margin-left: 60px;}  
@@ -126,7 +109,7 @@
                             </div><br>
 							
 							
-							<!-- 로그인한 유저와 게시글 작성한 멤버 번호가 일치할 경우에만 수정/삭제 버튼 보이도록 -->
+							<!-- 로그인한 유저와 게시글 작성한 멤버 아이디가 일치할 경우에만 수정/삭제 버튼 보이도록 -->
 							<c:if test="${ loginUser.id eq bf.memNo }">							
 	                            <div class="boardFreeBtn" style="margin-left:780px;">   
 	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
@@ -180,8 +163,7 @@
                                     
                                 </tbody>                       
                             </table>   
-                        </div>
-                        
+                        </div>                      
                     </div>             
                 </div>          
             </div>	
@@ -196,27 +178,41 @@
 		})
 		
 		
-		// 댓글 리스트 조회용 ajax 
+		// 댓글 리스트 조회 ajax 
 		function selectReplyList(){
 			$.ajax({
 				url:"rlist.bf", 
 				data:{bfno:${bf.freeNo}},
 				success:function(list){
 					// console.log(list);
-					// style="background-color:rgb(255, 221, 136); border-color:"rgb(255, 231, 136);"
+					// style="background-color:rgb(255, 231, 136); border-color:"rgb(255, 231, 136);"
 					var value="";
 					$.each(list, function(i, obj){
 						value += "<tr>"
-							   +    "<th>" + obj.memNo + "&nbsp;" + obj.freeReplyLike + "</th>"
+							   +    "<th>" + obj.memNo + "</th>"
 							   
-						       +    '<td rowspan="2" width="100">' + 
-						       +     	+ "<button>" + '수정' + "</button>" 
-						       +        + "<button>" + '삭제' + "</button>"
+							   
+							   // 댓글 작성한 본인일 경우에만 수정/삭제 버튼 나타나도록 조건 처리
+							   <c:if test="${ loginUser.id eq bf.memNo }">	  
+						       +    '<td rowspan="2" width="100">'  
+						       +     	 '<input type="button" id="btn" value="수정">' 
+						       +         '<input type="button" id="btn" value="삭제" onclick="deleteReply">' 
+						       +    "</td>"
+						       </c:if>
+						       
+						       
+						       // 수정 버튼 누를 때 보이는 화면  
+						       +    '<td rowspan="2" width="100">'  
+						       +     	 '<input type="button" id="btn" value="저장">' 
+						       +         '<input type="button" id="btn" value="취소">' 
 						       +    "</td>"
 						       
+						            
 						       +    '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
 						       + "</tr>"
 						       + "<tr>"
+						       
+						       // 수정 버튼 누를 때 textarea로 변환 
 						       +    '"<td width="550">' + obj.freeReplyCnt + "</td>"
 						       + "</tr>";
 					})
@@ -260,6 +256,40 @@
 			}
 				
 		}	
+		
+		
+		
+		// 댓글 수정 ajax 
+		
+		
+		
+		// 댓글 삭제 ajax 
+		function deleteReply(freeReplyNo) { 
+			if (!confirm("댓글을 삭제하시겠습니까?")) { 
+				return; 
+			}
+			
+			$.ajax({
+				url:"rdelete.bf", 
+				type:"post",
+				data:{"freeNo" : $("#freeNo").val(), "freeReplyNo": freeReplyNo},
+				success: function(status){
+					if (status == "success") { 
+						
+					}
+				}
+			})
+			
+			
+		}
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

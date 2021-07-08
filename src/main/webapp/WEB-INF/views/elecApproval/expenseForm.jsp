@@ -343,10 +343,8 @@
 	   							
 	   $(function(){
 			$(".modal1>ul").click(function(){
-				$('.modal1>ul').click(function(){
 					$('.modal1>ul').removeClass()
 					$(this).addClass('on1')
-				})
 			})
 		});
 	

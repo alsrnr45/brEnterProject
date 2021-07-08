@@ -9,18 +9,33 @@
 		<result column="check_in" property="checkIn" />
 		<result column="check_out" property="checkOut" />
 		<result column="total_time" property="totalTime" />
+		<result column="atCount" property="atCount" />
+		<result column="atSum" property="atSum" />
+		<result column="atAvg" property="atAvg" />
 	</resultMap>
 	
 	<!-- 작성자 : 안소은 - 근태관리 조회 -->
-	<select id="selectAttend" resultMap="attendance" parameterType="_int">
+	<select id="selectAttend" resultMap="attendance">
 		select
 		       attend_no
+		     , mem_no
 		     , today
              , check_in
              , check_out
              , total_time
 		  from attendance
 		 where mem_no = #{memNo}
+	</select>
+	
+	<!-- 작성자 : 안소은 - 근무일수 조회 -->
+	<select id="selectTotalWorkDay" resultMap="attendance">
+		select
+		       count(*) atCount
+		     , ceil(sum(total_time) / 60) atSum
+		     , ceil(avg(total_time) / 60) atAvg
+		  from attendance
+		 where mem_no = #{memNo}
+		   and extract(year from today) = extract(year from sysdate)
 	</select>
 
 </mapper>

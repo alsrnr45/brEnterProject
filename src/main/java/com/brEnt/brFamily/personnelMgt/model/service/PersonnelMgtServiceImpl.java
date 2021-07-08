@@ -1,5 +1,7 @@
 package com.brEnt.brFamily.personnelMgt.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +20,14 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 
 	// 작성자 : 안소은 -- 근태관리 조회
 	@Override
-	public PersonnelMgt selectAttend(int memNo) {
+	public ArrayList<PersonnelMgt> selectAttend(int memNo) {
 		return pDao.selectAttend(sqlSession, memNo);
+	}
+	
+	// 작성자 : 안소은 -- 근무일수 조회
+	@Override
+	public PersonnelMgt selectTotalWorkDay(int memNo) {
+		return pDao.selectTotalWorkDay(sqlSession, memNo);
 	}
 	
 	

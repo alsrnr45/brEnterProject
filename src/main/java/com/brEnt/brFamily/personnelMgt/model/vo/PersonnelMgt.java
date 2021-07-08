@@ -20,5 +20,9 @@ public class PersonnelMgt {
 	private String checkIn;
 	private String checkOut;
 	private int totalTime;
+	
+	private int atCount;
+	private int atSum;
+	private int atAvg;
 
 }

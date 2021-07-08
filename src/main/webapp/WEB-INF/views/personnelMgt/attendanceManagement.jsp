@@ -125,14 +125,16 @@
                             <small>09:00 ~ 18:00 (소정 9시간)</small>
                         </div>
                     </div>
+                    
                     <div class="second">
-                        <h2><b id="dpTime">00 : 00 : 00</b></h2>
-                        <br>
-                        <button class="btn btn-primary checkIn">출근하기</button>
-                        <button class="btn btn-primary checkOut">퇴근하기</button>
+	                    <form>
+	                        <h2><b id="dpTime">00 : 00 : 00</b></h2>
+	                        <br>
+	                        <button class="btn btn-primary checkIn">출근하기</button>
+	                        <button class="btn btn-primary checkOut">퇴근하기</button>
+	                    </form>
                     </div>
                     
-
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
                         <h2 class="third_1"><b>09 : 00</b></h2>
@@ -141,27 +143,29 @@
                         <h2 class="third_2"><b>19 : 00</b></h2>
                     </div>
                 </div>
+                
                 <div class="secondLine">
-                    <h6 style="margin-left:20px;"><b>근무시간</b></h6>
+                    <h6 style="margin-left:20px;"><b>근무시간(연별)</b></h6>
                     <div class="average">
                         <div>
                             <span>근무일수</span> <br>
-                            <span class="number">281</span> 일
+                            <span class="number" id="atWorkDay">${ p.atCount }</span> 일
                         </div>
                         <div>
                             <span>총근무시간</span> <br>
-                            <span class="number">${ p.totalTime }</span> 시간
+                            <span class="number" id="atTotalTime">${ p.atSum }</span> 시간
                         </div>
                         <div>
                             <span>평균근무시간</span> <br>
-                            <span class="number">9</span> 시간
+                            <span class="number" id="atAverage">${ p.atAvg }</span> 시간
                         </div>
                     </div>
                 </div>
+               
             </div>
         </div>
     </div>
-    
+    <input type="hidden" name="memNo" value="${ loginUser.memNo }">
     <!-- 실시간으로 시간을 구해오기 위한 script -->
 	<script type="text/javascript">
     	setInterval("dpTime()",1000); 
@@ -184,6 +188,16 @@
     		= hours + " : " + minutes + " : " + seconds; 
     	}
     </script>
+    <script type="text/javascript">
+    	/* $(function (){
+    		var no = $('input[name=memNo]').val();
+			console.log(no);    	
+    	}) */
+    	function addCheckIn(){
+    		
+    	}
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

@@ -37,6 +37,13 @@ public class StoreServiceImpl implements StoreService {
    }
    
    
+   @Override // 작성자 : 김혜미 -- 바로 구매하기
+   public Product buyNowProduct(int pno) {
+   	return sDao.buyNowProduct(sqlSession, pno);
+   }
+   
+   
+   
    @Override // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
    public ArrayList<Product> selectProductListAdmin() {
 	   return sDao.selectProductListAdmin(sqlSession);
@@ -68,6 +75,8 @@ public class StoreServiceImpl implements StoreService {
       // TODO Auto-generated method stub
       return 0;
    }
+
+
 
 
    

@@ -34,6 +34,11 @@ public class StoreDao {
 		return sqlSession.selectOne("storeMapper.selectProductDetail", pdtNo);
 	}
 
+	// 작성자 : 김혜미 -- 바로 구매하기
+	public Product buyNowProduct(SqlSessionTemplate sqlSession, int pdtNo) {
+		return sqlSession.selectOne("storeMapper.buyNowProduct", pdtNo);
+	}
+	
 	
 	// 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
 	public ArrayList<Product> selectProductListAdmin(SqlSessionTemplate sqlSession) {
@@ -45,5 +50,7 @@ public class StoreDao {
 	public Product selectProductDetailAdmin(SqlSessionTemplate sqlSession, int pdtNo) {
 		return sqlSession.selectOne("storeMapper.selectProductDetailAdmin", pdtNo);
 	}
+
+
 
 }

@@ -164,7 +164,7 @@
                         </table>
                     </div>
                     <a type="button" class="btn btn-light btn-lg" href="#">장바구니 담기</a>
-                    <a type="button" class="btn btn-info btn-lg" href="order.st">바로 구매하기</a>
+                    <a type="button" class="btn btn-info btn-lg" href="buyNow.st?pno=${ p.pdtNo }&pco=">바로 구매하기</a>
                 </div>
 			</div>
             
@@ -198,7 +198,6 @@
                         text: '최대 주문수량은 5개 입니다.'
                     });
                 }
-                
             }else{
                 if(pCount > 1){
                     $input.val(Number(pCount)-1);    
@@ -215,7 +214,31 @@
                     document.getElementById("finalPrice").innerHTML = productPrice;
                 }
             }
+            
+            /*
+            $.ajax({
+            	url: "count.st",
+            	data: {pCount:pCount},
+			    success:function(result){
+			    	if (result > 0){
+			    		alert("성공");
+			    	}else {
+
+			    	}
+			    }		
+            })
+            */
+            
         }
+        
+        
+        
+        $(function() {
+            $(".thumbnail>img").click(function() {
+				// console.log(typeof ($(this).prev(".pno").val()));
+            	location.href ="storeDetail.st?pno=" + $(this).prev(".pno").val();
+            })
+        });
     </script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

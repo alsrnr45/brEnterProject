@@ -141,7 +141,6 @@
 	<script>
         $(function() {
             $(".thumbnail>img").click(function() {
-
 				// console.log(typeof ($(this).prev(".pno").val()));
             	location.href ="storeDetail.st?pno=" + $(this).prev(".pno").val();
             })

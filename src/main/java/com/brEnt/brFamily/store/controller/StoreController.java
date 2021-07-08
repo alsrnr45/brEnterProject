@@ -7,12 +7,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
 import com.brEnt.brFamily.common.template.Pagination;
 import com.brEnt.brFamily.store.model.service.StoreService;
 import com.brEnt.brFamily.store.model.vo.Product;
+import com.google.gson.Gson;
 
 @Controller
 public class StoreController {
@@ -47,11 +49,22 @@ public class StoreController {
 		return "store/storeDetail";
    }
    
+   // 작성자 : 김혜미 -- 바로구매하기
+   @RequestMapping("buyNow.st")
+   public String buyNowProduct(int pno, Model model) {
+	   
+	   Product p = sService.buyNowProduct(pno);
+	   model.addAttribute("p", p);
+	   
+	   return "store/buyNow";
+   }
+   
    // 작성자 : 김혜미 -- 결제
    @RequestMapping("order.st")
    public String order() {
       return "store/order";
    }
+ 
    
    // 작성자 : 김혜미 -- 주문완료
    @RequestMapping("orderFinish.st")
@@ -81,7 +94,7 @@ public class StoreController {
 		return "store/adminProductDetail";
    }
    
-   // 작성자 : 김혜미 -- 상품관리 등록
+   // 작성자 : 김혜미 -- 상품관리 수정
    @RequestMapping("productUpdate.admin")
    public String productUpdate() {
       return "store/adminProductUpdate";

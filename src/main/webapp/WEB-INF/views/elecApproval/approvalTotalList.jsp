@@ -127,10 +127,11 @@
 	                                       <c:forEach var="ea" items="${ list }">
 	                                       	   <c:if test="${ loginUser.memName eq ea.ecWriter }">							
 		                                       	   <tr>                             	   
-		                                       	   	   <td class="eano">${ ea.ecDocName }</td>                                      	   	   
+		                                       	   	   <td>${ ea.ecDocName }<input type="hidden" class="eano" value="${ ea.ecDocNo }"></td>                                      	   	   
 		                                       	       	                                       	      	                                     	       
 		                                       	       <!-- 문서 코드에 따른 조건처리 -->
 		                                       	       <td>
+		                                       	       		<input id="ecCode" type="hidden" value="${ ea.ecCode }">
 		                                       	       		<c:choose>
 		                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
 		                                       	       				기획안
@@ -150,7 +151,7 @@
 		                                       	       		</c:choose>
 		                                       	       </td>
 		                                       	        
-		                                       	       <td>${ ea.ecTitle }<input id="ecCode" type="hidden" value="${ ea.ecCode }"></td>
+		                                       	       <td>${ ea.ecTitle }</td>
 		                                       	       <td>${ ea.ecWriter }</td>
 		                                       	       
 		                                       	       <!-- JSTL 날짜형식 포맷팅 -->
@@ -236,12 +237,12 @@
             //$(".approvalTotalList>tbody>tr").click(function() {
             	
             	// 폼마다 디테일 뷰 다름 
-            	var ecCode = $(this).find("#ecCode").val()
-				console.log(ecCode);
+            	var ecCode = $(this).find("#ecCode").val();
+				//console.log(ecCode);
             	
             	// 조건1. 연차
             	if(ecCode == "OF") {
-            		location.href ="offCheckForm.ea";
+            		location.href ="offDetail.ea?eano=" + $(this).find(".eano").val();
 	             	
             	// 조건2. 지출결의서 
             	}else if (ecCode == "EX") {	
@@ -249,7 +250,7 @@
 	            
 	            // 조건3. 기획안/업무연락/회람 
             	}else { 
-	             	location.href ="documentDetail.ea?eano=" + $(this).children(".eano").text();
+	             	location.href ="documentDetail.ea?eano=" + $(this).find(".eano").val();
             	}   	
             })
         });

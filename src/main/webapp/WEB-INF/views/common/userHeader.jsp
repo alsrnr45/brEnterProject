@@ -65,7 +65,7 @@
     <!-- 상단바 -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="index.html" style="width: 225px;">
+        <a class="navbar-brand ps-3" href="logout.me" style="width: 225px;">
               <img src="resources/images/brLogo_user.png" style="height: 56px;"></a>
       
         <!-- Sidebar Toggle-->

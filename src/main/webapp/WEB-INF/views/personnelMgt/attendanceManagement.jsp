@@ -97,8 +97,7 @@
 		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd HH:mm:ss" /></c:set>
 		
 		<!-- 오늘 요일 -->
-		<c:set var="now" value="<%=new java.util.Date() %>"/>
-		<fmt:formatDate value="${now}" pattern="E" var="day" />
+		<fmt:formatDate value="${today}" pattern="E" var="day" />
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
@@ -125,14 +124,12 @@
                             <small>09:00 ~ 18:00 (소정 9시간)</small>
                         </div>
                     </div>
-                    
+                    <input type="hidden" name="memNo" value="${ loginUser.memNo }" />
                     <div class="second">
-	                    <form>
-	                        <h2><b id="dpTime">00 : 00 : 00</b></h2>
-	                        <br>
-	                        <button class="btn btn-primary checkIn">출근하기</button>
-	                        <button class="btn btn-primary checkOut">퇴근하기</button>
-	                    </form>
+                        <h2><b id="dpTime">00 : 00 : 00</b></h2>
+                        <br>
+                        <button class="btn btn-primary checkIn">출근하기</button>
+                        <button class="btn btn-primary checkOut">퇴근하기</button>
                     </div>
                     
                     <div class="third">
@@ -165,7 +162,7 @@
             </div>
         </div>
     </div>
-    <input type="hidden" name="memNo" value="${ loginUser.memNo }">
+
     <!-- 실시간으로 시간을 구해오기 위한 script -->
 	<script type="text/javascript">
     	setInterval("dpTime()",1000); 
@@ -188,15 +185,32 @@
     		= hours + " : " + minutes + " : " + seconds; 
     	}
     </script>
+    
+    <!-- 출퇴근용 ajax -->
     <script type="text/javascript">
-    	/* $(function (){
-    		var no = $('input[name=memNo]').val();
-			console.log(no);    	
-    	}) */
-    	function addCheckIn(){
-    		
-    	}
-    </script>
+    	
+    	$(function(){
+    		$(".checkIn").click(function(){
+    			/* var memNo = $('#memNo').val();  */
+    			/* var memNo = ${ loginUser.memNo }; */
+            	
+    			var memNo = $('input[name=memNo]').val();
+    			
+    			$.ajax({
+        			url:"insertCheckIn.pm",
+        			data:{memNo : memNo},
+        			success:function(time){
+        				if(time == "success"){
+        					console.log("오예!");
+        				}
+        			},error:function(){
+        				console.log("웩");
+        			}
+        		});
+    		})
+    	})
+
+    	</script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

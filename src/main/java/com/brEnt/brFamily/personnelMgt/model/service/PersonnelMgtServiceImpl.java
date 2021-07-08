@@ -30,6 +30,13 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 		return pDao.selectTotalWorkDay(sqlSession, memNo);
 	}
 	
+	// 작성자 : 안소은 -- 출근시간 insert
+	@Override
+	public int insertCheckIn(PersonnelMgt p) {
+		return pDao.insertCheckIn(sqlSession, p);
+		
+	}
+	
 	
 	
 }

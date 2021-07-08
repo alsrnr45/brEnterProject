@@ -11,5 +11,7 @@ public interface PersonnelMgtService {
 	
 	// 작성자 : 안소은 -- 근무일수 조회
 	PersonnelMgt selectTotalWorkDay(int memNo);
-
+	
+	// 작성자 : 안소은 -- 출근시간 insert
+	int insertCheckIn(PersonnelMgt p);
 }

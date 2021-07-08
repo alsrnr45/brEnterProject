@@ -1,12 +1,10 @@
 package com.brEnt.brFamily.personnelMgt.controller;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.brEnt.brFamily.personnelMgt.model.service.PersonnelMgtService;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
@@ -52,6 +50,22 @@ public class PersonnelMgtController {
 		
 		return "personnelMgt/attendanceManagement";
 	}
+	
+	// 작성자 : 안소은 -- 출근시간 insert
+	@ResponseBody
+	@RequestMapping("insertCheckIn.pm")
+	public String ajaxInsertCheckIn(PersonnelMgt p) {
+		
+		int result = pService.insertCheckIn(p);
+		if(result > 0) {
+			return "Check-In have been successfully registered";
+		}else {
+			return "fail";
+	
+		}
+	}
+	
+	
 	
 	
 	

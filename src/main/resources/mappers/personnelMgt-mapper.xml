@@ -37,5 +37,24 @@
 		 where mem_no = #{memNo}
 		   and extract(year from today) = extract(year from sysdate)
 	</select>
+	
+	<!-- 작성자 : 안소은 - 출근시간 insert -->
+	<insert id="insertCheckIn" parameterType="personnelmgt">
+		insert
+		  into attendance
+		  (
+		    attend_no
+		  , mem_no
+		  , today
+		  , check_in
+		  )
+		  values
+		  (
+		    seq_adno.nextval
+		  , #{memNo}
+		  , sysdate
+		  , to_char(current_timestamp, 'hh24:mi')
+		  )
+	</insert>
 
 </mapper>

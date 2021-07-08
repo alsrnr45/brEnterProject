@@ -64,7 +64,7 @@
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 	
-	/* 전자결재 전체 리스트 */
+	/* 전자결재 기안 문서함 리스트 */
     h1{margin-bottom: 20px;}  
     .approvalTotalList{text-align: center;}
 	.approvalTotalList>tbody>tr:hover{cursor:pointer;}
@@ -105,7 +105,7 @@
 	
 	                        <div class="card mb-4">
 	                            <div class="card-header">
-	                                <i class="far fa-clipboard"></i>&nbsp;문서함 &nbsp;
+	                                <i class="far fa-clipboard"></i>&nbsp;기안 문서함 &nbsp;
 	                                <a class="btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentSelect" style="float: right;">작성하기</a>
 	                            </div>
 	                            <div class="card-body">
@@ -123,7 +123,7 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                       <!-- 로그인한 유저가 올린 문서만 보이도록 조건 처리 -->                                         
+	                                       <!-- 로그인한 유저가 올린 문서만 보이도록 조건 처리 -->                                       
 	                                       <c:forEach var="ea" items="${ list }">
 	                                       	   <c:if test="${ loginUser.memName eq ea.ecWriter }">							
 		                                       	   <tr>                             	   
@@ -231,7 +231,7 @@
     <script>
     
     	$(function() {
-    		
+            // 리스트가 비어있을 경우 선택되지 않도록 조건 처리  
     		$(document).on("click", ".approvalTotalList>tbody>tr", function(){
             //$(".approvalTotalList>tbody>tr").click(function() {
             	

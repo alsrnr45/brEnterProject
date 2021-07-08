@@ -16,6 +16,11 @@
 <link href="resources/css/styles.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
 
+<!-- 부트스트랩4 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -59,10 +64,22 @@
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 	
-	/* 전자결재 진행중인 문서 대기 리스트 */
+	/* 전자결재 결재대기 리스트 */
     h1{margin-bottom: 20px;}  
-    .approvalTotalList{text-align: center;}
+    .approvalStandbyList{text-align: center;}
+	.approvalStandbyList>tbody>tr:hover{cursor:pointer;}
+	
+	.modal-body {margin: 30px 0 30px 60px;}
+	.modal-body .modalContent1, .modal-body .modalContent2 {float: left;}
+	h6 {margin: 6px 20px 0 0; font-size: large;}
+	.modalContent2 {width:250px;}
 
+	/* .modal-dialog{display: inline-block; vertical-align: middle;} */
+	.modal-footer {margin: auto;}
+	.modal-footer button {width:120px;}
+	.btn-primary {background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+	.btn-danger {background-color: rgb(241, 82, 82); border-color: rgb(255, 134, 134);}
+	
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -89,13 +106,12 @@
 	                        <div class="card mb-4">
 	                            <div class="card-header">
 	                                <i class="far fa-clipboard"></i>&nbsp;
-	                                진행중인 문서 &nbsp;
-	                                <a class="btn btn-primary" href="documentEnrollForm.ea" style="background-color:rgb(155, 89, 182); ; border-color:rgb(155, 89, 182);">
-	                                작성하기</a> 
+	                                결재대기 문서함 &nbsp;
+	                                <a class="btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentSelect" style="float: right;">작성하기</a>
 	                            </div>
 	                            <div class="card-body">
 
-	                                <table id="datatablesSimple" class="approvalTotalList">
+	                                <table id="datatablesSimple" class="approvalStandbyList">
 	                                    <thead>
 	                                        <tr>
 	                                            <th style="text-align:center;">문서번호</th>
@@ -108,49 +124,52 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
+	                                   		<!-- 결재대기 문서 & 결재선 승인자들에게만 보이도록 조건 처리 -->      
 	                                    	<c:forEach var="ea" items="${ list }">
-		                                        <tr>
-		                                            <td class="eano">${ ea.ecDocName }
-		                                            
-		                                            <!-- 문서 코드에 따른 조건처리 -->
-	                                       	        <td>
-	                                       	       		<c:choose>
-	                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
-	                                       	       				기획안
-	                                       	       			</c:when>
-	                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
-	                                       	       				업무연락
-	                                       	       			</c:when>
-	                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
-	                                       	       				연차
-	                                       	       			</c:when>
-	                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
-	                                       	       				지출결의서
-	                                       	       			</c:when>
-	                                       	       			<c:otherwise>
-	                                       	       				회람 
-	                                       	       			</c:otherwise>
-	                                       	       		</c:choose>
-	                                       	       </td>
-		                                            
-		                                           <td>${ ea.ecTitle }</td>
-	                                       	       <td>${ ea.ecWriter }</td>
-		                                            
-		                                           <!-- JSTL 날짜형식 포맷팅 -->
-	                                       	       <td>
-	                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
-	                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
-	                                       	       </td>
-	                                       	       
-		                                           <td>${ ea.ecCompdate }</td> 
-		                                           
-		                                           <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
-	                                       	       <td>
-	                                       	       	   <c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">
-	                                       	       	   		<font color="red">결재대기</font>
-	                                       	       	   </c:if>       
-	                                       	       </td>    
-		                                        </tr>
+	                                    		<c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">			                                    				
+			                                        <tr>
+			                                            <td>${ ea.ecDocName }<input type="hidden" class="eano" value="${ ea.ecDocNo }"></td>                   
+			                                            
+			                                            <!-- 문서 코드에 따른 조건처리 -->
+		                                       	        <td>
+		                                       	        	<input id="ecCode" type="hidden" value="${ ea.ecCode }">
+		                                       	       		<c:choose>
+		                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
+		                                       	       				기획안
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
+		                                       	       				업무연락
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
+		                                       	       				연차
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
+		                                       	       				지출결의서
+		                                       	       			</c:when>
+		                                       	       			<c:otherwise>
+		                                       	       				회람 
+		                                       	       			</c:otherwise>
+		                                       	       		</c:choose>
+		                                       	       </td>
+			                                            
+			                                           <td>${ ea.ecTitle }
+		                                       	       <td>${ ea.ecWriter }</td>
+			                                            
+			                                           <!-- JSTL 날짜형식 포맷팅 -->
+			                                           <td>
+		                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
+		                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
+		                                       	       </td>
+		                                       	       
+		                                       	       <td>${ ea.ecCompdate }</td>
+		                                       	       		
+		                                       	       <td>	      	             
+			                                       	   	   <c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate  }">
+								                               <font color="red">결재대기</font>
+								                           </c:if>
+		                                       	       </td>
+			                                        </tr>
+		                                        </c:if>
 	                                       	</c:forEach>
 	                                    </tbody>
 	                                </table>
@@ -161,19 +180,76 @@
             	</main> 
         	</div>
         	
+        	<!-- The Modal -->
+			<div class="modal" id="documentSelect">
+				<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+			
+					<!-- Modal Header -->
+					<div class="modal-header">
+					<h4 class="modal-title">문서 종류</h4>
+					</div>
+			
+					<!-- <form action=""> -->
+						<!-- Modal body -->
+						<div class="modal-body">
+							<div class="modalContent1">
+								<h6>문서 선택</h6> 
+							</div>
+
+							<div class="modalContent2">
+								<select class="form-control" id="formSelect">
+									<option>선택</option>
+									<option value="documentEnrollForm.ea?code=PL">기획안</option>
+									<option value="documentEnrollForm.ea?code=BC">업무연락</option>
+									<option value="offEnrollForm.ea">연차</option>									
+									<option value="expenseForm.ea">지출결의서</option>									
+									<option value="documentEnrollForm.ea?code=ME">회람</option>
+								</select>
+							</div>
+						</div>
+						
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
+							<button type="button" class="btn btn-primary selectButton" onchange="goUrl()">선택하기</button>
+						</div>
+					<!-- </form> -->
+				</div>
+				</div>
+			</div>
+			
     </div>
     
     <script>
-    
-    	$(function() {
-            $(".approvalTotalList>tbody>tr").click(function() {
-            	// 폼마다 디테일 뷰 다름 => 조건 설정 (1: 기획안, 업무연락, 회람 / 2: 연차 / 3: 지출결의서)
-            	location.href = "documentDetail.ea";
-                console.log("전자결재 문서 클릭");
-            })
-        });
-    	
-    	$(function() {
+	    
+	    $(function() {
+	        // 리스트가 비어있을 경우 선택되지 않도록 조건 처리  
+			$(document).on("click", ".approvalStandbyList>tbody>tr", function(){
+	        //$(".approvalTotalList>tbody>tr").click(function() {
+	        	
+	        	// 폼마다 디테일 뷰 다름 
+	        	var ecCode = $(this).find("#ecCode").val();
+				//console.log(ecCode);
+	        	
+	        	// 조건1. 연차
+	        	if(ecCode == "OF") {
+	        		location.href ="offDetail.ea?eano=" + $(this).find(".eano").val();
+	             	
+	        	// 조건2. 지출결의서 
+	        	}else if (ecCode == "EX") {	
+	             	location.href ="expenseDetail.ea";
+	            
+	            // 조건3. 기획안/업무연락/회람 
+	        	}else { 
+	             	location.href ="documentDetail.ea?eano=" + $(this).find(".eano").val();
+	        	}   	
+	        })
+	    });
+
+    		
+
+		$(function() {
             $(".modal-footer>.selectButton").click(function() {
 
 				var selectOption = document.getElementById("formSelect");
@@ -183,7 +259,7 @@
 
             })
         });
-    	
+		
     </script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

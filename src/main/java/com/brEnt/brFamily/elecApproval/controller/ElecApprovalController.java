@@ -58,9 +58,8 @@ public class ElecApprovalController {
 	   return "redirect:approvalTotalList.ea";
    }
 
-
-   
-   // 작성자 : 최선희 -- 전자결재 전체 리스트 
+ 
+   // 작성자 : 최선희 -- 전자결재 기안함 리스트 
    @RequestMapping("approvalTotalList.ea")
    public ModelAndView approvalTotalList(ModelAndView mv) {
       	 
@@ -73,10 +72,16 @@ public class ElecApprovalController {
    }
    
    
-   // 작성자 : 최선희 -- 전자결재 진행중인 문서 대기 리스트 
+   // 작성자 : 최선희 -- 전자결재 결재대기 리스트 
    @RequestMapping("approvalStandbyList.ea")
-   public String approvalStandbyList() {
-      return "elecApproval/approvalStandbyList";
+   public ModelAndView approvalStandbyList(ModelAndView mv) {
+	   
+	  ArrayList<ElecApproval> list = eaService.selectApprovalTotalList(); 
+	  
+	  mv.addObject("list", list)
+      	.setViewName("elecApproval/approvalStandbyList"); 
+	  
+	  return mv;
    }
       
    
@@ -92,17 +97,13 @@ public class ElecApprovalController {
 	   return mv;
    }
    
-   // 작성자 : 최선희 -- 기획안/업무연락/회람 수정폼  
-   @RequestMapping("documentUpdateForm.ea")
-   public String documentUpdateForm() {
-      return "elecApproval/documentUpdateForm";
-   }
    
    // 작성자 : 최선희 -- 기획안/업무연락/회람 상세페이지
    @RequestMapping("documentDetail.ea")
    public String documentDetail() {
       return "elecApproval/documentDetail";
    }
+   
    
    // 작성자 : 안소은 — 지출결의서 폼
    @RequestMapping("expenseForm.ea")
@@ -115,11 +116,13 @@ public class ElecApprovalController {
 	   return mv;
    }
 
+   
    // 작성자 : 안소은 — 지출결의서 상세페이지
    @RequestMapping("expenseDetail.ea")
    public String expenseDetail() {
 	   return "elecApproval/expenseDetail";
    }
+   
    
    // 작성자 : 안소은 — 결재선 해당 부서 사원 조회용 AJAX
    @ResponseBody

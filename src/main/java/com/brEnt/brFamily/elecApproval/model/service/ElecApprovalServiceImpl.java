@@ -21,7 +21,7 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    private ElecApprovalDao eaDao; 
    
    
-   // 작성자 : 최선희 -- 전자결재 전체 리스트 조회 
+   // 작성자 : 최선희 -- 전자결재 리스트 조회 
    @Override
    public ArrayList<ElecApproval> selectApprovalTotalList() {
       return eaDao.selectApprovalTotalList(sqlSession); 

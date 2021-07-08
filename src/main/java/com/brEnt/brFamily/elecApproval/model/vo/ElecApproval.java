@@ -25,4 +25,16 @@ public class ElecApproval {
 	private String ecCanceldate;
 	private String ecStatus; 
 	
+	private String offStart;
+	private String offEnd;
+	private String offReason;
+	
+	private int approvalPathNo;
+	private int memeNo;
+	private int ecTurn;
+	private String apEnrolldate;
+	
+	private String deptName;
+	private String posiName;
+	
 }

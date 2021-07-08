@@ -21,4 +21,6 @@ public interface ElecApprovalService {
     // 작성자 : 김혜미 -- 연차 신청
     int offInsert(Off o);
     
+    // 작성자 : 김혜미 -- 연차 상세조회
+    ElecApproval offDetail(int eano);
 }

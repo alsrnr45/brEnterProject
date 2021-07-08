@@ -28,8 +28,14 @@ public class ElecApprovalDao {
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectMemberList", deptNo);
 	}
 
+	// 작성자 : 김혜미 -- 연차 신청
 	public int offInsert(SqlSessionTemplate sqlSession, Off o) {
 		return sqlSession.insert("approvalMapper.offInsert", o);
+	}
+
+	// 작성자 : 김혜미 -- 연차 조회
+	public ElecApproval offDetail(SqlSessionTemplate sqlSession, int ecDocNo) {
+		return sqlSession.selectOne("approvalMapper.offDetail", ecDocNo);
 	}
 
 

@@ -38,7 +38,6 @@
    .btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px;}
    .btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
 
-
    /* 스타일 */
    /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
@@ -173,8 +172,8 @@
 	                     <!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 	                     <tr height="80" style="color:gray;">
 	                        <td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-	                        <td><img src="resources/elecApprovalUpfiles/check2.png"></td>
-	                        <td><img src="resources/elecApprovalUpfiles/check2.png"></td>
+	                        <td></td>
+	                        <td></td>
 	                        <td></td>
 	                        <td></td>
 	                     </tr>
@@ -336,8 +335,8 @@
 		});
 		
 		$(function(){
-			$(".modal2>ul>li").click(function(){
-		
+            $(document).on("click", ".modal2>ul>li", function(){
+
 				$('.modal2>ul>li').removeClass()
 				$(this).addClass('on2')
 				

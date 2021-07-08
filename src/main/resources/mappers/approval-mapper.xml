@@ -15,6 +15,15 @@
 		<result column="ec_compdate" property="ecCompdate"/>
 		<result column="ec_canceldate" property="ecCanceldate"/>
 		<result column="ec_status" property="ecStatus"/>	
+		<result column="off_start" property="offStart"/>	
+		<result column="off_end" property="offEnd"/>	
+		<result column="off_reason" property="offReason"/>
+		<result column="approval_path_no" property="approvalPathNo"/>
+		<result column="ec_turn" property="ecTurn"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ap_enrolldate" property="apEnrolldate"/>
+		<result column="dept_name" property="deptName"/>	
+		<result column="posi_name" property="posiName"/>	
 	</resultMap>
 	
 	<resultMap id="off" type="off">
@@ -30,9 +39,13 @@
 		<result column="ec_compdate" property="ecCompdate"/>
 		<result column="ec_canceldate" property="ecCanceldate"/>
 		<result column="ec_status" property="ecStatus"/>	
-		<result column="off_start" property="offStrat"/>	
+		<result column="off_start" property="offStart"/>	
 		<result column="off_end" property="offEnd"/>	
-		<result column="off_reason" property="offReason"/>	
+		<result column="off_reason" property="offReason"/>
+		<result column="approval_path_no" property="approvalPathNo"/>
+		<result column="ec_turn" property="ecTurn"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ap_enrolldate" property="apEnrolldate"/>
 		<result column="dept_name" property="deptName"/>	
 		<result column="posi_name" property="posiName"/>	
 	</resultMap>
@@ -101,7 +114,7 @@
 	</select>
 	
 	<!-- 작성자 : 김혜미 - 연차 신청 -->
-	<insert id="offInsert" parameterType="Off">
+	<insert id="offInsert" parameterType="off">
 		insert all
 		  into ec_document
 		     (
@@ -136,8 +149,8 @@
 		values
 		     (
 		       SEQ_ECNO.NEXTVAL
-		     , #{offStart}
-		     , #{offEnd}
+		     , to_date(#{offStart}, 'YYYY-MM-DD')
+		  	 , to_date(#{offEnd}, 'YYYY-MM-DD')
 		     )
 		  into approval_path
 		     (
@@ -159,6 +172,30 @@
 		from dual
 	</insert>
 	
+	<select id="offDetail" resultMap="elecApproval" parameterType="_int">
+		select 
+		       e.ec_doc_no
+		     , e.mem_no
+		     , ec_writer
+		     , ec_title
+		     , ec_cnt
+		     , ec_code
+		     , ec_enrolldate
+		     , e.ec_status
+		     , ec_doc_name
+		     , ec_canceldate
+		     , ec_compdate
+		     , off_start
+		     , off_end
+		     , approval_path_no
+		     , ec_turn
+		     , a.ec_status
+		     , ap_enrolldate
+		 from ec_document e
+		 join off o on(o.ec_doc_no = e.ec_doc_no)
+		 join approval_path a on(a.ec_doc_no = e.ec_doc_no)
+		where e.ec_doc_no = #{ ea.docNo }
+	</select>
 	
 	
 	

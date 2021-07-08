@@ -37,10 +37,14 @@ public class ElecApprovalController {
    }
    
 
-   // 작성자 : 김혜미 -- 연차 확인폼
-   @RequestMapping("offCheckForm.ea")
-   public String offCheckForm() {
-      return "elecApproval/offCheckForm";
+   // 작성자 : 김혜미 -- 연차 조회
+   @RequestMapping("offDetail.ea")
+   public String offDetail(int eano, Model model) {
+	   
+	   ElecApproval ea = eaService.offDetail(eano);
+	   System.out.println(ea);
+	   model.addAttribute("ea", ea);
+	   return "elecApproval/offCheckForm";
    }
    
    

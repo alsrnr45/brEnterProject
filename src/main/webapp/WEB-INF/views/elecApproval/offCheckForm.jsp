@@ -93,14 +93,14 @@
 						<tr>
 							<th width="120">문서종류</th> 
 							<td width="340">연차</td>
-							<th width="120">문서번호</th>
-							<td width="340">OF-20210618-86328</td>
+							<th width="120">문서번호<input type="hidden" id="eano" class="eano" value="${ ea.ecDocNo }"></th>
+							<td width="340">${ ea.ecDocName }</td>
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
-							<td>2021-06-11 10:18:07</td>
+							<td>${ ea.ecEnrolldate }</td>
 							<th>완료 일시</th>
-							<td>2021-06-11 10:18:07</td>
+							<td>${ ea.ecCompdate }</td>
 						</tr>
 					</table>
 					<br>
@@ -110,7 +110,7 @@
 					<table class="tableType02">
 						<tr height="35">
 							<th rowspan="5" width="120">기안자</th>
-							<td width="136">개발팀</td>
+							<td width="136">${ ea.deptName }</td>
 							<th rowspan="5" width="120">결재자</th>
 							<td width="136">개발팀</td>
 							<td width="136">개발팀</td>
@@ -118,7 +118,7 @@
 							<td width="136"></td>
 						</tr>
 						<tr height="35">
-							<td>사원</td>
+							<td>${ ea.ecWriter }</td>
 							<td>과장</td>
 							<td>차장</td>
 							<td>부장</td>
@@ -126,21 +126,21 @@
 						</tr>
 						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 						<tr height="80" style="color:gray;">
+							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
+							<td><img src="resources/elecApprovalUpfiles/check2.png"></td>
 							<td></td>
-							<td><img src="resources/images/approval_Ok.png"></td>
 							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr height="35">
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
 							<td></td>
 						</tr>
 						<tr height="35">
-							<td style="color: royalblue;">김사원</td>
+							<td>${ ea.ecEnrolldate }</td>
+							<td>2021-06-11</td>
+							<td>2021-06-11</td>
+							<td>2021-06-11</td>
+							<td></td>
+						</tr>
+						<tr height="35">
+							<td style="color: royalblue;">${ ea.ecWriter }</td>
 							<td>박과장</td>
 							<td></td>
 							<td></td>
@@ -155,18 +155,22 @@
 						<table class="tableType03">
 							<tr height="40">
 								<th>제목</th>
-								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." readonly></td>
+								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecTitle }" readonly></td>
 							</tr>
 							<tr height="40">
 								<th width="120">연차신청일</th>
-								<td colspan="3" width="800"><input type="date" name="" id="" value="2021-06-24" readonly style="width:130px;"></td>
+								<td colspan="3" width="800">
+									<input type="date" name="offStart" id="" value="${ ea.offStart }" required style="width:130px; margin-right:25px" readonly>  
+									 ~
+	                           		<input type="date" name="offEnd" id="" value="${ ea.offEnd }" required style="width:130px; margin-left:25px;" readonly>
+								</td>
 							</tr>
 							<tr height="30">
 								<th colspan="4">상세내용</th>
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." readonly style="height:250px;">
+									<input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecCnt }" readonly style="height:250px;">
 								</td>
 							</tr>
 						</table>

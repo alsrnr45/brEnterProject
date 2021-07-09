@@ -48,6 +48,7 @@
 
 	.content {width: 1150px; height: 860px; margin: auto; margin-top: 30px;}
 	.content_4 {padding: 15px 0 0 500px;}
+	.content_4>a{margin-left: 40px;}
 
 	table {text-align: center; font-size: 13px; margin: auto;}
 	table>tr,th,td{border: 1px lightgray solid;} 
@@ -179,14 +180,14 @@
 							<tr height="40">
 								<th width="120">첨부파일</th>
 								<td colspan="3" width="800">
-									<!-- <c:choose>
+								<!--<c:choose>
                                     	<c:when test="${ empty eaf.ecFileOrigin }">
                                         	
                                         </c:when>
                                         <c:otherwise>
                                             <a href="${ eaf.ecFileUpdate }" download="${ eaf.ecFileOrigin  }">${ eaf.ecFileOrigin }</a>
                                         </c:otherwise>
-                                	</c:choose> -->
+                                	</c:choose>-->
 								</td>
 							</tr>
 							<tr height="30">
@@ -203,13 +204,13 @@
 
 
 				<div class="content_4">	
-					<!-- 회원마다 보여지는 디테일 뷰 다름 => 조건 설정 (1: 해당 전자결재를 작성한 기안자일 경우 / 2: 해당 문서의 결재자일 경우 / 3: 아무것도 해당되지 않는 사원일 경우) -->
+					<!-- 회원마다 보여지는 디테일 뷰 다름 
+						=> 조건 1: 해당 전자결재를 작성한 기안자일 경우 / 조건 2: 해당 문서의 결재자일 경우 / 조건 3: 아무것도 해당되지 않는 사원일 경우) -->
 					 
-					<!-- 이 글이 본인 글일 경우에만 보여져야 하는 버튼 -->
-					<a class="btn btn-light" href="documentUpdateForm.ea" style="background-color:lightgray; border-color:lightgray;">수정하기</a>
+					<!-- 본인이 기안한 문서일 경우에만 보여져야 하는 버튼 -->
 					<a class="btn btn-danger" href="">삭제하기</a>
 					
-					<!-- 승인, 반려 => 이 글의 결재자일 경우에만 보여져야 하는 버튼 -->
+					<!-- 결재자일 경우에만 보여져야 하는 버튼 -->
 					<!-- 
 					<a class="btn btn-light" href="" style="background-color:lightgray; border-color:lightgray;">승인하기</a>
 					<a class="btn btn-danger" href="">반려하기</a> -->					

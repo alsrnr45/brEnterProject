@@ -132,14 +132,37 @@
 							<tr>
 								<th width="120px" height="35px;">문서종류</th> 
 								<td width="340px">
-									<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
-										<option value="documentEnrollForm.ea">기획안</option>
-										<option value="documentEnrollForm.ea">업무연락</option>
-										<option value="offEnrollForm.ea">연차</option>
-										<option value="expenseForm.ea">지출결의서</option>
-										<option value="documentEnrollForm.ea">회람</option>
-									</select>
-										<input type="hidden" id="ecCode" value="${ code }">
+									<!-- 문서 종류 변경에 따른 select값 + 코드 변경 -->
+									<c:choose>
+										<c:when test="${ code eq 'PL' }">
+											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
+												<option value="documentEnrollForm.ea?code=PL" selected>기획안</option>
+												<option value="documentEnrollForm.ea?code=BC">업무연락</option>
+												<option value="offEnrollForm.ea">연차</option>
+												<option value="expenseForm.ea">지출결의서</option>
+												<option value="documentEnrollForm.ea?code=ME">회람</option>
+											</select>	
+										</c:when>	
+										<c:when test="${ code eq 'BC' }">
+											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
+												<option value="documentEnrollForm.ea?code=PL">기획안</option>
+												<option value="documentEnrollForm.ea?code=BC" selected>업무연락</option>
+												<option value="offEnrollForm.ea">연차</option>
+												<option value="expenseForm.ea">지출결의서</option>
+												<option value="documentEnrollForm.ea?code=ME">회람</option>
+											</select>	
+										</c:when>		
+										<c:when test="${ code eq 'ME' }">
+											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
+												<option value="documentEnrollForm.ea?code=PL">기획안</option>
+												<option value="documentEnrollForm.ea?code=BC">업무연락</option>
+												<option value="offEnrollForm.ea">연차</option>
+												<option value="expenseForm.ea">지출결의서</option>
+												<option value="documentEnrollForm.ea?code=ME" selected>회람</option>
+											</select>
+										</c:when>			
+									</c:choose>
+									<input type="hidden" id="ecCode" value="${ code }">
 								</td>
 								<th width="120px">문서번호</th><input type="hidden" name="ecDocName" value="${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
 								<td width="340px">

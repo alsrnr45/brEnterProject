@@ -89,7 +89,7 @@
 	                        <div class="card mb-4">
 	                            <div class="card-header">
 	                                <i class="fas fa-chalkboard"></i> 게시판 > 자유게시판 &nbsp;
-	                                <a class="btn btn-primary" type="button" href="boardFreeEnroll.bf" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182); margin-left: 775px;">
+	                                <a class="btn btn-primary" type="button" href="boardFreeEnroll.bf" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); margin-left: 775px;">
 	                                작성하기</a> 
 	                            </div>
 	                            

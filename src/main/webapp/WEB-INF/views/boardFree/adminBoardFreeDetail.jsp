@@ -63,7 +63,7 @@
     
                     <h1>자유게시판</h1><hr>
         
-                    <a class="btn btn-primary" href="adminBoardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:960px;">
+                    <a class="btn btn-primary" href="adminBoardFreeList.bf" style="background-color: lightgray; border-color: lightgray; margin-left: 960px;">
                     목록으로</a> 
                     <br><br><br>
         
@@ -100,8 +100,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5" style="background-color:rgb(248, 248, 248);"> 
-                                            <p style="height:250px;">${ bf.freeCnt }</p>
+                                        <td colspan="5" style="background-color: rgb(248, 248, 248);"> 
+                                            <p style="height: 250px;">${ bf.freeCnt }</p>
                                         </td>
                                     </tr>
                                 </table>
@@ -116,13 +116,14 @@
 
 
                         <div class="adBoardFreeReplyArea">                                                   
-                            <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)"> 
+                            <table id="replyArea" width="960" style="background-color: rgb(248, 248, 248)"> 
                                 <thead> 
                                 	<tr>
                                         <th colspan="3">
                                             <textarea class="form-control" name="freeReplyCnt" id="freeReplyCnt" cols="55" rows="2" style="resize:none;" readonly></textarea>
                                         </th>
-                                        <th colspan="3" style="vertical-align: middle" width="150"><button class="btn btn-secondary" onclick="addReply();" readonly style="background-color:rgb(255, 232, 141); border-color:rgb(255, 232, 141)">
+                                        <th colspan="3" style="vertical-align: middle" width="150">
+                                        	<button class="btn btn-secondary" onclick="addReply();" style="background-color: rgb(255, 232, 141); border-color: rgb(255, 232, 141)" readonly>
                                             댓글<br>등록</button></th><br>
                                     </tr>
                                 	<tr>

@@ -65,7 +65,7 @@
 
                     <h1>자유게시판</h1><hr>
 
-                    <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray; margin-left:960px;">
+                    <a class="btn btn-primary" href="boardFreeList.bf" style="background-color: lightgray; border-color: lightgray; margin-left: 960px;">
                     목록으로</a> 
                     <br><br><br>
 
@@ -101,7 +101,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="5" style="background-color:rgb(248, 248, 248);"> 
+                                        <td colspan="5" style="background-color: rgb(248, 248, 248);"> 
                                             <p style="height:250px;">${ bf.freeCnt }</p>
                                         </td>
                                     </tr>
@@ -112,7 +112,7 @@
 							<!-- 로그인한 유저와 게시글 작성한 멤버 아이디가 일치할 경우에만 수정/삭제 버튼 보이도록 -->
 							<c:if test="${ loginUser.id eq bf.memNo }">							
 	                            <div class="boardFreeBtn" style="margin-left:780px;">   
-	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color:rgb(255, 231, 136); border-color:rgb(255, 231, 136);">
+	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color: rgb(255, 231, 136); border-color: rgb(255, 231, 136);">
 	                                수정하기</a>
 	                                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
 	                            </div><br><br>
@@ -121,6 +121,7 @@
 		                            <input type="hidden" name="bfno" value="${ bf.freeNo }">
 		                            <input type="hidden" name="filePath" value="${ bf.freeFileUpdate }"> 
 	                            </form>
+								
 								
 								<script>
 					            	function postFormSubmit(num){
@@ -146,13 +147,14 @@
 
                         <div class="boardFreeReplyArea">
 
-                            <table id="replyArea" width="960" style="background-color:rgb(248, 248, 248)">
+                            <table id="replyArea" width="960" style="background-color: rgb(248, 248, 248)">
                                 <thead>
                                     <tr>
                                         <th colspan="2">
-                                            <textarea class="form-control" name="freeReplyCnt" id="freeReplyCnt" cols="55" rows="2" style="resize:none;"></textarea>
+                                            <textarea class="form-control" name="freeReplyCnt" id="freeReplyCnt" cols="55" rows="2" style="resize: none;"></textarea>
                                         </th>
-                                        <th style="vertical-align: middle" width="150"><button class="btn btn-secondary" onclick="addReply();" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182)">
+                                        <th style="vertical-align: middle" width="150">
+                                        	<button class="btn btn-secondary" onclick="addReply();" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182)">
                                             댓글<br>등록</button></th>
                                     </tr>
                                     <tr>

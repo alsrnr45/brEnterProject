@@ -82,9 +82,9 @@
 	                            <input type="hidden" name="freeNo" value="${ bf.freeNo }">
 	                            
 	                            <div style="margin-left:870px;">
-	                                <button type="submit" onclick="return validate()" class="btn btn-secondary" style="background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);">
+	                                <button type="submit" onclick="return validate()" class="btn btn-secondary" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182);">
 	                                    수정하기</button>
-	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color:lightgray; border-color:lightgray;">
+	                                <a class="btn btn-primary" href="boardFreeList.bf" style="background-color: lightgray; border-color: lightgray;">
 	                                	목록으로</a>
 	                            </div><br><br>
 																
@@ -93,12 +93,12 @@
 	                            		<table class="boardFreeTable">
 		                                  	<tr>
 		                                        <th width="80"><label for="freeTitle">제목</label></th>
-		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control"  value="${ bf.freeTitle }" required></td>
+		                                        <td width="800"><input type="text" name="freeTitle" id="freeTitle" class="form-control" value="${ bf.freeTitle }" required></td>
 		                                    </tr>
 		                                    <tr>
 		                                        <th><label for="upfile">첨부파일</label></th>
 		                                        <td>
-		                                            <input type="file" name="reupfile" id="upfile" class="form-control-file border"  style="cursor:pointer;"><br>
+		                                            <input type="file" name="reupfile" id="upfile" class="form-control-file border" style="cursor:pointer;"><br>
 		                                            
 		                                            <c:if test="${ !empty bf.freeFileOrigin }">
 			                                            현재 업로드된 파일 : 
@@ -118,15 +118,11 @@
 		                                        </th>
 		                                    </tr>
 	                                    </table>
-	                            	</div>
-	                              
-	                            </div>
-	
-	                        </form>
-	                        
+	                            	</div>	                             
+	                            </div>	
+	                        </form>	                        
 	                    </div>  
-	               	</div>
-               
+	               	</div>              
             	</div>
        		</div>
         	

@@ -14,17 +14,15 @@
 		<result column="atAvg" property="atAvg" />
 	</resultMap>
 	
-	<!-- 작성자 : 안소은 - 근태관리 조회 -->
+	<!-- 작성자 : 안소은 - null값인 퇴근시간, 총근무시간 조회 -->
 	<select id="selectAttend" resultMap="attendance">
-		select
-		       attend_no
-		     , mem_no
-		     , today
-             , check_in
-             , check_out
-             , total_time
+		select 
+			   check_out
+			 , total_time
 		  from attendance
 		 where mem_no = #{memNo}
+		   and check_out is null
+		   and total_time is null
 	</select>
 	
 	<!-- 작성자 : 안소은 - 근무일수 조회 -->
@@ -56,5 +54,14 @@
 		  , to_char(current_timestamp, 'hh24:mi')
 		  )
 	</insert>
+	<!-- 퇴근하기 버튼클릭시 check_out update문 -->
+	<update id="insertCheckOut" parameterType="personnelmgt">
+		update
+		       attendance
+		   set check_out = to_char(current_timestamp, 'hh24:mi')
+		 where mem_no = 14
+		   and check_out is null
+	</update>
+	
 
 </mapper>

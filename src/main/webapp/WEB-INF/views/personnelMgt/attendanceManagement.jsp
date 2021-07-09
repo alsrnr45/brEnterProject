@@ -134,10 +134,10 @@
                     
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
-                        <h2 class="third_1"><b>09 : 00</b></h2>
+                        <h2 class="third_1" id="checkInTime"><b> : </b></h2>
                         <br>
                         <button class="btn btn-primary" style="margin-top:5px;" disabled>퇴근체크시간</button>
-                        <h2 class="third_2"><b>19 : 00</b></h2>
+                        <h2 class="third_2" id="checkOutTime"><b> : </b></h2>
                     </div>
                 </div>
                 
@@ -185,32 +185,60 @@
     		= hours + " : " + minutes + " : " + seconds; 
     	}
     </script>
-    
-    <!-- 출퇴근용 ajax -->
-    <script type="text/javascript">
-    	
-    	$(function(){
-    		$(".checkIn").click(function(){
-    			/* var memNo = $('#memNo').val();  */
-    			/* var memNo = ${ loginUser.memNo }; */
-            	
-    			var memNo = $('input[name=memNo]').val();
-    			
-    			$.ajax({
-        			url:"insertCheckIn.pm",
-        			data:{memNo : memNo},
-        			success:function(time){
-        				if(time == "success"){
-        					console.log("오예!");
-        				}
-        			},error:function(){
-        				console.log("웩");
-        			}
-        		});
-    		})
-    	})
-
-    	</script>
+		
+   	<script type="text/javascript">
+   		// 출근버튼 클릭시 DB에 근태번호, 사원번호, 오늘날짜, 출근체크시간 insert하고 출근체크시간에 현재시간 띄우기
+   		$(function(){
+   			$(".checkIn").click(function(){
+   				
+   				var checkInTime = new Date();
+   				hours = checkInTime.getHours();
+   				minutes = checkInTime.getMinutes();
+   	    		
+       			$.ajax({
+           			url:"insertCheckIn.pm",
+           			data:{memNo : ${loginUser.memNo}},
+           			success:function(data){
+           				
+           	    		//console.log(hours + " : " + minutes);
+           	    		document.getElementById("checkInTime").innerHTML 
+           	    		= hours + " : " + minutes;
+           	    		
+           			},error:function(){
+           				alert("FAIL");
+           			}
+           		});
+       			
+       		})
+   		})
+   		// 퇴근버튼 클릭시 mem_no이 일치할 경우 DB에 퇴근체크시간 insert하고 출근체크시간에 현재시간 띄우기
+   		// 새로고침시 입력한 출퇴근시간이 사라짐.. 디비에서 select 해와야겠음..
+   		// 그리고 같은날 한번 출퇴근버튼을 눌렀으면 두번 insert 되지 않게 조건걸어야함....ㅠㅠㅠㅠ 하ㅏ
+   		
+   		
+   		$(function(){
+   			$(".checkOut").click(function(){
+   				
+   				var checkInTime = new Date();
+   				hours = checkInTime.getHours();
+   				minutes = checkInTime.getMinutes();
+   	    		
+       			$.ajax({
+           			url:"insertCheckOut.pm",
+           			data:{memNo : ${loginUser.memNo}},
+           			success:function(data){
+           				
+           	    		document.getElementById("checkOutTime").innerHTML 
+           	    		= hours + " : " + minutes;
+           	    		
+           			},error:function(){
+           				alert("FAIL");
+           			}
+           		});
+       			
+       		})
+   		}) 
+   	</script>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

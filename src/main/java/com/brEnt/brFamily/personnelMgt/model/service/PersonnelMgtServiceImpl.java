@@ -20,7 +20,7 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 
 	// 작성자 : 안소은 -- 근태관리 조회
 	@Override
-	public ArrayList<PersonnelMgt> selectAttend(int memNo) {
+	public PersonnelMgt selectAttend(int memNo) {
 		return pDao.selectAttend(sqlSession, memNo);
 	}
 	
@@ -35,6 +35,12 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 	public int insertCheckIn(PersonnelMgt p) {
 		return pDao.insertCheckIn(sqlSession, p);
 		
+	}
+
+	// 작성자 : 안소은 -- 퇴근시간 insert
+	@Override
+	public int insertCheckOut(PersonnelMgt p) {
+		return pDao.insertCheckOut(sqlSession, p);
 	}
 	
 	

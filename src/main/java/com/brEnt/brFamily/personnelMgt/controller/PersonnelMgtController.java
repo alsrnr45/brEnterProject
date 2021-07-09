@@ -1,5 +1,7 @@
 package com.brEnt.brFamily.personnelMgt.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -45,8 +47,15 @@ public class PersonnelMgtController {
 		
 		PersonnelMgt p = pService.selectTotalWorkDay(memNo);
 		model.addAttribute("p", p);
+		//System.out.println(p);
 		
-		//System.out.println(count);
+		PersonnelMgt pp = pService.selectAttend(memNo);
+		model.addAttribute("pp", pp);
+		
+		if(pp == null) {
+			System.out.println("널이다!!");
+		}
+		
 		
 		return "personnelMgt/attendanceManagement";
 	}
@@ -57,12 +66,28 @@ public class PersonnelMgtController {
 	public String ajaxInsertCheckIn(PersonnelMgt p) {
 		
 		int result = pService.insertCheckIn(p);
+		
 		if(result > 0) {
 			return "Check-In have been successfully registered";
 		}else {
 			return "fail";
 	
 		}
+	}
+	
+	@ResponseBody
+	@RequestMapping("insertCheckOut.pm")
+	public String ajaxInsertCheckOut(PersonnelMgt p) {
+		
+		int result = pService.insertCheckOut(p);
+		
+		if(result > 0) {
+			return "Check-Out have been successfully registered";
+		}else {
+			return "fail";
+	
+		}
+		
 	}
 	
 	

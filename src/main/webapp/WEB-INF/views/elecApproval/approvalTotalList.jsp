@@ -67,17 +67,17 @@
 	/* 전자결재 기안 문서함 리스트 */
     h1{margin-bottom: 20px;}  
     .approvalTotalList{text-align: center;}
-	.approvalTotalList>tbody>tr:hover{cursor:pointer;}
+	.approvalTotalList>tbody>tr:hover{cursor: pointer;}
 	
 	.modal-body {margin: 30px 0 30px 60px;}
 	.modal-body .modalContent1, .modal-body .modalContent2 {float: left;}
 	h6 {margin: 6px 20px 0 0; font-size: large;}
-	.modalContent2 {width:250px;}
+	.modalContent2 {width: 250px;}
 
 	/* .modal-dialog{display: inline-block; vertical-align: middle;} */
 	.modal-footer {margin: auto;}
-	.modal-footer button {width:120px;}
-	.btn-primary {background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+	.modal-footer button {width: 120px;}
+	.btn-primary {background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182);}
 	.btn-danger {background-color: rgb(241, 82, 82); border-color: rgb(255, 134, 134);}
 
 </style>
@@ -129,7 +129,7 @@
 		                                       	   <tr>                             	   
 		                                       	   	   <td>${ ea.ecDocName }<input type="hidden" class="eano" value="${ ea.ecDocNo }"></td>                                      	   	   
 		                                       	       	                                       	      	                                     	       
-		                                       	       <!-- 문서 코드에 따른 조건처리 -->
+		                                       	       <!-- 문서 코드에 따른 조건 처리 -->
 		                                       	       <td>
 		                                       	       		<input id="ecCode" type="hidden" value="${ ea.ecCode }">
 		                                       	       		<c:choose>

@@ -6,8 +6,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
 import com.brEnt.brFamily.elecApproval.model.dao.ElecApprovalDao;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
 import com.brEnt.brFamily.member.model.vo.Member;
@@ -26,7 +28,17 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    public ArrayList<ElecApproval> selectApprovalTotalList() {
       return eaDao.selectApprovalTotalList(sqlSession); 
    }
+   
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 상세 조회  
+   @Override
+   public ElecApproval documentDetail(int eano) {
+	   return eaDao.documentDetail(sqlSession, eano);
+   }
+     
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
 
+   
+   
    // 작성자 : 안소은 -- 결재선 부서 리스트 조회
    @Override
    public ArrayList<Dept> selectDept() {

@@ -132,14 +132,14 @@
 							<tr>
 								<th width="120px" height="35px;">문서종류</th> 
 								<td width="340px">
-									<select class="form-control" name="approvalFormCode url" id="approvalFormCode" onchange="moveurl(this.value);">
+									<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
 										<option value="documentEnrollForm.ea">기획안</option>
 										<option value="documentEnrollForm.ea">업무연락</option>
 										<option value="offEnrollForm.ea">연차</option>
 										<option value="expenseForm.ea">지출결의서</option>
 										<option value="documentEnrollForm.ea">회람</option>
 									</select>
-										<input type="hidden" id="approvalFormCode" value="${ code }">
+										<input type="hidden" id="ecCode" value="${ code }">
 								</td>
 								<th width="120px">문서번호</th><input type="hidden" name="ecDocName" value="${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
 								<td width="340px">
@@ -200,26 +200,29 @@
 						<table class="tableType03">
 							<tr height="40">
 								<th>제목</th>
-									<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="전자결재 문서 제목입니다." placeholder="제목을 입력해주세요." required></td>
+									<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" placeholder="제목을 입력해주세요." required></td>
 								</tr>
 								<tr height="40">
 									<th width="120">기안자</th>
-									<td width="340"><input type="text" name="" id="" value="김사원" readonly></td>
+									<td width="340">
+										<input type="text" name="ecWriter" value="${ loginUser.memName }" readonly>
+										<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+									</td>
 									<th width="120">기안 부서</th>
-									<td width="340"><input type="text" name="" id="" value="개발팀" readonly></td>
+									<td width="340"><input type="text" value="${ loginUser.deptName }" readonly></td>
 								</tr>
 								<tr height="40">									
 									<th>기안 일시</th>
-									<td><input type="text" name="" id="" value="2021-06-11 10:18:07" readonly></td>
+									<td><input type="text" name="ecEnrolldate" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/>" readonly></td>
 	                               	<th>첨부파일</th>
-									<td><input type="file" name="ecUpfile" id="ecUpfile" style="cursor:pointer;"></td>
+									<td><input type="file" name="ecUpfile" id="ecUpfile" style="cursor: pointer;"></td>
 								</tr>
 								<tr height="30">
 									<th colspan="4">상세내용</th>
 								</tr>
 								<tr>
 									<td colspan="4">
-										<input type="text" name="ecTitle" id="ecTitle" value="전자결재 문서 내용입니다." placeholder="내용을 입력해주세요." required style="height:250px;">
+										<input type="text" name="ecCnt" id="ecCnt" placeholder="내용을 입력해주세요." required style="height: 250px;">
 								</td>
 							</tr>
 						</table>   														
@@ -320,6 +323,7 @@
 			})
 		});
 	
+		
 		$(function(){
 			$(".modal1>ul").click(function(){
 		
@@ -329,17 +333,17 @@
 			})
 		});
 		
-		$(function(){
-			$(".modal2>ul>li").click(function(){
 		
+		$(function(){
+            $(document).on("click", ".modal2>ul>li", function(){
+
 				$('.modal2>ul>li').removeClass()
 				$(this).addClass('on2')
 				
 			})
 		});
 		
-		
-		 
+				 
 		function moveurl(url) { 
 			location.href = url;
 		};
@@ -348,7 +352,7 @@
 		var len = $('#ecCnt').val().length;
 		$('#ecCnt').focus();
 		$('#ecCnt')[0].setSelectionRange(len, len);
-				          
+					
 	</script>
 	
 	

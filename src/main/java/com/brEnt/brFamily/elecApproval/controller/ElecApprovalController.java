@@ -1,6 +1,10 @@
 package com.brEnt.brFamily.elecApproval.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,10 +13,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
+import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
 import com.google.gson.Gson;
@@ -84,8 +90,18 @@ public class ElecApprovalController {
 	  return mv;
    }
       
+     
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 상세 조회 
+   @RequestMapping("documentDetail.ea")
+   public String documentDetail(int eano, Model model) {
+	   
+	   ElecApproval ea = eaService.documentDetail(eano);
+	   model.addAttribute("ea", ea); 
+	   return "elecApproval/documentDetail";
+   }
    
-   // 작성자 : 최선희 — 기획안/업무연락/회람 작성폼  
+   
+   // 작성자 : 최선희 —- 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
    public ModelAndView documentEnrollForm(String code, ModelAndView mv) {   
 	   ArrayList<Dept> list = eaService.selectDept();
@@ -98,11 +114,58 @@ public class ElecApprovalController {
    }
    
    
-   // 작성자 : 최선희 -- 기획안/업무연락/회람 상세페이지
-   @RequestMapping("documentDetail.ea")
-   public String documentDetail() {
-      return "elecApproval/documentDetail";
-   }
+   /*
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
+   @RequestMapping("insertDocument.ea")
+   public String insertDocument(ElecApproval ea, ElecApprovalFile eaf, MultipartFile upfile, HttpSession session, Model model) {
+	   
+	   // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 ea에 추가로 담기 
+	   if(!upfile.getOriginalFilename().equals("")) { 
+				
+			String changeName = saveFile(session, upfile); 
+				
+			eaf.setEcFileOrigin(upfile.getOriginalFilename()); 
+			eaf.setEcFileUpdate("resources/elecApprovalUpfiles/" + changeName); // 업로드된파일명 + 파일명
+				
+		}
+			
+		int result = eaService.insertDocument(ea, eaf); 
+			
+		// 성공했을 경우 
+		if(result > 0) { 
+			session.setAttribute("alertMsg", "성공적으로 문서가 작성되었습니다.");
+			return "redirect:approvalTotalList.ea";
+		// 실패했을 경우 
+		}else { 
+			model.addAttribute("errorMsg", "게시글 작성 실패"); 
+			return "common/errorPage"; 
+		}
+		
+   }*/
+   
+   
+   // 작성자 : 최선희 -- 전달받은 첨부파일 수정명 작업해서 서버에 업로드시킨 후 해당 수정된 파일명(서버에 업로드된 파일명)을 반환하는 메소드 
+   public String saveFile(HttpSession session, MultipartFile upfile) {
+				
+	   String savePath = session.getServletContext().getRealPath("/resources/elecApprovalUpfiles/");
+				
+	   String originName = upfile.getOriginalFilename(); // 원본명 ("aaa.jpg") 
+				
+	   String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	   int ranNum = (int)(Math.random() * 900000 + 10000); 
+	   String ext = originName.substring(originName.lastIndexOf(".")); 
+				
+	   String changeName = currentTime + ranNum + ext;
+				
+	   try {
+		   upfile.transferTo(new File(savePath + changeName));
+	   } catch (IllegalStateException | IOException e) {
+		   e.printStackTrace();
+	   }
+				
+	   return changeName;
+				
+   }	
    
    
    // 작성자 : 안소은 — 지출결의서 폼

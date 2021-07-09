@@ -67,17 +67,17 @@
 	/* 전자결재 결재대기 리스트 */
     h1{margin-bottom: 20px;}  
     .approvalStandbyList{text-align: center;}
-	.approvalStandbyList>tbody>tr:hover{cursor:pointer;}
+	.approvalStandbyList>tbody>tr:hover{cursor: pointer;}
 	
 	.modal-body {margin: 30px 0 30px 60px;}
 	.modal-body .modalContent1, .modal-body .modalContent2 {float: left;}
 	h6 {margin: 6px 20px 0 0; font-size: large;}
-	.modalContent2 {width:250px;}
+	.modalContent2 {width: 250px;}
 
 	/* .modal-dialog{display: inline-block; vertical-align: middle;} */
 	.modal-footer {margin: auto;}
-	.modal-footer button {width:120px;}
-	.btn-primary {background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+	.modal-footer button {width: 120px;}
+	.btn-primary {background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182);}
 	.btn-danger {background-color: rgb(241, 82, 82); border-color: rgb(255, 134, 134);}
 	
 </style>
@@ -130,7 +130,7 @@
 			                                        <tr>
 			                                            <td>${ ea.ecDocName }<input type="hidden" class="eano" value="${ ea.ecDocNo }"></td>                   
 			                                            
-			                                            <!-- 문서 코드에 따른 조건처리 -->
+			                                            <!-- 문서 코드에 따른 조건 처리 -->
 		                                       	        <td>
 		                                       	        	<input id="ecCode" type="hidden" value="${ ea.ecCode }">
 		                                       	       		<c:choose>
@@ -164,7 +164,7 @@
 		                                       	       <td>${ ea.ecCompdate }</td>
 		                                       	       		
 		                                       	       <td>	      	             
-			                                       	   	   <c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate  }">
+			                                       	   	   <c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">
 								                               <font color="red">결재대기</font>
 								                           </c:if>
 		                                       	       </td>
@@ -226,7 +226,6 @@
 	    $(function() {
 	        // 리스트가 비어있을 경우 선택되지 않도록 조건 처리  
 			$(document).on("click", ".approvalStandbyList>tbody>tr", function(){
-	        //$(".approvalTotalList>tbody>tr").click(function() {
 	        	
 	        	// 폼마다 디테일 뷰 다름 
 	        	var ecCode = $(this).find("#ecCode").val();

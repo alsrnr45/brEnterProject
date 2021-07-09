@@ -88,22 +88,38 @@
             
 			<div class="content">
 
-				<a class="btn btn-primary" href="">목록으로</a>
+				<a class="btn btn-primary" href="approvalTotalList.ea">목록으로</a>
 
 				<div class="content_1">
 						
 					<table class="tableType01">
 						<tr>
-							<th width="120">문서종류</th> 
-							<td width="340">업무연락</td>
-							<th width="120">문서번호</th>
-							<td width="340">BC2021062286328</td>
+							<th width="120">문서종류</th>
+							
+							<!-- 문서 코드에 따른 조건 처리 --> 
+							<td width="340">
+								<input id="ecCode" type="hidden" value="${ ea.ecCode }">
+								<c:choose>
+									<c:when test="${ ea.ecCode eq 'PL' }">
+										기획안
+									</c:when>
+									<c:when test="${ ea.ecCode eq 'BC' }">
+										업무연락
+									</c:when>
+									<c:otherwise>
+										회람
+									</c:otherwise>
+								</c:choose>
+							</td>
+							
+							<th width="120">문서번호<input type="hidden" id="eano" class="eano" value="${ ea.ecDocNo }"></th>
+							<td width="340">${ ea.ecDocName }</td>
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
-							<td>2021-06-22 10:18:07</td>
+							<td>${ ea.ecEnrolldate }</td>
 							<th>완료 일시</th>
-							<td>2021-06-22 10:18:07</td>
+							<td>${ ea.ecCompdate }</td>
 						</tr>
 					</table>
 					<br>
@@ -113,7 +129,7 @@
 					<table class="tableType02">
 						<tr height="35">
 							<th rowspan="5" width="120">기안자</th>
-							<td width="136">개발팀</td>
+							<td width="136">${ ea.deptName }</td>
 							<th rowspan="5" width="120">결재자</th>
 							<td width="136">개발팀</td>
 							<td width="136">개발팀</td>
@@ -121,29 +137,29 @@
 							<td width="136"></td>
 						</tr>
 						<tr height="35">
-							<td>사원</td>
+							<td>${ ea.posiName }</td>
 							<td>과장</td>
 							<td>차장</td>
 							<td>부장</td>
-							<td>대표</td>
+							<td></td>
 						</tr>
 						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
-						<tr height="80" style="color:gray;">
+						<tr height="80" style="color: gray;">
+							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
+							<td><img src="resources/elecApprovalUpfiles/check2.png"></td>
 							<td></td>
-							<td><img src="resources/elecApprovalUpfiles/approval_Ok.png"></td>
 							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr height="35">
-							<td>2021-06-22</td>
-							<td>2021-06-22</td>
-							<td>2021-06-22</td>
-							<td>2021-06-22</td>
 							<td></td>
 						</tr>
 						<tr height="35">
-							<td style="color: royalblue;">최사원</td>
+							<td>${ ea.ecEnrolldate }</td>
+							<td>2021-06-22</td>
+							<td>2021-06-22</td>
+							<td>2021-06-22</td>
+							<td></td>
+						</tr>
+						<tr height="35">
+							<td style="color: royalblue;">${ ea.ecWriter }</td>
 							<td>이과장</td>
 							<td></td>
 							<td></td>
@@ -158,18 +174,27 @@
 						<table class="tableType03">
 							<tr height="40">
 								<th>제목</th>
-								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="업무연락 관련 결재 올립니다." readonly></td>
+								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecTitle }" readonly></td>
 							</tr>
 							<tr height="40">
 								<th width="120">첨부파일</th>
-								<td colspan="3" width="800"><a href="" download=""> &nbsp;&nbsp; test.png</a></td>
+								<td colspan="3" width="800">
+									<!-- <c:choose>
+                                    	<c:when test="${ empty eaf.ecFileOrigin }">
+                                        	
+                                        </c:when>
+                                        <c:otherwise>
+                                            <a href="${ eaf.ecFileUpdate }" download="${ eaf.ecFileOrigin  }">${ eaf.ecFileOrigin }</a>
+                                        </c:otherwise>
+                                	</c:choose> -->
+								</td>
 							</tr>
 							<tr height="30">
 								<th colspan="4">상세내용</th>
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" name="ecTitle" id="ecTitle" value="업무연락 내용입니다." readonly style="height:250px;">
+									<input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecCnt }" style="height: 250px;" readonly>
 								</td>
 							</tr>
 						</table>
@@ -180,7 +205,7 @@
 				<div class="content_4">	
 					<!-- 회원마다 보여지는 디테일 뷰 다름 => 조건 설정 (1: 해당 전자결재를 작성한 기안자일 경우 / 2: 해당 문서의 결재자일 경우 / 3: 아무것도 해당되지 않는 사원일 경우) -->
 					 
-					<!-- 수정, 삭제 => 이 글이 본인 글일 경우에만 보여져야 하는 버튼 -->
+					<!-- 이 글이 본인 글일 경우에만 보여져야 하는 버튼 -->
 					<a class="btn btn-light" href="documentUpdateForm.ea" style="background-color:lightgray; border-color:lightgray;">수정하기</a>
 					<a class="btn btn-danger" href="">삭제하기</a>
 					

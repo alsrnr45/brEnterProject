@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
+import com.brEnt.brFamily.store.model.vo.PayDto;
 import com.brEnt.brFamily.store.model.vo.Product;
 
 @Repository
@@ -50,7 +51,11 @@ public class StoreDao {
 	public Product selectProductDetailAdmin(SqlSessionTemplate sqlSession, int pdtNo) {
 		return sqlSession.selectOne("storeMapper.selectProductDetailAdmin", pdtNo);
 	}
-
+	
+	// 작성자 : 김혜미 -- 상품관리 등록
+	public int orderInsert(SqlSessionTemplate sqlSession, PayDto pd) {
+		return sqlSession.insert("storeMapper.orderInsert", pd);
+	}
 
 
 }

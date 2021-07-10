@@ -138,7 +138,7 @@
                                 </tr><tr>
                                     <th><label for="address">주소</label></th>
                                     <td><input type="text" id="sample6_postcode" placeholder="우편번호" class="form-control" name="" value="${ m.post }" readonly></td>
-                                    <td style="padding-left: 7px;"><input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"></td>
+                                    <td style="padding-left: 7px;"><input type="button" class="btn btn-secondary" onclick="sample6_execDaumPostcode()" value="주소검색"></td>
                                     <td></td>
                                 </tr>
                                 <tr>

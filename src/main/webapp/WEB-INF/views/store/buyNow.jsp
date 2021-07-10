@@ -71,11 +71,11 @@
    <!-- 상단바 -->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<!-- Navbar Brand-->
-		<a class="navbar-brand ps-3" href="index.html" style="width: 225px;">
+		<a class="navbar-brand ps-3" href="logout.me" style="width: 225px;">
 		<img src="resources/images/brLogo_user.png" style="height: 56px;"></a>
 
 		<!-- Sidebar Toggle-->
-		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!" hidden><i class="fas fa-bars"></i></button>
+		<button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#" hidden><i class="fas fa-bars"></i></button>
 	  
 	  	<!-- Navbar-->
 		<div style="width:100%;" align="right">
@@ -99,7 +99,7 @@
     
     <div id="layoutSidenav">
     
-		<form action="" id="sss">
+		<form action="orderFinish.st" id="sss">
 			<div class="content">
 				
 				<h1 class="mt-4">Order</h1>
@@ -125,11 +125,11 @@
 									<td>${ p.pdtName }<input type="hidden" id="pdtName" value="${ p.pdtName }"></td>
 									<td>${ p.orgPrice }원</td>
 									<td>${ p.memPrice }원</td>
-									<td>100</td>
+									<td>${ pco }<input type="hidden" name="pdtCount" value="${ pco }"></td>
 								</tr>
 							</tbody>
 							<tfoot>
-								<td colspan="5">합계: 54,000원<input type="hidden"id="totalPrice" value="100"></td>
+								<td colspan="5">합계: ${ p.memPrice * pco }원<input type="hidden"id="totalPrice" name="totalPrice" value="${ p.memPrice * pco }"></td>
 							</tfoot>
 						</table>
 					</div>  
@@ -140,29 +140,29 @@
 						<table class="table table-borderless" id="buyerInfo">
 							<tr>
 								<th width="150">주문하시는분</th>
-								<td width="250"><input type="text" class="form-control" id="userName" name="userName" value="${ loginUser.memName }" required></td>
-								<td width="350"></td>
+								<td width="250"><input type="text" class="form-control" id="userName" value="${ loginUser.memName }" required></td>
+								<td width="350"><input type="hidden" name="memNo" value="${ loginUser.memNo }"></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><input type="text" class="form-control" id="postCode" name="postCode" value="${ loginUser.post }" required></td>
-								<td></td>
+								<td><input type="text" class="form-control" id="postCode" value="${ loginUser.post }" required></td>
+								<td><input type="hidden" name="pdtNo" value="${ p.pdtNo }"></td>
 							</tr>
 							<tr>
 								<th></th>
-								<td colspan="2"><input type="text" class="form-control" id="roadAddress" name="roadAddress" value="${ loginUser.roadAddress }" required></td>
+								<td colspan="2"><input type="text" class="form-control" id="roadAddress" value="${ loginUser.roadAddress }" required></td>
 							</tr>
 							<tr>
 								<th></th>
-								<td colspan="2"><input type="text" class="form-control" id="detailAddress" name="detailAddress" value="${ loginUser.detailAddress }" required></td>
+								<td colspan="2"><input type="text" class="form-control" id="detailAddress" value="${ loginUser.detailAddress }" required></td>
 							</tr>
 							<tr>
 								<th>연락처</th>
-								<td colspan="2"><input type="text" class="form-control" id="phone" name="phone" value="${ loginUser.phone }" required></td>
+								<td colspan="2"><input type="text" class="form-control" id="phone" value="${ loginUser.phone }" required></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
-								<td colspan="2"><input type="text" class="form-control" id="" name="userId" value="${ loginUser.officeEmail }" required></td>
+								<td colspan="2"><input type="text" class="form-control" value="${ loginUser.officeEmail }" required></td>
 							</tr>
 						</table>
 					</div>
@@ -173,21 +173,21 @@
 						<table class="table table-borderless">
 							<tr>
 								<th width="150">받으시는분</th>
-								<td width="250"><input type="text" class="form-control" id="receiverName" name="receiverName" required></td>
+								<td width="250"><input type="text" class="form-control" id="receiverName" name="orderReceiver" required></td>
 								<td width="350"></td>
 							</tr>
 							<tr>
 								<th>주소</th>
-								<td><input type="text" class="form-control" id="receiverPostCode" name="receiverPostCode" required></td>
-								<td><button type="button" class="btn btn-secondary">주소검색</button></td>
+								<td><input type="text" class="form-control" id="sample6_postcode" name="postCode" required></td>
+								<td><input type="button" class="btn btn-secondary" onclick="sample6_execDaumPostcode()" value="주소검색"></td>
 							</tr>
 							<tr>
 								<th></th>
-								<td colspan="2"><input type="text" class="form-control" id="receiverRoadAddress" name="receiverRoadAddress" required></td>
+								<td colspan="2"><input type="text" class="form-control" id="sample6_address" name="roadAddress" required></td>
 							</tr>
 							<tr>
 								<th></th>
-								<td colspan="2"><input type="text" class="form-control" id="receiverDetailAddress" name="receiverDetailAddress" required></td>
+								<td colspan="2"><input type="text" class="form-control" id="sample6_detailAddress" name="detailAddress" required></td>
 							</tr>
 							<tr>
 								<th>연락처</th>
@@ -195,15 +195,18 @@
 							</tr>
 							<tr>
 								<th>베송메세지</th>
-								<td colspan="2"><input type="text" class="form-control" id="deliveryMessage" name="deliveryMessage" required style="height: 100px;"></td>
+								<td colspan="2"><input type="text" class="form-control" id="deliveryMessage" name="shipMessage" required style="height: 100px;"></td>
 							</tr>
 						</table>
 					</div>
+					<input type="text" id="sample6_extraAddress" placeholder="참고항목" hidden>
 
 					<!-- 결제수단 -->
 					<h2 class="mt-4">결제수단</h2><hr>
 					<div id="paymentType">
-						<button class="btn btn-outline-secondary" style="width: 150px;">신용카드</button>
+						<button class="btn btn-outline-secondary" style="width: 150px;">
+							신용카드<input type="hidden" name="payMethod" value="신용카드">
+						</button>
 					</div>
 				
 					<br><br><br><br>
@@ -217,17 +220,17 @@
 							<table class="table table-borderless">
 								<tr style="font-size:large;">
 									<td>총 상품금액</td>
-									<td align="right">60000원</td>
+									<td align="right">${ p.orgPrice * pco }원</td>
 								</tr>
 								<tr style="font-size:large;">
 									<td>총 할인금액</td>
-									<td align="right">6000원</td>
+									<td align="right">${ (p.orgPrice - p.memPrice)* pco }원</td>
 								</tr>
 							</table>
 							
 							<hr>
 							<h3 class="mt-4">최종 결제금액</h3>
-							<p align="right" style="font-size:x-large;">54000원</p>
+							<p align="right" style="font-size:x-large;">${ p.memPrice * pco }원</p>
 							
 							<hr>
 							<input id="terms" type="checkbox" class="form-check-input" required>
@@ -240,7 +243,58 @@
 		</form>
     </div>
     
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
+       function sample6_execDaumPostcode() {
+           new daum.Postcode({
+               oncomplete: function(data) {
+                   // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+   
+                   // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                   // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                   var addr = ''; // 주소 변수
+                   var extraAddr = ''; // 참고항목 변수
+   
+                   //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                   if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                       addr = data.roadAddress;
+                   } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                       addr = data.jibunAddress;
+                   }
+   
+                   // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                   if(data.userSelectedType === 'R'){
+                       // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                       // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                       if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                           extraAddr += data.bname;
+                       }
+                       // 건물명이 있고, 공동주택일 경우 추가한다.
+                       if(data.buildingName !== '' && data.apartment === 'Y'){
+                           extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                       }
+                       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                       if(extraAddr !== ''){
+                           extraAddr = ' (' + extraAddr + ')';
+                       }
+                       // 조합된 참고항목을 해당 필드에 넣는다.
+                       document.getElementById("sample6_extraAddress").value = extraAddr;
+                   
+                   } else {
+                       document.getElementById("sample6_extraAddress").value = '';
+                   }
+   
+                   // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                   document.getElementById('sample6_postcode').value = data.zonecode;
+                   document.getElementById("sample6_address").value = addr;
+                   // 커서를 상세주소 필드로 이동한다.
+                   document.getElementById("sample6_detailAddress").focus();
+               }
+           }).open();
+       }
+       
+       
+    	// 아임포트
         $("#check_module").click(function () {
             var IMP = window.IMP;
             IMP.init('imp35934987');

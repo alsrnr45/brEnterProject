@@ -146,7 +146,7 @@
                             <tr>
                                 <td>
                                     <button type="button" class="btn" onclick="fnCalCount('m', this);"><i class="fas fa-minus-circle"></i></button>
-                                    <input type="number" name="quantity" value="1" readonly/>
+                                    <input type="number" name="quantity" id="count" value="1" readonly/>
                                     <button type ="button" class="btn" onclick="fnCalCount('p',this);"><i class="fas fa-plus-circle"></i></button>
                                 </td>
                                 <td class="maxQuantity" hidden>5</td>
@@ -164,7 +164,7 @@
                         </table>
                     </div>
                     <a type="button" class="btn btn-light btn-lg" href="#">장바구니 담기</a>
-                    <a type="button" class="btn btn-info btn-lg" href="buyNow.st?pno=${ p.pdtNo }&pco=">바로 구매하기</a>
+                    <a type="button" class="btn btn-info btn-lg" id="pay">바로 구매하기</a>
                 </div>
 			</div>
             
@@ -180,6 +180,13 @@
     </div>
 
 	<script>
+		
+		$(function(){
+	        $("#pay").click(function(){
+	           location.href="buyNow.st?pno=" + $(".pno").val() + "&pco=" + $("#count").val() ;
+	        })
+	     })
+	
         function fnCalCount(type, ths){
             var $input = $(ths).parents("td").find("input[name='quantity']");
             var pCount = Number($input.val());

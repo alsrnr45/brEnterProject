@@ -3,6 +3,7 @@ package com.brEnt.brFamily.store.model.service;
 import java.util.ArrayList;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
+import com.brEnt.brFamily.store.model.vo.PayDto;
 import com.brEnt.brFamily.store.model.vo.Product;
 
 public interface StoreService {
@@ -31,4 +32,7 @@ public interface StoreService {
 	
 	// 작성자 : 김혜미 -- 상품 삭제 (관리자)
 	int deleteProduct(int pdtNo);
+	
+	// 작성자 : 김혜미 -- 주문 등록
+	int orderInsert(PayDto pd);
 }

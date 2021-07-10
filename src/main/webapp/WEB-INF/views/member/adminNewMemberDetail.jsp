@@ -253,6 +253,7 @@
 
         })
 
+    	// 카카오지도
         function loadImg(inputFile, num){
             // inputFile : 현재 변화가 생긴 input type="file" 요소객체
             // num : 몇번째 input요소인지 확인 후 해당 그 영역에 미리보기하기 위해

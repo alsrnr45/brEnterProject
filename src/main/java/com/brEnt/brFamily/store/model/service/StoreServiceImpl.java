@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
 import com.brEnt.brFamily.store.model.dao.StoreDao;
+import com.brEnt.brFamily.store.model.vo.PayDto;
 import com.brEnt.brFamily.store.model.vo.Product;
 
 @Service
@@ -75,6 +76,12 @@ public class StoreServiceImpl implements StoreService {
       // TODO Auto-generated method stub
       return 0;
    }
+
+
+@Override // 작성자 : 김혜미 -- 주문 등록
+public int orderInsert(PayDto pd) {
+	return sDao.orderInsert(sqlSession, pd);
+}
 
 
 

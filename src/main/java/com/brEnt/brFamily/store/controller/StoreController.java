@@ -7,14 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
 import com.brEnt.brFamily.common.template.Pagination;
 import com.brEnt.brFamily.store.model.service.StoreService;
+import com.brEnt.brFamily.store.model.vo.PayDto;
 import com.brEnt.brFamily.store.model.vo.Product;
-import com.google.gson.Gson;
 
 @Controller
 public class StoreController {
@@ -34,7 +33,7 @@ public class StoreController {
       mv.addObject("pi", pi)
         .addObject("list", list)
         .setViewName("store/storeList");
-      System.out.println(list);
+      //System.out.println(list);
       
       return mv;
    }
@@ -51,8 +50,9 @@ public class StoreController {
    
    // 작성자 : 김혜미 -- 바로구매하기
    @RequestMapping("buyNow.st")
-   public String buyNowProduct(int pno, Model model) {
+   public String buyNowProduct(int pno, int pco, Model model) {
 	   
+	   model.addAttribute("pco", pco);
 	   Product p = sService.buyNowProduct(pno);
 	   model.addAttribute("p", p);
 	   
@@ -68,7 +68,12 @@ public class StoreController {
    
    // 작성자 : 김혜미 -- 주문완료
    @RequestMapping("orderFinish.st")
-   public String orderFinish() {
+   public String orderFinish(PayDto pd) {
+	   
+	   System.out.println(pd);
+	   
+	   int result = sService.orderInsert(pd);
+	   
       return "store/orderFinish";
    }
    

@@ -126,5 +126,32 @@
 		   and c.mem_no = #{memNo}
    </select>
    
+   <insert id="orderInsert" parameterType="PayDto">
+   		insert all
+		  into order_form
+		values
+		     (
+			     SEQ_ODFNO.NEXTVAL
+			   , #{memNo}
+			   , #{orderReceiver}
+			   , #{postCode}
+			   , #{roadAddress}
+			   , #{detailAddress}
+			   , #{receiverPhone}
+			   , #{shipMessage}
+			   , #{totalPrice}
+			   , #{payMethod}
+			   , sysdate
+			   )
+		    into order_list
+		  values
+		       (
+			     SEQ_ODFNO.NEXTVAL
+			   , #{pdtNo}
+			   , #{pdtCount}
+			   )
+		  select * from dual
+   </insert>
+   
 
 </mapper>

@@ -121,7 +121,7 @@
         <div id="layoutSidenav_content">
             
 			<div class="content">
-				<form action="documentEnroll.ea" method="post" enctype="multipart/form-data">
+				<form action="insertDocument.ea" method="post" enctype="multipart/form-data">
 
 					<button class="btn btn-primary" href="">기안하기</button>
 
@@ -140,8 +140,9 @@
 												<option value="documentEnrollForm.ea?code=BC">업무연락</option>
 												<option value="offEnrollForm.ea">연차</option>
 												<option value="expenseForm.ea">지출결의서</option>
-												<option value="documentEnrollForm.ea?code=ME">회람</option>
+												<option value="documentEnrollForm.ea?code=ME">회람</option>												
 											</select>	
+												<input type="hidden" name="ecCode" value="PL">
 										</c:when>	
 										<c:when test="${ code eq 'BC' }">
 											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
@@ -151,6 +152,7 @@
 												<option value="expenseForm.ea">지출결의서</option>
 												<option value="documentEnrollForm.ea?code=ME">회람</option>
 											</select>	
+												<input type="hidden" name="ecCode" value="BC">
 										</c:when>		
 										<c:when test="${ code eq 'ME' }">
 											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
@@ -160,15 +162,16 @@
 												<option value="expenseForm.ea">지출결의서</option>
 												<option value="documentEnrollForm.ea?code=ME" selected>회람</option>
 											</select>
+												<input type="hidden" name="ecCode" value="ME">
 										</c:when>			
 									</c:choose>
 									<input type="hidden" id="ecCode" value="${ code }">
 								</td>
 								<th width="120px">문서번호</th><input type="hidden" name="ecDocName" value="${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
 								<td width="340px">
-									${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>
+									${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/><input type="hidden" name="ecDocumentNo" value="${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>">
 								</td>
-							</tr>
+							</tr>						
 						</table>
 						<br><br>
 					</div>
@@ -238,7 +241,7 @@
 									<th>기안 일시</th>
 									<td><input type="text" name="ecEnrolldate" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/>" readonly></td>
 	                               	<th>첨부파일</th>
-									<td><input type="file" name="ecUpfile" id="ecUpfile" style="cursor: pointer;"></td>
+									<td><input type="file" name="upfile" id="upfile" style="cursor: pointer;"></td>
 								</tr>
 								<tr height="30">
 									<th colspan="4">상세내용</th>

@@ -26,6 +26,16 @@
 		<result column="posi_name" property="posiName"/>	
 	</resultMap>
 	
+	<resultMap id="elecApprovalFile" type="elecApprovalFile">
+		<id column="ec_file_no" property="ecFileNo"/>
+		<result column="ec_document_no" property="ecDocumentNo"/>
+		<result column="ec_file_origin" property="ecFileOrigin"/>
+		<result column="ec_file_update" property="ecFileUpdate"/>
+		<result column="ec_file_path" property="ecFilePath"/>
+		<result column="ec_file_upload" property="ecFileUpload"/>
+		<result column="ec_document_name" property="ecDocumentName"/>
+	</resultMap>
+	
 	<resultMap id="off" type="off">
 		<id column="ec_doc_no" property="ecDocNo"/>
 		<result column="mem_no" property="memNo"/>
@@ -89,7 +99,8 @@
 		  from ec_document e
 		 where e.ec_status = 'Y' 
 		 order 
-		    by ec_enrolldate desc
+		    by ec_enrolldate desc,
+		       e.ec_doc_no desc	
 	</select>
 	
 	
@@ -111,6 +122,57 @@
 		where ec_doc_no = #{ ea.docNo }
 		  and ec_status = 'Y' 
 	</select>	
+	
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 작성 -->
+	<insert id="insertDocument" parameterType="elecApproval">
+  		insert
+  		  into ec_document
+  		  (
+  		    ec_doc_no
+  		  , mem_no
+  		  , ec_writer
+  		  , ec_title
+  		  , ec_cnt
+  		  , ec_code
+  		  , ec_doc_name
+  		  , ec_enrolldate
+  		  , ec_status
+  		  )
+  		  values
+  		  ( 
+  		    seq_ecno.nextval 
+  		  , #{memNo}
+  		  , #{ecWriter}
+  		  , #{ecTitle}  		  
+  		  , #{ecCnt}
+  		  , #{ecCode}
+  		  , #{ecDocName} 
+  		  , DEFAULT
+  		  , DEFAULT
+  		  )
+  	</insert>
+
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 파일 업로드 -->
+	<!--  
+	<insert id="insertDocumentFile" parameterType="elecApprovalFile">
+  		insert
+  		  into ec_file
+  		  (
+  		    ec_file_no
+  		  , ec_document_no
+  		  , ec_file_origin
+  		  , ec_file_update
+  		  )
+  		  values
+  		  ( 
+  		    seq_ecfno.nextval 
+  		  , #{ecDocumentNo}
+  		  , #{ecFileOrigin}  		  
+  		  , #{ecFileUpdate}
+  		  )
+  	</insert> -->
 	
 	
 	<!--           작성자 : 안소은            -->

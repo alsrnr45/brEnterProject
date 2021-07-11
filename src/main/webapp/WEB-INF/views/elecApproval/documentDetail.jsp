@@ -180,14 +180,14 @@
 							<tr height="40">
 								<th width="120">첨부파일</th>
 								<td colspan="3" width="800">
-								<!--<c:choose>
+									<c:choose>
                                     	<c:when test="${ empty eaf.ecFileOrigin }">
-                                        	
+                                        	&nbsp;&nbsp; 첨부파일이 없습니다.
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="${ eaf.ecFileUpdate }" download="${ eaf.ecFileOrigin  }">${ eaf.ecFileOrigin }</a>
+                                            <a href="${ eaf.ecFileUpdate }" download="${ eaf.ecFileOrigin  }">${ eaf.ecFileOrigin }</a>                                            
                                         </c:otherwise>
-                                	</c:choose>-->
+                                	</c:choose>
 								</td>
 							</tr>
 							<tr height="30">

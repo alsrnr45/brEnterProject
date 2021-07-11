@@ -26,8 +26,14 @@ public class ElecApprovalDao {
 	}
 	
 	// 작성자 : 최선희 -- 기획안/업무연락/회람 작성
+	public int insertDocument(SqlSessionTemplate sqlSession, ElecApproval ea) {		
+		return sqlSession.insert("approvalMapper.insertDocument", ea); 
+	}
 	
-			
+	public int insertDocumentFile(SqlSessionTemplate sqlSession, ElecApprovalFile eaf) {		
+		return sqlSession.insert("approvalMapper.insertDocumentFile", eaf); 
+	}
+				
 	// 작성자 : 안소은 -- 결재선 부서 리스트 조회
 	public ArrayList<Dept> selectDept(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectDept");

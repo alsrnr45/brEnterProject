@@ -13,11 +13,12 @@ import lombok.ToString;
 public class ElecApprovalFile {
 	
 	private int ecFileNo;
-	private int ecDocumentNo;
+	private String ecDocumentNo;
 	private String ecFileOrigin;
 	private String ecFileUpdate;
 	private String ecFilePath;
 	private String ecFileUpload;
-	private String ecFileSize; 
+	
+	private String ecDocumentName;
 	
 }

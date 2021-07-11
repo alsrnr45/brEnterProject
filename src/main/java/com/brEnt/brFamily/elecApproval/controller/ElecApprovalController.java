@@ -113,23 +113,25 @@ public class ElecApprovalController {
 	   return mv;
    }
    
-   
-   /*
+      
    // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
    @RequestMapping("insertDocument.ea")
-   public String insertDocument(ElecApproval ea, ElecApprovalFile eaf, MultipartFile upfile, HttpSession session, Model model) {
+   public String insertDocument(ElecApproval ea, MultipartFile upfile, HttpSession session, Model model) {
 	   
 	   // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 ea에 추가로 담기 
 	   if(!upfile.getOriginalFilename().equals("")) { 
 				
 			String changeName = saveFile(session, upfile); 
-				
+			
+			ElecApprovalFile eaf = new ElecApprovalFile(); 
+			
 			eaf.setEcFileOrigin(upfile.getOriginalFilename()); 
 			eaf.setEcFileUpdate("resources/elecApprovalUpfiles/" + changeName); // 업로드된파일명 + 파일명
-				
+			eaf.setEcFilePath("resources/elecApprovalUpfiles/" + changeName); 
+			eaService.insertDocumentFile(eaf); 
 		}
 			
-		int result = eaService.insertDocument(ea, eaf); 
+		int result = eaService.insertDocument(ea); 
 			
 		// 성공했을 경우 
 		if(result > 0) { 
@@ -141,7 +143,7 @@ public class ElecApprovalController {
 			return "common/errorPage"; 
 		}
 		
-   }*/
+   }
    
    
    // 작성자 : 최선희 -- 전달받은 첨부파일 수정명 작업해서 서버에 업로드시킨 후 해당 수정된 파일명(서버에 업로드된 파일명)을 반환하는 메소드 

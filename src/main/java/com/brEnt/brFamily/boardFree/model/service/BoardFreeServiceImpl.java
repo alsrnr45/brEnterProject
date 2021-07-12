@@ -107,8 +107,8 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	
 	// 댓글 삭제 
 	@Override
-	public int deleteReply(int freeReplyNo) {
-		return bfDao.deleteReply(sqlSession, freeReplyNo); 
+	public int deleteReply(int rno) {
+		return bfDao.deleteReply(sqlSession, rno); 
 	}
 	
 

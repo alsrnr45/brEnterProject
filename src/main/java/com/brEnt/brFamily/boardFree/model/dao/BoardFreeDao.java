@@ -87,8 +87,8 @@ public class BoardFreeDao {
 	
 	
 	// 댓글 삭제 
-	public int deleteReply(SqlSessionTemplate sqlSession, int freeReplyNo) { 
-		return sqlSession.update("boardFreeMapper.deleteReply", freeReplyNo); 
+	public int deleteReply(SqlSessionTemplate sqlSession, int rno) { 
+		return sqlSession.update("boardFreeMapper.deleteReply", rno);
 	}
 	
 	

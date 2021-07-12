@@ -158,7 +158,7 @@
                                             댓글<br>등록</button></th>
                                     </tr>
                                     <tr>
-                                        <td colspan="3" height="50">댓글 (<span id="rcount">0</span>) </td> 
+                                        <td colspan="3" height="50">댓글 (<span id="rcount">0</span>)</td>                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -176,57 +176,51 @@
 		$(function(){
 			selectReplyList();
 			
-			setInterval(selectReplyList, 1000);
+		//	setInterval(selectReplyList, 1000);
 		})
 		
 		
 		// 댓글 리스트 조회 ajax 
-		function selectReplyList(){
-			$.ajax({
-				url:"rlist.bf", 
-				data:{bfno:${bf.freeNo}},
-				success:function(list){
-					// console.log(list);
-					// style="background-color:rgb(255, 231, 136); border-color:"rgb(255, 231, 136);"
-					var value="";
-					$.each(list, function(i, obj){
-						value += "<tr>"
-							   +    "<th>" + obj.memNo + "</th>"
-							   
-							   
-							   // 댓글 작성한 본인일 경우에만 수정/삭제 버튼 나타나도록 조건 처리
-							   <c:if test="${ loginUser.id eq bf.memNo }">	  
-						       +    '<td rowspan="2" width="100">'  
-						       +     	 '<input type="button" id="btn" value="수정">' 
-						       +         '<input type="button" id="btn" value="삭제" onclick="deleteReply">' 
-						       +    "</td>"
-						       </c:if>
-						       
-						       
-						       // 수정 버튼 누를 때 보이는 화면  
-						       +    '<td rowspan="2" width="100">'  
-						       +     	 '<input type="button" id="btn" value="저장">' 
-						       +         '<input type="button" id="btn" value="취소">' 
-						       +    "</td>"
-						       
-						            
-						       +    '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
-						       + "</tr>"
-						       + "<tr>"
-						       
-						       // 수정 버튼 누를 때 textarea로 변환 
-						       +    '"<td width="550">' + obj.freeReplyCnt + "</td>"
-						       + "</tr>";
-					})
-					
-					$("#replyArea tbody").html(value); 
-					$("#rcount").text(list.length); 
-					
-				},error:function(){
-					console.log("댓글 리스트 조회용 ajax 실패"); 
-				}
-			})
-		}
+     	function selectReplyList(){
+	         $.ajax({
+	            url:"rlist.bf", 
+	            data:{bfno:${bf.freeNo}},
+	            success:function(list){
+	                console.log(list);
+	               
+	               var value="";
+	               $.each(list, function(i, obj){
+	                  value += "<tr>"
+	                        +    "<th>" + obj.memNo 
+	                        +    '<input type="hidden" name="rno" value="' + obj.freeReplyNo + '">'                   
+	                        +    "</th>"
+	                        
+	                        // 댓글 작성한 본인일 경우에만 수정/삭제 버튼 나타나도록 => 수정/삭제 버튼 누르면 저장/취소로 변경하기   
+	                        if('${loginUser.id}' == obj.memNo) {
+	                        	value   +=    '<td rowspan="2" width="100">'  
+				 	                    +         '<input type="button" id="updateBtn" value="수정">' 
+				 	                    +         '<input type="button" id="deleteBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">' 
+				 	                    +    "</td>"
+				 	                    +    '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
+				 	        + "</tr>"
+                               
+                            + "<tr>"                    
+   	                        // 수정 버튼 누를 때 textarea로 변환 
+   	                       	+    '"<td width="550">' + obj.freeReplyCnt + "</td>"
+   	                        //+    '"<td width="550">' + '<textarea></textarea>' + "</td>"
+   	                        + "</tr>";
+	                        }                        
+	                      
+	               })
+	               
+	               $("#replyArea tbody").html(value); 
+	               $("#rcount").text(list.length); 
+	               
+	            },error:function(){
+	               console.log("댓글 리스트 조회용 ajax 실패"); 
+	            }
+	         })
+	    }
 		
 		
 		
@@ -261,35 +255,24 @@
 		
 		
 		
-		// 댓글 수정 ajax 
-		
-		
-		
 		// 댓글 삭제 ajax 
-		function deleteReply(freeReplyNo) { 
-			if (!confirm("댓글을 삭제하시겠습니까?")) { 
-				return; 
-			}
-			
+		function deleteReply(rno){			
+				
 			$.ajax({
-				url:"rdelete.bf", 
-				type:"post",
-				data:{"freeNo" : $("#freeNo").val(), "freeReplyNo": freeReplyNo},
-				success: function(status){
-					if (status == "success") { 
+				url: "rdelete.bf",
+				data: {rno:rno},
+				success:function(status){
+					if(status == "success"){
+						selectReplyList(); 
+						console.log("delete success");
 						
-					}
+						
+					}					
+				}, error: function(){
+					console.log("delete fail"); 
 				}
 			})
-			
-			
 		}
-		
-		
-		
-		
-		
-		
 		
 		
 	</script>

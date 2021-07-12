@@ -23,6 +23,7 @@
 		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.ElecApproval" alias="ElecApproval"/>
 		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile" alias="ElecApprovalFile"/>
 		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.Off" alias="Off"/>
+		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm" alias="Expense"/>
 		<typeAlias type="com.brEnt.brFamily.mail.model.vo.ReceiveMail" alias="ReceiveMail"/>
 		<typeAlias type="com.brEnt.brFamily.mail.model.vo.SendMail" alias="SendMail"/>
 		<typeAlias type="com.brEnt.brFamily.mail.model.vo.MailFile" alias="MailFile"/>

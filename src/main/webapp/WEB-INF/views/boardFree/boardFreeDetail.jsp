@@ -29,7 +29,7 @@
 	}
 	
 	/* 드롭박스 */
-	select:focus, select:active{
+	select:focus, select:active{   
 	    border-color: rgb(155, 89, 182) !important;
 	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
 	    outline: 0 none !important;
@@ -43,6 +43,7 @@
 	h1{margin-top: 20px; margin-left: 60px;}  
     .boardFreeDetailArea, .boardFreeReplyArea{margin-left: 100px;}
     a:hover{color: rgb(155, 89, 182);}
+    
 	
 </style>
 </head>
@@ -194,22 +195,23 @@
 	                        +    "<th>" + obj.memNo 
 	                        +    '<input type="hidden" name="rno" value="' + obj.freeReplyNo + '">'                   
 	                        +    "</th>"
+	                        + 	 '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
 	                        
 	                        // 댓글 작성한 본인일 경우에만 수정/삭제 버튼 나타나도록 => 수정/삭제 버튼 누르면 저장/취소로 변경하기   
 	                        if('${loginUser.id}' == obj.memNo) {
 	                        	value   +=    '<td rowspan="2" width="100">'  
-				 	                    +         '<input type="button" id="updateBtn" value="수정">' 
-				 	                    +         '<input type="button" id="deleteBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">' 
-				 	                    +    "</td>"
-				 	                    +    '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
-				 	        + "</tr>"
-                               
-                            + "<tr>"                    
-   	                        // 수정 버튼 누를 때 textarea로 변환 
-   	                       	+    '"<td width="550">' + obj.freeReplyCnt + "</td>"
-   	                        //+    '"<td width="550">' + '<textarea></textarea>' + "</td>"
-   	                        + "</tr>";
-	                        }                        
+				 	                    +         '<input type="button" style="color:purple;" id="updateBtn" value="수정" onclick="updateReply();">'
+				 	                    +         '<input type="button" style="color:purple;" id="deleteBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">' 
+				 	                    +     "</td>"
+	                        }
+	                        
+				 	  value += "</tr>"          
+	                        + "<tr>"                    
+	   	                    // 수정 버튼 누를 때 textarea로 변환 
+	   	                    +    '"<td width="550">' + obj.freeReplyCnt + "</td>"
+	   	                    //+    '"<td width="550">' + '<textarea></textarea>' + "</td>"
+	   	                    + "</tr>";
+	                                               
 	                      
 	               })
 	               
@@ -217,7 +219,7 @@
 	               $("#rcount").text(list.length); 
 	               
 	            },error:function(){
-	               console.log("댓글 리스트 조회용 ajax 실패"); 
+	               console.log("selectReplyList fail"); 
 	            }
 	         })
 	    }

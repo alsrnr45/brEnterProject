@@ -17,10 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
+import com.brEnt.brFamily.elecApproval.model.vo.Approval_path;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
+import com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
+import com.brEnt.brFamily.member.model.vo.Position;
 import com.google.gson.Gson;
 
 @Controller
@@ -174,6 +177,7 @@ public class ElecApprovalController {
    @RequestMapping("expenseForm.ea")
    public ModelAndView expenseForm(ModelAndView mv) {
 	   
+	   // 결재선 부서 리스트 조회
 	   ArrayList<Dept> list = eaService.selectDept();
 	   mv.addObject("list", list)
 	   	 .setViewName("elecApproval/expenseForm");
@@ -184,8 +188,31 @@ public class ElecApprovalController {
    
    // 작성자 : 안소은 — 지출결의서 상세페이지
    @RequestMapping("expenseDetail.ea")
-   public String expenseDetail() {
+   public String expenseDetail(int eano, Model model) {
+	   
+	   // 통합문서 조회
+	   ElecApproval ea = eaService.expenseDetail(eano);
+	   model.addAttribute("ea", ea); 
+	   
+	   // 지출결의서 조회
+	   ExpenseForm ex = eaService.expenseDetailTwo(eano);
+	   model.addAttribute("ex", ex);
+	   
+	   // 부서조회
+	   Dept dept = eaService.selectDeptName(eano);
+	   model.addAttribute("dept", dept);
+	   
+	   // 직급조회
+	   Position posi = eaService.selectPosiName(eano);
+	   model.addAttribute("posi", posi);
+	   
+	   // 결재선 조회
+	   ArrayList<Approval_path> apList = eaService.selectApPath(eano);
+	   model.addAttribute("apList", apList);
+	   System.out.println(apList);
+	   
 	   return "elecApproval/expenseDetail";
+	   
    }
    
    
@@ -193,7 +220,9 @@ public class ElecApprovalController {
    @ResponseBody
    @RequestMapping(value="memberList.ea", produces="application/json; charset=utf-8")
    public String ajaxSelectMember(int deptNo) {
+	   
 	   return new Gson().toJson(eaService.selectMemberList(deptNo));
+	   
    }
   
    

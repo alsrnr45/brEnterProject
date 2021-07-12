@@ -5,12 +5,14 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.elecApproval.model.vo.Approval_path;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
+import com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
 import com.brEnt.brFamily.member.model.vo.Member;
+import com.brEnt.brFamily.member.model.vo.Position;
 
 @Repository 
 public class ElecApprovalDao {
@@ -33,17 +35,42 @@ public class ElecApprovalDao {
 	public int insertDocumentFile(SqlSessionTemplate sqlSession, ElecApprovalFile eaf) {		
 		return sqlSession.insert("approvalMapper.insertDocumentFile", eaf); 
 	}
-				
+	
 	// 작성자 : 안소은 -- 결재선 부서 리스트 조회
 	public ArrayList<Dept> selectDept(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectDept");
+	}
+	
+	// 작성자 : 안소은 -- 지출결의서(통합문서) 상세조회
+	public ElecApproval expenseDetail(SqlSessionTemplate sqlSession, int eano) {
+		return sqlSession.selectOne("approvalMapper.expenseDetail", eano);
+	}
+	
+	// 작성자 : 안소은 -- 지출결의서 상세조회
+	public ExpenseForm expenseDetailTwo(SqlSessionTemplate sqlSession, int eano) {
+		return sqlSession.selectOne("approvalMapper.expenseDetailTwo", eano);
+	}
+	
+	// 작성자 : 안소은 -- 부서명 조회
+	public Dept selectDeptName(SqlSessionTemplate sqlSession, int eano) {
+		return sqlSession.selectOne("approvalMapper.selectDeptName", eano);
+	}
+	
+	// 작성자 : 안소은 -- 직급명 조회
+	public Position selectPosiName(SqlSessionTemplate sqlSession, int eano) {
+		return sqlSession.selectOne("approvalMapper.selectPosiName", eano);
+	}
+	
+	// 작성자 : 안소은 -- 결재선 조회
+	public ArrayList<Approval_path> selectApPath(SqlSessionTemplate sqlSession, int eano) {
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectApPath", eano);
 	}
 	
 	// 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
 	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession, int deptNo){
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectMemberList", deptNo);
 	}
-
+	
 	// 작성자 : 김혜미 -- 연차 신청
 	public int offInsert(SqlSessionTemplate sqlSession, Off o) {
 		return sqlSession.insert("approvalMapper.offInsert", o);

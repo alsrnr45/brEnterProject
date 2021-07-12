@@ -26,6 +26,15 @@
 		<result column="posi_name" property="posiName"/>	
 	</resultMap>
 	
+	<resultMap id="path" type="ApprovalPath">
+		<id column="approval_path_no" property="approvalPathNo"/>
+		<result column="ec_doc_no" property="ecDocNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ec_turn" property="ecTurn"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ap_enrolldate" property="apEnrolldate"/>
+	</resultMap>
+	
 	<resultMap id="elecApprovalFile" type="elecApprovalFile">
 		<id column="ec_file_no" property="ecFileNo"/>
 		<result column="ec_document_no" property="ecDocumentNo"/>
@@ -34,6 +43,14 @@
 		<result column="ec_file_path" property="ecFilePath"/>
 		<result column="ec_file_upload" property="ecFileUpload"/>
 		<result column="ec_document_name" property="ecDocumentName"/>
+	</resultMap>
+		
+	<resultMap id="expense" type="Expense" >
+		<id column="ec_doc_no" property="ecDocNo" />
+		<result column="expense_status" property="exStatus" />
+		<result column="ec_expense_writer" property="exWriter" />
+		<result column="account_month" property="month" />
+		<result column="account" property="account" />
 	</resultMap>
 	
 	<resultMap id="off" type="off">
@@ -60,13 +77,20 @@
 		<result column="posi_name" property="posiName"/>	
 	</resultMap>
 	
-	<resultMap type="Dept" id="dept">
+	<resultMap id="dept" type="Dept">
 		<id column="dept_no" property="deptNo" />
 		<result column="dept_name" property="deptName" />
 		<result column="count" property="count"/>
 	</resultMap>
 	
-	<resultMap type="Member" id="member">
+	<resultMap id="posi" type="Position">
+		<id column="posi_no" property="posiNo"/>
+		<result column="posi_name" property="posiName"/>
+		<result column="base_salary" property="baseSalary"/>
+		<result column="hourly_pay" property="hourlyPay"/>
+	</resultMap>
+	
+	<resultMap id="member" type="Member">
 		<id column="mem_no" property="memNo" />
 		<result column="dept_no" property="deptNo" />
 		<result column="posi_no" property="posiNo" />
@@ -77,7 +101,7 @@
 		<result column="dept_name" property="deptName"/>
 		<result column="posi_name" property="posiName"/>
 	</resultMap>
-	
+
 	
 	<!-- 작성자 : 최선희 - 전자결재 리스트 조회 -->
 	<select id="selectApprovalTotalList" resultMap="elecApproval">
@@ -174,9 +198,7 @@
   		  )
   	</insert> -->
 	
-	
-	<!--           작성자 : 안소은            -->
-	<!-- 결재선 부서 리스트 조회 -->
+	<!-- 작성자 : 안소은 - 결재선 부서 리스트 조회 -->
 	<select id="selectDept" resultMap="dept">
 		select
 			   dept_no
@@ -187,16 +209,108 @@
 	      from dept d
 	</select>
 	
-	
-	<!-- 결재선 해당 부서 사원 조회용 AJAX -->
+	<!--  작성자 : 안소은 - 결재선 해당 부서 사원 조회용 AJAX -->
 	<select id="selectMemberList" resultMap="member" resultType="_int">
 		select
 		       mem_name
 		     , posi_name
 		  from member m
 		  join position p on(m.posi_no = p.posi_no)
-		 where m.dept_no = #{deptNo}
+		 where m.dept_no = #{ deptNo }
 	</select>
+	
+	<!--  작성자 : 안소은 - 지출결의서(통합문서) 상세 조회 -->
+	<select id="expenseDetail" resultMap="elecApproval" resultType="_int">
+		select 
+		       ec_doc_no
+		     , mem_no
+		     , ec_writer
+		     , ec_title
+		     , ec_cnt
+		     , ec_code
+		     , ec_status
+		     , ec_doc_name
+		     , ec_enrolldate
+		     , ec_canceldate
+		     , ec_compdate
+		 from ec_document
+		where ec_doc_no = #{ ea.ecDocNo }
+ 		  and ec_status = 'Y'
+	</select>
+	
+	<!--  작성자 : 안소은 - 지출결의서 상세 조회 -->
+	<select id="expenseDetailTwo" resultMap="expense" resultType="_int">
+		select
+			   ec_doc_no
+		     , expense_status
+		     , ec_expense_writer
+		     , to_char(account_month, 'YYYY-MM-DD') account_month
+		     , account
+		  from expense_form
+		 where ec_doc_no = #{ ex.ecDocNo }
+	</select>
+	
+	<!--  작성자 : 안소은 - 부서명 조회 -->
+	<select id="selectDeptName" resultMap="dept" resultType="_int">
+		select
+		       dept_name
+		  from dept d
+		  join member m on(d.dept_no = m.dept_no)
+		 where mem_no = #{ memNo }
+	</select>
+	
+	<!--  작성자 : 안소은 - 직급명 조회 -->
+	<select id="selectPosiName" resultMap="posi" resultType="_int">
+		select
+		       posi_name
+		  from position p
+		  join member m on(p.posi_no = m.posi_no)
+		 where mem_no = #{ memNo }
+	</select>
+	
+	<!-- 작성자 : 안소은 - 결재선 조회 -->
+	<select id="selectApPath" resultMap="path" resultType="_int">
+		select
+		       approval_path_no
+		     , ec_doc_no
+		     , mem_no
+		     , ec_turn
+		     , ec_status
+		     , ap_enrolldate
+		  from approval_path
+		 where ec_doc_no = #{ ap.ecDocNo }
+	</select>
+	
+	<!--  작성자 : 안소은 - 지출결의서 기안하기 -->
+	<insert id="">
+		insert
+	       into ec_document
+	       (
+	         ec_doc_no
+	       , mem_no
+	       , ec_writer
+	       , ec_title
+	       , ec_cnt
+	       , ec_code
+	       , ec_enrolldate
+	       , ec_status
+	       , ec_doc_name
+	       )
+	       values
+	       (
+	         seq_ecno.nextval
+	       , #{memNo}
+	       , #{ecWriter}
+	       , #{ecTitle}
+	       , #{ecCnt}
+	       , default
+	       , default
+	       , #{ecDocName}
+	       )
+	</insert>
+	
+	
+	
 	
 	
 	<!-- 작성자 : 김혜미 - 연차 신청 -->
@@ -259,28 +373,30 @@
 	</insert>
 	
 	<select id="offDetail" resultMap="elecApproval" parameterType="_int">
-		select 
-		       e.ec_doc_no
-		     , e.mem_no
-		     , ec_writer
-		     , ec_title
-		     , ec_cnt
-		     , ec_code
-		     , ec_enrolldate
-		     , e.ec_status
-		     , ec_doc_name
-		     , ec_canceldate
-		     , ec_compdate
-		     , off_start
-		     , off_end
-		     , approval_path_no
-		     , ec_turn
-		     , a.ec_status
-		     , ap_enrolldate
-		 from ec_document e
-		 join off o on(o.ec_doc_no = e.ec_doc_no)
-		 join approval_path a on(a.ec_doc_no = e.ec_doc_no)
-		where e.ec_doc_no = #{ ea.docNo }
+	     insert
+	       into ec_document
+	       (
+	         ec_doc_no
+	       , mem_no
+	       , ec_writer
+	       , ec_title
+	       , ec_cnt
+	       , ec_code
+	       , ec_enrolldate
+	       , ec_status
+	       , ec_doc_name
+	       )
+	       values
+	       (
+	         seq_ecno.nextval
+	       , #{memNo}
+	       , #{ecWriter}
+	       , #{ecTitle}
+	       , #{ecCnt}
+	       , default
+	       , default
+	       , #{ecDocName}
+	       )
 	</select>
 	
 	

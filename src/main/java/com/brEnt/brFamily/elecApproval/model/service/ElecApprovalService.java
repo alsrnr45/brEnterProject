@@ -2,12 +2,14 @@ package com.brEnt.brFamily.elecApproval.model.service;
 
 import java.util.ArrayList;
 
-import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.elecApproval.model.vo.Approval_path;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
+import com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
 import com.brEnt.brFamily.member.model.vo.Member;
+import com.brEnt.brFamily.member.model.vo.Position;
 
 public interface ElecApprovalService {
    
@@ -23,6 +25,21 @@ public interface ElecApprovalService {
     
     // 작성자 : 안소은 -- 전자결재 결재선 부서조회
     ArrayList<Dept> selectDept();
+    
+    // 작성자 : 안소은 -- 지출결의서(통합문서)상세조회
+    ElecApproval expenseDetail(int eano);
+    
+	// 작성자 : 안소은 -- 지출결의서 조회
+    ExpenseForm expenseDetailTwo(int eano);
+    
+	// 작성자 : 안소은 -- 부서명 조회
+    Dept selectDeptName(int eano);
+    
+	// 작성자 : 안소은 -- 직급명 조회
+    Position selectPosiName(int eano);
+    
+    // 작성자 : 안소은 -- 결재선 조회
+    ArrayList<Approval_path> selectApPath(int eano);
     
     // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
     ArrayList<Member> selectMemberList(int deptNo);

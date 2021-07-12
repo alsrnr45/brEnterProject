@@ -68,7 +68,7 @@
             height:40px;
             font-size: 14px;
         }
-        .outer input[type=text]{width:100%; height:35px; border:none; font-size: 14px;}
+        .outer input[type=text]{width:100%; height:35px; border:none; font-size: 14px; background:white;}
         .outer textarea{resize: none; font-size: 14px;}
         
 		/* 결재선 모달 */
@@ -177,10 +177,10 @@
                     </tr>
                     <tr height="40%;">
                         <td class="signTd"><img src="resources/elecApprovalUpfiles/check1.png"></td>
-                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
-                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
-                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
-                        <td class="signTd"><img src="resources/elecApprovalUpfiles/check2.png"></td>
+                        <td class="signTd"></td>
+                        <td class="signTd"></td>
+                        <td class="signTd"></td>
+                        <td class="signTd"></td>
                     </tr>
                     <tr height="15%;">
                         <td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
@@ -204,19 +204,20 @@
                 <table class="inputTable">
                     <tr height="40">
                         <th>제목</th>
-                        <td><input type="text" class="form-control form-control"></td>
+                        <td><input type="text" class="form-control" required></td>
                     </tr>
                     <tr height="40">
                         <th>구분</th>
                         <td>
-                            <input type="radio" name="sortation" selected> 개인 &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="sortation"> 법인
+                            <input type="radio" name="sortation" selected> 개인 &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <input type="radio" name="sortation"> 법인
                         </td>
                     </tr>
                     <tr height="40">
-                        <th>회계 기준월</th>
+                        <th>지출 일자</th>
                         <td>
                             <p style="float:left; margin: 8px 10px 0px 0px;">2021년</p>
-                            <select class="form-control" id="" style="float:left; width:50px;">
+                            <select class="form-control" id="" style="float:left; width:50px;" required>
                                 <option value="Jan">1</option>
                                 <option value="Feb">2</option>
                                 <option value="Mar">3</option>
@@ -235,17 +236,20 @@
                     </tr>
                     <tr height="40">
                         <th>지출자</th>
-                        <td><input type="text" class="form-control form-control"></td>
+                        <td>
+                        	<input type="text" class="form-control" value="${ loginUser.memName }" readonly>
+                        	<%-- <input type="hidden" name="memNo" value="${ loginUser.memNo }" > --%>
+                        </td>
                     </tr>
                     <tr height="40">
                         <th>계좌 정보</th>
-                        <td><input type="text" class="form-control form-control"></td>
+                        <td><input type="text" class="form-control" required></td>
                     </tr>
                     <tr>
                         <th>지출 내용</th>
                         <td>
                             <div class="form-group">
-                                <textarea class="form-control" rows="15" id="comment"></textarea>
+                                <textarea class="form-control" rows="15" id="comment" required></textarea>
                             </div>
                         </td>
                     </tr>
@@ -321,8 +325,10 @@
     <script type="text/javascript">
 	    $(function(){
 	         $(".modal1>ul").click(function(){
+	        	 
 	        	 var deptNo = $(this).children(".deptNo").val();
 	         	 var json = JSON.parse(deptNo);
+	         	 
 		         $.ajax({
 		                  url:"memberList.ea",
 		                  data:{deptNo:deptNo},
@@ -343,18 +349,15 @@
 	   							
 	   $(function(){
 			$(".modal1>ul").click(function(){
-					$('.modal1>ul').removeClass()
-					$(this).addClass('on1')
+				$('.modal1>ul').removeClass()
+				$(this).addClass('on1')
 			})
 		});
 	
 		$(function(){
-			$(".modal2>ul>li").click(function(){
-				console.log("클릭");
-				$('.modal2>ul>li').click(function(){
-					$('.modal2>ul>li').removeClass()
-					$(this).addClass('on2')
-				})
+			$(document).on("click", ".modal2>ul>li", function(){
+				$('.modal2>ul>li').removeClass()
+				$(this).addClass('on2')
 			})
 		});		
 	</script>

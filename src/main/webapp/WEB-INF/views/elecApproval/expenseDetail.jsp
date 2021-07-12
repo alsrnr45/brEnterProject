@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment</title>
+<title>expenseDetail</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -58,7 +59,7 @@
     /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
     .content {width:1000px; height: 100%; margin: auto; margin-top: 30px;}
-    .content_4 {padding: 15px 0 0 400px;}
+    .content_4 {padding: 15px 0 0 400px; margin-left:50px;}
 
     table {text-align: center; font-size:13px; margin: auto;}
     table>tr,th,td{border:1px lightgray solid;} 
@@ -90,24 +91,31 @@
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
-
+        
+        <!-- 현재날짜 -->
+		<c:set var="today" value="<%=new java.util.Date()%>" />
+		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set> 
+		
+		<!-- 회계 기준월 -->
+		<%-- <fmt:formatDate value="${ ex.month }" pattern="yyyyMMdd" var="month" /> --%>
+		
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             			<div class="content">
-				<a class="btn btn-primary" href="">목록으로</a>
+				<a class="btn btn-primary" href="approvalTotalList.ea">목록으로</a>
 				<div class="content_1">
 					<table class="tableType01">
 						<tr>
 							<th width="120">문서종류</th> 
 							<td width="340">지출결의서</td>
 							<th width="120">문서번호</th>
-							<td width="340">EX-20210618-86328</td>
+							<td width="340">${ ea.ecDocName }</td>
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
-							<td>2021-06-11 10:18</td>
+							<td>${ ea.ecEnrolldate }</td>
 							<th>완료 일시</th>
-							<td>2021-06-11 10:18</td>
+							<td>${ ea.ecCompdate }</td>
 						</tr>
 					</table>
 					<br>
@@ -117,7 +125,7 @@
 					<table class="tableType02">
 						<tr height="35">
 							<th rowspan="5" width="120">기안자</th>
-							<td width="136">개발팀</td>
+							<td width="136">${ dept.deptName }</td>
 							<th rowspan="5" width="120">결재자</th>
 							<td width="136">개발팀</td>
 							<td width="136">개발팀</td>
@@ -125,7 +133,7 @@
 							<td width="136"></td>
 						</tr>
 						<tr height="35">
-							<td>사원</td>
+							<td>${ posi.posiName }</td>
 							<td>과장</td>
 							<td>차장</td>
 							<td>부장</td>
@@ -133,21 +141,21 @@
 						</tr>
 						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 						<tr height="80" style="color:gray;">
-							<td></td>
-							<td><img src="resources/images/approval_Ok.png"></td>
-							<td></td>
+							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
 							<td></td>
 							<td></td>
-						</tr>
-						<tr height="35">
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
+							<td></td>
 							<td></td>
 						</tr>
 						<tr height="35">
-							<td style="color: royalblue;">김사원</td>
+							<td>${ ea.ecEnrolldate }</td>
+							<td>2021-06-11</td>
+							<td>2021-06-11</td>
+							<td>2021-06-11</td>
+							<td></td>
+						</tr>
+						<tr height="35">
+							<td style="color: royalblue;">${ ea.ecWriter }</td>
 							<td>박과장</td>
 							<td></td>
 							<td></td>
@@ -162,34 +170,33 @@
 						<table class="tableType03">
 							<tr height="40">
 								<th>제목</th>
-								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." readonly></td>
+								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecTitle }" readonly></td>
 							</tr>
                             <tr height="40">
                                 <th>구분</th>
-                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="법인" readonly></td>
+                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ex.exStatus }" readonly></td>
                             </tr>
 							<tr height="40">
-								<th width="120">회계 기준월</th>
-								<td colspan="3" width="800"><input type="text" name="" id="" value="2021년 06월" readonly style="width:130px;"></td>
+								<th width="120">지출 일자</th>
+								<td colspan="3" width="800"><input type="text" name="" id="" value="${ ex.month }" readonly style="width:130px;"></td>
 							</tr>
                             <tr height="40">
                                 <th>계좌 정보</th>
-                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="국민은행" readonly></td>
+                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ex.account }" readonly></td>
                             </tr>
 							<tr height="40">
 								<th colspan="4">지출 내용</th>
 							</tr>
 							<tr>
 								<td colspan="4">
-									<input type="text" name="ecTitle" id="ecTitle" value="연차 신청합니다." readonly style="height:300px;">
+									<input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecCnt }" readonly style="height:300px;">
 								</td>
 							</tr>
 						</table>
 					</form>
 				</div>
 				<div class="content_4">
-					<!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
-					<a class="btn btn-light" href="">수정하기</a>
+					<!-- 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					<a class="btn btn-danger" href="">삭제하기</a>
 				</div><br><br>
 			</div>

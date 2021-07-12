@@ -20,6 +20,7 @@
 		<typeAlias type="com.brEnt.brFamily.boardMenu.model.vo.BoardMenu" alias="BoardMenu"/>
 		<typeAlias type="com.brEnt.brFamily.boardMenu.model.vo.BoardMenuReply" alias="BoardMenuReply"/>
 		<typeAlias type="com.brEnt.brFamily.chat.model.vo.Chat" alias="Chat"/>
+		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.Approval_path" alias="ApprovalPath"/>
 		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.ElecApproval" alias="ElecApproval"/>
 		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile" alias="ElecApprovalFile"/>
 		<typeAlias type="com.brEnt.brFamily.elecApproval.model.vo.Off" alias="Off"/>

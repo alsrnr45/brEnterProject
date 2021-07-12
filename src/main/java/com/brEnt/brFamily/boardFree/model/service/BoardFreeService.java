@@ -54,7 +54,7 @@ public interface BoardFreeService {
 	
 	
 	// 댓글 삭제 
-	int deleteReply(int freeReplyNo);
+	int deleteReply(int rno);
 	
 	
 }

@@ -299,8 +299,8 @@ public class BoardFreeController {
 	// 댓글 삭제 
 	@ResponseBody
 	@RequestMapping("rdelete.bf")
-	public String deleteReply(int freeReplyNo) { 
-		int result = bfService.deleteReply(freeReplyNo); 
+	public String deleteReply(int rno) { 
+		int result = bfService.deleteReply(rno); 
 		if(result > 0) {
 			return "success"; 
 		}else { 

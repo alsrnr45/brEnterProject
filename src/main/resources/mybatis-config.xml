@@ -40,7 +40,7 @@
 		<typeAlias type="com.brEnt.brFamily.schedule.model.vo.Schedule" alias="Schedule"/>
 		<typeAlias type="com.brEnt.brFamily.store.model.vo.Product" alias="Product"/>
 		<typeAlias type="com.brEnt.brFamily.store.model.vo.Cart" alias="Cart"/>
-		<typeAlias type="com.brEnt.brFamily.store.model.vo.PayDto" alias="PayDto"/>
+		<typeAlias type="com.brEnt.brFamily.store.model.vo.PayDto" alias="PayDto"/>		
 	</typeAliases>
 	
 	<!-- mapper파일 등록 -->

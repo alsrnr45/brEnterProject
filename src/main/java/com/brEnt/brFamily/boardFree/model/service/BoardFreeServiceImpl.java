@@ -110,6 +110,6 @@ public class BoardFreeServiceImpl implements BoardFreeService {
 	public int deleteReply(int rno) {
 		return bfDao.deleteReply(sqlSession, rno); 
 	}
-	
+
 
 }

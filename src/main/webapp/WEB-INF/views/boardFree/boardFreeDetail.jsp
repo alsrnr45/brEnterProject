@@ -15,6 +15,12 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- 부트스트랩4 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 <style>
 
 	/* 폰트 */
@@ -27,7 +33,7 @@
 		box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
 		outline: 0 none !important;
 	}
-	
+			
 	/* 드롭박스 */
 	select:focus, select:active{   
 	    border-color: rgb(155, 89, 182) !important;
@@ -125,6 +131,7 @@
 								
 								
 								<script>
+								
 					            	function postFormSubmit(num){
 					            		if(num == 1){ // 수정하기 클릭 시 
 					            			$("#postForm").attr("action", "updateBoardFreeForm.bf").submit();
@@ -140,6 +147,7 @@
 					            			
 					            		}
 					            	}
+					            	
 					            </script>
 					            
 				            </c:if>
@@ -173,45 +181,89 @@
 	</div>
 	
 	
+	
+	<!-- 댓글 수정 모달 -->
+	<!-- The Modal -->
+    <div class="modal" id="updateReplyModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+      
+            <!-- Modal Header -->
+            <div class="modal-header">
+            	<h4 class="modal-title">댓글 수정</h4>           	
+            </div>
+      
+            <!-- Modal body -->
+            <div class="modal-body">
+            	<div class="modal1">            	
+            		<input type="hidden" class="form-control"  name="rno" value="" readonly>
+            	</div>
+            	<div class="modal2">
+					<label for="memNo">작성자</label>
+					<input class="form-control" id="replyWriter" name="replyWriter" value="${loginUser.id}" readonly>
+				</div>
+            	<div class="modal3">
+            		<label for="replyCnt">댓글 내용</label>	
+            		<input type="text" class="form-control" id="replyCnt">
+            	</div>         		 
+            </div>
+  
+            <!-- Modal footer -->
+            <div class="modal-footer" >        
+	            <button type="button" class="btn btn-primary modalUpdateBtn">수정</button>
+	            <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>            	
+            </div>
+      
+          </div>
+        </div>
+    </div>
+	
+	
+		
 	<script>
+	
 		$(function(){
+			
 			selectReplyList();
 			
 		//	setInterval(selectReplyList, 1000);
 		})
 		
 		
+		
 		// 댓글 리스트 조회 ajax 
      	function selectReplyList(){
+			
 	         $.ajax({
 	            url:"rlist.bf", 
 	            data:{bfno:${bf.freeNo}},
 	            success:function(list){
-	                console.log(list);
+	               //console.log(list);
 	               
 	               var value="";
 	               $.each(list, function(i, obj){
 	                  value += "<tr>"
 	                        +    "<th>" + obj.memNo 
-	                        +    '<input type="hidden" name="rno" value="' + obj.freeReplyNo + '">'                   
+	                        +    '<input type="hidden" id="rno" name="rno" value="' + obj.freeReplyNo + '">'                   
 	                        +    "</th>"
 	                        + 	 '"<td rowspan="2" style="color:gray;">' + obj.freeReplyEnroll + "</td>" 
 	                        
-	                        // 댓글 작성한 본인일 경우에만 수정/삭제 버튼 나타나도록 => 수정/삭제 버튼 누르면 저장/취소로 변경하기   
+	                        
+	                        // 댓글 작성한 본인일 경우에만 수정/삭제 버튼이 나타나는 조건문 
 	                        if('${loginUser.id}' == obj.memNo) {
+	                        	
 	                        	value   +=    '<td rowspan="2" width="100">'  
-				 	                    +         '<input type="button" style="color:purple;" id="updateBtn" value="수정" onclick="updateReply();">'
-				 	                    +         '<input type="button" style="color:purple;" id="deleteBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">' 
-				 	                    +     "</td>"
+				 	                    +     	'<input type="button" class="btn btn-primary" style="color: gray; background-color: white; border-color: gray;" id="updateReplyBtn" value="수정" data-toggle="modal" data-target="#updateReplyModal">'
+				 	                    +       '<input type="button" class="btn btn-primary" style="color: gray; background-color: white; border-color: gray;" id="deleteReplyBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">'      
+				 	                    +     "</td>" 			 	                     	   
+	                        		    	                       			                        		                                          	
 	                        }
 	                        
 				 	  value += "</tr>"          
-	                        + "<tr>"                    
-	   	                    // 수정 버튼 누를 때 textarea로 변환 
-	   	                    +    '"<td width="550">' + obj.freeReplyCnt + "</td>"
-	   	                    //+    '"<td width="550">' + '<textarea></textarea>' + "</td>"
-	   	                    + "</tr>";
-	                                               
+	                        +  "<tr>"                    
+	   	                    +    '"<td width="550">' + obj.freeReplyCnt 
+	   	                    +	 "</td>"
+	   	                    +  "</tr>";	                                               
 	                      
 	               })
 	               
@@ -223,10 +275,10 @@
 	            }
 	         })
 	    }
+
+	    
 		
-		
-		
-		// 댓글 작성 ajax 
+		// 댓글 작성 ajax 		
 		function addReply(){
 			
 			if($("#freeReplyCnt").val().trim().length != 0){ // 댓글 작성되어 있을 경우 
@@ -244,7 +296,7 @@
 							selectReplyList(); 
 						}
 					},error:function(){
-						console.log("댓글 작성용 ajax 통신 실패"); 
+						console.log("addReply fail"); 
 					}
 				})
 					
@@ -256,10 +308,36 @@
 		}	
 		
 		
+				
+		// 댓글 수정 ajax 		
+		$(".modalUpdateBtn").on("click", function () {
+			
+			$.ajax({
+				url: "rupdate.bf",
+				data: {
+					freeReplyNo:$("#rno").val(),
+					freeReplyCnt:$("#replyCnt").val()
+				},
+				
+				success:function(status){
+					if(status == "success"){							
+						selectReplyList(); 
+						console.log("update success");
+							
+					}
+				}, error:function(){
+					console.log("update fail"); 
+				}
+			})
+		})
 		
+			
+				
 		// 댓글 삭제 ajax 
 		function deleteReply(rno){			
-				
+			
+			confirm("댓글을 삭제하시겠습니까?"); 
+			
 			$.ajax({
 				url: "rdelete.bf",
 				data: {rno:rno},
@@ -267,8 +345,7 @@
 					if(status == "success"){
 						selectReplyList(); 
 						console.log("delete success");
-						
-						
+												
 					}					
 				}, error: function(){
 					console.log("delete fail"); 

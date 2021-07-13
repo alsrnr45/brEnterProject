@@ -146,6 +146,7 @@
     
     <script>
 	    $(function(){
+	    	
 			selectReplyList();
 			
 			setInterval(selectReplyList, 1000);
@@ -154,6 +155,7 @@
     	
 		// 댓글 리스트 조회 ajax 
     	function selectReplyList(){
+	    	
 			$.ajax({
 				url:"adminRlist.bf", 
 				data:{bfno:${bf.freeNo}},

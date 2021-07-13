@@ -152,14 +152,14 @@
   	</insert>
 	
 	
-	<!-- 댓글 수정 -->
+	<!-- 댓글 수정 --> 
 	<update id="updateReply" parameterType="boardFreeReply">
 		update 
 			   free_reply 
 		   set free_reply_cnt = #{freeReplyCnt}		      
 		 where free_reply_no = #{freeReplyNo} 
 	</update>
-	
+
 	
 	<!-- 댓글 삭제 -->
 	<update id="deleteReply" parameterType="_int">

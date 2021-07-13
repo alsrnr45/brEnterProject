@@ -125,13 +125,15 @@
     
     <script>
     	$(function() {
+    		
 			$(document).on("click", ".adminBoardFreeList>tbody>tr>td", function(){
         		location.href ="adminBoardFreeDetail.bf?bfno=" + $(this).siblings().eq(1).text();
      		});
 		}); 
     	
     	
-    	function check(){    		
+    	function check(){   
+    		
     		if($("input:checkbox[id='bfno']").is(":checked") == true) {
      				var result = confirm("선택한 게시글을 삭제하시겠습니까?");
          			if(result){

@@ -285,9 +285,13 @@ public class BoardFreeController {
 	
 	// 댓글 수정 
 	@ResponseBody
-	@RequestMapping(value="rupdate.bf", produces="application/json; charset=utf-8")
+	@RequestMapping("rupdate.bf")
 	public String updateReply(BoardFreeReply r) {
+		// System.out.println(r); 
+
 		int result = bfService.updateReply(r); 
+
+		
 		if(result > 0) {
 			return "success";
 		}else {

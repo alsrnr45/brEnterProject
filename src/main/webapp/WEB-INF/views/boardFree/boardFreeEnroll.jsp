@@ -157,6 +157,7 @@
        
         // 썸머노트
         $(document).ready(function() {
+        	
             $('#summernote').summernote({
                 height: 250,                    	// 에디터 높이
                 lang: "ko-KR",						// 에디터 한글 설정

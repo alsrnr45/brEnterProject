@@ -199,18 +199,20 @@ public class ElecApprovalController {
 	   model.addAttribute("ex", ex);
 	   
 	   // 부서조회
-	   Dept dept = eaService.selectDeptName(eano);
+	   ArrayList<Dept> dept = eaService.selectDeptName(eano);
 	   model.addAttribute("dept", dept);
+	   System.out.println(dept);
 	   
 	   // 직급조회
-	   Position posi = eaService.selectPosiName(eano);
+	   ArrayList<Position> posi = eaService.selectPosiName(eano);
 	   model.addAttribute("posi", posi);
+	   System.out.println(posi);
 	   
 	   // 결재선 조회
-	   ArrayList<Approval_path> apList = eaService.selectApPath(eano);
-	   model.addAttribute("apList", apList);
-	   System.out.println(apList);
-	   
+//	   ArrayList<Approval_path> apList = eaService.selectApPath(eano);
+//	   model.addAttribute("apList", apList);
+//	   System.out.println(apList);
+//	   
 	   return "elecApproval/expenseDetail";
 	   
    }

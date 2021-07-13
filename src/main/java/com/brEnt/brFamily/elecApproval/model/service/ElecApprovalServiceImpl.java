@@ -69,13 +69,13 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 	
 	// 작성자 : 안소은 -- 부서명 조회
 	@Override
-	public Dept selectDeptName(int eano) {
+	public ArrayList<Dept> selectDeptName(int eano) {
 		return eaDao.selectDeptName(sqlSession, eano);
 	}
 	
 	// 작성자 : 안소은 -- 직급명 조회
 	@Override
-	public Position selectPosiName(int eano) {
+	public ArrayList<Position> selectPosiName(int eano) {
 		return eaDao.selectPosiName(sqlSession, eano);
 	}
 	

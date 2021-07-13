@@ -33,10 +33,10 @@ public interface ElecApprovalService {
     ExpenseForm expenseDetailTwo(int eano);
     
 	// 작성자 : 안소은 -- 부서명 조회
-    Dept selectDeptName(int eano);
+    ArrayList<Dept> selectDeptName(int eano);
     
 	// 작성자 : 안소은 -- 직급명 조회
-    Position selectPosiName(int eano);
+    ArrayList<Position> selectPosiName(int eano);
     
     // 작성자 : 안소은 -- 결재선 조회
     ArrayList<Approval_path> selectApPath(int eano);

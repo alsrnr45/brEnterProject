@@ -127,10 +127,11 @@
 							<th rowspan="5" width="120">기안자</th>
 							<td width="136">${ dept.deptName }</td>
 							<th rowspan="5" width="120">결재자</th>
-							<td width="136">개발팀</td>
-							<td width="136">개발팀</td>
-							<td width="136">개발팀</td>
-							<td width="136"></td>
+								
+								<td width="136">개발팀</td>
+								<td width="136">개발팀</td>
+								<td width="136">개발팀</td>
+								<td width="136"></td>
 						</tr>
 						<tr height="35">
 							<td>${ posi.posiName }</td>

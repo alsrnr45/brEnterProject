@@ -52,13 +52,13 @@ public class ElecApprovalDao {
 	}
 	
 	// 작성자 : 안소은 -- 부서명 조회
-	public Dept selectDeptName(SqlSessionTemplate sqlSession, int eano) {
-		return sqlSession.selectOne("approvalMapper.selectDeptName", eano);
+	public ArrayList<Dept> selectDeptName(SqlSessionTemplate sqlSession, int eano) {
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectDeptName", eano);
 	}
 	
 	// 작성자 : 안소은 -- 직급명 조회
-	public Position selectPosiName(SqlSessionTemplate sqlSession, int eano) {
-		return sqlSession.selectOne("approvalMapper.selectPosiName", eano);
+	public ArrayList<Position> selectPosiName(SqlSessionTemplate sqlSession, int eano) {
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectPosiName", eano);
 	}
 	
 	// 작성자 : 안소은 -- 결재선 조회

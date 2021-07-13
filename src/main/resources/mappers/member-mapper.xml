@@ -123,7 +123,8 @@
 	<select id="enrollNewMember" parameterType="member">
 		update  
 		       member
-		   set dept_no = #{deptNo}
+		   set profile = #{profile}
+		     , dept_no = #{deptNo}
 		     , posi_no = #{posiNo}
 		     , hire_date = to_char(to_date(#{hireDate}, 'YYYY-MM-DD'), 'MM/DD/YYYY')
 		     , account = #{account}

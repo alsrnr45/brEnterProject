@@ -97,7 +97,7 @@
                 <form id="personalInformation" method="post" action="enrollNewMember.admin" enctype="multipart/form-data">
                     <div class="content1">
 	                    <div class="productImage">                  
-							<img class="titleImg" src="${ m.profile }" alt="" required>
+							<img class="titleImg" name="profile" src="${ m.profile }" required>
 							<input type="file" name="upfile" id="upfile" onchange="loadImg(this, 1);" required>
 						</div>
                     </div>
@@ -244,16 +244,13 @@
     <script>
     	// 상품사진
         $(function(){
-            
             $("#upfile").hide();
-
             $(".titleImg").click(function(){
                 $("#upfile").click();
             });
 
         })
 
-    	// 카카오지도
         function loadImg(inputFile, num){
             // inputFile : 현재 변화가 생긴 input type="file" 요소객체
             // num : 몇번째 input요소인지 확인 후 해당 그 영역에 미리보기하기 위해

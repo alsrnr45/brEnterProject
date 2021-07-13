@@ -64,6 +64,7 @@
 	.fixedArea button {width: 350px; height:50px; margin: 15px 0px 0px 50px; border-radius:0.5em; background-color:rgb(155, 89, 182); color: white; font-size: large;}
 	.totalPriceCheck{width:350px; height:400px; margin: 77px 20px 0 50px; border-radius:0.5em; background-color:rgb(245, 238, 248); border: 1px solid rgb(127, 127, 127); padding: 13px 30px 13px 30px;}
 
+	::selection {background: purple; color:white;}
 </style>
 
 </head>
@@ -99,7 +100,7 @@
     
     <div id="layoutSidenav">
     
-		<form action="orderFinish.st" id="sss">
+		<form action="orderFinish.st" method="post" id="orderForm">
 			<div class="content">
 				
 				<h1 class="mt-4">Order</h1>
@@ -319,7 +320,7 @@
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
                 
-                $("#sss").submit();
+                $("#orderForm").submit();
             } else {
                 var msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

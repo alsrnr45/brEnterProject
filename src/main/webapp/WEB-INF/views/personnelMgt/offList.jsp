@@ -119,7 +119,7 @@
 					<div class="card mb-4">
 						<div class="card-header">
 							<i class="fas fa-user me-1"></i>
-								김자바님의 연차내역
+								${ loginUser.memName }님의 연차내역
 						</div>
 						<div class="card-body">
 							<table id="datatablesSimple" class="salaryList">

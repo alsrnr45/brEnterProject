@@ -3,6 +3,7 @@ package com.brEnt.brFamily.personnelMgt.model.service;
 import java.util.ArrayList;
 
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
+import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
 public interface PersonnelMgtService {
 	
@@ -17,4 +18,7 @@ public interface PersonnelMgtService {
 	
 	// 작성자 : 안소은 -- 퇴근시간 insert
 	int insertCheckOut(PersonnelMgt p);
+
+	// 작성자 : 김혜미 -- 급여내역 조회
+	ArrayList<SalaryDto> slaryList();
 }

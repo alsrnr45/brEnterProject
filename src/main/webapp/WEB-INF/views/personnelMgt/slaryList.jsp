@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<!-- JSTL format 태그로 날짜 형식 변경하기 -->
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +76,7 @@
                 <div class="card mb-4">
                     <div class="card-header">
                         <i class="fas fa-user me-1"></i>
-                            김자바님의 급여내역
+                        ${ loginUser.memName }님의 급여내역
                     </div>
                     <div class="card-body">
                         <table id="datatablesSimple" class="salaryList">
@@ -88,51 +92,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2021년</td>
-                                    <td>5월</td>
-                                    <td>220</td>
-                                    <td>2.400,000</td>
-                                    <td>110,000</td>
-                                    <td>2,510,000</td>
-                                    <td>2021.06.14</td>
-                                </tr>
-                                <tr>
-                                    <td>2021년</td>
-                                    <td>4월</td>
-                                    <td>209</td>
-                                    <td>2.400,000</td>
-                                    <td>0</td>
-                                    <td>2,400,000</td>
-                                    <td>2021.05.14</td>
-                                </tr>
-                                <tr>
-                                    <td>2021년</td>
-                                    <td>3월</td>
-                                    <td>209</td>
-                                    <td>2.400,000</td>
-                                    <td>0</td>
-                                    <td>2,400,000</td>
-                                    <td>2021.04.14</td>
-                                </tr>
-                                <tr>
-                                    <td>2021년</td>
-                                    <td>2월</td>
-                                    <td>215</td>
-                                    <td>2.400,000</td>
-                                    <td>60,000</td>
-                                    <td>2,460,000</td>
-                                    <td>2021.03.14</td>
-                                </tr>
-                                <tr>
-                                    <td>2021년</td>
-                                    <td>1월</td>
-                                    <td>209</td>
-                                    <td>2.400,000</td>
-                                    <td>0</td>
-                                    <td>2,400,000</td>
-                                    <td>2021.02.14</td>
-                                </tr>
+								<!-- 로그인한 유저가 올린 문서만 보이도록 조건 처리 -->                                       
+                            	<c:forEach var="s" items="${ list }">
+                            	<c:if test="${ loginUser.memNo eq s.memNo }">	
+	                                <tr>
+	                                    <td>${ s.workingYear }년</td>
+	                                    <td>${ s.workingMonth }월</td>
+	                                    <td>${ s.workingHour }</td>
+	                                    <td>
+	                                    	<fmt:formatNumber value="${ s.baseSalary }" pattern="#,###" />
+	                                    </td>
+	                                    <td>
+	                                    	<fmt:formatNumber value="${ s.overtimeHour * s.hourlyPay }" pattern="#,###" />
+	                                    </td>
+	                                    <td>
+	                                    	<fmt:formatNumber value="${ s.baseSalary + s.overtimeHour * s.hourlyPay }" pattern="#,###" />
+	                                    </td>
+	                                    <td>
+                            				<fmt:parseDate value="${ s.salaryDay }" var="salaryDay" pattern="MM/dd/yyyy"/>
+	                                    	<fmt:formatDate value="${ salaryDay }" pattern="yyyy-MM-dd"/>
+	                                    </td>
+	                                </tr>
+								</c:if>
+                               	</c:forEach>
                             </tbody>
                         </table>
                     </div>

@@ -70,11 +70,9 @@ public class StoreController {
    @RequestMapping("orderFinish.st")
    public String orderFinish(PayDto pd) {
 	   
-	   System.out.println(pd);
-	   
+	   //System.out.println(pd);
 	   int result = sService.orderInsert(pd);
-	   
-      return "store/orderFinish";
+	   return "store/orderFinish";
    }
    
    // 작성자 : 김혜미 -- 상품관리 리스트 조회 (관리자)

@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.personnelMgt.model.service.PersonnelMgtService;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
+import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
 @Controller
 public class PersonnelMgtController {
@@ -19,8 +21,13 @@ public class PersonnelMgtController {
 
 	// 작성자 : 김혜미 -- 급여내역 리스트
 	@RequestMapping("salaryList.pm")
-	public String slaryList() {
-		return "personnelMgt/slaryList";
+	public ModelAndView slaryList(ModelAndView mv) {
+		
+		ArrayList<SalaryDto> list = pService.slaryList();
+		
+		mv.addObject("list", list)
+        .setViewName("personnelMgt/slaryList");
+		return mv;
 	}
 	
 	// 작성자 : 김혜미 -- 연차 조회

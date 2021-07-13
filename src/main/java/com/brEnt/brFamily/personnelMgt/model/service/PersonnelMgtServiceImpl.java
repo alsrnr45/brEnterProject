@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.personnelMgt.model.dao.PersonnelMgtDao;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
+import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
 @Service
 public class PersonnelMgtServiceImpl implements PersonnelMgtService {
@@ -41,6 +42,12 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 	@Override
 	public int insertCheckOut(PersonnelMgt p) {
 		return pDao.insertCheckOut(sqlSession, p);
+	}
+
+	// 작성자 : 김혜미 -- 급여내역 조회
+	@Override
+	public ArrayList<SalaryDto> slaryList() {
+		return pDao.slaryList(sqlSession);
 	}
 	
 	

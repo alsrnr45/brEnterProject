@@ -14,6 +14,25 @@
 		<result column="atAvg" property="atAvg" />
 	</resultMap>
 	
+	<resultMap id="salaryDto" type="salaryDto">
+		<id column="salary_list_no" property="salaryListNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="working_year" property="workingYear"/>
+		<result column="working_month" property="workingMonth"/>
+		<result column="working_hour" property="workingHour"/>
+		<result column="overtime_hour" property="overtimeHour"/>
+		<result column="salary" property="salary"/>
+		<result column="salary_day" property="salaryDay"/>
+		<result column="posi_no" property="posiNo"/>
+		<result column="posi_name" property="posiName"/>
+		<result column="base_salary" property="baseSalary"/>
+		<result column="hourly_pay" property="hourlyPay"/>
+		<result column="attend_no" property="attendNo" />
+		<result column="atCount" property="atCount" />
+		<result column="atSum" property="atSum" />
+		<result column="atAvg" property="atAvg" />
+	</resultMap>
+	
 	<!-- 작성자 : 안소은 - null값인 퇴근시간, 총근무시간 조회 -->
 	<select id="selectAttend" resultMap="attendance">
 		select 
@@ -62,6 +81,28 @@
 		 where mem_no = 14
 		   and check_out is null
 	</update>
+	
+	<!-- 작성자 : 김혜미 - 급여내역 조회 -->
+	<select id="slaryList" resultMap="salaryDto">
+		select
+		       salary_list_no
+		     , s.mem_no
+		     , working_year
+		     , working_month
+		     , working_hour
+		     , overtime_hour
+		     , salary
+		     , salary_day
+		     , p.posi_no
+		     , base_salary
+		     , hourly_pay
+		 from salary_list s
+		 join member m on (m.mem_no = s.mem_no)
+		 join position p on (p.posi_no = m.posi_no)
+		order
+		   by working_year desc
+		    , working_month desc
+	</select>
 	
 
 </mapper>

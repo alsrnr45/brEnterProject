@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
+import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
 @Repository
 public class PersonnelMgtDao {
@@ -28,6 +29,11 @@ public class PersonnelMgtDao {
 	// 작성자 : 안소은 -- 퇴근시간 insert
 	public int insertCheckOut(SqlSessionTemplate sqlSession, PersonnelMgt p) {
 		return sqlSession.update("personnelMgtMapper.insertCheckOut", p);
+	}
+
+	// 작성자 : 김혜미 -- 급여내역 조회
+	public ArrayList<SalaryDto> slaryList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("personnelMgtMapper.slaryList");
 	}
 	
 }

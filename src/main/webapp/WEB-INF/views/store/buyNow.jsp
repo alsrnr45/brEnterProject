@@ -234,10 +234,10 @@
 							<p align="right" style="font-size:x-large;">${ p.memPrice * pco }원</p>
 							
 							<hr>
-							<input id="terms" type="checkbox" class="form-check-input" required>
+							<input id="terms" type="checkbox" class="form-check-input">
 							<label for="terms">모든 내용을 확인하였으며 <br>구매조건에 동의합니다.</label>
 						</div>
-						<button type="button" class="btn" id="check_module">결제하기</button>
+						<button type="button" class="btn" id="check_module" disabled="disabled">결제하기</button>
 					</div>
 				</div>
 			</div>
@@ -246,7 +246,22 @@
     
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script>
-       function sample6_execDaumPostcode() {
+    	// 체크박스 클릭 시 버튼 활성화 
+	    $(document).ready(function(){
+	        $("#terms").click(function(){
+	        var terms=$('#terms').prop("checked");
+	
+	            if(terms){
+	                $("#check_module").prop("disabled",false);
+	            }
+	            else{
+	                $("#check_module").prop("disabled",true);
+	            }
+	        });
+	    });
+ 				
+    	// 카카오지도 api
+        function sample6_execDaumPostcode() {
            new daum.Postcode({
                oncomplete: function(data) {
                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
@@ -295,7 +310,7 @@
        }
        
        
-    	// 아임포트
+    	// 아임포트 api
         $("#check_module").click(function () {
             var IMP = window.IMP;
             IMP.init('imp35934987');

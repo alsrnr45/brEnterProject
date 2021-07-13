@@ -122,7 +122,7 @@
                     </div>
 
                     <div class="buttonArea" style="float:right;">
-                        <a type="button" class="btn btn-light" href="productDetail.admin">뒤로가기</a>
+                        <a type="button" class="btn btn-light" onclick="javascript:history.go(-1);">뒤로가기</a>
                         <button type="button" class="btn btn-warning" style="margin-left: 7px;">수정완료</button>
                     </div>
                 </form>

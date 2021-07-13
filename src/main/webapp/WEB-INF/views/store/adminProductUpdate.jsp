@@ -78,37 +78,37 @@
         <div id="layoutSidenav_content">
             <div class="content">
                 
-                <form method="post">
+                <form id="productUpdate" method="post" action="productUpdate.admin" enctype="multipart/form-data">
                     <div class="content1">
 
                         <div class="productImage">                  
-                            <img id="titleImg" src="" alt="">
-                            <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" required>
+                            <img id="titleImg" src="${ p.pdtFile }" alt="">
+                            <input type="file" name="file" id="file" onchange="loadImg(this);" required>
                         </div>
         
                         <div class="productInfo">
                             <table align="center">
                                 <tr>
                                     <th><label for="productNo">상품번호</label></th>
-                                    <td><input type="text" id="productNo" class="form-control" name="" value="147" required></td>
+                                    <td><input type="text" class="form-control" name="pdtNo" value="${ p.pdtNo }" required></td>
                                     <th><label for="productCtg">카테고리</label></th>
-                                    <td><input type="text" id="productCtg " class="form-control" name="" value="Album" required></td>
+                                    <td><input type="text" class="form-control" name="pdtCtg" value="${ p.pdtCtg }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="productName">상품명</label></th>
-                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="BLACKPINK 1st FULL ALBUM" required></td>
+                                    <td colspan="3"><input type="text" class="form-control" name="pdtName" value="${ p.pdtName }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="originPrice">판매가</label></th>
-                                    <td><input type="text" id="originPrice" class="form-control" name="" value="20000원" required></td>
+                                    <td><input type="text" class="form-control" name="orgPrice" value="${ p.orgPrice }원" required></td>
                                     <th><label for="memberPrice">직원가</label></th>
-                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="18000원" required></td>
+                                    <td><input type="text" class="form-control" name="memPrice" value="${ p.memPrice }원" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="stock">재고</label></th>
-                                    <td><input type="text" id="stock" class="form-control" name="" value="147" required></td>
+                                    <td><input type="text" class="form-control" name="pdtStock" value="${ p.pdtStock }" required></td>
                                     <th><label for="status">진열여부</label></th>
-                                    <td><input type="text" id="status " class="form-control" name="" value="Y" required></td>
+                                    <td><input type="text" class="form-control" name="pdtStatus" value="${ p.pdtStatus }" required></td>
                                 </tr>
                             </table>                        
                         </div>
@@ -117,7 +117,7 @@
 
                     <div class="content2">
                         <div class="summernote">
-                            <textarea id="summernote" name=""></textarea>
+                            <textarea id="summernote" name="">${ p.pdtDetail }</textarea>
                         </div>
                     </div>
 
@@ -148,10 +148,10 @@
         // 상품사진
         $(function(){
             
-            $("#file1").hide();
+            $("#file").hide();
 
             $("#titleImg").click(function(){
-                $("#file1").click();
+                $("#file").click();
             });
 
         })
@@ -173,16 +173,12 @@
                 // 파일 읽어들이기가 다 완료된 순간 실행할 함수 정의
                 reader.onload = function(e){
                     // 각 영역에 맞춰서 이미지 미리보기
-                    switch(num){
-                        case 1: $("#titleImg").attr("src", e.target.result); break;
-                    }
+                    $("#titleImg").attr("src", e.target.result); 
                 }
 
             }else{ // 선택된 파일이 사라졌을 경우 
 
-                switch(num){
-                    case 1: $("#titleImg").attr("src", null); break;
-                }
+                $("#titleImg").attr("src", null);
 
             }
 

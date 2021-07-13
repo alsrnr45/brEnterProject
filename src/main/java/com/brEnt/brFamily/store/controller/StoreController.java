@@ -97,11 +97,23 @@ public class StoreController {
 		return "store/adminProductDetail";
    }
    
+   // 작성자 : 김혜미 -- 상품 수정폼
+   @RequestMapping("productUpdateForm.admin")
+   public String productUpdateForm(int pno, Model model) {
+	   
+	   Product p = sService.selectProductDetailAdmin(pno); 
+	   model.addAttribute("p", p);
+	   
+      return "store/adminProductUpdate";
+   }
+   
+   /*
    // 작성자 : 김혜미 -- 상품관리 수정
    @RequestMapping("productUpdate.admin")
    public String productUpdate() {
       return "store/adminProductUpdate";
    }
+   */
 
    // 작성자 : 김혜미 -- 상품관리 등록
    @RequestMapping("productEnroll.admin")

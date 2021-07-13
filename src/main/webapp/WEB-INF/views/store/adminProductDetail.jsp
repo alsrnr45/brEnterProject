@@ -96,25 +96,25 @@
                             <table align="center">
                                 <tr>
                                     <th><label for="productNo">상품번호</label></th>
-                                    <td><input type="text" id="productNo" class="form-control" name="" value="${ p.pdtNo }" readonly></td>
+                                    <td><input type="text" class="form-control" value="${ p.pdtNo }" readonly></td>
                                     <th><label for="productCtg">카테고리</label></th>
-                                    <td><input type="text" id="productCtg " class="form-control" name="" value="${ p.pdtCtg }" readonly></td>
+                                    <td><input type="text" class="form-control" value="${ p.pdtCtg }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="productName">상품명</label></th>
-                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="${ p.pdtName }" readonly></td>
+                                    <td colspan="3"><input type="text" class="form-control" value="${ p.pdtName }" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="originPrice">판매가</label></th>
-                                    <td><input type="text" id="originPrice" class="form-control" name="" value="${ p.orgPrice }원" readonly></td>
+                                    <td><input type="text" class="form-control" value="${ p.orgPrice }원" readonly></td>
                                     <th><label for="memberPrice">직원가</label></th>
-                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="${ p.memPrice }원" readonly></td>
+                                    <td><input type="text" class="form-control" value="${ p.memPrice }원" readonly></td>
                                 </tr>
                                 <tr>
                                     <th><label for="stock">재고</label></th>
-                                    <td><input type="text" id="stock" class="form-control" name="" value="${ p.pdtStock }" readonly></td>
+                                    <td><input type="text" class="form-control" value="${ p.pdtStock }" readonly></td>
                                     <th><label for="status">진열여부</label></th>
-                                    <td><input type="text" id="status " class="form-control" name="" value="${ p.pdtStatus }" readonly></td>
+                                    <td><input type="text" class="form-control" value="${ p.pdtStatus }" readonly></td>
                                 </tr>
                             </table>                        
                         </div>
@@ -129,7 +129,7 @@
 
                     <div class="buttonArea">
                         <a type="button" class="btn btn-light" href="productList.admin">뒤로가기</a>
-                        <a type="button" class="btn btn-warning" href="productUpdate.admin" style="margin-left: 7px;">수정하기</a>
+                        <a type="button" class="btn btn-warning" href="productUpdateForm.admin?pno=${ p.pdtNo }" style="margin-left: 7px;">수정하기</a>
                         <a type="button" class="btn btn-danger" href="#" style="margin-left: 7px;">삭제하기</a>
                     </div>                    
                 </form>

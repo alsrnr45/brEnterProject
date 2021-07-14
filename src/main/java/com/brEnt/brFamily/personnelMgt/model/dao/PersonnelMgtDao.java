@@ -21,6 +21,10 @@ public class PersonnelMgtDao {
 		return sqlSession.selectOne("personnelMgtMapper.selectTotalWorkDay", memNo);
 	}
 	
+	public PersonnelMgt selectToday(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("personnelMgtMapper.selectToday", memNo);
+	}
+	
 	// 작성자 : 안소은 -- 출근시간 insert
 	public int insertCheckIn(SqlSessionTemplate sqlSession, PersonnelMgt p) {
 		return sqlSession.insert("personnelMgtMapper.insertCheckIn", p);

@@ -59,15 +59,25 @@ public class PersonnelMgtController {
 		PersonnelMgt pp = pService.selectAttend(memNo);
 		model.addAttribute("pp", pp);
 		
-		if(pp == null) {
-			System.out.println("널이다!!");
-		}
+		PersonnelMgt d = pService.selectToday(memNo);
+		model.addAttribute("d", d);
+		System.out.println(d.getAtCount());
 		
+//		if(d.getAtCount() > 0) {
+//			
+//			return "personnelMgt/attendanceManagement";
+//			
+//		}else {
+//			
+//		}
 		
 		return "personnelMgt/attendanceManagement";
+		
 	}
 	
-	// 작성자 : 안소은 -- 출근시간 insert
+	
+	
+	// 작성자 : 안소은 -- 출근시간 INSERT AJAX
 	@ResponseBody
 	@RequestMapping("insertCheckIn.pm")
 	public String ajaxInsertCheckIn(PersonnelMgt p) {
@@ -78,10 +88,11 @@ public class PersonnelMgtController {
 			return "Check-In have been successfully registered";
 		}else {
 			return "fail";
-	
 		}
+		
 	}
 	
+	// 작성자 : 안소은 -- 퇴근시간 INSERT AJAX
 	@ResponseBody
 	@RequestMapping("insertCheckOut.pm")
 	public String ajaxInsertCheckOut(PersonnelMgt p) {
@@ -92,7 +103,6 @@ public class PersonnelMgtController {
 			return "Check-Out have been successfully registered";
 		}else {
 			return "fail";
-	
 		}
 		
 	}

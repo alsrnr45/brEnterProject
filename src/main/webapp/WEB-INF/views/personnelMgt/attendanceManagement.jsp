@@ -21,13 +21,7 @@
         .outer{margin:auto; height:800px;}
         .outer .firstLine{margin:auto; width:100%; height:400px;}
         .outer .firstLine .workTitle{width:100%; display: inline-block; margin-left:10px;}
-        .outer .firstLine .workTitle>*{
-            width:300px;
-            float:left;
-            text-align: left;
-            margin-right:20px;
-            margin-left:20px;
-        }
+        .outer .firstLine .workTitle>*{width:300px; float:left; text-align: left; margin-right:20px; margin-left:20px;}
         .outer .firstLine>div{
             margin:auto;
             border:1px solid lightgray;
@@ -58,21 +52,9 @@
         /* 근무현황 */
         .outer .firstLine .third_1{margin-top:20px;}
         .outer .firstLine .third_2{margin-top:18px;}
-        .outer .firstLine .third .btn{
-            width:100%;
-            height:60px;
-            background: rgb(177, 201, 245);
-            color:black;
-            border:none;
-        }
+        .outer .firstLine .third .btn{width:100%; height:60px; background: rgb(177, 201, 245); color:black; border:none;}
         /* 근무시간 */
-        .outer .secondLine .average{
-            border:1px solid lightgray;
-            border-radius: 10px;
-            margin:auto;
-            width:1000px;
-            height:100px;
-        }
+        .outer .secondLine .average{border:1px solid lightgray; border-radius: 10px; margin:auto; width:1000px; height:100px;}
         .outer .secondLine .average > div{margin-left:20px;}
         .outer .secondLine .average>*{text-align: center; float:left; width:300px; margin:10px; padding:15px;}
         .outer .secondLine .average .number{color:royalblue;}
@@ -125,13 +107,23 @@
                         </div>
                     </div>
                     <input type="hidden" name="memNo" value="${ loginUser.memNo }" />
+                    <input type="hidden" id="d" value="${ d.atCount }">
                     <div class="second">
                         <h2><b id="dpTime">00 : 00 : 00</b></h2>
                         <br>
-                        <button class="btn btn-primary checkIn">출근하기</button>
-                        <button class="btn btn-primary checkOut">퇴근하기</button>
+                        <%-- <c:choose>
+                        	<c:when test="${ d.atCount > 0 }">
+	                      		<button class="btn btn-primary checkIn">출근하기</button>
+	                      		<button class="btn btn-primary checkOut">퇴근하기</button>
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<button class="btn btn-primary checkIn" disabled>출근하기</button>
+	                      		<button class="btn btn-primary checkOut" disabled>퇴근하기</button>
+                    		</c:otherwise>
+                    	</c:choose> --%>
+                    	<button class="btn btn-primary checkIn" id="checkIn" disabled="disabled">출근하기</button>
+	                    <button class="btn btn-primary checkOut" id="checkOut" disabled="disabled">퇴근하기</button>
                     </div>
-                    
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
                         <h2 class="third_1" id="checkInTime"><b> : </b></h2>
@@ -192,6 +184,9 @@
    			$(".checkIn").click(function(){
    				
    				var checkInTime = new Date();
+   				year = checkInTime.getFullYear();
+   				month = checkInTime.getMonth();
+   				date = checkInTime.getDate();
    				hours = checkInTime.getHours();
    				minutes = checkInTime.getMinutes();
    	    		
@@ -200,10 +195,16 @@
            			data:{memNo : ${loginUser.memNo}},
            			success:function(data){
            				
-           	    		//console.log(hours + " : " + minutes);
-           	    		document.getElementById("checkInTime").innerHTML 
-           	    		= hours + " : " + minutes;
-           	    		
+           				if(data == "success"){
+           					
+	           	    		//console.log(hours + " : " + minutes);
+	           	    		document.getElementById("checkInTime").innerHTML 
+	           	    		= hours + " : " + minutes;
+           	    			
+	           	    		selectCheckIn();
+           	    				
+           				}
+           				
            			},error:function(){
            				alert("FAIL");
            			}
@@ -211,9 +212,9 @@
        			
        		})
    		})
-   		// 퇴근버튼 클릭시 mem_no이 일치할 경우 DB에 퇴근체크시간 insert하고 출근체크시간에 현재시간 띄우기
+   		// 퇴근버튼 클릭시 mem_no이 일치하고, null일경우 DB에 퇴근체크시간 insert하고 출근체크시간에 현재시간 띄우기
    		// 새로고침시 입력한 출퇴근시간이 사라짐.. 디비에서 select 해와야겠음..
-   		// 그리고 같은날 한번 출퇴근버튼을 눌렀으면 두번 insert 되지 않게 조건걸어야함....ㅠㅠㅠㅠ 하ㅏ
+   		// 그리고 같은날 한번 출퇴근버튼을 눌렀으면 두번 insert 되지 않게 조건걸기
    		// 출근버튼 클릭시 근무일수 새로고침
    		// 퇴근버튼 클릭시 총근무시간/평균근무시간 새로고침되게..!~!!!!!!!
    		
@@ -231,7 +232,7 @@
            				
            	    		document.getElementById("checkOutTime").innerHTML 
            	    		= hours + " : " + minutes;
-           	    		
+           				
            			},error:function(){
            				alert("FAIL");
            			}
@@ -239,7 +240,47 @@
        			
        		})
    		}) 
+   		
+   		/* function selectCheckIn(){
+   			$.ajax({
+   				url:"",
+   				data:{},
+   				success:function(){
+   					
+   				},error:function(){
+   					
+   				}
+   			})
+   		}
+   		
+   		function selectCheckOut(){
+   			$.ajax({
+   				url:"",
+   				data:{},
+   				success:function(){
+   					
+   				},error:function(){
+   					
+   				}
+   			})
+   		} */
    	</script>
+   	
+ 	<script type="text/javascript">
+   		$(document).ready(function(){
+   			
+   			var d = $("#d").val();
+   			
+   			console.log(d);
+   			if(d > 0){
+   				$("#checkIn").prop("disabled", true);
+   				// 한번클릭하면 두번째엔 못하게막기
+   			}else{
+   				$("#checkIn").prop("disabled", false);
+   			}
+   			
+   		})
+   	</script> 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

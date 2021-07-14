@@ -31,6 +31,11 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 		return pDao.selectTotalWorkDay(sqlSession, memNo);
 	}
 	
+	@Override
+	public PersonnelMgt selectToday(int memNo) {
+		return pDao.selectToday(sqlSession, memNo);
+	}
+	
 	// 작성자 : 안소은 -- 출근시간 insert
 	@Override
 	public int insertCheckIn(PersonnelMgt p) {
@@ -49,6 +54,8 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 	public ArrayList<SalaryDto> slaryList() {
 		return pDao.slaryList(sqlSession);
 	}
+
+	
 	
 	
 	

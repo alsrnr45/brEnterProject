@@ -58,4 +58,9 @@ public class StoreDao {
 	}
 
 
+	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.update("storeMapper.updateProduct", p);
+	}
+
+
 }

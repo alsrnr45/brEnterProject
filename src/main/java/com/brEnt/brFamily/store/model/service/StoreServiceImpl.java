@@ -44,7 +44,6 @@ public class StoreServiceImpl implements StoreService {
    }
    
    
-   
    @Override // 작성자 : 김혜미 -- 상품 리스트 조회 (관리자)
    public ArrayList<Product> selectProductListAdmin() {
 	   return sDao.selectProductListAdmin(sqlSession);
@@ -66,8 +65,7 @@ public class StoreServiceImpl implements StoreService {
    
    @Override // 작성자 : 김혜미 -- 상품 수정 (관리자)
    public int updateProduct(Product p) {
-      // TODO Auto-generated method stub
-      return 0;
+	   return sDao.updateProduct(sqlSession, p);
    }
 
    

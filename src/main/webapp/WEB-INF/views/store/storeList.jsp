@@ -44,6 +44,10 @@
 	/* 카테고리, 검색창 */
 	.headArea>div {float: left;}
 	.input-group {width: 250px; margin-left: 640px;}
+	.input-group:focus, .input-group:active {
+		border-color: rgb(155, 89, 182) !important;
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+	    outline: 0 none !important;}
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem; border: 1px solid #ced4da;}
 	.btn-light:focus, .btn-light:active{

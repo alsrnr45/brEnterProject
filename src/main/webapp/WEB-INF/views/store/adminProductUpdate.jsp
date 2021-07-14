@@ -15,7 +15,6 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -59,6 +58,7 @@
 	.productInfo table {width:100%;}
 	.productInfo>table *{margin-bottom: 10px;}
 	.productInfo>table th {text-align:center; width:130px; font-size: 17px;}
+	
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -78,12 +78,12 @@
         <div id="layoutSidenav_content">
             <div class="content">
                 
-                <form id="productUpdate" method="post" action="productUpdate.admin" enctype="multipart/form-data">
+                <form id="updateProduct" method="post" action="updateProduct.admin" enctype="multipart/form-data">
                     <div class="content1">
-
                         <div class="productImage">                  
-                            <img id="titleImg" src="${ p.pdtFile }" alt="">
-                            <input type="file" name="file" id="file" onchange="loadImg(this);" required>
+                            <img class="titleImg" src="${ p.pdtFile }">
+							<input type="file" name="upfile" id="upfile" onchange="loadImg(this);">
+							<input type="hidden" name="pdtFile" value="${ p.pdtFile }">
                         </div>
         
                         <div class="productInfo">
@@ -100,9 +100,9 @@
                                 </tr>
                                 <tr>
                                     <th><label for="originPrice">판매가</label></th>
-                                    <td><input type="text" class="form-control" name="orgPrice" value="${ p.orgPrice }원" required></td>
+                                    <td><input type="text" class="form-control" name="orgPrice" value="${ p.orgPrice }" required></td>
                                     <th><label for="memberPrice">직원가</label></th>
-                                    <td><input type="text" class="form-control" name="memPrice" value="${ p.memPrice }원" required></td>
+                                    <td><input type="text" class="form-control" name="memPrice" value="${ p.memPrice }" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="stock">재고</label></th>
@@ -117,13 +117,13 @@
 
                     <div class="content2">
                         <div class="summernote">
-                            <textarea id="summernote" name="">${ p.pdtDetail }</textarea>
+                            <textarea id="summernote" name="pdtDetail">${ p.pdtDetail }</textarea>
                         </div>
                     </div>
 
                     <div class="buttonArea" style="float:right;">
                         <a type="button" class="btn btn-light" onclick="javascript:history.go(-1);">뒤로가기</a>
-                        <button type="button" class="btn btn-warning" style="margin-left: 7px;">수정완료</button>
+                        <button type="submit" class="btn btn-warning" style="margin-left: 7px;">수정완료</button>
                     </div>
                 </form>
 
@@ -141,47 +141,28 @@
                 focus: true,                    // 에디터 로딩후 포커스를 맞출지 여부
                 lang: "ko-KR",					// 한글 설정
                 placeholder: '최대 2048자까지 쓸 수 있습니다'	//placeholder 설정
-                
             });
         });
    
         // 상품사진
         $(function(){
-            
-            $("#file").hide();
-
-            $("#titleImg").click(function(){
-                $("#file").click();
+            $("#upfile").hide();
+            $(".titleImg").click(function(){
+                $("#upfile").click();
             });
 
         })
 
         function loadImg(inputFile, num){
-            // inputFile : 현재 변화가 생긴 input type="file" 요소객체
-            // num : 몇번째 input요소인지 확인 후 해당 그 영역에 미리보기하기 위해
-
-            // 파일을 선택하는 순간 inputFile.files라는 속성배열에 0번인덱스에 파일 담김
-            if(inputFile.files.length == 1){ // 선택된 파일이 있을 경우
-
-                // 파일을 읽어들일 FileReader 객체 생성
-                var reader = new FileReader();
-
-                // 선택된 파일을 읽어들이기
-                // => 읽어들이는 순간 해당 그 파일만의 고유한 url 부여됨
+        	if(inputFile.files.length == 1){
+        		var reader = new FileReader();
                 reader.readAsDataURL(inputFile.files[0]);
-
-                // 파일 읽어들이기가 다 완료된 순간 실행할 함수 정의
                 reader.onload = function(e){
-                    // 각 영역에 맞춰서 이미지 미리보기
-                    $("#titleImg").attr("src", e.target.result); 
+                    $(".titleImg").attr("src", e.target.result);
                 }
-
-            }else{ // 선택된 파일이 사라졌을 경우 
-
-                $("#titleImg").attr("src", null);
-
+            }else{ 
+                $(".titleImg").attr("src", null);
             }
-
         }
     </script>
 

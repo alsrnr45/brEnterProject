@@ -1,16 +1,24 @@
 package com.brEnt.brFamily.store.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
 import com.brEnt.brFamily.common.template.Pagination;
+import com.brEnt.brFamily.member.model.vo.Member;
 import com.brEnt.brFamily.store.model.service.StoreService;
 import com.brEnt.brFamily.store.model.vo.PayDto;
 import com.brEnt.brFamily.store.model.vo.Product;
@@ -107,18 +115,49 @@ public class StoreController {
       return "store/adminProductUpdate";
    }
    
-   /*
    // 작성자 : 김혜미 -- 상품관리 수정
-   @RequestMapping("productUpdate.admin")
-   public String productUpdate() {
-      return "store/adminProductUpdate";
+   @RequestMapping("updateProduct.admin")
+   public String updateProduct(Product p, MultipartFile upfile, HttpSession session, Model model) {
+	   
+	   System.out.println(p);
+	   
+	   // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 bf에 추가로 담기 
+      if(!upfile.getOriginalFilename().equals("")) { 
+         
+         String changeName = saveFile(session, upfile); 
+         p.setPdtFile("resources/productUpfiles/" + changeName); // 업로드된파일명 + 파일명
+      }
+      int result = sService.updateProduct(p);
+      
+      return "redirect:productList.admin";
    }
-   */
 
    // 작성자 : 김혜미 -- 상품관리 등록
    @RequestMapping("productEnroll.admin")
    public String productEnroll() {
       return "store/adminProductEnroll";
    }
+   
+   // 작성자 : 김혜미 -- 첨부파일명 수정 
+   public String saveFile(HttpSession session, MultipartFile upfile) {
+      
+      String savePath = session.getServletContext().getRealPath("/resources/productUpfiles/");
+            
+      String originName = upfile.getOriginalFilename(); // 원본명 ("aaa.jpg") 
+            
+      String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+      int ranNum = (int)(Math.random() * 900000 + 10000); 
+      String ext = originName.substring(originName.lastIndexOf(".")); 
+            
+      String changeName = currentTime + ranNum + ext;
+            
+      try {
+         upfile.transferTo(new File(savePath + changeName));
+      } catch (IllegalStateException | IOException e) {
+         e.printStackTrace();
+      }
+            
+      return changeName;
+   }   
       
 }

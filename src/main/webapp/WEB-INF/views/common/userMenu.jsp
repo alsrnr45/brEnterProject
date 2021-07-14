@@ -85,7 +85,7 @@
                         </a>
                         <div class="collapse" id="personnelManagement" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="attendeanceMgt.pm?memNo=${loginUser.memNo}">근태관리</a>
+                                <a class="nav-link today" href="attendeanceMgt.pm?memNo=${loginUser.memNo}">근태관리</a>
                                 <a class="nav-link" href="#">근무현황</a>
                                 <a class="nav-link" href="offList.pm">연차</a>
                                 <a class="nav-link" href="salaryList.pm">급여내역 조회</a>
@@ -164,7 +164,7 @@
                 </div>
             </nav>
         </div>
-
+        
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

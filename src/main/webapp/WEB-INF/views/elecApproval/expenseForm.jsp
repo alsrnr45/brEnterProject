@@ -137,12 +137,12 @@
                         <td class="td1">문서종류</td>
                         <td class="td2">
                             <div class="form-group">
-                                <select class="form-control" style="font-size: 13px;"  onchange="moveurl(this.value);">
-                                    <option value="documentEnrollForm.ea">기획안</option>
-                                    <option value="documentEnrollForm.ea">업무연락</option>
-                                    <option value="offEnrollForm.ea">연차</option>
-                                    <option value="expenseForm.ea" selected>지출결의서</option>
-                                    <option value="documentEnrollForm.ea">회람</option>
+                                <select class="form-control" name="approvalFormCode url" id="ecCode" style="font-size: 13px;"  onchange="moveurl(this.value);">
+                                    <option value="documentEnrollForm.ea?code=PL" selected>기획안</option>
+									<option value="documentEnrollForm.ea?code=BC">업무연락</option>
+									<option value="offEnrollForm.ea">연차</option>
+									<option value="expenseForm.ea">지출결의서</option>
+									<option value="documentEnrollForm.ea?code=ME">회람</option>
                                 </select>
                                 <input type="hidden" id="approvalFormCode" value="">
                               </div>

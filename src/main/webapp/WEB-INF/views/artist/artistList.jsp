@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>brEntertainment</title>
+<title>artistList</title>
 
 <!-- 부트스트랩 탬플릿 -->
 <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
@@ -16,65 +16,30 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
-	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(155, 89, 182); 
-	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	outline: 0 none;
-	}
-	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
-	}
-	option:checked {background: rgb(155, 89, 182); color: white;}
-	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color:black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(155, 89, 182);
-	    box-shadow: none;} 
-	    
-	/* 컨텐츠영역 */    
+	/* 컨텐츠 */
 	.outer{margin:auto; width:1000px;}
-    .outer .wrap{height:350px; width:800px; margin-bottom: 30px; margin:auto;}
-    .outer .wrap>*{
-        height:100%;
-        width:350px;
+    .outer .title{margin: 50px 0px 50px 0px;}
+    .outer .artistList{margin-left:10px; float:left;}
+    .outer img:hover{-webkit-filter: grayscale(0%); filter: none; cursor: pointer;}
+    .outer img{width:300px; height:350px; margin:0px 10px 0px 10px; -webkit-filter: grayscale(100%); filter: gray; background: chartreuse;}
+    .outer p{
+        background: rgb(0, 0, 0); 
+        color:rgb(255, 255, 255); 
         text-align: center;
-        box-sizing: border-box;
+        font-size: 20px;
+        font-weight: bold;
+        height:30px;
+        width:300px;
+        margin:0px 10px 50px 10px; 
     }
-    .wrap > .artist1{border:1px solid lightgray; float:left;}
-    .wrap > .artist2{border:1px solid lightgray; float:right;}
-    .outer .image{
-        width:100%;
-        height:100%;
-        -webkit-filter: grayscale(100%);
-        filter: gray;
-    }
-    .outer a:hover img{-webkit-filter: grayscale(0%); filter: none;}
     /* 페이징바 */
-    #pagingArea{ margin-left:250px;}
-    #pagingArea .page-link{
-        background-color: rgb(235, 202, 250);
-        color:white;
-        height:45px;
-        width:45px;
-        text-align: center;
-        line-height: 30px;
-        font-size: 18px;
-    }
+    .pagination a {color:black;}
+    .pagination a:hover, .pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
+    .pagination a:active {background-color: rgb(155, 89, 182) !important; box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
+    .page-item.active .page-link, .page-item.active .pagination a, .pagination .page-item.active a, .pagination li.active .page-link, .pagination li.active a {
+        z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
+    .pagination .active a, .pagination .active a:focus, .pagination .active a:hover {background-color: rgb(155, 89, 182); box-shadow: none;} 
+    .pagination {justify-content: center !important;}
 </style>
 
 </head>
@@ -85,64 +50,65 @@
     </nav>
     
     <div id="layoutSidenav">
-        
+    
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
 
-        <!--컨텐츠-->
+        <!-- 컨텐츠 -->
         <div id="layoutSidenav_content">
             <div class="outer">
-                <br><br>
-                <h1><b>ARTISTS</b></h1>
-                <br><br><br>
-
+                <div class="title"><h1><b>ARTISTS</b></h1></div>
                 <!-- 아티스트 리스트 -->
-                <div class="wrap">
-                    <div class="artist1">
-                        <a href=""><img class="image" src="../artistUpfiles/BLACKPINK.png" alt=""></a>
-                    </div>
-                    <div class="artist2">
-                        <a href=""><img class="image" src="../artistUpfiles/BTS.jpeg" alt=""></a>
-                    </div>
-                </div>
-                <div class="wrap">
-                    <div class="artist1">
-                        <a href=""><img class="image" src="../artistUpfiles/EXO.jpeg" alt=""></a>
-                    </div>
-                    <div class="artist2">
-                        <a href=""><img class="image" src="../artistUpfiles/IU.jpeg" alt=""></a>
-                    </div>
-                </div>
-                <div class="wrap">
-                    <div class="artist1">
-                        <a href=""><img class="image" src="../artistUpfiles/REDVELVET.png" alt=""></a>
-                    </div>
-                    <div  class="artist2">
-                        <a href=""><img class="image" src="../artistUpfiles/SEVENTEEN.jpeg" alt=""></a>
-                    </div>
-                </div>
-                <br><br><br>
-
-                <!-- 페이징바 -->
-                <div id="pagingArea">
-                    <ul class="pagination">
-                        <li class="page-item disabled"><a class="page-link" href="#"><</a></li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <li class="page-item"><a class="page-link" href="#">4</a></li>
-                        <li class="page-item"><a class="page-link" href="#">5</a></li>
-                        <li class="page-item"><a class="page-link" href="#">></a></li>
-                    </ul>
-                </div>
-
-                <br><br><br><br><br>
+                <c:forEach var="a" items="${ list }">
+	                <div class="artists">
+	                    <div class="artistList">
+	                        <input type="hidden" class="ano" value="${ a.artistNo }">
+	                        <img src="${ a.img }">
+	                        <p>${ a.name }</p>
+	                    </div>
+	                </div>
+                </c:forEach>
             </div>
+            
+            <!-- 페이징바 -->
+            <div class="pagingArea">
+                <ul class="pagination">
+                    <c:choose>
+                        <c:when test="${ pi.currentPage eq 1 }">
+                            <li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="artistList.art?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                    
+                    <c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+                        <li class="page-item"><a class="page-link" href="artistList.art?currentPage=${ p }">${ p }</a></li>
+                    </c:forEach>
+                    
+                    <c:choose>
+                        <c:when test="${ pi.currentPage eq pi.maxPage }">
+                            <li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="artistList.art?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </ul>
+            </div><br><br><br><br><br>
+            
         </div>
     </div>
 	
+	<script>
+        $(function() {
+            $(".artistList>img").click(function() {
+            	location.href ="artistDetail.art?ano=" + $(this).prev(".ano").val();
+            })
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

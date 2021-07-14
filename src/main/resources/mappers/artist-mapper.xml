@@ -1,4 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="artistMapper">
+
+	<resultMap type="Artist" id="artist">
+		<id column="artist_no" property="artistNo" />
+		<result column="artist_name" property="name" />
+		<result column="artist_info" property="info" />
+		<result column="artist_img" property="img" />
+		<result column="album" property="album" />
+		<result column="award" property="award" />
+		<result column="music_broad" property="musicBroad" />
+		<result column="broadcasting" property="broadCasting" />
+		<result column="artist_status" property="status" />
+	</resultMap>
+	
+	<select id="selectArtistListCount" resultType="_int">
+		select
+			   count(*)
+		  from artist
+		 where artist_status = 'Y'
+	</select>
+	
+	<select id="selectArtistList" resultMap="artist">
+		select
+		       artist_no
+		     , artist_name
+		     , artist_info
+		     , artist_img
+		     , album
+		     , award
+		     , music_broad
+		     , broadcasting
+		  from artist
+		 where artist_status = 'Y'
+	</select>
+	
+	<select id="selectArtistDetail" resultMap="artist" parameterType="_int">
+		select
+		       artist_no
+		     , artist_name
+		     , artist_info
+		     , artist_img
+		     , album
+		     , award
+		     , music_broad
+		     , broadcasting
+		  from artist
+		 where artist_no = #{artistNo}
+	</select>
+
 </mapper>

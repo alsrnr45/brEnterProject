@@ -114,7 +114,7 @@
                         </a>
                         <div class="collapse" id="brEnterNotice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="#">Notice</a>
+                                <a class="nav-link" href="noticeList.no">Notice</a>
                                 <a class="nav-link" href="artistList.art">Artists</a>
                                 <a class="nav-link" href="#">News</a>
                                 <a class="nav-link" href="#">Schedule</a>

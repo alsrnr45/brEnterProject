@@ -310,7 +310,6 @@ public class BoardFreeController {
 		}else { 
 			return "fail"; 
 		}
-	}
-	
+	}	
 		
 }

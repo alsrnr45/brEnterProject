@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.brEnt.brFamily.elecApproval.model.vo.Approval_path;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
-import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
 import com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
@@ -30,10 +29,6 @@ public class ElecApprovalDao {
 	// 작성자 : 최선희 -- 기획안/업무연락/회람 작성
 	public int insertDocument(SqlSessionTemplate sqlSession, ElecApproval ea) {		
 		return sqlSession.insert("approvalMapper.insertDocument", ea); 
-	}
-	
-	public int insertDocumentFile(SqlSessionTemplate sqlSession, ElecApprovalFile eaf) {		
-		return sqlSession.insert("approvalMapper.insertDocumentFile", eaf); 
 	}
 	
 	// 작성자 : 안소은 -- 결재선 부서 리스트 조회

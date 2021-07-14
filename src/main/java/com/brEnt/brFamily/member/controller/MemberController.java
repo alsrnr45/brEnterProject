@@ -89,34 +89,22 @@ public class MemberController {
    // 작성자 : 김혜미 -- 신규사원 등록
    @RequestMapping("enrollNewMember.admin")
    public String enrollNewMember(Member m, MultipartFile upfile, HttpSession session, Model model) {
-      
+	   
       // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 bf에 추가로 담기 
       if(!upfile.getOriginalFilename().equals("")) { 
-         
          String changeName = saveFile(session, upfile); 
          m.setProfile("resources/profileUpfiles/" + changeName); // 업로드된파일명 + 파일명
       }
-      int result = mService.enrollNewMember(m);
       
-//      // 성공했을 경우 
-//      if(result > 0) { 
-         session.setAttribute("alertMsg", "성공적으로 게시글이 작성되었습니다.");
-         return "redirect:newMemberList.admin";
-      // 실패했을 경우 
-//      }else { 
-//         model.addAttribute("errorMsg", "게시글 작성 실패"); 
-//         return "common/errorPage"; 
-//      }
+      int result = mService.enrollNewMember(m);
+      return "redirect:newMemberList.admin";
    }
    
    
    // 작성자 : 김혜미 -- 신규사원 반려
    @RequestMapping("returnMember.admin")
    public String returnMember(int mno, Model model) {
-      
       int result = mService.returnMember(mno);
-      
-//      session.setAttribute("alertMsg","성공적으로 반려되었습니다.");
       return "redirect:newMemberList.admin";
    }
 

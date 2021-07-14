@@ -59,7 +59,7 @@
 	/* .content div {outline: 1px solid blueviolet;} */
 	.content div {float: left;}
 	.content1 {width: 250px; height: 100%; padding: 52px 0px 50px 50px;}
-	.productImage {width: 200px; height: 200px; border-radius: 70%; overflow: hidden; box-shadow: 0 7px 15px rgb(0 0 0 / 20%);}
+	.profileImage {width: 200px; height: 200px; border-radius: 70%; overflow: hidden; box-shadow: 0 7px 15px rgb(0 0 0 / 20%);}
 	.titleImg {width: 100%; height: 100%; object-fit: cover;}
 	
 	.content2 {width: 850px; height: 100%; padding: 52px 0px 50px 0px;}
@@ -96,9 +96,10 @@
                 
                 <form id="personalInformation" method="post" action="enrollNewMember.admin" enctype="multipart/form-data">
                     <div class="content1">
-	                    <div class="productImage">                  
+	                    <div class="profileImage">                  
 							<img class="titleImg" name="profile" src="${ m.profile }" required>
-							<input type="file" name="upfile" id="upfile" onchange="loadImg(this, 1);" required>
+							<input type="file" name="upfile" id="upfile" onchange="loadImg(this);" required>
+							<input type="hidden" name="pdtFile" value="${ p.pdtFile }">
 						</div>
                     </div>
                     
@@ -268,17 +269,11 @@
                 // 파일 읽어들이기가 다 완료된 순간 실행할 함수 정의
                 reader.onload = function(e){
                     // 각 영역에 맞춰서 이미지 미리보기
-                    switch(num){
-                        case 1: $(".titleImg").attr("src", e.target.result); break;
-                    }
+                    $(".titleImg").attr("src", e.target.result);
                 }
 
             }else{ // 선택된 파일이 사라졌을 경우 
-
-                switch(num){
-                    case 1: $(".titleImg").attr("src", null); break;
-                }
-
+                $(".titleImg").attr("src", null);
             }
 
         }

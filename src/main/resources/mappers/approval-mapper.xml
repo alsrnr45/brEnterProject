@@ -175,6 +175,16 @@
   		  )
   	</insert>
 	
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 삭제 -->
+	<update id="deleteDocument" parameterType="_int">
+  		update 
+  			   ec_document 
+  		   set ec_status = 'N' 
+  		 where ec_doc_no = #{ ea.ecDocNo } 
+  	</update>
+	
+	
 	<!-- 작성자 : 안소은 - 결재선 부서 리스트 조회 -->
 	<select id="selectDept" resultMap="dept">
 		select
@@ -186,6 +196,7 @@
 	      from dept d
 	</select>
 	
+	
 	<!--  작성자 : 안소은 - 결재선 해당 부서 사원 조회용 AJAX -->
 	<select id="selectMemberList" resultMap="member" resultType="_int">
 		select
@@ -195,6 +206,7 @@
 		  join position p on(m.posi_no = p.posi_no)
 		 where m.dept_no = #{ deptNo }
 	</select>
+	
 	
 	<!--  작성자 : 안소은 - 지출결의서(통합문서) 상세 조회 -->
 	<select id="expenseDetail" resultMap="elecApproval" resultType="_int">
@@ -215,6 +227,7 @@
  		  and ec_status = 'Y'
 	</select>
 	
+	
 	<!--  작성자 : 안소은 - 지출결의서 상세 조회 -->
 	<select id="expenseDetailTwo" resultMap="expense" resultType="_int">
 		select
@@ -227,6 +240,7 @@
 		 where ec_doc_no = #{ ex.ecDocNo }
 	</select>
 	
+	
 	<!--  작성자 : 안소은 - 부서명 조회 -->
 	<select id="selectDeptName" resultMap="dept" resultType="_int">
 		select
@@ -236,6 +250,7 @@
 		 where mem_no = #{ memNo }
 	</select>
 	
+	
 	<!--  작성자 : 안소은 - 직급명 조회 -->
 	<select id="selectPosiName" resultMap="posi" resultType="_int">
 		select
@@ -244,6 +259,7 @@
 		  join member m on(p.posi_no = m.posi_no)
 		 where mem_no = #{ memNo }
 	</select>
+	
 	
 	<!-- 작성자 : 안소은 - 결재선 조회 -->
 	<!-- <select id="selectApPath" resultMap="path" resultType="_int">
@@ -257,6 +273,7 @@
 		  from approval_path
 		 where ec_doc_no = #{ ap.ecDocNo }
 	</select> -->
+	
 	
 	<!--  작성자 : 안소은 - 지출결의서 기안하기 -->
 	<insert id="">
@@ -286,10 +303,7 @@
 	       )
 	</insert>
 	
-	
-	
-	
-	
+
 	<!-- 작성자 : 김혜미 - 연차 신청 -->
 	<insert id="offInsert" parameterType="off">
 		insert all
@@ -348,6 +362,7 @@
 		select *
 		from dual
 	</insert>
+	
 	
 	<select id="offDetail" resultMap="elecApproval" parameterType="_int">
 	     select 

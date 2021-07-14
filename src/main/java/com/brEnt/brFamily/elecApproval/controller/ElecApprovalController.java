@@ -98,7 +98,7 @@ public class ElecApprovalController {
    public String documentDetail(int eano, Model model) {
 	   
 	   ElecApproval ea = eaService.documentDetail(eano);
-	   //System.out.println(ea);
+	   System.out.println(ea);
 	   model.addAttribute("ea", ea); 
 	   return "elecApproval/documentDetail";
    }
@@ -170,6 +170,35 @@ public class ElecApprovalController {
    }	
    
    
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 삭제 
+   @RequestMapping("deleteDocument.ea")
+   public String deleteDocument(int eano, String filePath, 
+				  				HttpSession session, Model model) {
+			// filePath : 첨부파일 존재했다면 	  "resources/elecApprovalUpfiles/xxxxxx.pdf" 
+			// filePath : 첨부파일 존재하지 않았다면 "" 
+	
+		int result = eaService.deleteDocument(eano); 
+		//System.out.println(eano);
+		if(result > 0) {
+	
+			// 첨부파일이 있을 경우 => 서버에 업로드된 파일 찾아서 삭제 
+			if(!filePath.equals("")) {
+				new File(session.getServletContext().getRealPath(filePath)).delete(); 
+			}
+			
+			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+			return "redirect:approvalTotalList.ea"; 
+	
+		}else { 
+		
+			model.addAttribute("errorMsg", "전자결재 기안문서 삭제 실패"); 
+			return "common/errorPage";
+
+		}
+	
+   }
+   
+    
    // 작성자 : 안소은 — 지출결의서 폼
    @RequestMapping("expenseForm.ea")
    public ModelAndView expenseForm(ModelAndView mv) {

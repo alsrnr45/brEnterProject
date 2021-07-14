@@ -42,7 +42,13 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    public int insertDocument(ElecApproval ea) { 
 	   return eaDao.insertDocument(sqlSession, ea); 
    }
-      
+   
+   // 작성자 : 최선희 -- 기획안/업무연락/회람 삭제
+   @Override
+   public int deleteDocument(int eano) {
+	   return eaDao.deleteDocument(sqlSession, eano); 
+   }
+     
    // 작성자 : 안소은 -- 결재선 부서 리스트 조회
    @Override
    public ArrayList<Dept> selectDept() {

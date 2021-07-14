@@ -21,6 +21,9 @@ public interface ElecApprovalService {
     // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
     int	insertDocument(ElecApproval ea); 
     
+    // 작성자 : 최선희 -- 기획안/업무연락/회람 삭제 
+    int deleteDocument(int eano);
+    
     // 작성자 : 안소은 -- 전자결재 결재선 부서조회
     ArrayList<Dept> selectDept();
     

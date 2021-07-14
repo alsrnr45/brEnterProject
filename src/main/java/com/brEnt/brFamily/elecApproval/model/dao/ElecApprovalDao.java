@@ -22,13 +22,18 @@ public class ElecApprovalDao {
 	}
 	
 	// 작성자 : 최선희 -- 기획안/업무연락/회람 상세 조회 
-	public ElecApproval documentDetail(SqlSessionTemplate sqlSession, int ecDocNo) {
-		return sqlSession.selectOne("approvalMapper.documentDetail", ecDocNo);
+	public ElecApproval documentDetail(SqlSessionTemplate sqlSession, int eano) {
+		return sqlSession.selectOne("approvalMapper.documentDetail", eano);
 	}
 	
 	// 작성자 : 최선희 -- 기획안/업무연락/회람 작성
 	public int insertDocument(SqlSessionTemplate sqlSession, ElecApproval ea) {		
 		return sqlSession.insert("approvalMapper.insertDocument", ea); 
+	}
+	
+	// 작성자 : 최선희 -- 기획안/업무연락/회람 삭제 
+	public int deleteDocument(SqlSessionTemplate sqlSession, int eano) { 
+		return sqlSession.update("approvalMapper.deleteDocument", eano); 
 	}
 	
 	// 작성자 : 안소은 -- 결재선 부서 리스트 조회

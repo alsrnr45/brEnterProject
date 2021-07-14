@@ -113,7 +113,7 @@
 								</c:choose>
 							</td>
 							
-							<th width="120">문서번호<input type="hidden" id="eano" class="eano" value="${ ea.ecDocNo }"></th>
+							<th width="120">문서번호</th>
 							<td width="340">${ ea.ecDocName }</td>
 						</tr>
 						<tr style="border-bottom: 0;">
@@ -124,8 +124,8 @@
 						</tr>
 					</table>
 					<br>
-				</div>
-
+				</div>				
+				
 				<div class="content_2">
 					<table class="tableType02">
 						<tr height="35">
@@ -171,56 +171,81 @@
 				</div>
 
 				<div class="content_3">
-					<form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
-						<table class="tableType03">
-							<tr height="40">
-								<th>제목</th>
-								<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecTitle }" readonly></td>
-							</tr>
-							<tr height="40">
-								<th width="120">첨부파일</th>
-								<td colspan="3" width="800">
-									 <c:choose>
-                                     	<c:when test="${ empty ea.ecFileOrigin }">
-                                        	첨부파일이 없습니다.
-                                        </c:when>
-                                        <c:otherwise>
-                                        	&nbsp; <a href="${ ea.ecFileUpdate }" download="${ ea.ecFileOrigin }">${ ea.ecFileOrigin }</a>
-                                        </c:otherwise>
-                                     </c:choose>  
-                                   
-								</td>
-							</tr>
-							<tr height="30">
-								<th colspan="4">상세내용</th>
-							</tr>
-							<tr>
-								<td colspan="4">
-									<input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecCnt }" style="height: 250px;" readonly>
-								</td>
-							</tr>
-						</table>
-					</form>
+					<table class="tableType03">
+						<tr height="40">
+							<th>제목</th>
+							<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.ecTitle }" readonly></td>
+						</tr>
+						<tr height="40">
+							<th width="120">첨부파일</th>
+							<td colspan="3" width="800">
+								<c:choose>
+                                     <c:when test="${ empty ea.ecFileOrigin }">
+                                     	첨부파일이 없습니다.
+                                     </c:when>
+                                     <c:otherwise>
+                                        &nbsp; <a href="${ ea.ecFileUpdate }" download="${ ea.ecFileOrigin }">${ ea.ecFileOrigin }</a>
+                                     </c:otherwise>
+                                </c:choose>                                     
+							</td>
+						</tr>
+						<tr height="30">
+							<th colspan="4">상세내용</th>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<input type="text" name="ecCnt" id="ecCnt" value="${ ea.ecCnt }" style="height: 250px;" readonly>
+							</td>
+						</tr>
+					</table>
 				</div>
 
 
-				<div class="content_4">	
+				<div class="content_4">
 					<!-- 회원마다 보여지는 디테일 뷰 다름 
-						=> 조건 1: 해당 전자결재를 작성한 기안자일 경우 / 조건 2: 해당 문서의 결재자일 경우 / 조건 3: 아무것도 해당되지 않는 사원일 경우) -->
+					=> 조건 1: 해당 전자결재를 작성한 기안자일 경우 / 조건 2: 해당 문서의 결재자일 경우 / 조건 3: 아무것도 해당되지 않는 사원일 경우) -->
 					 
 					<!-- 본인이 기안한 문서일 경우에만 보여져야 하는 버튼 -->
-					<a class="btn btn-danger" href="deleteDocument.ea">삭제하기</a>
-					
+					<a class="btn btn-danger" onclick="postFormSubmit();">삭제하기</a>
+						
 					<!-- 결재자일 경우에만 보여져야 하는 버튼 -->
 					<!-- 
 					<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
-					<button class="btn btn-danger">반려하기</button> -->					
+					<button class="btn btn-danger">반려하기</button> -->		
+					
+					<form id="postForm" action="" method="post">
+						 <input type="hidden" name="eano" value="${ ea.ecDocNo }">
+		                 <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
+					</form>
+					
+					
+					<script>
+		
+						function postFormSubmit() { 
+							
+							var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
+							
+							if(result){
+								$("#postForm").attr("action", "deleteDocument.ea").submit();
+								return true;
+							} else{
+								alert("삭제가 취소되었습니다.")
+								return false; 
+							}
+						}
+					
+					</script>
+					
+																	
 				</div><br><br>
 
 			</div>
 
         </div>
     </div>
+	
+	
+	
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

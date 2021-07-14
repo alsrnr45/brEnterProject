@@ -240,7 +240,7 @@
 								<tr height="40">									
 									<th>기안 일시</th>
 									<td><input type="text" name="ecEnrolldate" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/>" readonly></td>
-	                               	<th>첨부파일</th>
+	                               	<th><label for="upfile">첨부파일</label></th>
 									<td><input type="file" name="upfile" id="upfile" style="cursor: pointer;"></td>
 								</tr>
 								<tr height="30">

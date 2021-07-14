@@ -190,40 +190,40 @@
 					<h4 class="modal-title">문서 종류</h4>
 					</div>
 			
-					<!-- <form action=""> -->
-						<!-- Modal body -->
-						<div class="modal-body">
-							<div class="modalContent1">
-								<h6>문서 선택</h6> 
-							</div>
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div class="modalContent1">
+							<h6>문서 선택</h6> 
+						</div>
 
-							<div class="modalContent2">
-								<select class="form-control" id="formSelect">
-									<option>선택</option>
-									<option value="documentEnrollForm.ea?code=PL">기획안</option>
-									<option value="documentEnrollForm.ea?code=BC">업무연락</option>
-									<option value="offEnrollForm.ea">연차</option>									
-									<option value="expenseForm.ea">지출결의서</option>									
-									<option value="documentEnrollForm.ea?code=ME">회람</option>
-								</select>
-							</div>
+						<div class="modalContent2">
+							<select class="form-control" id="formSelect">
+								<option>선택</option>
+								<option value="documentEnrollForm.ea?code=PL">기획안</option>
+								<option value="documentEnrollForm.ea?code=BC">업무연락</option>
+								<option value="offEnrollForm.ea">연차</option>									
+								<option value="expenseForm.ea?code=EX">지출결의서</option>									
+								<option value="documentEnrollForm.ea?code=ME">회람</option>
+							</select>
 						</div>
-						
-						<!-- Modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
-							<button type="button" class="btn btn-primary selectButton" onchange="goUrl()">선택하기</button>
-						</div>
-					<!-- </form> -->
+					</div>
+					
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
+						<button type="button" class="btn btn-primary selectButton" onchange="goUrl()">선택하기</button>
+					</div>					
 				</div>
 				</div>
 			</div>
 			
     </div>
     
+    
     <script>
 	    
 	    $(function() {
+	    	
 	        // 리스트가 비어있을 경우 선택되지 않도록 조건 처리  
 			$(document).on("click", ".approvalStandbyList>tbody>tr", function(){
 	        	
@@ -249,6 +249,7 @@
     		
 
 		$(function() {
+			
             $(".modal-footer>.selectButton").click(function() {
 
 				var selectOption = document.getElementById("formSelect");

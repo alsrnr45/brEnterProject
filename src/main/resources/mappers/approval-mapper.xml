@@ -14,7 +14,9 @@
 		<result column="ec_updatedate" property="ecUpdatedate"/>
 		<result column="ec_compdate" property="ecCompdate"/>
 		<result column="ec_canceldate" property="ecCanceldate"/>
-		<result column="ec_status" property="ecStatus"/>	
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ec_file_origin" property="ecFileOrigin"/>
+		<result column="ec_file_update" property="ecFileUpdate"/>			
 		<result column="off_start" property="offStart"/>	
 		<result column="off_end" property="offEnd"/>	
 		<result column="off_reason" property="offReason"/>
@@ -34,17 +36,7 @@
 		<result column="ec_status" property="ecStatus"/>
 		<result column="ap_enrolldate" property="apEnrolldate"/>
 	</resultMap>
-	
-	<resultMap id="elecApprovalFile" type="elecApprovalFile">
-		<id column="ec_file_no" property="ecFileNo"/>
-		<result column="ec_document_no" property="ecDocumentNo"/>
-		<result column="ec_file_origin" property="ecFileOrigin"/>
-		<result column="ec_file_update" property="ecFileUpdate"/>
-		<result column="ec_file_path" property="ecFilePath"/>
-		<result column="ec_file_upload" property="ecFileUpload"/>
-		<result column="ec_document_name" property="ecDocumentName"/>
-	</resultMap>
-		
+				
 	<resultMap id="expense" type="Expense" >
 		<id column="ec_doc_no" property="ecDocNo" />
 		<result column="expense_status" property="exStatus" />
@@ -142,6 +134,8 @@
 		     , ec_enrolldate
 		     , ec_canceldate
 		     , ec_compdate
+		     , ec_file_origin
+		     , ec_file_update
 		 from ec_document e
 		where ec_doc_no = #{ ea.ecDocNo }
 		  and ec_status = 'Y' 
@@ -162,6 +156,8 @@
   		  , ec_doc_name
   		  , ec_enrolldate
   		  , ec_status
+  		  , ec_file_origin
+  		  , ec_file_update
   		  )
   		  values
   		  ( 
@@ -174,29 +170,10 @@
   		  , #{ecDocName} 
   		  , DEFAULT
   		  , DEFAULT
-  		  )
-  	</insert>
-
-	
-	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 파일 업로드 -->
-	<!--  
-	<insert id="insertDocumentFile" parameterType="elecApprovalFile">
-  		insert
-  		  into ec_file
-  		  (
-  		    ec_file_no
-  		  , ec_document_no
-  		  , ec_file_origin
-  		  , ec_file_update
-  		  )
-  		  values
-  		  ( 
-  		    seq_ecfno.nextval 
-  		  , #{ecDocumentNo}
-  		  , #{ecFileOrigin}  		  
+  		  , #{ecFileOrigin}
   		  , #{ecFileUpdate}
   		  )
-  	</insert> -->
+  	</insert>
 	
 	<!-- 작성자 : 안소은 - 결재선 부서 리스트 조회 -->
 	<select id="selectDept" resultMap="dept">

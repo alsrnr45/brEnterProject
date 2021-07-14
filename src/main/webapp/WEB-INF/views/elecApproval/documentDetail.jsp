@@ -180,14 +180,15 @@
 							<tr height="40">
 								<th width="120">첨부파일</th>
 								<td colspan="3" width="800">
-									<c:choose>
-                                    	<c:when test="${ empty eaf.ecFileOrigin }">
-                                        	&nbsp;&nbsp; 첨부파일이 없습니다.
+									 <c:choose>
+                                     	<c:when test="${ empty ea.ecFileOrigin }">
+                                        	첨부파일이 없습니다.
                                         </c:when>
                                         <c:otherwise>
-                                            <a href="${ eaf.ecFileUpdate }" download="${ eaf.ecFileOrigin  }">${ eaf.ecFileOrigin }</a>                                            
+                                        	&nbsp; <a href="${ ea.ecFileUpdate }" download="${ ea.ecFileOrigin }">${ ea.ecFileOrigin }</a>
                                         </c:otherwise>
-                                	</c:choose>
+                                     </c:choose>  
+                                   
 								</td>
 							</tr>
 							<tr height="30">
@@ -208,12 +209,12 @@
 						=> 조건 1: 해당 전자결재를 작성한 기안자일 경우 / 조건 2: 해당 문서의 결재자일 경우 / 조건 3: 아무것도 해당되지 않는 사원일 경우) -->
 					 
 					<!-- 본인이 기안한 문서일 경우에만 보여져야 하는 버튼 -->
-					<a class="btn btn-danger" href="">삭제하기</a>
+					<a class="btn btn-danger" href="deleteDocument.ea">삭제하기</a>
 					
 					<!-- 결재자일 경우에만 보여져야 하는 버튼 -->
 					<!-- 
-					<a class="btn btn-light" href="" style="background-color:lightgray; border-color:lightgray;">승인하기</a>
-					<a class="btn btn-danger" href="">반려하기</a> -->					
+					<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+					<button class="btn btn-danger">반려하기</button> -->					
 				</div><br><br>
 
 			</div>

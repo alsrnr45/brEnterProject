@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
 import com.brEnt.brFamily.elecApproval.model.vo.Approval_path;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
-import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
 import com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
@@ -99,6 +98,7 @@ public class ElecApprovalController {
    public String documentDetail(int eano, Model model) {
 	   
 	   ElecApproval ea = eaService.documentDetail(eano);
+	   //System.out.println(ea);
 	   model.addAttribute("ea", ea); 
 	   return "elecApproval/documentDetail";
    }
@@ -123,15 +123,12 @@ public class ElecApprovalController {
 	   
 	   // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 ea에 추가로 담기 
 	   if(!upfile.getOriginalFilename().equals("")) { 
-				
-			String changeName = saveFile(session, upfile); 
+		   
+			String changeName = saveFile(session, upfile); 		
 			
-			ElecApprovalFile eaf = new ElecApprovalFile(); 
+			ea.setEcFileOrigin(upfile.getOriginalFilename()); 
+			ea.setEcFileUpdate("resources/elecApprovalUpfiles/" + changeName); // 업로드된파일명 + 파일명
 			
-			eaf.setEcFileOrigin(upfile.getOriginalFilename()); 
-			eaf.setEcFileUpdate("resources/elecApprovalUpfiles/" + changeName); // 업로드된파일명 + 파일명
-			eaf.setEcFilePath("resources/elecApprovalUpfiles/" + changeName); 
-			eaService.insertDocumentFile(eaf); 
 		}
 			
 		int result = eaService.insertDocument(ea); 

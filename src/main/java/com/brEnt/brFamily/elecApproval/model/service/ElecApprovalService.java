@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.brEnt.brFamily.elecApproval.model.vo.Approval_path;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
-import com.brEnt.brFamily.elecApproval.model.vo.ElecApprovalFile;
 import com.brEnt.brFamily.elecApproval.model.vo.ExpenseForm;
 import com.brEnt.brFamily.elecApproval.model.vo.Off;
 import com.brEnt.brFamily.member.model.vo.Dept;
@@ -21,7 +20,6 @@ public interface ElecApprovalService {
     
     // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
     int	insertDocument(ElecApproval ea); 
-    int insertDocumentFile(ElecApprovalFile eaf);
     
     // 작성자 : 안소은 -- 전자결재 결재선 부서조회
     ArrayList<Dept> selectDept();

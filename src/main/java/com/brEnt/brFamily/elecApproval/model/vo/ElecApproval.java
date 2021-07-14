@@ -24,6 +24,8 @@ public class ElecApproval {
 	private String ecCompdate;
 	private String ecCanceldate;
 	private String ecStatus; 
+	private String ecFileOrigin;
+	private String ecFileUpdate; 
 	
 	private String offStart;
 	private String offEnd;

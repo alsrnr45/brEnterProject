@@ -127,9 +127,7 @@
                                             댓글<br>등록</button></th><br>
                                     </tr>
                                 	<tr>
-                                        <td colspan="6" height="50">댓글 (<span id="rcount">0</span>)
-                                            <button class="btn btn-danger">댓글 삭제</button>
-                                        </td> 
+                                        <td colspan="6" height="50">댓글 (<span id="rcount">0</span>)</td> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -149,7 +147,7 @@
 	    	
 			selectReplyList();
 			
-			setInterval(selectReplyList, 1000);
+			//setInterval(selectReplyList, 1000);
 		})
     
     	
@@ -161,10 +159,11 @@
 				data:{bfno:${bf.freeNo}},
 				success:function(list){
 					// console.log(list);
+					
 					var value="";
 					$.each(list, function(i, obj){
 						value += "<tr>"
-							   +    '"<th colspan="5">' + '<input type="checkbox" name="rno" id="rno" value="${ r.freeReplyNo }">' + "&nbsp;" + obj.memNo + "</th>"						      						            						   
+							   +    '"<th colspan="5">' + obj.memNo + "</th>"						      						            						   
 						       +    '"<td style="color:gray;" >' + obj.freeReplyEnroll + "</td>" 
 						       + "</tr>"
 						       + "<tr>"
@@ -179,7 +178,8 @@
 					console.log("댓글 리스트 조회용 ajax 실패"); 
 				}
 			})
-	    }
+	    }	 			 			 			
+	    	    
     </script>
     
     

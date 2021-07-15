@@ -101,7 +101,7 @@
                         <div class="collapse" id="board" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="#">경조사</a>
-                                <a class="nav-link" href="#">주간식단</a>
+                                <a class="nav-link" href="boardMenuList.bm">주간식단</a>
                                 <a class="nav-link" href="boardFreeList.bf">자유게시판</a>
                             </nav>
                         </div>

@@ -54,9 +54,18 @@
 	 	width:60%;
 	 }
 	 
+	 .boardMenuTitle {
+	 	cursor:pointer;
+	 }
+	 
 	 /* 검색창 */
 	 
-	 .searchTag {color:black;}
+	 .searchTag {
+	 	color:black;
+	 	position: absolute;
+	 	margin-left:13%;
+	 	cursor:pointer
+	 }
 	 a:hover {
 	 	color:gray;
 	 	cursor:pointer;
@@ -77,7 +86,7 @@
 	 	text-decoration:none;
 	 	color:black;
 	 	border-radius:3px;
-	 	margin-left: 68%;
+	 	margin-left: 88%;
 	 }
 	
 </style>
@@ -99,62 +108,89 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
-        	<div class="menuOuter">
-	        	<div>
-	        		<div>
-	        			<a class="searchTag"><div class="fa fa-search"></div></a>
-	        			<input type="search" id="searchText" placeholder="검색어를 입력하세요">
-	        			<a href="" class="enrollBtn">글쓰기</a>
-	        		</div>
-	        	</div>
-	        	
-	        	<br>
-	        	
-	        	<div>
-	        		<form name="menuList" id="menuList" method="post" action="">
-	        			<table class="table">
-	        				<thead class="table-light" align="center">
-	        					<tr>
-	        						<th>번호</th>
-	        						<th>제목</th>
-	        						<th>조회수</th>
-	        						<th>작성일</th>
-	        					</tr>
-	        				</thead>
-	        				<tbody align="center">
-	        					<tr>
-	        						<td>3</td>
-	        						<td>2021-06-07 ~ 2021-06-11 주간식단</td>
-	        						<td>217</td>
-	        						<td>2021-06-07</td>
-	        					</tr>
-	        				</tbody>
-	        			</table>
+        <c:set var="list" value="${boardMenuList}" />
+        	    
+        <div class="menuOuter">
+	    	<div>
+	        	<div><br>
+	        		<a class="searchTag">
+	        			<div class="fa fa-search"></div>
+	        		</a>
+	        		<form action="boardMenuList.bm">
+	        			<input type="search" name="keyword" id="searchText" placeholder="검색어를 입력하세요" value="${page.keyword }">
 	        		</form>
-	        		
-	        	<nav aria-label="Page navigation example">
-					<ul class="pagination">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-							<span aria-hidden="true">&laquo;</span>
-							</a>
-						</li>
-						<li class="page-item"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-							<span aria-hidden="true">&raquo;</span>
-							</a>
-						</li>
-					</ul>
-				</nav>
-					
+	        		<a href="boardMenuEnroll.bm" class="enrollBtn">글쓰기</a>
 	        	</div>
-        	</div>    
+	        </div>
+	        	
+	        	<script>
+	        	$(function(){
+        			$(".searchTag").click(function(){
+        				location.href="adminBoardMenuList.bm?keyword=" + $("#searchText").val();
+        			})
+        		})
+	        	</script>
+	        <br>
+	        	
+	        <div>
+	        	<form name="menuList" id="menuList" method="post" action="">
+	        		<table class="table">
+	        			<thead class="table-light" align="center">
+	        				<tr>
+	        					<th>번호</th>
+	        					<th>제목</th>
+	        					<th>조회수</th>
+	        					<th class="boardMenuEnrolldateh">작성일</th>
+	        				</tr>
+	        			</thead>
+	        			<tbody align="center">
+	        				<c:forEach items="${boardMenuList}" var="boardMenuList">
+	        				<tr>
+	        					<td>${boardMenuList.weekmenuNo}</td>
+	        					<td class="boardMenuTitle">${boardMenuList.weekmenuTitle}</td>
+	        					<td>${boardMenuList.weekmenuCount}</td>
+	        					<td class="boardMenuEnrolldated">${boardMenuList.weekmenuEnrolldate}</td>
+	        				</tr>
+	        				</c:forEach>
+	        			</tbody>
+	        		</table>
+	        	</form>
+	        	<script>
+	        		$(function(){
+	        			$("#menuList .boardMenuTitle").click(function(){
+	        				location.href="adminBoardMenuDetail.bm?weekmenuNo=" + $(this).prev().text();
+	        			})
+	        		})
+	        	</script>
+	        		
+	        <nav aria-label="Page navigation example">
+				<ul class="pagination">
+				<c:if test="${page.page != 1 }">
+					<li class="page-item">
+						<a class="page-link" href="adminBoardMenuList.bm?page=${page.page - 1}" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					</c:if>
+					<c:forEach begin="1" end="${page.total / 15 +1}" step="1" var="i">
+					<li class="page-item"><a class="page-link" href="adminBoardMenuList.bm?page=${i }">${i }</a></li>
+					
+					</c:forEach>
+					<c:if test="${page.page != lastpage }">
+					<li class="page-item">
+						<a class="page-link" href="adminBoardMenuList.bm?page=${page.page +1}" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+					</c:if>
+				</ul>
+			</nav>
+					
+	        </div>
+        </div>    
             
-        </div>   
-		
+        </div>    
+			
     </div>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -17,8 +17,9 @@ public class BoardMenuReply {
 	private int weekmenuReplyNo;
 	private int weekmenuNo;
 	private int memNo;
+	private String memName;
 	private String weekmenuReplyCnt;
 	private Date weekmenuReplyEnroll;
 	private Date weekmenuReplyUpdate;
-
+	
 }

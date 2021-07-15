@@ -63,7 +63,13 @@
 	
 	/* 검색창 */
 	
-	.searchTag {color:black;}
+	.searchTag {
+		color:black;
+	 	position: absolute;
+	 	margin-left:13%;
+	 	cursor:pointer;
+	 }
+	}
 	a:hover {
 		color:gray;
 		cursor:pointer;
@@ -95,13 +101,23 @@
         <c:set var="list" value="${boardMenuList}" />
         	    
         <div class="menuOuter">
+        <br>
 	    	<div>
 	        	<div>
 	        		<a class="searchTag"><div class="fa fa-search"></div></a>
-	        		<input type="search" id="searchText" placeholder="검색어를 입력하세요">
+	        		<form action="boardMenuList.bm">
+	        		<input type="search" name="keyword" id="searchText" placeholder="검색어를 입력하세요" value="${page.keyword }">
+	        		</form>
 	        	</div>
 	        </div>
 	        	
+	        	<script>
+	        	$(function(){
+        			$(".searchTag").click(function(){
+        				location.href="boardMenuList.bm?keyword=" + $("#searchText").val();
+        			})
+        		})
+	        	</script>
 	        <br>
 	        	
 	        <div>
@@ -130,26 +146,31 @@
 	        	<script>
 	        		$(function(){
 	        			$("#menuList .boardMenuTitle").click(function(){
-	        				location.href="" + $(this).children("").text();
+	        				location.href="boardMenuDetail.bm?weekmenuNo=" + $(this).prev().text();
 	        			})
 	        		})
 	        	</script>
 	        		
 	        <nav aria-label="Page navigation example">
 				<ul class="pagination">
+				<c:if test="${page.page != 1 }">
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Previous">
+						<a class="page-link" href="boardMenuList.bm?page=${page.page - 1}" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
 						</a>
 					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					</c:if>
+					<c:forEach begin="1" end="${page.total / 15 +1}" step="1" var="i">
+					<li class="page-item"><a class="page-link" href="boardMenuList.bm?page=${i }">${i }</a></li>
+					
+					</c:forEach>
+					<c:if test="${page.page != lastpage }">
 					<li class="page-item">
-						<a class="page-link" href="#" aria-label="Next">
+						<a class="page-link" href="boardMenuList.bm?page=${page.page +1}" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 						</a>
 					</li>
+					</c:if>
 				</ul>
 			</nav>
 					

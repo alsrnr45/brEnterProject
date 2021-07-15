@@ -3,19 +3,166 @@
 <mapper namespace="menuMapper">
 
 <!-- 작성자 : 박지은 - 주간식단 게시판 리스트 -->
-<select id="boardMenuList" resultType="com.brEnt.brFamily.boardMenu.model.vo.BoardMenu">
+<select id="boardMenuList" parameterType="PageMaker" resultType="BoardMenu">
 
 	select
-	        weekmenu_no as weekmenuNo
-	      , mem_no as memNo
-	      , weekmenu_title as weekmenuTitle
-	      , weekmenu_cnt as weekmenuCnt
-	      , weekmenu_enrolldate as weekmenuEnrolldate
-	      , weekmenu_count as weekmenuCount
-	      , weekmenu_updatedate as weekmenuUpdatedate
-	   from menu_board
-	  order by weekmenu_no desc
+	   	   weekmenu_no as weekmenuNo
+	     , mem_no as memNo
+	     , weekmenu_title as weekmenuTitle
+	     , weekmenu_cnt as weekmenuCnt
+	     , weekmenu_enrolldate as weekmenuEnrolldate
+	     , weekmenu_count as weekmenuCount
+	     , weekmenu_updatedate as weekmenuUpdatedate
+	 from
+	    ( 
+	      select
+	             weekmenu_no
+	           , mem_no
+	           , weekmenu_title 
+	           , weekmenu_cnt
+	           , weekmenu_enrolldate 
+	           , weekmenu_count 
+	           , weekmenu_updatedate
+	           , rownum as rnum
+	        from menu_board
+	       where 1=1
+	       <include refid="forPage"/>
+	       order by weekmenu_no desc
+	     )
+    where 1=1
+      and rnum between #{rows} and #{rowe}
+</select>
+
+<select id="pageMaker" parameterType="PageMaker" resultType="PageMaker">
+	select
+		   count(*) as total
+	  from 
+		   (select
+	       		   weekmenu_no as weekmenuNo
+	     		 , mem_no as memNo
+	     		 , weekmenu_title as weekmenuTitle
+	     		 , weekmenu_cnt as weekmenuCnt
+	     		 , weekmenu_enrolldate as weekmenuEnrolldate
+	     		 , weekmenu_count as weekmenuCount
+	     		 , weekmenu_updatedate as weekmenuUpdatedate
+	        from menu_board
+	   	   where 1=1
+	   <include refid="forPage"/>
+		order by weekmenu_no desc)
 
 </select>
+
+<!-- 주간식단 상세페이지  -->
+<!-- reference id -->
+<sql id="forPage">
+	<if test="keyword != null">
+		and weekmenu_title like '%'||#{keyword}||'%'
+		or weekmenu_cnt like '%'||#{keyword}||'%'
+	</if>
+</sql>
+
+<select id="boardMenuDetail" parameterType="BoardMenu" resultType="BoardMenu">
+	select
+		   weekmenu_no as weekmenuNo
+	     , mem_no as memNo
+	     , weekmenu_title as weekmenuTitle
+	     , weekmenu_cnt as weekmenuCnt
+	     , weekmenu_enrolldate as weekmenuEnrolldate
+	     , weekmenu_count as weekmenuCount
+	     , weekmenu_updatedate as weekmenuUpdatedate
+	  from menu_board
+	 where weekmenu_no = #{weekmenuNo}
+</select>
+
+<!-- 주간식단 댓글 조회 -->
+<select id="detailReply" parameterType="BoardMenu" resultType="BoardMenuReply">
+	select
+		   r.weekmenu_reply_no as weekmenuReplyNo
+		 , r.weekmenu_no as weekmenuNo
+		 , r.mem_no as memNo
+		 , m.mem_name as memName
+		 , r.weekmenu_reply_cnt as weekmenuReplyCnt
+		 , r.weekmenu_reply_enroll as weekmenuReplyEnroll
+		 , r.weekmenu_reply_update as weekmenuReplyUpdate
+	  from menu_reply r, member m
+	 where r.mem_no = m.mem_no
+	   and weekmenu_no = #{weekmenuNo}
+  order by weekmenuReplyEnroll desc
+</select>
+
+<update id="updateCount" parameterType="BoardMenu">
+	update 
+  		   menu_board  
+  	   set weekmenu_count = weekmenu_count + 1
+  	 where weekmenu_no = #{weekmenuNo} 
+</update>
+
+<!-- 댓글 삭제 -->
+<delete id="boardMenuReplyDeleteAction" parameterType="BoardMenu">
+	delete 
+	  from menu_reply
+	 where weekmenu_no = #{weekmenuNo}
+</delete>
+
+<!-- 주간식단 글 삭제 -->
+<delete id="boardMenuDeleteAction" parameterType="BoardMenu">
+	delete 
+	  from menu_board
+	 where weekmenu_no = #{weekmenuNo}
+</delete>
+
+<!-- 주간식당 글작성 -->
+<insert id="boardMenuEnroll" parameterType="BoardMenu">
+	insert 
+	  into menu_board
+		 ( 
+		   weekmenu_no
+		 , mem_no
+		 , weekmenu_title
+		 , weekmenu_cnt 
+		 )
+		 values
+				( 
+				  seq_menuno.nextval
+				, #{memNo}
+				, #{weekmenuTitle}
+				, #{weekmenuCnt} 
+				)
+</insert>
+
+<!-- 주간식단 글 수정 -->
+<update id="boardMenuUpdate" parameterType="BoardMenu">
+	update 
+		   menu_board
+	   set 
+	   	   weekmenu_title = #{weekmenuTitle}
+		 , weekmenu_cnt = #{weekmenuCnt}
+		 , weekmenu_updatedate = sysdate
+	 where 
+	 	   weekmenu_no = #{weekmenuNo}
+</update>
+
+<!-- 주간식단 댓글 등록 -->
+<insert id="insertReply" parameterType="BoardMenuReply">
+	insert into 
+			    menu_reply
+			  ( weekmenu_reply_no
+			  , weekmenu_no
+			  , mem_no
+			  , weekmenu_reply_cnt )
+		 values
+			  ( seq_menurno.nextval
+			  , #{weekmenuNo}
+			  , #{memNo}
+			  , #{weekmenuReplyCnt} )
+</insert>
+
+<!-- 주간식단 댓글 삭제 -->
+<delete id="deleteReply" parameterType="BoardMenuReply">
+	delete from 
+			    menu_reply
+		  where 
+		  		weekmenu_reply_no = #{weekmenuReplyNo}
+</delete>
 
 </mapper>

@@ -6,6 +6,10 @@
 <head>
 <meta charset="UTF-8">
 <title>adminMenu</title>
+<style>
+	a:hover {text-decoration:none;}
+	a:active {text-decoration:none;}
+</style>
 </head>
 <body class="sb-nav-fixed">
         
@@ -13,7 +17,7 @@
 	<div id="layoutSidenav_nav">
 	    <nav class="sb-sidenav accordion sb-sidenav-light2" id="sidenavAccordion">
 	        <div class="sb-sidenav-menu">
-	            <div class="nav">
+	            <div class="nav" style="font-size:17px;">
 	
 	                <!-- 인사관리 --><br>
 	                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#personnelManagement" aria-expanded="false" aria-controls="collapseLayouts">

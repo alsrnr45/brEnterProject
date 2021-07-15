@@ -82,33 +82,52 @@
 <body class="sb-nav-fixed">
    <!-- 상단바 -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<jsp:include page="../common/adminHeader.jsp"/>
+		<jsp:include page="../common/adminHeaderBoardMenuVer.jsp"/>
     </nav>
     
     <div id="layoutSidenav">
         
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
-            <jsp:include page="../common/adminMenu.jsp"/>
+            <jsp:include page="../common/adminMenuBoardMenuVer.jsp"/>
         </div>
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             
            <div class="summernoteOuter">
+           <c:if test="${Detail != null }">
 	        	<div>
-	        		<form method="post"action="">
+	        		<form method="post"action="boardMenuEnrollAction.bm?weekmenuNo=${Detail.weekmenuNo }">
 	        			<span class="btns">
 		        			<button type="submit" class="submitBtn">등록하기</button>
-		        			<a href="" class="listBtn">&nbsp;목록으로&nbsp;</a>
+		        			<a href="adminBoardMenuList.bm" class="listBtn">&nbsp;목록으로&nbsp;</a>
 		        		</span>
 	        			<br>
-	        			제목  <input type="text" name="title" style="width:75%;">
+	        			제목  <input type="text" name="weekmenuTitle" style="width:75%;" value="${ Detail.weekmenuTitle}">
 	        			<br><br>
-	        			<textarea id="summernote" name="content"></textarea>
+	        			<textarea id="summernote" name="weekmenuCnt">
+	        			${ Detail.weekmenuCnt}
+	        			</textarea>
 	        		</form>
 	        	</div>
+	        	</c:if>
 	        	
+	       <c:if test="${Detail == null }">
+	        	<div>
+	        		<form method="post"action="boardMenuEnrollAction.bm">
+	        			<span class="btns">
+		        			<button type="submit" class="submitBtn">등록하기</button>
+		        			<a href="adminBoardMenuList.bm" class="listBtn">&nbsp;목록으로&nbsp;</a>
+		        		</span>
+	        			<br>
+	        			제목  <input type="text" name="weekmenuTitle" style="width:75%;">
+	        			<br><br>
+	        			<textarea id="summernote" name="weekmenuCnt">
+	        			</textarea>
+	        		</form>
+	        	</div>
+	        	</c:if>
 	        	<script>
 	        		$(document).ready(function(){
 	        			$('#summernote').summernote({

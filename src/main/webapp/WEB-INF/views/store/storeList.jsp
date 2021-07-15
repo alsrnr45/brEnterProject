@@ -43,7 +43,7 @@
 
 	/* 카테고리, 검색창 */
 	.headArea>div {float: left;}
-	.input-group {width: 250px; margin-left: 640px;}
+	.input-group {width: 250px; margin-left: 670px;}
 	.input-group:focus, .input-group:active {
 		border-color: rgb(155, 89, 182) !important;
 	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
@@ -89,12 +89,15 @@
 					</div>
 
 					<!-- 검색창 -->
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="상품 검색">
-						<div class="input-group-append">
-							<button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+					<form action="search.st" method="Get">
+						<div id="search-area" class="input-group">
+							<input type="hidden" name="currentPage" value="1">
+							<input type="text" name="keyword" id="keyword" class="form-control" placeholder="상품 검색" value="${ keyword }">
+							<div class="input-group-append">
+								<button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+							</div>
 						</div>
-					</div>
+					</form>
 				</div>
 
 				<!-- 상품리스트 -->
@@ -115,27 +118,72 @@
 				<div class="pagingArea">
 					<ul class="pagination">
 					           	
-						<c:choose>
-							<c:when test="${ pi.currentPage eq 1 }">
-								<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage-1 }">&lt;</a></li>
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${ pi.currentPage ne 1 }">
+							<c:choose>
+								<c:when test="${ empty keyword }">
+				            		<a href="storeList.st?currentPage=${ pi.currentPage-1 }">[이전]</a>
+				            	</c:when>
+				            	<c:otherwise>
+				            		<a href="search.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">[이전]</a>
+			            		</c:otherwise>
+			            	</c:choose>
+						</c:if>
 						
 						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ p }">${ p }</a></li>
-						</c:forEach>
+							<c:choose>
+								<c:when test="${ empty keyword }">
+			            			<a href="storeList.st?currentPage=${ p }">[${ p }]</a>
+			            		</c:when>
+			            		<c:otherwise>
+			            			<a href="search.st?currentPage=${ p }&keyword=${keyword}">[${ p }]</a>
+			            		</c:otherwise>
+			            	</c:choose>
+			            </c:forEach>
+			            
+			            <c:if test="${ pi.currentPage ne pi.maxPage }">
+			            	<c:choose>
+			            		<c:when test="${ empty keyword }">
+					            	<a href="storeList.st?currentPage=${ pi.currentPage+1 }">[다음]</a>
+					            </c:when>
+					            <c:otherwise>
+					            	<a href="list.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">[다음]</a>
+				            	</c:otherwise>
+				            </c:choose>
+			            </c:if>
+					    <!--  
+						<c:if test="${ pi.currentPage ne 1 }">
+							<c:choose>
+								<c:when test="${ empty keyword }">
+									<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled"><a class="page-link" href="search.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">&lt;</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
 						
-						<c:choose>
-							<c:when test="${ pi.currentPage eq pi.maxPage }">
-								<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage+1 }">&gt;</a></li>
-							</c:otherwise>
-						</c:choose>
+						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+							<c:choose>
+								<c:when test="${ empty keyword }">
+										<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ p }">${ p }</a></li>
+								</c:when>
+			            		<c:otherwise>
+									<a href="search.st?currentPage=${ p }&condition=${condition}&keyword=${keyword}">[${ p }]</a>
+			            		</c:otherwise>
+			            	</c:choose>
+			            </c:forEach>
+						
+						<c:if test="${ pi.currentPage ne pi.maxPage }">
+			            	<c:choose>
+			            		<c:when test="${ empty keyword }">
+									<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item"><a class="page-link" href="search.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">&gt;</a></li>
+								</c:otherwise>
+				            </c:choose>
+			            </c:if>
+			            -->
 					</ul>
 				</div>
 			</div>

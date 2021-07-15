@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.common.model.vo.PageInfo;
 import com.brEnt.brFamily.common.template.Pagination;
-import com.brEnt.brFamily.member.model.vo.Member;
 import com.brEnt.brFamily.store.model.service.StoreService;
 import com.brEnt.brFamily.store.model.vo.PayDto;
 import com.brEnt.brFamily.store.model.vo.Product;
@@ -31,7 +31,8 @@ public class StoreController {
    
    // 작성자 : 김혜미 -- 스토어 리스트 조회
    @RequestMapping("storeList.st")
-   public ModelAndView selectProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, ModelAndView mv) {
+   public ModelAndView selectProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+		   								 ModelAndView mv) {
 
       int listCount = sService.selectProductListCount();
       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 6);
@@ -46,6 +47,26 @@ public class StoreController {
       return mv;
    }
    
+   // 작성자 : 김혜미 -- 스토어 검색 조회
+   @RequestMapping("search.st")
+   public ModelAndView selectSearchList(int currentPage, String keyword, ModelAndView mv) {
+
+	   int listCount = sService.selectSearchListCount(keyword);
+       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 6, 10);
+       ArrayList<Product> list = sService.selectSearchList(pi, keyword);
+       
+       System.out.println(keyword);
+       System.out.println(listCount);
+       //System.out.println(list);
+
+       mv.addObject("pi", pi)
+         .addObject("list", list)
+         .addObject("keyword", keyword)
+         .setViewName("store/storeList");
+
+       return mv;
+   }
+   
    // 작성자 : 김혜미 -- 스토어 상세조회
    @RequestMapping("storeDetail.st")
    public String selectProductDetail(int pno, Model model) {
@@ -55,7 +76,7 @@ public class StoreController {
 		
 		return "store/storeDetail";
    }
-   
+
    // 작성자 : 김혜미 -- 바로구매하기
    @RequestMapping("buyNow.st")
    public String buyNowProduct(int pno, int pco, Model model) {
@@ -73,7 +94,6 @@ public class StoreController {
       return "store/order";
    }
  
-   
    // 작성자 : 김혜미 -- 주문완료
    @RequestMapping("orderFinish.st")
    public String orderFinish(PayDto pd) {
@@ -160,4 +180,8 @@ public class StoreController {
       return changeName;
    }   
       
+   
+
+   
+   
 }

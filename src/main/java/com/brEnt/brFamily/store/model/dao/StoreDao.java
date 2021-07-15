@@ -1,6 +1,7 @@
 package com.brEnt.brFamily.store.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -17,18 +18,30 @@ public class StoreDao {
 	public int selectProductListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("storeMapper.selectProductListCount");
 	}
-
 	
 	// 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
 	public ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
 		int limit = pi.getProductLimit();
-		
 		RowBounds rowBounds = new RowBounds(offset, limit);
-		
 		return (ArrayList)sqlSession.selectList("storeMapper.selectProductList", null, rowBounds);
 	}
-
+	
+	// 작성자 : 김혜미 -- 상품 검색 개수 조회
+	public int selectSearchListCount(SqlSessionTemplate sqlSession, String keyword) {
+		return sqlSession.selectOne("storeMapper.selectSearchListCount", keyword);
+	}
+	
+	
+	// 작성자 : 김혜미 -- 상품 검색 리스트 조회 (페이징처리)
+	public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String keyword) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getPageLimit());
+		return (ArrayList)sqlSession.selectList("storeMapper.selectSearchList", keyword, rowBounds);
+	}
+	
+	
+	
 	
 	// 작성자 : 김혜미 -- 상품 상세조회
 	public Product selectProductDetail(SqlSessionTemplate sqlSession, int pdtNo) {
@@ -57,7 +70,7 @@ public class StoreDao {
 		return sqlSession.insert("storeMapper.orderInsert", pd);
 	}
 
-
+	// 작성자 : 김혜미 - 상품관리 수정
 	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.update("storeMapper.updateProduct", p);
 	}

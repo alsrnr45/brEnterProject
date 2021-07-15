@@ -12,6 +12,10 @@ public interface StoreService {
 	int selectProductListCount();
 	ArrayList<Product> selectProductList(PageInfo pi);     
    
+	// 작성자 : 김혜미 -- 상품 검색 리스트조회
+	int selectSearchListCount(String keyword);
+	ArrayList<Product> selectSearchList(PageInfo pi, String keyword);
+	
 	// 작성자 : 김혜미 -- 상품 상세조회
 	Product selectProductDetail(int pno);
    

@@ -180,7 +180,6 @@
     </div>
 
 	<script>
-		
 		$(function(){
 	        $("#pay").click(function(){
 	           location.href="buyNow.st?pno=" + $(".pno").val() + "&pco=" + $("#count").val() ;
@@ -221,21 +220,6 @@
                     document.getElementById("finalPrice").innerHTML = productPrice;
                 }
             }
-            
-            /*
-            $.ajax({
-            	url: "count.st",
-            	data: {pCount:pCount},
-			    success:function(result){
-			    	if (result > 0){
-			    		alert("성공");
-			    	}else {
-
-			    	}
-			    }		
-            })
-            */
-            
         }
         
         

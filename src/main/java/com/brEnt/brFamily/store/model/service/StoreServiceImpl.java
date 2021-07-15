@@ -1,6 +1,7 @@
 package com.brEnt.brFamily.store.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,23 @@ public class StoreServiceImpl implements StoreService {
    public ArrayList<Product> selectProductList(PageInfo pi) {
       return sDao.selectProductList(sqlSession, pi);
    }
+   
+   @Override // 작성자 : 김혜미 -- 상품 개수 조회
+   public int selectSearchListCount(String keyword) {
+      return sDao.selectSearchListCount(sqlSession, keyword);
+   }   
 
+   
+   @Override // 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
+   public ArrayList<Product> selectSearchList(PageInfo pi, String keyword) {
+      return sDao.selectSearchList(sqlSession, pi, keyword);
+   }
+   
+  
+
+   
+   
+   
    
    @Override // 작성자 : 김혜미 -- 상품 상세조회
    public Product selectProductDetail(int pno) {

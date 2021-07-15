@@ -119,7 +119,7 @@
 							<!-- 로그인한 유저와 게시글 작성한 멤버 아이디가 일치할 경우에만 수정/삭제 버튼 보이도록 -->
 							<c:if test="${ loginUser.id eq bf.memNo }">							
 	                            <div class="boardFreeBtn" style="margin-left:780px;">   
-	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color: rgb(255, 231, 136); border-color: rgb(255, 231, 136);">
+	                                <a class="btn btn-primary" onclick="postFormSubmit(1);" style="background-color:  lightgray; border-color:  lightgray;">
 	                                수정하기</a>
 	                                <a class="btn btn-danger" onclick="postFormSubmit(2);">삭제하기</a>
 	                            </div><br><br>
@@ -210,7 +210,7 @@
   
             <!-- Modal footer -->
             <div class="modal-footer" >        
-	            <button type="button" class="btn btn-primary modalUpdateBtn">수정</button>
+	            <button type="button" class="btn btn-primary modalUpdateBtn" style="background: lightgray; border-color: lightgray;">수정</button>
 	            <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>            	
             </div>
       
@@ -253,8 +253,8 @@
 	                        if('${loginUser.id}' == obj.memNo) {
 	                        	
 	                        	value   +=    '<td rowspan="2" width="100">'  
-				 	                    +     	'<input type="button" class="btn btn-primary" style="color: gray; background-color: white; border-color: gray;" id="updateReplyBtn" value="수정" data-toggle="modal" data-target="#updateReplyModal">'
-				 	                    +       '<input type="button" class="btn btn-primary" style="color: gray; background-color: white; border-color: gray;" id="deleteReplyBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">'      
+				 	                    +     	'<input type="button" class="btn btn-primary" style="color: white; background-color: lightgray; border-color: lightgray;" id="updateReplyBtn" value="수정" data-toggle="modal" data-target="#updateReplyModal">'
+				 	                    +       '<input type="button" class="btn btn-danger" style="color: white;" id="deleteReplyBtn" value="삭제" onclick="deleteReply(' + obj.freeReplyNo + ');">'      
 				 	                    +     "</td>" 			 	                     	   
 	                        		    	                       			                        		                                          	
 	                        }

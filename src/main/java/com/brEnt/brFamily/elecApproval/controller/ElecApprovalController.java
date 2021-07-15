@@ -98,7 +98,7 @@ public class ElecApprovalController {
    public String documentDetail(int eano, Model model) {
 	   
 	   ElecApproval ea = eaService.documentDetail(eano);
-	   System.out.println(ea);
+	   //System.out.println(ea);
 	   model.addAttribute("ea", ea); 
 	   return "elecApproval/documentDetail";
    }

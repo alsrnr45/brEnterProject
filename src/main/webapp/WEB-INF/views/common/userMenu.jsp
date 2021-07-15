@@ -121,13 +121,6 @@
                             </nav>
                         </div>
 
-                        <!-- 채팅 -->
-                        <a class="nav-link" href="chatMain.ch">
-                            <div class="sb-nav-link-icon"><i class="fas fa-comments fa-fw"></i></div>
-                            	채팅
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-right"></i></div>
-                        </a>
-
                         <!-- 스토어 -->
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#store" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-store fa-fw"></i></div>

@@ -2,29 +2,50 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="noticeMapper">
 
-	<!-- <resultMap type="Notice" id="notice">
-		<id column="notice_no" property="noticeNo"/>
-		<result column="notice_title" property="title"/>
-		<result column="notice_content" property="content"/>
-		<result column="notice_enrolldate" property="enrolldate"/>
-		<result column="notice_changedate" property="changedate"/>
-		<result column="notice_count" property="count"/>
-		<result column="notice_status" property="status"/>
-	</resultMap> -->
+	<resultMap id="notice" type="Notice">
+		<id column="notice_no" property="noticeNo" />
+		<result column="notice_title" property="title" />
+		<result column="notice_content" property="content" />
+		<result column="notice_enrolldate" property="enrolldate" />
+		<result column="notice_changedate" property="changedate" />
+		<result column="notice_count" property="count" />
+		<result column="notice_status" property="status" />
+	</resultMap>
 	
 	<!-- 공지사항 리스트 조회 -->
-	<!-- <select id="selectNoticeList" resultMap="notice">
+	 <select id="selectNoticeList" resultMap="notice">
 		select 
 		       notice_no
 		     , notice_title
 		     , notice_content
-		     , to_char(notice_enrolldate, 'YYYY-MM-DD') enrolldate
-             , to_char(notice_changedate, 'YYYY-MM-DD') changedate
+		     , to_char(notice_enrolldate, 'YYYY/MM/DD') notice_enrolldate
              , notice_count
 		  from notice
 		 where notice_status = 'Y' 
 		 order
 		    by notice_no desc
-	</select> -->
+	</select>
 	
+	<!-- 공지사항 조회수 증가 -->
+	<update id="increaseCount" parameterType="_int">
+		update 
+  			   notice  
+  		   set notice_count = notice_count + 1 
+  		 where notice_no = #{nno}
+  		   and notice_status = 'Y'
+	</update>
+	
+	<!-- 공지사항 상세 조회 -->
+	<select id="selectNotice" resultType="notice" parameterType="_int">
+		select 
+		       notice_no
+		     , notice_title
+		     , notice_content
+		     , to_char(notice_enrolldate, 'YYYY/MM/DD') notice_enrolldate
+             , to_char(notice_changedate, 'YYYY/MM/DD') notice_changedate
+             , notice_count
+		  from notice
+		 where notice_status = 'Y' 
+           and notice_no = #{nno}
+	</select>
 </mapper>

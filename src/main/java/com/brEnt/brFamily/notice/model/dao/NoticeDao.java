@@ -14,4 +14,13 @@ public class NoticeDao {
 	public ArrayList<Notice> selectNoticeList(SqlSessionTemplate sqlSession){
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectNoticeList");
 	}
+	
+	public int increaseCount(SqlSessionTemplate sqlSession, int nno) {
+		return sqlSession.update("noticeMapper.increaseCount", nno);
+	}
+	
+	public Notice selectNotice(SqlSessionTemplate sqlSession, int nno) {
+		return sqlSession.selectOne("noticeMapper.selectNotice", nno);
+	}
+	
 }

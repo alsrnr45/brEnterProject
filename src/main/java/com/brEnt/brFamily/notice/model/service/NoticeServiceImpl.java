@@ -23,5 +23,17 @@ public class NoticeServiceImpl implements NoticeService {
 	public ArrayList<Notice> selectNoticeList() {
 		return nDao.selectNoticeList(sqlSession);
 	}
+
+	// 공지사항 조회수 증가
+	@Override
+	public int increaseCount(int nno) {
+		return nDao.increaseCount(sqlSession, nno);
+	}
+	
+	// 공지사항 상세 조회
+	@Override
+	public Notice selectNotice(int nno) {
+		return nDao.selectNotice(sqlSession, nno);
+	}
 	
 }

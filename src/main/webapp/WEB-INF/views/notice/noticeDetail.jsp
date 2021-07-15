@@ -83,14 +83,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>14</td>
-                            <td>[사내공모] BR Global법인 개발자 모집(~05.11)</td>
-                            <td>2021/04/03</td>
-                            <td>121</td>
+                            <td>${ no.noticeNo }</td>
+                            <td>${ no.title }</td>
+                            <td>${ no.enrolldate }</td>
+                            <td>${ no.count }</td>
                         </tr>
                     </tbody>
                 </table>    
-                <textarea class="form-control contentArea">내용입니다</textarea>  
+                <textarea class="form-control contentArea">${ no.content }</textarea>  
                 <div class="replyOuter">
                     <h5><b>댓글쓰기</b></h5>
                     <div>
@@ -118,7 +118,7 @@
                         </tbody>
                     </table>
                 </div> 
-            </div>
+            </div><br><br><br><br><br>
         </div>
     </div>
 	

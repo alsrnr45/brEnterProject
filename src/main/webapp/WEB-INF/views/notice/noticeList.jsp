@@ -50,6 +50,7 @@
 	h1{margin-bottom: 20px;}
   	table{ text-align: center; margin: auto;}
   	.noticeList>tbody>tr:hover{cursor:pointer;}
+  	.card-header>.btn{float:right;}
 </style>
 
 </head>
@@ -75,8 +76,7 @@
                         <div class="card mb-4">
                         
                             <div class="card-header">
-                                <i class="fas fa-chalkboard"></i> 공지사항 &nbsp;
-                                <a class="btn btn-primary" type="button" href="boardFreeEnroll.bf" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); margin-left: 775px;">
+                                <a class="btn btn-primary" type="button" href="noticeDetail.no" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); margin-left: 775px;">
                                 작성하기</a> 
                             </div>
                             
@@ -94,7 +94,6 @@
                                        <c:forEach var="n" items="${ list }">
                                        	   <tr>
                                        	       <td class="nno">${ n.noticeNo }</td>
-                                       	       <!-- 댓글 수 포함해서 제목에 나타나도록 수정할 것 -->
                                        	       <td>${ n.title }</td>
                                        	       <td>${ n.enrolldate }</td>
                                        	       <td>${ n.count }</td>

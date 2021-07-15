@@ -45,6 +45,11 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
+	
+	/* NOTICE */
+	h1{margin-bottom: 20px;}
+  	table{ text-align: center; margin: auto;}
+  	.noticeList>tbody>tr:hover{cursor:pointer;}
 </style>
 
 </head>
@@ -63,9 +68,56 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            
+            <main>
+                <div class="container-fluid px-4">
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">NOTICE</h1>
+                        <div class="card mb-4">
+                        
+                            <div class="card-header">
+                                <i class="fas fa-chalkboard"></i> 공지사항 &nbsp;
+                                <a class="btn btn-primary" type="button" href="boardFreeEnroll.bf" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); margin-left: 775px;">
+                                작성하기</a> 
+                            </div>
+                            
+                            <div class="card-body">	                                	                             	
+                                <table id="datatablesSimple" class="noticeList">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align:center;">번호</th>
+                                            <th style="text-align:center;">제목</th>
+                                            <th style="text-align:center;">작성일</th>
+                                            <th style="text-align:center;">조회수</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                       <c:forEach var="n" items="${ list }">
+                                       	   <tr>
+                                       	       <td class="nno">${ n.noticeNo }</td>
+                                       	       <!-- 댓글 수 포함해서 제목에 나타나도록 수정할 것 -->
+                                       	       <td>${ n.title }</td>
+                                       	       <td>${ n.enrolldate }</td>
+                                       	       <td>${ n.count }</td>
+                                       	   </tr>
+                                       </c:forEach>
+                                    </tbody>	                                                                 
+                                </table>	                               
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+           	</main> 
         </div>
     </div>
+	
+	<script>
+  		$(function() {
+  			$(document).on("click", ".noticeList>tbody>tr", function(){
+           	location.href="noticeDetail.no?nno=" + $(this).children(".nno").text();
+        	});
+   	}); 
+   	</script>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

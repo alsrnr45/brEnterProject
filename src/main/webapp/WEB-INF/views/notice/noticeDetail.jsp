@@ -16,35 +16,38 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <style>
-	/* 폰트 */
-	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
-	* {font-family: 'Noto Sans KR', sans-serif;}
-	
-	/* input 스타일 */
-	input:focus, input[type]:focus, .uneditable-input:focus {
-	border-color: rgb(155, 89, 182); 
-	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	outline: 0 none;
-	}
-	
-	/* 드롭박스 스타일 */
-	.dataTable-selector:focus, .dataTable-selector:active{
-	    border-color: rgb(155, 89, 182); 
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
-	    outline: 0 none;
-	}
-	option:checked {background: rgb(155, 89, 182); color: white;}
-	
-	/* 페이징바 스타일 */
-	.dataTable-pagination a {color:black;}
-	.dataTable-pagination a:hover, 
-	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
-	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
-	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
-	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
-	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
-	    background-color: rgb(155, 89, 182);
-	    box-shadow: none;} 
+    .outer{margin:auto; width:1000px; height:100%;}
+    .outer .list{
+        background-color: lightgray;
+        color:white;
+        border: none;
+        float:right;
+        width:100px;
+        height:40px;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    .outer table{width:100%; text-align: center; font-size:15px; font-weight: lighter;}
+    .outer table tbody{border-top:1px solid lightgray;}
+    .outer .contentArea{
+        height:500px; 
+        width:100%; 
+        border:1px solid lightgray;
+        background: rgb(247, 247, 247); 
+        padding:10px; 
+        margin:30px 0 30px 0; 
+        resize: none;
+    }
+    .outer .replyOuter{width:100%; margin-bottom: 30px;}
+    .outer .replyArea{width:90%; float:left; resize: none;}
+    .outer .replyBtn{width:10%; height:85px; border:none; background: rgb(155, 89, 182);}
+    .outer .replyTable{width:100%;}
+    .replyTable th{width:10%; padding:15px; border-bottom:1px solid lightgray; font-weight:bold; font-size: 16px;}
+    .replyTable td>*{ display:inline;}
+    .replyTable td{ border-bottom:1px solid lightgray; text-align: left;}
+    .replyTable .update{ margin-left:550px; background:rgb(255, 231, 136);}
+    .replyTable .delete{ margin-right:10px; background:rgb(255, 134, 134);}
+    .replyTable p{font-size: 14px; color:gray;}
 </style>
 
 </head>
@@ -63,7 +66,59 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            
+            <div class="outer">
+                <br><br>
+                <h1><b>NOTICE</b></h1>
+
+                <a href="" type="button" class="btn btn-primary list">목록으로</a>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <td>No.</td>
+                            <td>Title</td>
+                            <td>Date</td>
+                            <td>Hits</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>14</td>
+                            <td>[사내공모] BR Global법인 개발자 모집(~05.11)</td>
+                            <td>2021/04/03</td>
+                            <td>121</td>
+                        </tr>
+                    </tbody>
+                </table>    
+                <textarea class="form-control contentArea">내용입니다</textarea>  
+                <div class="replyOuter">
+                    <h5><b>댓글쓰기</b></h5>
+                    <div>
+                        <textarea  class="form-control replyArea" rows="3" id="comment" placeholder="댓글을 입력해주세요." required></textarea>
+                        <button type="submit" class="btn btn-primary replyBtn">댓글등록</button>
+                    </div>
+                </div>  
+                <div class="writeReply">
+                    <div><h5><b>댓글(2)</b></h5></div>
+                    <table class="replyTable">
+                        <tbody >
+                            <tr>
+                                <th>김자바</th>
+                                <td>
+                                    그거참좋은스토리네여
+                                    <button class="btn btn-sm update">수정</button>
+                                    <button class="btn btn-sm delete">삭제</button>
+                                    <p>2021/02/12</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>안소은</th>
+                                <td>우와우와</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> 
+            </div>
         </div>
     </div>
 	

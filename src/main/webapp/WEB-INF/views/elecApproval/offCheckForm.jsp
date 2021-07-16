@@ -107,46 +107,135 @@
 					<br>
 				</div>
 
-				<div class="content_2">
-					<table class="tableType02">
-						<tr height="35">
-							<th rowspan="5" width="120">기안자</th>
-							<td width="136">${ ea.deptName }</td>
-							<th rowspan="5" width="120">결재자</th>
+				<div class="content_2" style="height:220px;">
+					<div id="drafter">기안자</div>
+					<div id="approvalInfo">
+						<div style="height:35px;">개발팀</div>
+						<div style="height:35px;">사원</div>
+						<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
+						<div style="height:35px;">2021-07-10</div>
+						<div style="height:35px;">김사원</div>
+					</div>
+					<div id="approver">결재자</div>
+					<c:choose>
+						<c:when test="${ ApprovalPathList.size() eq 4 }">
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.deptName }</td>
+							<div id="approvalInfo">
+								<div style="height:35px;">${ ap.deptName }</div>
+								<div style="height:35px;">${ ap.posiName }</div>
+								<c:choose>
+									<c:when test="${ ap.apEnrolldate != null }">
+										<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+									</c:when>
+									<c:otherwise>
+										<div style="height:80px;"></div>
+									</c:otherwise>
+								</c:choose>
+								<div style="height:35px;">${ ap.apEnrolldate }</div>
+								<div style="height:35px;">${ ap.memName }</div>
+							</div>
 							</c:forEach>
-						</tr>
-						<tr height="35">
-							<td>${ ea.ecWriter }</td>
+						</c:when>
+						<c:when test="${ ApprovalPathList.size() eq 3 }">
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.posiName }</td>
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
 							</c:forEach>
-						</tr>
-						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
-						<tr height="80" style="color:gray;">
-							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-							<td><img src="resources/elecApprovalUpfiles/check2.png"></td>
-							<td><img src="resources/elecApprovalUpfiles/cancelled.png"></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr height="35">
-							<td>${ ea.ecEnrolldate }</td>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:when>
+						<c:when test="${ ApprovalPathList.size() eq 2 }">
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.apEnrolldate }</td>
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
 							</c:forEach>
-						</tr>
-						<tr height="35">
-							<td style="color: royalblue;">${ ea.ecWriter }</td>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:when>
+						<c:otherwise>
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.memName }</td>
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
 							</c:forEach>
-						</tr>
-					</table>
-					<br>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 
+				<br>
 				<div class="content_3">
 					<form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
 						<table class="tableType03">

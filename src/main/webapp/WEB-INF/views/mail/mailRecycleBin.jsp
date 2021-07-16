@@ -50,12 +50,11 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">메일 전체 보기</h1>
+                    <h1 class="mt-4">휴지통</h1>
                     <br>
                     <div class="card mb-4">
                         <div class="card-header">
-                            <i class="far fa-envelope"></i>
-                            전체 메일
+                            <i class="far fa-trash-alt"></i> 휴지통
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple" class="mailList">
@@ -63,22 +62,59 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th>보낸사람</th>
+                                        <th></th>
                                         <th>제목</th>
                                         <th>일시</th>
                                         <th>첨부파일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td><input type="button" hidden><i class="far fa-star"></i></input></td>
-                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->
-                                        <td>kimjava@br.com</td>
-                                        <td>제목입니다</td>
-                                        <td>2021.06.04</td>
-                                        <td>Y</td>
-                                    </tr>
+                                    
+                                    <%-- 보낸 사람이 로그인사용자일때
+                                    <c:forEach var="s" items="${slist}">
+                                    	<tr>
+	                                        <td><input type="checkbox" name="" id="${ s.mailNo }"></td>
+	                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->
+	                                        <td>[ 내가 보낸 메시지 ] ${ s.mailWriter }</td>
+	                                        <td>${ s.mailTitle }</td>
+	                                        <td>${ s.mailSendDate }</td>
+	                                        <c:choose>
+	                                        	<c:when test="${ s.mfIsHave > 0 }">
+	                                        		<td>Y</td>
+	                                        	</c:when>
+	                                        	<c:otherwise>
+	                                        		<td>N</td>
+	                                        	</c:otherwise>
+	                                        </c:choose>
+                                        </tr>
+                                    </c:forEach>
+                                     --%>
+                                    
+                                    <!--  받은 사람이 로그인 사용자 일때 -->
+                                    <c:forEach var="r" items="${rlist }">
+                                    	<tr>
+	                                        <td><input type="checkbox" name="" id="${ r.mailNo }"></td>
+	                                        <c:choose>
+	                                        	<c:when test="${ r.bookmark  eq 'N' }">
+	                                        		<td><input type="button" hidden><i class="far fa-star"></i></td>
+	                                        	</c:when>
+	                                        	<c:otherwise>
+	                                        		<th><button onclick="important()"><i class="fas fa-star"></i></button></th>
+	                                        	</c:otherwise>
+	                                        </c:choose>
+	                                        <td>[ 보낸 사람 ] ${ r.mailWriter }</td>
+	                                        <td>${ r.mailTitle }</td>
+	                                        <td>${ r.mailSendDate }</td>
+	                                        <c:choose>
+	                                        	<c:when test="${ r.mfIsHave > 0 }">
+	                                        		<td>Y</td>
+	                                        	</c:when>
+	                                        	<c:otherwise>
+	                                        		<td>N</td>
+	                                        	</c:otherwise>
+	                                        </c:choose>
+                                        </tr>             
+                                    </c:forEach>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -95,7 +131,7 @@
                                 <a class="btn btn-primary btn-block">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
-                                <a class="btn btn-primary btn-block">메일쓰기</a>
+                                <a class="btn btn-primary btn-block" href="enroll.mail">메일쓰기</a>
                                 <a class="btn btn-primary btn-block">삭제하기</a>
                             </div>
                         </div>

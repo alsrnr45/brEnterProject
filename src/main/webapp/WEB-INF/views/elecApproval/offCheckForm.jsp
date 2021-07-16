@@ -46,8 +46,14 @@
 	/* 스타일 */
 	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
-	.content {width:1150px; height: 860px; margin: auto; margin-top: 30px;}
+	.content {width: 1150px; height: 860px; margin: auto; margin-top: 30px;}
+
+	.content_2 {width:920px; margin:auto;}
+	.content_2>div {float: left; text-align:center;}
+	.content_2 img {height: 60px;}
+
 	.content_4 {padding: 15px 0 0 500px;}
+	.content_4>a{margin-left: 40px;}
 
 	table {text-align: center; font-size:13px; margin: auto;}
 	table>tr,th,td{border:1px lightgray solid;} 
@@ -65,6 +71,30 @@
 	.tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
 	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
 
+	#drafter {
+		width:120px; 
+		height:100%; 
+		vertical-align:center;
+		font-size:13px;
+		background-color:rgba(241, 241, 241, 0.75);
+		outline:0.1px solid lightgray;
+	}
+
+	#approver {
+		width:120px;
+		height:100%;
+		font-size:13px;
+		background-color:rgba(241, 241, 241, 0.75);
+		outline:0.1px solid lightgray;
+	}
+	
+	#approvalInfo {
+		width:136px; 
+		height:100%;
+		font-size:13px;
+		outline:0.1px solid lightgray;
+	}
+	#approvalInfo div {outline: 1px solid lightgray;}
 </style>
 
 </head>

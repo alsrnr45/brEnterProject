@@ -52,5 +52,9 @@ public interface ElecApprovalService {
     int insertApprovalPath(ArrayList<Approval_path> approvalPathList);
     
     // 작성자 : 김혜미 -- 연차 상세조회
-    ElecApproval offDetail(int eano);
+    ElecApproval detailOff(int eano);
+    
+    // 결재선 상세조회
+    ArrayList<Approval_path> detailApprovalPath(int eano);
+    
 }

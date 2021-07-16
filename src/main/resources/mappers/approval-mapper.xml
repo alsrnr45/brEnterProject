@@ -351,7 +351,7 @@
 	</insert>
 	
 	<!-- 결재선 -->
-	<insert id="insertApprovalPath" parameterType="ApprovalPath">
+	<insert id="insertApprovalPath" parameterType="approvalPath">
 	  insert
 		into approval_path
 			     (
@@ -394,7 +394,7 @@
 	-->
 	 
 	<!-- 연차 상세조회 -->
-	<select id="offDetail" resultMap="elecApproval" parameterType="_int">
+	<select id="detailOff" resultMap="elecApproval" parameterType="_int">
 	     select 
 		       e.ec_doc_no
 		     , e.mem_no
@@ -409,14 +409,28 @@
 		     , ec_compdate
 		     , off_start
 		     , off_end
-		     , approval_path_no
-		     , ec_turn
-		     , a.ec_status
-		     , ap_enrolldate
 		 from ec_document e
 		 join off o on(o.ec_doc_no = e.ec_doc_no)
-		 join approval_path a on(a.ec_doc_no = e.ec_doc_no)
 		where e.ec_doc_no = #{ ea.docNo }
+	</select>
+	
+	<!-- 결재선 상세조회 -->
+	<select id="detailApprovalPath" resultMap="approvalPath" parameterType="_int">
+		select 
+               approval_path_no
+             , ec_doc_no
+             , a.mem_no
+             , ec_turn
+             , ec_status
+             , ap_enrolldate
+             , dept_name
+             , posi_name
+             , mem_name
+          from approval_path a
+          join member m on(m.mem_no = a.mem_no)
+          join dept d on(d.dept_no = m.mem_no)
+          join position p on(p.posi_no = m.posi_no)
+         where ec_doc_no = #{ ea.docNo }
 	</select>
 	
 	

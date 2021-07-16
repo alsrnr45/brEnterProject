@@ -44,18 +44,6 @@ public class ElecApprovalController {
       return mv;
    }
    
-
-   // 작성자 : 김혜미 -- 연차 조회
-   @RequestMapping("offDetail.ea")
-   public String offDetail(int eano, Model model) {
-	   
-	   ElecApproval ea = eaService.offDetail(eano);
-	   System.out.println(ea);
-	   model.addAttribute("ea", ea);
-	   return "elecApproval/offCheckForm";
-   }
-   
-   
    // 작성자 : 김혜미 -- 연차 신청
    @RequestMapping("insertOff.ea")
    public String insertOff(Approval_path ap, Off o, Model model) {
@@ -72,19 +60,22 @@ public class ElecApprovalController {
 	   return "redirect:approvalTotalList.ea";
    }
    
-   
-   // 작성자 : 김혜미 -- 연차 신청
-   /*
-   @RequestMapping("offInsert.ea")
-   public String offInsert(Off o, Model model) {
-	   System.out.println(o);
+
+   // 작성자 : 김혜미 -- 연차 조회
+   @RequestMapping("detailOff.ea")
+   public String detailOff(int eano, Model model) {
 	   
-	   int result = eaService.offInsert(o); 
-	
-	   return "redirect:approvalTotalList.ea";
+	   ElecApproval ea = eaService.detailOff(eano);
+	   ArrayList<Approval_path> ApprovalPathList = eaService.detailApprovalPath(eano);
+	   
+	   System.out.println(ea);
+	   System.out.println(ApprovalPathList);
+	   
+	   model.addAttribute("ea", ea)
+	   		.addAttribute("ApprovalPathList", ApprovalPathList);
+	   return "elecApproval/offCheckForm";
    }
-	*/
- 
+   
    // 작성자 : 최선희 -- 전자결재 기안함 리스트 
    @RequestMapping("approvalTotalList.ea")
    public ModelAndView approvalTotalList(ModelAndView mv) {
@@ -245,12 +236,10 @@ public class ElecApprovalController {
 	   // 부서조회
 	   ArrayList<Dept> dept = eaService.selectDeptName(eano);
 	   model.addAttribute("dept", dept);
-	   System.out.println(dept);
 	   
 	   // 직급조회
 	   ArrayList<Position> posi = eaService.selectPosiName(eano);
 	   model.addAttribute("posi", posi);
-	   System.out.println(posi);
 	   
 	   // 결재선 조회
 //	   ArrayList<Approval_path> apList = eaService.selectApPath(eano);

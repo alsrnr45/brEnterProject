@@ -240,7 +240,7 @@
             	
             	// 조건1. 연차
             	if(ecCode == "OF") {
-            		location.href ="offDetail.ea?eano=" + $(this).find(".eano").val();
+            		location.href ="detailOff.ea?eano=" + $(this).find(".eano").val();
 	             	
             	// 조건2. 지출결의서 
             	}else if (ecCode == "EX") {	

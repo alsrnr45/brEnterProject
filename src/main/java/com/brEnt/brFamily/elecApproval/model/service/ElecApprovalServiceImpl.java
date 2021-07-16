@@ -90,6 +90,7 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    public ArrayList<Member> selectMemberList(int deptNo) {
 	   return eaDao.selectMemberList(sqlSession, deptNo);
    }
+   
    // 작성자 : 김혜미 -- 연차 신청
    @Override
    public int insertOff(Off o) {
@@ -104,8 +105,14 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    
    // 작성자 : 김혜미 -- 연차 조회
    @Override
-   public ElecApproval offDetail(int eano) {
-	   return eaDao.offDetail(sqlSession, eano);
+   public ElecApproval detailOff(int eano) {
+	   return eaDao.detailOff(sqlSession, eano);
+   }
+
+   // 결재선 조회
+   @Override
+   public ArrayList<Approval_path> detailApprovalPath(int eano) {
+   	return eaDao.detailApprovalPath(sqlSession, eano);
    }
 
 

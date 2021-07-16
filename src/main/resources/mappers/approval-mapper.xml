@@ -98,7 +98,7 @@
 	</resultMap>
 
 	
-	<!-- 작성자 : 최선희 - 전자결재 리스트 조회 -->
+	<!-- 작성자 : 최선희 - 전자결재 기안함 리스트 조회 -->
 	<select id="selectApprovalTotalList" resultMap="elecApproval">
 		select 
 		       e.ec_doc_no
@@ -123,25 +123,51 @@
 	</select>
 	
 	
-	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 상세 조회 -->
-	<select id="documentDetail" resultMap="elecApproval" parameterType="_int">
+	<!-- 작성자 : 최선희 - 전자결재 결재대기 리스트 조회 -->
+	<select id="selectApprovalStandbyList" resultMap="elecApproval">
 		select 
-		       ec_doc_no
-		     , mem_no
+		       e.ec_doc_no
+		     , ec_doc_name
+		     , ec_code
 		     , ec_writer
 		     , ec_title
-		     , ec_cnt
-		     , ec_code
-		     , ec_status
-		     , ec_doc_name
-		     , ec_enrolldate
+		     , to_char(ec_enrolldate, 'YYYYMMDD') ec_enrolldate
+		     , to_char(ec_compdate, 'YYYY-MM-DD') ec_compdate 
 		     , ec_canceldate
-		     , ec_compdate
-		     , ec_file_origin
-		     , ec_file_update
-		 from ec_document e
-		where ec_doc_no = #{ ea.ecDocNo }
-		  and ec_status = 'Y' 
+		     , (select a.ec_status
+		          from approval_path a
+		         where ec_turn = (select max(ec_turn)
+		                            from approval_path ap
+		                           where e.ec_doc_no = ap.ec_doc_no)
+		           and e.ec_doc_no = a.ec_doc_no)
+		  from ec_document e
+		 where e.ec_status = 'Y' 
+		   and a.mem_no = { ea.memNo }
+		 order 
+		    by ec_enrolldate desc,
+		       e.ec_doc_no desc	
+	</select>
+	
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 상세 조회 -->
+	<select id="documentDetail" resultMap="elecApproval" parameterType="_int">
+		 select 
+             ec_doc_no
+           , mem_no
+           , ec_writer
+           , ec_title
+           , ec_cnt
+           , ec_code
+           , ec_status
+           , ec_doc_name
+           , ec_enrolldate
+           , ec_canceldate
+           , ec_compdate
+           , ec_file_origin
+           , ec_file_update
+       from ec_document e
+      where ec_doc_no = #{ ea.ecDocNo }
+        and ec_status = 'Y' 
 	</select>	
 	
 	
@@ -203,7 +229,8 @@
 	<!--  작성자 : 안소은 - 결재선 해당 부서 사원 조회용 AJAX -->
 	<select id="selectMemberList" resultMap="member" resultType="_int">
 		select
-		       mem_name
+			   mem_no
+		     , mem_name
 		     , posi_name
 		  from member m
 		  join position p on(m.posi_no = p.posi_no)

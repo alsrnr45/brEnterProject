@@ -152,7 +152,7 @@
 		                                       	       		</c:choose>
 		                                       	       </td>
 			                                            
-			                                           <td>${ ea.ecTitle }
+			                                           <td>${ ea.ecTitle }</td>
 		                                       	       <td>${ ea.ecWriter }</td>
 			                                            
 			                                           <!-- JSTL 날짜형식 포맷팅 -->

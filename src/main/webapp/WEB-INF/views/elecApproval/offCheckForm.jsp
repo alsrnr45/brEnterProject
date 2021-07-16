@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -98,7 +99,7 @@
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
-							<td>${ ea.ecEnrolldate }</td>
+							<td><fmt:parseDate value="${ ea.ecEnrolldate }" pattern="yyyy-MM-dd" /></td>
 							<th>완료 일시</th>
 							<td>${ ea.ecCompdate }</td>
 						</tr>
@@ -138,8 +139,8 @@
 						</tr>
 						<tr height="35">
 							<td style="color: royalblue;">${ ea.ecWriter }</td>
-							<c:forEach var="ap" items="${ ApprovalPathList }" begin=0 end=3 step=1 varStatus="i">
-								<td width="136">${ ap.memName[i] }</td>
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<td width="136">${ ap.memName }</td>
 							</c:forEach>
 						</tr>
 					</table>
@@ -156,9 +157,9 @@
 							<tr height="40">
 								<th width="120">연차신청일</th>
 								<td colspan="3" width="800">
-									<input type="date" name="offStart" id="" value="${ ea.offStart }" required style="width:130px; margin-right:25px" readonly>  
+									<input type="date" name="offStart" value="${ ea.offStart }" required style="width:130px; margin-right:25px" readonly>  
 									 ~
-	                           		<input type="date" name="offEnd" id="" value="${ ea.offEnd }" required style="width:130px; margin-left:25px;" readonly>
+	                           		<input type="date" name="offEnd" value="${ ea.offEnd }" required style="width:130px; margin-left:25px;" readonly>
 								</td>
 							</tr>
 							<tr height="30">

@@ -14,7 +14,7 @@ import lombok.ToString;
 public class ReceiveMail {
 	private int mailNo;
 	private String mailWriter;
-	private String mailRecevier;
+	private String mailReceiver;
 	private String recycleBinStatus;
 	private String receiveStatus;
 	private String bookmark;
@@ -28,4 +28,9 @@ public class ReceiveMail {
 	// mfIsHave = 0 : 첨부파일 없음
 	// mfIsHave > 0 : 첨부파일 있음
 	private String mfIsHave;
+	
+	// receiveStatus = 메일 받은 사람 숫자
+	// receiveYCount = 메일 읽은 사람 숫자
+	private String receiverCount;
+	private String receiverYCount;
 }

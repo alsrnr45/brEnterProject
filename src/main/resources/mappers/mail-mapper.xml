@@ -5,7 +5,7 @@
 	<resultMap type="ReceiveMail" id="receiveMail">
 		<result column="mail_no" property="mailNo" />
 		<result column="mail_writer" property="mailWriter" />
-		<result column="mail_receiver" property="mailRecevier" />
+		<result column="mail_receiver" property="mailReceiver" />
 		<result column="recycle_bin_status" property="recycleBinStatus" />
 		<result column="receive_status" property="receiveStatus" />
 		<result column="bookmark" property="bookmark" />
@@ -27,7 +27,6 @@
 		<result column="mail_cnt" property="mailContent" />
 		<result column="mail_send_date" property="mailSendDate" />
 		<result column="temp_box" property="tempBox" />
-		<result column="receive_status" property="receiveStatus" />
 		<result column="mf_Is_Have" property="mfIsHave" />
 	</resultMap>
 	
@@ -57,7 +56,8 @@
 		  from receive_mail r
 		  join send_mail s
 		    on (r.mail_no = s.mail_no) 
-		 where r.mail_receiver ='${email}'
+		 where r.mail_receiver = #{email}
+		   and r.recycle_bin_status = 'Y'
 	</select>
 	
 	<select id="sendMailListView" parameterType="string" resultMap="sendMail">
@@ -67,7 +67,17 @@
 		     , s.mail_writer
 		     , s.mail_title
 		     , s.mail_send_Date
-		     , s.temp_box
+   		     , (select count(*)
+        		  from mail_file mf
+      			 where mf.mail_no = s.mail_no) mf_Is_Have
+		  from send_mail s
+		 where s.mail_writer = #{email}
+		   and s.temp_box = 'N'
+	</select>
+	
+	<select id="receiverList" parameterType="string" resultMap="receiveMail">
+		select 
+			   r.mail_no
              , r.mail_receiver
              , r.receive_status
              , (select count(*)
@@ -76,14 +86,213 @@
              , (select count(*)
              	  from receive_mail r
              	 where r.mail_no = s.mail_no
-             	   and r.receiveStatus = 'Y') receiverYCount
+             	   and r.receive_status = 'Y') receiverYCount
 		     , (select count(*)
 		          from mail_file mf
 		         where mf.mail_no = s.mail_no) mf_Is_Have
-		  from send_mail s
-          join receive_mail r
-            on (s.mail_no = r.mail_no)
-		 where s.mail_writer ='${email}'
+		  from receive_mail r
+          join send_mail s
+            on (r.mail_no = s.mail_no)
+		 where r.mail_writer = #{email}
 		   and s.temp_box = 'N'
 	</select>
+	
+	<select id="tempboxListView" parameterType="string" resultMap="sendMail">
+		select 
+		       s.mail_no
+		     , s.mem_no
+		     , s.mail_writer
+		     , s.mail_receiver
+		     , s.mail_title
+		     , s.mail_send_Date
+		     , r.bookmark
+   		     , (select count(*)
+        		  from mail_file mf
+      			 where mf.mail_no = s.mail_no) mf_Is_Have
+		  from send_mail s
+		  join receive_mail r
+		    on (s.mail_no = r.mail_no)
+		 where s.mail_writer = #{email}
+		   and s.temp_box = 'Y'
+	</select>
+	
+	<select id="recycleBinList" parameterType="string" resultMap="sendMail">
+		select 
+		       s.mail_no
+		     , s.mail_writer
+		     , s.mail_title
+		     , s.mail_send_date
+		     , s.temp_box
+		  from send_mail s
+		 where s.mail_writer = #{email}
+		 order 
+		    by s.mail_send_date
+	</select>
+	
+	<select id="recycleBinRList" parameterType="string" resultMap="receiveMail">
+		select 
+		       r.mail_no
+		     , r.mail_writer
+		     , r.mail_receiver
+		     , r.recycle_bin_status
+		     , r.receive_status
+		     , r.bookmark
+		     , s.mail_send_date
+		     , s.mail_title
+		     , (select count(*)
+		          from mail_file mf
+		         where mf.mail_no = r.mail_no) mf_Is_Have
+		  from receive_mail r
+          join send_mail s
+            on (r.mail_no = s.mail_no)
+		 where r.mail_receiver like '%' || #{email} || '%'
+           and r.recycle_bin_status ='A'
+		 order 
+		    by s.mail_send_date
+		
+	</select>
+	
+	<insert id="insertSMail" parameterType="SendMail">
+		insert
+		  into send_mail
+		     ( mail_no
+		     , mem_no
+		     , mail_writer
+		     , mail_receiver
+		     , mail_title
+		     , mail_cnt
+		     )
+			   values 
+			 ( seq_mailno.nextval
+			 , #{memNo}
+			 , #{mailWriter}
+			 , #{mailReceiver}
+			 , #{mailTitle}
+			 , #{mailContent}
+			 )
+		     
+	</insert>
+	
+	<insert id="insertRMail" parameterType="java.util.List">
+		<foreach item="i" index="index" collection="list" 
+		open="insert all" 
+		close="select * from dual">
+		  into receive_mail
+		     ( mail_no
+		     , mail_writer
+		     , mail_receiver
+		     , recycle_bin_status
+		     , receive_status
+		     , bookmark
+		     )
+		       values
+		     ( seq_mailno.currval
+		     , #{i.mailWriter}
+		     , #{i.mailReceiver}
+		     , 'Y'
+		     , 'N'
+		     , 'N'
+		     )
+		</foreach>
+	</insert>
+	
+	<insert id="insertMFMail" parameterType="MailFile">
+		insert
+		  into mail_file
+		     ( mail_file_no
+		     , mail_no
+		     , mail_origin
+		     , mail_update
+		     , mail_file_path
+		     , mail_filesize
+		     , mail_filetype
+		   	 )
+		   	   values
+		   	 ( seq_mailfno.nextval
+		   	 , seq_mailno.currval
+		   	 , #{mailOrigin}
+		   	 , #{mailUpdate}
+		   	 , #{mailFPath}
+		   	 , #{mailFSize}
+		   	 , #{mailFType}
+		   	 )
+	</insert>
+	
+	<insert id="tempSMail" parameterType="SendMail">
+		insert
+		  into send_mail
+		     ( mail_no
+		     , mem_no
+		     , mail_writer
+		     , mail_receiver
+		     , mail_title
+		     , mail_cnt
+		     , temp_box
+		     )
+			   values 
+			 ( seq_mailno.nextval
+			 , #{memNo}
+			 , #{mailWriter}
+			 , #{mailReceiver}
+			 , #{mailTitle}
+			 , #{mailContent}
+			 , 'Y'
+			 )
+		     
+	</insert>
+	
+	<insert id="tempRMail" parameterType="java.util.List">
+		<foreach item="i" index="index" collection="list" 
+		open="insert all" 
+		close="select * from dual">
+		  into receive_mail
+		     ( mail_no
+		     , mail_writer
+		     , mail_receiver
+		     , recycle_bin_status
+		     , receive_status
+		     , bookmark
+		     )
+		       values
+		     ( seq_mailno.currval
+		     , #{i.mailWriter}
+		     , #{i.mailReceiver}
+		     , 'Y'
+		     , 'N'
+		     , 'N'
+		     )
+		</foreach>
+	</insert>
+	
+	<insert id="tempMFMail" parameterType="MailFile">
+		insert
+		  into mail_file
+		     ( mail_file_no
+		     , mail_no
+		     , mail_origin
+		     , mail_update
+		     , mail_file_path
+		     , mail_filesize
+		     , mail_filetype
+		   	 )
+		   	   values
+		   	 ( seq_mailfno.nextval
+		   	 , seq_mailno.currval
+		   	 , #{mailOrigin}
+		   	 , #{mailUpdate}
+		   	 , #{mailFPath}
+		   	 , #{mailFSize}
+		   	 , #{mailFType}
+		   	 )
+	</insert>
+	
+	<update id="deleteMail" parameterType="hashMap">
+		update receive_mail
+		   set 
+		       recycle_bin_status = 'A'
+		 where mail_no = #{mail_no}
+		   and mail_receiver = #{email}     
+	</update>
 </mapper>
+
+

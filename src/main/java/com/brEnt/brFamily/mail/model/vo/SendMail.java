@@ -23,11 +23,7 @@ public class SendMail {
 	private String tempBox;
 
 	
-	// receiveStatus = 메일 받은 사람 숫자
-	// receiveYCount = 메일 읽은 사람 숫자
-	private String receiverCount;
-	private String receiveStatusYCount;
-	private String receiveStatus;
+
 	
 	// mfIsHave = 0 : 첨부파일 없음
 	// mfIsHave > 0 : 첨부파일 있음

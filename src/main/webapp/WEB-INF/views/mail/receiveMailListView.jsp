@@ -73,7 +73,7 @@
                                 <tbody>
                                 	<c:forEach var="r" items="${list}">
                                     <tr>
-                                        <td><input type="checkbox" name="" id="mailCheck_${r.mailNo}"></td>
+                                        <td><input type="checkbox" name="${r.mailNo}" value="${r.mailNo}" id="mailCheck_${r.mailNo}" ></td>
                                         <c:choose>
 	                                        <c:when test="${ r.bookmark eq 'N' }">
 	                                        <td><input type="button" hidden><i class="far fa-star"></i></td>
@@ -118,11 +118,11 @@
                                 </tfoot>
                             </table>
                             <div class="card-footer">
-                                <a class="btn btn-primary btn-block">답장</a>
+                                <a id="do_reply" class="btn btn-primary btn-block" href="">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
                                 <a class="btn btn-primary btn-block"  href="enroll.mail">메일쓰기</a>
-                                <a class="btn btn-primary btn-block">삭제하기</a>
+                                <a id="deleteBtn" class="btn btn-primary btn-block" >삭제하기</a>
                             </div>
                         </div>
                     </div>
@@ -131,4 +131,64 @@
         </div>
     </div>
 </body>
+<script>
+	$(document).ready(function() {
+	// 답장
+		$("#do_reply").click(function(){
+			
+			
+			var length = $('input:checked').length; // 체크된 숫자갯수
+
+			console.log("숫자갯수" + length);
+	
+			if(length>1){
+				alert("메일 한 개만 선택해주세요.");
+			} else{
+				
+			}
+			
+			$('input:checked').each(function(){
+				var mail_no = $(this).val(); // 내가 원하는 값을 value로 담아놓고 체크할 때 value값 담기(생각의전환 필요!) 
+				
+				mail_arr.push(mail_no);
+				// 배열에 담기
+			});
+	
+	// 삭제 
+	
+		$("#deleteBtn").click(function(){
+			var length = $('input:checked').length; // 체크된 숫자갯수
+	
+			console.log("숫자갯수" + length);
+	
+			var mail_arr = []; // 배열선언
+			
+			$('input:checked').each(function(){
+				var mail_no = $(this).val(); // 내가 원하는 값을 value로 담아놓고 체크할 때 value값 담기(생각의전환 필요!) 
+				
+				mail_arr.push(mail_no);
+				// 배열에 담기
+			});
+	
+			console.log("배열" + mail_arr);
+			// 체크된 게시물 번호 배열에 담았음
+			$.ajax({
+				type: "POST",
+				url: "delete.mail",
+				data: {
+					mail_arr: mail_arr
+				},
+				traditional:true,
+				success: function(data){
+					alert("성공");
+					window.location.reload();
+				},
+				error: function(data){
+					alert(data);
+					window.location.reload();
+				}
+			});
+		});
+	})
+</script>
 </html>

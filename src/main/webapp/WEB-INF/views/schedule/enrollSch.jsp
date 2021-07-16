@@ -17,6 +17,10 @@
     <link href='resources/scheduleResources/lib/main.css' rel='stylesheet' />
     <script src='resources/scheduleResources/lib/main.js'></script>
     <script src='resources/scheduleResources/lib/locales/ko.js'></script>
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
     <style>
         #layoutAuthentication_content{
@@ -49,6 +53,14 @@
             resize: none;
             width:68%
         }
+        
+                .note-modal-footer{
+            height:50px;
+            padding-right:30px;
+            border-top:1px solid #e5e5e5;
+        }
+        
+        
 
     </style>
 <title>Insert title here</title>
@@ -203,12 +215,13 @@
                                         <span class="input-explain">일정유형</span><input class="dataTable-input" id="schCategory" name="schCategory" value="${s.schCategory}" type="text" min=0 placeholder="ex) 회의"/>&nbsp;
                                         <label for="schCategory"></label>
                                         <br><br>내용<br>
-                                        <textarea class="dataTable-input" id="schContent" name="schContent" value="${s.schContent}" rows="5px"></textarea>
+<!--                                         <textarea class="dataTable-input" id="schContent" name="schContent" value="${s.schContent}" rows="5px"></textarea> -->
+                                        <textarea id="summernote" id="schContent" name="schContent" value="${s.schContent}"></textarea>
                                         <br><br>
                                         <!-- 이미지/파일 버튼 다시 만들기-->
                                         <span class="input-explain">파일첨부</span>
                                         <a class="btn btn-primary btn-block"><input type="file" name="upfile" style="display: none;" />이미지/파일</a>
-                                    </form>
+                                    
                                 </div>
                                 <div class="card-footer text-center py-3">
                                     <div class="small">
@@ -217,7 +230,7 @@
                                     		<a class="btn btn-primary btn-block" id="updateSch" onclick="">수정하기</a>
                                     	</c:if>
                                     </div>
-
+</form>
                                 </div>
                             </div>
                         </div>
@@ -228,6 +241,24 @@
     </div>
 </body>
 <script>
+
+$(document).ready(function() {
+    $('#summernote').summernote({
+    	lang: 'ko-KR',
+    	placeholder: '내용을 입력해주세요.',
+        tabsize: 2,
+        height: 340,
+        toolbar: [
+          ['style', ['style']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['color', ['color']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['table', ['table']],
+          ['insert', ['link', 'picture', 'video']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      });
+});
 	function planSchSubmit(){
 		<c:choose>
 			<c:when test="${selected_date} eq  $('#startDate').val()">

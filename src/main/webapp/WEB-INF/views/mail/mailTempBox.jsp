@@ -51,38 +51,62 @@
         <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">메일 전체 보기</h1>
+                    <h1 class="mt-4">임시보관함</h1>
                     <br>
                     <div class="card mb-4">
                         <div class="card-header">
                             <i class="far fa-envelope"></i>
-                            전체 메일
+                            임시보관함
                         </div>
                         <div class="card-body">
                             <table id="datatablesSimple" class="mailList">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th>보낸사람</th>
+                                        <th>받는사람</th>
                                         <th>제목</th>
                                         <th>일시</th>
                                         <th>첨부파일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td><input type="checkbox" name="" id=""></td>
-                                        <td><input type="button" hidden><i class="far fa-star"></i></input></td>
-                                        <!--  <th><button onclick="important()"><i class="fas fa-star"></i></button></th> -->
+                                    
+                                    	<c:forEach var="s" items="${ slist }" >
+                                    	<tr>
+                                        <td><input type="checkbox" name="" id="${ s.mailNo }"></td>
+                             
+                                        <!--
                                         <th><i class="far fa-envelope"></i></th>
-                                        <!-- <th><i class="far fa-envelope-open"></i></th>-->
-                                        <td>kimjava@br.com</td>
-                                        <td>제목입니다</td>
-                                        <td>2021.06.04</td>
-                                        <td>Y</td>
-                                    </tr>
+                                        <th><i class="far fa-envelope-open"></i></th>-->
+                                       	
+                                       	<c:choose>
+	                                       	<c:when test="${ empty s.mailReceiver }">
+	                                       		<td>( 받는 사람 없음 )</td>
+	                                       	</c:when>
+	                                       	<c:otherwise>
+	                                       		<td>${s.mailReceiver}</td>
+	                                       	</c:otherwise>
+                                       	</c:choose>
+                                       	<c:choose>
+	                                       	<c:when test="${ empty s.mailTitle }">
+	                                       		<td>( 제목 없음 )</td>
+	                                       	</c:when>
+	                                       	<c:otherwise>
+	                                       		<td>${s.mailTitle}</td>
+	                                       	</c:otherwise>
+                                       	</c:choose>
+                                        <td>${s.mailSendDate}</td>
+                                        <c:choose>	
+                                        	<c:when test="${ s.mfIsHave > 0 }">	
+                                        		<td>Y</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<td>N</td>
+                                        	</c:otherwise>
+                                        </c:choose>
+                                        </tr>
+                                        </c:forEach>
+                                    
                                 </tbody>
                                 <tfoot>
                                     <tr>

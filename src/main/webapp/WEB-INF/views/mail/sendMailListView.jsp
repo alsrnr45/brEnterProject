@@ -57,69 +57,58 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th></th>
-                                        <th>받은 사람</th>
+                                        <th>받은 사람(수신여부 같이)</th>
                                         <th>제목</th>
                                         <th>일시</th>
                                         <th>첨부파일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                	<c:forEach var="s" items="${list}">
-                                    <tr>
-                                        <td><input type="checkbox" name="" id="mailCheck_${s.mailNo}" ></td>
-	                                    
-
-                      <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        <div class="collapse" id="mail" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="receive.mail">받은 메일함</a>
-                                <a class="nav-link" href="send.mail">보낸 메일함</a>
-                                <a class="nav-link" href="temp.mail">임시 보관함</a>
-                                <a class="nav-link" href="bin.mail">휴지통</a>
-                            </nav>
-                        </div>
-	                                    
-	                                    
-	                                    
-	                                    
-	                                    
-	                                    
-	                                    <c:choose>
-                                    		<c:when test="${ s.receiverCount > 1}">
-                                    			<td>${s.receiverCount} 명 중 ${receiveStatusYCount} 명 읽음 </td>
-                                       			<c:choose>
-                                       				<c:when test="${s.receiveStatus eq 'N' }">
-                                       					<td><i class="far fa-envelope"></i>${s.mailReceiver}</td>
-                                       				</c:when>
-                                       				<c:otherwise>
-                                       					<td><i class="far fa-envelope-open"></i>${s.mailReceiver}</td>
-                                       				</c:otherwise>
-                                       			</c:choose>
-                                        	</c:when>
-	                                    	<c:otherwise>
-	                                    	        <c:choose>
-                                        				<c:when test="${s.receiveStatus eq 'N' }">
-                                        					<td>${s.mailReceiver}<i class="far fa-envelope"></i></td>
-                                        				</c:when>
-                                        				<c:otherwise>
-                                        					<td>${s.mailReceiver}<i class="far fa-envelope-open"></i></td>
-                                        				</c:otherwise>
-                                        			</c:choose>
-	                                    	</c:otherwise>
-                                        </c:choose>
-                                        <td>${ s.mailReceiver }</td>
-                                        <td>${ s.mailTitle }</td>
-                                        <td>${ s.mailSendDate }</td>
-                                        <c:choose>
-                                        	<c:when test="${ s.mfIsHave != 0 }">
-                                        	<td>Y</td>
-                                        	</c:when>
-                                        	<c:otherwise>
-                                        	<td>N</td>
-                                        	</c:otherwise>
-                                        </c:choose>
-                                    </tr>
+                                	<c:forEach var="s" items="${slist}">
+	                                    <tr>
+	                                        <td><input type="checkbox" name="" id="mailCheck_${s.mailNo}" ></td>
+	                                        <%--
+	                                        <c:forEach var="r" items="${rlist}">
+	                                          
+                                        		<c:choose>
+	                                        		<c:when test="${ s.mail_no = r.mail_no and r.receiverCount > 1 }">	
+		                                        		<c:choose>
+		                                        			<c:when test="${ r.receiverYCount = 'N'}">
+		                                        				<td>총 ${r.receiverCount} 명 중 ${r.receiverYCount} 읽음</td>
+		                                        			</c:when>
+		                                        			<c:when test="${ s.mail_no = r.mail_no and r.receiverCount = 1 }">
+		                                        				
+		                                        				<td>${r.receiverYCount} 읽지않음</td>
+		                                        				
+		                                        			</c:when>
+		                                        			<c:otherwise>
+		                                        				
+		                                        			</c:otherwise>
+		                                        		</c:choose>
+	                                        		</c:when>
+                                        		</c:choose>
+	                                        </c:forEach>
+	                                        --%>
+	                                        <td></td>
+	                                        <c:choose>
+		                                        <c:when test="${ !empty s.mailTitle }">
+		                                        	<td>${ s.mailTitle }</td>
+		                                        </c:when>
+		                                        <c:otherwise>
+			                                        <td>(제목 없음)</td>
+		                                        </c:otherwise>
+	                                        </c:choose>
+	                                        
+	                                        <td>${ s.mailSendDate }</td>
+	                                        <c:choose>
+												<c:when test="${ s.mfIsHave > 0 }">
+													<td>Y</td>
+												</c:when>
+												<c:otherwise>
+													<td>N</td>											
+												</c:otherwise>
+											</c:choose>
+	                                    </tr>
                                 	</c:forEach>
                                 </tbody>
                                 <tfoot>
@@ -133,7 +122,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
-                            <div class="card-footer">/
+                            <div class="card-footer">
                                 <a class="btn btn-primary btn-block">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
                                 <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
@@ -147,4 +136,13 @@
         </div>
     </div>
 </body>
+<script>
+    function showAndHide(){
+        if($('#dis').css('display') == 'none'){
+        $('#dis').show();
+    }else{
+        $('#dis').hide();
+    }
+    }
+</script>
 </html>

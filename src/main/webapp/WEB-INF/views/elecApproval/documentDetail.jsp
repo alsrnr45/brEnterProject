@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,6 +48,11 @@
 	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
 	.content {width: 1150px; height: 860px; margin: auto; margin-top: 30px;}
+
+	.content_2 {width:920px; margin:auto;}
+	.content_2>div {float: left; text-align:center;}
+	.content_2 img {height: 60px;}
+
 	.content_4 {padding: 15px 0 0 500px;}
 	.content_4>a{margin-left: 40px;}
 
@@ -68,7 +74,31 @@
 	
 	a:hover{color: rgb(155, 89, 182);}
 	a{text-decoration: none;}
+
+
+	#drafter {
+		width:120px; 
+		height:100%; 
+		font-size: 13px;
+		background-color:rgba(241, 241, 241, 0.75);
+		outline: 0.1px solid lightgray;
+	}
+
+	#approver {
+		width:120px;
+		height:100%;
+		font-size: 13px;
+		background-color:rgba(241, 241, 241, 0.75);
+		outline: 0.1px solid lightgray;
+	}
 	
+	#approvalInfo {
+		width:136px; 
+		height:100%;
+		font-size: 13px;
+		outline: 0.1px solid lightgray;
+	}
+	#approvalInfo div {outline: 1px solid lightgray;}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -126,46 +156,135 @@
 					<br>
 				</div>				
 				
-				<div class="content_2">
-					<table class="tableType02">
-						<tr height="35">
-							<th rowspan="5" width="120">기안자</th>
-							<td width="136">${ ea.deptName }</td>
-							<th rowspan="5" width="120">결재자</th>
+				<div class="content_2" style="height:220px;">
+					<div id="drafter">기안자</div>
+					<div id="approvalInfo">
+						<div style="height:35px;">개발팀</div>
+						<div style="height:35px;">사원</div>
+						<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
+						<div style="height:35px;">2021-07-10</div>
+						<div style="height:35px;">김사원</div>
+					</div>
+					<div id="approver">결재자</div>
+					<c:choose>
+						<c:when test="${ ApprovalPathList.size() eq 4 }">
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.deptName }</td>
+							<div id="approvalInfo">
+								<div style="height:35px;">${ ap.deptName }</div>
+								<div style="height:35px;">${ ap.posiName }</div>
+								<c:choose>
+									<c:when test="${ ap.apEnrolldate != null }">
+										<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+									</c:when>
+									<c:otherwise>
+										<div style="height:80px;"></div>
+									</c:otherwise>
+								</c:choose>
+								<div style="height:35px;">${ ap.apEnrolldate }</div>
+								<div style="height:35px;">${ ap.memName }</div>
+							</div>
 							</c:forEach>
-						</tr>
-						<tr height="35">
-							<td>${ ea.ecWriter }</td>
+						</c:when>
+						<c:when test="${ ApprovalPathList.size() eq 3 }">
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.posiName }</td>
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
 							</c:forEach>
-						</tr>
-						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
-						<tr height="80" style="color:gray;">
-							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-							<td><img src="resources/elecApprovalUpfiles/check2.png"></td>
-							<td><img src="resources/elecApprovalUpfiles/cancelled.png"></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr height="35">
-							<td>${ ea.ecEnrolldate }</td>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:when>
+						<c:when test="${ ApprovalPathList.size() eq 2 }">
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.apEnrolldate }</td>
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
 							</c:forEach>
-						</tr>
-						<tr height="35">
-							<td style="color: royalblue;">${ ea.ecWriter }</td>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:when>
+						<c:otherwise>
 							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<td width="136">${ ap.memName }</td>
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
 							</c:forEach>
-						</tr>
-					</table>
-					<br>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
-
+				
+				<br>
 				<div class="content_3">
 					<table class="tableType03">
 						<tr height="40">

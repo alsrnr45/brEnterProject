@@ -124,7 +124,7 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                   		<!-- 결재대기 문서 & 결재선 승인자들에게만 보이도록 조건 처리 -->      
+	                                   		<!-- 결재대기 문서만 보이도록 조건 처리 -->      
 	                                    	<c:forEach var="ea" items="${ list }">
 	                                    		<c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">			                                    				
 			                                        <tr>

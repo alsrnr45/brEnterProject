@@ -181,7 +181,7 @@
 							<td colspan="3" width="800">
 								<c:choose>
                                      <c:when test="${ empty ea.ecFileOrigin }">
-                                     	첨부파일이 없습니다.
+                                     	&nbsp;&nbsp; 첨부파일이 없습니다.
                                      </c:when>
                                      <c:otherwise>
                                         &nbsp; <a href="${ ea.ecFileUpdate }" download="${ ea.ecFileOrigin }">${ ea.ecFileOrigin }</a>
@@ -200,15 +200,19 @@
 					</table>
 				</div>
 
-
+				
 				<div class="content_4">
 					<!-- 회원마다 보여지는 디테일 뷰 다름 
-					=> 조건 1: 해당 전자결재를 작성한 기안자일 경우 / 조건 2: 해당 문서의 결재자일 경우 / 조건 3: 아무것도 해당되지 않는 사원일 경우) -->
+					=> 조건 : 해당 문서의 결재자일 경우 -->
 					 
-					<!-- 본인이 기안한 문서일 경우에만 보여져야 하는 버튼 -->
+					<!-- !! 승인 버튼이 눌리기 전에만 삭제 가능 -->	
+					
+					<!-- 1. ec_status가 모두 N이면 승인 전 => 삭제 버튼 o  / 2. ec_status가 c 또는 y가 하나라도 있으면 반려 삭제 버튼 x -->	
 					<a class="btn btn-danger" onclick="postFormSubmit();">삭제하기</a>
-						
-					<!-- 결재자일 경우에만 보여져야 하는 버튼 -->
+
+					
+					<!-- 결재자이고 자기 차례일 때만 보여지고 반려 상태가 아닐 때 보이는 버튼 -->	
+					<!-- 나의 ec_turn을 불러와서 ec_turn -1 상태가 Y 이고 내가 N이면 버튼이 보이도록 -->
 					<!-- 
 					<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
 					<button class="btn btn-danger">반려하기</button> -->		
@@ -235,8 +239,7 @@
 						}
 					
 					</script>
-					
-																	
+																
 				</div><br><br>
 
 			</div>
@@ -244,9 +247,7 @@
         </div>
     </div>
 	
-	
-	
-	
+		
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

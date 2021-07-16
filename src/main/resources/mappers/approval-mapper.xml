@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="approvalMapper">
+
+	<resultMap id="elecApproval" type="elecApproval">
+		<id column="ec_doc_no" property="ecDocNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ec_doc_name" property="ecDocName"/>
+		<result column="ec_writer" property="ecWriter"/>
+		<result column="ec_title" property="ecTitle"/>
+		<result column="ec_cnt" property="ecCnt"/>
+		<result column="ec_code" property="ecCode"/>
+		<result column="ec_enrolldate" property="ecEnrolldate"/>
+		<result column="ec_updatedate" property="ecUpdatedate"/>
+		<result column="ec_compdate" property="ecCompdate"/>
+		<result column="ec_canceldate" property="ecCanceldate"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ec_file_origin" property="ecFileOrigin"/>
+		<result column="ec_file_update" property="ecFileUpdate"/>			
+		<result column="off_start" property="offStart"/>	
+		<result column="off_end" property="offEnd"/>	
+		<result column="off_reason" property="offReason"/>
+		<result column="approval_path_no" property="approvalPathNo"/>
+		<result column="ec_turn" property="ecTurn"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ap_enrolldate" property="apEnrolldate"/>
+		<result column="dept_name" property="deptName"/>	
+		<result column="posi_name" property="posiName"/>	
+	</resultMap>
+	
+	<resultMap id="approvalPath" type="approvalPath">
+		<id column="approval_path_no" property="approvalPathNo"/>
+		<result column="ec_doc_no" property="ecDocNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ec_turn" property="ecTurn"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ap_enrolldate" property="apEnrolldate"/>
+		<result column="dept_name" property="deptName"/>
+		<result column="posi_name" property="posiName"/>
+		<result column="mem_name" property="memName"/>
+	</resultMap>
+				
+	<resultMap id="expense" type="Expense" >
+		<id column="ec_doc_no" property="ecDocNo" />
+		<result column="expense_status" property="exStatus" />
+		<result column="ec_expense_writer" property="exWriter" />
+		<result column="account_month" property="month" />
+		<result column="account" property="account" />
+	</resultMap>
+	
+	<resultMap id="off" type="off">
+		<id column="ec_doc_no" property="ecDocNo"/>
+		<result column="mem_no" property="memNo"/>
+		<result column="ec_doc_name" property="ecDocName"/>
+		<result column="ec_writer" property="ecWriter"/>
+		<result column="ec_title" property="ecTitle"/>
+		<result column="ec_cnt" property="ecCnt"/>
+		<result column="ec_code" property="ecCode"/>
+		<result column="ec_enrolldate" property="ecEnrolldate"/>
+		<result column="ec_updatedate" property="ecUpdatedate"/>
+		<result column="ec_compdate" property="ecCompdate"/>
+		<result column="ec_canceldate" property="ecCanceldate"/>
+		<result column="ec_status" property="ecStatus"/>	
+		<result column="off_start" property="offStart"/>	
+		<result column="off_end" property="offEnd"/>	
+		<result column="off_reason" property="offReason"/>
+		<result column="approval_path_no" property="approvalPathNo"/>
+		<result column="ec_turn" property="ecTurn"/>
+		<result column="ec_status" property="ecStatus"/>
+		<result column="ap_enrolldate" property="apEnrolldate"/>
+		<result column="dept_name" property="deptName"/>	
+		<result column="posi_name" property="posiName"/>	
+	</resultMap>
+	
+	<resultMap id="dept" type="Dept">
+		<id column="dept_no" property="deptNo" />
+		<result column="dept_name" property="deptName" />
+		<result column="count" property="count"/>
+	</resultMap>
+	
+	<resultMap id="posi" type="Position">
+		<id column="posi_no" property="posiNo"/>
+		<result column="posi_name" property="posiName"/>
+		<result column="base_salary" property="baseSalary"/>
+		<result column="hourly_pay" property="hourlyPay"/>
+	</resultMap>
+	
+	<resultMap id="member" type="Member">
+		<id column="mem_no" property="memNo" />
+		<result column="dept_no" property="deptNo" />
+		<result column="posi_no" property="posiNo" />
+		<result column="id" property="id" />
+		<result column="pwd" property="pwd" />
+		<result column="mem_name" property="memName" />
+		<result column="off_count" property="offCount" />
+		<result column="dept_name" property="deptName"/>
+		<result column="posi_name" property="posiName"/>
+	</resultMap>
+
+	
+	<!-- 작성자 : 최선희 - 전자결재 기안함 리스트 조회 -->
+	<select id="selectApprovalTotalList" resultMap="elecApproval">
+		select 
+		       e.ec_doc_no
+		     , ec_doc_name
+		     , ec_code
+		     , ec_writer
+		     , ec_title
+		     , to_char(ec_enrolldate, 'YYYYMMDD') ec_enrolldate
+		     , to_char(ec_compdate, 'YYYY-MM-DD') ec_compdate 
+		     , ec_canceldate
+		     , (select a.ec_status
+		          from approval_path a
+		         where ec_turn = (select max(ec_turn)
+		                            from approval_path ap
+		                           where e.ec_doc_no = ap.ec_doc_no)
+		           and e.ec_doc_no = a.ec_doc_no)
+		  from ec_document e
+		 where e.ec_status = 'Y' 
+		 order 
+		    by ec_enrolldate desc,
+		       e.ec_doc_no desc	
+	</select>
+	
+	
+	<!-- 작성자 : 최선희 - 전자결재 결재대기 리스트 조회 -->
+	<select id="selectApprovalStandbyList" resultMap="elecApproval">
+		select 
+		       e.ec_doc_no
+		     , ec_doc_name
+		     , ec_code
+		     , ec_writer
+		     , ec_title
+		     , to_char(ec_enrolldate, 'YYYYMMDD') ec_enrolldate
+		     , to_char(ec_compdate, 'YYYY-MM-DD') ec_compdate 
+		     , ec_canceldate
+		     , (select a.ec_status
+		          from approval_path a
+		         where ec_turn = (select max(ec_turn)
+		                            from approval_path ap
+		                           where e.ec_doc_no = ap.ec_doc_no)
+		           and e.ec_doc_no = a.ec_doc_no)
+		  from ec_document e
+		 where e.ec_status = 'Y' 
+		   and a.mem_no = { ea.memNo }
+		 order 
+		    by ec_enrolldate desc,
+		       e.ec_doc_no desc	
+	</select>
+	
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 상세 조회 -->
+	<select id="documentDetail" resultMap="elecApproval" parameterType="_int">
+		 select 
+             ec_doc_no
+           , mem_no
+           , ec_writer
+           , ec_title
+           , ec_cnt
+           , ec_code
+           , ec_status
+           , ec_doc_name
+           , ec_enrolldate
+           , ec_canceldate
+           , ec_compdate
+           , ec_file_origin
+           , ec_file_update
+       from ec_document e
+      where ec_doc_no = #{ ea.ecDocNo }
+        and ec_status = 'Y' 
+	</select>	
+	
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 작성 -->
+	<insert id="insertDocument" parameterType="elecApproval">
+  		insert
+  		  into ec_document
+  		  (
+  		    ec_doc_no
+  		  , mem_no
+  		  , ec_writer
+  		  , ec_title
+  		  , ec_cnt
+  		  , ec_code
+  		  , ec_doc_name
+  		  , ec_enrolldate
+  		  , ec_status
+  		  , ec_file_origin
+  		  , ec_file_update
+  		  )
+  		  values
+  		  (
+  		    seq_ecno.nextval 
+  		  , #{memNo}
+  		  , #{ecWriter}
+  		  , #{ecTitle}	  
+  		  , #{ecCnt}
+  		  , #{ecCode}
+  		  , #{ecDocName}
+  		  , DEFAULT
+  		  , DEFAULT
+  		  , #{ecFileOrigin}
+  		  , #{ecFileUpdate}
+  		  )
+  	</insert>
+	
+	
+	<!-- 작성자 : 최선희 - 기획안/업무연락/회람 삭제 -->
+	<update id="deleteDocument" parameterType="_int">
+  		update 
+  			   ec_document 
+  		   set ec_status = 'N' 
+  		 where ec_doc_no = #{ ea.ecDocNo } 
+  	</update>
+	
+	
+	<!-- 작성자 : 안소은 - 결재선 부서 리스트 조회 -->
+	<select id="selectDept" resultMap="dept">
+		select
+			   dept_no
+			 , dept_name
+			 , (select count(*)
+			 	  from member m
+			 	 where d.dept_no = m.dept_no) count
+	      from dept d
+	</select>
+	
+	
+	<!--  작성자 : 안소은 - 결재선 해당 부서 사원 조회용 AJAX -->
+	<select id="selectMemberList" resultMap="member" resultType="_int">
+		select
+			   mem_no
+		     , mem_name
+		     , posi_name
+		  from member m
+		  join position p on(m.posi_no = p.posi_no)
+		 where m.dept_no = #{ deptNo }
+	</select>
+	
+	
+	<!--  작성자 : 안소은 - 지출결의서(통합문서) 상세 조회 -->
+	<select id="expenseDetail" resultMap="elecApproval" resultType="_int">
+		select 
+		       ec_doc_no
+		     , mem_no
+		     , ec_writer
+		     , ec_title
+		     , ec_cnt
+		     , ec_code
+		     , ec_status
+		     , ec_doc_name
+		     , ec_enrolldate
+		     , ec_canceldate
+		     , ec_compdate
+		 from ec_document
+		where ec_doc_no = #{ ea.ecDocNo }
+ 		  and ec_status = 'Y'
+	</select>
+	
+	
+	<!--  작성자 : 안소은 - 지출결의서 상세 조회 -->
+	<select id="expenseDetailTwo" resultMap="expense" resultType="_int">
+		select
+			   ec_doc_no
+		     , expense_status
+		     , ec_expense_writer
+		     , to_char(account_month, 'YYYY-MM-DD') account_month
+		     , account
+		  from expense_form
+		 where ec_doc_no = #{ ex.ecDocNo }
+	</select>
+	
+	
+	<!--  작성자 : 안소은 - 부서명 조회 -->
+	<select id="selectDeptName" resultMap="dept" resultType="_int">
+		select
+		       dept_name
+		  from dept d
+		  join member m on(d.dept_no = m.dept_no)
+		 where mem_no = #{ memNo }
+	</select>
+	
+	
+	<!--  작성자 : 안소은 - 직급명 조회 -->
+	<select id="selectPosiName" resultMap="posi" resultType="_int">
+		select
+		       posi_name
+		  from position p
+		  join member m on(p.posi_no = m.posi_no)
+		 where mem_no = #{ memNo }
+	</select>
+	
+	
+	<!-- 작성자 : 안소은 - 결재선 조회 -->
+	<!-- <select id="selectApPath" resultMap="path" resultType="_int">
+		select
+		       approval_path_no
+		     , ec_doc_no
+		     , mem_no
+		     , ec_turn
+		     , ec_status
+		     , ap_enrolldate
+		  from approval_path
+		 where ec_doc_no = #{ ap.ecDocNo }
+	</select> -->
+	
+	
+	<!--  작성자 : 안소은 - 지출결의서 기안하기 -->
+	<insert id="">
+		insert
+	       into ec_document
+	       (
+	         ec_doc_no
+	       , mem_no
+	       , ec_writer
+	       , ec_title
+	       , ec_cnt
+	       , ec_code
+	       , ec_enrolldate
+	       , ec_status
+	       , ec_doc_name
+	       )
+	       values
+	       (
+	         seq_ecno.nextval
+	       , #{memNo}
+	       , #{ecWriter}
+	       , #{ecTitle}
+	       , #{ecCnt}
+	       , default
+	       , default
+	       , #{ecDocName}
+	       )
+	</insert>
+	
+
+	<!-- 작성자 : 김혜미 - 연차 신청 -->
+	<insert id="insertOff" parameterType="off">
+		insert all
+		  into ec_document
+		     (
+               ec_doc_no
+             , mem_no
+             , ec_writer
+             , ec_title
+             , ec_cnt
+             , ec_code
+             , ec_enrolldate
+             , ec_status
+             , ec_doc_name
+             )
+		values 
+		     (
+		       SEQ_ECNO.NEXTVAL
+		     , #{memNo}
+		     , #{ecWriter}
+		     , #{ecTitle}
+		     , #{ecCnt}
+		     , #{ecCode}
+		     , DEFAULT
+		     , DEFAULT
+		     , #{ecDocName}
+		     )
+		  into off
+		  	 (
+		  	   ec_doc_no
+		  	 , off_start
+		  	 , off_end
+		  	 )
+		values
+		     (
+		       SEQ_ECNO.NEXTVAL
+		     , to_date(#{offStart}, 'YYYY-MM-DD')
+		  	 , to_date(#{offEnd}, 'YYYY-MM-DD')
+		     )
+		select *
+		from dual
+	</insert>
+	
+	<!-- 결재선 -->
+	<insert id="insertApprovalPath" parameterType="approvalPath">
+	  insert
+		into approval_path
+			     (
+			       approval_path_no
+			     , ec_doc_no
+			     , mem_no
+			     , ec_turn
+			     , ec_status
+			     )
+			values
+				 (
+				   SEQ_APNO.NEXTVAL
+				 , SEQ_ECNO.CURRVAL
+				 , 4
+				 , #{ecTurn}
+				 , DEFAULT
+				 )
+	</insert>
+	
+	<!-- 
+	<insert id="insertApprovalPath" parameterType="ApprovalPath">
+  	  insert	
+		into approval_path
+			     (
+			       approval_path_no
+			     , ec_doc_no
+			     , mem_name
+			     , ec_turn
+			     , ec_status
+			     )
+			values
+				 (
+				   SEQ_APNO.NEXTVAL
+				 , SEQ_ECNO.NEXTVAL
+				 , 7
+				 , 1
+				 , DEFAULT
+				 )
+	</insert>
+	-->
+	 
+	<!-- 연차 상세조회 -->
+	<select id="detailOff" resultMap="elecApproval" parameterType="_int">
+	     select 
+		       e.ec_doc_no
+		     , e.mem_no
+		     , ec_writer
+		     , ec_title
+		     , ec_cnt
+		     , ec_code
+		     , ec_enrolldate
+		     , e.ec_status
+		     , ec_doc_name
+		     , ec_canceldate
+		     , ec_compdate
+		     , off_start
+		     , off_end
+		 from ec_document e
+		 join off o on(o.ec_doc_no = e.ec_doc_no)
+		where e.ec_doc_no = #{ ea.docNo }
+	</select>
+	
+	<!-- 결재선 상세조회 -->
+	<select id="detailApprovalPath" resultMap="approvalPath" parameterType="_int">
+		select 
+               approval_path_no
+             , ec_doc_no
+             , a.mem_no
+             , ec_turn
+             , ec_status
+             , ap_enrolldate
+             , dept_name
+             , posi_name
+             , mem_name
+          from approval_path a
+          join member m on(m.mem_no = a.mem_no)
+          join dept d on(d.dept_no = m.mem_no)
+          join position p on(p.posi_no = m.posi_no)
+         where ec_doc_no = #{ ea.docNo }
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</mapper>

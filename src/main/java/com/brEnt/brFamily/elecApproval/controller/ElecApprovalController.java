@@ -93,7 +93,7 @@ public class ElecApprovalController {
    @RequestMapping("approvalStandbyList.ea")
    public ModelAndView approvalStandbyList(ModelAndView mv) {
 	   
-	  ArrayList<ElecApproval> list = eaService.selectApprovalTotalList(); 
+	  ArrayList<ElecApproval> list = eaService.selectApprovalStandbyList(); 
 	  
 	  mv.addObject("list", list)
       	.setViewName("elecApproval/approvalStandbyList"); 

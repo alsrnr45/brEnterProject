@@ -141,8 +141,9 @@
 		                           where e.ec_doc_no = ap.ec_doc_no)
 		           and e.ec_doc_no = a.ec_doc_no)
 		  from ec_document e
+		  join approval_path a on(a.ec_doc_no = e.ec_doc_no)
 		 where e.ec_status = 'Y' 
-		   and a.mem_no = { ea.memNo }
+		   and a.mem_no = ${ mno }
 		 order 
 		    by ec_enrolldate desc,
 		       e.ec_doc_no desc	
@@ -397,28 +398,6 @@
 				 , DEFAULT
 				 )
 	</insert>
-	
-	<!-- 
-	<insert id="insertApprovalPath" parameterType="ApprovalPath">
-  	  insert	
-		into approval_path
-			     (
-			       approval_path_no
-			     , ec_doc_no
-			     , mem_name
-			     , ec_turn
-			     , ec_status
-			     )
-			values
-				 (
-				   SEQ_APNO.NEXTVAL
-				 , SEQ_ECNO.NEXTVAL
-				 , 7
-				 , 1
-				 , DEFAULT
-				 )
-	</insert>
-	-->
 	 
 	<!-- 연차 상세조회 -->
 	<select id="detailOff" resultMap="elecApproval" parameterType="_int">

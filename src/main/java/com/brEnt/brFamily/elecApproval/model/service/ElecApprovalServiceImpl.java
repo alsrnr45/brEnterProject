@@ -33,8 +33,8 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    
    // 작성자 : 최선희 -- 전자결재 결재대기 리스트 조회 
    @Override
-   public ArrayList<ElecApproval> selectApprovalStandbyList() {
-      return eaDao.selectApprovalStandbyList(sqlSession); 
+   public ArrayList<ElecApproval> selectApprovalStandbyList(int mno) {
+      return eaDao.selectApprovalStandbyList(sqlSession, mno); 
    }
       
    // 작성자 : 최선희 -- 기획안/업무연락/회람 상세 조회  

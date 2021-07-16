@@ -78,11 +78,13 @@ public class ElecApprovalController {
    
    // 작성자 : 최선희 -- 전자결재 기안함 리스트 
    @RequestMapping("approvalTotalList.ea")
-   public ModelAndView approvalTotalList(ModelAndView mv) {
+   public ModelAndView approvalTotalList(int mno, ModelAndView mv) {
       	 
+	  System.out.println(mno);
       ArrayList<ElecApproval> list = eaService.selectApprovalTotalList();
       
       mv.addObject("list", list)
+        .addObject("mno", mno)
         .setViewName("elecApproval/approvalTotalList"); 
       
       return mv;            
@@ -91,11 +93,13 @@ public class ElecApprovalController {
    
    // 작성자 : 최선희 -- 전자결재 결재대기 리스트 
    @RequestMapping("approvalStandbyList.ea")
-   public ModelAndView approvalStandbyList(ModelAndView mv) {
-	   
-	  ArrayList<ElecApproval> list = eaService.selectApprovalStandbyList(); 
+   public ModelAndView approvalStandbyList(int mno, ModelAndView mv) {
+	  
+	  System.out.println(mno);
+	  ArrayList<ElecApproval> list = eaService.selectApprovalStandbyList(mno); 
 	  
 	  mv.addObject("list", list)
+	    .addObject("mno", mno)
       	.setViewName("elecApproval/approvalStandbyList"); 
 	  
 	  return mv;
@@ -208,39 +212,38 @@ public class ElecApprovalController {
    }
    
     
-   // 작성자 : 안소은 — 지출결의서 폼
-   @RequestMapping("expenseForm.ea")
-   public ModelAndView expenseForm(ModelAndView mv) {
+	// 작성자 : 안소은 — 지출결의서 폼
+	@RequestMapping("expenseForm.ea")
+	public ModelAndView expenseForm(ModelAndView mv) {
 	   
-	   // 결재선 부서 리스트 조회
-	   ArrayList<Dept> list = eaService.selectDept();
-	   mv.addObject("list", list)
-	   	 .setViewName("elecApproval/expenseForm");
-	   
-	   return mv;
-   }
+	// 결재선 부서 리스트 조회
+		ArrayList<Dept> list = eaService.selectDept();
+		mv.addObject("list", list)
+		  .setViewName("elecApproval/expenseForm");
+			return mv;
+	}
 
    
    // 작성자 : 안소은 — 지출결의서 상세페이지
    @RequestMapping("expenseDetail.ea")
    public String expenseDetail(int eano, Model model) {
-	   
-	   // 통합문서 조회
-	   ElecApproval ea = eaService.expenseDetail(eano);
-	   model.addAttribute("ea", ea); 
-	   
-	   // 지출결의서 조회
-	   ExpenseForm ex = eaService.expenseDetailTwo(eano);
-	   model.addAttribute("ex", ex);
-	   
-	   // 부서조회
-	   ArrayList<Dept> dept = eaService.selectDeptName(eano);
-	   model.addAttribute("dept", dept);
-	   
-	   // 직급조회
-	   ArrayList<Position> posi = eaService.selectPosiName(eano);
-	   model.addAttribute("posi", posi);
-	   
+   
+   // 통합문서 조회
+   ElecApproval ea = eaService.expenseDetail(eano);
+   model.addAttribute("ea", ea); 
+   
+   // 지출결의서 조회
+   ExpenseForm ex = eaService.expenseDetailTwo(eano);
+   model.addAttribute("ex", ex);
+   
+   // 부서조회
+   ArrayList<Dept> dept = eaService.selectDeptName(eano);
+   model.addAttribute("dept", dept);
+   
+   // 직급조회
+   ArrayList<Position> posi = eaService.selectPosiName(eano);
+   model.addAttribute("posi", posi);
+   
 	   // 결재선 조회
 //	   ArrayList<Approval_path> apList = eaService.selectApPath(eano);
 //	   model.addAttribute("apList", apList);

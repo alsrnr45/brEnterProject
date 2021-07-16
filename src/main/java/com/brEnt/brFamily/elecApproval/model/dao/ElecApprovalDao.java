@@ -22,8 +22,8 @@ public class ElecApprovalDao {
 	}
 	
 	// 작성자 : 최선희 -- 전자결재 결재대기 리스트 조회
-	public ArrayList<ElecApproval> selectApprovalStandbyList(SqlSessionTemplate sqlSession) { 
-		return (ArrayList)sqlSession.selectList("approvalMapper.selectApprovalStandbyList");
+	public ArrayList<ElecApproval> selectApprovalStandbyList(SqlSessionTemplate sqlSession, int mno) { 
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectApprovalStandbyList", mno);
 	}
 	
 	// 작성자 : 최선희 -- 기획안/업무연락/회람 상세 조회 
@@ -98,11 +98,11 @@ public class ElecApprovalDao {
 		return sqlSession.selectOne("approvalMapper.detailOff", ecDocNo);
 	}
 
+	// 결재선 조회
 	public ArrayList<Approval_path> detailApprovalPath(SqlSessionTemplate sqlSession, int eano) {
 		return (ArrayList)sqlSession.selectList("approvalMapper.detailApprovalPath", eano);
 	}
 
-	// 결재선 조회
 	
 	
 	

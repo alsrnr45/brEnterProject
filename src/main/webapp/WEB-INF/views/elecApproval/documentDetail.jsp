@@ -132,39 +132,35 @@
 							<th rowspan="5" width="120">기안자</th>
 							<td width="136">${ ea.deptName }</td>
 							<th rowspan="5" width="120">결재자</th>
-							<td width="136">개발팀</td>
-							<td width="136">개발팀</td>
-							<td width="136">개발팀</td>
-							<td width="136"></td>
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<td width="136">${ ap.deptName }</td>
+							</c:forEach>
 						</tr>
 						<tr height="35">
-							<td>${ ea.posiName }</td>
-							<td>과장</td>
-							<td>차장</td>
-							<td>부장</td>
-							<td></td>
+							<td>${ ea.ecWriter }</td>
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<td width="136">${ ap.posiName }</td>
+							</c:forEach>
 						</tr>
 						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
-						<tr height="80" style="color: gray;">
+						<tr height="80" style="color:gray;">
 							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
 							<td><img src="resources/elecApprovalUpfiles/check2.png"></td>
-							<td></td>
+							<td><img src="resources/elecApprovalUpfiles/cancelled.png"></td>
 							<td></td>
 							<td></td>
 						</tr>
 						<tr height="35">
 							<td>${ ea.ecEnrolldate }</td>
-							<td>2021-06-22</td>
-							<td>2021-06-22</td>
-							<td>2021-06-22</td>
-							<td></td>
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<td width="136">${ ap.apEnrolldate }</td>
+							</c:forEach>
 						</tr>
 						<tr height="35">
 							<td style="color: royalblue;">${ ea.ecWriter }</td>
-							<td>이과장</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<td width="136">${ ap.memName }</td>
+							</c:forEach>
 						</tr>
 					</table>
 					<br>

@@ -72,22 +72,29 @@ public class ElecApprovalDao {
 	}
 	
 	// 작성자 : 김혜미 -- 연차 신청
-	public int offInsert(SqlSessionTemplate sqlSession, Off o) {
-		return sqlSession.insert("approvalMapper.offInsert", o);
+	public int insertOff(SqlSessionTemplate sqlSession, Off o) {
+		return sqlSession.insert("approvalMapper.insertOff", o);
 	}
+	
+	// 결재선
+	public int insertApprovalPath(SqlSessionTemplate sqlSession, ArrayList<Approval_path> approvalPathList) {
+		
+		int result = 0;
+		
+		for(int i=0; i<approvalPathList.size(); i++) {
+			System.out.println(approvalPathList.get(i));
+			result = sqlSession.insert("approvalMapper.insertApprovalPath", approvalPathList.get(i));
+		}
 
+		return result;
+		
+	}
+	
 	// 작성자 : 김혜미 -- 연차 조회
 	public ElecApproval offDetail(SqlSessionTemplate sqlSession, int ecDocNo) {
 		return sqlSession.selectOne("approvalMapper.offDetail", ecDocNo);
 	}
 
-
-	
-	
-	
-	
-	
-	
 	
 	
 	

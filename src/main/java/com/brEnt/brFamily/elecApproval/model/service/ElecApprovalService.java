@@ -46,7 +46,10 @@ public interface ElecApprovalService {
     ArrayList<Member> selectMemberList(int deptNo);
     
     // 작성자 : 김혜미 -- 연차 신청
-    int offInsert(Off o);
+    int insertOff(Off o);
+    
+    // 결재선
+    int insertApprovalPath(ArrayList<Approval_path> approvalPathList);
     
     // 작성자 : 김혜미 -- 연차 상세조회
     ElecApproval offDetail(int eano);

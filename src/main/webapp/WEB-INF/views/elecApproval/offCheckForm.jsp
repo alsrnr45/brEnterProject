@@ -128,7 +128,7 @@
 						<tr height="80" style="color:gray;">
 							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
 							<td><img src="resources/elecApprovalUpfiles/check2.png"></td>
-							<td></td>
+							<td><img src="resources/elecApprovalUpfiles/cancelled.png"></td>
 							<td></td>
 							<td></td>
 						</tr>

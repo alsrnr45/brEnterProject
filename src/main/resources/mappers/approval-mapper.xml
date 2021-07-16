@@ -28,13 +28,16 @@
 		<result column="posi_name" property="posiName"/>	
 	</resultMap>
 	
-	<resultMap id="path" type="ApprovalPath">
+	<resultMap id="approvalPath" type="approvalPath">
 		<id column="approval_path_no" property="approvalPathNo"/>
 		<result column="ec_doc_no" property="ecDocNo"/>
 		<result column="mem_no" property="memNo"/>
 		<result column="ec_turn" property="ecTurn"/>
 		<result column="ec_status" property="ecStatus"/>
 		<result column="ap_enrolldate" property="apEnrolldate"/>
+		<result column="dept_name" property="deptName"/>
+		<result column="posi_name" property="posiName"/>
+		<result column="mem_name" property="memName"/>
 	</resultMap>
 				
 	<resultMap id="expense" type="Expense" >
@@ -305,7 +308,7 @@
 	
 
 	<!-- 작성자 : 김혜미 - 연차 신청 -->
-	<insert id="offInsert" parameterType="off">
+	<insert id="insertOff" parameterType="off">
 		insert all
 		  into ec_document
 		     (
@@ -343,27 +346,54 @@
 		     , to_date(#{offStart}, 'YYYY-MM-DD')
 		  	 , to_date(#{offEnd}, 'YYYY-MM-DD')
 		     )
-		  into approval_path
-		     (
-		       approval_path_no
-		     , ec_doc_no
-		     , mem_no
-		     , ec_turn
-		     , ec_status
-		     )
-		values
-			 (
-			   SEQ_APNO.NEXTVAL
-			 , SEQ_ECNO.NEXTVAL
-			 , 7
-			 , 1
-			 , DEFAULT
-			 )
 		select *
 		from dual
 	</insert>
 	
+	<!-- 결재선 -->
+	<insert id="insertApprovalPath" parameterType="ApprovalPath">
+	  insert
+		into approval_path
+			     (
+			       approval_path_no
+			     , ec_doc_no
+			     , mem_no
+			     , ec_turn
+			     , ec_status
+			     )
+			values
+				 (
+				   SEQ_APNO.NEXTVAL
+				 , SEQ_ECNO.CURRVAL
+				 , 4
+				 , #{ecTurn}
+				 , DEFAULT
+				 )
+	</insert>
 	
+	<!-- 
+	<insert id="insertApprovalPath" parameterType="ApprovalPath">
+  	  insert	
+		into approval_path
+			     (
+			       approval_path_no
+			     , ec_doc_no
+			     , mem_name
+			     , ec_turn
+			     , ec_status
+			     )
+			values
+				 (
+				   SEQ_APNO.NEXTVAL
+				 , SEQ_ECNO.NEXTVAL
+				 , 7
+				 , 1
+				 , DEFAULT
+				 )
+	</insert>
+	-->
+	 
+	<!-- 연차 상세조회 -->
 	<select id="offDetail" resultMap="elecApproval" parameterType="_int">
 	     select 
 		       e.ec_doc_no

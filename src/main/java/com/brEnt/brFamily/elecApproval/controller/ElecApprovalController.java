@@ -57,6 +57,24 @@ public class ElecApprovalController {
    
    
    // 작성자 : 김혜미 -- 연차 신청
+   @RequestMapping("insertOff.ea")
+   public String insertOff(Approval_path ap, Off o, Model model) {
+	   
+	   ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
+	   //System.out.println(ApprovalPathList);
+	   
+	   //System.out.println(o);
+	   //System.out.println(ap);
+	   
+	   model.addAttribute("o", eaService.insertOff(o))
+	  	    .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList));
+	
+	   return "redirect:approvalTotalList.ea";
+   }
+   
+   
+   // 작성자 : 김혜미 -- 연차 신청
+   /*
    @RequestMapping("offInsert.ea")
    public String offInsert(Off o, Model model) {
 	   System.out.println(o);
@@ -65,7 +83,7 @@ public class ElecApprovalController {
 	
 	   return "redirect:approvalTotalList.ea";
    }
-
+	*/
  
    // 작성자 : 최선희 -- 전자결재 기안함 리스트 
    @RequestMapping("approvalTotalList.ea")

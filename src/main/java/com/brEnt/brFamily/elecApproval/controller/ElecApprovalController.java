@@ -111,14 +111,8 @@ public class ElecApprovalController {
    public String documentDetail(int eano, Model model) {
 	   
 	   ElecApproval ea = eaService.documentDetail(eano);
-	   ArrayList<Approval_path> ApprovalPathList = eaService.detailApprovalPath(eano);
-	   
 	   //System.out.println(ea);
-	   System.out.println(ApprovalPathList);
-
-	   model.addAttribute("ea", ea)
-  			.addAttribute("ApprovalPathList", ApprovalPathList);
-
+	   model.addAttribute("ea", ea); 
 	   return "elecApproval/documentDetail";
    }
    

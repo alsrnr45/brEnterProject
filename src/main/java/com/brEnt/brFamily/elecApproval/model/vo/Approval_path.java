@@ -24,7 +24,6 @@ public class Approval_path {
 	private String deptName;
 	private String posiName;
 	private String memName;
-	//private int mno;
 	
 	private ArrayList<Approval_path> ApprovalPathList;
 }

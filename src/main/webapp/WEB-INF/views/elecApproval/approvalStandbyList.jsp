@@ -227,22 +227,22 @@
 	        // 리스트가 비어있을 경우 선택되지 않도록 조건 처리  
 			$(document).on("click", ".approvalStandbyList>tbody>tr", function(){
 	        	
-	        	// 폼마다 디테일 뷰 다름 
-	        	var ecCode = $(this).find("#ecCode").val();
+				// 폼마다 디테일 뷰 다름 
+            	var ecCode = $(this).find("#ecCode").val();
 				//console.log(ecCode);
-	        	
-	        	// 조건1. 연차
-	        	if(ecCode == "OF") {
-	        		location.href ="offDetail.ea?eano=" + $(this).find(".eano").val();
+            	
+            	// 조건1. 연차
+            	if(ecCode == "OF") {
+            		location.href ="detailOff.ea?eano=" + $(this).find(".eano").val();
 	             	
-	        	// 조건2. 지출결의서 
-	        	}else if (ecCode == "EX") {	
-	             	location.href ="expenseDetail.ea";
+            	// 조건2. 지출결의서 
+            	}else if (ecCode == "EX") {	
+	             	location.href ="expenseDetail.ea?eano=" + $(this).find(".eano").val();
 	            
 	            // 조건3. 기획안/업무연락/회람 
-	        	}else { 
+            	}else { 
 	             	location.href ="documentDetail.ea?eano=" + $(this).find(".eano").val();
-	        	}   	
+            	}   		
 	        })
 	    });
 

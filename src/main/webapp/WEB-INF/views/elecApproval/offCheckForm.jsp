@@ -176,9 +176,23 @@
 
 
 				<div class="content_4">
-					<!-- 수정하기, 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
-					<a class="btn btn-light" href="" style="background-color:lightgray; border-color:lightgray;">수정하기</a>
-					<a class="btn btn-danger" href="">삭제하기</a>
+					<!-- 회원마다 보여지는 디테일 뷰 다름 
+					
+					=> 조건 1 : 해당 문서의 결재자일 경우 / 
+					   조건 2 : 승인 버튼이 눌리기 전에만 삭제 가능 => 삭제 버튼 o (ec_status가 모두 N인 결재대기 상태) 
+					   		   (ec_status가 c 또는 y가 하나라도 있으면 삭제 버튼 x) -->
+					   		   					   		   
+					<c:if test="${ ap.ecStatus eq 'N' && ap.memNo eq loginUser.memNo }">   		   															
+						<button class="btn btn-danger" onclick="">삭제하기</button>
+					</c:if>
+					
+					<!-- 1. 결재자이면서 2. 결재순번이 자기 차례이면서 3. 반려 상태가 아닐 때 보이는 버튼 -->	
+					<!-- 결재자의 ec_turn을 불러와서 ec_turn -1 상태가 Y 이고 결재자의 ec_status가 N이면 버튼이 보이도록 -->
+					<!-- 
+					<c:if test="${} "> 
+						<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+						<button class="btn btn-danger">반려하기</button> 	
+					</c:if>-->						
 				</div><br><br>
 
 

@@ -179,10 +179,10 @@
 	                     </tr>
 	                     <tr height="35">
 	                        <td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
-	                        <td><input type="hidden" name="ApprovalPathList[0].memNo" value="4"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[1].memNo" value="3"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[2].memNo" value="2"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[3].memNo" value="1"></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
+	                        <td></td>
 	                     </tr>
 	                     <tr height="35">
 	                        <td style="color: royalblue;">${ loginUser.memName }</td>

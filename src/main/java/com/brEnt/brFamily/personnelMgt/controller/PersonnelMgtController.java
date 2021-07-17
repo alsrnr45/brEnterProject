@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.brEnt.brFamily.personnelMgt.model.service.PersonnelMgtService;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
 import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
+import com.google.gson.Gson;
 
 @Controller
 public class PersonnelMgtController {
@@ -36,46 +37,30 @@ public class PersonnelMgtController {
 		return "personnelMgt/offList";
 	}
 	
-	// 작성자 : 안소은 -- 근태관리 조회
-//	@RequestMapping("attendeanceMgt.pm")
-//	public ModelAndView attendanceManagement(int memNo, ModelAndView mv) {
-//		
-//		ArrayList<PersonnelMgt> pList = pService.selectAttend(memNo);
-//		mv.addObject("pList", pList)
-//		  .setViewName("personnelMgt/attendanceManagement");
-//			
-//		return mv;
-//	
-//	}
-	
 	// 작성자 : 안소은 -- 근무일수 조회
 	@RequestMapping("attendeanceMgt.pm")
 	public String selectTotalWorkDay(int memNo, Model model) {
 		
+		// 오늘 날짜로 출근시간이 찍혀있는지 조회
+		PersonnelMgt t = pService.selectToday(memNo);
+		model.addAttribute("t", t);
+		
+		// 근무일수 조회
 		PersonnelMgt p = pService.selectTotalWorkDay(memNo);
 		model.addAttribute("p", p);
-		//System.out.println(p);
 		
-		PersonnelMgt pp = pService.selectAttend(memNo);
-		model.addAttribute("pp", pp);
+		// 출근시간 조회
+		PersonnelMgt in = pService.selectCheckIn(memNo);
+		model.addAttribute("in", in);
 		
-		PersonnelMgt d = pService.selectToday(memNo);
-		model.addAttribute("d", d);
-		System.out.println(d.getAtCount());
-		
-//		if(d.getAtCount() > 0) {
-//			
-//			return "personnelMgt/attendanceManagement";
-//			
-//		}else {
-//			
-//		}
+		// 퇴근시간 조회
+		PersonnelMgt out = pService.selectCheckOut(memNo);
+		model.addAttribute("out", out);
+		//System.out.println(out);
 		
 		return "personnelMgt/attendanceManagement";
 		
 	}
-	
-	
 	
 	// 작성자 : 안소은 -- 출근시간 INSERT AJAX
 	@ResponseBody

@@ -45,6 +45,8 @@
 	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
 	    background-color: rgb(155, 89, 182);
 	    box-shadow: none;} 
+	    
+	
 </style>
 
 </head>
@@ -55,18 +57,17 @@
     </nav>
     
     <div id="layoutSidenav">
-        
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
             <jsp:include page="userMenu.jsp"/>
         </div>
-
         <!--컨텐츠-->
-        <div id="layoutSidenav_content">
-            
-        </div>
+    	<div id="layoutSidenav_content">
+        	<jsp:include page="userHomeMain.jsp"/>
+   		</div>
     </div>
-	
+  
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

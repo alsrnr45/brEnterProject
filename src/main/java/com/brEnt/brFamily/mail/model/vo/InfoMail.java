@@ -11,18 +11,25 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class SendMail {
+public class InfoMail {
 	
 	private int mailNo;
-	private int memNo;
 	private String mailWriter;
 	private String mailReceiver;
+	private String recycleBinStatus;
+	private String receiveStatus;
+	private String bookmark;
+	
+	private int memNo;
 	private String mailTitle;
 	private String mailContent;
 	private String mailSendDate;
 	private String tempBox;
-
-	// mfIsHave = 0 : 첨부파일 없음
-	// mfIsHave > 0 : 첨부파일 있음
-	private String mfIsHave;
+	
+	private int mailFNo;
+	private String mailOrigin;
+	private String mailUpdate;
+	private String mailFPath;
+	private String mailFSize;
+	private String mailFType;
 }

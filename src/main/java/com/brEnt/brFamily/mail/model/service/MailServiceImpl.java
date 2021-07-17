@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.brEnt.brFamily.mail.model.dao.MailDao;
+import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
@@ -89,6 +89,18 @@ public class MailServiceImpl implements MailService {
 	public int deleteMail(String[] mail_arr, String email) {
 		return mDao.deleteMail(mail_arr, email, sqlSession);
 	}
+	
+	@Override
+	public int readMail(ReceiveMail rmail) {
+		return mDao.readMail(rmail, sqlSession);
+	}
+
+	@Override
+	public InfoMail detailRMail(ReceiveMail rmail) {
+		
+		return mDao.detailRMail(rmail, sqlSession);
+	}
+
 
 
 

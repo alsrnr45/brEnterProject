@@ -2,8 +2,7 @@ package com.brEnt.brFamily.mail.model.service;
 
 import java.util.ArrayList;
 
-import org.springframework.web.multipart.MultipartFile;
-
+import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
@@ -36,6 +35,11 @@ public interface MailService {
 	
 	// 메일 삭제
 	int deleteMail(String[] mail_arr, String email);
+	
+	// 메일조회
+	int readMail(ReceiveMail rmail); // 받은 메일 수신시, 읽음표시
+	InfoMail detailRMail(ReceiveMail rmail);
+
 
 
 	

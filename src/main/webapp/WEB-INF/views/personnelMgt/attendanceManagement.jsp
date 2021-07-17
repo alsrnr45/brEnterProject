@@ -107,29 +107,32 @@
                         </div>
                     </div>
                     <input type="hidden" name="memNo" value="${ loginUser.memNo }" />
-                    <input type="hidden" id="d" value="${ d.atCount }">
+                   
                     <div class="second">
                         <h2><b id="dpTime">00 : 00 : 00</b></h2>
                         <br>
-                        <%-- <c:choose>
-                        	<c:when test="${ d.atCount > 0 }">
-	                      		<button class="btn btn-primary checkIn">출근하기</button>
-	                      		<button class="btn btn-primary checkOut">퇴근하기</button>
-	                        </c:when>
-	                        <c:otherwise>
-	                        	<button class="btn btn-primary checkIn" disabled>출근하기</button>
-	                      		<button class="btn btn-primary checkOut" disabled>퇴근하기</button>
-                    		</c:otherwise>
-                    	</c:choose> --%>
-                    	<button class="btn btn-primary checkIn" id="checkIn" disabled="disabled">출근하기</button>
-	                    <button class="btn btn-primary checkOut" id="checkOut" disabled="disabled">퇴근하기</button>
+
+                        <input type="hidden" id="t" name="t" value="${ t.atCount }">
+                        <c:choose>
+                        	<c:when test="${ t.atCount eq 0 }">
+                        		<button class="btn btn-primary checkIn" id="checkIn">출근하기</button>
+                        	</c:when>
+                        	<c:otherwise>
+                        		<button class="btn btn-primary checkIn" disabled>출근하기</button>
+                        	</c:otherwise>
+                        </c:choose>
+                        
+                        <!-- 퇴근시간의 count가 0이면 활성화 1이상이면 비활성화하기 -->
+	                    <button class="btn btn-primary checkOut" id="checkOut">퇴근하기</button>
+                    
+                    
                     </div>
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
-                        <h2 class="third_1" id="checkInTime"><b> : </b></h2>
+                        <h2 class="third_1" id="checkInTime"><b>${ in.checkIn }</b></h2>
                         <br>
                         <button class="btn btn-primary" style="margin-top:5px;" disabled>퇴근체크시간</button>
-                        <h2 class="third_2" id="checkOutTime"><b> : </b></h2>
+                        <h2 class="third_2" id="checkOutTime"><b> ${ out.checkOut } </b></h2>
                     </div>
                 </div>
                 
@@ -141,7 +144,7 @@
                             <span class="number" id="atWorkDay">${ p.atCount }</span> 일
                         </div>
                         <div>
-                            <span>총근무시간</span> <br>
+                            <span>근무시간</span> <br>
                             <span class="number" id="atTotalTime">${ p.atSum }</span> 시간
                         </div>
                         <div>
@@ -155,132 +158,77 @@
         </div>
     </div>
 
-    <!-- 실시간으로 시간을 구해오기 위한 script -->
-	<script type="text/javascript">
-    	setInterval("dpTime()",1000); 
-    	function dpTime(){ 
-    		var now = new Date(); 
-    		hours = now.getHours(); 
-    		minutes = now.getMinutes(); 
-    		seconds = now.getSeconds(); 
-    		if (hours > 24){
-    			hours -= 24; 
-    		} else{ 
-    		} if (hours < 10){ 
-    			hours = "0" + hours; 
-    		} if (minutes < 10){ 
-    			minutes = "0" + minutes; 
-    		} if (seconds < 10){ 
-    			seconds = "0" + seconds; 
-    		} 
-    		document.getElementById("dpTime").innerHTML 
-    		= hours + " : " + minutes + " : " + seconds; 
-    	}
-    </script>
 		
    	<script type="text/javascript">
-   		// 출근버튼 클릭시 DB에 근태번호, 사원번호, 오늘날짜, 출근체크시간 insert하고 출근체크시간에 현재시간 띄우기
+   		
+   		// 실시간 시간 구하기
+	   	setInterval("dpTime()",1000); 
+		function dpTime(){ 
+			
+			var now = new Date(); 
+			hours = now.getHours(); 
+			minutes = now.getMinutes(); 
+			seconds = now.getSeconds(); 
+			
+			if (hours > 24){
+				hours -= 24; 
+			} else{ 
+			} if (hours < 10){ 
+				hours = "0" + hours; 
+			} if (minutes < 10){ 
+				minutes = "0" + minutes; 
+			} if (seconds < 10){ 
+				seconds = "0" + seconds; 
+			} 
+			document.getElementById("dpTime").innerHTML 
+			= hours + " : " + minutes + " : " + seconds; 
+			
+		}
+   		
+		// 출근버튼 클릭용 AJAX
    		$(function(){
    			$(".checkIn").click(function(){
-   				
-   				var checkInTime = new Date();
-   				year = checkInTime.getFullYear();
-   				month = checkInTime.getMonth();
-   				date = checkInTime.getDate();
-   				hours = checkInTime.getHours();
-   				minutes = checkInTime.getMinutes();
    	    		
        			$.ajax({
            			url:"insertCheckIn.pm",
            			data:{memNo : ${loginUser.memNo}},
            			success:function(data){
            				
-           				if(data == "success"){
-           					
-	           	    		//console.log(hours + " : " + minutes);
-	           	    		document.getElementById("checkInTime").innerHTML 
-	           	    		= hours + " : " + minutes;
-           	    			
-	           	    		selectCheckIn();
-           	    				
-           				}
+           				alert("출근시간이 성공적으로 입력되었습니다.");
+           				location.reload();
            				
            			},error:function(){
-           				alert("FAIL");
+           				alert("출근시간이 정상적으로 입력되지 않았습니다.");
            			}
            		});
        			
        		})
-   		})
-   		// 퇴근버튼 클릭시 mem_no이 일치하고, null일경우 DB에 퇴근체크시간 insert하고 출근체크시간에 현재시간 띄우기
-   		// 새로고침시 입력한 출퇴근시간이 사라짐.. 디비에서 select 해와야겠음..
-   		// 그리고 같은날 한번 출퇴근버튼을 눌렀으면 두번 insert 되지 않게 조건걸기
-   		// 출근버튼 클릭시 근무일수 새로고침
-   		// 퇴근버튼 클릭시 총근무시간/평균근무시간 새로고침되게..!~!!!!!!!
+   		});
    		
+		// 퇴근버튼 클릭용 AJAX
+		// 퇴근버튼 클릭시 total_time에도 현재시간 - 출근시간을 분단위로 환산해서 insert
+		
    		$(function(){
    			$(".checkOut").click(function(){
-   				
-   				var checkInTime = new Date();
-   				hours = checkInTime.getHours();
-   				minutes = checkInTime.getMinutes();
    	    		
        			$.ajax({
            			url:"insertCheckOut.pm",
            			data:{memNo : ${loginUser.memNo}},
            			success:function(data){
            				
-           	    		document.getElementById("checkOutTime").innerHTML 
-           	    		= hours + " : " + minutes;
+           				alert("퇴근시간이 성공적으로 입력되었습니다.");
+           				location.reload();
            				
            			},error:function(){
-           				alert("FAIL");
+           				alert("퇴근시간이 정상적으로 입력되지 않았습니다.");
            			}
            		});
        			
        		})
-   		}) 
+   		});
    		
-   		/* function selectCheckIn(){
-   			$.ajax({
-   				url:"",
-   				data:{},
-   				success:function(){
-   					
-   				},error:function(){
-   					
-   				}
-   			})
-   		}
    		
-   		function selectCheckOut(){
-   			$.ajax({
-   				url:"",
-   				data:{},
-   				success:function(){
-   					
-   				},error:function(){
-   					
-   				}
-   			})
-   		} */
    	</script>
-   	
- 	<script type="text/javascript">
-   		$(document).ready(function(){
-   			
-   			var d = $("#d").val();
-   			
-   			console.log(d);
-   			if(d > 0){
-   				$("#checkIn").prop("disabled", true);
-   				// 한번클릭하면 두번째엔 못하게막기
-   			}else{
-   				$("#checkIn").prop("disabled", false);
-   			}
-   			
-   		})
-   	</script> 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

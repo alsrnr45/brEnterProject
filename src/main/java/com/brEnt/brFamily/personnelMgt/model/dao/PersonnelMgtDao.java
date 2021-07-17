@@ -11,9 +11,9 @@ import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 @Repository
 public class PersonnelMgtDao {
 
-	// 작성자 : 안소은 -- 근태관리 조회
-	public PersonnelMgt selectAttend(SqlSessionTemplate sqlSession, int memNo) {
-		return sqlSession.selectOne("personnelMgtMapper.selectAttend", memNo);
+	// 작성자 : 안소은 -- 오늘 날짜로 출근시간이 찍혀있는지 조회
+	public PersonnelMgt selectToday(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("personnelMgtMapper.selectToday", memNo);
 	}
 	
 	// 작성자 : 안소은 -- 근무일수 조회
@@ -21,8 +21,14 @@ public class PersonnelMgtDao {
 		return sqlSession.selectOne("personnelMgtMapper.selectTotalWorkDay", memNo);
 	}
 	
-	public PersonnelMgt selectToday(SqlSessionTemplate sqlSession, int memNo) {
-		return sqlSession.selectOne("personnelMgtMapper.selectToday", memNo);
+	// 작성자 : 안소은 -- 출근시간 조회
+	public PersonnelMgt selectCheckIn(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("personnelMgtMapper.selectCheckIn", memNo);
+	}
+	
+	// 작성자 : 안소은 -- 퇴근시간 조회
+	public PersonnelMgt selectCheckOut(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("personnelMgtMapper.selectCheckOut", memNo);
 	}
 	
 	// 작성자 : 안소은 -- 출근시간 insert

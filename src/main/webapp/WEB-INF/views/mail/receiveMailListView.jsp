@@ -58,7 +58,9 @@
                             받은 메일
                         </div>
                         <div class="card-body">
+                        <form id="rlist" action="detail.mail" method="post" enctype="multipart/form-data">
                             <table id="datatablesSimple" class="mailList">
+                            
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -73,7 +75,13 @@
                                 <tbody>
                                 	<c:forEach var="r" items="${list}">
                                     <tr>
-                                        <td><input type="checkbox" name="${r.mailNo}" value="${r.mailNo}" id="mailCheck_${r.mailNo}" ></td>
+
+                                        <td>
+                                        <input type="hidden" name="mailTitle" value="${ r.mailTitle }">
+                                    	<input type="hidden" name="mailNo" value="${r.mailNo}">
+                                    	<input type="hidden" name="mailReceiver" value="${ loginUser.officeEmail }" >
+                                        <input type="checkbox" name="${r.mailNo}" value="${r.mailNo}" id="mailCheck_${r.mailNo}" >
+                                        </td>
                                         <c:choose>
 	                                        <c:when test="${ r.bookmark eq 'N' }">
 	                                        <td><input type="button" hidden><i class="far fa-star"></i></td>
@@ -93,7 +101,9 @@
 	                                        </c:otherwise>
                                         </c:choose>
                                         <td>${ r.mailWriter }</td>
-                                        <td>${ r.mailTitle }</td>
+                                        <td id="title">           
+                                        ${ r.mailTitle }
+                                        </td>
                                         <td>${ r.mailSendDate }</td>
                                         <c:choose>
                                         	<c:when test="${ r.mfIsHave != 0 }">
@@ -104,10 +114,13 @@
                                         	</c:otherwise>
                                         </c:choose>
                                     </tr>
+                                    
                                 	</c:forEach>
+                                	
                                 </tbody>
                                 <tfoot>
                                     <tr>
+                                    
                                         <th><input type="checkbox"></th>
                                         <th><button onclick="important()"><i class="far fa-star"></i></button></th>
                                         <th></th>
@@ -117,6 +130,7 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                            
                             <div class="card-footer">
                                 <a id="do_reply" class="btn btn-primary btn-block" href="">답장</a>
                                 <a class="btn btn-primary btn-block">전달</a>
@@ -124,6 +138,7 @@
                                 <a class="btn btn-primary btn-block"  href="enroll.mail">메일쓰기</a>
                                 <a id="deleteBtn" class="btn btn-primary btn-block" >삭제하기</a>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -133,9 +148,17 @@
 </body>
 <script>
 	$(document).ready(function() {
+		
+	// 리스트 보여주기
+    $(function(){
+	   	$("#title").click(function(){
+	   		$('input').attr("disabled", true);
+	   		$(this).prevAll().find('input').attr("disabled", false);
+	   		$('#rlist').submit();
+	   	})
+   	})	
 	// 답장
 		$("#do_reply").click(function(){
-			
 			
 			var length = $('input:checked').length; // 체크된 숫자갯수
 
@@ -144,15 +167,11 @@
 			if(length>1){
 				alert("메일 한 개만 선택해주세요.");
 			} else{
-				
+				$('#rlist.view').attr('action','doReply.mail');
+				$('input[type!=checked]').attr("disabled", true);
+				$('#rlist').submit();
 			}
-			
-			$('input:checked').each(function(){
-				var mail_no = $(this).val(); // 내가 원하는 값을 value로 담아놓고 체크할 때 value값 담기(생각의전환 필요!) 
-				
-				mail_arr.push(mail_no);
-				// 배열에 담기
-			});
+		});
 	
 	// 삭제 
 	

@@ -144,11 +144,10 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="far fa-envelope"></i> 메일 쓰기</h3></div>
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="far fa-envelope"></i> 메일 </h3></div>
                                 <form name="sendMail" id="sendMail" action="insert.mail" method="post" enctype="multipart/form-data">
                                     <input type="hidden" id="is_receiver_check" value="F">
                                     <div class="card-body">
-                                    
                                     	<input type="hidden" id="writer" name="mailWriter" value="${ loginUser.officeEmail }" >
                                     	<input type="hidden" id="memberNo" name="memNo" value="${ loginUser.memNo }">       
                                         <input type="text" id="mailReceiver" placeholder="Email">
@@ -159,7 +158,7 @@
                                         <a class="btn btn-primary btn-block" href="">내게 쓰기</a>
                                         <label for=""></label><br>
                                         <div id="email-check"></div><br><br>
-                                        <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" />
+                                        <span class="input-explain">제목</span>${im.mailTitle}
                                         <label for=""></label>
 
                                         <br>
@@ -179,11 +178,11 @@
                                         <br><div id="content_explain">내용</div>
                                         <br>
                                         <div>
-                                            <textarea id="summernote" name="mailContent"></textarea>
+                                            ${im.mailContent}
                                         </div>
                                         <div class="card-footer text-center py-3">
                                             <div class="small">
-                                                <button type="button" id="insertCheck" class="btn btn-primary btn-block">보내기</button>
+                                                <button type="button" id="insertCheck" class="btn btn-primary btn-block">목록으로</button>
                                                 <button type="button" id="" class="btn btn-primary btn-block">임시저장</button>
                                             </div>
                                         </div>    
@@ -321,8 +320,8 @@
         return this.each(function()
         {
             $(this).after("<span class=\"to-input\">받는사람</span>\n<br>" +
-                "<div class=\"all-mail\"></div>\n" +
-                "<input type=\"text\" name=\"mailReceiver\" class=\"enter-mail-id\" placeholder=\"이메일 입력 후 엔터를 누르세요.\" />");
+                "<div class=\"all-mail\"><span class=\"email-ids\">" + ${im.mailReceiver} + "</span></div>\n" 
+                );
             let $orig = $(this);
             let $element = $('.enter-mail-id');
             $element.keydown(function (e) {

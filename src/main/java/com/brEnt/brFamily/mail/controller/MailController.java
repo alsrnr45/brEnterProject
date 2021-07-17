@@ -18,11 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.mail.model.service.MailService;
+import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
 import com.brEnt.brFamily.member.model.vo.Member;
-import com.google.gson.Gson;
 
 @Controller
 public class MailController {
@@ -40,6 +40,14 @@ public class MailController {
 		  .setViewName("mail/receiveMailListView");
 		
 		return mv;
+	}
+	
+	
+	
+	// 받은 메일 메일쓰기, 답장, 전달, 즐겨찾기, 삭제하기 
+	@RequestMapping("doReply.mail")
+	public void doReply(int mailNo, HttpSession session) {
+		System.out.println(mailNo);
 	}
 	
 	@RequestMapping("send.mail")
@@ -194,19 +202,26 @@ public class MailController {
 		}
 		
 	}
-//	@RequestMapping("detail.mail")
-//	public String selectBoard(int bno, Model model) {
-//		int result = bService.increaseCount(bno);
-//		
-//		if(result>0) {
-//			Board b = bService.selectBoard(bno);
-//			model.addAttribute("b", b);
-//			return "board/boardDetailView";
-//		} else {
-//			model.addAttribute("errorMsg", "게시글 조회 실패!");
-//			return "common/errorPage";
-//		}
-//	}	
+	
+	@RequestMapping("detail.mail")
+	public String detailRMail(ReceiveMail rmail, HttpSession session, Model model) {
+		
+		int result = mService.readMail(rmail);
+		
+		if(result>0) {
+			InfoMail im = mService.detailRMail(rmail);
+			
+			model.addAttribute("im", im);
+			
+			return "mail/mailDetailView";
+		} else {
+			model.addAttribute("errorMsg", "게시글 조회 실패!");
+			return "common/errorPage";
+		}
+		
+		
+	}	
+	
 	@ResponseBody
 	@RequestMapping(value="delete.mail", produces="application/json; charset=utf-8")
 	public String deleteMail(HttpServletRequest request, HttpSession session, Model model) { 

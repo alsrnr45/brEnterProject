@@ -6,12 +6,11 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
-import com.brEnt.brFamily.member.model.vo.Member;
 
 @Repository
 public class MailDao {
@@ -85,5 +84,14 @@ public class MailDao {
 		
 		return result;
 	}
+
+	public int readMail(ReceiveMail rmail, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("mailMapper.readMail", rmail);
+	}
+	
+	public InfoMail detailRMail(ReceiveMail rmail, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("mailMapper.detailRMail", rmail);
+	}
+
 	
 }

@@ -53,7 +53,7 @@
                 margin-top: 20px;
             }
             #on{
-                width: 150px; height: 50px !important;
+                width: 30%; height: 50px !important;
                 margin-right: 10px;
                 border-radius: 5px;
                 border: none;
@@ -62,13 +62,14 @@
                 color: white;
             }
             #off{
-                width: 150px; height: 50px !important;
+                width: 30%; height: 50px !important;
                 border-radius: 5px;
                 border: none;
                 cursor: pointer;
-                background-color:  #e0e0e0;
-          
+                background-color: #c9c4c4;
             }
+            #on:hover{background-color: #cf9ae4}
+            #off:hover{background-color: #e0e0e0}
     
             /*테이블*/
 
@@ -92,15 +93,15 @@
                                 <div class="card mb-4 lefRow" style="height: 600px;">
                                     <div class="card-header">
                                         <i class="fas fa-chart-area me-1"></i>
-                                        근태관리 상단 -> 현재시간 표시부분
+                                        	근태관리 상단 -> 현재시간 표시부분
                                     </div>
                                     <div class="card-body" style="text-align: center;">
                                        <div class="parent 상부" style="height: 200px;" >
                                            <div class="child 프로필" style=" background-color: aqua;" >
-                                             수정예정
+                                          	   수정예정
                                            </div>
                                            <div class="child 사원정보">
-                                            수정예정
+                                    	        수정예정
                                            </div>
                                        </div>
                                        <hr class="dropdown-divider" />
@@ -108,11 +109,11 @@
                                             <div class=" inAndOut" style="margin: 30px align=center;" >
                                                 <div>출근 시간: ***********
                                                 </div>
-                                                <div>퇴근시간: ************
+                                                <div>퇴근 시간: ************
                                                 </div>
                                             </div>
                                             <div class="status">
-                                                <select style="width: 200px; height: 50px;">
+                                                <select style="width: 70%; height: 50px;">
                                                     <option value="">근무중</option>
                                                     <option value="">외출중</option>
                                                      <option value="">회의중</option>
@@ -120,7 +121,7 @@
                                             </div>
                                        </div>
                                        <div class="timeBtn 하부2(버튼)">
-                                        <div class="onOff" style="margin-bottom: 30px;" >
+                                        <div class="onOff" style="margin-bottom: 10%;" >
                                             <div class="buttons"  >
                                                 <button id="on"> 출근 </button>
                                                 <button id="off"> 퇴근 </button>

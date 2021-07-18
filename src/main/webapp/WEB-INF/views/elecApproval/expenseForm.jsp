@@ -215,7 +215,7 @@
                     <tr height="40">
                         <th>구분</th>
                         <td>
-                            <input type="radio" name="exStatus" value="개인"> 개인 &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <input type="radio" name="exStatus" value="개인"> 개인 &nbsp;
                             <input type="radio" name="exStatus" value="법인"> 법인
                         </td>
                     </tr>

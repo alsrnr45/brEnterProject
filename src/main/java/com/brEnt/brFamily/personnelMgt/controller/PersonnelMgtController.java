@@ -48,11 +48,16 @@ public class PersonnelMgtController {
 	@RequestMapping("attendeanceMgt.pm")
 	public String selectTotalWorkDay(int memNo, Model model) {
 		
-		// 오늘 날짜로 출근시간이 찍혀있는지 조회
-		PersonnelMgt t = pService.selectToday(memNo);
+		// 오늘날짜count 조회
+		PersonnelMgt t = pService.countToday(memNo);
 		model.addAttribute("t", t);
 		
-		// 근무일수 조회
+		// 퇴근시간count 조회
+		PersonnelMgt o = pService.countCheckOut(memNo);
+		model.addAttribute("o", o);
+		//System.out.println(o.getAtCount());
+		
+		// 연별 근무일수, 총근무시간, 평균근무시간 조회
 		PersonnelMgt p = pService.selectTotalWorkDay(memNo);
 		model.addAttribute("p", p);
 		

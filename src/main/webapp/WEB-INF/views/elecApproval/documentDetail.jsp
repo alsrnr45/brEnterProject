@@ -167,8 +167,8 @@
 						<div style="height:35px;">2021-07-10</div>
 						<div style="height:35px;">김사원</div>
 					</div>
+					
 					<div id="approver">결재자</div>
-
 			        <!-- 무조건 4번 반복문 돌게 (i=0~3)-->
 			        <c:forEach var="i" begin="0" end="3">
 			            <c:choose>

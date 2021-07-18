@@ -50,7 +50,7 @@
         .outer .firstLine .second .checkIn{background:rgb(252, 152, 185);}
         .outer .firstLine .second .checkOut{background:rgb(16, 185, 115);}
         /* 근무현황 */
-        .outer .firstLine .third_1{margin-top:20px;}
+        .outer .firstLine .third_1{margin-top:20px; height:33px;}
         .outer .firstLine .third_2{margin-top:18px;}
         .outer .firstLine .third .btn{width:100%; height:60px; background: rgb(177, 201, 245); color:black; border:none;}
         /* 근무시간 */
@@ -124,7 +124,12 @@
                         
                         <!-- 퇴근시간의 count가 0이면 활성화 1이상이면 비활성화하기 -->
 	                    <button class="btn btn-primary checkOut" id="checkOut">퇴근하기</button>
-                    
+                    	<%-- <c:choose>
+                    		<c:when>
+                    		</c:when>
+                    		<c:otherwise>
+                    		</c:otherwise>
+                    	</c:choose> --%>
                     
                     </div>
                     <div class="third">

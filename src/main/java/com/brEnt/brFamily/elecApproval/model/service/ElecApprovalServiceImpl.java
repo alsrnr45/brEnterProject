@@ -60,41 +60,27 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    public ArrayList<Dept> selectDept() {
 	   return eaDao.selectDept(sqlSession);
    }
-
-   // 작성자 : 안소은 -- 지출결의서(통합문서) 상세조회
-   @Override
-   public ElecApproval expenseDetail(int eano) {
-	   return eaDao.expenseDetail(sqlSession, eano);
-   }
-	
-   // 작성자 : 안소은 -- 지출결의서 상세조회
-   @Override
-   public ExpenseForm expenseDetailTwo(int exno) {
-	   return eaDao.expenseDetailTwo(sqlSession, exno);
-   }
-	
-   // 작성자 : 안소은 -- 부서명 조회
-   @Override
-   public ArrayList<Dept> selectDeptName(int eano) {
-	   return eaDao.selectDeptName(sqlSession, eano);
-   }
-	
-   // 작성자 : 안소은 -- 직급명 조회
-   @Override
-   public ArrayList<Position> selectPosiName(int eano) {
-	   return eaDao.selectPosiName(sqlSession, eano);
-   }
-	
-   // 작성자 : 안소은 -- 결재선 조회
-   @Override
-   public ArrayList<Approval_path> selectApPath(int eano) {
-	   return eaDao.selectApPath(sqlSession, eano);
-   }
-
+   
    // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
    @Override	
    public ArrayList<Member> selectMemberList(int deptNo) {
 	   return eaDao.selectMemberList(sqlSession, deptNo);
+   }
+
+   // 작성자 : 안소은 -- 지출결의서 상세조회
+   @Override
+   public ElecApproval expenseDetail(int eano) {
+	   return eaDao.expenseDetail(sqlSession, eano);
+   }
+   
+   @Override
+   public int insertEcDocument(ElecApproval ea) {
+   		return eaDao.insertEcDocument(sqlSession, ea);
+   }
+
+   @Override
+   public int insertExpense(ExpenseForm ex) {
+   		return eaDao.insertExpense(sqlSession, ex);
    }
    
    // 작성자 : 김혜미 -- 연차 신청
@@ -120,6 +106,8 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    public ArrayList<Approval_path> detailApprovalPath(int eano) {
    	return eaDao.detailApprovalPath(sqlSession, eano);
    }
+
+
 
 
 }

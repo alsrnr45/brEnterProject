@@ -46,34 +46,22 @@ public class ElecApprovalDao {
 		return (ArrayList)sqlSession.selectList("approvalMapper.selectDept");
 	}
 	
-	// 작성자 : 안소은 -- 지출결의서(통합문서) 상세조회
+	// 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
+	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession, int deptNo){
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectMemberList", deptNo);
+	}
+	
+	// 작성자 : 안소은 -- 지출결의서 상세조회
 	public ElecApproval expenseDetail(SqlSessionTemplate sqlSession, int eano) {
 		return sqlSession.selectOne("approvalMapper.expenseDetail", eano);
 	}
 	
-	// 작성자 : 안소은 -- 지출결의서 상세조회
-	public ExpenseForm expenseDetailTwo(SqlSessionTemplate sqlSession, int eano) {
-		return sqlSession.selectOne("approvalMapper.expenseDetailTwo", eano);
+	public int insertEcDocument(SqlSessionTemplate sqlSession, ElecApproval ea) {
+		return sqlSession.insert("approvalMapper.insertEcDocument", ea);
 	}
 	
-	// 작성자 : 안소은 -- 부서명 조회
-	public ArrayList<Dept> selectDeptName(SqlSessionTemplate sqlSession, int eano) {
-		return (ArrayList)sqlSession.selectList("approvalMapper.selectDeptName", eano);
-	}
-	
-	// 작성자 : 안소은 -- 직급명 조회
-	public ArrayList<Position> selectPosiName(SqlSessionTemplate sqlSession, int eano) {
-		return (ArrayList)sqlSession.selectList("approvalMapper.selectPosiName", eano);
-	}
-	
-	// 작성자 : 안소은 -- 결재선 조회
-	public ArrayList<Approval_path> selectApPath(SqlSessionTemplate sqlSession, int eano) {
-		return (ArrayList)sqlSession.selectList("approvalMapper.selectApPath", eano);
-	}
-	
-	// 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
-	public ArrayList<Member> selectMemberList(SqlSessionTemplate sqlSession, int deptNo){
-		return (ArrayList)sqlSession.selectList("approvalMapper.selectMemberList", deptNo);
+	public int insertExpense(SqlSessionTemplate sqlSession, ExpenseForm ex) {
+		return sqlSession.insert("approvalMapper.insertExpense", ex);
 	}
 	
 	// 작성자 : 김혜미 -- 연차 신청

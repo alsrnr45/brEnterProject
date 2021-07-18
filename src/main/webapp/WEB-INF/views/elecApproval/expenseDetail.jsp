@@ -47,18 +47,18 @@
         font-size: 13px;
         width:80px;
     }
-    .btn-light {
-        margin-right: 10px; 
-        background-color: rgb(215, 215, 215); 
-        border-color: rgb(215, 215, 215); 
-        color:white;
-    }
+    .btn-light {margin-right: 10px;background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215); color:white;}
     .btn-danger {background-color: rgb(255, 134, 134); border-color: rgb(255, 134, 134); color: white;}
 
     /* 스타일 */
     /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
     .content {width:1000px; height: 100%; margin: auto; margin-top: 30px;}
+    
+    .content_2 {width:920px; margin:auto;}
+	.content_2>div {float: left; text-align:center;}
+	.content_2 img {height: 60px;}
+	.content_3 {margin-top:25px;};
     .content_4 {padding: 15px 0 0 400px; margin-left:50px;}
 
     table {text-align: center; font-size:13px; margin: auto;}
@@ -76,6 +76,37 @@
 
     .tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
     .tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
+    
+    a:hover{color: rgb(155, 89, 182);}
+	a{text-decoration: none;}
+    
+    #drafter {
+		width:120px; 
+		height:100%; 
+		font-size: 13px;
+		background-color:rgba(241, 241, 241, 0.75);
+		outline: 0.1px solid lightgray;
+		padding-top: 100px;
+	}
+
+	#approver {
+		width:120px;
+		height:100%;
+		font-size: 13px;
+		background-color:rgba(241, 241, 241, 0.75);
+		outline: 0.1px solid lightgray;
+		padding-top: 100px;
+	}
+	
+	#approvalInfo {
+		width:136px; 
+		height:100%;
+		font-size: 13px;
+		outline: 0.1px solid lightgray;
+	}
+	#approvalInfo div {outline: 1px solid lightgray;}
+    
+    
 </style>
 
 </head>
@@ -92,24 +123,20 @@
             <jsp:include page="../common/userMenu.jsp"/>
         </div>
         
-        <!-- 현재날짜 -->
-		<c:set var="today" value="<%=new java.util.Date()%>" />
-		<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set> 
-		
-		<!-- 회계 기준월 -->
-		<%-- <fmt:formatDate value="${ ex.month }" pattern="yyyyMMdd" var="month" /> --%>
-		
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            			<div class="content">
-				<a class="btn btn-primary" href="approvalTotalList.ea">목록으로</a>
+           	<div class="content">
+				<a class="btn btn-primary" href="approvalTotalList.ea?mno=${ loginUser.memNo }">목록으로</a>
 				<div class="content_1">
 					<table class="tableType01">
 						<tr>
 							<th width="120">문서종류</th> 
 							<td width="340">지출결의서</td>
 							<th width="120">문서번호</th>
-							<td width="340">${ ea.ecDocName }</td>
+							<td width="340">
+								${ ea.ecDocName }
+								<input type="hidden" name="docNo" value="${ ea.ecDocNo }">
+							</td>
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
@@ -121,49 +148,132 @@
 					<br>
 				</div>
 
-				<div class="content_2">
-					<table class="tableType02">
-						<tr height="35">
-							<th rowspan="5" width="120">기안자</th>
-							<td width="136">${ dept.deptName }</td>
-							<th rowspan="5" width="120">결재자</th>
-								
-								<td width="136">개발팀</td>
-								<td width="136">개발팀</td>
-								<td width="136">개발팀</td>
-								<td width="136"></td>
-						</tr>
-						<tr height="35">
-							<td>${ posi.posiName }</td>
-							<td>과장</td>
-							<td>차장</td>
-							<td>부장</td>
-							<td></td>
-						</tr>
-						<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
-						<tr height="80" style="color:gray;">
-							<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr height="35">
-							<td>${ ea.ecEnrolldate }</td>
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
-							<td>2021-06-11</td>
-							<td></td>
-						</tr>
-						<tr height="35">
-							<td style="color: royalblue;">${ ea.ecWriter }</td>
-							<td>박과장</td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
-					<br>
+				<div class="content_2" style="height:220px;">
+					<div id="drafter">기안자</div>
+					<div id="approvalInfo">
+						<div style="height:35px;">개발팀</div>
+						<div style="height:35px;">사원</div>
+						<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
+						<div style="height:35px;">${ ea.ecEnrolldate }</div>
+						<div style="height:35px;">${ ea.ecWriter }</div>
+					</div>
+					<div id="approver">결재자</div>
+					<c:choose>
+						<c:when test="${ ApprovalPathList.size() eq 4 }">
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+							<div id="approvalInfo">
+								<div style="height:35px;">${ ap.deptName }</div>
+								<div style="height:35px;">${ ap.posiName }</div>
+								<c:choose>
+									<c:when test="${ ap.apEnrolldate != null }">
+										<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+									</c:when>
+									<c:otherwise>
+										<div style="height:80px;"></div>
+									</c:otherwise>
+								</c:choose>
+								<div style="height:35px;">${ ap.apEnrolldate }</div>
+								<div style="height:35px;">${ ap.memName }</div>
+							</div>
+							</c:forEach>
+						</c:when>
+						<c:when test="${ ApprovalPathList.size() eq 3 }">
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
+							</c:forEach>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:when>
+						<c:when test="${ ApprovalPathList.size() eq 2 }">
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
+							</c:forEach>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="ap" items="${ ApprovalPathList }">
+								<div id="approvalInfo">
+									<div style="height:35px;">${ ap.deptName }</div>
+									<div style="height:35px;">${ ap.posiName }</div>
+									<c:choose>
+										<c:when test="${ ap.apEnrolldate != null }">
+											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										</c:when>
+										<c:otherwise>
+											<div style="height:80px;"></div>
+										</c:otherwise>
+									</c:choose>
+									<div style="height:35px;">${ ap.apEnrolldate }</div>
+									<div style="height:35px;">${ ap.memName }</div>
+								</div>
+							</c:forEach>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+							<div id="approvalInfo">
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:80px;"></div>
+								<div style="height:35px;"></div>
+								<div style="height:35px;"></div>
+							</div>
+						</c:otherwise>
+					</c:choose>
 				</div>
 
 				<div class="content_3">
@@ -175,15 +285,15 @@
 							</tr>
                             <tr height="40">
                                 <th>구분</th>
-                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ex.exStatus }" readonly></td>
+                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.exStatus }" readonly></td>
                             </tr>
 							<tr height="40">
 								<th width="120">지출 일자</th>
-								<td colspan="3" width="800"><input type="text" name="" id="" value="${ ex.month }" readonly style="width:130px;"></td>
+								<td colspan="3" width="800"><input type="text" name="" id="" value="${ ea.month }" readonly style="width:130px;"></td>
 							</tr>
                             <tr height="40">
                                 <th>계좌 정보</th>
-                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ex.account }" readonly></td>
+                                <td colspan="3"><input type="text" name="ecTitle" id="ecTitle" value="${ ea.account }" readonly></td>
                             </tr>
 							<tr height="40">
 								<th colspan="4">지출 내용</th>
@@ -196,10 +306,12 @@
 						</table>
 					</form>
 				</div>
+				
 				<div class="content_4">
 					<!-- 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
 					<a class="btn btn-danger" href="">삭제하기</a>
 				</div><br><br>
+				
 			</div>
         </div>
     </div>

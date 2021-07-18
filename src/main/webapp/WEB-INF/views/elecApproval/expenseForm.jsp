@@ -126,7 +126,7 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-		<form class="outer">
+		<form class="outer" action="insertExpense.ea">
                 <br><br>
                 <button type="submit" class="btn btn-warning" href="">기안하기</button>
                 <br><br>
@@ -138,16 +138,19 @@
                         <td class="td2">
                             <div class="form-group">
                                 <select class="form-control" name="approvalFormCode url" id="ecCode" style="font-size: 13px;"  onchange="moveurl(this.value);">
-                                    <option value="documentEnrollForm.ea?code=PL" selected>기획안</option>
+                                    <option value="documentEnrollForm.ea?code=PL">기획안</option>
 									<option value="documentEnrollForm.ea?code=BC">업무연락</option>
 									<option value="offEnrollForm.ea">연차</option>
-									<option value="expenseForm.ea">지출결의서</option>
+									<option value="expenseForm.ea" selected>지출결의서</option>
 									<option value="documentEnrollForm.ea?code=ME">회람</option>
                                 </select>
-                                <input type="hidden" id="approvalFormCode" value="">
+                                <input type="hidden" name="ecCode" value="EX">
                               </div>
                         </td>
-                        <td class="td3">문서번호</td>
+                        <td class="td3">
+                        	문서번호
+                        	<input type="hidden" name="ecDocName" value="EX-<c:out value="${date}"/>-<c:out value="${randomNo}"/>">
+                        </td>
                         <td class="td4">EX-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
                     </tr>
                 </table>
@@ -161,12 +164,15 @@
                 <table class="signLine">
                     <tr height="15%;">
                         <td rowspan="6" style="width:5%; font-weight: bold;">기안자</td>
-                        <td>${ loginUser.deptName }</td>
+                        <td>
+                        	<input type="text" name="ecWriter" value="${ loginUser.memName }" readonly>
+                       		<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+                        </td>
                         <td rowspan="6" style="width:5%; font-weight: bold;">결재자</td>
-                        <td>개발팀</td>
-                        <td>개발팀</td>
-                        <td>개발팀</td>
-                        <td>개발팀</td>
+                        <td class="signDept1">개발팀</td>
+                        <td class="signDept2">개발팀</td>
+                        <td class="signDept3">개발팀</td>
+                        <td class="signDept4">개발팀</td>
                     </tr>
                     <tr height="15%;">
                         <td>${ loginUser.posiName }</td>
@@ -204,19 +210,20 @@
                 <table class="inputTable">
                     <tr height="40">
                         <th>제목</th>
-                        <td><input type="text" class="form-control" required></td>
+                        <td><input type="text" name="ecTitle" class="form-control" required></td>
                     </tr>
                     <tr height="40">
                         <th>구분</th>
                         <td>
-                            <input type="radio" name="sortation" selected> 개인 &nbsp;&nbsp;&nbsp;&nbsp; 
-                            <input type="radio" name="sortation"> 법인
+                            <input type="radio" name="exStatus" value="개인"> 개인 &nbsp;&nbsp;&nbsp;&nbsp; 
+                            <input type="radio" name="exStatus" value="법인"> 법인
                         </td>
                     </tr>
                     <tr height="40">
                         <th>지출 일자</th>
                         <td>
-                            <p style="float:left; margin: 8px 10px 0px 0px;">2021년</p>
+                        	<input type="text" name="month" value=""> 
+                            <!-- <p style="float:left; margin: 8px 10px 0px 0px;">2021년</p>
                             <select class="form-control" id="" style="float:left; width:50px;" required>
                                 <option value="Jan">1</option>
                                 <option value="Feb">2</option>
@@ -231,25 +238,24 @@
                                 <option value="Nov">11</option>
                                 <option value="Dec">12</option>
                             </select>
-                            <p style="float:left; margin: 8px 0px 0px 10px;">월</p>
+                            <p style="float:left; margin: 8px 0px 0px 10px;">월</p> -->
                         </td>
                     </tr>
                     <tr height="40">
                         <th>지출자</th>
                         <td>
-                        	<input type="text" class="form-control" value="${ loginUser.memName }" readonly>
-                        	<%-- <input type="hidden" name="memNo" value="${ loginUser.memNo }" > --%>
+                        	<input type="text" class="form-control" name="exWriter" value="${ loginUser.memName }" required>
                         </td>
                     </tr>
                     <tr height="40">
                         <th>계좌 정보</th>
-                        <td><input type="text" class="form-control" required></td>
+                        <td><input type="text" name="account" class="form-control" required></td>
                     </tr>
                     <tr>
                         <th>지출 내용</th>
                         <td>
                             <div class="form-group">
-                                <textarea class="form-control" rows="15" id="comment" required></textarea>
+                                <textarea class="form-control" name="ecCnt" rows="15" id="comment" required></textarea>
                             </div>
                         </td>
                     </tr>
@@ -258,7 +264,7 @@
             </form>
 
             <!-- The Modal -->
-            <form action="">
+            <form action="<!-- expenseForm.ea -->">
                 <div class="modal fade" id="signOffBtn">
                     <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -281,12 +287,12 @@
                                     </c:forEach>
                                 </div>
                                 <div class="modal2">
-                                    <ul></ul>
+                                    <ul id="selectName"></ul>
                                 </div>
-                                <div class="modal3">
+                                <!-- <div class="modal3">
                                     <button class="btn btn-primary"> > </button>
                                     <button class="btn btn-primary"> < </button>
-                                </div>
+                                </div> -->
                                 <div class="modal4" align="left">
                                     <div style="margin-bottom:5px;"><b>기안자</b></div>
                                     <div class="modal4_1">
@@ -299,15 +305,11 @@
                                         <button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
                                         </div>
                                     </div>
-                                    <div class="modal4_3">
-                                        <ul>안소은(사원)</ul>
-                                        <ul>최선희(팀장)</ul>
-                                        <ul>김혜미(부장)</ul>
-                                        <ul>김민국(대표)</ul>
-                                    </div>
+                                    <!-- 결재자 -->
+                                    <div class="modal4_3" id="modal4_3"></div>
                                     <div>
-                                        <button type="submit" class="btn btn-secondary apply" data-dismiss="modal">적용</button>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                        <button type="submit" class="btn btn-secondary apply" id="apply" data-dismiss="modal">적용</button>
+                                        <button type="button" class="btn btn-secondary" id="delete" data-dismiss="modal">취소</button>
                                     </div>
                                 </div>
                             </div>    
@@ -315,58 +317,163 @@
                     </div>
                     </div>
                 </div>
+                
+                
+                <!-- The Modal -->
+				<div class="modal" id="myModal">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				
+				      <!-- Modal Header -->
+				      <div class="modal-header">
+				        <h4 class="modal-title">Modal Heading</h4>
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				      </div>
+				
+				      <!-- Modal body -->
+				      <div class="modal-body">
+				         <span id="result"></span>
+				      </div>
+				
+				      <!-- Modal footer -->
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+				      </div>
+				
+				    </div>
+				  </div>
+				</div>
                 </form>
                 <!-- //The Modal -->
+                
                 
         </div>
     </div>
     
 	<!-- 결재선 AJAX용 script -->
     <script type="text/javascript">
+    
+    	// 클릭된 폼으로 이동하기
+	    function moveurl(url) { 
+		    location.href = url;
+		};
+    
 	    $(function(){
+	    	
+	    	// 결재선에서 부서클릭시 해당 부서의 사원명,직급 불러오기
 	         $(".modal1>ul").click(function(){
 	        	 
 	        	 var deptNo = $(this).children(".deptNo").val();
 	         	 var json = JSON.parse(deptNo);
-	         	 
-		         $.ajax({
+
+	         	 $.ajax({
 		                  url:"memberList.ea",
+		                  type:"get",
 		                  data:{deptNo:deptNo},
 		                  success:function(list){
+		                	
 		                  	var value="";
 		                	$.each(list, function(i, obj){
-		                  	value += "<li>"
-		                          + obj.memName + "(" + obj.posiName + ")"
-		                          + "</li>"
+		                		
+			                  	value += "<li>"
+			                  		  + '<input type="hidden" name="memNo" id="memNo" value="' + obj.memNo + '">'
+			                          + obj.memName + "(" + obj.posiName + ")"
+			                          + "</li>"
+		                	
 		                	})
-		                  $(".modal2 ul").html(value);
+		                	
+		                 	$(".modal2 ul").html(value);
+		                	
 		                  },error:function(){
 		                      console.log("실패");
 		                  }
 		         });
 	      	})
 	   });
-	   							
+	   
+	   // 부서클릭시 CSS효과주기
 	   $(function(){
 			$(".modal1>ul").click(function(){
-				$('.modal1>ul').removeClass()
-				$(this).addClass('on1')
+				$('.modal1>ul').removeClass();
+				$(this).addClass('on1');
 			})
 		});
 	
 		$(function(){
 			$(document).on("click", ".modal2>ul>li", function(){
-				$('.modal2>ul>li').removeClass()
-				$(this).addClass('on2')
+				
+				// 부서원의 이름 클릭시 CSS효과주기
+				$('.modal2>ul>li').removeClass();
+				$(this).addClass('on2');
+				
+				// 결재자의 memNo, memName, posiName
+				var memNo = $(this).children().val();
+				var name = $(this).text();
+				
+				// #modal4_3 안의 자식요소(결재선) 갯수 불러오기 (0부터)
+				var ele = document.getElementById('modal4_3');
+				var eleCount = ele.childElementCount;
+
+				// 결재선에 네명까지만 들어갈 수 있게 하는 조건문
+				if(eleCount < 4){
+					$(".modal4_3").append(
+										  "<ul class='namePosi'>" 
+										  + name
+										  + '<input type="hidden" class="memNo" value='+ memNo +'>'
+										  + "</ul>"
+										 );
+				}else{
+					alert("추가할 수 있는 결재자가 초과되었습니다.");
+				}
+				
 			})
-		});		
-	</script>
-	
-	<!-- 클릭된 폼으로 이동용 script -->
-	<script>
-		function moveurl(url) { 
-		    location.href = url;
-		};
+		});
+		
+		// 결재선 적용버튼 클릭시 선택된 결재자 리스트 폼에 뿌리기
+		var arr = new Array();
+		
+		$(function(){
+			$("#apply").click(function(){
+				
+				// 선택된 결재자들의 memNo을 arr에 담기
+				$(".memNo").each(function(i,input){
+					arr.push($(this).val());
+				})
+				/* console.log(arr); */
+
+				const first = arr[0];
+				const second = arr[1];
+				const third = arr[2];
+				const fourth = arr[3];
+				console.log(first, second, third, fourth);
+				
+				/* document.getElementById("signDept1").innerHTML 
+       	    		= fist; */
+       	    		
+       	    	// 결재선에있는 deptName, memName, memNo을 뿌려줘야함
+				
+       	    	
+       	    	
+       	    	
+       	    	
+       	    	
+       	    	
+       	    	
+       	    	
+       	    	
+			})
+		});
+		
+		$(function(){
+			$("#delete").click(function(){
+				
+				// 취소버튼 클릭시 결재선 비우기
+				$(".modal4_3").empty();
+				
+				// modal1, modal2 css 효과 지우기
+				
+			})
+		});
    	</script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

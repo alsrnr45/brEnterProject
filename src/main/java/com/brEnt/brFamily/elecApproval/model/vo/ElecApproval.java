@@ -39,4 +39,8 @@ public class ElecApproval {
 	private String deptName;
 	private String posiName;
 	
+	private String exStatus;
+	private String month;
+	private String account;
+	
 }

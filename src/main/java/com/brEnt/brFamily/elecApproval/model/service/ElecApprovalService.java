@@ -30,23 +30,15 @@ public interface ElecApprovalService {
     // 작성자 : 안소은 -- 전자결재 결재선 부서조회
     ArrayList<Dept> selectDept();
     
-    // 작성자 : 안소은 -- 지출결의서(통합문서)상세조회
-    ElecApproval expenseDetail(int eano);
-    
-	// 작성자 : 안소은 -- 지출결의서 조회
-    ExpenseForm expenseDetailTwo(int eano);
-    
-	// 작성자 : 안소은 -- 부서명 조회
-    ArrayList<Dept> selectDeptName(int eano);
-    
-	// 작성자 : 안소은 -- 직급명 조회
-    ArrayList<Position> selectPosiName(int eano);
-    
-    // 작성자 : 안소은 -- 결재선 조회
-    ArrayList<Approval_path> selectApPath(int eano);
-    
     // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
     ArrayList<Member> selectMemberList(int deptNo);
+    
+    // 작성자 : 안소은 -- 지출결의서 상세조회
+    ElecApproval expenseDetail(int eano);
+    
+    // 작성자 : 안소은 -- 지출결의서 작성
+    int insertEcDocument(ElecApproval ea);
+    int insertExpense(ExpenseForm ex);
     
     // 작성자 : 김혜미 -- 연차 신청
     int insertOff(Off o);

@@ -262,34 +262,54 @@
 		 where e.ec_doc_no = #{ ea.docNo }
 	</select>
 
-	<!--  작성자 : 안소은 - 지출결의서 기안하기 -->
-	<insert id="">
+	<!--  작성자 : 안소은 - 지출결의서 작성 -->
+	<insert id="insertEcDocument" parameterType="elecApproval">
 		insert
-	       into ec_document
-	       (
-	         ec_doc_no
-	       , mem_no
-	       , ec_writer
-	       , ec_title
-	       , ec_cnt
-	       , ec_code
-	       , ec_enrolldate
-	       , ec_status
-	       , ec_doc_name
-	       )
-	       values
-	       (
-	         seq_ecno.nextval
-	       , #{memNo}
-	       , #{ecWriter}
-	       , #{ecTitle}
-	       , #{ecCnt}
-	       , default
-	       , default
-	       , #{ecDocName}
-	       )
+  		  into ec_document
+  		  (
+  		    ec_doc_no
+  		  , mem_no
+  		  , ec_writer
+  		  , ec_title
+  		  , ec_cnt
+  		  , ec_code
+  		  , ec_doc_name
+  		  , ec_enrolldate
+  		  , ec_status
+          )
+  		  values
+  		  (
+  		    seq_ecno.nextval 
+  		  , #{memNo}
+  		  , #{ecWriter}
+  		  , #{ecTitle}	  
+  		  , #{ecCnt}
+  		  , #{ecCode}
+  		  , #{ecDocName}
+  		  , DEFAULT
+  		  , DEFAULT
+          )
 	</insert>
 	
+	<insert id="insertExpense" parameterType="Expense">
+		insert
+		  into expense_form
+		  (
+		    ec_doc_no
+		  , expense_status
+		  , ec_expense_writer
+		  , account_month
+		  , account
+		  )
+		  values
+		  (
+		    seq_ecno.currval
+		  , #{exStatus}
+		  , #{exWriter}
+		  , #{month}
+		  , #{account}
+		  )
+	</insert>
 
 	<!-- 작성자 : 김혜미 - 연차 신청 -->
 	<insert id="insertOff" parameterType="off">

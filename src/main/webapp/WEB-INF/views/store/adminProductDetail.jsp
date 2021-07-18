@@ -19,6 +19,21 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
+<!-- alertify -->
+<!-- JavaScript -->
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<!-- CSS -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+<!-- Default theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+<!-- Semantic UI theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+<!-- Bootstrap theme -->
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <style>
 	/* input 스타일 */
 	input:focus, input[type]:focus, .uneditable-input:focus {
@@ -130,12 +145,13 @@
                     <div class="buttonArea">
                         <a type="button" class="btn btn-light" href="productList.admin">뒤로가기</a>
                         <a type="button" class="btn btn-warning" href="productUpdateForm.admin?pno=${ p.pdtNo }" style="margin-left: 7px;">수정하기</a>
-                        <a type="button" class="btn btn-danger" href="#" style="margin-left: 7px;">삭제하기</a>
+                        <a type="button" class="btn btn-danger" id="deleteProduct" style="margin-left: 7px;">삭제하기</a>
                     </div>                    
                 </form>
             </div>
         </div>
     </div>
+    
     
     <script>
         // 썸머노트
@@ -154,6 +170,43 @@
             $('#summernote').summernote('disable');
         });
 
+        /*
+        $(function(){
+	        $("#deleteProduct").click(function(){
+	           //location.href="deleteProduct.admin?pno=" + ${ p.pdtNo } ;
+	           
+	        	Swal.fire({
+                    icon: 'error',
+                    text: '최대 주문수량은 5개 입니다.'
+                });
+	        })
+	     })
+	     */
+	     $(function() {
+            $(document).on("click", "#deleteProduct", function(){
+
+            	swal.fire({
+					icon  : "warning",
+					text  : "정말로 삭제하시겠습니까?",
+					showCancelButton: true,
+					confirmButtonColor: '#3085d6',
+					cancelButtonColor: '#d33',
+					confirmButtonText: '삭제',
+					cancelButtonText: '취소'
+            	}).then((result) => {
+            		  /* Read more about isConfirmed, isDenied below */
+            		  if (result.isConfirmed) {
+            			  location.href="deleteProduct.admin?pno=" + ${ p.pdtNo };
+            			  Swal.fire('', '성공적으로 삭제되었습니다!', 'success')
+            		  } 
+           		})
+           	
+            })
+        });
+        
+        
+        
+	     
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

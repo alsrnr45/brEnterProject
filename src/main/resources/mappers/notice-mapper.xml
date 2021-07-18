@@ -46,6 +46,6 @@
              , notice_count
 		  from notice
 		 where notice_status = 'Y' 
-           and notice_no = #{nno}
+           and notice_no = #{noticeNo}
 	</select>
 </mapper>

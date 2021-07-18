@@ -12,9 +12,14 @@ import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 @Repository
 public class PersonnelMgtDao {
 
-	// 작성자 : 안소은 -- 오늘 날짜로 출근시간이 찍혀있는지 조회
-	public PersonnelMgt selectToday(SqlSessionTemplate sqlSession, int memNo) {
-		return sqlSession.selectOne("personnelMgtMapper.selectToday", memNo);
+	// 작성자 : 안소은 -- 오늘날짜count 조회
+	public PersonnelMgt countToday(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("personnelMgtMapper.countToday", memNo);
+	}
+	
+	// 작성자 : 안소은 -- 퇴근시간count 조회
+	public PersonnelMgt countCheckOut(SqlSessionTemplate sqlSession, int memNo) {
+		return sqlSession.selectOne("personnelMgtMapper.countCheckOut", memNo);
 	}
 	
 	// 작성자 : 안소은 -- 근무일수 조회

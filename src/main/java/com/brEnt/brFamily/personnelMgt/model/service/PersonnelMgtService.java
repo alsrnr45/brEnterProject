@@ -8,8 +8,11 @@ import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
 public interface PersonnelMgtService {
 	
-	// 작성자 : 안소은 -- 오늘 날짜로 출근시간이 찍혀있는지 조회
-	PersonnelMgt selectToday(int memNo);
+	// 작성자 : 안소은 -- 오늘날짜count 조회
+	PersonnelMgt countToday(int memNo);
+	
+	// 작성자 : 안소은 -- 퇴근시간count 조회
+	PersonnelMgt countCheckOut(int memNo);
 	
 	// 작성자 : 안소은 — 근무일수 조회
 	PersonnelMgt selectTotalWorkDay(int memNo);

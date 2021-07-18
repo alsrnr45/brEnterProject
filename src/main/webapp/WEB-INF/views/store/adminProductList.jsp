@@ -96,7 +96,6 @@
     
     <script>
         $(function() {
-
             $(document).on("click", ".productList>tbody>tr", function(){
             	location.href ="productDetail.admin?pno=" + $(this).children().eq(0).text();
             });

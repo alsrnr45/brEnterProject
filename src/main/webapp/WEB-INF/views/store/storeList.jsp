@@ -80,13 +80,68 @@
 			<div class="content">
 				<div class="headArea">
 					<!-- 카테고리 -->
-					<div id="form-group">
-						<select class="form-control">
-							<option value="newest">최신순</option>
-							<option value="expensive">높은가격순</option>
-							<option value="cheap">낮은가격순</option>
-						</select>
-					</div>
+					<form action="storeCtgList.st">
+						<div id="form-group">
+							<select class="form-control" name="pdtCtg" id="pdtCtg">
+								<option value="Album" id="Album">Album</option>
+								<option value="Cherring" id="Cherring">Cherring</option>
+								<option value="Photo" id="Photo">Photo</option>
+								<option value="Fashion" id="Fashion">Fashion</option>
+								<option value="Stationery" id="Stationery">Stationery</option>
+							</select>
+						</div>
+						<button type="submit">확인</button>
+					</form>
+
+					<script>
+						/*
+		        		$(document).ready(function() {
+		        	        $('#pdtCtg').change(pdtCtgChange);
+		        	    })
+		        	 
+		        	    function pdtCtgChange() { // 학과
+		        	        var ctgCode = $('#pdtCtg option:selected').val();
+		        	        $('#pdtCtg').attr("selected", ctgCode.val());
+		        	    };
+		        		*/
+		        	
+			            /* 화면 전환 후 select box 고정 */
+		        		var ctgCode = $('#pdtCtg option:selected').val();
+			            
+			            if(ctgCode == Album){
+			                $('#Album').attr('selected','selected');
+			            } else if(selectedYear == Cherring){
+			                $('#Cherring').attr('selected','selected');
+			            } else if(selectedYear == Photo){
+			                $('#Photo').attr('selected','selected');
+			            } else if(selectedYear == Fashion){
+			                $('#Fashion').attr('selected','selected');
+			            } else{
+			                $('#Stationery').attr('selected','selected');
+			            }
+		        	</script>
+		        	
+					<!--  					
+					<c:if test="${ !empty pdtCtg }">
+			        	<script>
+			        		$(function(){
+			        			$("#headArea option[value=${pdtCtg}]").attr("selected", true);
+			        		})
+			        	</script>
+			        </c:if>
+					-->
+					
+					<!--  
+					<form action="">
+						<div id="form-group">
+							<select class="form-control" name="pdtCtg">
+								<option value="newest">최신순</option>
+								<option value="expensive">높은가격순</option>
+								<option value="cheap">낮은가격순</option>
+							</select>
+						</div>
+					</form>
+					-->
 
 					<!-- 검색창 -->
 					<form action="search.st" method="Get">

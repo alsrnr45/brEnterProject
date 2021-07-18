@@ -58,9 +58,8 @@
 	    border-color: rgb(155, 89, 182) !important;
 	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
 	    outline: 0 none !important;}
-	/*option:checked {background: rgb(155, 89, 182); color: white;}*/
-	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
-	
+	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; background: white;}
+	#productCtg {background-color: white !important;}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -82,7 +81,7 @@
             	
             	<!-- 현재날짜 -->
 			    <c:set var="today" value="<%=new java.util.Date()%>" />
-			    <c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set>
+			    <c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></c:set>
                 
                 <form method="post" action="productEnroll.admin" enctype="multipart/form-data">
                     <div class="content1">

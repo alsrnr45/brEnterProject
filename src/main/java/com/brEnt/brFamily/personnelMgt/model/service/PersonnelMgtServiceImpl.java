@@ -20,10 +20,16 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 	@Autowired
 	private PersonnelMgtDao pDao;
 
-	// 작성자 : 안소은 -- 오늘 날짜로 출근시간이 찍혀있는지 조회
+	// 작성자 : 안소은 -- 오늘날짜count 조회
 	@Override
-	public PersonnelMgt selectToday(int memNo) {
-		return pDao.selectToday(sqlSession, memNo);
+	public PersonnelMgt countToday(int memNo) {
+		return pDao.countToday(sqlSession, memNo);
+	}
+	
+	// 작성자 : 안소은 -- 퇴근시간count 조회
+	@Override
+	public PersonnelMgt countCheckOut(int memNo) {
+		return pDao.countCheckOut(sqlSession, memNo);
 	}
 	
 	// 작성자 : 안소은 -- 근무일수 조회
@@ -68,6 +74,8 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 	public ArrayList<Off> offList() {
 		return pDao.offList(sqlSession);
 	}
+
+	
 
 	
 	

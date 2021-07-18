@@ -122,15 +122,16 @@
                         	</c:otherwise>
                         </c:choose>
                         
-                        <!-- 퇴근시간의 count가 0이면 활성화 1이상이면 비활성화하기 -->
-	                    <button class="btn btn-primary checkOut" id="checkOut">퇴근하기</button>
-                    	<%-- <c:choose>
-                    		<c:when>
-                    		</c:when>
-                    		<c:otherwise>
-                    		</c:otherwise>
-                    	</c:choose> --%>
-                    
+                        <!-- 오늘날짜 count가 1이고, 퇴근시간이 null(비어있는게)인게 1이면 활성화 -->
+                       	<c:choose>
+                       		<c:when test="${ t.atCount eq 1 && o.atCount eq 1 }">
+                       			<button class="btn btn-primary checkOut" id="checkOut">퇴근하기</button>
+                       		</c:when>
+                       		<c:otherwise>
+                       			<button class="btn btn-primary checkOut" id="checkOut" disabled>퇴근하기</button>
+                       		</c:otherwise>
+                       	</c:choose>
+                        
                     </div>
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>

@@ -27,6 +27,17 @@ public class StoreDao {
 		return (ArrayList)sqlSession.selectList("storeMapper.selectProductList", null, rowBounds);
 	}
 	
+	public int selectCtgProductListCount(SqlSessionTemplate sqlSession, String pdtCtg) {
+		return sqlSession.selectOne("storeMapper.selectCtgProductListCount", pdtCtg);
+	}
+
+	public ArrayList<Product> selectCtgProductList(SqlSessionTemplate sqlSession, PageInfo pi, String pdtCtg) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
+		int limit = pi.getProductLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return (ArrayList)sqlSession.selectList("storeMapper.selectCtgProductList", pdtCtg, rowBounds);
+	}
+	
 	// 작성자 : 김혜미 -- 상품 검색 개수 조회
 	public int selectSearchListCount(SqlSessionTemplate sqlSession, String keyword) {
 		return sqlSession.selectOne("storeMapper.selectSearchListCount", keyword);
@@ -39,9 +50,6 @@ public class StoreDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getPageLimit());
 		return (ArrayList)sqlSession.selectList("storeMapper.selectSearchList", keyword, rowBounds);
 	}
-	
-	
-	
 	
 	// 작성자 : 김혜미 -- 상품 상세조회
 	public Product selectProductDetail(SqlSessionTemplate sqlSession, int pdtNo) {
@@ -78,6 +86,11 @@ public class StoreDao {
 	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.insert("storeMapper.insertProduct", p);
 	}
+
+	public int deleteProduct(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.delete("storeMapper.deleteProduct", pno);
+	}
+
 
 
 }

@@ -42,8 +42,8 @@
 		<result column="ec_status" property="ecStatus"/>
 	</resultMap>   	
 	
-	<!-- 작성자 : 오늘 날짜로 출근시간이 찍혀있는지 조회 -->
-	<select id="selectToday" resultMap="attendance">
+	<!-- 작성자 : 안소은 - 오늘날짜count 조회 -->
+	<select id="countToday" resultMap="attendance">
 		select
 		       count(*) atCount
 		  from attendance
@@ -51,7 +51,17 @@
            and mem_no = #{memNo}
 	</select>
 	
-	<!-- 작성자 : 안소은 - 근무일수 조회 -->
+	<!-- 작성자 : 안소은 - 로그인한 유저의 출근날이 오늘이고 퇴근시간이 null이면 1 -->
+	<select id="countCheckOut" resultMap="attendance">
+		select
+		       count(*) atCount
+		  from attendance
+         where to_char(today, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
+           and check_out is null
+           and mem_no = #{memNo}
+	</select>
+	
+	<!-- 작성자 : 안소은 - 연별 근무일수, 총근무시간, 평균근무시간 조회 -->
 	<select id="selectTotalWorkDay" resultMap="attendance">
 		select
 		       count(*) atCount

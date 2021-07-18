@@ -50,18 +50,23 @@
                                     </div>
                                     
                                     <!-- 프로필및 근태관리 -->
-                                    <div class="card-body" style="text-align: center;">
+                                    <div class="card-body" style="text-align: left;">
                                        <div class="parent 상부 " style="height: 200px;" >
-                                         <div class="child 프로필사진" style=" background-color: aqua;" >
+                                         <div class="child 프로필사진" style=" " >
 	                                       	 <div style="text-align: center;">
 	                                       	  <img class="circleBase type1" src="${ loginUser.profile}"> 
 	                                       	 </div>
                                          </div>
-                                         <div class="child 사원정보">
-                                  	        <div class="myName">ㅇㄴㄹㅇㄹ</div>
-                                  	        <div class="myInfo">
-	                                  	        <div class="직급">ㅇㄹㅇㄹ</div>
-	                                  	        <div class="부서">ㅇㄹㅇㄹㅇㄹ</div>
+                                         <div class="child myProfileBox"  style=" margin-left:15px;">
+                                  	        <div class="name"style="height: 40%; padding-left:10px;">
+                                  	        	<div class="myName" style=" padding-top:50px; font-size:1.2em; font-weight:bold; ">
+	                                  	        ${ loginUser.memName }
+	                                  	        	
+                                  	        	</div>
+                                  	        </div>
+                                  	        <div class="myInfo" style=" height: 60%; margin-top:10px; padding-left:10px; font-size:0.9em; color:#474747;">
+	                                  	        <div class="직급">직급: ${ loginUser.posiName }</div>
+	                                  	        <div class="부서">부서: ${ loginUser.deptName }</div>
                                   	        </div>
                                          </div>
                                        </div>

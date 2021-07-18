@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.personnelMgt.model.service.PersonnelMgtService;
+import com.brEnt.brFamily.personnelMgt.model.vo.Off;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
 import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
-import com.google.gson.Gson;
 
 @Controller
 public class PersonnelMgtController {
@@ -27,15 +27,22 @@ public class PersonnelMgtController {
 		ArrayList<SalaryDto> list = pService.slaryList();
 		
 		mv.addObject("list", list)
-        .setViewName("personnelMgt/slaryList");
+          .setViewName("personnelMgt/slaryList");
 		return mv;
 	}
 	
-	// 작성자 : 김혜미 -- 연차 조회
+	// 작성자 : 김혜미 -- 연차 리스트 조회
 	@RequestMapping("offList.pm")
-	public String offList() {
-		return "personnelMgt/offList";
-	}
+	public ModelAndView offList(ModelAndView mv) {
+      
+      ArrayList<Off> list = pService.offList();
+      System.out.println(list);
+      
+      mv.addObject("list", list)
+        .setViewName("personnelMgt/offList");
+      return mv;
+   }
+	
 	
 	// 작성자 : 안소은 -- 근무일수 조회
 	@RequestMapping("attendeanceMgt.pm")
@@ -97,12 +104,3 @@ public class PersonnelMgtController {
 	
 	
 }
-
-
-
-
-
-
-
-
-

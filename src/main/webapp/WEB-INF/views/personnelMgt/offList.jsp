@@ -133,90 +133,15 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
-									<tr>
-										<td>EC2021062058493</td>
-										<td>21.06.21(월)~21.06.22(화)</td>
-										<td>21.06.10(목)</td>
-										<td>승인요청</td>
-										<td><i class="fas fa-trash-alt"></i></td>
-									</tr>
+									<c:forEach var="o" items="${ list }">
+										<tr>
+											<td>${ o.ecDocName }</td>
+											<td>${ o.offStart }~${ o.offEnd }</td>
+											<td>${ o.ecEnrolldate }</td>
+											<td>${ o.ecStatus }</td>
+											<td><i class="fas fa-trash-alt"></i></td>
+										</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 						</div>

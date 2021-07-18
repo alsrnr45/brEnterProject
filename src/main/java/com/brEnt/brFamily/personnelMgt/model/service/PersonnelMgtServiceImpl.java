@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.personnelMgt.model.dao.PersonnelMgtDao;
+import com.brEnt.brFamily.personnelMgt.model.vo.Off;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
 import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
@@ -56,13 +57,17 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 		return pDao.insertCheckOut(sqlSession, p);
 	}
 
-	// 작성자 : 김혜미 -- 급여내역 조회
+	// 작성자 : 김혜미 — 급여내역 조회
 	@Override
 	public ArrayList<SalaryDto> slaryList() {
 		return pDao.slaryList(sqlSession);
 	}
 
-	
+	// 작성자 : 김혜미 -- 연차내역 조회
+	@Override
+	public ArrayList<Off> offList() {
+		return pDao.offList(sqlSession);
+	}
 
 	
 	

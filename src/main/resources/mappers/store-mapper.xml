@@ -41,6 +41,7 @@
 			by pdt_no desc
 	</select>
    
+   
    <!-- 작성자 : 김혜미 - 상품 검색 리스트 조회  -->
 	<select id="selectSearchListCount" resultType="_int" parameterType="string">
 		select
@@ -49,6 +50,7 @@
 	     where pdt_status = 'Y'
 	       and pdt_name like upper('%' || #{keyword} || '%')
 	</select>
+   
    
 	<!-- 작성자 : 김혜미 - 상품 리스트 조회 (페이징처리) -->
 	<select id="selectSearchList" resultMap="product" parameterType="string">
@@ -66,16 +68,6 @@
 		 order
 			by pdt_no desc
 	</select>
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
    
    
 	<!-- 작성자 : 김혜미 - 상품 상세조회 -->

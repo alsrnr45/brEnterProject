@@ -73,30 +73,29 @@ public class StoreServiceImpl implements StoreService {
    }
 
    
-   @Override // 작성자 : 김혜미 -- 상품 등록 (관리자)
-   public int insertProduct(Product p) {
-      // TODO Auto-generated method stub
-      return 0;
-   }
+	@Override // 작성자 : 김혜미 -- 상품 등록 (관리자)
+	public int insertProduct(Product p) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
    
-   @Override // 작성자 : 김혜미 -- 상품 수정 (관리자)
-   public int updateProduct(Product p) {
-	   return sDao.updateProduct(sqlSession, p);
-   }
+	@Override // 작성자 : 김혜미 -- 상품 수정 (관리자)
+	public int updateProduct(Product p) {
+		return sDao.updateProduct(sqlSession, p);
+	}
 
    
-   @Override // 작성자 : 김혜미 -- 상품 삭제 (관리자)
-   public int deleteProduct(int pdtNo) {
-      // TODO Auto-generated method stub
-      return 0;
-   }
+	@Override // 작성자 : 김혜미 -- 상품 삭제 (관리자)
+	public int deleteProduct(int pdtNo) {
+		return 0;
+	}
 
 
-@Override // 작성자 : 김혜미 -- 주문 등록
-public int orderInsert(PayDto pd) {
-	return sDao.orderInsert(sqlSession, pd);
-}
+	@Override // 작성자 : 김혜미 -- 주문 등록
+	public int orderInsert(PayDto pd) {
+		return sDao.orderInsert(sqlSession, pd);
+	}
 
 
 

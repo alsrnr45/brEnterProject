@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.brEnt.brFamily.personnelMgt.model.vo.Off;
 import com.brEnt.brFamily.personnelMgt.model.vo.PersonnelMgt;
 import com.brEnt.brFamily.personnelMgt.model.vo.SalaryDto;
 
@@ -44,6 +45,11 @@ public class PersonnelMgtDao {
 	// 작성자 : 김혜미 -- 급여내역 조회
 	public ArrayList<SalaryDto> slaryList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("personnelMgtMapper.slaryList");
+	}
+	
+	// 작성자 : 김혜미 -- 연차내역 조회
+	public ArrayList<Off> offList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("personnelMgtMapper.offList");
 	}
 	
 }

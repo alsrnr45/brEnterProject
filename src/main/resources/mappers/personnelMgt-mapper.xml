@@ -33,13 +33,24 @@
 		<result column="atAvg" property="atAvg" />
 	</resultMap>
 	
-	<!-- 작성자 : 오늘 날짜로 출근시간이 찍혀있는지 조회 -->
-	<select id="selectToday" resultMap="attendance">
-		select
-		       count(*) atCount
+	<resultMap id="off" type="off">
+		<id column="ec_doc_no" property="ecDocNo"/>
+		<result column="off_start" property="offStart"/>
+		<result column="off_end" property="offEnd"/>
+		<result column="ec_doc_name" property="ecDocName"/>
+		<result column="ec_enrolldate" property="ecEnrolldate"/>
+		<result column="ec_status" property="ecStatus"/>
+	</resultMap>   	
+	
+	<!-- 작성자 : 안소은 - null값인 퇴근시간, 총근무시간 조회 -->
+	<select id="selectAttend" resultMap="attendance">
+		select 
+			   check_out
+			 , total_time
 		  from attendance
-		 where to_char(today, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
-		   and mem_no = #{memNo}
+		 where mem_no = #{memNo}
+		   and check_out is null
+		   and total_time is null
 	</select>
 	
 	<!-- 작성자 : 안소은 - 근무일수 조회 -->
@@ -53,20 +64,12 @@
 		   and extract(year from today) = extract(year from sysdate)
 	</select>
 	
-	<!-- 작성자 : 안소은 - 출근시간 조회 -->
-	<select id="selectCheckIn" resultMap="attendance" parameterType="_int">
-		select check_in
+	<select id="selectToday" resultMap="attendance">
+		select
+		       count(*) atCount
 		  from attendance
 		 where to_char(today, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
-		   and mem_no = ${memNo}
-	</select>
-	
-	<!-- 작성자 : 안소은 - 퇴근시간 조회 -->
-	<select id="selectCheckOut" resultMap="attendance" parameterType="_int">
-		select check_out
-		  from attendance
-		 where to_char(today, 'YYYY-MM-DD') = to_char(sysdate, 'YYYY-MM-DD')
-		   and mem_no = ${memNo}
+		   and mem_no = #{memNo}
 	</select>
 	
 	<!-- 작성자 : 안소은 - 출근시간 insert -->
@@ -84,7 +87,7 @@
 		    seq_adno.nextval
 		  , #{memNo}
 		  , sysdate
-		  , to_char(current_timestamp, 'hh24 : mi')
+		  , to_char(current_timestamp, 'hh24:mi')
 		  )
 	</insert>
 	
@@ -92,7 +95,7 @@
 	<update id="insertCheckOut" parameterType="personnelmgt">
 		update
 		       attendance
-		   set check_out = to_char(current_timestamp, 'hh24 : mi')
+		   set check_out = to_char(current_timestamp, 'hh24:mi')
 		 where mem_no = #{memNo}
 		   and check_out is null
 		   and check_in is not null
@@ -120,5 +123,21 @@
 		    , working_month desc
 	</select>
 	
+	<!-- 작성자 : 김혜미 - 연차내역 조회 -->
+	<select id="offList" resultMap="off">
+		select 
+		       o.ec_doc_no
+		     , off_start
+		     , off_end
+		     , e.ec_doc_name
+		     , ec_enrolldate
+		     , ec_status
+		  from off o 
+		  join ec_document e on (e.ec_doc_no = o.ec_doc_no)
+		  join member m on (m.mem_no = e.mem_no)
+		 where e.mem_no = #{memNo}
+		 order
+            by ec_enrolldate desc
+	</select>
 
 </mapper>

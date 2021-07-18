@@ -83,10 +83,10 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>${ no.noticeNo }</td>
-                            <td>${ no.title }</td>
-                            <td>${ no.enrolldate }</td>
-                            <td>${ no.count }</td>
+                            <td>${ n.noticeNo }</td>
+                            <td>${ n.title }</td>
+                            <td>${ n.enrolldate }</td>
+                            <td>${ n.count }</td>
                         </tr>
                     </tbody>
                 </table>    

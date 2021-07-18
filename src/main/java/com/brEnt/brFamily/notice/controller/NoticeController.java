@@ -30,25 +30,21 @@ public class NoticeController {
 	}
 	
 	// 공지사항 상세 조회
-	@RequestMapping("noticeDetai.no")
+	@RequestMapping("noticeDetail.no")
 	public String noticeDetail(int nno, Model model) {
 		
 		// 조회수 증가
 		int result = nService.increaseCount(nno);
 		
-		// 공지사항 상세 조회
 		if(result > 0) {
-			
-			Notice no = nService.selectNotice(nno);
-			model.addAttribute("no", no);
-			System.out.println(no.getNoticeNo());
+			Notice n = nService.selectNotice(nno);
+			model.addAttribute("n", n);
+			System.out.println(n);
 			return "notice/noticeDetail";
 			
 		}else {
-			
 			model.addAttribute("errorMsg", "공지사항 상세조회 실패ㅠㅠ");
 			return "common/errorPage";
-			
 		}
 	}
 	

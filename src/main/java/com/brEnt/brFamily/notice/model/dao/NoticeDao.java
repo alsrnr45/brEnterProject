@@ -15,10 +15,12 @@ public class NoticeDao {
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectNoticeList");
 	}
 	
+	// 공지사항 조회수 증가
 	public int increaseCount(SqlSessionTemplate sqlSession, int nno) {
 		return sqlSession.update("noticeMapper.increaseCount", nno);
 	}
 	
+	// 공지사항 상세 조회
 	public Notice selectNotice(SqlSessionTemplate sqlSession, int nno) {
 		return sqlSession.selectOne("noticeMapper.selectNotice", nno);
 	}

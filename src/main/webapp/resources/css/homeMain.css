@@ -1,0 +1,116 @@
+@charset "UTF-8";
+	/* 폰트 */
+	@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap');
+	* {font-family: 'Noto Sans KR', sans-serif;}
+	
+	/* input 스타일 */
+	input:focus, input[type]:focus, .uneditable-input:focus {
+	border-color: rgb(155, 89, 182); 
+	box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+	outline: 0 none;
+	}
+	
+	/* 드롭박스 스타일 */
+	.dataTable-selector:focus, .dataTable-selector:active{
+	    border-color: rgb(155, 89, 182); 
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);
+	    outline: 0 none;
+	}
+	option:checked {background: rgb(155, 89, 182); color: white;}
+	
+	/* 페이징바 스타일 */
+	.dataTable-pagination a {color:black;}
+	.dataTable-pagination a:hover, 
+	.dataTable-pagination a:focus {background: rgb(245, 238, 248); border-color: #dee2e6; color:black;}
+	.dataTable-pagination a:active {box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6);}
+	.page-item.active .page-link, .page-item.active .dataTable-pagination a, .dataTable-pagination .page-item.active a, .dataTable-pagination li.active .page-link, .dataTable-pagination li.active a {
+	    z-index: 3; color: #fff; background-color: rgb(155, 89, 182); border-color: #dee2e6;}
+	.dataTable-pagination .active a, .dataTable-pagination .active a:focus, .dataTable-pagination .active a:hover {
+	    background-color: rgb(155, 89, 182);
+	    box-shadow: none;} 
+	    
+	/*userHome 스타일*/
+	#layoutSidenav_content {
+		      width:100%;
+		      margin:auto;
+		      align : center;
+		      padding-top : 30px;
+		   }
+		   .leftBox{
+		   	  padding-left :80px !important;
+		   }
+		   .rightBox{
+		   	  padding-right: 80px !important;
+		   }
+
+            .card-body{
+               height: 250px;
+           }
+           .leftBox{
+               width: 100%;
+           }
+           .rightBox{
+               width: 80%;
+           }
+           .leftRow{
+               width: 100%;
+               height: 100%;
+           }
+           .col-xl-6{
+               width: 500px;
+           }
+           .parent {
+                display: flex;
+            }
+            .child {
+                flex: 1;
+            }
+            .time1{
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            .status{
+                margin-bottom: 30px;
+            }
+            select:focus {
+            	border-color:rgba(234, 152, 236, 0.25);
+            	box-shadow: 0 0 0 0.25rem rgba(234, 152, 236, 0.25)!important;
+            }
+            #on{
+                width: 100px; height: 50px !important;
+                margin:0px 30px 10px 0px;
+                border-radius: 80px;
+                border: 2px solid #c9c4c4;
+                cursor: pointer;
+                background-color: transparent;
+                color: gray;
+            }
+            #off{
+                width: 100px; height: 50px !important;
+                border-radius: 80px;
+                border: none;
+                cursor: pointer;
+                background-color: #c9c4c4;
+            }
+            #on:hover{background-color: #ea98ec40}
+            #off:hover{background-color: #e0e0e0}
+            
+            /*프로필박스*/
+            .circleBase {
+			    border-radius: 50%;
+			    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+			}
+			.type1 {
+				margin: 35px 5px 35px 5px;
+			    width: 120px;
+			    height: 120px;
+			    background: yellow;
+			    border: 3px solid red;
+			}    
+		            /*테이블*/
+
+            h1{margin-bottom: 20px;}
+            table{ text-align: center; margin: auto;}
+            .noticeList>tbody>tr:hover{cursor:pointer;}
+            .card-header>.btn{float:right;}
+	

@@ -327,8 +327,8 @@
 		values
 		     (
 		       SEQ_ECNO.NEXTVAL
-		     , to_date(#{offStart}, 'YYYY-MM-DD')
-		  	 , to_date(#{offEnd}, 'YYYY-MM-DD')
+		     , #{offStart}
+		  	 , #{offEnd}
 		     )
 		select *
 		from dual

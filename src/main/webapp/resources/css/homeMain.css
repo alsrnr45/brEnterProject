@@ -64,10 +64,15 @@
             }
             .child {
                 flex: 1;
+                margin:
             }
             .time1{
                 margin-top: 10px;
                 margin-bottom: 10px;
+            }
+             .time2{
+                margin-top: 20px;
+                margin-bottom: 50px;
             }
             .status{
                 margin-bottom: 30px;
@@ -98,16 +103,19 @@
             /*프로필박스*/
             .circleBase {
 			    border-radius: 50%;
-			    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+			    behavior: url(PIE.htc); 
 			}
 			.type1 {
 				margin: 35px 5px 35px 5px;
 			    width: 120px;
 			    height: 120px;
-			    background: yellow;
 			    border: 3px solid red;
-			}    
-		            /*테이블*/
+			}   
+			.memInfo{
+				사원명 사원정보
+			}
+			 
+            /*테이블*/
 
             h1{margin-bottom: 20px;}
             table{ text-align: center; margin: auto;}

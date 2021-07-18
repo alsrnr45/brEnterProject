@@ -44,23 +44,26 @@
                                     <div class="card-header">
                                         <div>
 										<i class="fas fa-clock"></i>
-											<!-- *js date함수적용하기 -->
                                         	<span>00월00일 </span>
-                                        	<span style="margin-left:35%; text-align:right;">00:00:00</span>
+                                        	<span style="margin-left:35%; text-align:right;">00:00:00</span> <!-- *js date함수적용하기 -->
                                         </div>	
                                     </div>
                                     
                                     <!-- 프로필및 근태관리 -->
                                     <div class="card-body" style="text-align: center;">
-                                       <div class="parent 상부" style="height: 200px;" >
-                                           <div id="personalInformation" class="child 프로필사진" style=" background-color: aqua;" >
-                                          	 <div class="circleBase type1" style="text-align: center;">
-                                          	 <img class="profile" src="${ m.profile }">
-                                          	 </div>
-                                           </div>
-                                           <div class="child 사원정보">
-                                    	        수정예정
-                                           </div>
+                                       <div class="parent 상부 " style="height: 200px;" >
+                                         <div class="child 프로필사진" style=" background-color: aqua;" >
+	                                       	 <div style="text-align: center;">
+	                                       	  <img class="circleBase type1" src="${ loginUser.profile}"> 
+	                                       	 </div>
+                                         </div>
+                                         <div class="child 사원정보">
+                                  	        <div class="myName">ㅇㄴㄹㅇㄹ</div>
+                                  	        <div class="myInfo">
+	                                  	        <div class="직급">ㅇㄹㅇㄹ</div>
+	                                  	        <div class="부서">ㅇㄹㅇㄹㅇㄹ</div>
+                                  	        </div>
+                                         </div>
                                        </div>
                                     <hr class="dropdown-divider" />
                                        <div class="parent time1 하부1(시간)">

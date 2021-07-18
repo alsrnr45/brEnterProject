@@ -29,7 +29,7 @@ public class StoreController {
    @Autowired
    private StoreService sService;
    
-   // 작성자 : 김혜미 -- 스토어 리스트 조회
+   // 작성자 : 김혜미 - 스토어 리스트 조회
    @RequestMapping("storeList.st")
    public ModelAndView selectProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
 		   								 ModelAndView mv) {
@@ -47,7 +47,7 @@ public class StoreController {
       return mv;
    }
    
-   // 작성자 : 김혜미 -- 스토어 검색 조회
+   // 작성자 : 김혜미 - 스토어 검색 조회
    @RequestMapping("search.st")
    public ModelAndView selectSearchList(int currentPage, String keyword, ModelAndView mv) {
 
@@ -55,8 +55,8 @@ public class StoreController {
        PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 6, 10);
        ArrayList<Product> list = sService.selectSearchList(pi, keyword);
        
-       System.out.println(keyword);
-       System.out.println(listCount);
+       //System.out.println(keyword);
+       //System.out.println(listCount);
        //System.out.println(list);
 
        mv.addObject("pi", pi)
@@ -67,7 +67,7 @@ public class StoreController {
        return mv;
    }
    
-   // 작성자 : 김혜미 -- 스토어 상세조회
+   // 작성자 : 김혜미 - 스토어 상세조회
    @RequestMapping("storeDetail.st")
    public String selectProductDetail(int pno, Model model) {
 	   
@@ -77,7 +77,7 @@ public class StoreController {
 		return "store/storeDetail";
    }
 
-   // 작성자 : 김혜미 -- 바로구매하기
+   // 작성자 : 김혜미 - 바로구매하기
    @RequestMapping("buyNow.st")
    public String buyNowProduct(int pno, int pco, Model model) {
 	   
@@ -88,13 +88,13 @@ public class StoreController {
 	   return "store/buyNow";
    }
    
-   // 작성자 : 김혜미 -- 결제
+   // 작성자 : 김혜미 - 결제
    @RequestMapping("order.st")
    public String order() {
       return "store/order";
    }
  
-   // 작성자 : 김혜미 -- 주문완료
+   // 작성자 : 김혜미 - 주문완료
    @RequestMapping("orderFinish.st")
    public String orderFinish(PayDto pd) {
 	   
@@ -103,7 +103,7 @@ public class StoreController {
 	   return "store/orderFinish";
    }
    
-   // 작성자 : 김혜미 -- 상품관리 리스트 조회 (관리자)
+   // 작성자 : 김혜미 - 상품 리스트 조회 (관리자)
    @RequestMapping("productList.admin")
    public ModelAndView productList(ModelAndView mv) {
 	   
@@ -115,7 +115,7 @@ public class StoreController {
 	  return mv;
    }
    
-   // 작성자 : 김혜미 -- 상품관리 상세조회 (관리자)
+   // 작성자 : 김혜미 - 상품 상세조회 (관리자)
    @RequestMapping("productDetail.admin")
    public String selectProductDetailAdmin(int pno, Model model) {
 	   
@@ -125,7 +125,7 @@ public class StoreController {
 		return "store/adminProductDetail";
    }
    
-   // 작성자 : 김혜미 -- 상품 수정폼
+   // 작성자 : 김혜미 - 상품 수정폼
    @RequestMapping("productUpdateForm.admin")
    public String productUpdateForm(int pno, Model model) {
 	   
@@ -135,7 +135,7 @@ public class StoreController {
       return "store/adminProductUpdate";
    }
    
-   // 작성자 : 김혜미 -- 상품관리 수정
+   // 작성자 : 김혜미 - 상품 수정
    @RequestMapping("updateProduct.admin")
    public String updateProduct(Product p, MultipartFile upfile, HttpSession session, Model model) {
 	   
@@ -152,14 +152,14 @@ public class StoreController {
       return "redirect:productList.admin";
    }
    
-   //
+   // 작성자 : 김혜미 - 상품 등록폼
    @RequestMapping("productEnrollForm.admin")
    public String productEnroll() {
 	   
 	   return "store/adminProductEnroll";
    }
 
-   // 작성자 : 김혜미 -- 상품관리 등록
+   // 작성자 : 김혜미 - 상품 등록
    @RequestMapping("productEnroll.admin")
    public String productEnroll(Product p, MultipartFile upfile, HttpSession session, Model model) {
 	   
@@ -176,7 +176,17 @@ public class StoreController {
 	   return "redirect:productList.admin";
    }
    
-   // 작성자 : 김혜미 -- 첨부파일명 수정 
+   // 작성자 : 김혜미 - 상품 삭제
+   @RequestMapping("deleteProduct.admin")
+   public String deleteProduct(int pno, Model model) {
+	   
+		int p = sService.deleteProduct(pno); 
+		model.addAttribute("p", p);
+		
+		return "redirect:productList.admin";
+   }
+   
+   // 작성자 : 김혜미 - 첨부파일명 수정 
    public String saveFile(HttpSession session, MultipartFile upfile) {
       
       String savePath = session.getServletContext().getRealPath("/resources/productUpfiles/");

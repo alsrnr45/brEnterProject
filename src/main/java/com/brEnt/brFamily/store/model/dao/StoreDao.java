@@ -79,5 +79,9 @@ public class StoreDao {
 		return sqlSession.insert("storeMapper.insertProduct", p);
 	}
 
+	public int deleteProduct(SqlSessionTemplate sqlSession, int pno) {
+		return sqlSession.delete("storeMapper.deleteProduct", pno);
+	}
+
 
 }

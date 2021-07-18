@@ -35,7 +35,7 @@ public interface StoreService {
 	int updateProduct(Product p);
 	
 	// 작성자 : 김혜미 -- 상품 삭제 (관리자)
-	int deleteProduct(int pdtNo);
+	int deleteProduct(int pno);
 	
 	// 작성자 : 김혜미 -- 주문 등록
 	int orderInsert(PayDto pd);

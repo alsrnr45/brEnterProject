@@ -80,8 +80,8 @@ public class StoreServiceImpl implements StoreService {
 
    
 	@Override // 작성자 : 김혜미 -- 상품 삭제 (관리자)
-	public int deleteProduct(int pdtNo) {
-		return 0;
+	public int deleteProduct(int pno) {
+		return sDao.deleteProduct(sqlSession, pno);
 	}
 
 

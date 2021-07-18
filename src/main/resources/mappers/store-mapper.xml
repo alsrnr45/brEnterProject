@@ -39,6 +39,32 @@
 			by pdt_no desc
 	</select>
    
+   	<!-- 작성자 : 김혜미 - 상품 리스트 조회 (페이징처리) -->
+	<select id="selectCtgProductListCount" resultType="_int" parameterType="string">
+		select
+			   count(*)
+		  from product
+		 where pdt_status = 'Y'
+		   and pdt_ctg = #{ pdtCtg }
+	</select>
+   
+   <!-- 작성자 : 김혜미 - 카테고리별 상품 리스트 조회 -->
+   <select id="selectCtgProductList" resultMap="product" parameterType="string">
+		select 
+			   pdt_no
+			 , pdt_ctg
+			 , pdt_file
+			 , pdt_name
+			 , org_price
+  			 , mem_price
+  			 , to_char(pdt_enrolldate, 'YYYY-MM-DD') pdt_enrolldate
+		  from product
+		 where pdt_status = 'Y'
+		   and pdt_ctg = #{ pdtCtg }
+		 order
+			by pdt_no desc
+	</select>
+   
    <!-- 작성자 : 김혜미 - 상품 검색 리스트 조회  -->
 	<select id="selectSearchListCount" resultType="_int" parameterType="string">
 		select

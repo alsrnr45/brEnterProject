@@ -196,7 +196,7 @@
             	}).then((result) => {
             		  /* Read more about isConfirmed, isDenied below */
             		  if (result.isConfirmed) {
-            			  //location.href="deleteProduct.admin?pno=" + ${ p.pdtNo };
+            			  location.href="deleteProduct.admin?pno=" + ${ p.pdtNo };
             			  Swal.fire('', '성공적으로 삭제되었습니다!', 'success')
             		  } 
            		})

@@ -47,6 +47,24 @@ public class StoreController {
       return mv;
    }
    
+   // 작성자 : 김혜미 - 스토어 리스트 조회
+   @RequestMapping("storeCtgList.st")
+   public ModelAndView selectCtgProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, 
+		   								 String pdtCtg,ModelAndView mv) {
+
+      int listCount = sService.selectCtgProductListCount(pdtCtg);
+      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 6);
+      
+      ArrayList<Product> list = sService.selectCtgProductList(pi, pdtCtg);
+      
+      mv.addObject("pi", pi)
+        .addObject("list", list)
+        .setViewName("store/storeList");
+      //System.out.println(list);
+      
+      return mv;
+   }
+   
    // 작성자 : 김혜미 - 스토어 검색 조회
    @RequestMapping("search.st")
    public ModelAndView selectSearchList(int currentPage, String keyword, ModelAndView mv) {

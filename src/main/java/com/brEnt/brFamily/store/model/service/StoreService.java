@@ -12,6 +12,10 @@ public interface StoreService {
 	int selectProductListCount();
 	ArrayList<Product> selectProductList(PageInfo pi);     
    
+	// 작성자 : 김혜미 -- 카테고리별 상품 리스트 조회 (페이징처리)
+	int selectCtgProductListCount(String pdtCtg);
+	ArrayList<Product> selectCtgProductList(PageInfo pi, String pdtCtg);
+	
 	// 작성자 : 김혜미 -- 상품 검색 리스트조회
 	int selectSearchListCount(String keyword);
 	ArrayList<Product> selectSearchList(PageInfo pi, String keyword);
@@ -39,4 +43,5 @@ public interface StoreService {
 	
 	// 작성자 : 김혜미 -- 주문 등록
 	int orderInsert(PayDto pd);
+	
 }

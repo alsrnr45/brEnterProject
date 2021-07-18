@@ -132,6 +132,35 @@
 		  from product
 		 where pdt_no = #{ pdtNo }
 	</select>
+	
+	<!-- 작성자 : 김혜미 - 상품등록 (관리자) -->
+	<insert id="insertProduct" parameterType="Product">
+		insert 
+		  into product
+		     (
+		       pdt_no
+		     , pdt_ctg
+		     , pdt_file
+		     , pdt_name
+		     , pdt_detail
+		     , org_price
+		     , mem_price
+		     , pdt_stock
+		     , pdt_enrolldate
+		     )
+		values
+		     (
+		       SEQ_PRNO.NEXTVAL
+		     , #{ pdtCtg }
+		     , #{ pdtFile }
+		     , #{ pdtName }
+		     , #{ pdtDetail }
+		     , #{ orgPrice }
+		     , #{ memPrice }
+		     , #{ pdtStock }
+		     , SYSDATE
+		     )
+	</insert>
    
    <!-- 작성자 : 박지은 - 장바구니 목록 조회 -->
    <select id="cartList" parameterType="int" resultType="com.brEnt.brFamily.store.model.vo.Cart">

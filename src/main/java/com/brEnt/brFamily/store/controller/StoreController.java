@@ -151,11 +151,29 @@ public class StoreController {
       
       return "redirect:productList.admin";
    }
+   
+   //
+   @RequestMapping("productEnrollForm.admin")
+   public String productEnroll() {
+	   
+	   return "store/adminProductEnroll";
+   }
 
    // 작성자 : 김혜미 -- 상품관리 등록
    @RequestMapping("productEnroll.admin")
-   public String productEnroll() {
-      return "store/adminProductEnroll";
+   public String productEnroll(Product p, MultipartFile upfile, HttpSession session, Model model) {
+	   
+	   System.out.println(p);
+	   
+	   if(!upfile.getOriginalFilename().equals("")) { 
+	         
+	         String changeName = saveFile(session, upfile); 
+	         p.setPdtFile("resources/productUpfiles/" + changeName); // 업로드된파일명 + 파일명
+	      }
+	   
+	   model.addAttribute("p", sService.insertProduct(p));
+	   
+	   return "redirect:productList.admin";
    }
    
    // 작성자 : 김혜미 -- 첨부파일명 수정 

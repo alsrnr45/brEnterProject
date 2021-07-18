@@ -99,7 +99,6 @@
 	                    <div class="profileImage">                  
 							<img class="titleImg" name="profile" src="${ m.profile }" required>
 							<input type="file" name="upfile" id="upfile" onchange="loadImg(this);" required>
-							<input type="hidden" name="pdtFile" value="${ p.pdtFile }">
 						</div>
                     </div>
                     

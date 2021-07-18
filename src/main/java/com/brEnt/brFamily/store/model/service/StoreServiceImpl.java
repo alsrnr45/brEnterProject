@@ -43,12 +43,6 @@ public class StoreServiceImpl implements StoreService {
       return sDao.selectSearchList(sqlSession, pi, keyword);
    }
    
-  
-
-   
-   
-   
-   
    @Override // 작성자 : 김혜미 -- 상품 상세조회
    public Product selectProductDetail(int pno) {
 	   return sDao.selectProductDetail(sqlSession, pno);
@@ -75,8 +69,7 @@ public class StoreServiceImpl implements StoreService {
    
 	@Override // 작성자 : 김혜미 -- 상품 등록 (관리자)
 	public int insertProduct(Product p) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sDao.insertProduct(sqlSession, p);
 	}
 
    

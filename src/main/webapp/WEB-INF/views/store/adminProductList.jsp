@@ -58,7 +58,7 @@
                             <div class="card-header">
                                 <i class="fas fa-store me-1"></i>
                                	 상품조회
-                                <a class="btn btn-warning" href="productEnroll.admin">작성하기</a> 
+                                <a class="btn btn-warning" href="productEnrollForm.admin">작성하기</a> 
                             </div>
                             <div class="card-body">
                                 <table id="datatablesSimple" class="productList">

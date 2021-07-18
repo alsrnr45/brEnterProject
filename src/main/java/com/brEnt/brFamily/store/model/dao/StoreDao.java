@@ -75,5 +75,9 @@ public class StoreDao {
 		return sqlSession.update("storeMapper.updateProduct", p);
 	}
 
+	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
+		return sqlSession.insert("storeMapper.insertProduct", p);
+	}
+
 
 }

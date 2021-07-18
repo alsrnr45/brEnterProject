@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -51,6 +52,15 @@
 	.productInfo table {width:100%;}
 	.productInfo>table *{margin-bottom: 10px;}
 	.productInfo>table th {text-align:center; width:130px; font-size: 17px;}
+	
+	/* 드롭박스 */
+	select:focus, select:active{
+	    border-color: rgb(155, 89, 182) !important;
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+	    outline: 0 none !important;}
+	/*option:checked {background: rgb(155, 89, 182); color: white;}*/
+	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important;}
+	
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -69,38 +79,50 @@
         <!-- 컨텐츠 -->
         <div id="layoutSidenav_content">
             <div class="content">
+            	
+            	<!-- 현재날짜 -->
+			    <c:set var="today" value="<%=new java.util.Date()%>" />
+			    <c:set var="date"><fmt:formatDate value="${today}" pattern="yyyyMMdd" /></c:set>
                 
-                <form method="post">
+                <form method="post" action="productEnroll.admin" enctype="multipart/form-data">
                     <div class="content1">
 
                         <div class="productImage">                  
-                            <img id="titleImg" src="" alt="">
-                            <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" required>
+                            <img id="titleImg" name="pdtFile" src="" alt="">
+                            <input type="file" name="upfile" id="upfile" onchange="loadImg(this);" required>
                         </div>
         
                         <div class="productInfo">
                             <table align="center">
                                 <tr>
                                     <th><label for="productNo">상품번호</label></th>
-                                    <td><input type="text" id="productNo" class="form-control" name="" value="" required></td>
+                                    <td><input type="text" id="productNo" class="form-control" readonly></td>
                                     <th><label for="productCtg">카테고리</label></th>
-                                    <td><input type="text" id="productCtg " class="form-control" name="" value="" required></td>
+                                    <td>
+                                    	<select class="form-control" name="pdtCtg" id="productCtg">
+											<option value="Album">Album</option>
+											<option value="Cherring">Cherring</option>
+											<option value="Photo">Photo</option>
+											<option value="Fashion">Fashion</option>
+											<option value="Stationery">Stationery</option>
+										</select>
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th><label for="productName">상품명</label></th>
-                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="" value="" required></td>
+                                    <td colspan="3"><input type="text" id="productName" class="form-control" name="pdtName" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="originPrice">판매가</label></th>
-                                    <td><input type="text" id="originPrice" class="form-control" name="" value="" required></td>
+                                    <td><input type="text" id="originPrice" class="form-control" name="orgPrice" required></td>
                                     <th><label for="memberPrice">직원가</label></th>
-                                    <td><input type="text" id="memberPrice " class="form-control" name="" value="" required></td>
+                                    <td><input type="text" id="memberPrice " class="form-control" name="memPrice" required></td>
                                 </tr>
                                 <tr>
                                     <th><label for="stock">재고</label></th>
-                                    <td><input type="text" id="stock" class="form-control" name="" value="" required></td>
-                                    <th><label for="status">진열여부</label></th>
-                                    <td><input type="text" id="status " class="form-control" name="" value="" required></td>
+                                    <td><input type="text" id="stock" class="form-control" name="pdtStock" required></td>
+                                    <th><label for="status">등록일</label></th>
+                                    <td><input type="text" id="pdtEnrolldate" class="form-control" value="<c:out value="${date}"/>" required></td>
                                 </tr>
                             </table>                        
                         </div>
@@ -109,13 +131,13 @@
 
                     <div class="content2">
                         <div class="summernote">
-                            <textarea id="summernote" name=""></textarea>
+                            <textarea id="summernote" name="pdtDetail"></textarea>
                         </div>
                     </div>
 
                     <div class="buttonArea" style="float:right;">
                         <a type="button" class="btn btn-light" href="productList.admin">뒤로가기</a>
-                        <button type="button" class="btn btn-warning" style="margin-left: 7px;">등록하기</button>
+                        <button type="submit" class="btn btn-warning" style="margin-left: 7px;">등록하기</button>
                     </div>
                 </form>
 
@@ -140,10 +162,10 @@
         // 상품사진
         $(function(){
             
-            $("#file1").hide();
+            $("#upfile").hide();
 
             $("#titleImg").click(function(){
-                $("#file1").click();
+                $("#upfile").click();
             });
 
         })
@@ -165,16 +187,12 @@
                 // 파일 읽어들이기가 다 완료된 순간 실행할 함수 정의
                 reader.onload = function(e){
                     // 각 영역에 맞춰서 이미지 미리보기
-                    switch(num){
-                        case 1: $("#titleImg").attr("src", e.target.result); break;
-                    }
+                    $("#titleImg").attr("src", e.target.result);
                 }
 
             }else{ // 선택된 파일이 사라졌을 경우 
 
-                switch(num){
-                    case 1: $("#titleImg").attr("src", null); break;
-                }
+                $("#titleImg").attr("src", null);
 
             }
 

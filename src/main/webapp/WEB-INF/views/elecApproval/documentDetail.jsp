@@ -186,7 +186,7 @@
                                            <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
                                         </c:if>
                                         
-                                        <c:set var="flag" value="ss"/>
+                                        <c:set var="flag" value="ss"/>                                     
                                         
                                      </c:when>
                                      <c:otherwise>
@@ -195,7 +195,11 @@
                                  </c:choose>
                                  <div style="height:35px;">${ ApprovalPathList[i].apEnrolldate }</div>
                                  <div style="height:35px;">${ ApprovalPathList[i].memName }</div>
-                             </div>
+                                 
+                                 	<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
+                                 		<c:set var="aname" value="aaa"/>
+                                 	</c:if>
+                                 	
                          </c:when>
                          <c:otherwise>
                              <!--그게 아닐 경우-->
@@ -244,40 +248,42 @@
 
             
             <div class="content_4">
-            	       
-                <!-- 승인/반려 버튼 보이는 조건문 -->
-                <c:choose>                
-                	<c:when test="${ ttt eq loginUser.memNo }">
-                    	<button class="btn btn-light" type="submit" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
-                     	<button class="btn btn-danger" type="submit">반려하기</button>    
-                  	</c:when>  
-                    <c:otherwise>
-                      	<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;" disabled>승인하기</button>
-                      	<button class="btn btn-danger" disabled>반려하기</button>
-                    </c:otherwise>
-                </c:choose>
-                
-                
-                <!-- 삭제 버튼 보이는 조건문 --> 
-                <!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
-                          (ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) -->  
-                          
-                <c:if test="${ ea.memNo eq loginUser.memNo }">
-                	<c:choose>
-                		<c:when test="${ flag eq 'ss' }">
-		              		<button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>      
-		              	</c:when>
-		              	<c:otherwise>
-		              		<button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button> 
-	              		</c:otherwise>
-	              	</c:choose>
-                </c:if>                          
-                              
+            
+            	<c:choose>  
+            		<c:when test="${ aname != null }">     
+		                <!-- 승인/반려 버튼 보이는 조건문 -->
+		                <c:choose>                
+		                	<c:when test="${ ttt eq loginUser.memNo }">
+		                    	<button class="btn btn-light" type="submit" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+		                     	<button class="btn btn-danger" type="submit">반려하기</button>    
+		                  	</c:when>  
+		                    <c:otherwise>
+		                      	<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;" disabled>승인하기</button>
+		                      	<button class="btn btn-danger" disabled>반려하기</button>
+		                    </c:otherwise>
+		                </c:choose>
+	                </c:when>
+	                
+	                <!-- 삭제 버튼 보이는 조건문 --> 
+	                <!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
+	                          (ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) -->          
+		            <c:when test="${ ea.memNo eq loginUser.memNo }">
+		                	<c:choose>
+		                		<c:when test="${ flag eq 'ss' }">
+				              		<button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>      
+				              	</c:when>
+				              	<c:otherwise>
+				              		<button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button> 
+			              		</c:otherwise>
+			              	</c:choose>
+		            </c:when>                          
+               	</c:choose>               
                                                  
                 <form id="postForm" action="" method="post">
                     <input type="hidden" name="eano" value="${ ea.ecDocNo }">
                     <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
                 </form>
+               
                
                 <script>
                    function postFormSubmit() { 

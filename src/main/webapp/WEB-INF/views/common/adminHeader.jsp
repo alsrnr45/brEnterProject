@@ -69,7 +69,7 @@
 	<!-- 상단바 -->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark2">
 	    <!-- Navbar Brand-->
-	    <a class="navbar-brand ps-3" href="index.html" style="width: 225px;">
+	    <a class="navbar-brand ps-3" href="newMemberList.admin" style="width: 225px;">
 	          <img src="resources/images/brLogo_admin.png" style="height: 56px;"></a>
 	  
 	    <!-- Sidebar Toggle-->
@@ -87,7 +87,7 @@
 	                   
 	                   <!--logout-->
 	                   <div class="dropmenu">
-		                    <button class="logout mymenu" >Logout</button><button class="mypage2 mymenu">HOME</button>
+		                    <button class="logout mymenu" >Logout</button><a class="mypage2 mymenu" href="brEnter.main">HOME</a>
 							<!--<li><a class="dropdown-item" href="#!">Logout</a></li> *dropdown-item 사용시 한칸 전부사용됨-->
 	                    </div>
 	                  </ul>

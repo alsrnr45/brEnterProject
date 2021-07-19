@@ -32,29 +32,22 @@
    }
    option:checked {background: rgb(155, 89, 182); color: white;}
    select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; font-size: 13px !important;}
-
    /* 버튼 */
    .btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
    .btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px;}
    .btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
-
    /* 스타일 */
    /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
-
    .content {width:1150px; height: 810px; margin: auto; margin-top: 30px; margin-bottom: 30px;}
    h6 {margin: 0 0 10px 115px; font-size: 18px;}
-
    table {text-align: center; font-size:13px; margin: auto;}
    table>tr,th,td{border:1px lightgray solid;} 
-
    .tableType01 th {height: 40px; background-color:rgba(241, 241, 241, 0.75);}
    
    .tableType02 th {height: 160px; background-color:rgba(241, 241, 241, 0.75);}
    .tableType02 img {height:50px;}
-
    .tableType03 td {text-align: left;}
    .tableType03 th {background-color:rgba(241, 241, 241, 0.75);}
-
    .tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
    .tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
    
@@ -179,10 +172,10 @@
 							</tr>
 							<tr height="35">
 								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td><input type="hidden" name="ApprovalPathList[0].memNo" value="4"></td>
+								<td><input type="hidden" name="ApprovalPathList[1].memNo" value="3"></td>
+								<td><input type="hidden" name="ApprovalPathList[2].memNo" value="2"></td>
+								<td><input type="hidden" name="ApprovalPathList[3].memNo" value="1"></td>
 		                     </tr>
 		                     <tr height="35">
 								<td style="color: royalblue;">${ loginUser.memName }</td>
@@ -297,7 +290,6 @@
 	</form>
 
 	<script type="text/javascript">
-
 		$(function(){
 			$(".modal1>ul").click(function(){
   			
@@ -324,19 +316,16 @@
 				});
 			})
 		});
-
 		$(function(){
 			$(".modal1>ul").click(function(){
 		
 				$('.modal1>ul').removeClass()
 				$(this).addClass('on1')
-
 			})
 		});
 		
 		$(function(){
             $(document).on("click", ".modal2>ul>li", function(){
-
 				$('.modal2>ul>li').removeClass()
 				$(this).addClass('on2')
 				

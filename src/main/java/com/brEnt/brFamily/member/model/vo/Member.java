@@ -1,7 +1,5 @@
 package com.brEnt.brFamily.member.model.vo;
 
-import java.util.ArrayList;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +37,4 @@ public class Member {
    
    private String deptName;
    private String posiName;
-   
-   private ArrayList<Member> memberList;
 }

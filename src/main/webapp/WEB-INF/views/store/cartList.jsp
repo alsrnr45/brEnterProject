@@ -349,7 +349,7 @@ a:hover {
 				    type : "post",
 				    data : { chbox : checkArr },
 				    success : function(){
-				     location.href = "#";
+				     location.href = "order.st";
 				    }
 				   });
 		})

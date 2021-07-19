@@ -48,20 +48,19 @@ public class ElecApprovalController {
    
    // 작성자 : 김혜미 -- 연차 신청
    @RequestMapping("insertOff.ea")
-   public ModelAndView insertOff(Approval_path ap, Off o, ModelAndView mv) {
+   public String insertOff(Approval_path ap, Off o, int memNo, Model model) {
 	   
 	   ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
 	   //System.out.println(ApprovalPathList);
 	   
 	   //System.out.println(o);
 	   //System.out.println(ap);
-//	   System.out.println(memNo);
+	   System.out.println(memNo);
 	   
-	   mv.addObject("o", eaService.insertOff(o))
-	  	 .addObject("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList))
-	  	.setViewName("elecApproval/approvalTotalList");
+	   model.addAttribute("o", eaService.insertOff(o))
+	  	    .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList));
 	
-	   return mv;
+	   return "redirect:approvalTotalList.ea?mno=" + memNo;
    }
    
 

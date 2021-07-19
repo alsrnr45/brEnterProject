@@ -122,7 +122,7 @@
         <div id="layoutSidenav_content">
             
 			<div class="content">
-	            <form action="insertOff.ea" type="post">
+	            <form action="insertOff.ea" method="post">
 	
 					<button class="btn btn-primary" href="">기안하기</button>
 	

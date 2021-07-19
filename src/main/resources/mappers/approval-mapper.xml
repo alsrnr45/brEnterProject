@@ -235,9 +235,11 @@
 			   mem_no
 		     , mem_name
 		     , posi_name
+             , dept_name
 		  from member m
 		  join position p on(m.posi_no = p.posi_no)
-		 where m.dept_no = #{ deptNo }
+          join dept d on(m.dept_no = d.dept_no)
+		 where m.dept_no = #{memNo}
 	</select>
 	
 	<!--  작성자 : 안소은 - 지출결의서 상세 조회 -->
@@ -347,8 +349,8 @@
 		values
 		     (
 		       SEQ_ECNO.NEXTVAL
-		     , #{offStart}
-		  	 , #{offEnd}
+		     , to_char(to_date(#{offStart}, 'YYYY-MM-DD'), 'YY/MM/DD')
+		  	 , to_char(to_date(#{offEnd}, 'YYYY-MM-DD'), 'YY/MM/DD')
 		     )
 		select *
 		from dual

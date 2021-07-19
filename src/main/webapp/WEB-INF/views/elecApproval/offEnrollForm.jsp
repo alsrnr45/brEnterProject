@@ -122,7 +122,7 @@
         <div id="layoutSidenav_content">
             
 			<div class="content">
-	            <form action="insertOff.ea">
+	            <form action="insertOff.ea" type="post">
 	
 					<button class="btn btn-primary" href="">기안하기</button>
 	
@@ -133,14 +133,14 @@
 	                    	<tr>
 		                        <th width="120px" height="35px;">문서종류</th> 
 		                        <td width="340px">
-		                           <select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
-		                              <option value="documentEnrollForm.ea">기획안</option>
-		                              <option value="documentEnrollForm.ea">업무연락</option>
-		                              <option value="offEnrollForm.ea" selected>연차</option>
-		                              <option value="expenseForm.ea">지출결의서</option>
-		                              <option value="documentEnrollForm.ea">회람</option>
-		                           </select>
-										<input type="hidden" name="ecCode" value="OF">
+									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
+										<option value="documentEnrollForm.ea">기획안</option>
+										<option value="documentEnrollForm.ea">업무연락</option>
+										<option value="offEnrollForm.ea" selected>연차</option>
+										<option value="expenseForm.ea">지출결의서</option>
+										<option value="documentEnrollForm.ea">회람</option>
+									</select>
+									<input type="hidden" name="ecCode" value="OF">
 		                        </td>
 			                    <th width="120px">문서번호<input type="hidden" name="ecDocName" value="OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
 			                    <td width="340px">OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
@@ -152,48 +152,48 @@
 	               <div class="content_2">
 	                  <h6>결재선<button type="button" class="btn btn-outline-secondary btn-sm signOffBtn" data-toggle="modal" data-target="#signOffBtn">결재선 설정</button></h6>
 	                  
-	                  <table class="tableType02">
-	                     <tr height="35">
-	                        <th rowspan="5" width="120">기안자</th>
-	                        <td width="136">${ loginUser.deptName }</td>
-	                        <th rowspan="5" width="120">결재자</th>
-	                        <td width="136"><input type="text" name="ApprovalPathList[0].deptName" value="개발팀"></td>
-	                        <td width="136"><input type="text" name="ApprovalPathList[1].deptName" value="개발팀"></td>
-	                        <td width="136"><input type="text" name="ApprovalPathList[2].deptName" value="개발팀"></td>
-	                        <td width="136"><input type="text" name="ApprovalPathList[3].deptName" value="개발팀"></td>
-	                     </tr>
-	                     <tr height="35">
-	                        <td>${ loginUser.posiName }</td>
-	                        <td><input type="text" name="ApprovalPathList[0].posiName" value="과장"></td>
-	                        <td><input type="text" name="ApprovalPathList[1].posiName" value="차장"></td>
-	                        <td><input type="text" name="ApprovalPathList[2].posiName" value="부장"></td>
-	                        <td><input type="text" name="ApprovalPathList[3].posiName" value="대표"></td>
-	                     </tr>
-	                     <!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
-	                     <tr height="80" style="color:gray;">
-	                        <td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[0].ecTurn" value="1"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[1].ecTurn" value="2"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[2].ecTurn" value="3"></td>
-	                        <td><input type="hidden" name="ApprovalPathList[3].ecTurn" value="4"></td>
-	                     </tr>
-	                     <tr height="35">
-	                        <td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                        <td></td>
-	                     </tr>
-	                     <tr height="35">
-	                        <td style="color: royalblue;">${ loginUser.memName }</td>
-	                        <td><input type="text" name="ApprovalPathList[0].memName" value="박지은"></td>
-	                        <td><input type="text" name="ApprovalPathList[1].memName" value="김혜미"></td>
-	                        <td><input type="text" name="ApprovalPathList[2].memName" value="김민국"></td>
-	                        <td><input type="text" name="ApprovalPathList[3].memName" value="강보람"></td>
-	                     </tr>
-	                  </table>
-	                  <br>
-	               </div>
+						<table class="tableType02">
+							<tr height="35">
+		                        <th rowspan="5" width="120">기안자</th>
+		                        <td width="136">${ loginUser.deptName }</td>
+		                        <th rowspan="5" width="120">결재자</th>
+		                        <td width="136"><input type="text" name="ApprovalPathList[0].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" name="ApprovalPathList[1].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" name="ApprovalPathList[2].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" name="ApprovalPathList[3].deptName" value="개발팀"></td>
+							</tr>
+							<tr height="35">
+		                        <td>${ loginUser.posiName }</td>
+		                        <td><input type="text" name="ApprovalPathList[0].posiName" value="과장"></td>
+		                        <td><input type="text" name="ApprovalPathList[1].posiName" value="차장"></td>
+		                        <td><input type="text" name="ApprovalPathList[2].posiName" value="부장"></td>
+		                        <td><input type="text" name="ApprovalPathList[3].posiName" value="대표"></td>
+							</tr>
+							<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
+							<tr height="80" style="color:gray;">
+								<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
+								<td><input type="hidden" name="ApprovalPathList[0].ecTurn" value="1"></td>
+								<td><input type="hidden" name="ApprovalPathList[1].ecTurn" value="2"></td>
+								<td><input type="hidden" name="ApprovalPathList[2].ecTurn" value="3"></td>
+								<td><input type="hidden" name="ApprovalPathList[3].ecTurn" value="4"></td>
+							</tr>
+							<tr height="35">
+								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+		                     </tr>
+		                     <tr height="35">
+								<td style="color: royalblue;">${ loginUser.memName }</td>
+								<td><input type="text" name="ApprovalPathList[0].memName" value="박지은"></td>
+								<td><input type="text" name="ApprovalPathList[1].memName" value="김혜미"></td>
+								<td><input type="text" name="ApprovalPathList[2].memName" value="김민국"></td>
+								<td><input type="text" name="ApprovalPathList[3].memName" value="강보람"></td>
+							</tr>
+						</table>
+						<br>
+					</div>
 	
 					<div class="content_3">
 						<table class="tableType03">
@@ -213,12 +213,12 @@
 	                        <tr height="40">
 								<th>연차신청일</th>
 								<td>
-									<input type="date" name="offStart" value="2021-06-24" required style="width:130px; margin-right:25px">  
+									<input type="date" name="offStart" required style="width:130px; margin-right:25px">  
 									 ~
-	                           		<input type="date" name="offEnd" value="2021-06-24" required style="width:130px; margin-left:25px;">
+	                           		<input type="date" name="offEnd" required style="width:130px; margin-left:25px;">
 								</td>
 								<th>기안 일시</th>
-								<td><input type="text" name="ecEnrolldate" id="" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />" readonly></td>
+								<td><input type="text" name="ecEnrolldate" value="<fmt:formatDate value="${today}" pattern="yyyy-MM-dd" />" readonly></td>
 	                        </tr>
 	                        <tr height="30">
 	                           <th colspan="4">상세내용</th>
@@ -228,7 +228,7 @@
 	                              <input type="text" name="ecCnt" id="ecCnt" placeholder="내용을 입력해주세요." required style="height:250px;">
 	                           </td>
 	                        </tr>
-						</table>   
+						</table>
 					</div>
 	            </form>
 			</div>

@@ -114,11 +114,10 @@
                                         <i class="fas fa-calendar-alt"></i>
                                       	  CALENDER
                                     </div>
-        <!-- *진행중!! -->            <div class="card-body calender">
-        								<ul>
-                                    	<div><jsp:include page="ybCalender.jsp"/></div>
+        <!-- *진행중!! -->          
+        						   	<jsp:include page="ybCalender.jsp"/>
                                     	
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>

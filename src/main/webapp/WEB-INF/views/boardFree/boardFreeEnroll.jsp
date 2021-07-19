@@ -15,11 +15,11 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- summernote -->
 <!-- include libraries(jQuery, bootstrap) -->
-<!--  
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">-->
+<!-- link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">-->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <!-- include summernote css/js -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -156,6 +156,19 @@
     
        
         // 썸머노트
+      
+        	$(document).ready(function(){
+            	$('#summernote').summernote({
+                	height: 300,
+                    minHeight:null,
+                    maxHeight:null,
+                    focus:true
+                 });
+            });
+                 
+        </script>
+        
+        <!--  
         $(document).ready(function() {
         	
             $('#summernote').summernote({
@@ -182,7 +195,7 @@
                 fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']          
             });
         });
-    </script>
+    </script>-->
     
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

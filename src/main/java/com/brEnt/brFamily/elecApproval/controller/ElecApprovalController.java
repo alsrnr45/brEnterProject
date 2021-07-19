@@ -33,30 +33,35 @@ public class ElecApprovalController {
    
    // 작성자 : 김혜미 -- 연차 신청폼
    @RequestMapping("offEnrollForm.ea")
-   public ModelAndView offEnrollForm(ModelAndView mv) {
+   public ModelAndView offEnrollForm(int mno, ModelAndView mv) {
       
       ArrayList<Dept> list = eaService.selectDept();
       //System.out.println(list);
+      //System.out.println(mno);
+      
       mv.addObject("list", list)
-          .setViewName("elecApproval/offEnrollForm");
+        .addObject("mno", mno)
+        .setViewName("elecApproval/offEnrollForm");
       
       return mv;
    }
    
    // 작성자 : 김혜미 -- 연차 신청
    @RequestMapping("insertOff.ea")
-   public String insertOff(Approval_path ap, Off o, Model model) {
+   public ModelAndView insertOff(Approval_path ap, Off o, ModelAndView mv) {
 	   
 	   ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
 	   //System.out.println(ApprovalPathList);
 	   
 	   //System.out.println(o);
 	   //System.out.println(ap);
+//	   System.out.println(memNo);
 	   
-	   model.addAttribute("o", eaService.insertOff(o))
-	  	    .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList));
+	   mv.addObject("o", eaService.insertOff(o))
+	  	 .addObject("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList))
+	  	.setViewName("elecApproval/approvalTotalList");
 	
-	   return "redirect:approvalTotalList.ea";
+	   return mv;
    }
    
 
@@ -79,7 +84,7 @@ public class ElecApprovalController {
    @RequestMapping("approvalTotalList.ea")
    public ModelAndView approvalTotalList(int mno, ModelAndView mv) {
       	 
-	  System.out.println(mno);
+	  //System.out.println(mno);
       ArrayList<ElecApproval> list = eaService.selectApprovalTotalList();
       
       mv.addObject("list", list)
@@ -94,7 +99,7 @@ public class ElecApprovalController {
    @RequestMapping("approvalStandbyList.ea")
    public ModelAndView approvalStandbyList(int mno, ModelAndView mv) {
 	  
-	  System.out.println(mno);
+	  //System.out.println(mno);
 	  ArrayList<ElecApproval> list = eaService.selectApprovalStandbyList(mno); 
 	  
 	  mv.addObject("list", list)

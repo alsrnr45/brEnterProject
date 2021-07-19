@@ -196,9 +196,9 @@
                                  <div style="height:35px;">${ ApprovalPathList[i].apEnrolldate }</div>
                                  <div style="height:35px;">${ ApprovalPathList[i].memName }</div>
                                  
-                                 	<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
-                                 		<c:set var="aname" value="aaa"/>
-                                 	</c:if>
+                                 	 <c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
+                                 		 <c:set var="aname" value="aaa"/>
+                                 	 </c:if>
                                  	
                          </c:when>
                          <c:otherwise>

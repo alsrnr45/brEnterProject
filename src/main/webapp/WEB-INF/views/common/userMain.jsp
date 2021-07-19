@@ -117,7 +117,7 @@
         <!-- *진행중!! -->            <div class="card-body calender">
         								<ul>
                                     	<div><jsp:include page="ybCalender.jsp"/></div>
-                                    	</ul>
+                                    	
                                     </div>
                                 </div>
                             </div>

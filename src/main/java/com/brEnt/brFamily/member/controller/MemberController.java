@@ -36,23 +36,20 @@ public class MemberController {
          return "common/userMain";  
           */
    
-   @RequestMapping("brEnter.main")
+   @RequestMapping("login.me")
    public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
       Member loginUser = mService.loginMember(m);
       
-      /*
       if(loginUser == null) { // 로그인 실패
     	  System.out.println("로그인 실패");
          
          mv.setViewName("redirect:/");
       
       }else { // 로그인 성공
-      */
          session.setAttribute("loginUser", loginUser);
          mv.setViewName("common/userMain");
-      /*
       }
-      */
+      
       return mv;
       
    }

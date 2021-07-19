@@ -128,12 +128,30 @@
                         </a>
                         <div class="collapse" id="store" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="storeList.st">사내스토어</a>
-                                <a class="nav-link" href="cartList.pro">장바구니</a>
-                                <a class="nav-link" href="orderlist.mp">주문내역 조회</a>
-                                <a class="nav-link" href="offStore.st">오프라인 매장 안내</a>
+                                <a class="nav-link" href="storeList.st">Album</a>
+                                <a class="nav-link" href="storeList.st">Cherring</a>
+                                <a class="nav-link" href="storeList.st">Photo</a>
+                                <a class="nav-link" href="storeList.st">Fashion</a>
+                                <a class="nav-link" href="storeList.st">Stationery</a>
+                                <a class="nav-link" href="cartList.pro">Cart</a>
+                                <a class="nav-link" href="#">Offline Store</a>
                             </nav>
                         </div>
+
+                        <!-- 마이페이지 -->
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#mypage" aria-expanded="false" aria-controls="collapseLayouts">
+                            <div class="sb-nav-link-icon"><i class="fas fa-key fa-fw"></i></div>
+                            	마이페이지
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="mypage" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="#">개인정보 설정</a>
+                                <a class="nav-link" href="#">비밀번호 변경</a>
+                                <a class="nav-link" href="orderlist.mp">주문내역 조회</a>
+                            </nav>
+                        </div>
+
                     </div>
                 </div>
             </nav>

@@ -61,7 +61,7 @@
                                 <div class="card-body">
                                 
                                 <!-- LOGIN 요청 -->
-                                    <form action="brEnter.main" method="post" style="margin: 30px;">
+                                    <form action="login.me" method="post" style="margin: 30px;">
                                         <div class="form-floating mb-3" style="margin-top: 30px;">
                                             <input class="form-control" id="userId" type="text" name="id" placeholder="@brent.com" style="border: none; border-bottom: 1px solid #ddd; border-radius:0px !important; " />
                                             <label for="userId" >ID</label>

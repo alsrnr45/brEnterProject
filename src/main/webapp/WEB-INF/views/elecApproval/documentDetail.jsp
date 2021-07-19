@@ -79,10 +79,10 @@
    #drafter {
       width: 120px; 
       height: 100%; 
+      vertical-align: center;
       font-size: 13px;
       background-color: rgba(241, 241, 241, 0.75);
       outline: 0.1px solid lightgray;
-      padding-top: 100px;
    }
 
    #approver {
@@ -91,7 +91,6 @@
       font-size: 13px;
       background-color: rgba(241, 241, 241, 0.75);
       outline: 0.1px solid lightgray;
-      padding-top: 100px;
    }
    
    #approvalInfo {
@@ -162,11 +161,11 @@
             <div class="content_2" style="height:220px;">
                <div id="drafter">기안자</div>
                <div id="approvalInfo">
-                  <div style="height:35px;">${ ap.deptName }</div>
-                  <div style="height:35px;">${ ap.posiName }</div>
+                  <div style="height:35px;">개발팀</div>
+                  <div style="height:35px;">사원</div>
                   <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
-                  <div style="height:35px;">${ ea.ecEnrolldate }</div>
-                  <div style="height:35px;">${ ea.ecWriter }</div>
+                  <div style="height:35px;">2021-07-10</div>
+                  <div style="height:35px;">김사원</div>
                </div>
                
                <div id="approver">결재자</div>
@@ -180,26 +179,26 @@
                                  <div style="height:35px;">${ ApprovalPathList[i].posiName }</div>
                                  <c:choose>
                                      <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
-                                     <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+                                     	<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
                                      	
-                                        <c:if test="${ (i+1) lt ApprovalPathList.size() }">
+                                     	<c:if test="${ (i+1) lt ApprovalPathList.size() }">
                                            <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
                                         </c:if>
                                         
-                                        <c:set var="flag" value="ss"/>                                     
-                                        
+                                        <c:set var="flag" value="ss"/>          
                                      </c:when>
                                      <c:otherwise>
-                                     <div style="height:80px;"></div>
-                                     </c:otherwise>
-                                 </c:choose>
+										<div style="height:80px;"></div>
+									 </c:otherwise>	
+								 </c:choose>	 
+								 
                                  <div style="height:35px;">${ ApprovalPathList[i].apEnrolldate }</div>
                                  <div style="height:35px;">${ ApprovalPathList[i].memName }</div>
                                  
                                  	 <c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
                                  		 <c:set var="aname" value="aaa"/>
                                  	 </c:if>
-                                 	
+                             </div>  	
                          </c:when>
                          <c:otherwise>
                              <!--그게 아닐 경우-->

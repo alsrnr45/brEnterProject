@@ -16,12 +16,13 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+
 <style>
 
 </style>
 
 </head>
-<body class="sb-nav-fixed">
+<body class="sb-nav-fixed" >
    <!-- 상단바 -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
 		<jsp:include page="userHeader.jsp"/>
@@ -42,10 +43,9 @@
                             <div class="col-xl-6 " style="width: 500px; height: 600px;">
                                 <div class="card mb-4 lefRow" style="height: 550px;">
                                     <div class="card-header">
-                                        <div>
+                                        <div >
 										<i class="fas fa-clock"></i>
-                                        	<span>00월00일 </span>
-                                        	<span style="margin-left:35%; text-align:right;">00:00:00</span> <!-- *js date함수적용하기 -->
+										<span id="dpTime">오후 00:11:22</span>
                                         </div>	
                                     </div>
                                     
@@ -94,7 +94,7 @@
                                             </div>
                                        </div>                                    
                                        <div class="time3 하부3(버튼)">
-                                         <div class="onOff" style="margin-bottom:;" >
+                                         <div class="onOff" style="text-align:center;" >
                                             <div class="buttons"  >
                                                 <button id="on"> 출근 </button>
                                                 <button id="off"> 퇴근 </button>
@@ -107,16 +107,14 @@
                             </div>
                         </div>
                     <!--api박스-->
-                        <div class="row"> 
-                            <div class="col-xl-6" >
-                                <div class="card mb-4"  style="height: 600px;">
+                        <div class="row" style="padding-left:0; padding-right:0  !important;"> 
+                            <div class="col-xl-6" style="padding-left:0; padding-right:0  !important;">
+                                <div class="card mb-4"  style="height: 450px;">
                                     <div class="card-header">
                                         <i class="fas fa-calendar-alt"></i>
                                       	  CALENDER
                                     </div>
-        <!-- *진행중!! -->          
         						   	<jsp:include page="ybCalender.jsp"/>
-                                    	
                                    
                                 </div>
                             </div>
@@ -288,6 +286,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
+    <script src="resources/js/clock.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
     <script src="resources/js/datatables-simple-demo.js"></script>
 </body>

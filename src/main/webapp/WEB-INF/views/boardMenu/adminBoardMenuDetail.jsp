@@ -125,7 +125,7 @@
 						action="">
 						
 						<br> <div class="title">제목 <input type="text" name="weekmenuTitle"
-							style="width: 100%;value="${ Detail.weekmenuTitle}" disabled="disabled"></div> <br>
+							style="width: 100%;value="${ Detail.weekmenuTitle}"></div> <br>
 						<br>
 						<div>
 	        			<c:if test="${Detail != null }">

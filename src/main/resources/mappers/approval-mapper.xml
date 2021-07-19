@@ -349,14 +349,40 @@
 		values
 		     (
 		       SEQ_ECNO.NEXTVAL
-		     , to_char(to_date(#{offStart}, 'YYYY-MM-DD'), 'YY/MM/DD')
-		  	 , to_char(to_date(#{offEnd}, 'YYYY-MM-DD'), 'YY/MM/DD')
+		     , to_char(to_date(#{offStart}, 'YY/MM/DD'), 'YYYY-MM-DD')
+             , to_char(to_date(#{offEnd}, 'YY/MM/DD'), 'YYYY-MM-DD')
 		     )
 		select *
 		from dual
 	</insert>
 	
-	<!-- 결재선 -->
+	<!-- 작성자 : 김혜미 - 연차 상세조회 -->
+	<select id="detailOff" resultMap="elecApproval" parameterType="_int">
+	     select 
+		       e.ec_doc_no
+		     , e.mem_no
+		     , ec_writer
+		     , ec_title
+		     , ec_cnt
+		     , ec_code
+		     , ec_enrolldate
+		     , e.ec_status
+		     , ec_doc_name
+		     , ec_canceldate
+		     , ec_compdate
+		     , to_char(to_date(off_start, 'YY/MM/DD'), 'YYYY-MM-DD') off_start
+		     , to_char(to_date(off_end, 'YY/MM/DD'), 'YYYY-MM-DD') off_end
+             , dept_name
+             , posi_name
+		 from ec_document e
+		 join off o on(o.ec_doc_no = e.ec_doc_no)
+         join member m on(m.mem_no = e.mem_no)
+         join dept d on(d.dept_no = m.dept_no)
+         join position p on(p.posi_no = m.posi_no)
+		where e.ec_doc_no = #{ ea.docNo }
+	</select>
+	
+	<!-- 작성자 : 김혜미 - 결재선 등록 -->
 	<insert id="insertApprovalPath" parameterType="approvalPath">
 	  insert
 		into approval_path
@@ -371,34 +397,13 @@
 				 (
 				   SEQ_APNO.NEXTVAL
 				 , SEQ_ECNO.CURRVAL
-				 , 4
+				 , #{memNo}
 				 , #{ecTurn}
 				 , DEFAULT
 				 )
 	</insert>
-	 
-	<!-- 연차 상세조회 -->
-	<select id="detailOff" resultMap="elecApproval" parameterType="_int">
-	     select 
-		       e.ec_doc_no
-		     , e.mem_no
-		     , ec_writer
-		     , ec_title
-		     , ec_cnt
-		     , ec_code
-		     , ec_enrolldate
-		     , e.ec_status
-		     , ec_doc_name
-		     , ec_canceldate
-		     , ec_compdate
-		     , off_start
-		     , off_end
-		 from ec_document e
-		 join off o on(o.ec_doc_no = e.ec_doc_no)
-		where e.ec_doc_no = #{ ea.docNo }
-	</select>
 	
-	<!-- 결재선 상세조회 -->
+	<!-- 작성자 : 김혜미 - 결재선 상세조회 -->
 	<select id="detailApprovalPath" resultMap="approvalPath" parameterType="_int">
 		select 
                approval_path_no
@@ -416,20 +421,5 @@
           join position p on(p.posi_no = m.posi_no)
          where ec_doc_no = #{ ea.docNo }
 	</select>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 </mapper>

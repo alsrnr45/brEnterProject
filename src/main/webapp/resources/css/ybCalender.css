@@ -1,11 +1,5 @@
 @charset "UTF-8";
-body{
-	margin:0;
-	color:#444;
-	background-color:#98c2c2;
-	font:300 18px/18px Roboto, sans-serif;
-	transition:background .4s ease-in-out 0s;
-}
+
 *,:after,:before{box-sizing:border-box}
 .pull-left{float:left}
 .pull-right{float:right}

@@ -296,6 +296,29 @@ public class MailController {
 		
 	}	
 	
+//	@RequestMapping("detail.smail")
+//	public String detailSMail(SendMail smail, HttpSession session, Model model) {
+//		System.out.println(rmail);
+//		int result = mService.readMail(rmail);
+//		
+//		if(result>0) {
+//			ReceiveMail r = mService.detailRMail(rmail);
+//			if( Integer.parseInt(rmail.getMfIsHave())  > 0) {
+//				ArrayList<MailFile> mflist = mService.detailMFMail(rmail);
+//				model.addAttribute("mflist", mflist);
+//			} 
+//			
+//			model.addAttribute("r", r);
+//			
+//			return "mail/mailDetailView";
+//		} else {
+//			model.addAttribute("errorMsg", "게시글 조회 실패!");
+//			return "common/errorPage";
+//		}
+//		
+//		
+//	}
+	
 	@ResponseBody
 	@RequestMapping(value="important.mail", produces="application/json; charset=utf-8")
 	public String updateImpor(ReceiveMail r) {

@@ -53,7 +53,7 @@
 		     , r.receive_status
 		     , r.bookmark
 		     , s.mail_title
-		     , s.mail_send_Date
+		     , s.mail_send_date
 		     , (select count(*)
 		          from mail_file mf
 		         where mf.mail_no = r.mail_no) mf_Is_Have
@@ -62,6 +62,8 @@
 		    on (r.mail_no = s.mail_no) 
 		 where r.mail_receiver = #{email}
 		   and r.recycle_bin_status = 'Y'
+		 order 
+		    by s.mail_send_date desc
 	</select>
 	
 	<select id="sendMailListView" parameterType="string" resultMap="sendMail">

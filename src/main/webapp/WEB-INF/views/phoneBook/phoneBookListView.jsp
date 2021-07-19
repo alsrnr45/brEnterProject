@@ -81,9 +81,14 @@
         height: 460px;
     }
 
-    .content-org-tree, .content-list{
+    .content-org-tree{
         border: 1px solid #c9c9c9;
-        flex:1;
+        flex:0.8;
+    }
+    
+    .content-list{
+        border: 1px solid #c9c9c9;
+        flex:2.2;
     }
 
     .search-wrap, .scroll-wrap{
@@ -92,7 +97,7 @@
 
     .move-tab{
         text-align:center;
-        flex:1;
+        flex:0.4;
     }
 
     .content-list{
@@ -101,7 +106,7 @@
 
     .new-list{
         border: 1px solid #c9c9c9;
-        flex:4;
+        flex:1;
     }
 
     ul, li{
@@ -121,6 +126,34 @@
     .open:hover, .close:hover {
         style:none;
     }
+    
+    #datatablesSimple{
+    border-box:1px solid black;
+    }
+
+/* 모달 css*/
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  font-size:15px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  text-align: left;
+  background-color: rgba(155, 89, 182);
+  color: white;
+}
+
+
 
 </style>
 </head>
@@ -186,17 +219,16 @@
                             </table>
                             <div class="card-footer">
                                   <!-- Button to Open the Modal -->
-                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                                주소록추가
-                                </button>
-                                <a class="btn btn-primary"  href="">메일발송</a>
-                                <a class="btn btn-primary">삭제하기</a>
+                                <button type="button" class="btn btn-primary" ">주소록추가</button>
+                                <a id="pbPopup" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >주소록</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </main>
-              <!-- The Modal -->
+        </div>
+    </div>
+    		<!-- The Modal -->
             <div class="modal fade" id="myModal">
                 <div class="modal-dialog modal-xl">
                     <div class="modal-content">
@@ -213,32 +245,53 @@
                                         <ul>
                                             <li>
                                                 <a href="#" class="open"><i class="fas fa-plus-square"></i>br엔터</a>
-                                                <ul>
-                                                    <li><a href="#" class="open"><i class="fas fa-plus-square"></i>기획팀</a></li>
-                                                    <li><a href="#" class="open"><i class="fas fa-plus-square"></i>총무팀</a></li>
-                                                    <li><a href="#" class="open"><i class="fas fa-plus-square"></i>인사팀</a></li>
+                                                <ul class="deptName">
+                                                <li><a href="#" class="open"><i class="fas fa-plus-square"></i>기획팀</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </div>
                                     <div class="content-list">
                                         <div class="search-wrap">
-                                            <input class="dataTable-input">
+                                        	<div class="dataTable-search">
+                                        		<input class="dataTable-input" placeholder="이름/이메일 검색" type="text">
+                                        	</div>
                                         </div>
                                         <div class="scroll-wrap">
-                                        스크롤랩(실질주소)   
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="move-tab">
-                                    <span class="btn btn-primary">추가 &gt</span><br><br>
-                                    <span class="btn btn-primary">&lt 제외</span>
-                                </div>
+					                            <table id="customers" class="phoneBook">
+					                                <thead>
+					                                    <tr>
+					                                    	<th></th>
+					                                        <th>이름</th>
+					                                        <th>회사</th>
+					                                        <th>부서</th>
+					                                        <th>직급</th>
+					                                        <th>이메일</th>
+					                                    </tr>
+					                                </thead>
+					                                <tbody>
+					                                   	<tr>
+					                                   		<td><input type="checkbox"></td>
+					                                        <td>김민국</td>
+					                                        <td>BRent</td>
+					                                        <td>개발지원팀</td>
+					                                        <td>부장</td>
+					                                        <td>mingook@brent.com</td>
+					                                   	</tr>
+					                                </tbody>
+					                            </table> 
+                                    	</div>
+                                	</div>
+	                                <div class="move-tab">
+	                                    <span class="btn btn-primary">추가 &gt</span><br><br>
+	                                    <span class="btn btn-primary">&lt 제외</span>
+	                                </div>
                                 <div class="new-list">
-                                    
+                                	<input class="dataTable-input" type="text" placeholder="주소록명">
+                                
+                                </div>
                                 </div>
                             </div>
-
                         </div>
                         <!-- Modal footer -->
                         <div class="modal-footer">
@@ -247,38 +300,43 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+    
 </body>
 <script>
-
-var opener = $("a.open");
-var nested = $("a.open").parent().find("li");
-var nestedCont = $("li > ul > li").parent();
-var that;
-
-var tree = {
-  init : function () {
-    nestedCont.hide();
-    $("li:last-child").addClass("end");
-    $("a.open").each( function () {
-      $(opener).click(function ( target ) {
-       tree.click(this);
-      });
-     return false;
-    })
-  },
-  click : function ( _tar ) {
-   that = _tar;
-   $(that).next().show();
-   $(that).prev().toggleClass("close");
-   $(that).toggleClass("close");
-   if (!$(that).hasClass("close")) {
-     $(that).next().hide();      
-   }
-  }
- }
- tree.init();
+	$(document).ready(function() {
+		
+		$('#pbPopup').on('click',(function(){
+			
+			let memNo = ${loginUser.memNo};
+			//let deptNo = ${loginUser.deptNo};
+			//let posiNo = ${loginUser.posiNo};
+			//let email = ${loginUser.officeEmail};
+					
+			$.ajax({
+				type: "POST",
+				url: "popup.pb",
+				success: function(map){
+					let mlist = map.mlist;
+					let dlist = map.dlist;
+					let plist = map.plist;
+					
+					for( var i in dlist ){
+						let d = dlist[i];
+						$('.deptName').append('<li><a href="#" class="open"><i class="fas fa-plus-square"></i>' + d['deptName'] + '</a></li>');
+						console.log(d);
+						
+						
+					}
+					
+					
+				},
+				error: function(data){
+					window.location.reload();
+				}
+			});
+		}))
+	
+	})
 
 </script>
 </html>

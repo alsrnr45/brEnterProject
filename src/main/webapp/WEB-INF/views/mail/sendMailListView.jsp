@@ -52,6 +52,7 @@
                             <i class="far fa-envelope"></i>
                             보낸 메일
                         </div>
+                        <form id="rlist" action="detail.mail" method="post" enctype="multipart/form-data">
                         <div class="card-body">
                             <table id="datatablesSimple" class="mailList">
                                 <thead>
@@ -128,13 +129,13 @@
                             <div class="card-footer">
                                 <a id="reply" class="btn btn-primary btn-block" >답장</a>
                                 <a id="forward" class="btn btn-primary btn-block">전달</a>
-                                <a id="do_important" class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
                                 <a class="btn btn-primary btn-block" href="enroll.mail">메일쓰기</a>
                                 <a id="deleteBtn" class="btn btn-primary btn-block" >삭제하기</a>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                            </div>
+                           </form>
+                       </div>
+                   </div>
             </main> 
         </div>
     </div>

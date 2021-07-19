@@ -1,4 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="phoneBookMapper">
+	
+	<resultMap type="Member" id="member">
+		<result column="mem_no" property="memNo"/> 
+		<result column="dept_no" property="deptNo"/>
+		<result column="posi_no" property="posiNo"/>
+		<result column="office_email" property="officeEmail"/>
+		<result column="mem_name" property="memName"/>
+		<result column="mem_status" property="memStatus"/>
+		<result column="dept_name" property="deptName"/>
+		<result column="posi_name" property="posiName"/>		
+	</resultMap>
+	
+	<resultMap type="Dept" id="dept">
+		<result column="dept_no" property="deptNo"/>
+		<result column="dept_name" property="deptName"/>
+	</resultMap>
+	
+	<resultMap type="Position" id="position">
+		<result column="posi_no" property="posiNo"/>
+		<result column="posi_name" property="posiName"/>
+	</resultMap>
+	
+	<select id="popupView" resultMap="member">
+		select
+		       m.mem_no
+		     , m.dept_no
+		     , m.posi_no
+		     , m.office_email
+		     , m.mem_name
+		     , d.dept_name
+		     , p.posi_name
+		     from member m
+		     join dept d 
+		       on (m.dept_no = d.dept_no)
+		     join position p
+		       on (m.posi_no = p.posi_no) 
+		  where mem_status = 'Y'  
+	</select>
+	
+	<select id="popupDeptView" resultMap="dept">
+		select 
+		       dept_no
+		     , dept_name
+		  from dept
+	</select>
+	
+	<select id="popupPositionView" resultMap="position">
+		select
+		       posi_no
+		     , posi_name
+		  from position
+	</select>
 </mapper>

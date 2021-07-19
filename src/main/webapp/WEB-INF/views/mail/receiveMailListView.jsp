@@ -235,12 +235,19 @@
 		
 		
 		// 즐겨찾기만 조회하기
-		$('#do_important').click(function(){
-			$('.no_important').closest('tr').remove('tr');
+		$('#do_important').on('click', function(){
+			$('.no_important').closest('tr').css('display', 'none');
+			$('#do_important').attr('id','#undo_imporatant');
 		});
 		
+		$('#undo_important').on('click', function(){
+			$('.no_important').closest('tr').css('display', 'contents');
+			$('#undo_important').attr('id','#do_imporatant');
+			console.log('이거되나?');
+		})
+		
 		// 삭제 
-		$("#deleteBtn").click(function(){
+		$("#deleteBtn").on('click', function(){
 			var length = $('input:checked').length; // 체크된 숫자갯수
 	
 			console.log("숫자갯수" + length);

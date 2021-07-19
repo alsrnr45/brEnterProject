@@ -9,4 +9,8 @@ public interface CartService {
 	// 작성자 : 박지은 - 장바구니 조회
 	ArrayList<Cart> cartList(int memNo) throws Exception;
 
+	void insertCart(Cart cart) throws Exception;
+
+	void deleteCart(Cart cart)throws Exception;
+
 }

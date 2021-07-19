@@ -20,4 +20,14 @@ public class CartServiceImpl implements CartService {
 		return (ArrayList<Cart>) cDao.cartList(memNo);
 	}
 
+	@Override
+	public void insertCart(Cart cart) throws Exception {
+		cDao.insertCart(cart);
+	}
+
+	@Override
+	public void deleteCart(Cart cart) throws Exception {
+		cDao.cartDelete(cart);
+	}
+
 }

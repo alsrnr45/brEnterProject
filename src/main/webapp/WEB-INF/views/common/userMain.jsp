@@ -109,12 +109,16 @@
                     <!--api박스-->
                         <div class="row"> 
                             <div class="col-xl-6" >
-                                <div class="card mb-4">
+                                <div class="card mb-4"  style="height: 600px;">
                                     <div class="card-header">
-                                        <i class="fas fa-chart-area me-1"></i>
-                                      	  코로나 api 혹은 달력api
+                                        <i class="fas fa-calendar-alt"></i>
+                                      	  CALENDER
                                     </div>
-                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+        <!-- *진행중!! -->            <div class="card-body calender">
+        								<ul>
+                                    	<div><jsp:include page="ybCalender.jsp"/></div>
+                                    	</ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,7 +141,7 @@
                     <!--게시판1-->
                     <div class="card mb-4" style="height: 400px;"> <!--카드박스 세로크기 조정부분-->
                         <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
+                            <i class="fas fa-bullhorn"></i>
                             NOTICE
                         </div>
                         <div class="card-body">

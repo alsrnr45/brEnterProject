@@ -31,6 +31,11 @@
     .dataTable-table > thead > tr > td, .dataTable-table > thead > tr > th{
         text-align:center;
     }
+    
+    .important{
+    	color:black;
+    	text-decoration: none;
+    }
 </style>
 </head>
 <body>
@@ -68,74 +73,60 @@
                                         <th></th>
                                         <th>보낸사람</th>
                                         <th>제목</th>
-                                        <th>일시</th>
+                                        <th id="dateDESC">일시</th>
                                         <th>첨부파일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 	<c:forEach var="r" items="${list}">
-                                    <tr>
-
-                                        <td>
-                                        <input type="hidden" name="mailTitle" value="${ r.mailTitle }">
-                                    	<input type="hidden" name="mailNo" value="${r.mailNo}">
-                                    	<input type="hidden" name="mailReceiver" value="${ loginUser.officeEmail }" >
-                                        <input type="checkbox" name="${r.mailNo}" value="${r.mailNo}" id="mailCheck_${r.mailNo}" >
-                                        </td>
-                                        <c:choose>
-	                                        <c:when test="${ r.bookmark eq 'N' }">
-	                                        <td><input type="button" hidden><i class="far fa-star"></i></td>
-	                                        </c:when>
-	                                        <c:otherwise>
-	                                        <!--  
-	                                        <th><button onclick="important()"><i class="fas fa-star"></i></button></th>
-	                                        -->
-	                                        </c:otherwise>
-	                                    </c:choose>
-	                                    <c:choose>	                                   
-	                                        <c:when test="${ r.receiveStatus eq 'N'}">
-	                                        <th><i class="far fa-envelope"></i></th>
-	                                        </c:when>
-	                                        <c:otherwise>
-	                                        <th><i class="far fa-envelope-open"></i></th>
-	                                        </c:otherwise>
-                                        </c:choose>
-                                        <td>${ r.mailWriter }</td>
-                                        <td id="title">           
-                                        ${ r.mailTitle }
-                                        </td>
-                                        <td>${ r.mailSendDate }</td>
-                                        <c:choose>
-                                        	<c:when test="${ r.mfIsHave != 0 }">
-                                        	<td>Y</td>
-                                        	</c:when>
-                                        	<c:otherwise>
-                                        	<td>N</td>
-                                        	</c:otherwise>
-                                        </c:choose>
-                                    </tr>
-                                    
+                                    	<tr>
+	                                        <td>
+	                                        <input type="hidden" name="mailTitle" value="${ r.mailTitle }">
+	                                    	<input type="hidden" name="mailNo" value="${r.mailNo}">
+	                                    	<input type="hidden" name="mailReceiver" value="${ loginUser.officeEmail }" >
+	                                    	<input type="hidden" name="mfIsHave" value="${ r.mfIsHave }" >
+	                                    	<input type="hidden" name="bookmark" value="${r.bookmark}">
+	                                        <input type="checkbox" name="${r.mailNo}" value="${r.mailNo}" id="mailCheck_${r.mailNo}" >
+	                                        </td>
+	                                        <c:choose>
+		                                        <c:when test="${ r.bookmark eq 'N' }">
+		                                        	<td class="no_important"><a class="important"><i class="far fa-star"></i></a></td>
+		                                        </c:when>
+		                                        <c:otherwise>
+		                                        	<td><a class="important"><i class="fas fa-star"></i></a></td>
+		                                        </c:otherwise>
+		                                    </c:choose>
+		                                    <c:choose>	                                   
+		                                        <c:when test="${ r.receiveStatus eq 'N'}">
+		                                        <th><i class="far fa-envelope"></i></th>
+		                                        </c:when>
+		                                        <c:otherwise>
+		                                        <th><i class="far fa-envelope-open"></i></th>
+		                                        </c:otherwise>
+	                                        </c:choose>
+	                                        <td>${ r.mailWriter }</td>
+	                                        <td class="title">           
+	                                        ${ r.mailTitle }
+	                                        </td>
+	                                        <td>${ r.mailSendDate }</td>
+	                                        <c:choose>
+	                                        	<c:when test="${ r.mfIsHave != 0 }">
+	                                        	<td>Y</td>
+	                                        	</c:when>
+	                                        	<c:otherwise>
+	                                        	<td>N</td>
+	                                        	</c:otherwise>
+	                                        </c:choose>
+                                    	</tr>
                                 	</c:forEach>
-                                	
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                    
-                                        <th><input type="checkbox"></th>
-                                        <th><button onclick="important()"><i class="far fa-star"></i></button></th>
-                                        <th></th>
-                                        <th>Age</th>
-                                        <th>Sta rt date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                             
                             <div class="card-footer">
-                                <a id="do_reply" class="btn btn-primary btn-block" href="">답장</a>
-                                <a class="btn btn-primary btn-block">전달</a>
-                                <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
-                                <a class="btn btn-primary btn-block"  href="enroll.mail">메일쓰기</a>
+                                <a id="reply" class="btn btn-primary btn-block" >답장</a>
+                                <a id="forward" class="btn btn-primary btn-block">전달</a>
+                                <a id="do_important" class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
+                                <a class="btn btn-primary btn-block" href="enroll.mail">메일쓰기</a>
                                 <a id="deleteBtn" class="btn btn-primary btn-block" >삭제하기</a>
                             </div>
                             </form>
@@ -150,31 +141,105 @@
 	$(document).ready(function() {
 		
 	// 리스트 보여주기
+	/*
     $(function(){
-	   	$("#title").click(function(){
+	   	$(".title").click(function(){
 	   		$('input').attr("disabled", true);
 	   		$(this).prevAll().find('input').attr("disabled", false);
 	   		$('#rlist').submit();
 	   	})
-   	})	
-	// 답장
-		$("#do_reply").click(function(){
-			
-			var length = $('input:checked').length; // 체크된 숫자갯수
-
-			console.log("숫자갯수" + length);
+   	})
+	*/
 	
-			if(length>1){
+	$(function(){
+		$(document).on('click', '.title', function(){
+			$('input').attr('disabled', true);
+			$(this).prevAll().find('input').attr('disabled', false);
+			$('#rlist').submit();
+		})
+	})
+	
+	// 리스트 날짜순으로 기본값
+	$(function(){
+		$('#dateDESC').attr('class','desc');
+	})
+	
+	// 즐겨찾기 만들기
+	
+	$(function(){
+		$(document).on('click', '.important', function(){
+			
+			let mailNo = $(this).parent().prevAll().find('input[name=mailNo]').val();
+			let mailReceiver = $(this).parent().prevAll().find('input[name=mailReceiver]').val();
+			let bookmark = $(this).parent().prevAll().find('input[name=bookmark]').val();
+			
+			$.ajax({
+				type: "POST",
+				url: "important.mail",
+				data: {
+					mailNo : mailNo,
+					mailReceiver : mailReceiver,
+					bookmark : bookmark
+				},
+				success: function(data){
+					window.location.reload();
+				},
+				error: function(data){
+					window.location.reload();
+				}
+		})
+	})
+	})
+	
+	/*
+	$('.important').click(function(){
+		let mailNo = $(this).parent().prevAll().find('input[name=mailNo]').val();
+		let mailReceiver = $(this).parent().prevAll().find('input[name=mailReceiver]').val();
+		let bookmark = $(this).parent().prevAll().find('input[name=bookmark]').val();
+		
+		$.ajax({
+			type: "POST",
+			url: "important.mail",
+			data: {
+				mailNo : mailNo,
+				mailReceiver : mailReceiver,
+				bookmark : bookmark
+			},
+			success: function(data){
+				window.location.reload();
+			},
+			error: function(data){
+				window.location.reload();
+			}
+		});
+	})
+	*/
+	
+		// 답장
+		$("#reply").click(function(){
+			var length = $('input:checked').length; // 체크된 숫자갯수
+			console.log("숫자갯수" + length);
+			if(length == 0){
+				alert('답장할 메일을 선택해주세요.');
+			} if(length > 1){
 				alert("메일 한 개만 선택해주세요.");
-			} else{
-				$('#rlist.view').attr('action','doReply.mail');
-				$('input[type!=checked]').attr("disabled", true);
+			} if(length == 1){
+				$('#rlist').attr('action','reply.mail');
+				$('input').attr("disabled", true);
+				$('input:checked').parent().parent().find('input').attr("disabled", false);
 				$('#rlist').submit();
 			}
 		});
 	
-	// 삭제 
-	
+		//전달
+		
+		
+		// 즐겨찾기만 조회하기
+		$('#do_important').click(function(){
+			$('.no_important').closest('tr').remove('tr');
+		});
+		
+		// 삭제 
 		$("#deleteBtn").click(function(){
 			var length = $('input:checked').length; // 체크된 숫자갯수
 	

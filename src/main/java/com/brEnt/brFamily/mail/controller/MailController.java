@@ -18,11 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.mail.model.service.MailService;
-import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
 import com.brEnt.brFamily.member.model.vo.Member;
+import com.google.gson.Gson;
 
 @Controller
 public class MailController {
@@ -42,13 +42,30 @@ public class MailController {
 		return mv;
 	}
 	
-	
-	
 	// 받은 메일 메일쓰기, 답장, 전달, 즐겨찾기, 삭제하기 
-	@RequestMapping("doReply.mail")
-	public void doReply(int mailNo, HttpSession session) {
-		System.out.println(mailNo);
+	@RequestMapping("reply.mail")
+	public String reply(ReceiveMail r, HttpSession session, Model model) {
+		System.out.println(r);
+		model.addAttribute("r", mService.reply(r));
+			
+		if(Integer.parseInt(r.getMfIsHave()) > 0 ) {
+			ArrayList<MailFile> mflist = mService.replyMF(r);
+			model.addAttribute("mflist", mflist);
+		}
+		return "mail/replyMail";
 	}
+	
+//	@RequestMapping("forward.mail")
+//	public String forwardMail(ReceiveMail r, HttpSession session, Model model) {
+//		System.out.println(r);
+//		model.addAttribute("r", mService.forward(r));
+//			
+//		if(Integer.parseInt(r.getMfIsHave()) > 0 ) {
+//			ArrayList<MailFile> mflist = mService.doReplyMF(r);
+//			model.addAttribute("mflist", mflist);
+//		}
+//		return "mail/replyMail";
+//	}
 	
 	@RequestMapping("send.mail")
 	public ModelAndView sendMailListView(HttpSession session, ModelAndView mv) {
@@ -149,6 +166,59 @@ public class MailController {
 		
 	}
 	
+	@RequestMapping("doReply.mail")
+	public String doReply(SendMail s , MultipartFile[] upfile, HttpSession session, ModelAndView mv) {
+		
+		int result1 = mService.insertSMail(s);
+		
+		if(result1 > 0) {
+			String[] values = s.getMailReceiver().split(",", 0);
+			
+			ArrayList<ReceiveMail> rlist = new ArrayList<>();
+			
+			for(int i=0; i<values.length; i++) {
+				
+				ReceiveMail r = new ReceiveMail();
+				r.setMailWriter(s.getMailWriter());
+				r.setMailReceiver(values[i]);
+				rlist.add(r);
+			} 
+			
+			int result2 = mService.insertRMail(rlist);
+			
+			for( MultipartFile multif : upfile) {
+				if(!multif.getOriginalFilename().isEmpty()) {
+					System.out.println(multif.getOriginalFilename());
+					String changeName = saveFile( multif , session);
+					
+					MailFile mf = new MailFile();
+					mf.setMailOrigin(multif.getOriginalFilename());
+					mf.setMailUpdate(changeName);
+					mf.setMailFPath(("/resources/mailUpfiles") + changeName);
+					mf.setMailFSize(String.valueOf(multif.getSize()));
+					
+					String ext = multif.getOriginalFilename().substring(multif.getOriginalFilename().lastIndexOf("."));
+					mf.setMailFType(ext);
+					
+					int result3 = mService.insertMFMail(mf);
+					
+					ArrayList<MailFile> mflist = new ArrayList<>();
+					mflist.add(mf);
+					
+				}else {
+					break;
+				}
+			}
+			mv.addObject("s", s)
+			  .addObject("rlist", rlist);
+			return "redirect:send.mail";
+		} else {
+			mv.addObject("errorPage", "메일 전송 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
 	@RequestMapping("sendTemp.mail")
 	public String tempMail(SendMail s , MultipartFile[] upfile, HttpSession session, ModelAndView mv) {
 		int result1 = mService.tempSMail(s);
@@ -205,13 +275,17 @@ public class MailController {
 	
 	@RequestMapping("detail.mail")
 	public String detailRMail(ReceiveMail rmail, HttpSession session, Model model) {
-		
+		System.out.println(rmail);
 		int result = mService.readMail(rmail);
 		
 		if(result>0) {
-			InfoMail im = mService.detailRMail(rmail);
+			ReceiveMail r = mService.detailRMail(rmail);
+			if( Integer.parseInt(rmail.getMfIsHave())  > 0) {
+				ArrayList<MailFile> mflist = mService.detailMFMail(rmail);
+				model.addAttribute("mflist", mflist);
+			} 
 			
-			model.addAttribute("im", im);
+			model.addAttribute("r", r);
 			
 			return "mail/mailDetailView";
 		} else {
@@ -221,6 +295,24 @@ public class MailController {
 		
 		
 	}	
+	
+	@ResponseBody
+	@RequestMapping(value="important.mail", produces="application/json; charset=utf-8")
+	public String updateImpor(ReceiveMail r) {
+		int result = mService.updateImpor(r);
+		
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="imporList.mail", produces="application/json; charset=utf-8")
+	public String imporListView(ReceiveMail r) {
+		 return new Gson().toJson(mService.imporListView(r));
+	}
 	
 	@ResponseBody
 	@RequestMapping(value="delete.mail", produces="application/json; charset=utf-8")

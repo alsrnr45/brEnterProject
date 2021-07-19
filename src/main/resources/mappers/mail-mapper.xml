@@ -9,10 +9,14 @@
 		<result column="recycle_bin_status" property="recycleBinStatus" />
 		<result column="receive_status" property="receiveStatus" />
 		<result column="bookmark" property="bookmark" />
+		
 		<result column="mail_title" property="mailTitle" />
+		<result column="mail_cnt" property="mailContent" />
 		<result column="mail_send_date" property="mailSendDate" />
+		
 		<result column="mail_file_no" property="mailFNo" />
 		<result column="mail_filesize" property="mailFSize" />
+		
 		<result column="mf_Is_Have" property="mfIsHave" />
 		<result column="receiverCount" property="receiverCount" />
 		<result column="receiverYCount" property="receiverYCount" />
@@ -33,29 +37,6 @@
 	<resultMap type="MailFile" id="mailFile">
 		<result column="mail_file_no" property="mailFNo" />
 		<result column="mail_no" property="mailNo" />
-		<result column="mail_origin" property="mailOrigin" />
-		<result column="mail_update" property="mailUpdate" />
-		<result column="mail_file_path" property="mailFPath" />
-		<result column="mail_filesize" property="mailFSize" />
-		<result column="mail_filetype" property="mailFType" />
-	</resultMap>
-	
-	
-	<resultMap type="InfoMail" id="infoMail">
-		<result column="mail_no" property="mailNo" />
-		<result column="mail_writer" property="mailWriter" />
-		<result column="mail_receiver" property="mailReceiver" />
-		<result column="recycle_bin_status" property="recycleBinStatus" />
-		<result column="receive_status" property="receiveStatus" />
-		<result column="bookmark" property="bookmark" />
-		
-		<result column="mem_no" property="memNo" />
-		<result column="mail_title" property="mailTitle" />
-		<result column="mail_cnt" property="mailContent" />
-		<result column="mail_send_date" property="mailSendDate" />
-		<result column="temp_box" property="tempBox" />
-		
-		<result column="mail_file_no" property="mailFNo" />
 		<result column="mail_origin" property="mailOrigin" />
 		<result column="mail_update" property="mailUpdate" />
 		<result column="mail_file_path" property="mailFPath" />
@@ -326,7 +307,7 @@
 	
 	</update>
 	
-	<select id="detailRMail" parameterType="ReceiveMail" resultMap="infoMail">
+	<select id="detailRMail" parameterType="ReceiveMail" resultMap="receiveMail">
 		select
 		 	   r.mail_no
 		 	 , r.mail_writer
@@ -337,20 +318,104 @@
 		     , s.mail_title
 		     , s.mail_cnt
 		     , s.mail_send_date
-		     , mf.mail_file_no
+		  from receive_mail r
+		  join send_mail s
+		    on (r.mail_no = s.mail_no)
+		 where r.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and r.mail_receiver = #{mailReceiver}
+	</select>
+	
+	<select id="detailMFMail" parameterType="ReceiveMail" resultMap="mailFile">
+		select
+		       mf.mail_file_no
 		     , mf.mail_origin
 		     , mf.mail_update
 		     , mf.mail_file_path
 		     , mf.mail_filesize
 		     , mf.mail_filetype
+		  from mail_file mf		   
+		  join receive_mail r 
+		    on (mf.mail_no = r.mail_no)
+	      join send_mail s
+		    on (mf.mail_no = s.mail_no)
+		 where r.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and r.mail_receiver = #{mailReceiver}     
+	</select>
+	
+	<update id="updateImpor" parameterType="ReceiveMail">
+		update receive_mail
+		<choose>
+			<when test='bookmark == "N"'>
+			set 
+		       bookmark = 'Y'
+			</when>
+			<otherwise>
+			set 
+		       bookmark = 'N'			
+			</otherwise>
+		</choose>
+		 where mail_no = #{mailNo}
+		   and mail_receiver = #{mailReceiver}
+	</update>
+	
+	<select id="imporListView" parameterType="ReceiveMail" resultMap="receiveMail">
+		select 
+		       r.mail_no
+		     , r.mail_writer
+		     , r.mail_receiver
+		     , r.recycle_bin_status
+		     , r.receive_status
+		     , r.bookmark
+		     , s.mail_title
+		     , s.mail_send_Date
+		     , (select count(*)
+		          from mail_file mf
+		         where mf.mail_no = r.mail_no) mf_Is_Have
+		  from receive_mail r
+		  join send_mail s
+		    on (r.mail_no = s.mail_no) 
+		 where r.mail_receiver = #{mailReceiver}
+		   and r.recycle_bin_status = 'Y'
+		   and r.bookmark = 'Y'
+	</select>
+	
+	<select id="reply" parameterType="ReceiveMail" resultMap="receiveMail">
+		select
+		 	   r.mail_no
+		 	 , r.mail_writer
+		 	 , r.mail_receiver
+			 , r.recycle_bin_status
+		     , r.receive_status
+		     , r.bookmark 
+		     , s.mail_title
+		     , s.mail_cnt
+		     , s.mail_send_date
 		  from receive_mail r
 		  join send_mail s
 		    on (r.mail_no = s.mail_no)
-		  join mail_file mf
-		    on (r.mail_no = mf.mail_no)
 		 where r.mail_no = #{mailNo}
 		   and s.mail_title = #{mailTitle}
 		   and r.mail_receiver = #{mailReceiver}
+	</select>
+	
+	<select id="replyMF" parameterType="ReceiveMail" resultMap="mailFile">
+		select
+		       mf.mail_file_no
+		     , mf.mail_origin
+		     , mf.mail_update
+		     , mf.mail_file_path
+		     , mf.mail_filesize
+		     , mf.mail_filetype
+		  from mail_file mf		   
+		  join receive_mail r 
+		    on (mf.mail_no = r.mail_no)
+	      join send_mail s
+		    on (mf.mail_no = s.mail_no)
+		 where r.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and r.mail_receiver = #{mailReceiver}    	
 	</select>
 </mapper>
 

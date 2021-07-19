@@ -64,41 +64,44 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                	<c:forEach var="s" items="${slist}">
-	                                    <tr>
-	                                        <td><input type="checkbox" name="" id="mailCheck_${s.mailNo}" ></td>
-	                                        <%--
-	                                        <c:forEach var="r" items="${rlist}">
-	                                          
-                                        		<c:choose>
-	                                        		<c:when test="${ s.mail_no = r.mail_no and r.receiverCount > 1 }">	
-		                                        		<c:choose>
-		                                        			<c:when test="${ r.receiverYCount = 'N'}">
-		                                        				<td>총 ${r.receiverCount} 명 중 ${r.receiverYCount} 읽음</td>
-		                                        			</c:when>
-		                                        			<c:when test="${ s.mail_no = r.mail_no and r.receiverCount = 1 }">
-		                                        				
-		                                        				<td>${r.receiverYCount} 읽지않음</td>
-		                                        				
-		                                        			</c:when>
-		                                        			<c:otherwise>
-		                                        				
-		                                        			</c:otherwise>
-		                                        		</c:choose>
-	                                        		</c:when>
-                                        		</c:choose>
-	                                        </c:forEach>
-	                                        --%>
-	                                        <td></td>
-	                                        <c:choose>
+                                <c:forEach var="s" items="${slist}">
+	                            	<tr>
+                                        <td>
+                                        <!--  
+                                        <input type="hidden" name="mailTitle" value="${ r.mailTitle }">
+	                                   	<input type="hidden" name="mailNo" value="${r.mailNo}">
+	                                   	<input type="hidden" name="mailReceiver" value="${ loginUser.officeEmail }" >
+	                                   	<input type="hidden" name="mfIsHave" value="${ r.mfIsHave }" >
+	                                   	<input type="hidden" name="bookmark" value="${r.bookmark}">
+	                                    -->
+	                                    <input type="checkbox" name="${s.mailNo}" value="${s.mailNo}" id="mailCheck_${s.mailNo}" >
+                                        </td>
+                                        <!-- 
+                                       		<c:choose>
+                                        		<c:when test="${ r.receiverCount > 1 }">	
+	                                        		<c:choose>
+	                                        			<c:when test="${ r.receiverYCount == 'N'}">
+	                                        				<td>총 ${r.receiverCount} 명 중 ${r.receiverYCount} 읽음</td>
+	                                        			</c:when>
+	                                        			<c:when test="${ r.receiverCount == 1 }">
+	                                        				<td>${r.receiverYCount} 읽지않음</td>
+	                                        			</c:when>
+                                        			</c:choose>
+                                        		</c:when>
+                                       			<c:otherwise>
+                                       				<td>${ r.mailReceiver }</td>
+                                       			</c:otherwise>
+                                       		</c:choose>
+                                       		 -->
+                                       		 <td></td>
+		                                    <c:choose>
 		                                        <c:when test="${ !empty s.mailTitle }">
-		                                        	<td>${ s.mailTitle }</td>
+		                                        	<td class="title">${ s.mailTitle }</td>
 		                                        </c:when>
 		                                        <c:otherwise>
-			                                        <td>(제목 없음)</td>
+			                                        <td class="title">(제목 없음)</td>
 		                                        </c:otherwise>
 	                                        </c:choose>
-	                                        
 	                                        <td>${ s.mailSendDate }</td>
 	                                        <c:choose>
 												<c:when test="${ s.mfIsHave > 0 }">
@@ -109,7 +112,7 @@
 												</c:otherwise>
 											</c:choose>
 	                                    </tr>
-                                	</c:forEach>
+                                    </c:forEach>
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -123,11 +126,11 @@
                                 </tfoot>
                             </table>
                             <div class="card-footer">
-                                <a class="btn btn-primary btn-block">답장</a>
-                                <a class="btn btn-primary btn-block">전달</a>
-                                <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
-                                <a class="btn btn-primary btn-block">메일쓰기</a>
-                                <a class="btn btn-primary btn-block">삭제하기</a>
+                                <a id="reply" class="btn btn-primary btn-block" >답장</a>
+                                <a id="forward" class="btn btn-primary btn-block">전달</a>
+                                <a id="do_important" class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
+                                <a class="btn btn-primary btn-block" href="enroll.mail">메일쓰기</a>
+                                <a id="deleteBtn" class="btn btn-primary btn-block" >삭제하기</a>
                             </div>
                         </div>
                     </div>
@@ -144,5 +147,113 @@
         $('#dis').hide();
     }
     }
+    
+	$(document).ready(function() {
+		
+		// 리스트 보여주기
+	    /*
+		$(function(){
+		   	$(".title").click(function(){
+		   		$('input').attr("disabled", true);
+		   		$(this).prevAll().find('input').attr("disabled", false);
+		   		$('#rlist').submit();
+		   	})
+	   	})
+	   	*/
+		
+		$(function(){
+			$(document).on('click', '.title', function(){
+				$('input').attr('disabled', true);
+				$(this).prevAll().find('input').attr('disabled', false);
+				$('#rlist').submit();
+			})
+		})
+
+		// 리스트 날짜순으로 기본값
+		$(function(){
+			$('#dateDESC').attr('class','desc');
+		})
+		
+		// 즐겨찾기 만들기
+		$('.important').click(function(){
+			let mailNo = $(this).parent().prevAll().find('input[name=mailNo]').val();
+			let mailReceiver = $(this).parent().prevAll().find('input[name=mailReceiver]').val();
+			let bookmark = $(this).parent().prevAll().find('input[name=bookmark]').val();
+			
+			$.ajax({
+				type: "POST",
+				url: "important.mail",
+				data: {
+					mailNo : mailNo,
+					mailReceiver : mailReceiver,
+					bookmark : bookmark
+				},
+				success: function(data){
+					window.location.reload();
+				},
+				error: function(data){
+					window.location.reload();
+				}
+			});
+		})
+		
+			// 답장
+			$("#reply").click(function(){
+				var length = $('input:checked').length; // 체크된 숫자갯수
+				console.log("숫자갯수" + length);
+				if(length == 0){
+					alert('답장할 메일을 선택해주세요.');
+				} if(length > 1){
+					alert("메일 한 개만 선택해주세요.");
+				} if(length == 1){
+					$('#rlist').attr('action','reply.mail');
+					$('input').attr("disabled", true);
+					$('input:checked').parent().parent().find('input').attr("disabled", false);
+					$('#rlist').submit();
+				}
+			});
+			//전달
+			
+			
+			// 즐겨찾기만 조회하기
+			$('#do_important').click(function(){
+				$('.no_important').closest('tr').remove('tr');
+			});
+			
+			// 삭제 
+			$("#deleteBtn").click(function(){
+				var length = $('input:checked').length; // 체크된 숫자갯수
+		
+				console.log("숫자갯수" + length);
+		
+				var mail_arr = []; // 배열선언
+				
+				$('input:checked').each(function(){
+					var mail_no = $(this).val(); // 내가 원하는 값을 value로 담아놓고 체크할 때 value값 담기(생각의전환 필요!) 
+					
+					mail_arr.push(mail_no);
+					// 배열에 담기
+				});
+		
+				console.log("배열" + mail_arr);
+				// 체크된 게시물 번호 배열에 담았음
+				$.ajax({
+					type: "POST",
+					url: "delete.mail",
+					data: {
+						mail_arr: mail_arr
+					},
+					traditional:true,
+					success: function(data){
+						alert("성공");
+						window.location.reload();
+					},
+					error: function(data){
+						alert(data);
+						window.location.reload();
+					}
+				});
+			});
+		})
 </script>
 </html>

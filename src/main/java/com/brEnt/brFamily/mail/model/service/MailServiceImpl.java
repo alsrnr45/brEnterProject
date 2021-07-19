@@ -11,6 +11,7 @@ import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
+import com.google.gson.JsonElement;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -96,9 +97,34 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public InfoMail detailRMail(ReceiveMail rmail) {
+	public ReceiveMail detailRMail(ReceiveMail rmail) {
 		
 		return mDao.detailRMail(rmail, sqlSession);
+	}
+
+	@Override
+	public ArrayList<MailFile> detailMFMail(ReceiveMail rmail) {
+		return mDao.detailMFMail(rmail, sqlSession);
+	}
+
+	@Override
+	public int updateImpor(ReceiveMail r) {
+		return mDao.updateImpor(r, sqlSession);
+	}
+
+	@Override
+	public ArrayList<ReceiveMail> imporListView(ReceiveMail r) {
+		return mDao.imporListView(r, sqlSession);
+	}
+
+	@Override
+	public ReceiveMail reply(ReceiveMail r) {
+		return mDao.reply(r, sqlSession);
+	}
+
+	@Override
+	public ArrayList<MailFile> replyMF(ReceiveMail r) {
+		return mDao.replyMF(r, sqlSession);
 	}
 
 

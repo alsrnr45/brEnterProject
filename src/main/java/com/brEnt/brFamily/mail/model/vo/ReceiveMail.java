@@ -21,6 +21,7 @@ public class ReceiveMail {
 	
 	private String mailTitle;
 	private String mailSendDate;
+	private String mailContent;
 	
 	private int mailFNo;
 	private String mailFSize;

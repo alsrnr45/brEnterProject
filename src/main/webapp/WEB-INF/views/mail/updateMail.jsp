@@ -159,7 +159,7 @@
                                         <a class="btn btn-primary btn-block" href="">내게 쓰기</a>
                                         <label for=""></label><br>
                                         <div id="email-check"></div><br><br>
-                                        <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" />
+                                        <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" value="[RE] ${r.mailTitle }"/>
                                         <label for=""></label>
 
                                         <br>
@@ -176,10 +176,23 @@
                                                 <span></span>
                                             </div>
                                         </div>
+                                        <div id="file_wrap">
+                                            <div id="target_file_wrap">
+                                                <span>파일첨부</span>
+												<div class="card-header" style="width:944px;">
+												<ul>
+												<i class="fas fa-paperclip"></i>
+												<c:forEach  var="mf" items="${mflist}">
+													<li><a class="file_download" href="/filedown/${mf.mailUpdate}" download="${mf.mailOrigin}">${mf.mailOrigin}( ${String.format("%.2f", mf.mailFSize/1024/1024)} MB ) </a></li>
+												</c:forEach>
+												</ul>
+												</div>
+											</div>
+										</div>
                                         <br><div id="content_explain">내용</div>
                                         <br>
                                         <div>
-                                            <textarea id="summernote" name="mailContent"></textarea>
+                                            <textarea id="summernote" name="mailContent">${r.mailContent }</textarea>
                                         </div>
                                         <div class="card-footer text-center py-3">
                                             <div class="small">
@@ -225,7 +238,15 @@
             selectFile(this.files, target_id); 
         }); 
     }); 
-
+	// 기존 파일 업로드 미리 해놓기
+	$(document).ready(function() {
+		$("#drop_zone").show();
+		
+		$("#drop_zone").each(function (index, item){
+			$("#drop_zone").append('<div><input type="checkbox" id="#' + files[i] + '"> ' + fileName + ' (' + fileSizeStr + ')' + '<span class="cancel-file">x</span></div>');
+		});
+		
+	});
     // 파일 선택시 
     function selectFile(fileObject, target_id) { 
         var files = null; 
@@ -233,8 +254,6 @@
         // 직접 파일 등록시 
         files = jQuery('#' + target_id)[0].files; 
         console.log(files);
-        // 다중파일 등록 
-        $("#drop_zone").html('');
 
         if (files != null) { 
             for (var i = 0; i < files.length; i++) { 

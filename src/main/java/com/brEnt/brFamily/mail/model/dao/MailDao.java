@@ -2,6 +2,7 @@ package com.brEnt.brFamily.mail.model.dao;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -89,8 +90,28 @@ public class MailDao {
 		return sqlSession.update("mailMapper.readMail", rmail);
 	}
 	
-	public InfoMail detailRMail(ReceiveMail rmail, SqlSessionTemplate sqlSession) {
+	public ReceiveMail detailRMail(ReceiveMail rmail, SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("mailMapper.detailRMail", rmail);
+	}
+
+	public ArrayList<MailFile> detailMFMail(ReceiveMail rmail, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("mailMapper.detailMFMail", rmail);
+	}
+
+	public int updateImpor(ReceiveMail r, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("mailMapper.updateImpor", r);
+	}
+
+	public ArrayList<ReceiveMail> imporListView(ReceiveMail r, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("mailMapper.imporListView", r);
+	}
+
+	public ReceiveMail reply(ReceiveMail r, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("mailMapper.reply", r);
+	}
+
+	public ArrayList<MailFile> replyMF(ReceiveMail r, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("mailMapper.replyMF", r);
 	}
 
 	

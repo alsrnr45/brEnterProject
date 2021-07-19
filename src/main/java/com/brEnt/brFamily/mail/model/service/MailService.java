@@ -6,6 +6,7 @@ import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
+import com.google.gson.JsonElement;
 
 public interface MailService {
 	
@@ -38,7 +39,18 @@ public interface MailService {
 	
 	// 메일조회
 	int readMail(ReceiveMail rmail); // 받은 메일 수신시, 읽음표시
-	InfoMail detailRMail(ReceiveMail rmail);
+	ReceiveMail detailRMail(ReceiveMail rmail);
+	ArrayList<MailFile> detailMFMail(ReceiveMail rmail);
+	
+	//즐겨찾기 추가
+	int updateImpor(ReceiveMail r);
+	
+	//즐겨찾기 리스트 조회
+	ArrayList<ReceiveMail> imporListView(ReceiveMail r);
+	
+	//메일 답장
+	ReceiveMail reply(ReceiveMail r);
+	ArrayList<MailFile> replyMF(ReceiveMail r);
 
 
 

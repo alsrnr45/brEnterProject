@@ -76,8 +76,6 @@
                         <div class="card mb-4">
                         
                             <div class="card-header">
-                                <a class="btn btn-primary" type="button" href="noticeDetail.no" style="background-color: rgb(155, 89, 182); border-color: rgb(155, 89, 182); margin-left: 775px;">
-                                작성하기</a> 
                             </div>
                             
                             <div class="card-body">	                                	                             	
@@ -113,7 +111,7 @@
 	<script>
   		$(function() {
   			$(document).on("click", ".noticeList>tbody>tr", function(){
-           	location.href="noticeDetail.no?nno=" + $(this).children(".nno").text();
+           		location.href="noticeDetail.no?nno=" + $(this).children(".nno").text();
         	});
    	}); 
    	</script>

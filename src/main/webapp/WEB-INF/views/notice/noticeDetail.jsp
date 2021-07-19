@@ -70,7 +70,7 @@
                 <br><br>
                 <h1><b>NOTICE</b></h1>
 
-                <a href="" type="button" class="btn btn-primary list">목록으로</a>
+                <a href="noticeList.no" type="button" class="btn btn-primary list">목록으로</a>
                 
                 <table>
                     <thead>

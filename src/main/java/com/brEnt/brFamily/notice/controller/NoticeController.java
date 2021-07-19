@@ -48,5 +48,18 @@ public class NoticeController {
 		}
 	}
 	
+	// 
+	@RequestMapping("noticeList.admin")
+	public ModelAndView noticeListAdmin(ModelAndView mv) {	
+		
+		ArrayList<Notice> list = nService.selectNoticeList();
+		mv.addObject("list", list)
+		  .setViewName("notice/adminNoticeList");
+		
+		return mv;
+		
+	}
+	
+	
 	
 }

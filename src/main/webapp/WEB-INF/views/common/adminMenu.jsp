@@ -49,10 +49,8 @@
 	                </a>
 	                <div class="collapse" id="brEnterNotice" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
 	                    <nav class="sb-sidenav-menu-nested nav">
-	                        <a class="nav-link" href="#">Notice</a>
+	                        <a class="nav-link" href="noticeList.admin">Notice</a>
 	                        <a class="nav-link" href="#">Artists</a>
-	                        <a class="nav-link" href="#">News</a>
-	                        <a class="nav-link" href="#">Schedule</a>
 	                        <a class="nav-link" href="#">Comeback Info</a> <!--컴백이미지슬라이드 관리자 등록-->
 	                    </nav>
 	                </div>

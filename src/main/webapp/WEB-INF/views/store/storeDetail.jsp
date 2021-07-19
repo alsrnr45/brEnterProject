@@ -163,11 +163,10 @@
                             </tr>
                         </table>
                     </div>
-                    <a type="button" class="btn btn-light btn-lg" href="#">장바구니 담기</a>
+                    <a type="button" class="btn btn-light btn-lg" id="insertCart">장바구니 담기</a>
                     <a type="button" class="btn btn-info btn-lg" id="pay">바로 구매하기</a>
                 </div>
 			</div>
-            
 			<!-- 상품디테일 -->
 			<div class="detailArea">
                 <h6>상품 정보</h6>
@@ -180,6 +179,12 @@
     </div>
 
 	<script>
+		 $(function(){
+			$("#insertCart").click(function(){
+				 location.href="insertCart.pro?pdtNo=" + ${p.pdtNo} + "&pdtCount=" + $("#count").val() ;
+			})
+		})
+	
 		$(function(){
 	        $("#pay").click(function(){
 	           location.href="buyNow.st?pno=" + $(".pno").val() + "&pco=" + $("#count").val() ;

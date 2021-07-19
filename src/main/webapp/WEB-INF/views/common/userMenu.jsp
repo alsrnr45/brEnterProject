@@ -129,7 +129,7 @@
                         <div class="collapse" id="store" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 <a class="nav-link" href="storeList.st">사내스토어</a>
-                                <a class="nav-link" href="#">Offline Store</a>
+                                <a class="nav-link" href="offStore.st">Offline Store</a>
                                 <a class="nav-link" href="orderlist.mp">주문내역 조회</a>
                             </nav>
                         </div>

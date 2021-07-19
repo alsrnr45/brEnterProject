@@ -14,8 +14,8 @@
 	     , weekmenu_count as weekmenuCount
 	     , weekmenu_updatedate as weekmenuUpdatedate
 	 from
-	    ( 
-	      select
+	    (
+		 select
 	             weekmenu_no
 	           , mem_no
 	           , weekmenu_title 
@@ -24,13 +24,24 @@
 	           , weekmenu_count 
 	           , weekmenu_updatedate
 	           , rownum as rnum
+	from
+	( 
+	      select
+	             weekmenu_no
+	           , mem_no
+	           , weekmenu_title 
+	           , weekmenu_cnt
+	           , weekmenu_enrolldate 
+	           , weekmenu_count 
+	           , weekmenu_updatedate
 	        from menu_board
 	       where 1=1
 	       <include refid="forPage"/>
 	       order by weekmenu_no desc
 	     )
-    where 1=1
-      and rnum between #{rows} and #{rowe}
+	order by rnum
+	)
+    where rnum between #{rows} and #{rowe}
 </select>
 
 <select id="pageMaker" parameterType="PageMaker" resultType="PageMaker">

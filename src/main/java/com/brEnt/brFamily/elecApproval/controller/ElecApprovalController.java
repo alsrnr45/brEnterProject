@@ -46,6 +46,7 @@ public class ElecApprovalController {
       return mv;
    }
    
+   
    // 작성자 : 김혜미 -- 연차 신청
    @RequestMapping("insertOff.ea")
    public String insertOff(Approval_path ap, Off o, int memNo, Model model) {
@@ -78,6 +79,7 @@ public class ElecApprovalController {
 	   		.addAttribute("ApprovalPathList", ApprovalPathList);
 	   return "elecApproval/offCheckForm";
    }
+   
    
    // 작성자 : 최선희 -- 전자결재 기안함 리스트 
    @RequestMapping("approvalTotalList.ea")
@@ -127,11 +129,16 @@ public class ElecApprovalController {
    
    // 작성자 : 최선희 —- 기획안/업무연락/회람 작성폼  
    @RequestMapping("documentEnrollForm.ea")
-   public ModelAndView documentEnrollForm(String code, ModelAndView mv) {   
+   public ModelAndView documentEnrollForm(int mno, String code, ModelAndView mv) {   
+	   
 	   ArrayList<Dept> list = eaService.selectDept();
 	   //System.out.println(list);
+	   //System.out.println(code);
+	   //System.out.println(mno); 
+	   
 	   mv.addObject("list", list)
 	     .addObject("code", code)
+	     .addObject("mno", mno)
 	     .setViewName("elecApproval/documentEnrollForm");
 	   
 	   return mv;
@@ -140,7 +147,7 @@ public class ElecApprovalController {
       
    // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
    @RequestMapping("insertDocument.ea")
-   public String insertDocument(ElecApproval ea, MultipartFile upfile, HttpSession session, Model model) {
+   public String insertDocument(ElecApproval ea, int memNo, MultipartFile upfile, HttpSession session, Model model) {
 	   
 	   // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 ea에 추가로 담기 
 	   if(!upfile.getOriginalFilename().equals("")) { 
@@ -157,7 +164,7 @@ public class ElecApprovalController {
 		// 성공했을 경우 
 		if(result > 0) { 
 			session.setAttribute("alertMsg", "성공적으로 문서가 작성되었습니다.");
-			return "redirect:approvalTotalList.ea";
+			return "redirect:approvalTotalList.ea?mno=" + memNo;
 		// 실패했을 경우 
 		}else { 
 			model.addAttribute("errorMsg", "게시글 작성 실패"); 
@@ -193,7 +200,7 @@ public class ElecApprovalController {
    
    // 작성자 : 최선희 -- 기획안/업무연락/회람 삭제 
    @RequestMapping("deleteDocument.ea")
-   public String deleteDocument(int eano, String filePath, 
+   public String deleteDocument(int eano, int memNo, String filePath, 
 				  				HttpSession session, Model model) {
 			// filePath : 첨부파일 존재했다면 	  "resources/elecApprovalUpfiles/xxxxxx.pdf" 
 			// filePath : 첨부파일 존재하지 않았다면 "" 
@@ -208,7 +215,7 @@ public class ElecApprovalController {
 			}
 			
 			session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-			return "redirect:approvalTotalList.ea"; 
+			return "redirect:approvalTotalList.ea?mno=" + memNo; 
 	
 		}else { 
 		
@@ -217,7 +224,7 @@ public class ElecApprovalController {
 
 		}
 	
-   }
+    }
    
     
 	// 작성자 : 안소은 — 지출결의서 폼
@@ -234,6 +241,7 @@ public class ElecApprovalController {
 	
 	}
 
+	
 	// 작성자 : 안소은 -- 지출결의서 상세
 	@RequestMapping("expenseDetail.ea")
 	public String expenseDetail(int eano, Model model) {
@@ -257,6 +265,7 @@ public class ElecApprovalController {
 	   return new Gson().toJson(eaService.selectMemberList(deptNo));
 	   
    }
+   
    
    // 작성자 : 안소은 -- 지출결의서 작성
    @RequestMapping("insertExpense.ea")

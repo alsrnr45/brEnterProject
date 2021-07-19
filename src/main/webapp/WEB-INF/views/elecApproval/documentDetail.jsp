@@ -281,6 +281,7 @@
                 <form id="postForm" action="" method="post">
                     <input type="hidden" name="eano" value="${ ea.ecDocNo }">
                     <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
+                    <input type="hidden" name="memNo" value="${ loginUser.memNo }">
                 </form>
                
                

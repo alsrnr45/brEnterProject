@@ -245,7 +245,7 @@
             
             <div class="content_4">
             	       
-                <!-- 버튼 표현해야 되는 쪽에서 -->
+                <!-- 승인/반려 버튼 보이는 조건문 -->
                 <c:choose>                
                 	<c:when test="${ ttt eq loginUser.memNo }">
                     	<button class="btn btn-light" type="submit" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
@@ -258,8 +258,8 @@
                 </c:choose>
                 
                 
-                <!--  
-                => 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
+                <!-- 삭제 버튼 보이는 조건문 --> 
+                <!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
                           (ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) -->  
                           
                 <c:if test="${ ea.memNo eq loginUser.memNo }">
@@ -271,24 +271,7 @@
 		              		<button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button> 
 	              		</c:otherwise>
 	              	</c:choose>
-                </c:if>
-                          
-                <!--                     
-                <c:forEach var="i" begin="0" end="3">         
-                	<c:choose>  
-	                	<c:when test="${ i eq ApprovalPathList.size() }">                                                
-			                <c:if test="${ ApprovalPathList[i-1].ecStatus eq 'N' }">                                                  
-			                   <button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button>
-			                </c:if>
-		                </c:when>
-		                <c:otherwise>
-							   <button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>
-                    	</c:otherwise>
-	                </c:choose>
-                </c:forEach>
-               -->
-               
-                <input type="text" value="${ ApprovalPathList[i+1].ecStatus }"> 
+                </c:if>                          
                               
                                                  
                 <form id="postForm" action="" method="post">

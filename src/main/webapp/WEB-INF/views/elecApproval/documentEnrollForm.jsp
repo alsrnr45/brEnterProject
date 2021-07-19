@@ -214,7 +214,7 @@
 							<tr height="35">
 								<td style="color: royalblue;">${ loginUser.memName }</td>
 								<td></td>
-								<td>안소은</td>
+								<td></td>
 								<td></td>
 								<td></td>
 							</tr>

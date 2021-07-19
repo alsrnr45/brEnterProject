@@ -191,7 +191,7 @@ option:checked {
 						action="">
 
 						<br> 제목 <input type="text" name="weekmenuTitle"
-							style="width: 100%;" value="${ Detail.weekmenuTitle}"> <br>
+							style="width: 100%;" value="${ Detail.weekmenuTitle}" disabled="disabled"> <br>
 						<br>
 						<div>
 	        			<c:if test="${Detail != null }">

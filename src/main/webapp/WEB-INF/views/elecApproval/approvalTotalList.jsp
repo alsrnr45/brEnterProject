@@ -207,11 +207,11 @@
 						<div class="modalContent2">
 							<select class="form-control" id="formSelect">
 								<option>선택</option>
-								<option value="documentEnrollForm.ea?code=PL">기획안</option>
-								<option value="documentEnrollForm.ea?code=BC">업무연락</option>
+								<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }">기획안</option>
+								<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }">업무연락</option>
 								<option value="offEnrollForm.ea?mno=${ loginUser.memNo }">연차</option>									
-								<option value="expenseForm.ea?code=EX">지출결의서</option>									
-								<option value="documentEnrollForm.ea?code=ME">회람</option>
+								<option value="expenseForm.ea?mno=${ loginUser.memNo }">지출결의서</option>									
+								<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }">회람</option>
 							</select>
 						</div>
 					</div>

@@ -136,36 +136,37 @@
 									<c:choose>
 										<c:when test="${ code eq 'PL' }">
 											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
-												<option value="documentEnrollForm.ea?code=PL" selected>기획안</option>
-												<option value="documentEnrollForm.ea?code=BC">업무연락</option>
-												<option value="offEnrollForm.ea">연차</option>
-												<option value="expenseForm.ea">지출결의서</option>
-												<option value="documentEnrollForm.ea?code=ME">회람</option>												
+												<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }" selected>기획안</option>
+												<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }">업무연락</option>
+												<option value="offEnrollForm.ea?mno=${ loginUser.memNo }">연차</option>
+												<option value="expenseForm.ea?mno=${ loginUser.memNo }">지출결의서</option>
+												<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }">회람</option>												
 											</select>	
 												<input type="hidden" name="ecCode" value="PL">
 										</c:when>	
 										<c:when test="${ code eq 'BC' }">
 											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
-												<option value="documentEnrollForm.ea?code=PL">기획안</option>
-												<option value="documentEnrollForm.ea?code=BC" selected>업무연락</option>
-												<option value="offEnrollForm.ea">연차</option>
-												<option value="expenseForm.ea">지출결의서</option>
-												<option value="documentEnrollForm.ea?code=ME">회람</option>
+												<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }">기획안</option>
+												<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }" selected>업무연락</option>
+												<option value="offEnrollForm.ea?mno=${ loginUser.memNo }">연차</option>
+												<option value="expenseForm.ea?mno=${ loginUser.memNo }">지출결의서</option>
+												<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }">회람</option>
 											</select>	
 												<input type="hidden" name="ecCode" value="BC">
 										</c:when>		
 										<c:when test="${ code eq 'ME' }">
 											<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
-												<option value="documentEnrollForm.ea?code=PL">기획안</option>
-												<option value="documentEnrollForm.ea?code=BC">업무연락</option>
-												<option value="offEnrollForm.ea">연차</option>
-												<option value="expenseForm.ea">지출결의서</option>
-												<option value="documentEnrollForm.ea?code=ME" selected>회람</option>
+												<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }">기획안</option>
+												<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }">업무연락</option>
+												<option value="offEnrollForm.ea?mno=${ loginUser.memNo }">연차</option>
+												<option value="expenseForm.ea?mno=${ loginUser.memNo }">지출결의서</option>
+												<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }" selected>회람</option>
 											</select>
 												<input type="hidden" name="ecCode" value="ME">
 										</c:when>			
 									</c:choose>
 									<input type="hidden" id="ecCode" value="${ code }">
+									<input type="hidden" id="memNo" value="${ loginUser.memNo }">
 								</td>
 								<th width="120px">문서번호</th><input type="hidden" name="ecDocName" value="${ code }-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
 								<td width="340px">
@@ -198,11 +199,11 @@
 							</tr>
 							<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 							<tr height="80" style="color:gray;">
-								<td><img src=""></td>
-								<td><img src=""></td>
-								<td><img src=""></td>
-								<td></td>
-								<td></td>
+								<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
+								<td><input type="hidden" name="ApprovalPathList[0].ecTurn" value="1"></td>
+								<td><input type="hidden" name="ApprovalPathList[1].ecTurn" value="2"></td>
+								<td><input type="hidden" name="ApprovalPathList[2].ecTurn" value="3"></td>
+								<td><input type="hidden" name="ApprovalPathList[3].ecTurn" value="4"></td>
 							</tr>
 							<tr height="35">
 								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></td>
@@ -213,10 +214,10 @@
 							</tr>
 							<tr height="35">
 								<td style="color: royalblue;">${ loginUser.memName }</td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<td><input type="text" name="ApprovalPathList[0].memName" value="박지은"></td>
+								<td><input type="text" name="ApprovalPathList[1].memName" value="김혜미"></td>
+								<td><input type="text" name="ApprovalPathList[2].memName" value="김민국"></td>
+								<td><input type="text" name="ApprovalPathList[3].memName" value="강보람"></td>
 							</tr>
 						</table>
 						<br>

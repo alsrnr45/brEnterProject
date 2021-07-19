@@ -181,10 +181,12 @@
                                  <c:choose>
                                      <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
                                      <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-                                     
+                                     	
                                         <c:if test="${ (i+1) lt ApprovalPathList.size() }">
                                            <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
                                         </c:if>
+                                        
+                                        <c:set var="flag" value="ss"/>
                                         
                                      </c:when>
                                      <c:otherwise>
@@ -258,7 +260,20 @@
                 
                 <!--  
                 => 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
-                          (ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) -->            
+                          (ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) -->  
+                          
+                <c:if test="${ ea.memNo eq loginUser.memNo }">
+                	<c:choose>
+                		<c:when test="${ flag eq 'ss' }">
+		              		<button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>      
+		              	</c:when>
+		              	<c:otherwise>
+		              		<button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button> 
+	              		</c:otherwise>
+	              	</c:choose>
+                </c:if>
+                          
+                <!--                     
                 <c:forEach var="i" begin="0" end="3">         
                 	<c:choose>  
 	                	<c:when test="${ i eq ApprovalPathList.size() }">                                                
@@ -271,6 +286,7 @@
                     	</c:otherwise>
 	                </c:choose>
                 </c:forEach>
+               -->
                
                 <input type="text" value="${ ApprovalPathList[i+1].ecStatus }"> 
                               
@@ -279,7 +295,6 @@
                     <input type="hidden" name="eano" value="${ ea.ecDocNo }">
                     <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
                 </form>
-               
                
                 <script>
                    function postFormSubmit() { 

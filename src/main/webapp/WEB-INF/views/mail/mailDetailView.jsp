@@ -66,6 +66,11 @@
             color:red;
 		}
 		
+		.to-input{
+		padding-top:3px;
+		padding-bottom:3px;
+		margin-bottom:5px;}
+		
         /* btn css */
         #toggle_fileList:link, #toggle_fileList:visited, #toggle_fileList:hover, #toggle_fileList:active{
             text-decoration: none;
@@ -80,35 +85,15 @@
         .svg-inline--fa{
             vertical-align:middle;
         }
-
-        /* file input css*/
-        #file_wrap{
-        }
-
-
-        input[type="file"]{
-            display: none;
-        }
-
-        #file_showAndHideBtn{
-            size:7;
-        }
-        
-        .fa-caret-square-up, .fa-caret-square-down{
-            font-size:30px;
-        }
-
-        #target_file_wrap{
-            float:left;
-        }
-
-        #drop_zone{
-            border:1px solid #e5e5e5;
-            float:right;
-            width:80%;
-            height:120px;
-            display:none;
-        }
+		/* file_list css */
+		li{
+			list-style :none;
+		}
+		
+		#file_download:link, #file_download:hover, #file_download:visited{
+			color: gray; 
+			text-decoration: none;
+		}
 
         #content_explain{
             clear:both;
@@ -152,13 +137,20 @@
                                     	<input type="hidden" id="memberNo" name="memNo" value="${ loginUser.memNo }">       
                                         <input type="text" id="mailReceiver" placeholder="Email">
                                         
-										<!--  <input type="text" class="dataTable-input" id="receiver" style="width: 72%;" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b" > -->
-                                        
-                                        <a class="btn btn-primary btn-block" href="">주소록</a>
-                                        <a class="btn btn-primary btn-block" href="">내게 쓰기</a>
                                         <label for=""></label><br>
-                                        <div id="email-check"></div><br><br>
-                                        <span class="input-explain">제목</span>${im.mailTitle}
+                                        <div id="email-check"></div><br>
+                                        <div id="send_date"><span class="to-inpt">보낸 날짜 :</span>${r.mailSendDate}</div><br>
+                                        <script>
+                                        	/*
+                                        	$(document).ready(function date_format(){
+                                        		var week = ['일', '월', '화', '수', '목', '금', '토']; 
+                                    			var dayOfWeek = week[new Date(날짜문자열).date_format()]; 
+                                    			return dayOfWeek;
+                                    			console.log(dayOfWeek);
+                                        	})
+                                        	*/
+                                        </script>
+                                        <span class="input-explain">제목</span>${r.mailTitle} 
                                         <label for=""></label>
 
                                         <br>
@@ -166,9 +158,14 @@
                                         <div id="file_wrap">
                                             <div id="target_file_wrap">
                                                 <span>파일첨부</span>
-                                                <input multiple type="file" id="upfile" name="upfile">
-                                                <a id="toggle_fileList" href="#" onclick="toggle_layer();"><i class="far fa-caret-square-up"></i></a>
-                                                <a href="#" onclick="$('#upfile').click()" class="btn btn-primary">내 PC</a>
+												<div class="card-header" style="width:100%;">
+												<ul>
+												<i class="fas fa-paperclip"></i>
+												<c:forEach  var="mf" items="${mflist}">
+													<li><a class="file_download" href="/filedown/${mf.mailUpdate}" download="${mf.mailOrigin}">${mf.mailOrigin}( ${String.format("%.2f", mf.mailFSize/1024/1024)} MB ) </a></li>
+												</c:forEach>
+												</ul>
+												</div>
 
                                             </div>
                                             <div id="drop_zone" ondrop="dropHandler(event);">
@@ -178,12 +175,11 @@
                                         <br><div id="content_explain">내용</div>
                                         <br>
                                         <div>
-                                            ${im.mailContent}
+                                            ${r.mailContent}
                                         </div>
                                         <div class="card-footer text-center py-3">
                                             <div class="small">
-                                                <button type="button" id="insertCheck" class="btn btn-primary btn-block">목록으로</button>
-                                                <button type="button" id="" class="btn btn-primary btn-block">임시저장</button>
+                                                <button type="button" id="againList" class="btn btn-primary btn-block"><a href="receive.mail" style="color:white; text-decoration:none;">목록으로</a></button>
                                             </div>
                                         </div>    
                                     </div>
@@ -263,15 +259,7 @@
                     console.log("fileSize="+parseInt(fileSize)); 
                     fileSizeStr = parseInt(fileSize) + " byte"; 
                 }
-                // 업로드 파일 목록 생성 
-                $("#drop_zone").append('<div><input type="checkbox" id="#' + files[i] + '"> ' + fileName + ' (' + fileSizeStr + ')' + '<span class="cancel-file">x</span></div>');
-                $("#drop_zone").show();
-                $(".fa-caret-square-up").attr('class', 'fa-caret-square-down');
                 
-                $(document).on('click','.cancel-file',function(){
-                    $(this).parent().next().remove();
-                    $(this).parent().remove();
-                });
             } 
         } else{ 
             alert("ERROR"); 
@@ -289,19 +277,6 @@
         $(".fa-caret-square-down").attr('class', 'fa-caret-square-up');
 	}
 }
- 
-    // 회원가입 넘길때 check요소 없을 시, 제약걸기
-    // $('#insertCheck').click(function(e) {
-    //     e.preventDefault();
-
-    //     // 이메일 전송 Check
-    //     if($('#receiver').val() == null) {
-    //          alert('받는 사람이 지정되지 않았습니다.' + '받는 사람 주소를 입력해주세요');
-    //          return false;
-    //     }
-
-    //     $('#sendMail').submit();
-    // });
     
 // 이메일 받는 사람 관련 js    
 (function($){
@@ -318,9 +293,11 @@
         let email = "";
 
         return this.each(function()
-        {
-            $(this).after("<span class=\"to-input\">받는사람</span>\n<br>" +
-                "<div class=\"all-mail\"><span class=\"email-ids\">" + ${im.mailReceiver} + "</span></div>\n" 
+        {	
+            $(this).after("<span class=\"to-input\">보낸사람 : </span>\n" +
+                    "<div class=\"all-mail\"><span class=\"email-ids\">" + "${r.mailWriter}" + "</span></div>\n<br>"
+                    + "<br><span class=\"to-input\">받는사람 : </span>\n" +
+                "<div class=\"all-mail\"><span class=\"email-ids\">" + "${r.mailReceiver}" + "</span></div>\n" 
                 );
             let $orig = $(this);
             let $element = $('.enter-mail-id');
@@ -350,7 +327,7 @@
                 $(this).parent().remove();
             });
 
-            return $orig.hide()
+            return $orig.hide();
         });
     };
 
@@ -378,6 +355,10 @@
             return false;
         }
         $('#sendMail').submit();        
+	});
+    
+	$('#againList').click(function(e) {
+        
 	});
 </script>
 </html>

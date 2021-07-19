@@ -19,4 +19,12 @@ public class CartDao {
 		return sqlSession.selectList("storeMapper.cartList", memNo);
 	}
 
+	public void insertCart(Cart cart) {
+		sqlSession.insert("storeMapper.insertCart",cart);
+	}
+
+	public void cartDelete(Cart cart) {
+		sqlSession.delete("storeMapper.cartDelete",cart);
+	}
+
 }

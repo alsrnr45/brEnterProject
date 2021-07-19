@@ -209,6 +209,21 @@
 		   and c.mem_no = #{memNo}
    </select>
    
+   <!-- 작성자 : 박지은  -->
+   <insert id="insertCart" parameterType="Cart">
+   insert into cart
+   (cart_no, mem_no, pdt_no, pdt_count, insert_date)
+   values
+   (seq_cartno.nextval, #{memNo}, #{pdtNo}, #{pdtCount}, sysdate)
+   
+   </insert>
+   
+   <delete id="cartDelete" parameterType="Cart">
+   delete from cart
+   where cart_no = #{cartNo}
+   and mem_no = #{memNo}
+   </delete>
+   
    <insert id="orderInsert" parameterType="PayDto">
    		insert all
 		  into order_form

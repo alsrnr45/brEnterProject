@@ -106,6 +106,9 @@ option:checked {
 	margin: auto;
 }
 </style>
+<link rel="stylesheet" href="resources/css/leaflet.css" />
+<script type="text/javascript" src="resources/js/leaflet.js"></script>
+<script type="text/javascript" src="resources/js/CmWorldLayer.js"></script>
 
 </head>
 <body class="sb-nav-fixed">
@@ -125,18 +128,28 @@ option:checked {
 		<div id="layoutSidenav_content">
 
 			<div class="offOuter">
-				<br>
-				<br>
+				<br> <br>
 
 				<h2 align="center">BR SHOP 오시는길</h2>
 				<br>
 
 				<div class="address">위치 : 서울특별시 강남구 테헤란로 14길 6 남도빌딩 2F, 3F,
 					4F, 5F, 6F</div>
-				<br>
-				<br>
+				<br> <br>
 
-				<div class="map"></div>
+				<div class="map">
+					<div id="mapid" style="width: 100%; height: 100%;"></div>
+					<script>
+						var mymap = L.map('mapid'); //지도 컨트롤로 맵 설정
+
+						L.tileLayer.CmWorld('naver').addTo(mymap); //,{  //배경지도로 사용할 지도가 NAVER 지도임을 명시.
+
+						mymap.setView([ 37.49898463104028, 127.03287899494173 ], 12); //지도 로딩 위치 설정
+						
+					    var marker = L.marker([37.49898463104028, 127.03287899494173]).addTo(mymap);
+					    marker.bindPopup("BREnt").openPopup();
+					</script>
+				</div>
 
 			</div>
 

@@ -73,7 +73,7 @@
 	                <!-- 일정관리 -->
 	                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#adminSchedule" aria-expanded="false" aria-controls="collapseLayouts">
 	                    <div class="sb-nav-link-icon"><i class="fas fa-calendar-alt fa-fw"></i></div>
-	                    일정관리
+	                    	일정관리
 	                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
 	                </a>
 	                <div class="collapse" id="adminSchedule" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">

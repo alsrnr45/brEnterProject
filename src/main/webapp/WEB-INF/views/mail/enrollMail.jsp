@@ -234,8 +234,13 @@
         files = jQuery('#' + target_id)[0].files; 
         console.log(files);
         // 다중파일 등록 
-        $("#drop_zone").html('');
-
+		/*
+        if($('.fileSelector').length > 10) {
+        	alret(10개이상)
+        	return false;
+        }
+        */
+        
         if (files != null) { 
             for (var i = 0; i < files.length; i++) { 
                 // 파일 이름 
@@ -330,11 +335,11 @@
                 if (e.keyCode === 13 || e.keyCode === 32) {
                     let getValue = $element.val();
                     if (/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/.test(getValue)){
-                        $('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
-                        $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + getValue + '">');
-                        $('#is_receiver_check').attr('value', 'T');
-                        $('#email-check').hide();
-                        $element.val('');
+                            $('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
+                            $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + getValue + '">');
+                            $('#is_receiver_check').attr('value', 'T');
+                            $('#email-check').hide();
+                            $element.val('');
 
                         email += getValue
                     } else {

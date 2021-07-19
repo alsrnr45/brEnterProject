@@ -226,6 +226,12 @@ public class StoreController {
       return changeName;
    }   
       
+   // 작성자 - 박지은 : 오프라인스토어
+   
+   @RequestMapping("offStore.st")
+   public String offlineStore() {
+      return "store/offlineStore";
+   }
    
 
    

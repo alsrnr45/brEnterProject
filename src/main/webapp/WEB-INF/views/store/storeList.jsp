@@ -79,7 +79,23 @@
             
 			<div class="content">
 				<div class="headArea">
+				
 					<!-- 카테고리 -->
+					<!--  
+					<form action="">
+						<div id="form-group">
+							<select class="form-control" name="pdtCtg" id="pdtCtg" onchange="location.href=storeCtgList.st?pdtCtg=this.value">
+								<option value="Album" id="Album">Album</option>
+								<option value="Cherring" id="Cherring">Cherring</option>
+								<option value="Photo" id="Photo">Photo</option>
+								<option value="Fashion" id="Fashion">Fashion</option>
+								<option value="Stationery" id="Stationery">Stationery</option>
+							</select>
+						</div>
+						<button type="submit">확인</button>
+					</form>
+					-->
+					
 					<form action="storeCtgList.st">
 						<div id="form-group">
 							<select class="form-control" name="pdtCtg" id="pdtCtg">
@@ -106,6 +122,7 @@
 		        		*/
 		        	
 			            /* 화면 전환 후 select box 고정 */
+			            /*
 		        		var ctgCode = $('#pdtCtg option:selected').val();
 			            
 			            if(ctgCode == Album){
@@ -119,6 +136,7 @@
 			            } else{
 			                $('#Stationery').attr('selected','selected');
 			            }
+			            */
 		        	</script>
 		        	
 					<!--  					
@@ -205,40 +223,6 @@
 				            	</c:otherwise>
 				            </c:choose>
 			            </c:if>
-					    <!--  
-						<c:if test="${ pi.currentPage ne 1 }">
-							<c:choose>
-								<c:when test="${ empty keyword }">
-									<li class="page-item disabled"><a class="page-link" href="#">&lt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item disabled"><a class="page-link" href="search.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">&lt;</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:if>
-						
-						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<c:choose>
-								<c:when test="${ empty keyword }">
-										<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ p }">${ p }</a></li>
-								</c:when>
-			            		<c:otherwise>
-									<a href="search.st?currentPage=${ p }&condition=${condition}&keyword=${keyword}">[${ p }]</a>
-			            		</c:otherwise>
-			            	</c:choose>
-			            </c:forEach>
-						
-						<c:if test="${ pi.currentPage ne pi.maxPage }">
-			            	<c:choose>
-			            		<c:when test="${ empty keyword }">
-									<li class="page-item disabled"><a class="page-link" href="#">&gt;</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item"><a class="page-link" href="search.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">&gt;</a></li>
-								</c:otherwise>
-				            </c:choose>
-			            </c:if>
-			            -->
 					</ul>
 				</div>
 			</div>

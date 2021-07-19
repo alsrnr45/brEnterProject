@@ -150,25 +150,25 @@
 		                        <th rowspan="5" width="120">기안자</th>
 		                        <td width="136">${ loginUser.deptName }</td>
 		                        <th rowspan="5" width="120">결재자</th>
-		                        <td width="136"><input type="text" name="ApprovalPathList[0].deptName" value="개발팀"></td>
-		                        <td width="136"><input type="text" name="ApprovalPathList[1].deptName" value="개발팀"></td>
-		                        <td width="136"><input type="text" name="ApprovalPathList[2].deptName" value="개발팀"></td>
-		                        <td width="136"><input type="text" name="ApprovalPathList[3].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[0].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[1].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[2].deptName" value="개발팀"></td>
+		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[3].deptName" value="개발팀"></td>
 							</tr>
 							<tr height="35">
 		                        <td>${ loginUser.posiName }</td>
-		                        <td><input type="text" name="ApprovalPathList[0].posiName" value="과장"></td>
-		                        <td><input type="text" name="ApprovalPathList[1].posiName" value="차장"></td>
-		                        <td><input type="text" name="ApprovalPathList[2].posiName" value="부장"></td>
-		                        <td><input type="text" name="ApprovalPathList[3].posiName" value="대표"></td>
+		                        <td><input type="text" class="form-control" name="ApprovalPathList[0].posiName" value="과장"></td>
+		                        <td><input type="text" class="form-control" name="ApprovalPathList[1].posiName" value="차장"></td>
+		                        <td><input type="text" class="form-control" name="ApprovalPathList[2].posiName" value="부장"></td>
+		                        <td><input type="text" class="form-control" name="ApprovalPathList[3].posiName" value="대표"></td>
 							</tr>
 							<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 							<tr height="80" style="color:gray;">
 								<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-								<td><input type="hidden" name="ApprovalPathList[0].ecTurn" value="1"></td>
-								<td><input type="hidden" name="ApprovalPathList[1].ecTurn" value="2"></td>
-								<td><input type="hidden" name="ApprovalPathList[2].ecTurn" value="3"></td>
-								<td><input type="hidden" name="ApprovalPathList[3].ecTurn" value="4"></td>
+								<td><input type="hidden" class="form-control" name="ApprovalPathList[0].ecTurn" value="1"></td>
+								<td><input type="hidden" class="form-control" name="ApprovalPathList[1].ecTurn" value="2"></td>
+								<td><input type="hidden" class="form-control" name="ApprovalPathList[2].ecTurn" value="3"></td>
+								<td><input type="hidden" class="form-control" name="ApprovalPathList[3].ecTurn" value="4"></td>
 							</tr>
 							<tr height="35">
 								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
@@ -179,10 +179,10 @@
 		                     </tr>
 		                     <tr height="35">
 								<td style="color: royalblue;">${ loginUser.memName }</td>
-								<td><input type="text" name="ApprovalPathList[0].memName" value="박지은"></td>
-								<td><input type="text" name="ApprovalPathList[1].memName" value="김혜미"></td>
-								<td><input type="text" name="ApprovalPathList[2].memName" value="김민국"></td>
-								<td><input type="text" name="ApprovalPathList[3].memName" value="강보람"></td>
+								<td><input type="text" class="form-control" name="ApprovalPathList[0].memName" value="박지은"></td>
+								<td><input type="text" class="form-control" name="ApprovalPathList[1].memName" value="김혜미"></td>
+								<td><input type="text" class="form-control" name="ApprovalPathList[2].memName" value="김민국"></td>
+								<td><input type="text" class="form-control" name="ApprovalPathList[3].memName" value="강보람"></td>
 							</tr>
 						</table>
 						<br>

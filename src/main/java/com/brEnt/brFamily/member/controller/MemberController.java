@@ -39,23 +39,22 @@ public class MemberController {
          return "common/userMain";  
           */
    
-   @RequestMapping("login.me")
+   @RequestMapping("brEnter.main")
    public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
       Member loginUser = mService.loginMember(m);
       
+      /*
       if(loginUser == null) { // 로그인 실패
     	  System.out.println("로그인 실패");
          
          mv.setViewName("redirect:/");
       
-      }else { // 로그인 성공
+      }else { // 로그인 성공 */ 
     	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();
           
          mv.addObject("list", list)
-            .setViewName("common/userMain");
+           .setViewName("common/userMain");
          session.setAttribute("loginUser", loginUser);
-        
-      }
       
       return mv;
       

@@ -166,7 +166,7 @@
                     <tr height="15%;">
                         <td rowspan="6" style="width:5%; font-weight: bold;">기안자</td>
                         <td>
-                        	<input type="text" class="form-control" name="ecWriter" value="${ loginUser.deptName }" readonly>
+                        	<input type="text" class="form-control" name="deptName" value="${ loginUser.deptName }" readonly>
                        		<input type="hidden" name="memNo" value="${ loginUser.memNo }">
                         </td>
                         <td rowspan="6" style="width:5%; font-weight: bold;">결재자</td>
@@ -222,30 +222,13 @@
                     </tr>
                     <tr height="40">
                         <th>지출 일자</th>
-                        <td>
-                        	<input type="text" name="month" value=""> 
-                            <!-- <p style="float:left; margin: 8px 10px 0px 0px;">2021년</p>
-                            <select class="form-control" id="" style="float:left; width:50px;" required>
-                                <option value="Jan">1</option>
-                                <option value="Feb">2</option>
-                                <option value="Mar">3</option>
-                                <option value="Apr">4</option>
-                                <option value="May">5</option>
-                                <option value="JUN">6</option>
-                                <option value="Jul">7</option>
-                                <option value="Aug">8</option>
-                                <option value="Sep">9</option>
-                                <option value="Oct">10</option>
-                                <option value="Nov">11</option>
-                                <option value="Dec">12</option>
-                            </select>
-                            <p style="float:left; margin: 8px 0px 0px 10px;">월</p> -->
-                        </td>
+                        <td><input type="text" name="month" value=""></td>
                     </tr>
                     <tr height="40">
                         <th>지출자</th>
                         <td>
                         	<input type="text" class="form-control" name="exWriter" value="${ loginUser.memName }" required>
+                        	<input type="hidden" class="form-control" name="ecWriter" value="${ loginUser.memName }" required>
                         </td>
                     </tr>
                     <tr height="40">
@@ -255,9 +238,7 @@
                     <tr>
                         <th>지출 내용</th>
                         <td>
-                            <div class="form-group">
-                                <textarea class="form-control" name="ecCnt" rows="15" id="comment" required></textarea>
-                            </div>
+                            <div class="form-group"><textarea class="form-control" name="ecCnt" rows="15" id="comment" required></textarea></div>
                         </td>
                     </tr>
                 </table>
@@ -449,6 +430,9 @@
 		      $("#memName2").val(arr[1].memName);
 		      $("#memName3").val(arr[2].memName);
 		      $("#memName4").val(arr[3].memName);
+		      
+		      // 결재선이 1개 or 2개 or 3개 일 경우
+		      
 		      
 		    })
 		});

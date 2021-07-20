@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
+import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
+import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.member.model.service.MemberService;
 import com.brEnt.brFamily.member.model.vo.Member;
 
@@ -24,7 +26,8 @@ public class MemberController {
 
    @Autowired 
    private MemberService mService; //변수선언(전역변수 세팅)
-      
+   
+   
    // 작성자 : 정예빈 -- 로그인 
 
          /*
@@ -36,31 +39,36 @@ public class MemberController {
          return "common/userMain";  
           */
    
-   @RequestMapping("login.me")
+   @RequestMapping("brEnter.main")
    public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
       Member loginUser = mService.loginMember(m);
       
+      /*
       if(loginUser == null) { // 로그인 실패
     	  System.out.println("로그인 실패");
          
          mv.setViewName("redirect:/");
       
-      }else { // 로그인 성공
+      }else { // 로그인 성공 */ 
+    	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();
+          
+         mv.addObject("list", list)
+           .setViewName("common/userMain");
          session.setAttribute("loginUser", loginUser);
-         mv.setViewName("common/userMain");
-      }
       
       return mv;
       
    }
+  
    
    @RequestMapping("logout.me")
-   public String logoutMember(HttpSession session) {
-      session.invalidate();
+   public String logoutMember(ModelAndView mv, HttpSession session) {
+      
+	   session.invalidate();
       return "member/login";
    }
    
-
+   
    ////////////// 신규사원  //////////////
    // 작성자 : 김혜미 -- 신규사원 리스트
    @RequestMapping("newMemberList.admin")
@@ -200,6 +208,8 @@ public class MemberController {
    }   
    
    
+   
+  
    
    
 

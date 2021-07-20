@@ -65,7 +65,7 @@
     <!-- 상단바 -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="brEnter.main" style="width: 225px;">
+        <a id="forwarding_main" class="navbar-brand ps-3" href="${ pageContext.servletContext.contextPath }/brEnter.main" style="width: 225px;">
               <img src="resources/images/brLogo_user.png" style="height: 56px;"></a>
       
         <!-- Sidebar Toggle-->

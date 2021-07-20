@@ -43,13 +43,19 @@ public interface ElecApprovalService {
     // 작성자 : 김혜미 -- 연차 신청
     int insertOff(Off o);
     
-    // 결재선
-    int insertApprovalPath(ArrayList<Approval_path> approvalPathList);
-    
     // 작성자 : 김혜미 -- 연차 상세조회
     ElecApproval detailOff(int eano);
+
+    // 작성자 : 김혜미 -- 결재선  등록
+    int insertApprovalPath(ArrayList<Approval_path> approvalPathList);
     
-    // 결재선 상세조회
+    // 작성자 : 김혜미 -- 결재선 상세조회
     ArrayList<Approval_path> detailApprovalPath(int eano);
+
+    // 작성자 : 김혜미 -- 결재 승인
+    int approveDocument(int approvalPathNo);
+    
+    // 작성자 : 김혜미 -- 결재 최종승인
+	int finalApprove(int finalApproval, int eano, int memNo);
     
 }

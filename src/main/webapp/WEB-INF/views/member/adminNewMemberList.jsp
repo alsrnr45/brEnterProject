@@ -99,39 +99,6 @@
                                        </tr>
                                     </c:forEach>
                                 </tbody>
-                                 
-                                <%--
-                                <tbody>
-                                    <tr>
-                                        <td>128</td>
-                                        <td>김자바</td>
-                                        <td>010-0000-0000</td>
-                                        <td>kimjava@br.com</td>
-                                        <td>2021.06.04</td>
-                                    </tr>
-                                    <tr>
-                                        <td>127</td>
-                                        <td>김자바</td>
-                                        <td>010-0000-0000</td>
-                                        <td>kimjava@br.com</td>
-                                        <td>2021.06.04</td>
-                                    </tr>
-                                    <tr>
-                                        <td>126</td>
-                                        <td>김자바</td>
-                                        <td>010-0000-0000</td>
-                                        <td>kimjava@br.com</td>
-                                        <td>2021.06.04</td>
-                                    </tr>
-                                    <tr>
-                                        <td>125</td>
-                                        <td>김자바</td>
-                                        <td>010-0000-0000</td>
-                                        <td>kimjava@br.com</td>
-                                        <td>2021.06.04</td>
-                                    </tr>
-                                </tbody>
-                                --%> 
                             </table>
                         </div>
                     </div>
@@ -141,15 +108,6 @@
     </div>
     
 	<script>
-	<%--
-	$(function() {
-	    $(".newMemberList>tbody>tr").click(function() {
-	        location.href ="newMemberDetail.admin";
-	        console.log("신규사원클릭");
-		})
-	})
-	--%>
-	
 	$(function() {
 
 		$(document).on("click", ".newMemberList>tbody>tr", function(){

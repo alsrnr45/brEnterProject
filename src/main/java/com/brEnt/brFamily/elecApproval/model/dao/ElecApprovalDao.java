@@ -69,28 +69,43 @@ public class ElecApprovalDao {
 		return sqlSession.insert("approvalMapper.insertOff", o);
 	}
 	
-	// 결재선
+	// 작성자 : 김혜미 -- 연차 상세조회
+	public ElecApproval detailOff(SqlSessionTemplate sqlSession, int ecDocNo) {
+		return sqlSession.selectOne("approvalMapper.detailOff", ecDocNo);
+	}
+	
+	// 작성자 : 김혜미 -- 결재선  등록
 	public int insertApprovalPath(SqlSessionTemplate sqlSession, ArrayList<Approval_path> approvalPathList) {
 		
 		int result = 0;
 		
 		for(int i=0; i<approvalPathList.size(); i++) {
-			System.out.println(approvalPathList.get(i));
+			//System.out.println(approvalPathList.get(i));
 			result = sqlSession.insert("approvalMapper.insertApprovalPath", approvalPathList.get(i));
 		}
 		return result;
 	}
-	
-	// 작성자 : 김혜미 -- 연차 조회
-	public ElecApproval detailOff(SqlSessionTemplate sqlSession, int ecDocNo) {
-		return sqlSession.selectOne("approvalMapper.detailOff", ecDocNo);
-	}
 
-	// 결재선 조회
+	// 작성자 : 김혜미 -- 결재선 상세조회
 	public ArrayList<Approval_path> detailApprovalPath(SqlSessionTemplate sqlSession, int eano) {
 		return (ArrayList)sqlSession.selectList("approvalMapper.detailApprovalPath", eano);
 	}
 
+	// 작성자 : 김혜미 -- 결재 승인
+	public int approveDocument(SqlSessionTemplate sqlSession, int approvalPathNo) {
+		return sqlSession.update("approvalMapper.approveDocument", approvalPathNo);
+	}
+
+	// 작성자 : 김혜미 -- 결재 최종승인
+	public int finalApprove(SqlSessionTemplate sqlSession, int finalApproval, int eano, int memNo) {
+		
+		int result = 0; 
+		
+		if((int)finalApproval == (int)memNo) {
+			result = sqlSession.update("approvalMapper.finalApprove", eano);
+		}
+		return result;
+	}
 	
 	
 	

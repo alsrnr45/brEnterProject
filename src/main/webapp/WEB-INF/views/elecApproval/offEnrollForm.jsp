@@ -24,70 +24,74 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <style>
-   /* 드롭박스 */
-   select:focus, select:active{
-       border-color: rgb(155, 89, 182) !important;
-       box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
-       outline: 0 none !important;
-   }
-   option:checked {background: rgb(155, 89, 182); color: white;}
-   select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; font-size: 13px !important;}
-   /* 버튼 */
-   .btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
-   .btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px;}
-   .btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
-   /* 스타일 */
-   /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
-   .content {width:1150px; height: 810px; margin: auto; margin-top: 30px; margin-bottom: 30px;}
-   h6 {margin: 0 0 10px 115px; font-size: 18px;}
-   table {text-align: center; font-size:13px; margin: auto;}
-   table>tr,th,td{border:1px lightgray solid;} 
-   .tableType01 th {height: 40px; background-color:rgba(241, 241, 241, 0.75);}
+	/* 드롭박스 */
+	select:focus, select:active{
+		border-color: rgb(155, 89, 182) !important;
+		box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+		outline: 0 none !important;
+	}
+	option:checked {background: rgb(155, 89, 182); color: white;}
+	select{background:url(https://t1.daumcdn.net/cfile/tistory/99761B495C84AA8716) no-repeat 95% 50% !important; font-size: 13px !important;}
    
-   .tableType02 th {height: 160px; background-color:rgba(241, 241, 241, 0.75);}
-   .tableType02 img {height:50px;}
-   .tableType03 td {text-align: left;}
-   .tableType03 th {background-color:rgba(241, 241, 241, 0.75);}
-   .tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
-   .tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
+	/* 버튼 */
+    .btn-primary {margin: 0 0 0px 950px; background-color:rgb(155, 89, 182); border-color:rgb(155, 89, 182);}
+    .btn-outline-secondary {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px;}
+    .btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color:royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
    
+	/* 문서종류 */
+    /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
+	.content {width:1150px; height: 810px; margin: auto; margin-top: 30px; margin-bottom: 30px;}
+	h6 {margin: 0 0 10px 115px; font-size: 18px;}
+	table {text-align: center; font-size:13px; margin: auto;}
+	table>tr,th,td{border:1px lightgray solid;} 
+	.tableType01 th {height: 40px; background-color:rgba(241, 241, 241, 0.75);}
+	
+	/* 결재선 */
+	.tableType02 th {height: 160px; background-color:rgba(241, 241, 241, 0.75);}
+	.tableType02 input {background-color: white !important; border-color: white;}
+	.tableType02 input:focus, input:active {
+		border-color: rgba(255, 255, 255, 0) !important;
+		box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0) !important;
+		outline: 0 none !important;}
+	.tableType02 img {height:50px;}
+
+	/* 연차폼 */
+	.tableType03 td {text-align: left;}
+	.tableType03 th {background-color:rgba(241, 241, 241, 0.75);}
+	.tableType03 input, textarea{width:100%; border:none; padding-left:10px;}
+	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
+    
     /* 결재선 모달 */
 	.signModalOuter{ margin:auto; text-align: center; width:1000px; height:500px;}
-    .signModalOuter .modal1 ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
-    /*
-    .signModalOuter .modal1 ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
-    .modal1>ul:hover>a .modal1>ul:focus>a, .modal1>ul:active>a, .modal1>ul:visited>a {cursor:pointer; background: rgb(170, 218, 248) !important; padding-top:3px;}
-    */
-    .modal1>ul.on1 {cursor:pointer; background: rgb(170, 218, 248);}
-    .modal2>ul>li.on2 {cursor:pointer; background: rgb(170, 218, 248);}
-    
-    
-    .signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
-    .modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
-    .modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:auto;}
-    .modal1, .modal2, .modal4{width:30%;}
-    .modal3{width:5%; padding-top:160px;}
-    .modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
-    .modal4 .apply{background:rgb(255, 235, 152); color:black;}
-    .modal4_1{
-        height:10%; 
-        border:1px solid lightgray; 
-        margin-bottom: 17px;
-        padding-top:10px;
-        color:royalblue;
-        text-align: center;
-    }
-    .modal4_2{width:100%; height:30px;}
-    .modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
-    .modal4_3{height:47%; border:1px solid lightgray; text-align: center; padding: 25px 20px 20px 0;}
+	.signModalOuter .btn{background:lightslategrey; color:white; border:none; margin-top:10px;}
 	
-	.modal1 {padding-top:37px;}
+	.modal1 ul{list-style:none; padding-left:0px; height:30px; padding-top:3px;}
+	.modal1 ul:hover{cursor:pointer; background: rgb(170, 218, 248); padding-top:3px;}
+	.modal1>ul.on1 {cursor:pointer; background: rgb(170, 218, 248);}
+	.modal2>ul>li.on2 {cursor:pointer; background: rgb(170, 218, 248);}
 	.modal2 ul {padding: 4px 0 0 0;}
 	.modal2 li {list-style:none; margin-bottom:13px; padding-bottom: 3px;}
-	/*
 	.modal2 li:hover{cursor:pointer; background: rgb(170, 218, 248); margin-bottom:13px; padding-bottom: 3px;}
-	*/
+	
+	.modal1 {padding-top:37px;}
+	.modal1, .modal2, .modal3, .modal4{float:left; height:430px; margin: 30px 5px 0px 5px; }
+	.modal1, .modal2{border:1px solid lightgray; padding: 20px; overflow:auto;}
+	.modal1, .modal2, .modal4{width:30%;}
+	.modal3{width:5%; padding-top:160px;}
 	.modal3 .btn-primary {margin-left: 0px;}
+	.modal4 .btn-secondary{width:100%; height:44px; background:rgb(255, 134, 134)}
+	.modal4 .apply{background:rgb(255, 235, 152); color:black;}
+	.modal4_1{
+		height:10%; 
+		border:1px solid lightgray; 
+		margin-bottom: 17px;
+		padding-top:10px;
+		color:royalblue;
+		text-align: center;
+	}
+	.modal4_2{width:100%; height:30px;}
+	.modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
+	.modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 25px 20px 20px 0;}
 </style>
 
 </head>
@@ -126,20 +130,20 @@
 	                    	<tr>
 		                        <th width="120px" height="35px;">문서종류</th> 
 		                        <td width="340px">
-									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
-										<option value="documentEnrollForm.ea">기획안</option>
-										<option value="documentEnrollForm.ea">업무연락</option>
-										<option value="offEnrollForm.ea" selected>연차</option>
-										<option value="expenseForm.ea">지출결의서</option>
-										<option value="documentEnrollForm.ea">회람</option>
-									</select>
+									<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
+										<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }">기획안</option>
+										<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }">업무연락</option>
+										<option value="offEnrollForm.ea?mno=${ loginUser.memNo }" selected>연차</option>
+										<option value="expenseForm.ea?mno=${ loginUser.memNo }">지출결의서</option>
+										<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }">회람</option>												
+									</select>	
 									<input type="hidden" name="ecCode" value="OF">
 		                        </td>
 			                    <th width="120px">문서번호<input type="hidden" name="ecDocName" value="OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 
 			                    <td width="340px">OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
 							</tr>
 						</table>
-	                  <br><br>
+	                  <br>
 	               </div>
 	
 	               <div class="content_2">
@@ -150,39 +154,39 @@
 		                        <th rowspan="5" width="120">기안자</th>
 		                        <td width="136">${ loginUser.deptName }</td>
 		                        <th rowspan="5" width="120">결재자</th>
-		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[0].deptName" value="개발팀"></td>
-		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[1].deptName" value="개발팀"></td>
-		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[2].deptName" value="개발팀"></td>
-		                        <td width="136"><input type="text" class="form-control" name="ApprovalPathList[3].deptName" value="개발팀"></td>
+								<td width="136" class="signDept1"><input type="text" class="form-control" id="deptName0" name="ApprovalPathList[0].deptName" readonly></td>
+								<td width="136" class="signDept2"><input type="text" class="form-control" id="deptName1" name="ApprovalPathList[1].deptName" readonly></td>
+								<td width="136" class="signDept3"><input type="text" class="form-control" id="deptName2" name="ApprovalPathList[2].deptName" readonly></td>
+								<td width="136" class="signDept4"><input type="text" class="form-control" id="deptName3" name="ApprovalPathList[3].deptName" readonly></td>
 							</tr>
 							<tr height="35">
 		                        <td>${ loginUser.posiName }</td>
-		                        <td><input type="text" class="form-control" name="ApprovalPathList[0].posiName" value="과장"></td>
-		                        <td><input type="text" class="form-control" name="ApprovalPathList[1].posiName" value="차장"></td>
-		                        <td><input type="text" class="form-control" name="ApprovalPathList[2].posiName" value="부장"></td>
-		                        <td><input type="text" class="form-control" name="ApprovalPathList[3].posiName" value="대표"></td>
+								<td><input type="text" class="form-control" id="posiName0" name="ApprovalPathList[0].posiName" readonly></td>
+								<td><input type="text" class="form-control" id="posiName1" name="ApprovalPathList[1].posiName" readonly></td>
+								<td><input type="text" class="form-control" id="posiName2" name="ApprovalPathList[2].posiName" readonly></td>
+								<td><input type="text" class="form-control" id="posiName3" name="ApprovalPathList[3].posiName" readonly></td>
 							</tr>
 							<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 							<tr height="80" style="color:gray;">
-								<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[0].ecTurn" value="1"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[1].ecTurn" value="2"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[2].ecTurn" value="3"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[3].ecTurn" value="4"></td>
+								<td class="signTd"><img src="resources/elecApprovalUpfiles/check1.png"></td>
+								<td class="signTd"><input type="hidden" name="ApprovalPathList[0].ecTurn" value="1"></td>
+								<td class="signTd"><input type="hidden" name="ApprovalPathList[1].ecTurn" value="2"></td>
+								<td class="signTd"><input type="hidden" name="ApprovalPathList[2].ecTurn" value="3"></td>
+								<td class="signTd"><input type="hidden" name="ApprovalPathList[3].ecTurn" value="4"></td>
 							</tr>
 							<tr height="35">
 								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd" /></td>
-								<td><input type="hidden" name="ApprovalPathList[0].memNo" value="4"></td>
-								<td><input type="hidden" name="ApprovalPathList[1].memNo" value="3"></td>
-								<td><input type="hidden" name="ApprovalPathList[2].memNo" value="2"></td>
-								<td><input type="hidden" name="ApprovalPathList[3].memNo" value="1"></td>
+								<td><input type="hidden" id="memNo0" name="ApprovalPathList[0].memNo"></td>
+								<td><input type="hidden" id="memNo1" name="ApprovalPathList[1].memNo"></td>
+								<td><input type="hidden" id="memNo2" name="ApprovalPathList[2].memNo"></td>
+								<td><input type="hidden" id="memNo3" name="ApprovalPathList[3].memNo"></td>
 		                     </tr>
 		                     <tr height="35">
-								<td style="color: royalblue;">${ loginUser.memName }</td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[0].memName" value="박지은"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[1].memName" value="김혜미"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[2].memName" value="김민국"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[3].memName" value="강보람"></td>
+								<td style="color:royalblue;">${ loginUser.memName }</td>
+								<td><input type="text" class="form-control" id="memName0" name="ApprovalPathList[0].memName" readonly></td>
+								<td><input type="text" class="form-control" id="memName1" name="ApprovalPathList[1].memName" readonly></td>
+								<td><input type="text" class="form-control" id="memName2" name="ApprovalPathList[2].memName" readonly></td>
+								<td><input type="text" class="form-control" id="memName3" name="ApprovalPathList[3].memName" readonly></td>
 							</tr>
 						</table>
 						<br>
@@ -221,7 +225,7 @@
 	                              <input type="text" name="ecCnt" id="ecCnt" placeholder="내용을 입력해주세요." required style="height:250px;">
 	                           </td>
 	                        </tr>
-						</table>
+						</table><br><br>
 					</div>
 	            </form>
 			</div>
@@ -230,120 +234,184 @@
     </div>
 
 	<!-- The Modal -->
- 	<form action="">
-		<div class="modal fade" id="signOffBtn">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-	              
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title">결재선 설정</h5>
+	<div class="modal fade" id="signOffBtn">
+		<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h5 class="modal-title">결재선 설정</h5>
+			</div>
+				
+			<c:forEach var="count" items="${ mCount }">
+				<input type="hidden" name="memCount" value="${ mCount.memCount }">
+			</c:forEach>
+			
+			<!-- Modal body -->
+			<div class="modal-body" style="width:100%; height:100%;">
+				<div class="signModalOuter">
+					<div class="modal1">
+						<c:forEach var="dept" items="${ list }">
+							<ul id="dept">${ dept.deptName }(${ dept.count }) <input type="hidden" name=" deptNo" class="deptNo" value="${ dept.deptNo }" ></ul>
+						</c:forEach>
 					</div>
-					
-					<!-- Modal body -->
-					<div class="modal-body" style="width:100%; height:100%;">
-                            <div class="signModalOuter">
-                                <div class="modal1">
-                                	<c:forEach var="dept" items="${ list }">
-                               			<ul id="dept">
-                               				<a>${ dept.deptName }(${ dept.count })</a>
-                               				<input type="hidden" name="deptNo" class="deptNo" value="${ dept.deptNo }">
-                               			</ul>
-                                    </c:forEach>
-                                </div>
-                                <div class="modal2">
-                                    <ul>
-                                    </ul>
-                                </div>
-                                <div class="modal3">
-                                    <button class="btn btn-primary"> > </button>
-                                    <button class="btn btn-primary"> < </button>
-                                </div>
-							<div class="modal4" align="left">
-								<div style="margin-bottom:5px;"><b>기안자</b></div>
-								<div class="modal4_1">
-		 							<p>${ loginUser.memName }</p>
-								</div>
-								<div class="modal4_2">
-		 							<b style="float:left;">결재자</b>
-		 							<div>
-		 							<button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
-		 							<button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
-		 							</div>
-								</div>
-								<div class="modal4_3">
-		 							<ul>안소은(사원)</ul>
-		 							<ul>최선희(팀장)</ul>
-		 							<ul>김혜미(부장)</ul>
-		 							<ul>김민국(대표)</ul>
-								</div>
-								<div>
-		 							<button type="submit" class="btn btn-secondary apply" data-dismiss="modal">적용</button>
-		 							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								</div>
+					<div class="modal2">
+						<ul id="selectName"></ul>
+					</div>
+					<!-- <div class="modal3">
+						<button class="btn btn-primary"> > </button>
+						<button class="btn btn-primary"> < </button>
+					</div> -->
+					<div class="modal4" align="left">
+						<div style="margin-bottom:5px;"><b>기안자</b></div>
+						<div class="modal4_1">
+							<p>${ loginUser.memName }</p>
+						</div>
+						<div class="modal4_2">
+							<b style="float:left;">결재자</b>
+							<div>
+							<button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
+							<button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
 							</div>
-						</div>    
+						</div>
+						<!-- 결재자 -->
+						<div class="modal4_3" id="modal4_3"></div>
+						<div>
+							<button type="submit" class="btn btn-secondary apply" id="apply" data-dismiss="modal">적용</button>
+							<button type="button" class="btn btn-secondary" id="delete" data-dismiss="modal">취소</button>
+						</div>
 					</div>
-				</div>
+				</div>    
 			</div>
 		</div>
-	</form>
+		</div>
+	</div>
 
-	<script type="text/javascript">
-		$(function(){
+	<!-- 결재선 AJAX용 script -->
+    <script type="text/javascript">
+    
+    	// 클릭된 폼으로 이동하기
+	    function moveurl(url) { 
+		    location.href = url;
+		};
+    
+	    $(function(){
+	    	
+	    	// 결재선에서 부서클릭시 해당 부서의 사원명,직급 불러오기
+	         $(".modal1>ul").click(function(){
+	        	 
+	        	 var deptNo = $(this).children(".deptNo").val();
+	         	 var json = JSON.parse(deptNo);
+
+	         	 $.ajax({
+		                  url:"memberList.ea",
+		                  type:"get",
+		                  data:{deptNo:deptNo},
+		                  success:function(list){
+		                	
+		                  	var value="";
+		                	$.each(list, function(i, obj){
+		                		
+			                  	value += "<li>"
+			                  		  + '<input type="hidden" name="memNo" class="memNo" id="memNo" value="' + obj.memNo + '">'
+			                  		  + '<input type="hidden" name="deptName" class="deptName" value="' + obj.deptName +'">'
+			                  		  + '<input type="hidden" name="posiName" class="posiName" value="' + obj.posiName +'">'
+			                  		  + '<input type="hidden" name="memName" class="memName" value="' + obj.memName +'">'
+			                          + obj.memName + "(" + obj.posiName + ")"
+			                          + "</li>"
+		                	
+		                	})
+		                	
+		                 	$(".modal2 ul").html(value);
+		                	
+		                  },error:function(){
+		                      console.log("실패");
+		                  }
+		         });
+	      	})
+	   });
+	   
+	   // 부서명 클릭시 CSS효과주기
+	   $(function(){
 			$(".modal1>ul").click(function(){
-  			
-			var deptNo = $(this).children(".deptNo").val();
-			var json = JSON.parse(deptNo);
-  			
-			$.ajax({
-                  url:"memberList.ea",
-                  data:{deptNo:deptNo},
-                  success:function(list){
-                  	//console.log(list);
-                	
-                  	var value="";
-    				$.each(list, function(i, obj){
-						value += "<li>" + obj.memName + "(" + obj.posiName + ")" + "</li>"
-    				})
-                  	
-    				console.log(value);
-                  	$(".modal2 ul").html(value);
-                  	
-	                  },error:function(){
-	                      console.log("실패");
-	                  }
-				});
+				$('.modal1>ul').removeClass();
+				$(this).addClass('on1');
 			})
 		});
+	
 		$(function(){
-			$(".modal1>ul").click(function(){
-		
-				$('.modal1>ul').removeClass()
-				$(this).addClass('on1')
-			})
+			$(document).on("click", ".modal2>ul>li", function(){
+				
+				// 사원명 클릭시 CSS효과주기
+				$('.modal2>ul>li').removeClass();
+				$(this).addClass('on2');
+				
+				// 결재자의 memNo, deptName, posiName, memName
+				var memNo = $(this).children('input.memNo').val();
+				var deptName = $(this).children('input.deptName').val();
+				var posiName = $(this).children('input.posiName').val();
+				var memName = $(this).children('input.memName').val();
+				// name(posi)
+				var name = $(this).text(); 
+				
+				// #modal4_3 안의 자식요소(결재선) 갯수 불러오기 (0부터)
+				var ele = document.getElementById('modal4_3');
+				var eleCount = ele.childElementCount;
+
+				// 결재선에 네개까지만 들어갈 수 있게 하는 조건문
+				if(eleCount < 4){
+					$(".modal4_3").append(
+										    "<ul>" 
+										  + name
+										  + '<input type="hidden" class="memNo" value='+ memNo +'>'
+										  + '<input type="hidden" class="deptName" value='+ deptName +'>'
+										  + '<input type="hidden" class="posiName" value='+ posiName +'>'
+										  + '<input type="hidden" class="memName" value='+ memName +'>'
+										  + "</ul>"
+										 );
+				}else{
+					alert("추가할 수 있는 결재자가 초과되었습니다.");
+				}
+				
+			});
+		});
+      
+		var arr = new Array();   
+			
+		$(function(){
+		    $("#apply").click(function(){
+		      
+		      // 선택된 결재자들의 memNo, deptName, posiName, memName을 arr에 담기
+		      $("#modal4_3 .memNo").each(function(i,input){
+		    	  
+		          arr.push({
+				             memNo:$(this).val()
+				       	   , deptName:$("#modal4_3 .deptName").eq(i).val()
+				       	   , posiName:$("#modal4_3 .posiName").eq(i).val()
+				       	   , memName:$("#modal4_3 .memName").eq(i).val()
+		          		  });
+		          
+		          // 선택된 결재자들의 memNo, deptName, posiName, memName을 폼에 뿌려주기
+		          $("#memNo"+i).val(arr[i].memNo);
+		          $("#deptName"+i).val(arr[i].deptName);
+		          $("#posiName"+i).val(arr[i].posiName);
+		          $("#memName"+i).val(arr[i].memName);
+		          
+		      });
+		    })
 		});
 		
 		$(function(){
-            $(document).on("click", ".modal2>ul>li", function(){
-				$('.modal2>ul>li').removeClass()
-				$(this).addClass('on2')
+			$("#delete").click(function(){
+				
+				// 취소버튼 클릭시 결재선 비우기
+				$(".modal4_3").empty();
+				
+				// modal1, modal2 css 효과 지우기
 				
 			})
 		});
-		
-		
-		// 
-		function moveurl(url) { 
-			location.href = url;
-		};
-		
-		
-		var len = $('#ecCnt').val().length;
-		$('#ecCnt').focus();
-		$('#ecCnt')[0].setSelectionRange(len, len);
-		
-   </script>
+   	</script>
    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

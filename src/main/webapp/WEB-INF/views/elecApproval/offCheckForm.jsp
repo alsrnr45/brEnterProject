@@ -129,10 +129,13 @@
 							<th>기안 일시</th>
 							<td>
 								<fmt:parseDate value="${ea.ecEnrolldate}" var="enrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
-								<fmt:formatDate value="${enrolldate}" pattern="yyyy-MM-dd"/>
+								<fmt:formatDate value="${ enrolldate }" pattern="yyyy-MM-dd"/>
 							</td>
 							<th>완료 일시</th>
-							<td>${ ea.ecCompdate }</td>
+							<td>
+								<fmt:parseDate value="${ ea.ecCompdate }" var="compdate" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<fmt:formatDate value="${ compdate }" pattern="yyyy-MM-dd"/>
+							</td>
 						</tr>
 					</table><br>
 				</div>

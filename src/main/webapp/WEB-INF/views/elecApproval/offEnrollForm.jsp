@@ -130,13 +130,13 @@
 	                    	<tr>
 		                        <th width="120px" height="35px;">문서종류</th> 
 		                        <td width="340px">
-									<select class="form-control" name="approvalFormCode url" onchange="moveurl(this.value);">
-										<option value="documentEnrollForm.ea">기획안</option>
-										<option value="documentEnrollForm.ea">업무연락</option>
-										<option value="offEnrollForm.ea" selected>연차</option>
-										<option value="expenseForm.ea">지출결의서</option>
-										<option value="documentEnrollForm.ea">회람</option>
-									</select>
+									<select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
+										<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }">기획안</option>
+										<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }">업무연락</option>
+										<option value="offEnrollForm.ea?mno=${ loginUser.memNo }" selected>연차</option>
+										<option value="expenseForm.ea?mno=${ loginUser.memNo }">지출결의서</option>
+										<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }">회람</option>												
+									</select>	
 									<input type="hidden" name="ecCode" value="OF">
 		                        </td>
 			                    <th width="120px">문서번호<input type="hidden" name="ecDocName" value="OF-<c:out value="${date}"/>-<c:out value="${randomNo}"/>"></th> 

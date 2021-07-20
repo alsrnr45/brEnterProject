@@ -187,17 +187,17 @@
 									<input type="hidden" name="memNo" value="${ loginUser.memNo }">
 								</td>
 								<th rowspan="5" width="120">결재자</th>
-								<td class="signDept1" width="136"><input type="text" class="form-control" id="deptName1" name="ApprovalPathList[0].deptName" value=""></td>
-								<td class="signDept2" width="136"><input type="text" class="form-control" id="deptName2" name="ApprovalPathList[1].deptName" value=""></td>
-								<td class="signDept3" width="136"><input type="text" class="form-control" id="deptName3" name="ApprovalPathList[2].deptName" value=""></td>
-								<td class="signDept4" width="136"><input type="text" class="form-control" id="deptName4" name="ApprovalPathList[3].deptName" value=""></td>
+								<td class="signDept1" width="136"><input type="text" class="form-control" id="deptName0" name="ApprovalPathList[0].deptName" value=""></td>
+								<td class="signDept2" width="136"><input type="text" class="form-control" id="deptName1" name="ApprovalPathList[1].deptName" value=""></td>
+								<td class="signDept3" width="136"><input type="text" class="form-control" id="deptName2" name="ApprovalPathList[2].deptName" value=""></td>
+								<td class="signDept4" width="136"><input type="text" class="form-control" id="deptName3" name="ApprovalPathList[3].deptName" value=""></td>
 							</tr>
 							<tr height="35">
 								<td>${ loginUser.posiName}</td>
-								<td><input type="text" class="form-control" id="posiName1" name="ApprovalPathList[0].posiName" value="" readonly></td>
-								<td><input type="text" class="form-control" id="posiName2" name="ApprovalPathList[1].posiName" value="" readonly></td>
-								<td><input type="text" class="form-control" id="posiName3" name="ApprovalPathList[2].posiName" value="" readonly></td>
-								<td><input type="text" class="form-control" id="posiName4" name="ApprovalPathList[3].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName0" name="ApprovalPathList[0].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName1" name="ApprovalPathList[1].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName2" name="ApprovalPathList[2].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName3" name="ApprovalPathList[3].posiName" value="" readonly></td>
 							</tr>
 							<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 							<tr height="80" style="color:gray;">
@@ -209,17 +209,17 @@
 							</tr>
 							<tr height="35">
 								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></td>
-								<td><input type="hidden" id="memNo1" name="ApprovalPathList[0].memNo" value=""></td>
-								<td><input type="hidden" id="memNo2" name="ApprovalPathList[1].memNo" value=""></td>
-								<td><input type="hidden" id="memNo3" name="ApprovalPathList[2].memNo" value=""></td>
-								<td><input type="hidden" id="memNo4" name="ApprovalPathList[3].memNo" value=""></td>
+								<td><input type="hidden" id="memNo0" name="ApprovalPathList[0].memNo" value=""></td>
+								<td><input type="hidden" id="memNo1" name="ApprovalPathList[1].memNo" value=""></td>
+								<td><input type="hidden" id="memNo2" name="ApprovalPathList[2].memNo" value=""></td>
+								<td><input type="hidden" id="memNo3" name="ApprovalPathList[3].memNo" value=""></td>
 							</tr>
 							<tr height="35">
 								<td style="color: royalblue;">${ loginUser.memName }</td>
-								<td><input type="text" class="form-control" id="memName1" name="ApprovalPathList[0].memName" value="" readonly></td>
-								<td><input type="text" class="form-control" id="memName2" name="ApprovalPathList[1].memName" value="" readonly></td>
-								<td><input type="text" class="form-control" id="memName3" name="ApprovalPathList[2].memName" value="" readonly></td>
-								<td><input type="text" class="form-control" id="memName4" name="ApprovalPathList[3].memName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="memName0" name="ApprovalPathList[0].memName" readonly></td>
+								<td><input type="text" class="form-control" id="memName1" name="ApprovalPathList[1].memName" readonly></td>
+								<td><input type="text" class="form-control" id="memName2" name="ApprovalPathList[2].memName" readonly></td>
+								<td><input type="text" class="form-control" id="memName3" name="ApprovalPathList[3].memName" readonly></td>
 							</tr>
 						</table>
 						<br>
@@ -426,32 +426,14 @@
 				       	   , posiName:$("#modal4_3 .posiName").eq(i).val()
 				       	   , memName:$("#modal4_3 .memName").eq(i).val()
 		          		  });
+		          
+		          // 선택된 결재자들의 memNo, deptName, posiName, memName을 폼에 뿌려주기
+		          $("#memNo"+i).val(arr[i].memNo);
+		          $("#deptName"+i).val(arr[i].deptName);
+		          $("#posiName"+i).val(arr[i].posiName);
+		          $("#memName"+i).val(arr[i].memName);
 		      });
-		      
-		      // 사원번호
-		      $("#memNo1").val(arr[0].memNo);
-		      $("#memNo2").val(arr[1].memNo);
-		      $("#memNo3").val(arr[2].memNo);
-		      $("#memNo4").val(arr[3].memNo);
-		      
-		      // 부서명
-		      $("#deptName1").val(arr[0].deptName);
-		      $("#deptName2").val(arr[1].deptName);
-		      $("#deptName3").val(arr[2].deptName);
-		      $("#deptName4").val(arr[3].deptName);
-		      
-		      // 직급명
-		      $("#posiName1").val(arr[0].posiName);
-		      $("#posiName2").val(arr[1].posiName);
-		      $("#posiName3").val(arr[2].posiName);
-		      $("#posiName4").val(arr[3].posiName);
-		      
-		      // 사원명
-		      $("#memName1").val(arr[0].memName);
-		      $("#memName2").val(arr[1].memName);
-		      $("#memName3").val(arr[2].memName);
-		      $("#memName4").val(arr[3].memName);
-		      
+		      		      
 		    })
 		});
 		

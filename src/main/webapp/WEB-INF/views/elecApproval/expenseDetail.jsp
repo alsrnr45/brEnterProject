@@ -183,6 +183,7 @@
 			                                 <!-- 기안/반려하기 버튼 구현 -->
 			                                 <c:if test="${ (i+1) lt ApprovalPathList.size() }">
 			                                    <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
+			                                    <c:set var="approvalNo" value="${ ApprovalPathList[i+1].approvalPathNo }"/>
 			                                 </c:if>
 			
 			                                 <!-- 삭제하기 버튼 구현 -->
@@ -192,6 +193,7 @@
 	                                     <c:otherwise>
 		                                     <div style="height:80px;  padding-top:10px;"></div>
 											 <c:set var="ttt" value="${ ApprovalPathList[0].memNo }"/>
+											 <c:set var="approvalNo" value="${ ApprovalPathList[i].approvalPathNo }"/>
 	                                     </c:otherwise>
                                  	</c:choose>
 			                        
@@ -204,6 +206,11 @@
 									<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
 										<c:set var="aname" value="aaa"/>
 									</c:if>
+									
+									<c:if test="${ i eq 3 }">
+										<c:set var="finalApproval" value="${ ApprovalPathList[i].memNo }"/>
+									</c:if>
+									
 			                    </div>
 			                </c:when>
 			                <c:otherwise>
@@ -281,26 +288,44 @@
 			            </c:when>                          
                		</c:choose>               
                                                  
-                <form id="postForm" action="" method="post">
-                    <input type="hidden" name="eano" value="${ ea.ecDocNo }">
-                    <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
-                    <input type="hidden" name="memNo" value="${ loginUser.memNo }">
-                </form>
-               
+                	<form id="postForm" action="" method="post">
+						<input type="hidden" name="eano" value="${ ea.ecDocNo }">
+						<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+					</form>							
+					
+					<form id="approveForm" action="" method="post">
+						<input type="hidden" name="eano" value="${ ea.ecDocNo }">
+						<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+                 		<input type="hidden" name="approvalPathNo" value="${ approvalNo }">
+						<input type="hidden" name="finalApproval" value="${ finalApproval }">
+					</form>
                
                 <script>
-                   function postFormSubmit() { 
-                     
-                      var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
-                     
-                      if(result){
-                         $("#postForm").attr("action", "deleteDocument.ea").submit();
-                         return true;
-                      } else{
-                         alert("삭제가 취소되었습니다.")
-                         return false; 
-                      }
-                   }
+	                function postFormSubmit() { 
+	        			
+	        			var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
+	        			
+	        			if(result){
+	        				$("#postForm").attr("action", "deleteExpense.ea").submit();
+	        				return true;
+	        			} else{
+	        				alert("삭제가 취소되었습니다.")
+	        				return false; 
+	        			}
+	        		}
+	
+	        		function approveFormSubmit() { 
+	        			
+	        			var result = confirm("기안한 문서를 승인하시겠습니까?"); 
+	        			
+	        			if(result){
+	        				$("#approveForm").attr("action", "approveDocument.ea").submit();
+	        				return true;
+	        			} else{
+	        				alert("승인이 취소되었습니다.")
+	        				return false; 
+	        			}
+        			}
                 </script>
 								
 															

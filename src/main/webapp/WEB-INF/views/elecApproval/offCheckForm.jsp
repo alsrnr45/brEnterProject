@@ -152,45 +152,46 @@
 					</div>
 					
 					<div id="approver">결재자</div>
-                 <!-- 무조건 4번 반복문 돌게 (i=0~3)-->
-                 <c:forEach var="i" begin="0" end="3">
-                     <c:choose>
-                         <c:when test="${ i lt ApprovalPathList.size() }">
+                 	<!-- 무조건 4번 반복문 돌게 (i=0~3)-->
+                 	<c:forEach var="i" begin="0" end="3">
+                     	<c:choose>
+                         	<c:when test="${ i lt ApprovalPathList.size() }">
           					
-                             <!--i라는 값이 현재 리스트의 사이즈보다 작을 경우 (예를들어 현재 리스트의 사이즈가 2라는 가정하면 i가 0,1일경우)-->
-                             <div id="approvalInfo">
-                                 <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].deptName }</div>
-                                 <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].posiName }</div>
-                                 <c:choose>
-                                     <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
+                            <!--i라는 값이 현재 리스트의 사이즈보다 작을 경우 (예를들어 현재 리스트의 사이즈가 2라는 가정하면 i가 0,1일경우)-->
+                            <div id="approvalInfo">
+								<div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].deptName }</div>
+								<div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].posiName }</div>
+								<c:choose>
+									<c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
 
-                                 <div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+										<div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
 
-                                 <!-- 기안/반려하기 버튼 구현 -->
-                                 <c:if test="${ (i+1) lt ApprovalPathList.size() }">
-                                    <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
-                                 </c:if>
+										<!-- 기안/반려하기 버튼 구현 -->
+										<c:if test="${ (i+1) lt ApprovalPathList.size() }">
+											<c:set var="turnNo" value="${ ApprovalPathList[i+1].memNo }"/>
+										</c:if>
 
-                                 <!-- 삭제하기 버튼 구현 -->
-                                 <c:set var="flag" value="ss"/>
+										<!-- 삭제하기 버튼 구현 -->
+										<c:set var="flag" value="delete"/>
+									</c:when>
+									<c:otherwise>
+										<div style="height:80px;"></div>
+										<c:if test="${i eq 0}">
+											<c:set var="turnNo" value="${ApprovalPathList[i].memNo}"/>
+										</c:if>
+									</c:otherwise>
+								</c:choose>
 
-                                     </c:when>
-                                     <c:otherwise>
-                                        <div style="height:80px;"></div>
-										<c:set var="ttt" value="${ ApprovalPathList[0].memNo }"/>
-                                     </c:otherwise>
-                              
-                                 </c:choose>
-                                 <div style="height:35px; padding-top:7px;">
-                                 	<fmt:parseDate value="${ ApprovalPathList[i].apEnrolldate }" var="apEnrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<div style="height:35px; padding-top:7px;">
+									<fmt:parseDate value="${ ApprovalPathList[i].apEnrolldate }" var="apEnrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
 									<fmt:formatDate value="${ apEnrolldate }" pattern="yyyy-MM-dd"/>
-                                 </div>
-                                 <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].memName }</div>
+								</div>
+								<div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].memName }</div>
 
-                           <c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
-                              <c:set var="aname" value="aaa"/>
-                           </c:if>
-                             </div>
+								<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
+									<c:set var="approvalName" value="approvalName"/>
+								</c:if>
+							</div>
                          </c:when>
                          <c:otherwise>
                              <!--그게 아닐경우-->
@@ -234,16 +235,15 @@
 					</form>
 				</div>
 
-
 				<div class="content_4">
 				<!-- 삭제 버튼 보이는 조건문 --> 
 				<!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
 							(ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) --> 
 								
 					<c:choose>  
-						<c:when test="${ aname != null }">     
+						<c:when test="${ approvalName != null }">     
 							<c:choose>                
-								<c:when test="${ ttt eq loginUser.memNo }">
+								<c:when test="${ turnNo eq loginUser.memNo }">
 									<button class="btn btn-light" type="submit" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
 										<button class="btn btn-danger" type="submit">반려하기</button>    
 									</c:when>  
@@ -257,7 +257,7 @@
 		
 						<c:when test="${ ea.memNo eq loginUser.memNo }">
 							<c:choose>
-								<c:when test="${ flag eq 'ss' }">
+								<c:when test="${ flag eq 'delete' }">
 									<button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>      
 								</c:when>
 								<c:otherwise>

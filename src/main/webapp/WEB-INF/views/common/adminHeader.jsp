@@ -69,7 +69,7 @@
 	<!-- 상단바 -->
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark2">
 	    <!-- Navbar Brand-->
-	    <a class="navbar-brand ps-3" href="index.html" style="width: 225px;">
+	    <a class="navbar-brand ps-3" href="brEnter.main" style="width: 225px;">
 	          <img src="resources/images/brLogo_admin.png" style="height: 56px;"></a>
 	  
 	    <!-- Sidebar Toggle-->

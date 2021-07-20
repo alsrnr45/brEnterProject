@@ -121,7 +121,7 @@
 					<table class="tableType01">
 						<tr>
 							<th width="120">문서종류</th> 
-							<td width="340">연차</td>
+							<td width="340">연차</td>          
 							<th width="120">문서번호<input type="hidden" id="eano" class="eano" value="${ ea.ecDocNo }"></th>
 							<td width="340">${ ea.ecDocName }</td>
 						</tr>
@@ -172,6 +172,7 @@
 										<!-- 기안/반려하기 버튼 구현 -->
 										<c:if test="${ (i+1) lt ApprovalPathList.size() }">
 											<c:set var="turnNo" value="${ ApprovalPathList[i+1].memNo }"/>
+											<c:set var="approvalNo" value="${ ApprovalPathList[i+1].approvalPathNo }"/>
 										</c:if>
 
 										<!-- 삭제하기 버튼 구현 -->
@@ -181,6 +182,7 @@
 										<div style="height:80px;"></div>
 										<c:if test="${i eq 0}">
 											<c:set var="turnNo" value="${ApprovalPathList[i].memNo}"/>
+											<c:set var="approvalNo" value="${ ApprovalPathList[i].approvalPathNo }"/>
 										</c:if>
 									</c:otherwise>
 								</c:choose>
@@ -194,6 +196,11 @@
 								<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
 									<c:set var="approvalName" value="approvalName"/>
 								</c:if>
+								
+								<c:if test="${ i eq 3 }">
+									<c:set var="finalApproval" value="${ ApprovalPathList[i].memNo }"/>
+								</c:if>
+								
 							</div>
                          </c:when>
                          <c:otherwise>
@@ -212,7 +219,7 @@
 
 				<br>
 				<div class="content_3">
-					<form action="" id="ecDetailForm" method="post" enctype="multipart/form-data">
+					<form action="" id="ecDetailForm" method="post">
 						<table class="tableType03">
 							<tr height="40">
 								<th>제목</th>
@@ -242,14 +249,14 @@
 				<!-- 삭제 버튼 보이는 조건문 --> 
 				<!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
 							(ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) --> 
-								
+				
 					<c:choose>  
 						<c:when test="${ approvalName != null }">     
 							<c:choose>                
 								<c:when test="${ turnNo eq loginUser.memNo }">
-									<button class="btn btn-light" type="submit" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
-										<button class="btn btn-danger" type="submit">반려하기</button>    
-									</c:when>  
+									<button class="btn btn-light" onclick="approveFormSubmit();" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+									<button class="btn btn-danger" type="submit">반려하기</button>
+								</c:when>  
 								<c:otherwise>
 										<button class="btn btn-light" style="background-color:lightgray; border-color:lightgray;" disabled>승인하기</button>
 										<button class="btn btn-danger" disabled>반려하기</button>
@@ -268,14 +275,21 @@
 									</c:otherwise>
 							</c:choose>
 						</c:when>                          
-					</c:choose>               
+					</c:choose>   
+							
 														
 					<form id="postForm" action="" method="post">
 						<input type="hidden" name="eano" value="${ ea.ecDocNo }">
-						<input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
+						<input type="hidden" name="memNo" value="${ loginUser.memNo }">
 					</form>							
+					
+					<form id="approveForm" action="" method="post">
+						<input type="hidden" name="eano" value="${ ea.ecDocNo }">
+						<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+                 		<input type="text" name="approvalPathNo" value="${ approvalNo }">
+						<input type="text" name="finalApproval" value="${ finalApproval }">
+					</form>
 				</div><br><br>
-
 			</div>
         </div>
     </div>
@@ -286,10 +300,23 @@
 			var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
 			
 			if(result){
-				$("#postForm").attr("action", "deleteDocument.ea").submit();
+				$("#postForm").attr("action", "deleteOff.ea").submit();
 				return true;
 			} else{
 				alert("삭제가 취소되었습니다.")
+				return false; 
+			}
+		}
+
+		function approveFormSubmit() { 
+			
+			var result = confirm("기안한 문서를 승인하시겠습니까?"); 
+			
+			if(result){
+				$("#approveForm").attr("action", "approveDocument.ea").submit();
+				return true;
+			} else{
+				alert("승인이 취소되었습니다.")
 				return false; 
 			}
 		}

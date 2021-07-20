@@ -83,30 +83,41 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
    		return eaDao.insertExpense(sqlSession, ex);
    }
    
-   // 작성자 : 김혜미 -- 연차 신청
-   @Override
-   public int insertOff(Off o) {
+	// 작성자 : 김혜미 -- 연차 신청
+	@Override
+	public int insertOff(Off o) {
 	   return eaDao.insertOff(sqlSession, o);
-   }
+	}
    
-   // 결재선
-   @Override
-   public int insertApprovalPath(ArrayList<Approval_path> approvalPathList) {
-	   return eaDao.insertApprovalPath(sqlSession, approvalPathList);
-   }
-   
-   // 작성자 : 김혜미 -- 연차 조회
-   @Override
-   public ElecApproval detailOff(int eano) {
+	// 작성자 : 김혜미 -- 연차 상세조회
+	@Override
+	public ElecApproval detailOff(int eano) {
 	   return eaDao.detailOff(sqlSession, eano);
-   }
+	}
 
-   // 결재선 조회
-   @Override
-   public ArrayList<Approval_path> detailApprovalPath(int eano) {
-   	return eaDao.detailApprovalPath(sqlSession, eano);
-   }
+	// 작성자 : 김혜미 -- 결재선  등록
+	@Override
+	public int insertApprovalPath(ArrayList<Approval_path> approvalPathList) {
+		return eaDao.insertApprovalPath(sqlSession, approvalPathList);
+	}
+   
+	// 작성자 : 김혜미 -- 결재선 상세조회
+	@Override
+	public ArrayList<Approval_path> detailApprovalPath(int eano) {
+		return eaDao.detailApprovalPath(sqlSession, eano);
+	}
 
+	// 작성자 : 김혜미 -- 결재 승인
+	@Override
+	public int approveDocument(int approvalPathNo) {
+		return eaDao.approveDocument(sqlSession, approvalPathNo);
+	}
+
+	// 작성자 : 김혜미 -- 결재 최종승인
+	@Override
+	public int finalApprove(int finalApproval, int eano, int memNo) {
+		return eaDao.finalApprove(sqlSession, finalApproval, eano, memNo);
+	}
 
 
 

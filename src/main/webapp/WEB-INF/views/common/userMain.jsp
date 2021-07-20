@@ -43,10 +43,13 @@
                             <div class="col-xl-6 " style="width: 500px; height: 600px;">
                                 <div class="card mb-4 lefRow" style="height: 550px;">
                                     <div class="card-header">
-                                        <div >
-										<i class="fas fa-clock"></i>
-										<span id="dpTime">오후 00:11:22</span>
+                                    <i class="fas fa-clock"></i>
+                                    <span  id="dpTime">오후 00:11:22 </span>
+                                        <div id="time-result" style="float:right; color:gray;">
+										
                                         </div>	
+										
+										
                                     </div>
                                     
                                     <!-- 프로필및 근태관리 -->
@@ -282,7 +285,14 @@
             </footer>
    		</div>
     </div>
-  
+  <script type="text/javascript"> 
+var d = new Date(); 
+var currentDate = d.getFullYear() + "년 " 
++ ( d.getMonth() + 1 ) + "월 " 
++ d.getDate() + "일";
+ var currentTime = d.getHours() + "시 " + d.getMinutes() + "분 " + d.getSeconds() + "초";
+ var result = document.getElementById("time-result"); 
+result.innerHTML = currentDate; </script> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

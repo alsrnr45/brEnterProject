@@ -442,6 +442,7 @@
 		 where approval_path_no = #{ approvalPathNo }
 	</update>
 
+	<!-- 작성자 : 김혜미 - 결재 최종승인 -->
 	<update id="finalApprove" parameterType="_int">
 		update 
 		       ec_document

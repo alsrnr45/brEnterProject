@@ -48,7 +48,7 @@
 	
 	/* 결재선 */
 	.tableType02 th {height: 160px; background-color:rgba(241, 241, 241, 0.75);}
-	.tableType02 input {background-color: white !important; border-color: white;}
+	.tableType02 input {background-color: white !important; border-color: white; font-size: 13px; text-align: center;}
 	.tableType02 input:focus, input:active {
 		border-color: rgba(255, 255, 255, 0) !important;
 		box-shadow: 0 1px 1px rgba(255, 255, 255, 0.075) inset, 0 0 8px rgba(255, 255, 255, 0) !important;

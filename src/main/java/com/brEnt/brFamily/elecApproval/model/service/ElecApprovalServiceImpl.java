@@ -94,6 +94,12 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 	public ElecApproval detailOff(int eano) {
 	   return eaDao.detailOff(sqlSession, eano);
 	}
+	
+	// 작성자 : 김혜미 -- 연차 삭제
+	@Override
+	public int deleteOff(int eano) {
+		return eaDao.deleteOff(sqlSession, eano);
+	}
 
 	// 작성자 : 김혜미 -- 결재선  등록
 	@Override
@@ -118,6 +124,8 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 	public int finalApprove(int finalApproval, int eano, int memNo) {
 		return eaDao.finalApprove(sqlSession, finalApproval, eano, memNo);
 	}
+
+	
 
 
 

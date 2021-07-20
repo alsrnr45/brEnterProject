@@ -74,6 +74,13 @@ public class ElecApprovalDao {
 		return sqlSession.selectOne("approvalMapper.detailOff", ecDocNo);
 	}
 	
+	
+	// 작성자 : 김혜미 -- 연차 삭제
+	public int deleteOff(SqlSessionTemplate sqlSession, int ecDocNo) {
+		return sqlSession.update("approvalMapper.deleteOff", ecDocNo);
+	}
+	
+	
 	// 작성자 : 김혜미 -- 결재선  등록
 	public int insertApprovalPath(SqlSessionTemplate sqlSession, ArrayList<Approval_path> approvalPathList) {
 		
@@ -106,6 +113,8 @@ public class ElecApprovalDao {
 		}
 		return result;
 	}
+
+	
 	
 	
 	

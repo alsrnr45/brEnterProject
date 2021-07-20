@@ -263,7 +263,6 @@
 								</c:otherwise>
 							</c:choose>
 						</c:when>
-						
 		
 						<c:when test="${ ea.memNo eq loginUser.memNo }">
 							<c:choose>
@@ -286,8 +285,8 @@
 					<form id="approveForm" action="" method="post">
 						<input type="hidden" name="eano" value="${ ea.ecDocNo }">
 						<input type="hidden" name="memNo" value="${ loginUser.memNo }">
-                 		<input type="text" name="approvalPathNo" value="${ approvalNo }">
-						<input type="text" name="finalApproval" value="${ finalApproval }">
+                 		<input type="hidden" name="approvalPathNo" value="${ approvalNo }">
+						<input type="hidden" name="finalApproval" value="${ finalApproval }">
 					</form>
 				</div><br><br>
 			</div>

@@ -389,8 +389,17 @@
           join member m on(m.mem_no = e.mem_no)
           join dept d on(d.dept_no = m.dept_no)
           join position p on(p.posi_no = m.posi_no)
-         where e.ec_doc_no = #{ ea.docNo }
+         where e.ec_doc_no = #{ ea.ecDocNo }
 	</select>
+	
+	<!-- 작성자 : 김혜미 - 연차 삭제 -->
+	<update id="deleteOff" parameterType="_int">
+		update 
+		       ec_document
+		   set 
+		       ec_status = 'N'
+		 where ec_doc_no = #{ ea.ecDocNo }
+	</update>
    
 	<!-- 작성자 : 김혜미 - 결재선 등록 -->
 	<insert id="insertApprovalPath" parameterType="approvalPath">

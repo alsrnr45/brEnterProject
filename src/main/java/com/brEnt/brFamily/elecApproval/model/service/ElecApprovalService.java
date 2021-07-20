@@ -46,6 +46,9 @@ public interface ElecApprovalService {
     // 작성자 : 김혜미 -- 연차 상세조회
     ElecApproval detailOff(int eano);
 
+    // 작성자 : 김혜미 -- 연차 삭제
+    int deleteOff(int eano);
+
     // 작성자 : 김혜미 -- 결재선  등록
     int insertApprovalPath(ArrayList<Approval_path> approvalPathList);
     
@@ -57,5 +60,6 @@ public interface ElecApprovalService {
     
     // 작성자 : 김혜미 -- 결재 최종승인
 	int finalApprove(int finalApproval, int eano, int memNo);
+	
     
 }

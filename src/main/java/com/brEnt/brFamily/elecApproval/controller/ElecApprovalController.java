@@ -31,83 +31,70 @@ public class ElecApprovalController {
    private ElecApprovalService eaService;
    
    
-   // 작성자 : 김혜미 -- 연차 신청폼
-   @RequestMapping("offEnrollForm.ea")
-   public ModelAndView offEnrollForm(int mno, ModelAndView mv) {
+	// 작성자 : 김혜미 -- 연차 신청폼
+	@RequestMapping("offEnrollForm.ea")
+	public ModelAndView offEnrollForm(int mno, ModelAndView mv) {
       
       ArrayList<Dept> list = eaService.selectDept();
-      //System.out.println(list);
-      //System.out.println(mno);
       
       mv.addObject("list", list)
         .addObject("mno", mno)
         .setViewName("elecApproval/offEnrollForm");
       
       return mv;
+	}
+   
+   
+	// 작성자 : 김혜미 -- 연차 신청
+	@RequestMapping("insertOff.ea")
+	public String insertOff(Approval_path ap, Off o, int memNo, Model model) {
+      
+		ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
+  
+		model.addAttribute("o", eaService.insertOff(o))
+			 .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList));
+   
+		return "redirect:approvalTotalList.ea?mno=" + memNo;
    }
    
    
-   // 작성자 : 김혜미 -- 연차 신청
-   @RequestMapping("insertOff.ea")
-   public String insertOff(Approval_path ap, Off o, int memNo, Model model) {
+	// 작성자 : 김혜미 -- 연차 조회
+	@RequestMapping("detailOff.ea")
+	public String detailOff(int eano, Model model) {
       
-      ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
-      //System.out.println(ApprovalPathList);
+		ElecApproval ea = eaService.detailOff(eano);
+		ArrayList<Approval_path> ApprovalPathList = eaService.detailApprovalPath(eano);
       
-      //System.out.println(o);
-      //System.out.println(ap);
-      //System.out.println(memNo);
-      
-      model.addAttribute("o", eaService.insertOff(o))
-           .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList));
+		model.addAttribute("ea", ea)
+			  .addAttribute("ApprovalPathList", ApprovalPathList);
+		return "elecApproval/offCheckForm";
+	}
    
-      return "redirect:approvalTotalList.ea?mno=" + memNo;
-   }
    
-   // 작성자 : 김혜미 -- 연차 조회
-   @RequestMapping("detailOff.ea")
-   public String detailOff(int eano, Model model) {
-      
-      ElecApproval ea = eaService.detailOff(eano);
-      ArrayList<Approval_path> ApprovalPathList = eaService.detailApprovalPath(eano);
-      
-      //System.out.println(ea);
-      //System.out.println(ApprovalPathList);
-      
-      model.addAttribute("ea", ea)
-            .addAttribute("ApprovalPathList", ApprovalPathList);
-      return "elecApproval/offCheckForm";
-   }
-   
-   // 작성자 : 김혜미 -- 연차 삭제
-   @RequestMapping("deleteOff.ea")
-   public String deleteOff(int eano, int memNo, HttpSession session, Model model) {
+	// 작성자 : 김혜미 -- 연차 삭제
+	@RequestMapping("deleteOff.ea")
+	public String deleteOff(int eano, int memNo, HttpSession session, Model model) {
 
 	   //System.out.println(eano);
 	   //System.out.println(memNo);
+	   //model.addAttribute("eano", eaService.deleteOff(eano));
 	   
-	   return "redirect:approvalTotalList.ea?mno=" + memNo;
+	   int result = eaService.deleteOff(eano);
 	   
+	   session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
+       return "redirect:approvalTotalList.ea?mno=" + memNo; 
     }
    
-   // 작성자 : 김혜미 -- 전자결재 승인
-   @RequestMapping("approveDocument.ea")
-   public String approveDocument(int finalApproval, int eano, int approvalPathNo, int memNo, HttpSession session, Model model) {
+	
+	// 작성자 : 김혜미 -- 전자결재 승인
+	@RequestMapping("approveDocument.ea")
+	public String approveDocument(int finalApproval, int eano, int approvalPathNo, int memNo, HttpSession session, Model model) {
 
-//      int result = eaService.approveDocument(approvalPathNo);
-      //int result = eaService.finalApprove(eano);
-      //ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
-      
-      //System.out.println(finalApproval);
-      //System.out.println(eano);
-      //System.out.println(approvalPathNo);
-      //System.out.println(memNo);
-	  
-      model.addAttribute("approvalPathNo", eaService.approveDocument(approvalPathNo))
-           .addAttribute("finalApproval", eaService.finalApprove(finalApproval, eano, memNo));
+		model.addAttribute("approvalPathNo", eaService.approveDocument(approvalPathNo))
+             .addAttribute("finalApproval", eaService.finalApprove(finalApproval, eano, memNo));
            
-      return "redirect:approvalStandbyList.ea?mno=" + memNo;
-    }
+		return "redirect:approvalStandbyList.ea?mno=" + memNo;
+	}
    
    
    // 작성자 : 최선희 -- 전자결재 기안함 리스트 

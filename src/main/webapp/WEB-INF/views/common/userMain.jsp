@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>BR-Main</title>
 
 <!-- 부트스트랩 탬플릿 -->
@@ -17,7 +18,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- CB slide image -->
-<link href="resources/css/comebackSlide.css" rel="stylesheet" />
 <link href="resources/css/comebackSlide2.css" rel="stylesheet" />
 
 

@@ -16,6 +16,9 @@
 <!-- jQuery 라이브러리 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<!-- CB slide image -->
+<link href="resources/css/comebackSlide.css" rel="stylesheet" />
+
 
 <style>
     .attendOuter{margin:auto; height:480px; width:300px;  border:1px solid lightgray; margin-bottom:23px;}
@@ -56,7 +59,7 @@
         	 <main style="display: flex;">
 
                 <!--컨텐츠: left-->
-                <div class="container-fluid px-4 leftBox" style="width: 40%;">
+                <div class="container-fluid px-4 leftBox" style="width: 30%;">
                     <!--근태박스-->
                    	<div class="attendOuter row"> 
 
@@ -113,11 +116,36 @@
                 <div class="container-fluid px-4 rightBox" >
                     <!--컴백슬라이드 부분표시-->
                     <div class="row" >
-                        <div class="col-xl-3 col-md-6" style="width: 100% !important;">
+                        <div class="col-xl-3 col-md-6 container" style="width: 100% !important;">
                             <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">컴백이미지 공간</div>
+                                <div class="card-body">
+	                                <img src="resources/comebackUpfiles/comeback_IU.png">
+	                                <img src="resources/comebackUpfiles/comeback_bts.png">
+	                                <img src="resources/comebackUpfiles/comeback_Twice.png">
+                                </div>
+                                
+                                <!-- footer -->
                                 <div class="card-footer d-flex align-items-center">
-                              
+                                  <button class="버튼1">1</button>
+	                                <button class="버튼2">2</button>
+	                                <button class="버튼1">3</button>
+									<script>
+									//버튼 1를 누르면 : transform: translate(vw)
+									document.querySelector('.버튼1').addEventListener('click',function(){
+										document.querySelector('.container').style.transform = 'translate(-0vw)';
+									});
+									//버튼 2를 누르면 : transform: translate(-100vw)
+									document.querySelector('.버튼2').addEventListener('click',function(){
+										document.querySelector('.container').style.transform = 'translate(-100vw)';
+									});
+									
+									//버튼3 누르면
+									document.querySelector('.버튼3').addEventListener('click',function(){
+									document.querySelector('.container').style.transform = 'translate(-200vw)';
+									});
+									
+									
+									</script>	        
                                 </div>
                             </div>
                         </div>
@@ -197,7 +225,8 @@
 	                            </table>
 	                        </div>
                     </div>
-            </main>
+             		</div>
+   		</main>
             
             
             <br><br><br><br><br><br><br>
@@ -213,8 +242,7 @@
                     </div>
                 </div>
             </footer>
-
-   		</div>
+ 
     </div>
   
 

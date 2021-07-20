@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.member.model.dao.MemberDao;
 import com.brEnt.brFamily.member.model.vo.Member;
 
@@ -104,7 +105,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMember(sqlSession, mno);
 	}
 
-
+	
+	// 작성자 : 최선희 -- 전자결재 기안함 리스트 조회 
+	@Override
+	public ArrayList<ElecApproval> selectApprovalTotalList() {
+		return mDao.selectApprovalTotalList(sqlSession); 
+	}
 
 	
 	

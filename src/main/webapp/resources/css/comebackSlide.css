@@ -5,7 +5,7 @@
 	transition: transform 0.5s; /*0.5초 속도로 이동하란 뜻!*/
 }
 img{
-	float:left;
+	float:right;
 }
 .card-body img{
 	width:100vw;

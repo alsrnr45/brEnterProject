@@ -18,6 +18,7 @@
 
 <!-- CB slide image -->
 <link href="resources/css/comebackSlide.css" rel="stylesheet" />
+<link href="resources/css/comebackSlide2.css" rel="stylesheet" />
 
 
 <style>
@@ -116,43 +117,82 @@
                 <div class="container-fluid px-4 rightBox" >
                     <!--컴백슬라이드 부분표시-->
                     <div class="row" >
-                        <div class="col-xl-3 col-md-6 container" style="width: 100% !important;">
-                            <div class="card bg-primary text-white mb-4">
-                                <div class="card-body">
-	                                <img src="resources/comebackUpfiles/comeback_IU.png">
-	                                
-                                </div>
-                                <div class="card-body">
-                                     <img src="resources/comebackUpfiles/comeback_bts.png">
-                                	
-                                </div>
-                                <div class="card-body">
-                                	 <img src="resources/comebackUpfiles/comeback_Twice.png">
-                                </div>
+                        <div class="col-xl-3 col-md-6  " style="width: 100% !important;">
+                            <div class="card bg-primary blue text-white mb-4">
+                                <!--<div class="card-body">-->
+								<div class="section">
+									<input type="radio" name="slide" id="slide01" checked>
+									<input type="radio" name="slide" id="slide02">
+									<input type="radio" name="slide" id="slide03">
+									<div class="slidewrap">
+										
+										<ul class="slidelist">
+											<!-- 슬라이드 영역 -->
+											<li class="slideitem">
+												<a>
+													<div class="textbox">
+														<h3>첫번째 슬라이드</h3>
+														<p>첫번째 슬라이드 입니다.</p>
+													</div>
+													<img src="resources/comebackUpfiles/comeback_IU.png">
+												</a>
+											</li>
+											<li class="slideitem">
+												<a>
+													
+													<div class="textbox">
+														<h3>두번째 슬라이드</h3>
+														<p>두번째 슬라이드 입니다.</p>
+													</div>
+													<img src="resources/comebackUpfiles/comeback_bts.png">
+
+												</a>
+											</li>
+											<li class="slideitem">
+												<a>
+													
+													<div class="textbox">
+														<h3>두번째 슬라이드</h3>
+														<p>두번째 슬라이드 입니다.</p>
+													</div>
+													<img src="resources/comebackUpfiles/comeback_blackpink.png">
+
+												</a>
+											</li class="slideitem">
+								
+											<!-- 좌,우 슬라이드 버튼 -->
+											<div class="slide-control">
+												<div>
+													<label for="slide03" class="left"></label>
+													<label for="slide02" class="right"></label>
+												</div>
+												<div>
+													<label for="slide01" class="left"></label>
+													<label for="slide03" class="right"></label>
+												</div>
+												<div>
+													<label for="slide02" class="left"></label>
+													<label for="slide01" class="right"></label>
+												</div>
+											</div>
+								
+										</ul>
+										<!-- 페이징 -->
+										<ul class="slide-pagelist">
+											<li><label for="slide01"></label></li>
+											<li><label for="slide02"></label></li>
+											<li><label for="slide03"></label></li>
+										</ul>
+									</div>
+									
+								</div>	              
+	              
+	              
+                                <!--</div>-->
                                 
                                 
                                 <!-- footer -->
                                 <div class="card-footer d-flex align-items-center">
-                                  <button class="버튼1">1</button>
-	                                <button class="버튼2">2</button>
-	                                <button class="버튼1">3</button>
-									<script>
-									//버튼 1를 누르면 : transform: translate(vw)
-									document.querySelector('.버튼1').addEventListener('click',function(){
-										document.querySelector('.container').style.transform = 'translate(-0vw)';
-									});
-									//버튼 2를 누르면 : transform: translate(-100vw)
-									document.querySelector('.버튼2').addEventListener('click',function(){
-										document.querySelector('.container').style.transform = 'translate(-100vw)';
-									});
-									
-									//버튼3 누르면
-									document.querySelector('.버튼3').addEventListener('click',function(){
-									document.querySelector('.container').style.transform = 'translate(-200vw)';
-									});
-									
-									
-									</script>	        
                                 </div>
                             </div>
                         </div>
@@ -250,8 +290,8 @@
                 </div>
             </footer>
  
-    </div>
-  
+   		</div>
+  </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>

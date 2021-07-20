@@ -18,24 +18,23 @@
 
 
 <style>
-    .attendOuter{margin:auto; width:300px; height:500px; border:1px solid lightgray;}
-    .attendOuter .date{height:45px; text-align: center; padding-top:10px; background: rgb(241, 241, 241);}
-    .attendOuter .profile{height:70%;}
-    .attendOuter .member{height:130px; width:100%; margin:0px 0px 30px 0px;}
-    .attendOuter .member .image .img{height:100%; width:130px; float:left;}
-    .attendOuter .member .info{height:100%; width:50%; float:right;}
-    .attendOuter .member .info .memName{font-size: 25px; font-weight: bold; text-align: center; padding-top:20px; margin-bottom: 5px;}
-    .attendOuter .member .info .deptName,.posiName{ text-align: center;}
+    .attendOuter{margin:auto; height:480px; width:300px;  border:1px solid lightgray; margin-bottom:23px;}
+    .attendOuter .date{height:50px; text-align: center; padding-top:10px; background: rgb(241, 241, 241);}
+    .attendOuter .profile{height:400px; margin-top:30px;}
+    .attendOuter .profile .member{height:130px; width:100%; margin:0px 0px 30px 0px;}
+    .attendOuter .profile .member .image .img{height:100%; width:130px; float:left;}
+    .attendOuter .profile .member .info{height:100%; width:50%; float:right;}
+    .attendOuter .profile .member .info .memName{font-size: 25px; font-weight: bold; text-align: center; padding-top:20px; margin-bottom: 5px;}
+    .attendOuter .profile .member .info .deptName,.posiName{ text-align: left; padding-left:25px;}
     
-    .attendOuter .workTime{text-align: center; padding: 10px 0 10px 0;}
-    .attendOuter .workTime .start,.end{font-size: 20px;}
-    .attendOuter .workTime .left{margin-right:70px;}
+    .attendOuter .profile .workTime{text-align: center; padding: 10px 0 10px 0;}
+    .attendOuter .profile .workTime .start,.end{font-size: 20px;}
+    .attendOuter .profile .workTime .left{margin-right:70px;}
 
-    .attendOuter .buttons{height:100px; width:100%; margin-top: 20px;}
-    .attendOuter .buttons>*{margin-bottom:10px;}
-    .attendOuter .buttons .checkIn{background:rgb(255, 244, 126); border:none; height:50px; width:100%;}
+    .attendOuter .buttons{height:100px; width:100%; margin: 20px 0 0 0;}
+    .attendOuter .buttons .checkIn{background:rgb(255, 244, 126); border:none; height:50px; width:100%; margin-bottom: 10px;}
     .attendOuter .buttons .checkOut{background:rgb(212, 212, 212); border:none; height:50px; width:100%;}
-    .attendOuter .cal {margin-top: 300px;}
+    /* .attendOuter .cal {margin-top: 500px;} */
 </style>
 
 </head>
@@ -46,16 +45,18 @@
     </nav>
     
     <div id="layoutSidenav">
+
         <!-- 메뉴바 -->
         <div id="layoutSidenav_nav">
             <jsp:include page="userMenu.jsp"/>
         </div>
+
         <!--컨텐츠-->
     	<div id="layoutSidenav_content">
         	 <main style="display: flex;">
 
                 <!--컨텐츠: left-->
-                <div class="container-fluid px-4 leftBox" style="width: 30%;">
+                <div class="container-fluid px-4 leftBox" style="width: 40%;">
                     <!--근태박스-->
                    	<div class="attendOuter row"> 
 
@@ -77,7 +78,6 @@
                                     <div class="posiName">직급 : ${ loginUser.posiName }</div>
                                 </div>
                             </div>
-                            
                             
                             <hr class="dropdown-divider" />
 
@@ -197,76 +197,9 @@
 	                            </table>
 	                        </div>
                     </div>
-
-
-					<!-- 
-                    <!--게시판2 
-                    <div class="card mb-4" style="height: 400px;"> <!--카드박스 세로크기 조정부분 
-                        <div class="card-header">
-                            <i class="fas fa-table me-1"></i>
-                            NOTICE
-                        </div>
-                        <div class="card-body">
-                            <table id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>제목</th>
-                                        <th>작성일</th>
-                                        <th>조회수</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> -->
             </main>
+            
+            
             <br><br><br><br><br><br><br>
             <footer class="py-4 bg-light mt-auto">
                 <div class="container-fluid px-4">
@@ -280,6 +213,7 @@
                     </div>
                 </div>
             </footer>
+
    		</div>
     </div>
   

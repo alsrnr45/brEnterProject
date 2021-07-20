@@ -157,13 +157,14 @@ public class ElecApprovalController {
          ea.setEcFileOrigin(upfile.getOriginalFilename()); 
          ea.setEcFileUpdate("resources/elecApprovalUpfiles/" + changeName); // 업로드된파일명 + 파일명
          
-      }         
+      }   
+      
+      int result = eaService.insertDocument(ea); 
       
       ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
 	  
-      model.addAttribute("ea", eaService.insertEcDocument(ea)) // 통합문서
-           .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList)); // 결재선
-      
+      model.addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList)); // 결재선
+                
       session.setAttribute("alertMsg", "성공적으로 문서가 작성되었습니다.");
       return "redirect:approvalTotalList.ea?mno=" + memNo;
             

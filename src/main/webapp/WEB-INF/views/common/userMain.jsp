@@ -142,63 +142,79 @@
                             NOTICE
                         </div>
                         <div class="card-body">
-                            <table id="datatablesSimple">
-                                <thead>
-                                    <tr>
-                                        <th>번호</th>
-                                        <th>제목</th>
-                                        <th>작성일</th>
-                                        <th>조회수</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ashton Cox</td>
-                                        <td>Junior Technical Author</td>
-                                        <td>San Francisco</td>
-                                        <td>66</td>
-                                        <td>2009/01/12</td>
-                                        <td>$86,000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Cedric Kelly</td>
-                                        <td>Senior Javascript Developer</td>
-                                        <td>Edinburgh</td>
-                                        <td>22</td>
-                                        <td>2012/03/29</td>
-                                        <td>$433,060</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+	                               
+	                                <table id="datatablesSimple" class="approvalTotalList">
+	                                    <thead>
+	                                        <tr>
+	                                            <th style="text-align:center;">문서번호</th>
+	                                            <th style="text-align:center;">문서종류</th>
+	                                            <th style="text-align:center;">제목</th>
+	                                            <th style="text-align:center;">기안자</th>
+	                                            <th style="text-align:center;">기안일</th>
+	                                            <th style="text-align:center;">완료일</th>
+	                                            <th style="text-align:center;">결재상태</th>
+	                                        </tr>
+	                                    </thead>
+	                                    <tbody>
+	                                       <!-- 로그인한 유저가 올린 문서만 보이도록 조건 처리 -->                                       
+	                                       <c:forEach var="ea" items="${ list }">
+	                                       	   <c:if test="${ loginUser.memName eq ea.ecWriter }">							
+		                                       	   <tr>                             	   
+		                                       	   	   <td>${ ea.ecDocName }<input type="hidden" class="eano" value="${ ea.ecDocNo }"></td>                                      	   	   
+		                                       	       	                                       	      	                                     	       
+		                                       	       <!-- 문서 코드에 따른 조건 처리 -->
+		                                       	       <td>
+		                                       	       		<input id="ecCode" type="hidden" value="${ ea.ecCode }">
+		                                       	       		<c:choose>
+		                                       	       			<c:when test="${ ea.ecCode eq 'PL' }">
+		                                       	       				기획안
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'BC' }">
+		                                       	       				업무연락
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'OF' }">
+		                                       	       				연차
+		                                       	       			</c:when>
+		                                       	       			<c:when test="${ ea.ecCode eq 'EX' }">
+		                                       	       				지출결의서
+		                                       	       			</c:when>
+		                                       	       			<c:otherwise>
+		                                       	       				회람 
+		                                       	       			</c:otherwise>
+		                                       	       		</c:choose>
+		                                       	       </td>
+		                                       	        
+		                                       	       <td>${ ea.ecTitle }</td>
+		                                       	       <td>${ ea.ecWriter }</td>
+		                                       	       
+		                                       	       <!-- JSTL 날짜형식 포맷팅 -->
+		                                       	       <td>
+		                                       	           <fmt:parseDate value="${ ea.ecEnrolldate }" var="dateFmt" pattern="yyyyMMdd"/>
+		                                       	           <fmt:formatDate value="${ dateFmt }" pattern="yyyy-MM-dd"/>
+		                                       	       </td>
+		                                       	       
+		                                       	       <td>${ ea.ecCompdate }</td>
+		                                       	       
+		                                       	       <!-- 결재대기인 경우에만 글자색 빨간색으로 변경할 것 -->
+		                                       	       <td>
+		                                       	       	   <c:choose>	             
+			                                       	       	   <c:when test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">
+								                           	   		<font color="red">결재대기</font>
+								                           	   </c:when>
+								                           	   <c:when test="${ !empty ea.ecCanceldate && !empty ea.ecCompdate }">
+								                           	   		반려  		
+								                           	   </c:when>
+								                           	   <c:when test="${ empty ea.ecCanceldate && !empty ea.ecCompdate }">
+								                           	   		결재완료
+								                           	   </c:when>
+							                           	   </c:choose>
+		                                       	       </td>
+		                                       	   </tr>
+	                                       	   </c:if>	
+	                                       </c:forEach>
+	                                    </tbody>
+	                                </table>
+	                            </div>
                     </div>
                     <!--게시판2-->
                     <div class="card mb-4" style="height: 400px;"> <!--카드박스 세로크기 조정부분-->

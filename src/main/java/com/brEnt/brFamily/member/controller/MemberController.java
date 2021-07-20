@@ -39,7 +39,30 @@ public class MemberController {
          return "common/userMain";  
           */
    
-   @RequestMapping("brEnter.main")
+   @RequestMapping("login.me")
+   public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
+      
+	   Member loginUser = mService.loginMember(m);
+      
+      
+      if(loginUser == null) { // 로그인 실패
+    	 System.out.println("로그인 실패");
+         
+         mv.setViewName("redirect:/");
+      
+      }else { // 로그인 성공  
+    	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();                          
+         
+         session.setAttribute("loginUser", loginUser);
+         
+         mv.addObject("list", list)
+           .setViewName("common/userMain");    
+      }
+      
+         return mv;
+      }
+         
+   /*@RequestMapping("brEnter.main")
    public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
       
 	   Member loginUser = mService.loginMember(m);
@@ -50,7 +73,7 @@ public class MemberController {
          
          mv.setViewName("redirect:/");
       
-      }else { // 로그인 성공 */ 
+      }else { // 로그인 성공  
     	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();
           
          mv.addObject("list", list)
@@ -60,7 +83,7 @@ public class MemberController {
       
          return mv;
       
-   }
+   }*/
   
    
    @RequestMapping("logout.me")

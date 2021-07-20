@@ -44,62 +44,62 @@
    .btn-light {margin-right: 10px; background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215);}
    .btn-danger {background-color: rgb(255, 134, 134); border-color: rgb(255, 134, 134); color: black;}
 
-   /* 스타일 */
+   /* outer */
    /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
    .content {width: 1150px; height: 860px; margin: auto; margin-top: 30px;}
-
-   .content_2 {width:920px; margin:auto;}
-   .content_2>div {float: left; text-align:center;}
-   .content_2 img {height: 60px;}
-
-   .content_4 {padding: 15px 0 0 500px;}
-   .content_4>a{margin-left: 40px;}
-
    table {text-align: center; font-size: 13px; margin: auto;}
    table>tr,th,td{border: 1px lightgray solid;} 
 
-   /* .tableType01 {margin-bottom: 10px;} */
+   /* 문서종류 */
    .tableType01 th {height: 40px; background-color: rgba(241, 241, 241, 0.75);}
    .tableType01 img {height: 50px;}
    
+   /* 결재선 */ 
+   .content_2 {width: 920px; margin: auto;}
+   .content_2>div {float: left; text-align: center;}
+   .content_2 img {height: 60px;}
    .tableType02 th {height: 160px; background-color: rgba(241, 241, 241, 0.75);}
    .tableType02 img {height: 60px;}
+   
+   #drafter {
+		width: 120px; 
+		height: 100%; 
+		font-size: 13px;
+		background-color: rgba(241, 241, 241, 0.75);
+		outline: 0.1px solid lightgray;
+		padding-top: 100px;
+	}
 
+	#approver {
+		width: 120px;
+		height: 100%;
+		font-size: 13px;
+		background-color: rgba(241, 241, 241, 0.75);
+		outline: 0.1px solid lightgray;
+		padding-top: 100px;
+	}
+   
+	#approvalInfo {
+		width: 136px; 
+		height: 100%;
+		font-size: 13px;
+		outline: 0.1px solid lightgray;
+	}
+	#approvalInfo div {outline: 1px solid lightgray;}
+   
+   /* 기획안/업무연락/회람 디테일 폼 */ 
    .tableType03 td {text-align: left;}
    .tableType03 th {background-color: rgba(241, 241, 241, 0.75);}
-
    .tableType03 input, textarea{width: 100%; border: none; padding-left: 10px;}
    .tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
    
    a:hover{color: rgb(155, 89, 182);}
    a{text-decoration: none;}
 
-
-   #drafter {
-      width: 120px; 
-      height: 100%; 
-      vertical-align: center;
-      font-size: 13px;
-      background-color: rgba(241, 241, 241, 0.75);
-      outline: 0.1px solid lightgray;
-   }
-
-   #approver {
-      width: 120px;
-      height: 100%;
-      font-size: 13px;
-      background-color: rgba(241, 241, 241, 0.75);
-      outline: 0.1px solid lightgray;
-   }
-   
-   #approvalInfo {
-      width: 136px; 
-      height: 100%;
-      font-size: 13px;
-      outline: 0.1px solid lightgray;
-   }
-   #approvalInfo div {outline: 1px solid lightgray;}
+   /* 삭제버튼 */ 	
+   .content_4 {padding: 15px 0 0 500px;}
+   .content_4>button{margin-left: 40px;}
    
 </style>
 </head>
@@ -150,9 +150,12 @@
                   </tr>
                   <tr style="border-bottom: 0;">
                      <th>기안 일시</th>
-                     	<td><fmt:parseDate value="${ ea.ecEnrolldate }" pattern="yyyy-MM-dd" /></td>
+                     	<td>
+                     		<fmt:parseDate value="${ea.ecEnrolldate}" var="enrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<fmt:formatDate value="${enrolldate}" pattern="yyyy-MM-dd"/>
+                     	</td>
                      <th>완료 일시</th>
-                     <td>${ ea.ecCompdate }</td>
+                     	<td>${ ea.ecCompdate }</td>
                   </tr>
                </table>
                <br>
@@ -161,11 +164,14 @@
             <div class="content_2" style="height:220px;">
                <div id="drafter">기안자</div>
                <div id="approvalInfo">
-                  <div style="height:35px;">${ ea.deptName }</div>
-                  <div style="height:35px;">${ ea.posiName }</div>
-                  <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
-                  <div style="height:35px;">${ ea.ecEnrolldate }</div>
-                  <div style="height:35px;">${ ea.ecWriter }</div>
+                  <div style="height:35px; padding-top:7px;">${ ea.deptName }</div>
+                  <div style="height:35px; padding-top:7px;">${ ea.posiName }</div>
+                  <div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
+                  <div style="height:35px; padding-top:7px;">
+                  	  <fmt:parseDate value="${ea.ecEnrolldate}" var="enrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+				  	  <fmt:formatDate value="${enrolldate}" pattern="yyyy-MM-dd"/>
+                  </div>
+                  <div style="height:35px; padding-top:7px;">${ ea.ecWriter }</div>
                </div>
                
                <div id="approver">결재자</div>
@@ -175,25 +181,31 @@
                          <c:when test="${ i lt ApprovalPathList.size() }">
                              <!-- i라는 값이 현재 리스트의 사이즈보다 작을 경우 (예를 들어 현재 리스트의 사이즈가 2라는 가정이면 i가 0,1일 경우) -->
                              <div id="approvalInfo">
-                                 <div style="height:35px;">${ ApprovalPathList[i].deptName }</div>
-                                 <div style="height:35px;">${ ApprovalPathList[i].posiName }</div>
+                                 <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].deptName }</div>
+                                 <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].posiName }</div>
                                  <c:choose>
                                      <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
-                                     	<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+                                     	<div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
                                      	
-                                     	<c:if test="${ (i+1) lt ApprovalPathList.size() }">
-                                           <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
-                                        </c:if>
-                                        
-                                        <c:set var="flag" value="ss"/>          
+                                     <!-- 승인/반려 버튼 구현 -->	
+                                     <c:if test="${ (i+1) lt ApprovalPathList.size() }">
+                                     	<c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
+                                     </c:if>
+                                     
+                                     <!-- 삭제하기 버튼 구현 -->   
+                                     <c:set var="flag" value="ss"/>    
+                                           
                                      </c:when>
                                      <c:otherwise>
 										<div style="height:80px;"></div>
 									 </c:otherwise>	
 								 </c:choose>	 
 								 
-                                 <div style="height:35px;">${ ApprovalPathList[i].apEnrolldate }</div>
-                                 <div style="height:35px;">${ ApprovalPathList[i].memName }</div>
+                                 <div style="height:35px; padding-top:7px;">
+                                 	<fmt:parseDate value="${ ApprovalPathList[i].apEnrolldate }" var="apEnrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${ apEnrolldate }" pattern="yyyy-MM-dd"/>
+                                 </div>
+                                 <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].memName }</div>
                                  
                                  	 <c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
                                  		 <c:set var="aname" value="aaa"/>
@@ -247,8 +259,8 @@
 
             
             <div class="content_4">
-            <!-- 삭제 버튼 보이는 조건문 --> 
-	        <!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
+            <!-- 버튼 보이는 조건문 --> 
+	        <!-- 삭제 버튼 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
 	                   (ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) --> 
 	                        
             	<c:choose>  
@@ -269,10 +281,10 @@
 		            <c:when test="${ ea.memNo eq loginUser.memNo }">
 		            	<c:choose>
 		                	<c:when test="${ flag eq 'ss' }">
-				            	<button class="btn btn-danger" onclick="postFormSubmit();" style="margin-left: 45px;" disabled>삭제하기</button>      
+				            	<button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>      
 				            </c:when>
 				            <c:otherwise>
-				              	<button class="btn btn-danger" onclick="postFormSubmit();" style="margin-left: 45px;">삭제하기</button> 
+				              	<button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button> 
 			              	</c:otherwise>
 			        	</c:choose>
 		            </c:when>                          

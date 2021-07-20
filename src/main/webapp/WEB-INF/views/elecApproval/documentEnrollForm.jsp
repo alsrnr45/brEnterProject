@@ -43,25 +43,23 @@
 	.btn-outline-secondary {margin: 0 0 3px 15px; color: royalblue; border-color: lightgray; font-size: 12px;}
 	.btn-outline-secondary:hover, .btn-outline-secondary:active {margin: 0 0 3px 15px; color: royalblue; border-color: lightgray; font-size: 12px; background-color: white; box-shadow: none !important;}
 		
-	/* 스타일 */
+	/* 문서종류 */
 	/* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
-
 	.content {width: 1150px; height: 810px; margin: auto; margin-top: 30px; margin-bottom: 30px;}
 	h6 {margin: 0 0 10px 115px; font-size: 18px;}
-
 	table {text-align: center; font-size: 13px; margin: auto;}
 	table>tr,th,td{border: 1px lightgray solid;} 
-
 	.tableType01 th {height: 40px; background-color: rgba(241, 241, 241, 0.75);}
 	
+	/* 결재선 */ 
 	.tableType02 th {height: 160px; background-color: rgba(241, 241, 241, 0.75);}
 	.tableType02 img {height: 50px;}
 	.tableType02 {width: 920px;}
-	.tableType02 input {text-align: center; font-size: 13px; border: none;}
+	.tableType02 input {text-align: center; font-size: 13px; border: none; background-color: white !important; border-color: white;}
 
 	.tableType03 td {text-align: left;}
 	.tableType03 th {background-color: rgba(241, 241, 241, 0.75);}
-	.tableType03 input, textarea{width: 100%; border: none; padding-left: 10px;}
+	.tableType03 input, textarea{width: 100%; border: none; padding-left: 10px; font-size: 13px;}
 	.tableType03 input:focus, .tableType03 textarea:focus{box-shadow: none !important;}
 	
 	/* 결재선 모달 */

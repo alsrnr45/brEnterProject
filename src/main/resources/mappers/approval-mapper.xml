@@ -217,7 +217,7 @@
    <!-- 작성자 : 최선희 - 기획안/업무연락/회람 삭제 -->
    <update id="deleteDocument" parameterType="_int">
         update 
-              ec_document 
+               ec_document 
            set ec_status = 'N' 
          where ec_doc_no = #{ ea.ecDocNo } 
      </update>
@@ -432,4 +432,15 @@
          where ec_doc_no = #{ ea.docNo }
    </select>
    
+   <!-- 전자결재 디테일 폼 완료 일시 표기 -->
+   <update id="updateCompdate" parameterType="_int">
+   		update 
+   			   ec_document 
+   		   set ec_compdate = sysdate 
+   		       ec_status = 'Y' 
+         where ec_doc_no = #{ ea.ecDocNo } 
+   </update>
+
+
+
 </mapper>

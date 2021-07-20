@@ -51,6 +51,7 @@
 	h1{margin-bottom: 20px;}
 	btn-primary{background: rgb(255, 235, 152);}
 	table{margin: auto; text-align: center;}
+	.noticeList>tbody>tr:hover{cursor:pointer;}
   	
 </style>
 </head>
@@ -73,17 +74,16 @@
                 <div class="container-fluid px-4">
                     
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">BR ENTER 소식</h1>
+                        <h1 class="mt-4">NOTICE</h1>
 
                         <div class="card mb-4">
                             <div class="card-header">
-                            	 <i class="fas fa-chalkboard"></i> NOTICE &nbsp;
-                            	 <a class="btn btn-primary" type="button" href="" style="color:white; border:none; margin-left:900px;">작성하기</a> 
+                            	 <a class="btn btn-primary" type="button" href="noticeEnroll.adim" style="color:white; border:none; margin-left:1000px;">작성하기</a> 
                             </div>
                             
-                            <form id="deleteBoardFree" method="post" >
+                            <form id="deleteNotice" method="post" >
 	                            <div class="card-body">
-	                                <table id="datatablesSimple" class="adminBoardFreeList">
+	                                <table id="datatablesSimple" class="noticeList">
 	                                    <thead>
 	                                        <tr>
 	                                            <th><input type="checkbox"></th>
@@ -122,8 +122,8 @@
     <script>
     	$(function() {
     		
-			$(document).on("click", ".adminBoardFreeList>tbody>tr>td", function(){
-        		location.href ="adminBoardFreeDetail.bf?bfno=" + $(this).siblings().eq(1).text();
+			$(document).on("click", ".noticeList>tbody>tr>td", function(){
+        		location.href ="noticeDetail.admin?nno=" + $(this).siblings().eq(1).text();
      		});
 		}); 
     	
@@ -133,7 +133,7 @@
     		if($("input:checkbox[id='noticeNo']").is(":checked") == true) {
      				var result = confirm("선택한 게시글을 삭제하시겠습니까?");
          			if(result){
-         				$("#deleteBoardFree").attr("action", "adminDeleteBoardFree.bf").submit(); 
+         				$("#deleteNotice").attr("action", "noticeDetail.admin").submit(); 
          				
                     } else {
                     	alert("삭제가 취소되었습니다.");

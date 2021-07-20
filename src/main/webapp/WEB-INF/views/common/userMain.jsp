@@ -38,10 +38,11 @@
         	 <main style="display: flex;">
                 <!--컨텐츠: left-->
                 <div class="container-fluid px-4 leftBox" style="width: 30%;">
-                    <!--근태박스-->
+                    <!--프로필 박스-->
                    	  <div class="row"> 
-                            <div class="col-xl-6 " style="width: 500px; height: 600px;">
+                            <div class="col-xl-6 " style="width: 500px; height: 600px; padding-left:0; padding-right:0  !important;">
                                 <div class="card mb-4 lefRow" style="height: 550px;">
+                                <!-- RealTime -->
                                     <div class="card-header">
                                     <i class="fas fa-clock"></i>
                                     <span  id="dpTime">오후 00:11:22 </span>
@@ -52,7 +53,7 @@
 										
                                     </div>
                                     
-                                    <!-- 프로필및 근태관리 -->
+                                    <!-- 사원정보및 근태관리 -->
                                     <div class="card-body" style="text-align: left;">
                                        <div class="parent 상부 " style="height: 200px;" >
                                          <div class="child 프로필사진" style=" " >
@@ -109,7 +110,7 @@
                                 </div>
                             </div>
                         </div>
-                    <!--api박스-->
+                    <!--달력-->
                         <div class="row" style="padding-left:0; padding-right:0  !important;"> 
                             <div class="col-xl-6" style="padding-left:0; padding-right:0  !important;">
                                 <div class="card mb-4"  style="height: 450px;">

@@ -111,6 +111,7 @@
         <c:set var="list" value="${boardMenuList}" />
         	    
         <div class="menuOuter">
+        <h1>주간식단</h1>
 	    	<div>
 	        	<div><br>
 	        		<a class="searchTag">

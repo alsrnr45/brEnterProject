@@ -159,13 +159,13 @@ public class BoradMenuController {
 		return "redirect:boardMenuDetail.bm?weekmenuNo="+bMenuR.getWeekmenuNo();
 	}
 
-	/*
-	주간식단 댓글 등록 (관리자) X
+	
+	//주간식단 댓글 등록 (관리자) X
 	@RequestMapping("adminBoardMenuReplyDelete.bm")
 	public String adminBoardMenuReplyDelete(BoardMenuReply bMenuR) throws Exception {
 		bmService.boardMenuReplyDelete(bMenuR);
 		return "redirect:adminBoardMenuDetail.bm?weekmenuNo="+bMenuR.getWeekmenuNo();
 	}
-	*/
+	
 	
 }

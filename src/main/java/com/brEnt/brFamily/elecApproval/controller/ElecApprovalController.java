@@ -147,7 +147,7 @@ public class ElecApprovalController {
       
    // 작성자 : 최선희 -- 기획안/업무연락/회람 작성 
    @RequestMapping("insertDocument.ea")
-   public String insertDocument(ElecApproval ea, int memNo, MultipartFile upfile, HttpSession session, Model model) {
+   public String insertDocument(Approval_path ap, ElecApproval ea, int memNo, MultipartFile upfile, HttpSession session, Model model) {
       
       // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 ea에 추가로 담기 
       if(!upfile.getOriginalFilename().equals("")) { 
@@ -157,8 +157,17 @@ public class ElecApprovalController {
          ea.setEcFileOrigin(upfile.getOriginalFilename()); 
          ea.setEcFileUpdate("resources/elecApprovalUpfiles/" + changeName); // 업로드된파일명 + 파일명
          
-      }
-         
+      }         
+      
+      ArrayList<Approval_path> ApprovalPathList = ap.getApprovalPathList();
+	  
+      model.addAttribute("ea", eaService.insertEcDocument(ea)) // 통합문서
+           .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList)); // 결재선
+      
+      session.setAttribute("alertMsg", "성공적으로 문서가 작성되었습니다.");
+      return "redirect:approvalTotalList.ea?mno=" + memNo;
+            
+      /*
       int result = eaService.insertDocument(ea); 
          
       // 성공했을 경우 
@@ -169,7 +178,7 @@ public class ElecApprovalController {
       }else { 
          model.addAttribute("errorMsg", "게시글 작성 실패"); 
          return "common/errorPage"; 
-      }
+      }*/
       
    }
    

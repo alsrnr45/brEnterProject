@@ -153,26 +153,31 @@
    </select>
    
    
-   <!-- 작성자 : 최선희 - 기획안/업무연락/회람 상세 조회 -->
+   <!-- 작성자 : 최선희 - 기획안/업무연락/회람 상세 조회 --> 
    <select id="documentDetail" resultMap="elecApproval" parameterType="_int">
-       select 
-             ec_doc_no
-           , mem_no
+        select 
+             e.ec_doc_no
+           , e.mem_no
            , ec_writer
            , ec_title
            , ec_cnt
            , ec_code
-           , ec_status
+           , e.ec_status
            , ec_doc_name
            , ec_enrolldate
            , ec_canceldate
            , ec_compdate
            , ec_file_origin
            , ec_file_update
+           , dept_name
+           , posi_name
        from ec_document e
+       join member m on(m.mem_no = e.mem_no)
+       join dept d on(d.dept_no = m.dept_no)
+       join position p on(p.posi_no = m.posi_no) 
       where ec_doc_no = #{ ea.ecDocNo }
         and ec_status = 'Y' 
-   </select>   
+   </select>
    
    
    <!-- 작성자 : 최선희 - 기획안/업무연락/회람 작성 -->

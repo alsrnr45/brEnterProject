@@ -184,41 +184,44 @@
 						<table class="tableType02">
 							<tr height="35">
 								<th rowspan="5" width="120">기안자</th>
-								<td width="136">${ loginUser.deptName }</td>
+								<td width="136">
+									<input type="text" class="form-control" name="deptName" value="${ loginUser.deptName }" readonly>
+									<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+								</td>
 								<th rowspan="5" width="120">결재자</th>
-								<td width="136"><input type="text" class="form-control" name="ApprovalPathList[0].deptName" value="개발팀"></td>
-								<td width="136"><input type="text" class="form-control" name="ApprovalPathList[1].deptName" value="개발팀"></td>
-								<td width="136"><input type="text" class="form-control" name="ApprovalPathList[2].deptName" value="개발팀"></td>
-								<td width="136"><input type="text" class="form-control" name="ApprovalPathList[3].deptName" value="개발팀"></td>
+								<td class="signDept1" width="136"><input type="text" class="form-control" id="deptName1" name="ApprovalPathList[0].deptName" value=""></td>
+								<td class="signDept2" width="136"><input type="text" class="form-control" id="deptName2" name="ApprovalPathList[1].deptName" value=""></td>
+								<td class="signDept3" width="136"><input type="text" class="form-control" id="deptName3" name="ApprovalPathList[2].deptName" value=""></td>
+								<td class="signDept4" width="136"><input type="text" class="form-control" id="deptName4" name="ApprovalPathList[3].deptName" value=""></td>
 							</tr>
 							<tr height="35">
 								<td>${ loginUser.posiName}</td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[0].posiName" value="과장"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[1].posiName" value="차장"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[2].posiName" value="부장"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[3].posiName" value="대표"></td>
+								<td><input type="text" class="form-control" id="posiName1" name="ApprovalPathList[0].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName2" name="ApprovalPathList[1].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName3" name="ApprovalPathList[2].posiName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="posiName4" name="ApprovalPathList[3].posiName" value="" readonly></td>
 							</tr>
 							<!-- 승인 시 승인날짜와 같이 이미지 뜨도록 (sysdate) -->
 							<tr height="80" style="color:gray;">
-								<td><img src="resources/elecApprovalUpfiles/check1.png"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[0].ecTurn" value="1"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[1].ecTurn" value="2"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[2].ecTurn" value="3"></td>
-								<td><input type="hidden" class="form-control" name="ApprovalPathList[3].ecTurn" value="4"></td>
+								<td class="signTd"><img src="resources/elecApprovalUpfiles/check1.png"></td>
+								<td class="signTd"><input type="hidden" class="form-control" name="ApprovalPathList[0].ecTurn" value="1"></td>
+								<td class="signTd"><input type="hidden" class="form-control" name="ApprovalPathList[1].ecTurn" value="2"></td>
+								<td class="signTd"><input type="hidden" class="form-control" name="ApprovalPathList[2].ecTurn" value="3"></td>
+								<td class="signTd"><input type="hidden" class="form-control" name="ApprovalPathList[3].ecTurn" value="4"></td>
 							</tr>
 							<tr height="35">
 								<td><fmt:formatDate value="${today}" pattern="yyyy-MM-dd"/></td>
-								<td><input type="hidden" name="ApprovalPathList[0].memNo" value="4"></td>
-								<td><input type="hidden" name="ApprovalPathList[1].memNo" value="3"></td>
-								<td><input type="hidden" name="ApprovalPathList[2].memNo" value="2"></td>
-								<td><input type="hidden" name="ApprovalPathList[3].memNo" value="1"></td>
+								<td><input type="hidden" id="memNo1" name="ApprovalPathList[0].memNo" value=""></td>
+								<td><input type="hidden" id="memNo2" name="ApprovalPathList[1].memNo" value=""></td>
+								<td><input type="hidden" id="memNo3" name="ApprovalPathList[2].memNo" value=""></td>
+								<td><input type="hidden" id="memNo4" name="ApprovalPathList[3].memNo" value=""></td>
 							</tr>
 							<tr height="35">
 								<td style="color: royalblue;">${ loginUser.memName }</td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[0].memName" value="박지은"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[1].memName" value="김혜미"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[2].memName" value="김민국"></td>
-								<td><input type="text" class="form-control" name="ApprovalPathList[3].memName" value="강보람"></td>
+								<td><input type="text" class="form-control" id="memName1" name="ApprovalPathList[0].memName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="memName2" name="ApprovalPathList[1].memName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="memName3" name="ApprovalPathList[2].memName" value="" readonly></td>
+								<td><input type="text" class="form-control" id="memName4" name="ApprovalPathList[3].memName" value="" readonly></td>
 							</tr>
 						</table>
 						<br>
@@ -228,7 +231,7 @@
 						<table class="tableType03">
 							<tr height="40">
 								<th>제목</th>
-									<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" placeholder="제목을 입력해주세요." required></td>
+									<td colspan="3"><input type="text" name="ecTitle" id="ecTitle" class="form-control" placeholder="제목을 입력해주세요." required></td>
 								</tr>
 								<tr height="40">
 									<th width="120">기안자</th>
@@ -256,131 +259,217 @@
 						</table>   														
 					</div>
 				</form>
+				
+								
+				<!-- The Modal -->
+                <div class="modal fade" id="signOffBtn">
+                    <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h5 class="modal-title">결재선 설정</h5>
+                        </div>
+	                      
+	                    <c:forEach var="count" items="${ mCount }">
+                        	<input type="hidden" name="memCount" value="${ mCount.memCount }">
+                        </c:forEach>
+                        
+                        <!-- Modal body -->
+                        <div class="modal-body" style="width:100%; height:100%;">
+                            <div class="signModalOuter">
+                                <div class="modal1">
+                                	<c:forEach var="dept" items="${ list }">
+                                		<ul id="dept">${ dept.deptName }(${ dept.count }) <input type="hidden" name=" deptNo" class="deptNo" value="${ dept.deptNo }" ></ul>
+                                    </c:forEach>
+                                </div>
+                                <div class="modal2">
+                                    <ul id="selectName"></ul>
+                                </div>
+ 								<!-- <div class="modal3">
+                                    <button class="btn btn-primary"> > </button>
+                                    <button class="btn btn-primary"> < </button>
+                                </div> -->
+                                <div class="modal4" align="left">
+                                    <div style="margin-bottom:5px;"><b>기안자</b></div>
+                                    <div class="modal4_1">
+                                        <p>${ loginUser.memName }</p>
+                                    </div>
+                                    <div class="modal4_2">
+                                        <b style="float:left;">결재자</b>
+                                        <div>
+                                        <button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
+                                        <button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
+                                        </div>
+                                    </div>
+                                    <!-- 결재자 -->
+                                    <div class="modal4_3" id="modal4_3"></div>
+                                    <div>
+                                        <button type="submit" class="btn btn-secondary apply" id="apply" data-dismiss="modal">적용</button>
+                                        <button type="button" class="btn btn-secondary" id="delete" data-dismiss="modal">취소</button>
+                                    </div>
+                                </div>
+                            </div>    
+                        </div>
+                    </div>
+                    </div>
+                </div>
+				
 			</div>
         </div>
         
     </div>
 	
-	<!-- The Modal -->
- 	<form action="">
-		<div class="modal fade" id="signOffBtn">
-			<div class="modal-dialog modal-xl">
-				<div class="modal-content">
-	              
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h5 class="modal-title">결재선 설정</h5>
-					</div>
-					
-					<!-- Modal body -->
-					<div class="modal-body" style="width:100%; height:100%;">
-                            <div class="signModalOuter">
-                                <div class="modal1">
-                                	<c:forEach var="dept" items="${ list }">
-                               			<ul id="dept">
-                               				<a>${ dept.deptName }(${ dept.count })</a>
-                               				<input type="hidden" name="deptNo" class="deptNo" value="${ dept.deptNo }">
-                               			</ul>
-                                    </c:forEach>
-                                </div>
-                                <div class="modal2">
-                                    <ul>
-                                    </ul>
-                                </div>
-                                <div class="modal3">
-                                    <button class="btn btn-primary"> > </button>
-                                    <button class="btn btn-primary"> < </button>
-                                </div>
-							<div class="modal4" align="left">
-								<div style="margin-bottom:5px;"><b>기안자</b></div>
-								<div class="modal4_1">
-		 							<p>${ loginUser.memName }</p>
-								</div>
-								<div class="modal4_2">
-		 							<b style="float:left;">결재자</b>
-		 							<div>
-		 							<button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
-		 							<button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
-		 							</div>
-								</div>
-								<div class="modal4_3">
-		 							<ul>안소은(사원)</ul>
-		 							<ul>정예빈(팀장)</ul>
-		 							<ul>김혜미(부장)</ul>
-		 							<ul>김민국(대표)</ul>
-								</div>
-								<div>
-		 							<button type="submit" class="btn btn-secondary apply" data-dismiss="modal">적용</button>
-		 							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								</div>
-							</div>
-						</div>    
-					</div>
-				</div>
-			</div>
-		</div>
-	</form>	
 	
-	
+	<!-- 결재선 AJAX용 script -->
 	<script type="text/javascript">
 	
-		$(function(){
-			$(".modal1>ul").click(function(){
-				
-			var deptNo = $(this).children(".deptNo").val();
-			var json = JSON.parse(deptNo);
-				
-			$.ajax({
-	              url:"memberList.ea",
-	              data:{deptNo:deptNo},
-	              success:function(list){
-	              	//console.log(list);
-	            	
-	              	var value="";
-					$.each(list, function(i, obj){
-						value += "<li>" + obj.memName + "(" + obj.posiName + ")" + "</li>"
-					})
-	              	
-					console.log(value);
-	              	$(".modal2 ul").html(value);
-	              	
-	                  },error:function(){
-	                      console.log("실패");
-	                  }
-				});
-			})
-		});
-	
-		
-		$(function(){
-			$(".modal1>ul").click(function(){
-		
-				$('.modal1>ul').removeClass()
-				$(this).addClass('on1')
-	
-			})
-		});
-		
-		
-		$(function(){
-            $(document).on("click", ".modal2>ul>li", function(){
-
-				$('.modal2>ul>li').removeClass()
-				$(this).addClass('on2')
-				
-			})
-		});
-		
-				 
-		function moveurl(url) { 
-			location.href = url;
+		// 클릭된 폼으로 이동하기
+	    function moveurl(url) { 
+		    location.href = url;
 		};
+	
+	    $(function(){
+	    	
+	    	// 결재선에서 부서 클릭 시 해당 부서의 사원명, 직급 불러오기
+	         $(".modal1>ul").click(function(){
+	        	 
+	        	 var deptNo = $(this).children(".deptNo").val();
+	         	 var json = JSON.parse(deptNo);
+	
+	         	 $.ajax({
+		                  url:"memberList.ea",
+		                  type:"get",
+		                  data:{deptNo:deptNo},
+		                  success:function(list){
+		                	
+		                  	var value="";
+		                	$.each(list, function(i, obj){
+		                		
+			                  	value += "<li>"
+			                  		  + '<input type="hidden" name="memNo" class="memNo" id="memNo" value="' + obj.memNo + '">'
+			                  		  + '<input type="hidden" name="deptName" class="deptName" value="' + obj.deptName +'">'
+			                  		  + '<input type="hidden" name="posiName" class="posiName" value="' + obj.posiName +'">'
+			                  		  + '<input type="hidden" name="memName" class="memName" value="' + obj.memName +'">'
+			                          + obj.memName + "(" + obj.posiName + ")"
+			                          + "</li>"
+		                	
+		                	})
+		                	
+		                 	$(".modal2 ul").html(value);
+		                	
+		                  },error:function(){
+		                      console.log("실패");
+		                  }
+		         });
+	      	})
+	   });
+	   
+	    
+	    
+	   // 부서명 클릭 시 CSS 효과 주기
+	   $(function(){
+			$(".modal1>ul").click(function(){
+				$('.modal1>ul').removeClass();
+				$(this).addClass('on1');
+			})
+		});
+	
+	   
+	   
+		$(function(){
+			$(document).on("click", ".modal2>ul>li", function(){
+				
+				// 사원명 클릭 시 CSS 효과 주기
+				$('.modal2>ul>li').removeClass();
+				$(this).addClass('on2');
+				
+				// 결재자의 memNo, deptName, posiName, memName
+				var memNo = $(this).children('input.memNo').val();
+				var deptName = $(this).children('input.deptName').val();
+				var posiName = $(this).children('input.posiName').val();
+				var memName = $(this).children('input.memName').val();
+				// name(posi)
+				var name = $(this).text(); 
+				
+				// #modal4_3 안의 자식 요소(결재선) 갯수 불러오기 (0부터)
+				var ele = document.getElementById('modal4_3');
+				var eleCount = ele.childElementCount;
+	
+				// 결재선에 4개까지만 들어갈 수 있게 하는 조건문
+				if(eleCount < 4){
+					$(".modal4_3").append(
+										    "<ul>" 
+										  + name
+										  + '<input type="hidden" class="memNo" value='+ memNo +'>'
+										  + '<input type="hidden" class="deptName" value='+ deptName +'>'
+										  + '<input type="hidden" class="posiName" value='+ posiName +'>'
+										  + '<input type="hidden" class="memName" value='+ memName +'>'
+										  + "</ul>"
+										 );
+				}else{
+					alert("추가할 수 있는 결재자가 초과되었습니다.");
+				}
+				
+			});
+		});
+	  
+		var arr = new Array();   				
+		
+		$(function(){
+		    $("#apply").click(function(){
+		      
+		      // 선택된 결재자들의 memNo, deptName, posiName, memName을 arr에 담기
+		      $("#modal4_3 .memNo").each(function(i,input){
+		    	  
+		          arr.push({
+				             memNo:$(this).val()
+				       	   , deptName:$("#modal4_3 .deptName").eq(i).val()
+				       	   , posiName:$("#modal4_3 .posiName").eq(i).val()
+				       	   , memName:$("#modal4_3 .memName").eq(i).val()
+		          		  });
+		      });
+		      
+		      // 사원번호
+		      $("#memNo1").val(arr[0].memNo);
+		      $("#memNo2").val(arr[1].memNo);
+		      $("#memNo3").val(arr[2].memNo);
+		      $("#memNo4").val(arr[3].memNo);
+		      
+		      // 부서명
+		      $("#deptName1").val(arr[0].deptName);
+		      $("#deptName2").val(arr[1].deptName);
+		      $("#deptName3").val(arr[2].deptName);
+		      $("#deptName4").val(arr[3].deptName);
+		      
+		      // 직급명
+		      $("#posiName1").val(arr[0].posiName);
+		      $("#posiName2").val(arr[1].posiName);
+		      $("#posiName3").val(arr[2].posiName);
+		      $("#posiName4").val(arr[3].posiName);
+		      
+		      // 사원명
+		      $("#memName1").val(arr[0].memName);
+		      $("#memName2").val(arr[1].memName);
+		      $("#memName3").val(arr[2].memName);
+		      $("#memName4").val(arr[3].memName);
+		      
+		    })
+		});
 		
 		
-		var len = $('#ecCnt').val().length;
-		$('#ecCnt').focus();
-		$('#ecCnt')[0].setSelectionRange(len, len);
-					
+		
+		$(function(){
+			$("#delete").click(function(){
+				
+				// 취소버튼 클릭시 결재선 비우기
+				$(".modal4_3").empty();
+				
+				// modal1, modal2 css 효과 지우기
+				
+			})
+		});
+						
 	</script>
 	
 	

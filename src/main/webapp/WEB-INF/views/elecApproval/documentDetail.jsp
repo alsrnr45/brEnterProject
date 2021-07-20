@@ -150,7 +150,7 @@
                   </tr>
                   <tr style="border-bottom: 0;">
                      <th>기안 일시</th>
-                     <td>${ ea.ecEnrolldate }</td>
+                     	<td><fmt:parseDate value="${ ea.ecEnrolldate }" pattern="yyyy-MM-dd" /></td>
                      <th>완료 일시</th>
                      <td>${ ea.ecCompdate }</td>
                   </tr>
@@ -161,11 +161,11 @@
             <div class="content_2" style="height:220px;">
                <div id="drafter">기안자</div>
                <div id="approvalInfo">
-                  <div style="height:35px;">개발팀</div>
-                  <div style="height:35px;">사원</div>
+                  <div style="height:35px;">${ ea.deptName }</div>
+                  <div style="height:35px;">${ ea.posiName }</div>
                   <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
-                  <div style="height:35px;">2021-07-10</div>
-                  <div style="height:35px;">김사원</div>
+                  <div style="height:35px;">${ ea.ecEnrolldate }</div>
+                  <div style="height:35px;">${ ea.ecWriter }</div>
                </div>
                
                <div id="approver">결재자</div>
@@ -269,10 +269,10 @@
 		            <c:when test="${ ea.memNo eq loginUser.memNo }">
 		            	<c:choose>
 		                	<c:when test="${ flag eq 'ss' }">
-				            	<button class="btn btn-danger" onclick="postFormSubmit();" disabled>삭제하기</button>      
+				            	<button class="btn btn-danger" onclick="postFormSubmit();" style="margin-left: 45px;" disabled>삭제하기</button>      
 				            </c:when>
 				            <c:otherwise>
-				              	<button class="btn btn-danger" onclick="postFormSubmit();">삭제하기</button> 
+				              	<button class="btn btn-danger" onclick="postFormSubmit();" style="margin-left: 45px;">삭제하기</button> 
 			              	</c:otherwise>
 			        	</c:choose>
 		            </c:when>                          

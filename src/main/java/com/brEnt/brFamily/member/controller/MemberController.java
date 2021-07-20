@@ -41,11 +41,12 @@ public class MemberController {
    
    @RequestMapping("brEnter.main")
    public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-      Member loginUser = mService.loginMember(m);
+      
+	   Member loginUser = mService.loginMember(m);
       
       /*
       if(loginUser == null) { // 로그인 실패
-    	  System.out.println("로그인 실패");
+    	 System.out.println("로그인 실패");
          
          mv.setViewName("redirect:/");
       
@@ -53,18 +54,19 @@ public class MemberController {
     	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();
           
          mv.addObject("list", list)
-           .setViewName("common/userMain");
+           .setViewName("common/userMain");           
+         
          session.setAttribute("loginUser", loginUser);
       
-      return mv;
+         return mv;
       
    }
   
    
    @RequestMapping("logout.me")
-   public String logoutMember(ModelAndView mv, HttpSession session) {
+   public String logoutMember(HttpSession session) {
       
-	   session.invalidate();
+	  session.invalidate();
       return "member/login";
    }
    

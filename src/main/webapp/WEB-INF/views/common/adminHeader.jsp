@@ -87,7 +87,7 @@
 	                   
 	                   <!--logout-->
 	                   <div class="dropmenu">
-		                    <button class="logout mymenu" >Logout</button>
+		                    <button class="logout mymenu" onclick="location.href='logout.me';">Logout</button>
 		                    <button class="mypage2 mymenu"  onClick="location.href='brEnter.main'; return false;">HOME</button>
 							<!--<li><a class="dropdown-item" href="#!">Logout</a></li> *dropdown-item 사용시 한칸 전부사용됨-->
 	                    </div>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .container{
-	width:200vw;  /*100vw=100% > x축이동!*/
+	width:300vw;  /*100vw=100% > x축이동!*/
 	transition: transform 0.5s; /*0.5초 속도로 이동하란 뜻!*/
 }
 img{

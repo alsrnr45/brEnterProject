@@ -120,9 +120,16 @@
                             <div class="card bg-primary text-white mb-4">
                                 <div class="card-body">
 	                                <img src="resources/comebackUpfiles/comeback_IU.png">
-	                                <img src="resources/comebackUpfiles/comeback_bts.png">
-	                                <img src="resources/comebackUpfiles/comeback_Twice.png">
+	                                
                                 </div>
+                                <div class="card-body">
+                                     <img src="resources/comebackUpfiles/comeback_bts.png">
+                                	
+                                </div>
+                                <div class="card-body">
+                                	 <img src="resources/comebackUpfiles/comeback_Twice.png">
+                                </div>
+                                
                                 
                                 <!-- footer -->
                                 <div class="card-footer d-flex align-items-center">

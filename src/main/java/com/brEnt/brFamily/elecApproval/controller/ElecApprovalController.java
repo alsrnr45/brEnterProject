@@ -56,7 +56,7 @@ public class ElecApprovalController {
       
       //System.out.println(o);
       //System.out.println(ap);
-      System.out.println(memNo);
+      //System.out.println(memNo);
       
       model.addAttribute("o", eaService.insertOff(o))
             .addAttribute("ApprovalPathList", eaService.insertApprovalPath(ApprovalPathList));
@@ -72,8 +72,8 @@ public class ElecApprovalController {
       ElecApproval ea = eaService.detailOff(eano);
       ArrayList<Approval_path> ApprovalPathList = eaService.detailApprovalPath(eano);
       
-      System.out.println(ea);
-      System.out.println(ApprovalPathList);
+      //System.out.println(ea);
+      //System.out.println(ApprovalPathList);
       
       model.addAttribute("ea", ea)
             .addAttribute("ApprovalPathList", ApprovalPathList);

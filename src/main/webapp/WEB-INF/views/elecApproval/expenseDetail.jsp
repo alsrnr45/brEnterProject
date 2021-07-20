@@ -132,11 +132,8 @@
 						<tr>
 							<th width="120">문서종류</th> 
 							<td width="340">지출결의서</td>
-							<th width="120">문서번호</th>
-							<td width="340">
-								${ ea.ecDocName }
-								<input type="hidden" name="docNo" value="${ ea.ecDocNo }">
-							</td>
+							<th width="120">문서번호<input type="hidden" name="docNo" value="${ ea.ecDocNo }"></th>
+							<td width="340">${ ea.ecDocName }</td>
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
@@ -151,8 +148,8 @@
 				<div class="content_2" style="height:220px;">
 					<div id="drafter">기안자</div>
 					<div id="approvalInfo">
-						<div style="height:35px;">개발팀</div>
-						<div style="height:35px;">사원</div>
+						<div style="height:35px;">${ ea.deptName }</div>
+						<div style="height:35px;">${ ea.posiName }</div>
 						<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
 						<div style="height:35px;">${ ea.ecEnrolldate }</div>
 						<div style="height:35px;">${ ea.ecWriter }</div>

@@ -240,7 +240,7 @@
             mem_no
            , mem_name
            , posi_name
-             , dept_name
+           , dept_name
         from member m
         join position p on(m.posi_no = p.posi_no)
           join dept d on(m.dept_no = d.dept_no)
@@ -252,20 +252,25 @@
       select 
              e.ec_doc_no
            , e.mem_no
-           , ec_writer
-           , ec_title
-           , ec_cnt
-           , ec_code
-           , ec_enrolldate
+           , e.ec_writer
+           , e.ec_title
+           , e.ec_cnt
+           , e.ec_code
+           , e.ec_enrolldate
            , e.ec_status
-           , ec_doc_name
-           , ec_canceldate
-           , ec_compdate
-           , expense_status
-           , account_month
-           , account
+           , e.ec_doc_name
+           , e.ec_canceldate
+           , e.ec_compdate
+           , x.expense_status
+           , x.account_month
+           , x.account
+           , dept_name
+           , posi_name
         from ec_document e
         join expense_form x on(x.ec_doc_no = e.ec_doc_no)
+        join member m on(m.mem_no = e.mem_no)
+        join dept d on(d.dept_no = m.dept_no)
+        join position p on(p.posi_no = m.posi_no)
        where e.ec_doc_no = #{ ea.docNo }
    </select>
 

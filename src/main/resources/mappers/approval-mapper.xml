@@ -417,7 +417,7 @@
              , mem_name
           from approval_path a
           join member m on(m.mem_no = a.mem_no)
-          join dept d on(d.dept_no = m.mem_no)
+          join dept d on(d.dept_no = m.dept_no)
           join position p on(p.posi_no = m.posi_no)
          where ec_doc_no = #{ ea.docNo }
    </select>

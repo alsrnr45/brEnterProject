@@ -49,11 +49,15 @@
     }
     .btn-light {margin-right: 10px;background-color: rgb(215, 215, 215); border-color: rgb(215, 215, 215); color:white;}
     .btn-danger {background-color: rgb(255, 134, 134); border-color: rgb(255, 134, 134); color: white;}
-
+	.delete{margin:30px 0px 0px 450px;}
+	.apply{margin:30px 0px 0px 400px; background-color:lightgray; border-color:lightgray;}
+	.return{margin: 30px 0px 0px 0px;}
+	
+	
     /* 스타일 */
     /* #layoutSidenav_content div {outline: 1px solid blueviolet;} */
 
-    .content {width:1000px; height: 100%; margin: auto; margin-top: 30px;}
+    .content {width:1000px; height: 1100px; margin: auto; margin-top: 30px;}
     
     .content_2 {width:920px; margin:auto;}
 	.content_2>div {float: left; text-align:center;}
@@ -154,123 +158,51 @@
 						<div style="height:35px;">${ ea.ecEnrolldate }</div>
 						<div style="height:35px;">${ ea.ecWriter }</div>
 					</div>
+					
 					<div id="approver">결재자</div>
-					<c:choose>
-						<c:when test="${ ApprovalPathList.size() eq 4 }">
-							<c:forEach var="ap" items="${ ApprovalPathList }">
-							<div id="approvalInfo">
-								<div style="height:35px;">${ ap.deptName }</div>
-								<div style="height:35px;">${ ap.posiName }</div>
-								<c:choose>
-									<c:when test="${ ap.apEnrolldate != null }">
-										<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-									</c:when>
-									<c:otherwise>
-										<div style="height:80px;"></div>
-									</c:otherwise>
-								</c:choose>
-								<div style="height:35px;">${ ap.apEnrolldate }</div>
-								<div style="height:35px;">${ ap.memName }</div>
-							</div>
-							</c:forEach>
-						</c:when>
-						<c:when test="${ ApprovalPathList.size() eq 3 }">
-							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<div id="approvalInfo">
-									<div style="height:35px;">${ ap.deptName }</div>
-									<div style="height:35px;">${ ap.posiName }</div>
-									<c:choose>
-										<c:when test="${ ap.apEnrolldate != null }">
-											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-										</c:when>
-										<c:otherwise>
-											<div style="height:80px;"></div>
-										</c:otherwise>
-									</c:choose>
-									<div style="height:35px;">${ ap.apEnrolldate }</div>
-									<div style="height:35px;">${ ap.memName }</div>
-								</div>
-							</c:forEach>
-							<div id="approvalInfo">
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:80px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-							</div>
-						</c:when>
-						<c:when test="${ ApprovalPathList.size() eq 2 }">
-							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<div id="approvalInfo">
-									<div style="height:35px;">${ ap.deptName }</div>
-									<div style="height:35px;">${ ap.posiName }</div>
-									<c:choose>
-										<c:when test="${ ap.apEnrolldate != null }">
-											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-										</c:when>
-										<c:otherwise>
-											<div style="height:80px;"></div>
-										</c:otherwise>
-									</c:choose>
-									<div style="height:35px;">${ ap.apEnrolldate }</div>
-									<div style="height:35px;">${ ap.memName }</div>
-								</div>
-							</c:forEach>
-							<div id="approvalInfo">
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:80px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-							</div>
-							<div id="approvalInfo">
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:80px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<c:forEach var="ap" items="${ ApprovalPathList }">
-								<div id="approvalInfo">
-									<div style="height:35px;">${ ap.deptName }</div>
-									<div style="height:35px;">${ ap.posiName }</div>
-									<c:choose>
-										<c:when test="${ ap.apEnrolldate != null }">
-											<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-										</c:when>
-										<c:otherwise>
-											<div style="height:80px;"></div>
-										</c:otherwise>
-									</c:choose>
-									<div style="height:35px;">${ ap.apEnrolldate }</div>
-									<div style="height:35px;">${ ap.memName }</div>
-								</div>
-							</c:forEach>
-							<div id="approvalInfo">
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:80px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-							</div>
-							<div id="approvalInfo">
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:80px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-							</div>
-							<div id="approvalInfo">
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:80px;"></div>
-								<div style="height:35px;"></div>
-								<div style="height:35px;"></div>
-							</div>
-						</c:otherwise>
-					</c:choose>
+					<!-- 무조건 4번 반복문 돌게 (i=0~3)-->
+			        <c:forEach var="i" begin="0" end="3">
+			            <c:choose>
+			                <c:when test="${ i lt ApprovalPathList.size() }">
+			                    <!--i라는 값이 현재 리스트의 사이즈보다 작을 경우 (예를들어 현재 리스트의 사이즈가 2라는 가정하면 i가 0,1일경우)-->
+			                    <div id="approvalInfo">
+			                        <div style="height:35px;">${ ApprovalPathList[i].deptName }</div>
+			                        <div style="height:35px;">${ ApprovalPathList[i].posiName }</div>
+			                        <c:choose>
+			                            <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
+			                            <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+
+										<c:if test="${ (i+1) lt ApprovalPathList.size() }">
+                                           <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
+                                        </c:if>
+
+										<c:set var="flag" value="ss"/>
+
+			                            </c:when>
+			                            <c:otherwise>
+			                            <div style="height:80px;"></div>
+			                            </c:otherwise>
+			                        </c:choose>
+			                        <div style="height:35px;">${ ApprovalPathList[i].apEnrolldate }</div>
+			                        <div style="height:35px;">${ ApprovalPathList[i].memName }</div>
+
+									<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
+										<c:set var="aname" value="aaa"/>
+									</c:if>
+			                    </div>
+			                </c:when>
+			                <c:otherwise>
+			                    <!--그게 아닐경우-->
+			                    <div id="approvalInfo">
+			                        <div style="height:35px;"></div>
+			                        <div style="height:35px;"></div>
+			                        <div style="height:80px;"></div>
+			                        <div style="height:35px;"></div>
+			                        <div style="height:35px;"></div>
+			                    </div>
+			                </c:otherwise>
+			            </c:choose>
+			        </c:forEach>
 				</div>
 
 				<div class="content_3">
@@ -305,9 +237,60 @@
 				</div>
 				
 				<div class="content_4">
-					<!-- 삭제하기 버튼은 이글이 본인글일 경우만 보여져야됨 -->
-					<a class="btn btn-danger" href="">삭제하기</a>
-				</div><br><br>
+				<!-- 삭제 버튼 보이는 조건문 --> 
+				<!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
+							(ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) --> 
+					<c:choose>  
+            		<c:when test="${ aname != null }">     
+		                <c:choose>                
+		                	<c:when test="${ ttt eq loginUser.memNo }">
+		                    	<button class="btn btn-light apply" type="submit">승인하기</button>
+		                     	<button class="btn btn-danger return" type="submit">반려하기</button>    
+		                  	</c:when>  
+		                    <c:otherwise>
+		                      	<button class="btn btn-light apply" disabled>승인하기</button>
+		                      	<button class="btn btn-danger return" disabled>반려하기</button>
+		                    </c:otherwise>
+		                </c:choose>
+	                </c:when>
+	                
+    
+		            <c:when test="${ ea.memNo eq loginUser.memNo }">
+		            	<c:choose>
+		                	<c:when test="${ flag eq 'ss' }">
+				            	<button class="btn btn-danger delete" onclick="postFormSubmit();"disabled>삭제하기</button>      
+				            </c:when>
+				            <c:otherwise>
+				              	<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
+			              	</c:otherwise>
+			        	</c:choose>
+		            </c:when>                          
+               	</c:choose>               
+                                                 
+                <form id="postForm" action="" method="post">
+                    <input type="hidden" name="eano" value="${ ea.ecDocNo }">
+                    <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
+                    <input type="hidden" name="memNo" value="${ loginUser.memNo }">
+                </form>
+               
+               
+                <script>
+                   function postFormSubmit() { 
+                     
+                      var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
+                     
+                      if(result){
+                         $("#postForm").attr("action", "deleteDocument.ea").submit();
+                         return true;
+                      } else{
+                         alert("삭제가 취소되었습니다.")
+                         return false; 
+                      }
+                   }
+                </script>
+								
+															
+				</div>
 				
 			</div>
         </div>

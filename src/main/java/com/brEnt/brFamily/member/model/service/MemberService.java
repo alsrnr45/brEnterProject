@@ -2,6 +2,7 @@ package com.brEnt.brFamily.member.model.service;
 
 import java.util.ArrayList;
 
+import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.member.model.vo.Member;
 import com.brEnt.brFamily.store.model.vo.Product;
 
@@ -55,7 +56,9 @@ public interface MemberService {
 	int deleteMember(int mno);
 
 	
-	
+	// 메인 전자결재 리스트 
+	// 작성자 : 최선희 -- 전자결재 기안함 리스트 조회
+    ArrayList<ElecApproval> selectApprovalTotalList(); 
 	
 		
 	

@@ -431,6 +431,9 @@
 		      $("#memName3").val(arr[2].memName);
 		      $("#memName4").val(arr[3].memName);
 		      
+		      // 결재선이 1개 or 2개 or 3개 일 경우
+		      
+		      
 		    })
 		});
 		

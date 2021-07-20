@@ -141,7 +141,10 @@
 						</tr>
 						<tr style="border-bottom: 0;">
 							<th>기안 일시</th>
-							<td>${ ea.ecEnrolldate }</td>
+							<td>
+								<fmt:parseDate value="${ea.ecEnrolldate}" var="enrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+								<fmt:formatDate value="${enrolldate}" pattern="yyyy-MM-dd"/>
+							</td>
 							<th>완료 일시</th>
 							<td>${ ea.ecCompdate }</td>
 						</tr>
@@ -152,11 +155,14 @@
 				<div class="content_2" style="height:220px;">
 					<div id="drafter">기안자</div>
 					<div id="approvalInfo">
-						<div style="height:35px;">${ ea.deptName }</div>
-						<div style="height:35px;">${ ea.posiName }</div>
-						<div style="height:80px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
-						<div style="height:35px;">${ ea.ecEnrolldate }</div>
-						<div style="height:35px;">${ ea.ecWriter }</div>
+						<div style="height:35px; padding-top:7px;">${ ea.deptName }</div>
+						<div style="height:35px; padding-top:7px;">${ ea.posiName }</div>
+						<div style="height:80px; padding-top:7px;"><img src="resources/elecApprovalUpfiles/check1.png"></div>
+						<div style="height:35px; padding-top:7px;">
+							<fmt:parseDate value="${ea.ecEnrolldate}" var="enrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+							<fmt:formatDate value="${enrolldate}" pattern="yyyy-MM-dd"/>
+						</div>
+						<div style="height:35px; padding-top:7px;">${ ea.ecWriter }</div>
 					</div>
 					
 					<div id="approver">결재자</div>
@@ -166,25 +172,34 @@
 			                <c:when test="${ i lt ApprovalPathList.size() }">
 			                    <!--i라는 값이 현재 리스트의 사이즈보다 작을 경우 (예를들어 현재 리스트의 사이즈가 2라는 가정하면 i가 0,1일경우)-->
 			                    <div id="approvalInfo">
-			                        <div style="height:35px;">${ ApprovalPathList[i].deptName }</div>
-			                        <div style="height:35px;">${ ApprovalPathList[i].posiName }</div>
+			                        <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].deptName }</div>
+			                        <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].posiName }</div>
+			                       
 			                        <c:choose>
-			                            <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
-			                            <div style="height:80px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-
-										<c:if test="${ (i+1) lt ApprovalPathList.size() }">
-                                           <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
-                                        </c:if>
-
-										<c:set var="flag" value="ss"/>
-
-			                            </c:when>
-			                            <c:otherwise>
-			                            <div style="height:80px;"></div>
-			                            </c:otherwise>
-			                        </c:choose>
-			                        <div style="height:35px;">${ ApprovalPathList[i].apEnrolldate }</div>
-			                        <div style="height:35px;">${ ApprovalPathList[i].memName }</div>
+	                                    <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
+	
+			                                 <div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
+			
+			                                 <!-- 기안/반려하기 버튼 구현 -->
+			                                 <c:if test="${ (i+1) lt ApprovalPathList.size() }">
+			                                    <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
+			                                 </c:if>
+			
+			                                 <!-- 삭제하기 버튼 구현 -->
+			                                 <c:set var="flag" value="ss"/>
+	
+	                                     </c:when>
+	                                     <c:otherwise>
+		                                     <div style="height:80px;  padding-top:10px;"></div>
+											 <c:set var="ttt" value="${ ApprovalPathList[0].memNo }"/>
+	                                     </c:otherwise>
+                                 	</c:choose>
+			                        
+			                        <div style="height:35px; padding-top:7px;">
+			                        	<fmt:parseDate value="${ ApprovalPathList[i].apEnrolldate }" var="apEnrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+										<fmt:formatDate value="${ apEnrolldate }" pattern="yyyy-MM-dd"/>
+			                        </div>
+			                        <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].memName }</div>
 
 									<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
 										<c:set var="aname" value="aaa"/>
@@ -241,31 +256,30 @@
 				<!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
 							(ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) --> 
 					<c:choose>  
-            		<c:when test="${ aname != null }">     
-		                <c:choose>                
-		                	<c:when test="${ ttt eq loginUser.memNo }">
-		                    	<button class="btn btn-light apply" type="submit">승인하기</button>
-		                     	<button class="btn btn-danger return" type="submit">반려하기</button>    
-		                  	</c:when>  
-		                    <c:otherwise>
-		                      	<button class="btn btn-light apply" disabled>승인하기</button>
-		                      	<button class="btn btn-danger return" disabled>반려하기</button>
-		                    </c:otherwise>
-		                </c:choose>
-	                </c:when>
-	                
+	            		<c:when test="${ aname != null }">     
+			                <c:choose>                
+			                	<c:when test="${ ttt eq loginUser.memNo }">
+			                    	<button class="btn btn-light apply" type="submit">승인하기</button>
+			                     	<button class="btn btn-danger return" type="submit">반려하기</button>    
+			                  	</c:when>  
+			                    <c:otherwise>
+			                      	<button class="btn btn-light apply" disabled>승인하기</button>
+			                      	<button class="btn btn-danger return" disabled>반려하기</button>
+			                    </c:otherwise>
+			                </c:choose>
+		                </c:when>
     
-		            <c:when test="${ ea.memNo eq loginUser.memNo }">
-		            	<c:choose>
-		                	<c:when test="${ flag eq 'ss' }">
-				            	<button class="btn btn-danger delete" onclick="postFormSubmit();"disabled>삭제하기</button>      
-				            </c:when>
-				            <c:otherwise>
-				              	<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
-			              	</c:otherwise>
-			        	</c:choose>
-		            </c:when>                          
-               	</c:choose>               
+			            <c:when test="${ ea.memNo eq loginUser.memNo }">
+			            	<c:choose>
+			                	<c:when test="${ flag eq 'ss' }">
+					            	<button class="btn btn-danger delete" onclick="postFormSubmit();"disabled>삭제하기</button>      
+					            </c:when>
+					            <c:otherwise>
+					              	<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
+				              	</c:otherwise>
+				        	</c:choose>
+			            </c:when>                          
+               		</c:choose>               
                                                  
                 <form id="postForm" action="" method="post">
                     <input type="hidden" name="eano" value="${ ea.ecDocNo }">

@@ -124,6 +124,8 @@
 									<input type="radio" name="slide" id="slide01" checked>
 									<input type="radio" name="slide" id="slide02">
 									<input type="radio" name="slide" id="slide03">
+									<input type="radio" name="slide" id="slide04">
+									<input type="radio" name="slide" id="slide05">
 									<div class="slidewrap">
 										
 										<ul class="slidelist">
@@ -131,8 +133,8 @@
 											<li class="slideitem">
 												<a>
 													<div class="textbox">
-														<h3>첫번째 슬라이드</h3>
-														<p>첫번째 슬라이드 입니다.</p>
+														<h3>IU</h3>
+														<p>정규5집 컴백 LAILAC</p>
 													</div>
 													<img src="resources/comebackUpfiles/comeback_IU.png">
 												</a>
@@ -141,8 +143,8 @@
 												<a>
 													
 													<div class="textbox">
-														<h3>두번째 슬라이드</h3>
-														<p>두번째 슬라이드 입니다.</p>
+														<h3>BTS</h3>
+														<p>PERMISSION TO DANCE</p>
 													</div>
 													<img src="resources/comebackUpfiles/comeback_bts.png">
 
@@ -152,13 +154,35 @@
 												<a>
 													
 													<div class="textbox">
-														<h3>두번째 슬라이드</h3>
-														<p>두번째 슬라이드 입니다.</p>
+														<h3>BLACKPINK</h3>
+														<p>LOVESICK GIRLS</p>
 													</div>
 													<img src="resources/comebackUpfiles/comeback_blackpink.png">
 
 												</a>
 											</li class="slideitem">
+											<li class="slideitem">
+												<a>
+													
+													<div class="textbox">
+														<h3>OH MY GIRL</h3>
+														<p>DUN DUN DANCE</p>
+													</div>
+													<img src="resources/comebackUpfiles/comeback_omg.png">
+
+												</a>
+											</li>
+											<li class="slideitem">
+												<a>
+													
+													<div class="textbox">
+														<h3>TWICE</h3>
+														<p>Alcohol-FREE</p>
+													</div>
+													<img src="resources/comebackUpfiles/comeback_Twice.png">
+
+												</a>
+											</li>
 								
 											<!-- 좌,우 슬라이드 버튼 -->
 											<div class="slide-control">
@@ -172,6 +196,14 @@
 												</div>
 												<div>
 													<label for="slide02" class="left"></label>
+													<label for="slide04" class="right"></label>
+												</div>
+												<div>
+													<label for="slide03" class="left"></label>
+													<label for="slide05" class="right"></label>
+												</div>
+												<div>
+													<label for="slide04" class="left"></label>
 													<label for="slide01" class="right"></label>
 												</div>
 											</div>

@@ -23,22 +23,28 @@
 
 <style>
     .attendOuter{margin:auto; height:480px; width:300px;  border:1px solid lightgray; margin-bottom:23px;}
-    .attendOuter .date{height:50px; text-align: center; padding-top:10px; background: rgb(241, 241, 241);}
+    .attendOuter .date{height:70px; text-align: center; padding-top:15px; background: rgb(241, 241, 241); font-size: 25px;}
     .attendOuter .profile{height:400px; margin-top:30px;}
-    .attendOuter .profile .member{height:130px; width:100%; margin:0px 0px 30px 0px;}
+    .attendOuter .profile .member{height:120px; width:100%; margin:0px 0px 0px 0px;}
     .attendOuter .profile .member .image .img{height:100%; width:130px; float:left;}
     .attendOuter .profile .member .info{height:100%; width:50%; float:right;}
-    .attendOuter .profile .member .info .memName{font-size: 25px; font-weight: bold; text-align: center; padding-top:20px; margin-bottom: 5px;}
-    .attendOuter .profile .member .info .deptName,.posiName{ text-align: left; padding-left:25px;}
+    .attendOuter .profile .member .info .memName{font-size: 25px; font-weight: bold; text-align: center; padding-top:10px; margin-bottom: 5px;}
+    .attendOuter .profile .member .info .deptName,.posiName{text-align: left; padding-left:25px;}
     
     .attendOuter .profile .workTime{text-align: center; padding: 10px 0 10px 0;}
     .attendOuter .profile .workTime .start,.end{font-size: 20px;}
     .attendOuter .profile .workTime .left{margin-right:70px;}
 
     .attendOuter .buttons{height:100px; width:100%; margin: 20px 0 0 0;}
-    .attendOuter .buttons .checkIn{background:rgb(255, 244, 126); border:none; height:50px; width:100%; margin-bottom: 10px;}
-    .attendOuter .buttons .checkOut{background:rgb(212, 212, 212); border:none; height:50px; width:100%;}
+    .attendOuter .buttons .checkIn{background:rgb(251, 222, 96); border:none; height:50px; width:120px; margin: 8px 20px 10px 10px;}
+    .attendOuter .buttons .checkOut{background:rgb(175, 175, 175); border:none; height:50px; width:120px; margin: 8px 0 0 0;}
+
+	.buttons button {float: left;}
     /* .attendOuter .cal {margin-top: 500px;} */
+
+	.attendOuter {height: 450px;}
+	.circleBase {padding-left: 15px;}
+	.slidelist {margin-bottom: 0;}
 </style>
 
 </head>
@@ -82,7 +88,7 @@
                                     <div class="posiName">직급 : ${ loginUser.posiName }</div>
                                 </div>
                             </div>
-                            
+                            <br>
                             <hr class="dropdown-divider" />
 
                             <!-- 출퇴근 시간 -->
@@ -97,7 +103,7 @@
                                 </div>
                             </div>
 
-                            <hr class="dropdown-divider" />  
+                            <hr class="dropdown-divider" />
                             
                             <!-- 출퇴근 버튼 -->
                             <div class="buttons">

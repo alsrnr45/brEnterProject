@@ -118,7 +118,7 @@
                     <!--컴백슬라이드 부분표시-->
                     <div class="row" >
                         <div class="col-xl-3 col-md-6  " style="width: 100% !important;">
-                            <div class="card bg-primary blue text-white mb-4">
+                            <div class="card text-white mb-4" style="border:none; border-radius:1rem;">
                                 <!--<div class="card-body">-->
 								<div class="section">
 									<input type="radio" name="slide" id="slide01" checked>
@@ -175,14 +175,10 @@
 													<label for="slide01" class="right"></label>
 												</div>
 											</div>
-								
+				
 										</ul>
 										<!-- 페이징 -->
-										<ul class="slide-pagelist">
-											<li><label for="slide01"></label></li>
-											<li><label for="slide02"></label></li>
-											<li><label for="slide03"></label></li>
-										</ul>
+
 									</div>
 									
 								</div>	              
@@ -192,7 +188,8 @@
                                 
                                 
                                 <!-- footer -->
-                                <div class="card-footer d-flex align-items-center">
+                                <div class="">
+                                
                                 </div>
                             </div>
                         </div>

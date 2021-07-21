@@ -2,6 +2,8 @@ package com.brEnt.brFamily.notice.controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,6 +85,21 @@ public class NoticeController {
 	@RequestMapping("noticeEnroll.adim")
 	public String noticeEnroll() {
 		return "notice/noticeEnrollForm"; 
+	}
+	
+	@RequestMapping("insertNotice.admin")
+	public String insertNotice(Notice n, HttpSession session, Model model) {
+		
+		int result = nService.insertNotice(n);
+		
+		if(result > 0){
+			session.setAttribute("alertMsg", "공지사항이 성공적으로 작성되었습니다.");
+			return "redirect:noticeList.admin";
+		}else {
+			model.addAttribute("errorMsg", "공지사항이 성공적으로 작성되었습니다.");
+			return "common/errorPage";
+		}
+		
 	}
 	
 	

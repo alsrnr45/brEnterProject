@@ -89,7 +89,7 @@
                         </tr>
                     </tbody>
                 </table>    
-                <textarea class="form-control contentArea">${ no.content }</textarea>  
+                <textarea class="form-control contentArea">${ n.content }</textarea>  
                 
                 <div class="replyOuter">
                     <h5><b>댓글쓰기</b></h5>
@@ -107,8 +107,6 @@
                                 <th>김자바</th>
                                 <td>
                                     그거참좋은스토리네여
-                                   <!--  <button class="btn btn-sm update">수정</button>
-                                    <button class="btn btn-sm delete">삭제</button> -->
                                     <p>2021/02/12</p>
                                 </td>
                             </tr>
@@ -118,7 +116,12 @@
                             </tr>
                         </tbody>
                     </table>
-                </div> 
+                </div>
+                
+                <form id="postForm" action="" method="post">
+	                <input type="hidden" name="nno" value="${ n.noticeNo }">
+                </form>
+								 
                 
             </div><br><br><br><br><br>
         </div>

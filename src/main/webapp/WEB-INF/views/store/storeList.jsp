@@ -126,7 +126,7 @@
 					-->
 
 					<!-- 카테고리 -->
-					<form action="storeCtgList.st">
+					<form action="ctgList.st">
 						<div id="ctgArea">
 							<div id="form-group">
 								<select class="form-control" name="pdtCtg" id="pdtCtg">
@@ -175,13 +175,13 @@
 					   	<c:if test="${ pi.currentPage ne 1 }">
 						  	<c:choose>
 							 	<c:when test="${ empty keyword }">
-								  	<a href="storeList.st?currentPage=${ pi.currentPage-1 }">[이전]</a>
+								  	<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage-1 }">이전</a></li>
 								</c:when>
 								<c:when test="${ !empty pdtCtg }">
-								  	<a href="storeList.st?currentPage=${ pi.currentPage-1 }&pdtCtg=${pdtCtg}">[이전]</a>
+								  	<li class="page-item"><a class="page-link" href="ctgList.st?currentPage=${ pi.currentPage-1 }&pdtCtg=${pdtCtg}">이전</a></li>
 								</c:when>
 								<c:otherwise>
-								   <a href="search.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">[이전]</a>
+								   <li class="page-item"><a class="page-link" href="searchList.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">이전</a></li>
 								</c:otherwise>
 							</c:choose>
 					   	</c:if>
@@ -189,13 +189,13 @@
 					   	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
 						  	<c:choose>
 							 	<c:when test="${ empty keyword }">
-								   <li class="page-item"><a href="storeList.st?currentPage=${ p }">[${ p }]</a></li>
+								   <li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ p }">${ p }</a></li>
 								</c:when>
 								<c:when test="${ !empty pdtCtg }">
-								   <li class="page-item"><a href="storeList.st?currentPage=${ p }&pdtCtg=${pdtCtg}">[${ p }]</a></li>
+								   <li class="page-item"><a class="page-link" href="ctgList.st?currentPage=${ p }&pdtCtg=${pdtCtg}">${ p }</a></li>
 								</c:when>
 								<c:otherwise>
-								   <li class="page-item"><a href="search.st?currentPage=${ p }&keyword=${keyword}">[${ p }]</a></li>
+								   <li class="page-item"><a class="page-link" href="searchList.st?currentPage=${ p }&keyword=${keyword}">${ p }</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:forEach>
@@ -203,13 +203,13 @@
 						<c:if test="${ pi.currentPage ne pi.maxPage }">
 							<c:choose>
 								<c:when test="${ empty keyword }">
-								   <a href="storeList.st?currentPage=${ pi.currentPage+1 }">[다음]</a>
+									<li class="page-item"><a class="page-link" href="storeList.st?currentPage=${ pi.currentPage+1 }">다음</a></li>
 								</c:when>
 								<c:when test="${ !empty pdtCtg }">
-								   <a href="storeList.st?currentPage=${ pi.currentPage+1 }&pdtCtg=${pdtCtg}">[다음]</a>
+									<li class="page-item"><a class="page-link" href="ctgList.st?currentPage=${ pi.currentPage+1 }&pdtCtg=${pdtCtg}">다음</a></li>
 								</c:when>
 								<c:otherwise>
-								   <a href="list.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">[다음]</a>
+									<li class="page-item"><a class="page-link" href="searchList.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">다음</a></li>
 								</c:otherwise>
 							</c:choose>
 						</c:if>

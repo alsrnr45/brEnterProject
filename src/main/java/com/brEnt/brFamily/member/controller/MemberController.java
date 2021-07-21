@@ -28,64 +28,29 @@ public class MemberController {
    private MemberService mService; //변수선언(전역변수 세팅)
    
    
-   // 작성자 : 정예빈 -- 로그인 
-
-         /*
-         // url 재요청 방식
-         return "redirect:/";
-         session.setAttribute("loginUser",loginUser); -> 로그인회원 세션에 담는것 
-         
-         // 포워딩 방식 (/WEB-INF/views/common/**.jsp)
-         return "common/userMain";  
-          */
-   
+   // 작성자 : 정예빈 - 로그인 
    @RequestMapping("login.me")
    public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
       
 	   Member loginUser = mService.loginMember(m);
       
-      
-      if(loginUser == null) { // 로그인 실패
-    	 System.out.println("로그인 실패");
+	   if(loginUser == null) { // 로그인 실패
+		   System.out.println("로그인 실패");
          
-         mv.setViewName("redirect:/");
+		   mv.setViewName("redirect:/");
       
-      }else { // 로그인 성공  
-    	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();                          
+	   }else { // 로그인 성공  
+		   ArrayList<ElecApproval> list = mService.selectApprovalTotalList();                          
+	         
+		   session.setAttribute("loginUser", loginUser);
          
-         session.setAttribute("loginUser", loginUser);
-         
-         mv.addObject("list", list)
-           .setViewName("common/userMain");    
-      }
-      
-         return mv;
-      }
-         
-   /*@RequestMapping("brEnter.main")
-   public ModelAndView loginMember(Member m, HttpSession session, ModelAndView mv) {
-      
-	   Member loginUser = mService.loginMember(m);
-      
-      /*
-      if(loginUser == null) { // 로그인 실패
-    	 System.out.println("로그인 실패");
-         
-         mv.setViewName("redirect:/");
-      
-      }else { // 로그인 성공  
-    	 ArrayList<ElecApproval> list = mService.selectApprovalTotalList();
-          
-         mv.addObject("list", list)
-           .setViewName("common/userMain");           
-         
-         session.setAttribute("loginUser", loginUser);
-      
-         return mv;
-      
-   }*/
+		   mv.addObject("list", list)
+             .setViewName("common/userMain");    
+	   }
+	   return mv;
+   }
   
-   
+   // 작성자 : 정예빈 - 로그아웃
    @RequestMapping("logout.me")
    public String logoutMember(HttpSession session) {
       
@@ -94,13 +59,11 @@ public class MemberController {
    }
    
    
-   ////////////// 신규사원  //////////////
-   // 작성자 : 김혜미 -- 신규사원 리스트
+   // 작성자 : 김혜미 - 신규사원 리스트조회
    @RequestMapping("newMemberList.admin")
    public ModelAndView newMemberList(ModelAndView mv) {
       
       ArrayList<Member> list = mService.newMemberList();
-//      System.out.println(list);
       mv.addObject("list", list)
         .setViewName("member/adminNewMemberList");
       
@@ -108,7 +71,7 @@ public class MemberController {
    }
    
    
-   // 작성자 : 김혜미 -- 신규사원 디테일
+   // 작성자 : 김혜미 -- 신규사원 상세조회
    @RequestMapping("newMemberDetail.admin")
    public String newMemberDetail(int mno, Model model) {
       
@@ -123,12 +86,10 @@ public class MemberController {
    @RequestMapping("enrollNewMember.admin")
    public String enrollNewMember(Member m, MultipartFile upfile, HttpSession session, Model model) {
 	   
-      // 전달된 파일이 있을 경우 => 파일명 수정 작업 후 서버에 업로드 => 파일 원본명, 실제 서버에 업로드된 경로를 bf에 추가로 담기 
       if(!upfile.getOriginalFilename().equals("")) { 
          String changeName = saveFile(session, upfile); 
-         m.setProfile("resources/profileUpfiles/" + changeName); // 업로드된파일명 + 파일명
+         m.setProfile("resources/profileUpfiles/" + changeName);
       }
-      
       int result = mService.enrollNewMember(m);
       return "redirect:newMemberList.admin";
    }
@@ -141,8 +102,8 @@ public class MemberController {
       return "redirect:newMemberList.admin";
    }
 
-   //////////////// 사원  ///////////////
-   // 작성자 : 김혜미 -- 사원 리스트(관리자)
+   
+   // 작성자 : 김혜미 -- 사원 리스트조회
    @RequestMapping("memberList.admin")
    public ModelAndView memberList(ModelAndView mv) {
       
@@ -153,7 +114,8 @@ public class MemberController {
       return mv;
    }   
 
-   // 작성자 : 김혜미 -- 사원 디테일(관리자)
+   
+   // 작성자 : 김혜미 -- 사원 상세조회
    @RequestMapping("memberDetail.admin")
    public String memberDetail(int mno, Model model) {
       
@@ -163,21 +125,33 @@ public class MemberController {
       return "member/adminMemberDetail";
    }
    
-   // 작성자 : 김혜미 -- 사원 수정폼(관리자)
+   
+   // 작성자 : 김혜미 -- 사원 수정폼
    @RequestMapping("memberUpdateForm.admin")
    public String memberUpdateForm(int mno, Model model) {
       
-      Member m = mService.memberUpdateForm(mno);
+      Member m = mService.memberDetail(mno);
       model.addAttribute("m", m);
       
       return "member/adminMemberUpdateForm";
    }
    
+   // 작성자 : 김혜미 - 사원 수정
+   @RequestMapping("memberUpdate.admin")
+   public String updateMember(Member m, MultipartFile upfile, HttpSession session, Model model) {
+      
+	   if(!upfile.getOriginalFilename().equals("")) { 
+	         String changeName = saveFile(session, upfile); 
+	         m.setProfile("resources/profileUpfiles/" + changeName);
+      }
+      int result = mService.updateMember(m);
+//      model.addAttribute("m", m);
+      
+      return "redirect:memberList.admin";
+   }
    
    
-   
-   
-   
+   // 작성자 : 김혜미 - 사원 탈퇴
 //   @RequestMapping("delete.me")
 //   public String deleteMember(String userPwd, HttpSession session, Model model) {
 //      
@@ -215,7 +189,7 @@ public class MemberController {
       
       String savePath = session.getServletContext().getRealPath("/resources/profileUpfiles/");
             
-      String originName = upfile.getOriginalFilename(); // 원본명 ("aaa.jpg") 
+      String originName = upfile.getOriginalFilename();
             
       String currentTime = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
       int ranNum = (int)(Math.random() * 900000 + 10000); 
@@ -228,16 +202,7 @@ public class MemberController {
       } catch (IllegalStateException | IOException e) {
          e.printStackTrace();
       }
-            
       return changeName;
    }   
-   
-   
-   
-  
-   
-   
-
-   
    
 }

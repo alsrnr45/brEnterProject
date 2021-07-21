@@ -21,47 +21,17 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDao mDao; 
 	
 	
-	@Override
+	@Override // 작성자 : 정예빈 - 로그인
 	public Member loginMember(Member m) {
-
 		Member loginUser =mDao.loginMember(sqlSession,m);
 		return loginUser;
 	}
 
-	@Override
-	public int insertMember(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int updateMember(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-//	@Override
-//	public int deleteMember(String userId) {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-
-	@Override
-	public int idCheck(String userId) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	
-	
-	
-	///////////////// 신규사원  /////////////////
 	@Override // 작성자 : 김혜미 -- 신규사원 리스트 조회
 	public ArrayList<Member> newMemberList() {
 		return mDao.newMemberList(sqlSession);
 	}
-
+	
 	@Override // 작성자 : 김혜미 -- 신규사원 상세조회
 	public Member newMemberDetail(int mno) {
 		return mDao.newMemberDetail(sqlSession, mno);
@@ -77,8 +47,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.returnMember(sqlSession, mno);
 	}
 
-	
-	///////////////// 사원  /////////////////
 	@Override // 작성자 : 김혜미 -- 사원 리스트 조회
 	public ArrayList<Member> memberList() {
 		return mDao.memberList(sqlSession);
@@ -89,15 +57,9 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.memberDetail(sqlSession, mno);
 	}
 	
-	@Override // 작성자 : 김혜미 -- 사원 수정폼
-	public Member memberUpdateForm(int mno) {
-		return mDao.memberUpdateForm(sqlSession, mno);
-	}
-
 	@Override // 작성자 : 김혜미 -- 사원 수정
-	public int updateMmeber(Member m) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int updateMember(Member m) {
+		return mDao.updateMember(sqlSession, m); 
 	}
 
 	@Override // 작성자 : 김혜미 -- 사원 탈퇴
@@ -105,14 +67,10 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.deleteMember(sqlSession, mno);
 	}
 
-	
-	// 작성자 : 최선희 -- 전자결재 기안함 리스트 조회 
-	@Override
+	@Override // 작성자 : 최선희 -- 전자결재 기안함 리스트 조회 
 	public ArrayList<ElecApproval> selectApprovalTotalList() {
 		return mDao.selectApprovalTotalList(sqlSession); 
 	}
-
-	
 	
 }
 

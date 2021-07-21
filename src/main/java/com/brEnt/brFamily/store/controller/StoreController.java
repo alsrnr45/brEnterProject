@@ -45,7 +45,7 @@ public class StoreController {
 	}
    
 	// 작성자 : 김혜미 - 카테고리별 스토어 리스트 조회
-	@RequestMapping("storeCtgList.st")
+	@RequestMapping("ctgList.st")
 	public ModelAndView selectCtgProductList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String pdtCtg, ModelAndView mv) {
 
       int listCount = sService.selectCtgProductListCount(pdtCtg);
@@ -61,7 +61,7 @@ public class StoreController {
 	}
    
 	// 작성자 : 김혜미 - 검색별 스토어 리스트 조회
-	@RequestMapping("search.st")
+	@RequestMapping("searchList.st")
 	public ModelAndView selectSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String keyword, ModelAndView mv) {
 
 	   int listCount = sService.selectSearchListCount(keyword);

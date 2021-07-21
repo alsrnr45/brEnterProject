@@ -73,8 +73,9 @@
                         </a>
                         <div class="collapse" id="electronicApproval" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="approvalTotalList.ea?mno=${ loginUser.memNo }">기안 문서함</a>
-                                <a class="nav-link" href="approvalStandbyList.ea?mno=${ loginUser.memNo }">결재대기 문서함</a>     
+                                <a class="nav-link" href="approvalTotalList.ea?mno=${ loginUser.memNo }">나의 기안 문서함</a>
+                                <a class="nav-link" href="approvalStandbyList.ea?mno=${ loginUser.memNo }">결재대기 문서함</a>    
+                                <a class="nav-link" href="approvalCompList.ea?mno=${ loginUser.memNo }">결재완료 문서함</a>      
                             </nav>
                         </div>
                         

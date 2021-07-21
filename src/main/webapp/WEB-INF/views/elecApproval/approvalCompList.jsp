@@ -64,10 +64,10 @@
 	#form-group {width: 150px;}
 	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem;}
 	
-	/* 전자결재 결재대기 리스트 */
+	/* 전자결재 결재완료 리스트 */
     h1{margin-bottom: 20px;}  
-    .approvalStandbyList{text-align: center;}
-	.approvalStandbyList>tbody>tr:hover{cursor: pointer;}
+    .approvalCompList{text-align: center;}
+	.approvalCompList>tbody>tr:hover{cursor: pointer;}
 	
 	.modal-body {margin: 30px 0 30px 60px;}
 	.modal-body .modalContent1, .modal-body .modalContent2 {float: left;}
@@ -106,12 +106,12 @@
 	                        <div class="card mb-4">
 	                            <div class="card-header">
 	                                <i class="far fa-clipboard"></i>&nbsp;
-	                                결재대기 문서함 &nbsp;
+	                                결재완료 문서함 &nbsp;
 	                                <a class="btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentSelect" style="float: right;">작성하기</a>
 	                            </div>
 	                            <div class="card-body">
 
-	                                <table id="datatablesSimple" class="approvalStandbyList">
+	                                <table id="datatablesSimple" class="approvalCompList">
 	                                    <thead>
 	                                        <tr>
 	                                            <th style="text-align:center;">문서번호</th>
@@ -124,10 +124,10 @@
 	                                        </tr>
 	                                    </thead>
 	                                    <tbody>
-	                                   		<!-- 결재대기 문서만 보이도록 조건 처리 -->      
+	                                   		<!-- 결재완료 문서만 보이도록 조건 처리 -->      
 	                                    	<c:forEach var="ea" items="${ list }">
-	                                    	
-	                                    		<c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">			                                    				
+	         
+	                                    		<c:if test="${ empty ea.ecCanceldate && !empty ea.ecCompdate }">			                                    				
 			                                        <tr>
 			                                            <td>${ ea.ecDocName }<input type="hidden" class="eano" value="${ ea.ecDocNo }"></td>                   
 			                                            
@@ -165,8 +165,8 @@
 		                                       	       <td>${ ea.ecCompdate }</td>
 		                                       	       		
 		                                       	       <td>	      	             
-			                                       	   	   <c:if test="${ empty ea.ecCanceldate && empty ea.ecCompdate }">
-								                               <font color="red">결재대기</font>
+			                                       	   	   <c:if test="${ empty ea.ecCanceldate && !empty ea.ecCompdate }">
+								                           		결재완료
 								                           </c:if>
 		                                       	       </td>
 			                                        </tr>
@@ -226,7 +226,7 @@
 	    $(function() {
 	    	
 	        // 리스트가 비어있을 경우 선택되지 않도록 조건 처리  
-			$(document).on("click", ".approvalStandbyList>tbody>tr", function(){
+			$(document).on("click", ".approvalCompList>tbody>tr", function(){
 	        	
 				// 폼마다 디테일 뷰 다름 
             	var ecCode = $(this).find("#ecCode").val();

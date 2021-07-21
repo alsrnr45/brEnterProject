@@ -189,6 +189,7 @@
                              <div id="approvalInfo">
                                  <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].deptName }</div>
                                  <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].posiName }</div>
+                                 
                                  <c:choose>
                                      <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
                                      
@@ -197,6 +198,7 @@
 	                                    <!-- 승인/반려 버튼 구현 -->	
 	                                    <c:if test="${ (i+1) lt ApprovalPathList.size() }">
 	                                    	<c:set var="turnNo" value="${ ApprovalPathList[i+1].memNo }"/>
+	                                    	<c:set var="approvalNo" value="${ ApprovalPathList[i+1].approvalPathNo }"/>
 	                                    </c:if>
 	                                     
 	                                    <!-- 삭제하기 버튼 구현 -->   
@@ -207,6 +209,7 @@
 										<div style="height:80px;"></div>
 										<c:if test="${i eq 0}">
 											<c:set var="turnNo" value="${ApprovalPathList[i].memNo}"/>
+											<c:set var="approvalNo" value="${ ApprovalPathList[i].approvalPathNo }"/>
 										</c:if>
 									 </c:otherwise>	
 								 </c:choose>	 
@@ -220,6 +223,10 @@
                                  	 <c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
                                  		 <c:set var="approvalName" value="approvalName"/>
                                  	 </c:if>
+                                 	 
+                                 	 <c:if test="${ i eq 3 }">
+										 <c:set var="finalApproval" value="${ ApprovalPathList[i].memNo }"/>
+									 </c:if>
                              </div>  	
                          </c:when>
                          <c:otherwise>
@@ -306,6 +313,14 @@
                     <input type="hidden" name="filePath" value="${ ea.ecFileUpdate }"> 
                     <input type="hidden" name="memNo" value="${ loginUser.memNo }">
                 </form>
+                
+                <form id="approveForm" action="" method="post">
+					<input type="hidden" name="eano" value="${ ea.ecDocNo }">
+					<input type="hidden" name="memNo" value="${ loginUser.memNo }">
+                 	<input type="hidden" name="approvalPathNo" value="${ approvalNo }">
+					<input type="hidden" name="finalApproval" value="${ finalApproval }">
+				</form>
+				
             </div><br><br>
            </div>
         </div>

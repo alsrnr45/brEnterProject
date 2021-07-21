@@ -125,6 +125,21 @@ public class ElecApprovalController {
      
      return mv;
    }
+   
+   
+   // 작성자 : 최선희 -- 전자결재 결재완료 리스트 
+   @RequestMapping("approvalCompList.ea")
+   public ModelAndView approvalCompList(int mno, ModelAndView mv) {
+     
+     //System.out.println(mno);
+     ArrayList<ElecApproval> list = eaService.selectApprovalStandbyList(mno); 
+     
+     mv.addObject("list", list)
+       .addObject("mno", mno)
+         .setViewName("elecApproval/approvalCompList"); 
+     
+     return mv;
+   }
       
      
    // 작성자 : 최선희 -- 기획안/업무연락/회람 상세 조회 

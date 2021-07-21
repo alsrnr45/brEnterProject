@@ -99,7 +99,6 @@
 
    /* 삭제버튼 */ 	
    .content_4 {padding: 15px 0 0 500px;}
-   .content_4>button{margin-left: 40px;}
    
 </style>
 </head>
@@ -284,7 +283,7 @@
             		<c:when test="${ approvalName != null }">     
 		                <c:choose>                
 		                	<c:when test="${ turnNo eq loginUser.memNo }">
-		                    	<button class="btn btn-light" onclick="approveFormSubmit();" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+		                    	<button class="btn btn-light" onclick="approveFormSubmit();" background-color:lightgray; border-color:lightgray;">승인하기</button>
 		                     	<button class="btn btn-danger" type="submit">반려하기</button>    
 		                  	</c:when>  
 		                    <c:otherwise>

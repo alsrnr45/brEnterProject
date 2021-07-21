@@ -109,6 +109,9 @@
                                     </tr>
                                     <tr>
                                         <td colspan="5" style="background-color: rgb(248, 248, 248);"> 
+                                        	<c:if test="${ !empty bf.freeFileUpdate  }">
+                                            	<img src="${ bf.freeFileUpdate }" width="400" height="400" style="margin-top: 30px; margin-left: 270px;">
+                                            </c:if>
                                             <p style="height:250px;">${ bf.freeCnt }</p>
                                         </td>
                                     </tr>

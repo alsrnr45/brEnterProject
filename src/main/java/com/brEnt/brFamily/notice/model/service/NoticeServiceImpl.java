@@ -35,5 +35,10 @@ public class NoticeServiceImpl implements NoticeService {
 	public Notice selectNotice(int nno) {
 		return nDao.selectNotice(sqlSession, nno);
 	}
+
+	@Override
+	public int insertNotice(Notice n) {
+		return nDao.insertNotice(sqlSession, n);
+	}
 	
 }

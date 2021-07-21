@@ -42,10 +42,32 @@
 		     , notice_title
 		     , notice_content
 		     , to_char(notice_enrolldate, 'YYYY/MM/DD') notice_enrolldate
-             , to_char(notice_changedate, 'YYYY/MM/DD') notice_changedate
              , notice_count
 		  from notice
 		 where notice_status = 'Y' 
-           and notice_no = #{noticeNo}
+           and notice_no = #{notiecNo}
 	</select>
+	
+	<!-- 공지사항 작성 -->
+	<insert id="insertNotice" parameterType="Notice">
+		insert
+       into notice
+       (
+         notice_no
+       , notice_title
+       , notice_content
+       , notice_enrolldate
+       , notice_count
+       , notice_status
+       )
+       values
+       (
+         seq_nono.nextval
+       , #{title}
+       , #{content}
+       , sysdate
+       , default
+       , default
+       )
+	</insert>
 </mapper>

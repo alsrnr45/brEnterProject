@@ -45,7 +45,7 @@
     }
     .outer .insert:hover{background:rgb(34, 188, 253);}
     .outer table{width:100%; text-align: center; font-size:15px; font-weight: lighter;}
-    .outer table tbody{border-top:1px solid lightgray; margin-top: 10px;}
+    .outer table tbody{border-top:1px solid lightgray; }
     .outer .contentArea{
         height:500px; 
         width:100%; 
@@ -72,26 +72,57 @@
 
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
-            <form class="outer">
+            <form class="outer" action="insertNotice.admin" method="post">
                 <br><br>
                 <h1><b>NOTICE</b></h1>
 
-                <button href="" type="button" class="btn btn-primary insert">등록하기</button>
+                <button href="" type="submit" onclick="return validate()" class="btn btn-primary insert">등록하기</button>
+                <div class="summernote">
                 <table>
                     <thead>
-                        <tr><input type="text" class="form-control title" name="" value="" placeholder="제목을 입력해주세요."></tr>
+                        <tr><input type="text" class="form-control title" name="title" value="" placeholder="제목을 입력해주세요." required></tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <textarea id="summernote" class="form-control contentArea" rows="15" name="" value="" style="resize:none;"></textarea>
+                        	<div>
+                        	    <textarea id="summernote" class="form-control contentArea" rows="15" name="content" value="" style="resize:none;" required></textarea>
+                        	</div>
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </form>
         </div>
     </div>
     
     <script>
+    
+ // 글등록 유효성 체크
+		function validate(){
+	
+    	var summernote = document.getElementById("summernote");
+    	var regExp = /[\S+$]/; // 공백을 제외한 모든 문자로 1글자 이상 등록
+	   	
+    	if(!regExp.test(summernote.value)){
+    		alert("내용을 입력해주세요.");
+    	
+    		summernote.value="";
+    		summernote.focus();
+    		
+    		return false;
+    	}
+    	
+
+    	var result = confirm("게시글을 등록하시겠습니까?");
+    	if(result){
+    		//alert("게시글이 등록되었습니다.");
+    		
+    	} else {
+    		alert("게시글 등록이 취소되었습니다.");
+    		return false;
+    	}       
+    
+    }
         // 썸머노트
         $(document).ready(function(){
             	$('#summernote').summernote({

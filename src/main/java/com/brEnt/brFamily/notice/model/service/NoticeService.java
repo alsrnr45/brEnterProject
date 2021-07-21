@@ -15,4 +15,7 @@ public interface NoticeService {
 	// 공지사항 상세 조회
 	Notice selectNotice(int nno);
 	
+	// 공지사항 작성
+	int insertNotice(Notice n);
+	
 }

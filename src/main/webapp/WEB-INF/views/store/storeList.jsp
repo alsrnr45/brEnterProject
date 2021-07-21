@@ -43,21 +43,44 @@
 
 	/* 카테고리, 검색창 */
 	.headArea>div {float: left;}
-	.input-group {width: 250px; margin-left: 670px;}
-	.input-group:focus, .input-group:active {
-		border-color: rgb(155, 89, 182) !important;
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
-	    outline: 0 none !important;}
+	#ctgArea>* {float: left; width: 200px;;}
 	#form-group {width: 150px;}
-	.btn-light {background-color: rgb(215, 215, 215); border-radius: 0rem 0.25rem 0.25rem 0rem; border: 1px solid #ced4da;}
-	.btn-light:focus, .btn-light:active{
-	    border-color: rgb(155, 89, 182) !important;
-	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+	#searchArea>* {float: left;}
+	.input-group {width: 250px; margin-left: 517px;}
+	#keyword:focus, #keyword:active {
+		border-color: lightgray !important;
+	    box-shadow: 0 1px 1px rgba(255, 255, 255, 0) inset, 0 0 8px rgba(255, 255, 255, 0) !important;
 	    outline: 0 none !important;}
-	
+
 	/* 상품리스트 */
     .thumbnail{width: 320px; display: inline-block; margin: 15px 20px 15px 20px;}
     .thumbnail:hover{cursor:pointer; opacity:0.6;}
+
+	.btn-info {
+        background-color: rgb(155, 89, 182); 
+        border-color: rgb(155, 89, 182); 
+        color: white; 
+        width: 50px !important; height: 37px;
+		font-size: 13px;
+	}
+	.btn-info:focus, .btn-info:active{
+		background-color: rgb(205, 146, 228) !important;
+	    border-color: rgb(205, 146, 228) !important;
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(155, 89, 182, 0.6) !important;
+	    outline: 0 none !important;
+	}
+	.btn-light {
+		background-color: rgb(215, 215, 215); 
+		border-color: lightgray;
+		border-radius: 0rem 0.25rem 0.25rem 0rem; 
+		border: 1px solid #ced4da;
+	}
+	.btn-light:focus, .btn-light:active{
+		background-color: rgb(104, 104, 104) !important;
+	    border-color: lightgray !important;
+	    box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgb(104, 104, 104)), 0.6) !important;
+	    outline: 0 none !important;
+	}
 </style>
 
 </head>
@@ -80,75 +103,6 @@
 			<div class="content">
 				<div class="headArea">
 				
-					<!-- 카테고리 -->
-					<!--  
-					<form action="">
-						<div id="form-group">
-							<select class="form-control" name="pdtCtg" id="pdtCtg" onchange="location.href=storeCtgList.st?pdtCtg=this.value">
-								<option value="Album" id="Album">Album</option>
-								<option value="Cherring" id="Cherring">Cherring</option>
-								<option value="Photo" id="Photo">Photo</option>
-								<option value="Fashion" id="Fashion">Fashion</option>
-								<option value="Stationery" id="Stationery">Stationery</option>
-							</select>
-						</div>
-						<button type="submit">확인</button>
-					</form>
-					-->
-					
-					<form action="storeCtgList.st">
-						<div id="form-group">
-							<select class="form-control" name="pdtCtg" id="pdtCtg">
-								<option value="Album" id="Album">Album</option>
-								<option value="Cherring" id="Cherring">Cherring</option>
-								<option value="Photo" id="Photo">Photo</option>
-								<option value="Fashion" id="Fashion">Fashion</option>
-								<option value="Stationery" id="Stationery">Stationery</option>
-							</select>
-						</div>
-						<button type="submit">확인</button>
-					</form>
-
-					<script>
-						/*
-		        		$(document).ready(function() {
-		        	        $('#pdtCtg').change(pdtCtgChange);
-		        	    })
-		        	 
-		        	    function pdtCtgChange() { // 학과
-		        	        var ctgCode = $('#pdtCtg option:selected').val();
-		        	        $('#pdtCtg').attr("selected", ctgCode.val());
-		        	    };
-		        		*/
-		        	
-			            /* 화면 전환 후 select box 고정 */
-			            /*
-		        		var ctgCode = $('#pdtCtg option:selected').val();
-			            
-			            if(ctgCode == Album){
-			                $('#Album').attr('selected','selected');
-			            } else if(selectedYear == Cherring){
-			                $('#Cherring').attr('selected','selected');
-			            } else if(selectedYear == Photo){
-			                $('#Photo').attr('selected','selected');
-			            } else if(selectedYear == Fashion){
-			                $('#Fashion').attr('selected','selected');
-			            } else{
-			                $('#Stationery').attr('selected','selected');
-			            }
-			            */
-		        	</script>
-		        	
-					<!--  					
-					<c:if test="${ !empty pdtCtg }">
-			        	<script>
-			        		$(function(){
-			        			$("#headArea option[value=${pdtCtg}]").attr("selected", true);
-			        		})
-			        	</script>
-			        </c:if>
-					-->
-					
 					<!--  
 					<form action="">
 						<div id="form-group">
@@ -161,14 +115,41 @@
 					</form>
 					-->
 
+					<!--  					
+					<c:if test="${ !empty pdtCtg }">
+						<script>
+							$(function(){
+								$("#headArea option[value=${pdtCtg}]").attr("selected", true);
+							})
+						</script>
+					</c:if>
+					-->
+
+					<!-- 카테고리 -->
+					<form action="storeCtgList.st">
+						<div id="ctgArea">
+							<div id="form-group">
+								<select class="form-control" name="pdtCtg" id="pdtCtg">
+									<option selected>Category</option>
+									<option value="Album" id="Album">Album</option>
+									<option value="Cherring" id="Cherring">Cherring</option>
+									<option value="Photo" id="Photo">Photo</option>
+									<option value="Fashion" id="Fashion">Fashion</option>
+									<option value="Stationery" id="Stationery">Stationery</option>
+								</select>
+							</div>
+							<button type="submit" class="btn btn-info">확인</button>
+						</div>
+					</form>
+
 					<!-- 검색창 -->
 					<form action="search.st" method="Get">
-						<div id="search-area" class="input-group">
-							<input type="hidden" name="currentPage" value="1">
-							<input type="text" name="keyword" id="keyword" class="form-control" placeholder="상품 검색" value="${ keyword }">
-							<div class="input-group-append">
-								<button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+						<div id="searchArea">
+							<div id="search-area" class="input-group">
+								<input type="text" name="keyword" id="keyword" class="form-control" placeholder="상품 검색" value="${ keyword }">
+								<div class="input-group-append"></div>
 							</div>
+							<button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
 						</div>
 					</form>
 				</div>
@@ -176,55 +157,64 @@
 				<!-- 상품리스트 -->
 				<div class="listArea">
 					<c:forEach var="p" items="${ list }">
-						<div class="thumbnail" align="center">
-							<input type="hidden" class="pno" value="${ p.pdtNo }">
-							<img src="${ p.pdtFile }" width="300" height="300">
-							<p>
-								${ p.pdtName }<br>
-								<s><em>${ p.orgPrice }원</em></s> &nbsp;&nbsp; ${ p.memPrice }원
-							</p>
-						</div>
-					</c:forEach>				
-				</div>
-
+					   <div class="thumbnail" align="center">
+						  <input type="hidden" class="pno" value="${ p.pdtNo }">
+						  <img src="${ p.pdtFile }" width="300" height="300">
+						  <p>
+							 ${ p.pdtName }<br>
+							 <s><em>${ p.orgPrice }원</em></s> &nbsp;&nbsp; ${ p.memPrice }원
+						  </p>
+					   </div>
+					</c:forEach>            
+				 </div>
+	 
 				<!-- 페이징바 -->
 				<div class="pagingArea">
 					<ul class="pagination">
-					           	
-						<c:if test="${ pi.currentPage ne 1 }">
+								  
+					   	<c:if test="${ pi.currentPage ne 1 }">
+						  	<c:choose>
+							 	<c:when test="${ empty keyword }">
+								  	<a href="storeList.st?currentPage=${ pi.currentPage-1 }">[이전]</a>
+								</c:when>
+								<c:when test="${ !empty pdtCtg }">
+								  	<a href="storeList.st?currentPage=${ pi.currentPage-1 }&pdtCtg=${pdtCtg}">[이전]</a>
+								</c:when>
+								<c:otherwise>
+								   <a href="search.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">[이전]</a>
+								</c:otherwise>
+							</c:choose>
+					   	</c:if>
+					   
+					   	<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
+						  	<c:choose>
+							 	<c:when test="${ empty keyword }">
+								   <li class="page-item"><a href="storeList.st?currentPage=${ p }">[${ p }]</a></li>
+								</c:when>
+								<c:when test="${ !empty pdtCtg }">
+								   <li class="page-item"><a href="storeList.st?currentPage=${ p }&pdtCtg=${pdtCtg}">[${ p }]</a></li>
+								</c:when>
+								<c:otherwise>
+								   <li class="page-item"><a href="search.st?currentPage=${ p }&keyword=${keyword}">[${ p }]</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						  
+						<c:if test="${ pi.currentPage ne pi.maxPage }">
 							<c:choose>
 								<c:when test="${ empty keyword }">
-				            		<a href="storeList.st?currentPage=${ pi.currentPage-1 }">[이전]</a>
-				            	</c:when>
-				            	<c:otherwise>
-				            		<a href="search.st?currentPage=${ pi.currentPage-1 }&keyword=${keyword}">[이전]</a>
-			            		</c:otherwise>
-			            	</c:choose>
+								   <a href="storeList.st?currentPage=${ pi.currentPage+1 }">[다음]</a>
+								</c:when>
+								<c:when test="${ !empty pdtCtg }">
+								   <a href="storeList.st?currentPage=${ pi.currentPage+1 }&pdtCtg=${pdtCtg}">[다음]</a>
+								</c:when>
+								<c:otherwise>
+								   <a href="list.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">[다음]</a>
+								</c:otherwise>
+							</c:choose>
 						</c:if>
-						
-						<c:forEach var="p" begin="${ pi.startPage }" end="${ pi.endPage }">
-							<c:choose>
-								<c:when test="${ empty keyword }">
-			            			<a href="storeList.st?currentPage=${ p }">[${ p }]</a>
-			            		</c:when>
-			            		<c:otherwise>
-			            			<a href="search.st?currentPage=${ p }&keyword=${keyword}">[${ p }]</a>
-			            		</c:otherwise>
-			            	</c:choose>
-			            </c:forEach>
-			            
-			            <c:if test="${ pi.currentPage ne pi.maxPage }">
-			            	<c:choose>
-			            		<c:when test="${ empty keyword }">
-					            	<a href="storeList.st?currentPage=${ pi.currentPage+1 }">[다음]</a>
-					            </c:when>
-					            <c:otherwise>
-					            	<a href="list.st?currentPage=${ pi.currentPage+1 }&keyword=${keyword}">[다음]</a>
-				            	</c:otherwise>
-				            </c:choose>
-			            </c:if>
 					</ul>
-				</div>
+				 </div>			
 			</div>
     	</div>
     </div>

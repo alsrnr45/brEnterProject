@@ -14,12 +14,10 @@ import com.brEnt.brFamily.store.model.vo.Product;
 @Repository
 public class StoreDao {
 
-	// 작성자 : 김혜미 -- 상품 개수 조회
+	// 작성자 : 김혜미 - 스토어 리스트조회
 	public int selectProductListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("storeMapper.selectProductListCount");
 	}
-	
-	// 작성자 : 김혜미 -- 상품 리스트 조회 (페이징처리)
 	public ArrayList<Product> selectProductList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
 		int limit = pi.getProductLimit();
@@ -27,10 +25,11 @@ public class StoreDao {
 		return (ArrayList)sqlSession.selectList("storeMapper.selectProductList", null, rowBounds);
 	}
 	
+	
+	// 작성자 : 김혜미 - 카테고리별 스토어 리스트조회
 	public int selectCtgProductListCount(SqlSessionTemplate sqlSession, String pdtCtg) {
 		return sqlSession.selectOne("storeMapper.selectCtgProductListCount", pdtCtg);
 	}
-
 	public ArrayList<Product> selectCtgProductList(SqlSessionTemplate sqlSession, PageInfo pi, String pdtCtg) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
 		int limit = pi.getProductLimit();
@@ -38,24 +37,24 @@ public class StoreDao {
 		return (ArrayList)sqlSession.selectList("storeMapper.selectCtgProductList", pdtCtg, rowBounds);
 	}
 	
-	// 작성자 : 김혜미 -- 상품 검색 개수 조회
+	
+	// 작성자 : 김혜미 - 검색별 스토어 리스트조회
 	public int selectSearchListCount(SqlSessionTemplate sqlSession, String keyword) {
 		return sqlSession.selectOne("storeMapper.selectSearchListCount", keyword);
 	}
-	
-	
-	// 작성자 : 김혜미 -- 상품 검색 리스트 조회 (페이징처리)
 	public ArrayList<Product> selectSearchList(SqlSessionTemplate sqlSession, PageInfo pi, String keyword) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getProductLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getPageLimit());
 		return (ArrayList)sqlSession.selectList("storeMapper.selectSearchList", keyword, rowBounds);
 	}
 	
+	
 	// 작성자 : 김혜미 -- 상품 상세조회
 	public Product selectProductDetail(SqlSessionTemplate sqlSession, int pdtNo) {
 		return sqlSession.selectOne("storeMapper.selectProductDetail", pdtNo);
 	}
 
+	
 	// 작성자 : 김혜미 -- 바로 구매하기
 	public Product buyNowProduct(SqlSessionTemplate sqlSession, int pdtNo) {
 		return sqlSession.selectOne("storeMapper.buyNowProduct", pdtNo);
@@ -73,20 +72,25 @@ public class StoreDao {
 		return sqlSession.selectOne("storeMapper.selectProductDetailAdmin", pdtNo);
 	}
 	
+	
 	// 작성자 : 김혜미 -- 상품관리 등록
 	public int orderInsert(SqlSessionTemplate sqlSession, PayDto pd) {
 		return sqlSession.insert("storeMapper.orderInsert", pd);
 	}
+	
 
 	// 작성자 : 김혜미 - 상품관리 수정
 	public int updateProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.update("storeMapper.updateProduct", p);
 	}
 
+	
+	// 작성자 : 김혜미 - 상품 등록 (관리자)
 	public int insertProduct(SqlSessionTemplate sqlSession, Product p) {
 		return sqlSession.insert("storeMapper.insertProduct", p);
 	}
 
+	// 작성자 : 김혜미 - 상품 삭제 (관리자)
 	public int deleteProduct(SqlSessionTemplate sqlSession, int pno) {
 		return sqlSession.delete("storeMapper.deleteProduct", pno);
 	}

@@ -164,7 +164,7 @@
                         </table>
                     </div>
                     <a type="button" class="btn btn-light btn-lg" id="insertCart">장바구니 담기</a>
-                    <a type="button" class="btn btn-info btn-lg" id="pay">바로 구매하기</a>
+                    <a type="button"  id="pay">바로 구매하기</a>
                 </div>
 			</div>
 			<!-- 상품디테일 -->

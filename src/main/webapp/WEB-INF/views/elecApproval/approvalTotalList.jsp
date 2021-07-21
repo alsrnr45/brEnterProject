@@ -105,7 +105,7 @@
 	
 	                        <div class="card mb-4">
 	                            <div class="card-header">
-	                                <i class="far fa-clipboard"></i>&nbsp;기안 문서함 &nbsp;
+	                                <i class="far fa-clipboard"></i>&nbsp;나의 기안 문서함 &nbsp;
 	                                <a class="btn btn-primary" type="button" class="btn btn-primary" data-toggle="modal" data-target="#documentSelect" style="float: right;">작성하기</a>
 	                            </div>
 	                            <div class="card-body">

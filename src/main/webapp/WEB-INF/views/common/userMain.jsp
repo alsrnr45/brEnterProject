@@ -18,7 +18,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <!-- CB slide image -->
-<link href="resources/css/comebackSlide2.css" rel="stylesheet" />
+<link href="resources/css/comebackSlide.css" rel="stylesheet" />
 
 
 <style>
@@ -114,7 +114,7 @@
                 </div>
 
                 <!--컨텐츠: right-->
-                <div class="container-fluid px-4 rightBox" >
+                <div class="container-fluid px-4 rightBox" style="width: 70%;">
                     <!--컴백슬라이드 부분표시-->
                     <div class="row" >
                         <div class="col-xl-3 col-md-6  " style="width: 100% !important;">

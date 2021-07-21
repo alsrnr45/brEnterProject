@@ -103,6 +103,7 @@
 	    .modal4_2{width:100%; height:30px;}
 	    .modal4_2 .btn{width:30px; height:30px; float:right; margin-top:0px; margin-left: 5px;}
 	    .modal4_3{ height:47%; border:1px solid lightgray; text-align: center; padding: 25px 20px 20px 0;}
+	    .signTd{background:white;}
 </style>
 </head>
 <body class="sb-nav-fixed">
@@ -170,10 +171,10 @@
                        		<input type="hidden" name="memNo" value="${ loginUser.memNo }">
                         </td>
                         <td rowspan="6" style="width:5%; font-weight: bold;">결재자</td>
-                        <td class="dept0"></td>
-                        <td class="dept1"></td>
-                        <td class="dept2"></td>
-                        <td class="dept3"></td>
+                        <td class="signTd dept0"></td>
+                        <td class="signTd dept1"></td>
+                        <td class="signTd dept2"></td>
+                        <td class="signTd dept3"></td>
                     </tr>
                     <tr height="15%;">
                         <td>${ loginUser.posiName }</td>
@@ -405,11 +406,11 @@
 				       	   , posiName:$("#modal4_3 .posiName").eq(i).val()
 				       	   , memName:$("#modal4_3 .memName").eq(i).val()
 		          		  });
-		          /
+		          
 		    	   $(".dept"+i).append('<input tpye="text" class="form-control" id="deptName" value='+ arr[i].deptName +' readonly>');
 		    	   $(".posi"+i).append('<input type="text" class="form-control" id="posiName" value='+ arr[i].posiName +' readonly>');
-		    	   $(".name"+i).append('<input type="text" class="form-control" id="memName3" value='+ arr[i].memName +' readonly>');
-		    	   $(".mno"+i).append('<input type="number" name="ApprovalPathList['+ i +'].memNo" value='+ arr[i].memNo +'>');
+		    	   $(".name"+i).append('<input type="text" class="form-control" id="memName" value='+ arr[i].memName +' readonly>');
+		    	   $(".mno"+i).append('<input type="hidden" name="ApprovalPathList['+ i +'].memNo" value='+ arr[i].memNo +'>');
 		    	   $(".turn"+i).append('<input type="hidden" name="ApprovalPathList[' + i + '].ecTurn" value="'+(i + 1)+'">');
 		    	   
 		      });

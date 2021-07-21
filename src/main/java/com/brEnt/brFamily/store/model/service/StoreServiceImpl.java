@@ -103,11 +103,5 @@ public class StoreServiceImpl implements StoreService {
    }
 
 
-   // 작성자 : 김혜미 - 주문 등록
-   @Override 
-   public int orderInsert(PayDto pd) {
-	   return sDao.orderInsert(sqlSession, pd);
-   }
-
    
 }

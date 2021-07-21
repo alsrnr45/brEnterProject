@@ -148,7 +148,7 @@
 														신청완료
 													</c:when>
 													<c:otherwise>
-														신청대기
+														<font color="red">결재대기</font>
 													</c:otherwise>
 												</c:choose>
 											</td>

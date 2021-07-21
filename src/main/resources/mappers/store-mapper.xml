@@ -205,39 +205,8 @@
 		  from product
 		 where pdt_no = #{ pdtNo }
 	</delete>
+
 	
-	
-	<!-- 작성자 : 김혜미 - 주문등록 -->
-	<!--  
-	<insert id="orderInsert" parameterType="PayDto">
-   		insert all
-		  into order_form
-		values
-		     (
-			     SEQ_ODFNO.NEXTVAL
-			   , #{memNo}
-			   , #{orderReceiver}
-			   , #{postCode}
-			   , #{roadAddress}
-			   , #{detailAddress}
-			   , #{receiverPhone}
-			   , #{shipMessage}
-			   , #{totalPrice}
-			   , #{payMethod}
-			   , sysdate
-			   )
-		    into order_list
-		  values
-		       (
-			     SEQ_ODFNO.NEXTVAL
-			   , #{pdtNo}
-			   , #{pdtCount}
-			   )
-		  select * from dual
-	</insert>
-	-->
-   
-   
    <!-- 작성자 : 박지은 - 장바구니 목록 조회 -->
    <select id="cartList" parameterType="int" resultType="com.brEnt.brFamily.store.model.vo.Cart">
    		select

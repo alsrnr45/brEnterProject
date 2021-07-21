@@ -143,7 +143,7 @@
 					</form>
 
 					<!-- 검색창 -->
-					<form action="search.st" method="Get">
+					<form action="searchList.st" method="Get">
 						<div id="searchArea">
 							<div id="search-area" class="input-group">
 								<input type="text" name="keyword" id="keyword" class="form-control" placeholder="상품 검색" value="${ keyword }">

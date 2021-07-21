@@ -62,19 +62,23 @@ public class StoreController {
    
 	// 작성자 : 김혜미 - 검색별 스토어 리스트 조회
 	@RequestMapping("searchList.st")
-	public ModelAndView selectSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String keyword, ModelAndView mv) {
+	   public ModelAndView selectSearchList(@RequestParam(value="currentPage", defaultValue="1") int currentPage, String keyword, ModelAndView mv) {
 
-	   int listCount = sService.selectSearchListCount(keyword);
-       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 6, 10);
-       ArrayList<Product> list = sService.selectSearchList(pi, keyword);
-       
-       mv.addObject("pi", pi)
-         .addObject("list", list)
-         .addObject("keyword", keyword)
-         .setViewName("store/storeList");
+		   int listCount = sService.selectSearchListCount(keyword);
+	       PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 6, 10);
+	       ArrayList<Product> list = sService.selectSearchList(pi, keyword);
+	       
+	       //System.out.println(keyword);
+	       //System.out.println(listCount);
+	       //System.out.println(list);
 
-       return mv;
-	}
+	       mv.addObject("pi", pi)
+	         .addObject("list", list)
+	         .addObject("keyword", keyword)
+	         .setViewName("store/storeList");
+
+	       return mv;
+	   }
    
    
 	// 작성자 : 김혜미 - 스토어 상세조회
@@ -103,15 +107,13 @@ public class StoreController {
 	// 작성자 : 김혜미 - 결제
 	@RequestMapping("order.st")
 	public String order() {
-      return "store/order";
+      return "store/orderFinish";
 	}
  
    
 	// 작성자 : 김혜미 - 주문완료
 	@RequestMapping("orderFinish.st")
-	public String orderFinish(PayDto pd) {
-	   
-	   int result = sService.orderInsert(pd);
+	public String orderFinish() {
 	   return "store/orderFinish";
 	}
    

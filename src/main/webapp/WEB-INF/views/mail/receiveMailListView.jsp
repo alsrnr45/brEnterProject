@@ -139,17 +139,6 @@
 </body>
 <script>
 	$(document).ready(function() {
-		
-	// 리스트 보여주기
-	/*
-    $(function(){
-	   	$(".title").click(function(){
-	   		$('input').attr("disabled", true);
-	   		$(this).prevAll().find('input').attr("disabled", false);
-	   		$('#rlist').submit();
-	   	})
-   	})
-	*/
 	
 	$(function(){
 		$(document).on('click', '.title', function(){
@@ -159,13 +148,7 @@
 		})
 	})
 	
-	// 리스트 날짜순으로 기본값
-	$(function(){
-		$('#dateDESC').attr('class','desc');
-	})
-	
 	// 즐겨찾기 만들기
-	
 	$(function(){
 		$(document).on('click', '.important', function(){
 			
@@ -191,29 +174,6 @@
 	})
 	})
 	
-	/*
-	$('.important').click(function(){
-		let mailNo = $(this).parent().prevAll().find('input[name=mailNo]').val();
-		let mailReceiver = $(this).parent().prevAll().find('input[name=mailReceiver]').val();
-		let bookmark = $(this).parent().prevAll().find('input[name=bookmark]').val();
-		
-		$.ajax({
-			type: "POST",
-			url: "important.mail",
-			data: {
-				mailNo : mailNo,
-				mailReceiver : mailReceiver,
-				bookmark : bookmark
-			},
-			success: function(data){
-				window.location.reload();
-			},
-			error: function(data){
-				window.location.reload();
-			}
-		});
-	})
-	*/
 	
 		// 답장
 		$("#reply").click(function(){
@@ -232,7 +192,20 @@
 		});
 	
 		//전달
-		
+		$("#forward").click(function(){
+			var length = $('input:checked').length; // 체크된 숫자갯수
+			console.log("숫자갯수" + length);
+			if(length == 0){
+				alert('답장할 메일을 선택해주세요.');
+			} if(length > 1){
+				alert("메일 한 개만 선택해주세요.");
+			} if(length == 1){
+				$('#rlist').attr('action','forward.mail');
+				$('input').attr("disabled", true);
+				$('input:checked').parent().parent().find('input').attr("disabled", false);
+				$('#rlist').submit();
+			}
+		});		
 		
 		// 즐겨찾기만 조회하기
 		$('#do_important').on('click', function(){
@@ -259,24 +232,24 @@
 				
 				mail_arr.push(mail_no);
 				// 배열에 담기
+				console.log(mail_arr);
 			});
-	
-			console.log("배열" + mail_arr);
 			// 체크된 게시물 번호 배열에 담았음
 			$.ajax({
 				type: "POST",
 				url: "delete.mail",
 				data: {
 					mail_arr: mail_arr
+					
 				},
 				traditional:true,
 				success: function(data){
-					alert("성공");
+					alert('삭제성공');
 					window.location.reload();
 				},
 				error: function(data){
-					alert(data);
-					window.location.reload();
+					//alert('삭제실패');
+					//window.location.reload();
 				}
 			});
 		});

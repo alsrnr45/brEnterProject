@@ -237,6 +237,7 @@
 	          ['view', ['fullscreen', 'codeview', 'help']]
 	        ]
 	      });
+
 	});
 	
     jQuery(document).ready(function($) {
@@ -322,9 +323,15 @@
 
     //     $('#sendMail').submit();
     // });
+
     
 // 이메일 받는 사람 관련 js    
 (function($){
+	// 같은 이메일 입력 불가 조건
+	let mrarr = [];
+	mrarr.push($('input[name=mailReceiver]').val()); 
+	console.log(mrarr);
+	let replymrarr = mrarr;
 
     $.fn.email_multiple = function(options) {
 
@@ -338,10 +345,10 @@
         let email = "";
 
         return this.each(function()
-        {	
+        {
             $(this).after("<span class=\"to-input\">받는사람</span>\n<br>" +
                 "<div class=\"all-mail\"></div>\n" +
-                "<input type=\"text\" name=\"mailReceiver\" class=\"enter-mail-id\" placeholder=\"이메일 입력 후 엔터를 누르세요.\" />");
+                "<input type=\"text\" class=\"enter-mail-id\" placeholder=\"이메일 입력 후 엔터를 누르세요.\" />");
             let $orig = $(this);
             let $element = $('.enter-mail-id');
             $element.keydown(function (e) {
@@ -349,21 +356,30 @@
                 if (e.keyCode === 13 || e.keyCode === 32) {
                     let getValue = $element.val();
                     if (/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/.test(getValue)){
-                        $('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
+                    	//배열 생성
+							if( mrarr.includes(getValue) ){
+								alert('똑같은 메일주소는 보낼 수 없습니다.');	
+								return false;
+							}
+						
+						$('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
                         $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + getValue + '">');
+                        
                         $('#is_receiver_check').attr('value', 'T');
                         $('#email-check').hide();
                         $element.val('');
 
-                        email += getValue
+                    	email += getValue
+                    	replymrarr.push(getValue);
+
+                            
                     } else {
                         $element.css('border', '1px solid red')
                         $('#email-check').html('<span>유효하지 않은 이메일입니다. 다시 입력해주세요.</span>');
                         $('#email-check').show();
                     }
-                }
                 $orig.val(email.slice(0))
-            });
+                }});
 
             $(document).on('click','.cancel-email',function(){
                 $(this).parent().next().remove();
@@ -375,6 +391,7 @@
     };
 
 })(jQuery);
+
 
     
     // email input js

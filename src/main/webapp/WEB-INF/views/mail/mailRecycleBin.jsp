@@ -93,7 +93,14 @@
                                     <!--  받은 사람이 로그인 사용자 일때 -->
                                     <c:forEach var="r" items="${rlist }">
                                     	<tr>
-	                                        <td><input type="checkbox" name="" id="${ r.mailNo }"></td>
+                                    		<td>
+	                                    	<input type="hidden" name="mailTitle" value="${ r.mailTitle }">
+		                                   	<input type="hidden" name="mailNo" value="${r.mailNo}">
+		                                   	<input type="hidden" name="mailWriter" value="${ loginUser.officeEmail }" >
+		                                   	<input type="hidden" name="mfIsHave" value="${ r.mfIsHave }" >
+		                                   	<input type="hidden" name="mailReceiver" value="${r.mailReceiver}">
+	                                        <input type="checkbox" name="" id="${ r.mailNo }" value="${ r.mailNo }">
+	                                        </td>
 	                                        <c:choose>
 	                                        	<c:when test="${ r.bookmark  eq 'N' }">
 	                                        		<td><input type="button" hidden><i class="far fa-star"></i></td>
@@ -128,11 +135,7 @@
                                 </tfoot>
                             </table>
                             <div class="card-footer">
-                                <a class="btn btn-primary btn-block">답장</a>
-                                <a class="btn btn-primary btn-block">전달</a>
-                                <a class="btn btn-primary btn-block"><i class="far fa-star"></i></a>
-                                <a class="btn btn-primary btn-block" href="enroll.mail">메일쓰기</a>
-                                <a class="btn btn-primary btn-block">삭제하기</a>
+                                <a id="totallyDelete" class="btn btn-primary btn-block" >완전 삭제하기</a>
                             </div>
                         </div>
                     </div>
@@ -141,4 +144,123 @@
         </div>
     </div>
 </body>
+
+<script>
+	$(document).ready(function() {
+	
+	$(function(){
+		$(document).on('click', '.title', function(){
+			$('input').attr('disabled', true);
+			$(this).prevAll().find('input').attr('disabled', false);
+			$('#rlist').submit();
+		})
+	})
+	
+	// 즐겨찾기 만들기
+	$(function(){
+		$(document).on('click', '.important', function(){
+			
+			let mailNo = $(this).parent().prevAll().find('input[name=mailNo]').val();
+			let mailReceiver = $(this).parent().prevAll().find('input[name=mailReceiver]').val();
+			let bookmark = $(this).parent().prevAll().find('input[name=bookmark]').val();
+			
+			$.ajax({
+				type: "POST",
+				url: "important.mail",
+				data: {
+					mailNo : mailNo,
+					mailReceiver : mailReceiver,
+					bookmark : bookmark
+				},
+				success: function(data){
+					window.location.reload();
+				},
+				error: function(data){
+					window.location.reload();
+				}
+		})
+	})
+	})
+	
+	
+		// 답장
+		$("#reply").click(function(){
+			var length = $('input:checked').length; // 체크된 숫자갯수
+			console.log("숫자갯수" + length);
+			if(length == 0){
+				alert('답장할 메일을 선택해주세요.');
+			} if(length > 1){
+				alert("메일 한 개만 선택해주세요.");
+			} if(length == 1){
+				$('#rlist').attr('action','reply.mail');
+				$('input').attr("disabled", true);
+				$('input:checked').parent().parent().find('input').attr("disabled", false);
+				$('#rlist').submit();
+			}
+		});
+	
+		//전달
+		$("#forward").click(function(){
+			var length = $('input:checked').length; // 체크된 숫자갯수
+			console.log("숫자갯수" + length);
+			if(length == 0){
+				alert('답장할 메일을 선택해주세요.');
+			} if(length > 1){
+				alert("메일 한 개만 선택해주세요.");
+			} if(length == 1){
+				$('#rlist').attr('action','forward.mail');
+				$('input').attr("disabled", true);
+				$('input:checked').parent().parent().find('input').attr("disabled", false);
+				$('#rlist').submit();
+			}
+		});		
+		
+		// 즐겨찾기만 조회하기
+		$('#do_important').on('click', function(){
+			$('.no_important').closest('tr').css('display', 'none');
+			$('#do_important').attr('id','#undo_imporatant');
+		});
+		
+		$('#undo_important').on('click', function(){
+			$('.no_important').closest('tr').css('display', 'contents');
+			$('#undo_important').attr('id','#do_imporatant');
+			console.log('이거되나?');
+		})
+		
+		// 삭제 
+		$("#totallyDelete").on('click', function(){
+			var length = $('input:checked').length; // 체크된 숫자갯수
+	
+			console.log("숫자갯수" + length);
+	
+			var mail_arr = []; // 배열선언
+			
+			$('input:checked').each(function(){
+				var mail_no = $(this).val(); // 내가 원하는 값을 value로 담아놓고 체크할 때 value값 담기(생각의전환 필요!) 
+				
+				mail_arr.push(mail_no);
+				// 배열에 담기
+				console.log(mail_arr);
+			});
+			// 체크된 게시물 번호 배열에 담았음
+			$.ajax({
+				type: "POST",
+				url: "ttDelete.mail",
+				data: {
+					mail_arr: mail_arr
+					
+				},
+				traditional:true,
+				success: function(data){
+					alert('삭제성공');
+					window.location.reload();
+				},
+				error: function(data){
+					alert('삭제실패');
+					window.location.reload();
+				}
+			});
+		});
+	})
+</script>
 </html>

@@ -1,12 +1,12 @@
 package com.brEnt.brFamily.mail.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
-import com.google.gson.JsonElement;
 
 public interface MailService {
 	
@@ -35,12 +35,16 @@ public interface MailService {
 	int tempMFMail(MailFile mf);
 	
 	// 메일 삭제
-	int deleteMail(String[] mail_arr, String email);
+	int deleteMail(Map<String, Object> map);
 	
 	// 메일조회
 	int readMail(ReceiveMail rmail); // 받은 메일 수신시, 읽음표시
 	ReceiveMail detailRMail(ReceiveMail rmail);
 	ArrayList<MailFile> detailMFMail(ReceiveMail rmail);
+	
+	// 보낸 메일 조회
+	SendMail detailSMail(SendMail smail);
+	ArrayList<MailFile> detailMFMail(SendMail smail);
 	
 	//즐겨찾기 추가
 	int updateImpor(ReceiveMail r);
@@ -51,6 +55,21 @@ public interface MailService {
 	//메일 답장
 	ReceiveMail reply(ReceiveMail r);
 	ArrayList<MailFile> replyMF(ReceiveMail r);
+	
+	// 메일 전달
+	ReceiveMail forwardMail(ReceiveMail r);
+	ArrayList<MailFile> forwarMFMail(ReceiveMail r);
+	
+	// 보낸메일 전달
+	SendMail forwardSMail(SendMail s);
+	ArrayList<MailFile> forwarMFSMail(SendMail s);
+	
+	// 임시보관 메일 삭제
+	int deleteTMail(Map<String, Object> map);
+	
+	// 완전 삭제
+	int ttDeleteMail(Map<String, Object> map);
+
 
 
 

@@ -89,6 +89,8 @@
     .content-list{
         border: 1px solid #c9c9c9;
         flex:2.2;
+       	height:460px;
+		overflow:auto;
     }
 
     .search-wrap, .scroll-wrap{
@@ -98,10 +100,6 @@
     .move-tab{
         text-align:center;
         flex:0.4;
-    }
-
-    .content-list{
-       
     }
 
     .new-list{
@@ -132,6 +130,7 @@
     }
 
 /* 모달 css*/
+
 #customers {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
@@ -244,9 +243,8 @@
                                     <div class="content-org-tree">
                                         <ul>
                                             <li>
-                                                <a href="#" class="open"><i class="fas fa-plus-square"></i>br엔터</a>
+                                                <a href="#" class="tree"><i class="fas fa-plus-square"></i></a><a href="#" class="open">br엔터</a>
                                                 <ul class="deptName">
-                                                <li><a href="#" class="open"><i class="fas fa-plus-square"></i>기획팀</a></li>
                                                 </ul>
                                             </li>
                                         </ul>
@@ -263,32 +261,22 @@
 					                                    <tr>
 					                                    	<th></th>
 					                                        <th>이름</th>
-					                                        <th>회사</th>
 					                                        <th>부서</th>
 					                                        <th>직급</th>
 					                                        <th>이메일</th>
 					                                    </tr>
 					                                </thead>
 					                                <tbody>
-					                                   	<tr>
-					                                   		<td><input type="checkbox"></td>
-					                                        <td>김민국</td>
-					                                        <td>BRent</td>
-					                                        <td>개발지원팀</td>
-					                                        <td>부장</td>
-					                                        <td>mingook@brent.com</td>
-					                                   	</tr>
 					                                </tbody>
 					                            </table> 
                                     	</div>
                                 	</div>
 	                                <div class="move-tab">
-	                                    <span class="btn btn-primary">추가 &gt</span><br><br>
-	                                    <span class="btn btn-primary">&lt 제외</span>
+	                                    <a id=""class="btn btn-primary">추가 &gt</a><br><br>
+	                                    <a class="btn btn-primary">&lt 제외</a>
 	                                </div>
                                 <div class="new-list">
-                                	<input class="dataTable-input" type="text" placeholder="주소록명">
-                                
+                                	
                                 </div>
                                 </div>
                             </div>
@@ -306,12 +294,6 @@
 	$(document).ready(function() {
 		
 		$('#pbPopup').on('click',(function(){
-			
-			let memNo = ${loginUser.memNo};
-			//let deptNo = ${loginUser.deptNo};
-			//let posiNo = ${loginUser.posiNo};
-			//let email = ${loginUser.officeEmail};
-					
 			$.ajax({
 				type: "POST",
 				url: "popup.pb",
@@ -322,20 +304,44 @@
 					
 					for( var i in dlist ){
 						let d = dlist[i];
-						$('.deptName').append('<li><a href="#" class="open"><i class="fas fa-plus-square"></i>' + d['deptName'] + '</a></li>');
-						console.log(d);
-						
-						
+						$('.deptName').append('<li><a href="#" class="tree"><i class="fas fa-plus-square"></i></a><a href="#" class="open">' + d['deptName'] + '</a></li>');
+					};
+					
+					for( var i in mlist){
+						let m = mlist[i];
+						$('.phoneBook>tbody').append('<tr>' + 
+										  '<td><input type="checkbox"></td>' + 
+										  '<td>' + m['memName'] + '</td>' + 
+										  '<td>' + m['deptName'] + '</td>' + 
+										  '<td>' + m['posiName'] + '</td>' +
+										  '<td>' + m['officeEmail'] + '</td>'
+										  + '</tr>');
+						$('.phoneBook>tbody>tr>td').each(function(){
+							if($(this).text() == '${loginUser.memName}'){
+								$(this).parent().remove();
+							}
+						})
 					}
-					
-					
 				},
 				error: function(data){
 					window.location.reload();
 				}
 			});
 		}))
-	
+		
+		// 부서별 사원 조회
+		$('.tree').on('click', function(){
+			
+		})
+		
+		$('.open').on('click',fun)
+		
+		// 보내고 싶은 사람 이메일 주소 넘기기
+		$().on('click', function(){
+			$('#myModal>input:checkbox')
+			
+		})
+		
 	})
 
 </script>

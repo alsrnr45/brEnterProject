@@ -1,6 +1,7 @@
 package com.brEnt.brFamily.mail.model.dao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,21 +70,12 @@ public class MailDao {
 		return sqlSession.insert("mailMapper.tempMFMail", mf);
 	}
 
-	public int deleteMail(String[] mail_arr, String email, SqlSessionTemplate sqlSession) {
-		int result = 0;
-		
-		for(int i=0; i<mail_arr.length; i++) {
-			String mail_no = mail_arr[i];
-			Map<String, String> map = new HashMap<String, String>();
+	public int deleteMail(Map<String, Object> map, SqlSessionTemplate sqlSession) {
+			System.out.println(((String[])map.get("mailNo"))[0]);
+			//System.out.println(((String[])map.get("mailNo"))[1]);
 
-			map.put("mail_no", mail_no);
-			map.put("email", email);
-			System.out.println("map 값" + map);
-			result += sqlSession.update("mailMapper.deleteMail", map);	
-			System.out.println("결과값:" + result);
-		}
-		
-		return result;
+		System.out.println(map.get("email"));
+		return sqlSession.update("mailMapper.deleteMail", map);	
 	}
 
 	public int readMail(ReceiveMail rmail, SqlSessionTemplate sqlSession) {
@@ -114,5 +106,36 @@ public class MailDao {
 		return (ArrayList)sqlSession.selectList("mailMapper.replyMF", r);
 	}
 
+	public ReceiveMail forwardMail(ReceiveMail r, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("mailMapper.forwardMail", r);
+	}
+
+	public ArrayList<MailFile> forwarMFMail(ReceiveMail r, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("mailMapper.forwarMFMail", r);
+	}
+
+	public SendMail detailSMail(SendMail smail, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("mailMapper.detailSMail", smail );
+	}
+
+	public ArrayList<MailFile> detailMFMail(SendMail smail, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("mailMapper.detailMFMail", smail);
+	}
+
+	public SendMail forwardSMail(SendMail s, SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("mailMapper.forwardSMail", s);
+	}
+
+	public ArrayList<MailFile> forwardMFSMail(SendMail s, SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("mailMapper.forwardMFSMail", s);
+	}
+
+	public int deleteTMail(Map<String, Object> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("mailMapper.deleteTMail", map);
+	}
+
+	public int ttDeleteMail(Map<String, Object> map, SqlSessionTemplate sqlSession) {
+		return sqlSession.update("mailMapper.ttDeleteMail", map);
+	}
 	
 }

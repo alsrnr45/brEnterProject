@@ -62,6 +62,7 @@
 		    on (r.mail_no = s.mail_no) 
 		 where r.mail_receiver = #{email}
 		   and r.recycle_bin_status = 'Y'
+		   and s.temp_box = 'N'
 		 order 
 		    by s.mail_send_date desc
 	</select>
@@ -70,6 +71,7 @@
 		select 
 		       s.mail_no
 		     , s.mem_no
+		     , s.mail_receiver
 		     , s.mail_writer
 		     , s.mail_title
 		     , s.mail_send_Date
@@ -79,6 +81,8 @@
 		  from send_mail s
 		 where s.mail_writer = #{email}
 		   and s.temp_box = 'N'
+		 order
+		    by s.mail_send_date desc
 	</select>
 	
 	<select id="receiverList" parameterType="string" resultMap="receiveMail">
@@ -120,19 +124,7 @@
 		    on (s.mail_no = r.mail_no)
 		 where s.mail_writer = #{email}
 		   and s.temp_box = 'Y'
-	</select>
-	
-	<select id="recycleBinList" parameterType="string" resultMap="sendMail">
-		select 
-		       s.mail_no
-		     , s.mail_writer
-		     , s.mail_title
-		     , s.mail_send_date
-		     , s.temp_box
-		  from send_mail s
-		 where s.mail_writer = #{email}
-		 order 
-		    by s.mail_send_date
+		   and r.recycle_bin_status = 'Y'
 	</select>
 	
 	<select id="recycleBinRList" parameterType="string" resultMap="receiveMail">
@@ -292,11 +284,36 @@
 		   	 )
 	</insert>
 	
-	<update id="deleteMail" parameterType="hashMap">
+	<update id="deleteMail" parameterType="hashmap" >
 		update receive_mail
 		   set 
 		       recycle_bin_status = 'A'
-		 where mail_no = #{mailNo}
+		       where mail_no in
+		       <foreach item="item" index="index" collection="mailNo" open="(" separator="," close=")">
+		  						#{item}      
+		       </foreach>
+		   and mail_receiver = #{email}     
+	</update>
+	
+	<update id="deleteTMail" parameterType="hashmap" >
+		update receive_mail 
+		   set 
+		       recycle_bin_status = 'A'
+		       where mail_no in
+		       <foreach item="item" index="index" collection="mailNo" open="(" separator="," close=")">
+		  						#{item}      
+		       </foreach>
+		   and mail_receiver = #{email}     
+	</update>
+	
+	<update id="ttDeleteMail" parameterType="hashmap" >
+		update receive_mail 
+		   set 
+		       recycle_bin_status = 'D'
+		       where mail_no in
+		       <foreach item="item" index="index" collection="mailNo" open="(" separator="," close=")">
+		  						#{item}      
+		       </foreach>
 		   and mail_receiver = #{email}     
 	</update>
 	
@@ -344,6 +361,20 @@
 		 where r.mail_no = #{mailNo}
 		   and s.mail_title = #{mailTitle}
 		   and r.mail_receiver = #{mailReceiver}     
+	</select>
+	
+	<select id="detailSMail" parameterType="SendMail" resultMap="sendMail">  
+		select 
+		       s.mail_no
+		     , s.mail_writer
+		     , s.mail_receiver
+		     , s.mail_title
+		     , s.mail_cnt
+		     , s.mail_send_date
+		  from send_mail s
+		 where s.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   
 	</select>
 	
 	<update id="updateImpor" parameterType="ReceiveMail">
@@ -403,6 +434,75 @@
 	</select>
 	
 	<select id="replyMF" parameterType="ReceiveMail" resultMap="mailFile">
+		select
+		       mf.mail_file_no
+		     , mf.mail_origin
+		     , mf.mail_update
+		     , mf.mail_file_path
+		     , mf.mail_filesize
+		     , mf.mail_filetype
+		  from mail_file mf		   
+		  join receive_mail r 
+		    on (mf.mail_no = r.mail_no)
+	      join send_mail s
+		    on (mf.mail_no = s.mail_no)
+		 where r.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and r.mail_receiver = #{mailReceiver}    	
+	</select>
+	
+	<select id="forwardMail" parameterType="ReceiveMail" resultMap="receiveMail">
+		select
+		 	   r.mail_no
+		 	 , r.mail_writer
+		 	 , r.mail_receiver
+			 , r.recycle_bin_status
+		     , r.receive_status
+		     , r.bookmark 
+		     , s.mail_title
+		     , s.mail_cnt
+		     , s.mail_send_date
+		  from receive_mail r
+		  join send_mail s
+		    on (r.mail_no = s.mail_no)
+		 where r.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and r.mail_receiver = #{mailReceiver}
+	</select>
+	
+	<select id="forwarMFMail" parameterType="ReceiveMail" resultMap="mailFile">
+		select
+		       mf.mail_file_no
+		     , mf.mail_origin
+		     , mf.mail_update
+		     , mf.mail_file_path
+		     , mf.mail_filesize
+		     , mf.mail_filetype
+		  from mail_file mf		   
+		  join receive_mail r 
+		    on (mf.mail_no = r.mail_no)
+	      join send_mail s
+		    on (mf.mail_no = s.mail_no)
+		 where r.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and r.mail_receiver = #{mailReceiver}    	
+	</select>
+	
+		<select id="forwardSMail" parameterType="SendMail" resultMap="sendMail">
+		select
+		 	   s.mail_no
+		 	 , s.mail_writer
+		 	 , s.mail_receiver 
+		     , s.mail_title
+		     , s.mail_cnt
+		     , s.mail_send_date
+		  from send_mail s
+		 where s.mail_no = #{mailNo}
+		   and s.mail_title = #{mailTitle}
+		   and s.mail_receiver = #{mailReceiver}
+	</select>
+	
+	<select id="forwarMFSMail" parameterType="SendMail" resultMap="mailFile">
 		select
 		       mf.mail_file_no
 		     , mf.mail_origin

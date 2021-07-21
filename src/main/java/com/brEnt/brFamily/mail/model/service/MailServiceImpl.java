@@ -1,17 +1,17 @@
 package com.brEnt.brFamily.mail.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.brEnt.brFamily.mail.model.dao.MailDao;
-import com.brEnt.brFamily.mail.model.vo.InfoMail;
 import com.brEnt.brFamily.mail.model.vo.MailFile;
 import com.brEnt.brFamily.mail.model.vo.ReceiveMail;
 import com.brEnt.brFamily.mail.model.vo.SendMail;
-import com.google.gson.JsonElement;
 
 @Service
 public class MailServiceImpl implements MailService {
@@ -87,8 +87,8 @@ public class MailServiceImpl implements MailService {
 	}
 
 	@Override
-	public int deleteMail(String[] mail_arr, String email) {
-		return mDao.deleteMail(mail_arr, email, sqlSession);
+	public int deleteMail(Map<String, Object> map) {
+		return mDao.deleteMail(map, sqlSession);
 	}
 	
 	@Override
@@ -125,6 +125,46 @@ public class MailServiceImpl implements MailService {
 	@Override
 	public ArrayList<MailFile> replyMF(ReceiveMail r) {
 		return mDao.replyMF(r, sqlSession);
+	}
+
+	@Override
+	public ReceiveMail forwardMail(ReceiveMail r) {
+		return mDao.forwardMail(r, sqlSession);
+	}
+
+	@Override
+	public ArrayList<MailFile> forwarMFMail(ReceiveMail r) {
+		return mDao.forwarMFMail(r, sqlSession);
+	}
+
+	@Override
+	public SendMail detailSMail(SendMail smail) {
+		return mDao.detailSMail(smail, sqlSession);
+	}
+
+	@Override
+	public ArrayList<MailFile> detailMFMail(SendMail smail) {
+		return mDao.detailMFMail(smail, sqlSession);
+	}
+
+	@Override
+	public SendMail forwardSMail(SendMail s) {
+		return mDao.forwardSMail(s, sqlSession);
+	}
+
+	@Override
+	public ArrayList<MailFile> forwarMFSMail(SendMail s) {
+		return mDao.forwardMFSMail(s, sqlSession);
+	}
+
+	@Override
+	public int deleteTMail(Map<String, Object> map) {
+		return mDao.deleteTMail(map, sqlSession);
+	}
+
+	@Override
+	public int ttDeleteMail(Map<String, Object> map) {
+		return mDao.ttDeleteMail(map, sqlSession);
 	}
 
 

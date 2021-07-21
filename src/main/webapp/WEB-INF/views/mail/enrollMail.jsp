@@ -19,8 +19,7 @@
     <script src='resources/scheduleResources/lib/locales/ko.js'></script>
 
 	<!-- summer note -->
-	
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     
@@ -28,6 +27,11 @@
     
     <!-- email input  -->
     <link rel="stylesheet" href="resources/mailResources/email.multiple.css">
+    
+    <!-- modal 라이브러리 -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
     <style>
         #layoutAuthentication_content{
@@ -120,6 +124,103 @@
             padding-right:30px;
             border-top:1px solid #e5e5e5;
         }
+        
+        /* modal css */
+    .modal-backdrop.show{
+        opacity :0;
+    }
+
+    .modal-body-content{
+        width:100%;
+        padding: 16px 24px;
+        display:flex;
+        flex-direction: row;
+    }
+
+    .content{
+        display:flex;
+        flex:5;
+    }
+
+    .content, .move-tab, .new-list{
+        box-sizing:border-box;
+        height: 460px;
+    }
+
+    .content-org-tree{
+        border: 1px solid #c9c9c9;
+        flex:0.8;
+    }
+    
+    .content-list{
+        border: 1px solid #c9c9c9;
+        flex:2.2;
+       	height:460px;
+		overflow:auto;
+    }
+
+    .search-wrap, .scroll-wrap{
+       
+    } 
+
+    .move-tab{
+        text-align:center;
+        flex:0.4;
+    }
+
+    .new-list{
+        border: 1px solid #c9c9c9;
+        flex:1;
+    }
+
+    ul, li{
+        list-style : none;
+    }
+
+    .open{
+        color:rgba(155, 89, 182);
+        style:none;
+    }
+
+    .close{
+        font-family: 'Noto Sans KR', sans-serif
+        
+    }
+
+    .open:hover, .close:hover {
+        style:none;
+    }
+    
+    #datatablesSimple{
+    border-box:1px solid black;
+    }
+    
+    a{
+    	text-decoration:none;
+    }
+
+/* 모달 css*/
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  font-size:15px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  text-align: left;
+  background-color: rgba(155, 89, 182);
+  color: white;
+}
     </style>
 <title>Insert title here</title>
 </head>
@@ -153,10 +254,10 @@
                                     	<input type="hidden" id="memberNo" name="memNo" value="${ loginUser.memNo }">       
                                         <input type="text" id="mailReceiver" placeholder="Email">
                                         
-										<!--  <input type="text" class="dataTable-input" id="receiver" style="width: 72%;" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b" > -->
+										<!--<input type="text" class="dataTable-input" id="receiver" style="width: 72%;" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}\b" > -->
                                         
-                                        <a class="btn btn-primary btn-block" href="">주소록</a>
-                                        <a class="btn btn-primary btn-block" href="">내게 쓰기</a>
+                                        <a id="pbPopup" class="btn btn-primary" data-toggle="modal" data-target="#myModal" >주소록</a>
+                                        <a id="toMe" class="btn btn-primary btn-block" href="#">내게 쓰기</a>
                                         <label for=""></label><br>
                                         <div id="email-check"></div><br><br>
                                         <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" />
@@ -196,6 +297,71 @@
             </main>
         </div>
     </div>
+
+			<!-- The Modal -->
+            <div class="modal fade" id="myModal">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                        <h4 class="modal-title">주소록 추가</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="modal-body-content">
+                                <div class="content">
+                                    <div class="content-org-tree">
+                                        <ul>
+                                            <li>
+                                                <a href="#" class="tree"><i class="fas fa-plus-square"></i></a><a href="#" class="open"> br엔터</a>
+                                                <ul class="deptName">
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="content-list">
+                                        <div class="search-wrap">
+                                        	<div class="dataTable-search">
+                                        		<input class="dataTable-input" placeholder="이름/이메일 검색" type="text">
+                                        	</div>
+                                        </div>
+                                        <div class="scroll-wrap">
+					                            <table id="customers" class="phoneBook">
+					                                <thead>
+					                                    <tr>
+					                                    	<th></th>
+					                                        <th>이름</th>
+					                                        <th>부서</th>
+					                                        <th>직급</th>
+					                                        <th>이메일</th>
+					                                    </tr>
+					                                </thead>
+					                                <tbody>
+					                                </tbody>
+					                            </table> 
+                                    	</div>
+                                	</div>
+	                                <div class="move-tab">
+	                                    <a id="add" class="btn btn-primary">추가 &gt</a><br><br>
+	                                    <a id="remove" class="btn btn-primary">&lt 제외</a>
+	                                </div>
+                                <div class="new-list">
+                                	
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                        	<a id="sendEmail" class="btn btn-primary">메일 보내기</a>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
 </body>
 <script>
@@ -327,29 +493,39 @@
         {
             $(this).after("<span class=\"to-input\">받는사람</span>\n<br>" +
                 "<div class=\"all-mail\"></div>\n" +
-                "<input type=\"text\" name=\"mailReceiver\" class=\"enter-mail-id\" placeholder=\"이메일 입력 후 엔터를 누르세요.\" />");
+                "<input type=\"text\" class=\"enter-mail-id\" placeholder=\"이메일 입력 후 엔터를 누르세요.\" />");
             let $orig = $(this);
             let $element = $('.enter-mail-id');
+            let mrarr = [];
             $element.keydown(function (e) {
                 $element.css('border', '');
                 if (e.keyCode === 13 || e.keyCode === 32) {
                     let getValue = $element.val();
                     if (/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/.test(getValue)){
-                            $('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
-                            $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + getValue + '">');
-                            $('#is_receiver_check').attr('value', 'T');
-                            $('#email-check').hide();
-                            $element.val('');
+                    	//배열 생성
+							if( mrarr.includes(getValue) ){
+								alert('똑같은 메일주소는 보낼 수 없습니다.');	
+								return false;
+							}
+						
+						$('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
+                        $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + getValue + '">');
+                        
+                        $('#is_receiver_check').attr('value', 'T');
+                        $('#email-check').hide();
+                        $element.val('');
 
-                        email += getValue
+                    	email += getValue
+                    	mrarr.push(getValue);
+
+                            
                     } else {
                         $element.css('border', '1px solid red')
                         $('#email-check').html('<span>유효하지 않은 이메일입니다. 다시 입력해주세요.</span>');
                         $('#email-check').show();
                     }
-                }
                 $orig.val(email.slice(0))
-            });
+                }});
 
             $(document).on('click','.cancel-email',function(){
                 $(this).parent().next().remove();
@@ -404,5 +580,70 @@
     		return true;
         };
     })
+    
+		$(document).ready(function(){
+
+			$.ajax({
+				type: "POST",
+				url: "popup.pb",
+				success: function(map){
+					let mlist = map.mlist;
+					let dlist = map.dlist;
+					let plist = map.plist;
+					
+					for( var i in dlist ){
+						let d = dlist[i];
+						$('.deptName').append('<li><a href="#" class="tree"><i class="fas fa-plus-square"></i>' + d['deptName'] + '</a></li>');
+					};
+					
+					for( var i in mlist){
+						let m = mlist[i];
+						$('.phoneBook>tbody').append('<tr>' + 
+										  '<td><input type="checkbox"></td>' + 
+										  '<td>' + m['memName'] + '</td>' + 
+										  '<td>' + m['deptName'] + '</td>' + 
+										  '<td>' + m['posiName'] + '</td>' +
+										  '<td class="pbEmail">' + m['officeEmail'] + '</td>'
+										  + '</tr>');
+						$('.phoneBook>tbody>tr>td').each(function(){
+							if($(this).text() == '${loginUser.memName}'){
+								$(this).parent().remove();
+							}
+						})
+					}
+				},
+				error: function(data){
+					window.location.reload();
+				}
+			})
+		});
+			
+		// 부서별 사원 조회
+		$('#sendEmail').on('click',function(){
+			let pbarr = [];
+			$('input:checked').each(function(){
+				
+				var pbEmail = $(this).parent().siblings('.pbEmail').text();
+				
+				pbarr.push(pbEmail);
+			})
+			
+			pbarr.shift();
+			pbarr.shift();
+			$('#myModal').modal('hide');
+			
+			for(var i=0; i<pbarr.length; i++){
+				
+				$('.all-mail').append('<span class="email-ids">'+ pbarr[i] +  '<span class="cancel-email">x</span></span>');
+                $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + pbarr[i] + '">');
+			}
+		})
+		
+		$('#toMe').on('click', function(){
+			$('.all-mail').append('<span class="email-ids">' + $('#writer').val()  +   '<span class="cancel-email">x</span></span>');
+            $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + $('#writer').val() + '">');
+		})
+		
+		
 </script>
 </html>

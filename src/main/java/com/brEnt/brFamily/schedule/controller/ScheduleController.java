@@ -62,10 +62,11 @@ public class ScheduleController {
 	// 일정 추가
 	@RequestMapping("insert.sch")
 	public String planSch(Schedule s, HttpSession session, ModelAndView mv) {
+		System.out.println(s);
 		int result = sService.planSch(s);
 		
 		if(result>0) {
-			
+				
 				mv.addObject("s", s);
 				return "redirect:calendar.sch";
 		} else {

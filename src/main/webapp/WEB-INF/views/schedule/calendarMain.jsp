@@ -142,11 +142,12 @@
             </c:forEach>
             {
               title: 'Meeting',
-              start: '2020-09-13T11:00:00',
+              start: '2021-07-13 12:00:00',
               constraint: 'availableForMeeting', // defined below
               color: '#257e4a'
             },
             {
+              groupId: 'availableForMeeting',
               title: 'Conference',
               start: '2021-06-03',
               end: '2021-06-08'
@@ -158,9 +159,9 @@
     
             // areas where "Meeting" must be dropped
             {
-              groupId: 'availableForMeeting',
-              start: '2021-07-01T10:00:00',
-              end: '2021-07-6T16:00:00',
+              
+              start: '2021-07-01T10:00',
+              end: '2021-07-6T16:00',
               display: 'background'
             },
     

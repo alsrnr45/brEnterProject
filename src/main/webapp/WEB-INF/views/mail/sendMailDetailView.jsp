@@ -66,6 +66,11 @@
             color:red;
 		}
 		
+		.to-input{
+		padding-top:3px;
+		padding-bottom:3px;
+		margin-bottom:5px;}
+		
         /* btn css */
         #toggle_fileList:link, #toggle_fileList:visited, #toggle_fileList:hover, #toggle_fileList:active{
             text-decoration: none;
@@ -80,35 +85,15 @@
         .svg-inline--fa{
             vertical-align:middle;
         }
-
-        /* file input css*/
-        #file_wrap{
-        }
-
-
-        input[type="file"]{
-            display: none;
-        }
-
-        #file_showAndHideBtn{
-            size:7;
-        }
-        
-        .fa-caret-square-up, .fa-caret-square-down{
-            font-size:30px;
-        }
-
-        #target_file_wrap{
-            float:left;
-        }
-
-        #drop_zone{
-            border:1px solid #e5e5e5;
-            float:right;
-            width:80%;
-            height:120px;
-            display:none;
-        }
+		/* file_list css */
+		li{
+			list-style :none;
+		}
+		
+		#file_download:link, #file_download:hover, #file_download:visited{
+			color: gray; 
+			text-decoration: none;
+		}
 
         #content_explain{
             clear:both;
@@ -144,24 +129,19 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-5">
                             <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="far fa-envelope"></i> 메일 쓰기</h3></div>
-                                <form name="sendMail" id="sendMail" action="doReply.mail" method="post" enctype="multipart/form-data">
-                                    <input type="hidden" id="is_receiver_check" value="T">
+                                <div class="card-header"><h3 class="text-center font-weight-light my-4"><i class="far fa-envelope"></i> 메일 </h3></div>
+                                <form name="sendMail" id="sendMail" action="doForward.mail" method="post" enctype="multipart/form-data">
+
+                                    <input type="hidden" id="is_receiver_check" value="F">
                                     <div class="card-body">
-                                    
                                     	<input type="hidden" id="writer" name="mailWriter" value="${ loginUser.officeEmail }" >
                                     	<input type="hidden" id="memberNo" name="memNo" value="${ loginUser.memNo }">       
-                                        
                                         <input type="text" id="mailReceiver" placeholder="Email">
                                         
-                                        <span class="email-ids">${r.mailWriter}<span class="cancel-email">x</span></span>
-                						<input type="hidden" name="mailReceiver" value="${r.mailWriter}">
-                						
-                                        <a class="btn btn-primary btn-block" href="">주소록</a>
-                                        <a class="btn btn-primary btn-block" href="">내게 쓰기</a>
                                         <label for=""></label><br>
                                         <div id="email-check"></div><br>
-                                        <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" value="[RE] ${r.mailTitle }"/>
+                                        <div id="send_date"><span class="to-inpt">보낸 날짜 :</span>${s.mailSendDate}</div><br>
+                                        <span class="input-explain">제목</span>${s.mailTitle} 
                                         <label for=""></label>
 
                                         <br>
@@ -169,42 +149,28 @@
                                         <div id="file_wrap">
                                             <div id="target_file_wrap">
                                                 <span>파일첨부</span>
-                                                <input multiple type="file" id="upfile" name="upfile">
-                                                <a id="toggle_fileList" href="#" onclick="toggle_layer();"><i class="far fa-caret-square-up"></i></a>
-                                                <a href="#" onclick="$('#upfile').click()" class="btn btn-primary">내 PC</a>
+												<div class="card-header" style="width:100%;">
+												<ul>
+												<i class="fas fa-paperclip"></i>
+												<c:forEach  var="mf" items="${mflist}">
+													<li><a class="file_download" href="/filedown/${mf.mailUpdate}" download="${mf.mailOrigin}">${mf.mailOrigin}( ${String.format("%.2f", mf.mailFSize/1024/1024)} MB ) </a></li>
+												</c:forEach>
+												</ul>
+												</div>
 
                                             </div>
                                             <div id="drop_zone" ondrop="dropHandler(event);">
                                                 <span></span>
-                                                <c:forEach var="mf" items="${mflist}">
-                                                <div>
-                                                	<input multiple type="file" id="upfile" name="upfile">
-                                                	<input type="checkbox" id="#[object File]"> ${mf.mailOrigin}
-                                        	        <c:choose>
-									                	<c:when test="${(1024*1024) <= mf.mailFSize}">
-									                		(${String.format("%.2f", mf.mailFSize/1024/1024)} MB)
-									                	</c:when>
-									                	<c:when test="${(1024) <= mf.mailFSize}">
-									                		(${String.format("%.2f", mf.mailFSize/1024)} KB)
-									                	</c:when>
-									                	<c:otherwise>
-									                		(${String.format("%.2f", mf.mailFSize)} byte)
-									                	</c:otherwise>
-								                	</c:choose>
-                                                	<span class="cancel-file"><i class="far fa-times-circle"></i></span>
-                                                </div>
-                                                </c:forEach>
                                             </div>
                                         </div>
                                         <br><div id="content_explain">내용</div>
                                         <br>
                                         <div>
-                                            <textarea id="summernote" name="mailContent">${r.mailContent}</textarea>
+                                            ${s.mailContent}
                                         </div>
                                         <div class="card-footer text-center py-3">
                                             <div class="small">
-                                                <button type="button" id="do_reply" class="btn btn-primary btn-block">답장하기</button>
-                                                <button type="button" id="sendTemp" class="btn btn-primary btn-block">임시저장</button>
+                                                <button type="button" id="againList" class="btn btn-primary btn-block"><a href="send.mail" style="color:white; text-decoration:none;">목록으로</a></button>
                                             </div>
                                         </div>    
                                     </div>
@@ -220,8 +186,18 @@
 </body>
 <script>
 
+	//보낸메일 화면 뿌려주기
+	$(function(){
+	$(document).on('click', '.title', function(){
+		$('input').attr('disabled', true);
+		$(this).prevAll().find('input').attr('disabled', false);
+		$('#slist').submit();
+		})
+	})
+
 	
 	$(document).ready(function() {
+		
 	    $('#summernote').summernote({
 	    	lang: 'ko-KR',
 	    	placeholder: '내용을 입력해주세요.',
@@ -237,17 +213,15 @@
 	          ['view', ['fullscreen', 'codeview', 'help']]
 	        ]
 	      });
-
 	});
 	
     jQuery(document).ready(function($) {
-        var target_id = "upfile";     
+        var target_id = "upfile"; 
         $("#" + target_id).bind('change', function() {
             selectFile(this.files, target_id); 
         }); 
     }); 
-    // 기본 파일 업로드 시켜놓는 함수
-    
+
     // 파일 선택시 
     function selectFile(fileObject, target_id) { 
         var files = null; 
@@ -255,7 +229,9 @@
         // 직접 파일 등록시 
         files = jQuery('#' + target_id)[0].files; 
         console.log(files);
-		
+        // 다중파일 등록 
+        $("#drop_zone").html('');
+
         if (files != null) { 
             for (var i = 0; i < files.length; i++) { 
                 // 파일 이름 
@@ -284,15 +260,7 @@
                     console.log("fileSize="+parseInt(fileSize)); 
                     fileSizeStr = parseInt(fileSize) + " byte"; 
                 }
-                // 업로드 파일 목록 생성 
-                $("#drop_zone").append('<div><input type="checkbox" id="#' + files[i] + '"> ' + fileName + ' (' + fileSizeStr + ')' + '<span class="cancel-file"><i class="far fa-times-circle"></i></span></div>');
-                $("#drop_zone").show();
-                $(".fa-caret-square-up").attr('class', 'fa-caret-square-down');
                 
-                $(document).on('click','.cancel-file',function(){
-                    $(this).parent().next().remove();
-                    $(this).parent().remove();
-                });
             } 
         } else{ 
             alert("ERROR"); 
@@ -310,28 +278,9 @@
         $(".fa-caret-square-down").attr('class', 'fa-caret-square-up');
 	}
 }
- 
-    // 회원가입 넘길때 check요소 없을 시, 제약걸기
-    // $('#insertCheck').click(function(e) {
-    //     e.preventDefault();
-
-    //     // 이메일 전송 Check
-    //     if($('#receiver').val() == null) {
-    //          alert('받는 사람이 지정되지 않았습니다.' + '받는 사람 주소를 입력해주세요');
-    //          return false;
-    //     }
-
-    //     $('#sendMail').submit();
-    // });
-
     
 // 이메일 받는 사람 관련 js    
 (function($){
-	// 같은 이메일 입력 불가 조건
-	let mrarr = [];
-	mrarr.push($('input[name=mailReceiver]').val()); 
-	console.log(mrarr);
-	let replymrarr = mrarr;
 
     $.fn.email_multiple = function(options) {
 
@@ -345,10 +294,12 @@
         let email = "";
 
         return this.each(function()
-        {
-            $(this).after("<span class=\"to-input\">받는사람</span>\n<br>" +
-                "<div class=\"all-mail\"></div>\n" +
-                "<input type=\"text\" class=\"enter-mail-id\" placeholder=\"이메일 입력 후 엔터를 누르세요.\" />");
+        {	
+            $(this).after("<span class=\"to-input\">보낸사람 : </span>\n" +
+                    "<div class=\"all-mail\"><span class=\"email-ids\">" + "${s.mailWriter}" + "</span></div>\n<br>"
+                    + "<br><span class=\"to-input\">받는사람 : </span>\n" +
+                "<div class=\"all-mail\"><span class=\"email-ids\">" + "${s.mailReceiver}" + "</span></div>\n" 
+                );
             let $orig = $(this);
             let $element = $('.enter-mail-id');
             $element.keydown(function (e) {
@@ -356,42 +307,32 @@
                 if (e.keyCode === 13 || e.keyCode === 32) {
                     let getValue = $element.val();
                     if (/^[a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,6}$/.test(getValue)){
-                    	//배열 생성
-							if( mrarr.includes(getValue) ){
-								alert('똑같은 메일주소는 보낼 수 없습니다.');	
-								return false;
-							}
-						
-						$('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
+                        $('.all-mail').append('<span class="email-ids">' + getValue + '<span class="cancel-email">x</span></span>');
                         $('.all-mail').append('<input type="hidden" name="mailReceiver" value="' + getValue + '">');
-                        
                         $('#is_receiver_check').attr('value', 'T');
                         $('#email-check').hide();
                         $element.val('');
 
-                    	email += getValue
-                    	replymrarr.push(getValue);
-
-                            
+                        email += getValue
                     } else {
                         $element.css('border', '1px solid red')
                         $('#email-check').html('<span>유효하지 않은 이메일입니다. 다시 입력해주세요.</span>');
                         $('#email-check').show();
                     }
+                }
                 $orig.val(email.slice(0))
-                }});
+            });
 
             $(document).on('click','.cancel-email',function(){
                 $(this).parent().next().remove();
                 $(this).parent().remove();
             });
 
-            return $orig.hide()
+            return $orig.hide();
         });
     };
 
 })(jQuery);
-
 
     
     // email input js
@@ -404,13 +345,10 @@
 	});
     
     // 이메일 보낼 때 체크제약조건
-	$('#do_reply').click(function(e) {
+	$('#insertCheck').click(function(e) {
         e.preventDefault();
-        if($('.email-ids').next('input').val() == null){
-        	$('#email-check').show();
-            $('#email-check').change($('#email-check').html('<span>받은 사람이 지정되지 않았습니다. 받는 사람 주소를 입력해주세요. </span>'));
-        	return false;
-        } if($('#is_receiver_check').val() !== 'T'){
+        
+        if($('#is_receiver_check').val() !== 'T'){
             $('.enter-mail-id').css('border', '1px solid red');
             $('.enter-mail-id').focus();
             $('#email-check').show();
@@ -420,23 +358,24 @@
         $('#sendMail').submit();        
 	});
     
-    // 이메일 임시저장 
-    $('#sendTemp').click(function(e){
-    	e.preventDefault();
-    	if(checkValue() === false){
-    		alert('임시저장할 수 없습니다. 내용을 넣어주세요.');
-    		return false;
-    	} else{
-            $('#sendMail').attr('action','sendTemp.mail');
-            $('#sendMail').submit();
-    	}
-    	
-    	function checkValue(){
-    		if($('input[type=text]').val()  == "" && $('#title').val() == "" && $('.note-editable').children('p').html() == '<br>'){
-    			return false;
-    		} 
-    		return true;
-        };
-    })
+	$('#againList').click(function(e) {
+        
+	});
+	
+	// 전달
+	$("#forward").click(function(){
+		var length = $('input:checked').length; // 체크된 숫자갯수
+		console.log("숫자갯수" + length);
+		if(length == 0){
+			alert('답장할 메일을 선택해주세요.');
+		} if(length > 1){
+			alert("메일 한 개만 선택해주세요.");
+		} if(length == 1){
+			$('#rlist').attr('action','forward.mail');
+			$('input').attr("disabled", true);
+			$('input:checked').parent().parent().find('input').attr("disabled", false);
+			$('#rlist').submit();
+		}
+	});		
 </script>
 </html>

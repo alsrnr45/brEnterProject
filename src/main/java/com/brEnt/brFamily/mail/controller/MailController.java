@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -55,17 +58,29 @@ public class MailController {
 		return "mail/replyMail";
 	}
 	
-//	@RequestMapping("forward.mail")
-//	public String forwardMail(ReceiveMail r, HttpSession session, Model model) {
-//		System.out.println(r);
-//		model.addAttribute("r", mService.forward(r));
-//			
-//		if(Integer.parseInt(r.getMfIsHave()) > 0 ) {
-//			ArrayList<MailFile> mflist = mService.doReplyMF(r);
-//			model.addAttribute("mflist", mflist);
-//		}
-//		return "mail/replyMail";
-//	}
+	@RequestMapping("forward.mail")
+	public String forwardMail(ReceiveMail r, HttpSession session, Model model) {
+		System.out.println(r);
+		model.addAttribute("r", mService.forwardMail(r));
+			
+		if(Integer.parseInt(r.getMfIsHave()) > 0 ) {
+			ArrayList<MailFile> mflist = mService.forwarMFMail(r);
+			model.addAttribute("mflist", mflist);
+		}
+			return "mail/forwardMail";
+		}
+	
+	@RequestMapping("forward.smail")
+	public String forwardSMail(SendMail s, HttpSession session, Model model) {
+		System.out.println(s);
+		model.addAttribute("s", mService.forwardSMail(s));
+			
+		if(Integer.parseInt(s.getMfIsHave()) > 0 ) {
+			ArrayList<MailFile> mflist = mService.forwarMFSMail(s);
+			model.addAttribute("mflist", mflist);
+		}
+			return "mail/forwardSendMail";
+		}
 	
 	@RequestMapping("send.mail")
 	public ModelAndView sendMailListView(HttpSession session, ModelAndView mv) {
@@ -117,7 +132,7 @@ public class MailController {
 		int result1 = mService.insertSMail(s);
 		
 		if(result1 > 0) {
-			String[] values = s.getMailReceiver().split(",", 0);
+			String[] values = s.getMailReceiver().split(",", 0); // s.getMailReceiver ("abc@naver.com,ggg@gmail.com")
 			
 			ArrayList<ReceiveMail> rlist = new ArrayList<>();
 			
@@ -168,6 +183,59 @@ public class MailController {
 	
 	@RequestMapping("doReply.mail")
 	public String doReply(SendMail s , MultipartFile[] upfile, HttpSession session, ModelAndView mv) {
+		
+		int result1 = mService.insertSMail(s);
+		
+		if(result1 > 0) {
+			String[] values = s.getMailReceiver().split(",", 0);
+			
+			ArrayList<ReceiveMail> rlist = new ArrayList<>();
+			
+			for(int i=0; i<values.length; i++) {
+				
+				ReceiveMail r = new ReceiveMail();
+				r.setMailWriter(s.getMailWriter());
+				r.setMailReceiver(values[i]);
+				rlist.add(r);
+			} 
+			
+			int result2 = mService.insertRMail(rlist);
+			
+			for( MultipartFile multif : upfile) {
+				if(!multif.getOriginalFilename().isEmpty()) {
+					System.out.println(multif.getOriginalFilename());
+					String changeName = saveFile( multif , session);
+					
+					MailFile mf = new MailFile();
+					mf.setMailOrigin(multif.getOriginalFilename());
+					mf.setMailUpdate(changeName);
+					mf.setMailFPath(("/resources/mailUpfiles") + changeName);
+					mf.setMailFSize(String.valueOf(multif.getSize()));
+					
+					String ext = multif.getOriginalFilename().substring(multif.getOriginalFilename().lastIndexOf("."));
+					mf.setMailFType(ext);
+					
+					int result3 = mService.insertMFMail(mf);
+					
+					ArrayList<MailFile> mflist = new ArrayList<>();
+					mflist.add(mf);
+					
+				}else {
+					break;
+				}
+			}
+			mv.addObject("s", s)
+			  .addObject("rlist", rlist);
+			return "redirect:send.mail";
+		} else {
+			mv.addObject("errorPage", "메일 전송 실패");
+			return "common/errorPage";
+		}
+		
+	}
+	
+	@RequestMapping("doForward.mail")
+	public String doForward(SendMail s , MultipartFile[] upfile, HttpSession session, ModelAndView mv) {
 		
 		int result1 = mService.insertSMail(s);
 		
@@ -292,32 +360,20 @@ public class MailController {
 			model.addAttribute("errorMsg", "게시글 조회 실패!");
 			return "common/errorPage";
 		}
+	}
 		
-		
-	}	
-	
-//	@RequestMapping("detail.smail")
-//	public String detailSMail(SendMail smail, HttpSession session, Model model) {
-//		System.out.println(rmail);
-//		int result = mService.readMail(rmail);
-//		
-//		if(result>0) {
-//			ReceiveMail r = mService.detailRMail(rmail);
-//			if( Integer.parseInt(rmail.getMfIsHave())  > 0) {
-//				ArrayList<MailFile> mflist = mService.detailMFMail(rmail);
-//				model.addAttribute("mflist", mflist);
-//			} 
-//			
-//			model.addAttribute("r", r);
-//			
-//			return "mail/mailDetailView";
-//		} else {
-//			model.addAttribute("errorMsg", "게시글 조회 실패!");
-//			return "common/errorPage";
-//		}
-//		
-//		
-//	}
+		@RequestMapping("detail.smail")
+		public String detailSMail(SendMail smail, HttpSession session, Model model) {
+			SendMail s = mService.detailSMail(smail);
+				if( Integer.parseInt(smail.getMfIsHave())  > 0) {
+					ArrayList<MailFile> mflist = mService.detailMFMail(smail);
+					model.addAttribute("mflist", mflist);
+				} 
+				
+				model.addAttribute("s", s);
+				
+				return "mail/sendMailDetailView";
+ 		}		
 	
 	@ResponseBody
 	@RequestMapping(value="important.mail", produces="application/json; charset=utf-8")
@@ -338,16 +394,55 @@ public class MailController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="delete.mail", produces="application/json; charset=utf-8")
-	public String deleteMail(HttpServletRequest request, HttpSession session, Model model) { 
-		
-		String[] mail_arr = request.getParameterValues("mail_arr");
+	@RequestMapping(value="delete.mail")
+	public String deleteMail(String[] mail_arr, HttpServletRequest request, HttpSession session) { 
+
+		String email = ((Member)session.getAttribute("loginUser")).getOfficeEmail();
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("mailNo", mail_arr);
+			map.put("email", email);
+			int result = mService.deleteMail(map);
+			System.out.println(result);
+		if(result>0) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="delete.tempMail")
+	public String deleteTMail(String[] mail_arr, HttpServletRequest request, HttpSession session) { 
+
 		String email = ((Member)session.getAttribute("loginUser")).getOfficeEmail();
 		
-		int result = mService.deleteMail(mail_arr, email);
+			Map<String, Object> map = new HashMap<String, Object>();
+
+			map.put("mailNo", mail_arr);
+			map.put("email", email);
+			
+			int result = mService.deleteTMail(map);
 		
 		if(result>0) {
 			return null;
+		} else {
+			return "fail";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="ttDelete.mail")
+	public String ttDeleteMail(String[] mail_arr, HttpServletRequest request, HttpSession session) { 
+
+		String email = ((Member)session.getAttribute("loginUser")).getOfficeEmail();
+			Map<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("mailNo", mail_arr);
+			map.put("email", email);
+			int result = mService.ttDeleteMail(map);
+		if(result>0) {
+			return "success";
 		} else {
 			return "fail";
 		}

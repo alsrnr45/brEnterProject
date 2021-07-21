@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -154,14 +155,26 @@
                                         
                                         <input type="text" id="mailReceiver" placeholder="Email">
                                         
-                                        <span class="email-ids">${r.mailWriter}<span class="cancel-email">x</span></span>
-                						<input type="hidden" name="mailReceiver" value="${r.mailWriter}">
+                                        
+                                        <c:choose>                                        
+	                                        <c:when test="${ fn:indexOf(s.mailReceiver, ',') gt 0 }">
+		                                    	<c:forTokens var="r" items="${ s.mailReceiver }" delims=",">
+		                                    			<span class="email-ids">${r}<span class="cancel-email">x</span></span>
+				                                    	<input type="hidden" name="mailReceiver" value="${ r }">
+			                                    </c:forTokens>
+		                                    </c:when>	
+		                                    <c:otherwise>
+		                                    	<span class="email-ids">${s.mailWriter}<span class="cancel-email">x</span></span>
+		                                    	<input type="hidden" name="mailReceiver" value="${s.mailReceiver}">
+		                                    </c:otherwise>
+	                                    </c:choose>
+                						
                 						
                                         <a class="btn btn-primary btn-block" href="">주소록</a>
                                         <a class="btn btn-primary btn-block" href="">내게 쓰기</a>
                                         <label for=""></label><br>
                                         <div id="email-check"></div><br>
-                                        <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" value="[RE] ${r.mailTitle }"/>
+                                        <span class="input-explain">제목</span><input class="dataTable-input" id="title" name="mailTitle" type="text" min=0 placeholder="" value="[RE] ${s.mailTitle }"/>
                                         <label for=""></label>
 
                                         <br>
@@ -199,7 +212,7 @@
                                         <br><div id="content_explain">내용</div>
                                         <br>
                                         <div>
-                                            <textarea id="summernote" name="mailContent">${r.mailContent}</textarea>
+                                            <textarea id="summernote" name="mailContent">${s.mailContent}</textarea>
                                         </div>
                                         <div class="card-footer text-center py-3">
                                             <div class="small">

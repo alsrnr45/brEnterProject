@@ -139,11 +139,17 @@
                                                 } if(i % 2 != 0){
                                                         min=":30";
                                                 }
-                                                document.write('<option value=' + hour + min + '>'
-                                                    + hour
-                                                    + min
-                                                    + '</option>'
-                                                )
+                                                if(hour<11){
+                                                	document.write('<option value=' + '0' + hour + min + ':00' + '>'
+                                                			+ hour
+                                                            + min
+                                                            + '</option>');
+                                                } else{
+                                                	document.write('<option value=' + hour + min + ':00' + '>'
+                                                			+ hour
+                                                            + min
+                                                            + '</option>');
+                                                }
                                             }
                                             /* 
                                             날짜설정은 완료 시간설정은 다시!
@@ -198,11 +204,18 @@
                                                 } if(i % 2 != 0){
                                                         min=":30";
                                                 }
-                                                document.write('<option value=' + hour + min + '>'
-                                                    + hour
-                                                    + min
-                                                    + '</option>'
-                                                )
+                                                
+                                                if(hour<11){
+                                                	document.write('<option value=' + '0' + hour + min + ':00' + '>'
+                                                			+ hour
+                                                            + min
+                                                            + '</option>');
+                                                } else{
+                                                	document.write('<option value=' + hour + min + ':00' + '>'
+                                                			+ hour
+                                                            + min
+                                                            + '</option>');
+                                                }
                                             }                                
                                             </script>
                                         </select>
@@ -218,9 +231,10 @@
 <!--                                         <textarea class="dataTable-input" id="schContent" name="schContent" value="${s.schContent}" rows="5px"></textarea> -->
                                         <textarea id="summernote" id="schContent" name="schContent" value="${s.schContent}"></textarea>
                                         <br><br>
-                                        <!-- 이미지/파일 버튼 다시 만들기-->
+                                        <!-- 이미지/파일 버튼 다시 만들기
                                         <span class="input-explain">파일첨부</span>
                                         <a class="btn btn-primary btn-block"><input type="file" name="upfile" style="display: none;" />이미지/파일</a>
+                                        -->
                                     
                                 </div>
                                 <div class="card-footer text-center py-3">

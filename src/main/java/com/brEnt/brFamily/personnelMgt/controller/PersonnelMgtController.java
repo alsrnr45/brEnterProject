@@ -36,13 +36,11 @@ public class PersonnelMgtController {
 	public ModelAndView offList(ModelAndView mv) {
       
       ArrayList<Off> list = pService.offList();
-      System.out.println(list);
       
       mv.addObject("list", list)
         .setViewName("personnelMgt/offList");
       return mv;
    }
-	
 	
 	// 작성자 : 안소은 -- 근무일수 조회
 	@RequestMapping("attendeanceMgt.pm")

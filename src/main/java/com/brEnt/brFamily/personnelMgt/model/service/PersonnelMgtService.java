@@ -32,6 +32,6 @@ public interface PersonnelMgtService {
 	// 작성자 : 김혜미 — 급여내역 조회
 	ArrayList<SalaryDto> slaryList();
 	
-	// 작성자 : 김혜미 -- 연차내역 조회
+	// 작성자 : 김혜미 — 연차내역 조회
 	ArrayList<Off> offList();
 }

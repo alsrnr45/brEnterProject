@@ -40,6 +40,7 @@
 		<result column="ec_doc_name" property="ecDocName"/>
 		<result column="ec_enrolldate" property="ecEnrolldate"/>
 		<result column="ec_status" property="ecStatus"/>
+		<result column="ec_compdate" property="ecCompdate"/>
 	</resultMap>   	
 	
 	<!-- 작성자 : 안소은 - 오늘날짜count 조회 -->
@@ -149,12 +150,13 @@
 		     , e.ec_doc_name
 		     , ec_enrolldate
 		     , ec_status
+		     , ec_compdate
 		  from off o 
 		  join ec_document e on (e.ec_doc_no = o.ec_doc_no)
 		  join member m on (m.mem_no = e.mem_no)
-		 where e.mem_no = #{memNo}
+		 where e.mem_no = 3
 		 order
-            by ec_enrolldate desc
+		    by ec_enrolldate desc
 	</select>
 
 </mapper>

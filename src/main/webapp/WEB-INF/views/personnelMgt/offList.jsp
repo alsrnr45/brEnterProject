@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -120,6 +121,7 @@
 						<div class="card-header">
 							<i class="fas fa-user me-1"></i>
 								${ loginUser.memName }님의 연차내역
+								<input type="hidden" name="memNo" value="${ loginUser.memNo }">
 						</div>
 						<div class="card-body">
 							<table id="datatablesSimple" class="salaryList">
@@ -129,7 +131,6 @@
 										<th>일자</th>
 										<th>신청일</th>
 										<th>상태</th>
-										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -137,9 +138,20 @@
 										<tr>
 											<td>${ o.ecDocName }</td>
 											<td>${ o.offStart }~${ o.offEnd }</td>
-											<td>${ o.ecEnrolldate }</td>
-											<td>${ o.ecStatus }</td>
-											<td><i class="fas fa-trash-alt"></i></td>
+											<td>
+												<fmt:parseDate value="${ o.ecEnrolldate }" var="enrolldate" pattern="yyyy-MM-dd HH:mm:ss"/>
+												<fmt:formatDate value="${ enrolldate }" pattern="yyyy-MM-dd"/>
+											</td>
+											<td>
+												<c:choose>
+													<c:when test="${ o.ecCompdate != null }">
+														신청완료
+													</c:when>
+													<c:otherwise>
+														신청대기
+													</c:otherwise>
+												</c:choose>
+											</td>
 										</tr>
 									</c:forEach>
 								</tbody>

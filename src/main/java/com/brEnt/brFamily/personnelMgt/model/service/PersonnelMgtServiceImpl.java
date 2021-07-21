@@ -54,7 +54,6 @@ public class PersonnelMgtServiceImpl implements PersonnelMgtService {
 	@Override
 	public int insertCheckIn(PersonnelMgt p) {
 		return pDao.insertCheckIn(sqlSession, p);
-		
 	}
 
 	// 작성자 : 안소은 -- 퇴근시간 insert

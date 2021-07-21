@@ -207,5 +207,14 @@
 		 where mem_no = #{memNo}
 	</update>
 	
+	<!-- 작성자 : 김혜미 - 사원 탈퇴 -->
+	<update id="deleteMember" parameterType="member">
+		update 
+		       member
+		   set 
+		       mem_status = 'N'
+		 where 
+		       mem_no = #{memNo}
+	</update>
 	
 </mapper>

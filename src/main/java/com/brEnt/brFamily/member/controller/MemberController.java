@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.brEnt.brFamily.boardFree.model.vo.BoardFree;
-import com.brEnt.brFamily.elecApproval.model.service.ElecApprovalService;
 import com.brEnt.brFamily.elecApproval.model.vo.ElecApproval;
 import com.brEnt.brFamily.member.model.service.MemberService;
 import com.brEnt.brFamily.member.model.vo.Member;
@@ -145,43 +143,17 @@ public class MemberController {
 	         m.setProfile("resources/profileUpfiles/" + changeName);
       }
       int result = mService.updateMember(m);
-//      model.addAttribute("m", m);
       
       return "redirect:memberList.admin";
    }
    
    
    // 작성자 : 김혜미 - 사원 탈퇴
-//   @RequestMapping("delete.me")
-//   public String deleteMember(String userPwd, HttpSession session, Model model) {
-//      
-//      Member loginUser = (Member)session.getAttribute("loginUser");
-//      // 아이디, 비번(암호문), 이메일, 주소, ....
-//      
-//      if(bcryptPasswordEncoder.matches(userPwd, loginUser.getUserPwd())) {
-//         // 비밀번호 일치 => 본인 맞음
-//         int result = mService.deleteMember(loginUser.getUserId());
-//         
-//         if(result > 0) {
-//            session.removeAttribute("loginUser");
-//            session.setAttribute("alertMsg", "성공적으로 탈퇴되었습니다. 그동안 이용해주셔서 감사합니다.");
-//            
-//            // => 메인페이지
-//            return "redirect:/";
-//            
-//         }else { // => 에러페이지
-//            model.addAttribute("errorMsg", "회원탈퇴 실패");
-//            return "common/errorPage";
-//         }
-//         
-//         
-//      }else {
-//         // 비밀번호 일치 x
-//         session.setAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
-//         return "redirect:myPage.me";
-//      }
-//      
-//   }
+   @RequestMapping("delete.admin")
+   public String deleteMember(int mno, Model model) {
+	   int result = mService.deleteMember(mno);
+	   return "redirect:memberList.admin";
+   }
 
    
    // 작성자 : 김혜미 -- 첨부파일명 수정 

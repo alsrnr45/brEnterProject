@@ -86,7 +86,6 @@
         <div id="layoutSidenav_content">
             <div class="content">
                 
-                <form id="personalInformation" action="" method="post">
                     <div class="content1">
                         <div class="box">
                             <img class="profile" src="${ m.profile }">
@@ -160,7 +159,7 @@
                             <div style="float:right; margin-top: 15px;">
                                 <button type="button" class="btn btn-light" onclick="javascript:history.go(-1);">뒤로가기</button>
                                 <button type="button" class="btn btn-warning" id="updateForm" style="margin-left: 7px;">수정하기</button>
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteForm" style="margin-left: 7px;">삭제하기</button>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteForm" style="margin-left: 7px;">탈퇴처리</button>
                             </div>
                         </div><!--information-->
                     </div><!--content2-->
@@ -182,9 +181,10 @@
 			                <b>
 					                       탈퇴 후 복구가 불가능합니다. <br>   
 					                       정말로 탈퇴 하시겠습니까?
-			                </b>
-			                <form action="delete.me" method="post">
-								관리자 비밀번호 :<input type="password" name="userPwd" required>
+			                </b><br><br>
+			                
+                    		<form action="delete.admin" method="post">
+			                	<input type="hidden" name="mno" value="${ m.memNo }">
 								<button type="submit" class="btn btn-danger">탈퇴하기</button>
 			                </form>
 			            </div>

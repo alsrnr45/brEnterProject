@@ -130,7 +130,7 @@
                                 <a class="nav-link" href="storeList.st">사내스토어</a>
                                 <a class="nav-link" href="cartList.pro">장바구니</a>
                                 <a class="nav-link" href="orderlist.mp">주문내역 조회</a>
-                                <a class="nav-link" href="#">오프라인 매장안내</a>
+                                <a class="nav-link" href="offStore.st">오프라인 매장안내</a>
                             </nav>
                         </div>                      
 

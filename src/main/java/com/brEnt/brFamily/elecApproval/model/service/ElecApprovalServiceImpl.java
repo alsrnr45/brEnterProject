@@ -18,7 +18,7 @@ import com.brEnt.brFamily.member.model.vo.Position;
 
 @Service
 public class ElecApprovalServiceImpl implements ElecApprovalService {
-   
+	
    @Autowired 
    private SqlSessionTemplate sqlSession;
    @Autowired
@@ -55,33 +55,41 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 	   return eaDao.deleteDocument(sqlSession, eano); 
    }
      
-   // 작성자 : 안소은 -- 결재선 부서 리스트 조회
-   @Override
-   public ArrayList<Dept> selectDept() {
-	   return eaDao.selectDept(sqlSession);
-   }
+    // 작성자 : 안소은 -- 결재선 부서 리스트 조회
+    @Override
+    public ArrayList<Dept> selectDept() {
+ 	   return eaDao.selectDept(sqlSession);
+    }
    
-   // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
-   @Override	
-   public ArrayList<Member> selectMemberList(int deptNo) {
+    // 작성자 : 안소은 -- 결재선 해당 부서 사원 조회용 AJAX
+    @Override	
+    public ArrayList<Member> selectMemberList(int deptNo) {
 	   return eaDao.selectMemberList(sqlSession, deptNo);
-   }
+    }
 
-   // 작성자 : 안소은 -- 지출결의서 상세조회
-   @Override
-   public ElecApproval expenseDetail(int eano) {
+    // 작성자 : 안소은 -- 지출결의서 상세조회
+    @Override
+    public ElecApproval expenseDetail(int eano) {
 	   return eaDao.expenseDetail(sqlSession, eano);
-   }
-   
-   @Override
-   public int insertEcDocument(ElecApproval ea) {
+    }
+    
+    // 작성자 : 안소은 -- 지출결의서 작성 (통합문서)
+    @Override
+    public int insertEcDocument(ElecApproval ea) {
    		return eaDao.insertEcDocument(sqlSession, ea);
-   }
-
-   @Override
-   public int insertExpense(ExpenseForm ex) {
+    }
+    
+    // 작성자 : 안소은 -- 지출결의서 작성
+    @Override
+    public int insertExpense(ExpenseForm ex) {
    		return eaDao.insertExpense(sqlSession, ex);
-   }
+    }
+   
+    // 작성자 : 안소은 -- 지출결의서 삭제
+	@Override
+	public int deleteExpense(int eano) {
+		return eaDao.deleteExpense(sqlSession, eano);
+	}
    
 	// 작성자 : 김혜미 -- 연차 신청
 	@Override
@@ -124,6 +132,7 @@ public class ElecApprovalServiceImpl implements ElecApprovalService {
 	public int finalApprove(int finalApproval, int eano, int memNo) {
 		return eaDao.finalApprove(sqlSession, finalApproval, eano, memNo);
 	}
+
 
 	
 

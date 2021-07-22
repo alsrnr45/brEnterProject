@@ -56,12 +56,19 @@ public class ElecApprovalDao {
 		return sqlSession.selectOne("approvalMapper.expenseDetail", eano);
 	}
 	
+	// 작성자 : 안소은 -- 지출결의서 작성하기(통합문서)
 	public int insertEcDocument(SqlSessionTemplate sqlSession, ElecApproval ea) {
 		return sqlSession.insert("approvalMapper.insertEcDocument", ea);
 	}
 	
+	// 작성자 : 안소은 -- 지출결의서 작성하기
 	public int insertExpense(SqlSessionTemplate sqlSession, ExpenseForm ex) {
 		return sqlSession.insert("approvalMapper.insertExpense", ex);
+	}
+	
+	// 작성자 : 안소은 -- 지출결의서 삭제
+	public int deleteExpense(SqlSessionTemplate sqlSession, int eano) {
+		return sqlSession.update("approvalMapper.deleteExpense", eano);
 	}
 	
 	// 작성자 : 김혜미 -- 연차 신청

@@ -139,13 +139,13 @@
                         <td class="td1">문서종류</td>
                         <td class="td2">
                             <div class="form-group">
-                                <select class="form-control" name="approvalFormCode url" id="ecCode" style="font-size: 13px;"  onchange="moveurl(this.value);">
-                                    <option value="documentEnrollForm.ea?code=PL">기획안</option>
-									<option value="documentEnrollForm.ea?code=BC">업무연락</option>
-									<option value="offEnrollForm.ea">연차</option>
-									<option value="expenseForm.ea" selected>지출결의서</option>
-									<option value="documentEnrollForm.ea?code=ME">회람</option>
-                                </select>
+                                <select class="form-control" name="approvalFormCode url" id="ecCode" onchange="moveurl(this.value);">
+									<option value="documentEnrollForm.ea?code=PL&mno=${ loginUser.memNo }" >기획안</option>
+									<option value="documentEnrollForm.ea?code=BC&mno=${ loginUser.memNo }">업무연락</option>
+									<option value="offEnrollForm.ea?mno=${ loginUser.memNo }">연차</option>
+									<option value="expenseForm.ea?mno=${ loginUser.memNo }" selected>지출결의서</option>
+									<option value="documentEnrollForm.ea?code=ME&mno=${ loginUser.memNo }">회람</option>												
+								</select>	
                                 <input type="hidden" name="ecCode" value="EX">
                               </div>
                         </td>
@@ -217,7 +217,7 @@
                     <tr height="40">
                         <th>구분</th>
                         <td>
-                            <input type="radio" name="exStatus" value="개인"> 개인 &nbsp;
+                            <input type="radio" name="exStatus" value="개인" checked="checked"> 개인 &nbsp;
                             <input type="radio" name="exStatus" value="법인"> 법인
                         </td>
                     </tr>

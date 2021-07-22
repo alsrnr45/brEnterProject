@@ -322,8 +322,7 @@ public class ElecApprovalController {
       
    }
    
-   /*
-   // 지출결의서 삭제
+   // 작성자 : 안소은 -- 지출결의서 삭제
    @RequestMapping("deleteExpense.ea")
 	public String deleteExpense(int eano, int memNo, HttpSession session, Model model) {
 
@@ -334,9 +333,10 @@ public class ElecApprovalController {
 	   int result = eaService.deleteExpense(eano);
 	   
 	   session.setAttribute("alertMsg", "성공적으로 게시글이 삭제되었습니다.");
-      return "redirect:approvalTotalList.ea?mno=" + memNo; 
+       
+	   return "redirect:approvalTotalList.ea?mno=" + memNo; 
+   
    }
-	*/
   
    
    

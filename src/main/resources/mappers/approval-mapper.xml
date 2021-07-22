@@ -274,7 +274,7 @@
        where e.ec_doc_no = #{ ea.docNo }
    </select>
 
-   <!--  작성자 : 안소은 - 지출결의서 작성 -->
+   <!--  작성자 : 안소은 - 지출결의서 작성 (통합문서) -->
    <insert id="insertEcDocument" parameterType="elecApproval">
       insert
           into ec_document
@@ -303,6 +303,7 @@
           )
    </insert>
    
+    <!--  작성자 : 안소은 - 지출결의서 작성 -->
    <insert id="insertExpense" parameterType="Expense">
       insert
         into expense_form
@@ -322,7 +323,16 @@
         , #{account}
         )
    </insert>
-
+   
+	<!-- 작성자 : 안소은 - 지출결의서 삭제 -->
+	<update id="deleteExpense" parameterType="_int">
+		update 
+		       ec_document
+		   set 
+		       ec_status = 'N'
+		 where ec_doc_no = #{ ea.ecDocNo }
+	</update>
+	
 	<!-- 작성자 : 김혜미 - 연차 신청 -->
   	 <insert id="insertOff" parameterType="off">
 		insert all

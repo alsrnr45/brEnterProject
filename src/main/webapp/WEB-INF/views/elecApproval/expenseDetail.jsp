@@ -177,24 +177,24 @@
 			                       
 			                        <c:choose>
 	                                    <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
-	
 			                                 <div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-			
+			                                 
 			                                 <!-- 기안/반려하기 버튼 구현 -->
 			                                 <c:if test="${ (i+1) lt ApprovalPathList.size() }">
-			                                    <c:set var="ttt" value="${ ApprovalPathList[i+1].memNo }"/>
+			                                    <c:set var="turnNo" value="${ ApprovalPathList[i+1].memNo }"/>
 			                                    <c:set var="approvalNo" value="${ ApprovalPathList[i+1].approvalPathNo }"/>
 			                                 </c:if>
-			
+			                                 
 			                                 <!-- 삭제하기 버튼 구현 -->
-			                                 <c:set var="flag" value="ss"/>
-	
+			                                 <c:set var="flag" value="delete"/>
 	                                     </c:when>
-	                                     <c:otherwise>
-		                                     <div style="height:80px;  padding-top:10px;"></div>
-											 <c:set var="ttt" value="${ ApprovalPathList[0].memNo }"/>
-											 <c:set var="approvalNo" value="${ ApprovalPathList[i].approvalPathNo }"/>
-	                                     </c:otherwise>
+	                                    <c:otherwise>
+											<div style="height:80px;"></div>
+											<c:if test="${i eq 0}">
+												<c:set var="turnNo" value="${ApprovalPathList[i].memNo}"/>
+												<c:set var="approvalNo" value="${ ApprovalPathList[i].approvalPathNo }"/>
+											</c:if>
+									</c:otherwise>
                                  	</c:choose>
 			                        
 			                        <div style="height:35px; padding-top:7px;">
@@ -204,9 +204,10 @@
 			                        <div style="height:35px; padding-top:7px;">${ ApprovalPathList[i].memName }</div>
 
 									<c:if test="${ ApprovalPathList[i].memNo eq loginUser.memNo }">
-										<c:set var="aname" value="aaa"/>
+										<c:set var="approvalName" value="approvalName"/>
 									</c:if>
 									
+									<!-- 조건문 수정 -->
 									<c:if test="${ i eq 3 }">
 										<c:set var="finalApproval" value="${ ApprovalPathList[i].memNo }"/>
 									</c:if>
@@ -262,33 +263,34 @@
 				<!-- 삭제 버튼 보이는 조건문 --> 
 				<!-- 조건 : 승인 버튼이 눌리기 전에만 삭제 가능 => ec_status가 모두 N인 결재대기 상태
 							(ec_status 중 c 또는 y가 하나라도 있으면 삭제 버튼 x) --> 
+				
 					<c:choose>  
-	            		<c:when test="${ aname != null }">     
-			                <c:choose>                
-			                	<c:when test="${ ttt eq loginUser.memNo }">
-			                    	<button class="btn btn-light apply" type="submit">승인하기</button>
-			                     	<button class="btn btn-danger return" type="submit">반려하기</button>    
-			                  	</c:when>  
-			                    <c:otherwise>
-			                      	<button class="btn btn-light apply" disabled>승인하기</button>
-			                      	<button class="btn btn-danger return" disabled>반려하기</button>
-			                    </c:otherwise>
-			                </c:choose>
-		                </c:when>
-    
-			            <c:when test="${ ea.memNo eq loginUser.memNo }">
-			            	<c:choose>
-			                	<c:when test="${ flag eq 'ss' }">
-					            	<button class="btn btn-danger delete" onclick="postFormSubmit();"disabled>삭제하기</button>      
-					            </c:when>
-					            <c:otherwise>
-					              	<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
-				              	</c:otherwise>
-				        	</c:choose>
-			            </c:when>                          
-               		</c:choose>               
-                                                 
-                	<form id="postForm" action="" method="post">
+						<c:when test="${ approvalName != null }">     
+							<c:choose>                
+								<c:when test="${ turnNo eq loginUser.memNo }">
+									<button class="btn btn-light apply" onclick="approveFormSubmit();" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+									<button class="btn btn-danger return" type="submit">반려하기</button>
+								</c:when>  
+								<c:otherwise>
+										<button class="btn btn-light apply" style="background-color:lightgray; border-color:lightgray;" disabled>승인하기</button>
+										<button class="btn btn-danger return" disabled>반려하기</button>
+								</c:otherwise>
+							</c:choose>
+						</c:when>
+		
+						<c:when test="${ ea.memNo eq loginUser.memNo }">
+							<c:choose>
+								<c:when test="${ flag eq 'delete' }">
+									<button class="btn btn-danger delete" onclick="postFormSubmit();" disabled>삭제하기</button>      
+								</c:when>
+								<c:otherwise>
+										<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
+									</c:otherwise>
+							</c:choose>
+						</c:when>                          
+					</c:choose>
+                    
+                    <form id="postForm" action="" method="post">
 						<input type="hidden" name="eano" value="${ ea.ecDocNo }">
 						<input type="hidden" name="memNo" value="${ loginUser.memNo }">
 					</form>							
@@ -299,42 +301,43 @@
                  		<input type="hidden" name="approvalPathNo" value="${ approvalNo }">
 						<input type="hidden" name="finalApproval" value="${ finalApproval }">
 					</form>
-               
-                <script>
-	                function postFormSubmit() { 
-	        			
-	        			var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
-	        			
-	        			if(result){
-	        				$("#postForm").attr("action", "deleteExpense.ea").submit();
-	        				return true;
-	        			} else{
-	        				alert("삭제가 취소되었습니다.")
-	        				return false; 
-	        			}
-	        		}
-	
-	        		function approveFormSubmit() { 
-	        			
-	        			var result = confirm("기안한 문서를 승인하시겠습니까?"); 
-	        			
-	        			if(result){
-	        				$("#approveForm").attr("action", "approveDocument.ea").submit();
-	        				return true;
-	        			} else{
-	        				alert("승인이 취소되었습니다.")
-	        				return false; 
-	        			}
-        			}
-                </script>
-								
-															
+					
 				</div>
-				
 			</div>
         </div>
     </div>
+    
+    
+	<script>
+      	function postFormSubmit() { 
 	
+			var result = confirm("기안한 문서를 삭제하시겠습니까?"); 
+			
+			if(result){
+				$("#postForm").attr("action", "deleteExpense.ea").submit();
+				return true;
+			} else{
+				alert("삭제가 취소되었습니다.")
+				return false; 
+			}
+			
+		}
+
+		function approveFormSubmit() { 
+			
+			var result = confirm("기안한 문서를 승인하시겠습니까?"); 
+			
+			if(result){
+				$("#approveForm").attr("action", "approveDocument.ea").submit();
+				return true;
+			} else{
+				alert("승인이 취소되었습니다.")
+				return false; 
+			}
+			
+		}
+    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="resources/js/scripts.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>

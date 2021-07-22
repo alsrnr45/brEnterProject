@@ -40,6 +40,9 @@ public interface ElecApprovalService {
     int insertEcDocument(ElecApproval ea);
     int insertExpense(ExpenseForm ex);
     
+    // 작성자 : 안소은 -- 지출결의서 삭제
+    int deleteExpense(int eano);
+    
     // 작성자 : 김혜미 -- 연차 신청
     int insertOff(Off o);
     

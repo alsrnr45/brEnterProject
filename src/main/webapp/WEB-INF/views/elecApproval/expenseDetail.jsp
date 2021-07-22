@@ -241,7 +241,10 @@
                             </tr>
 							<tr height="40">
 								<th width="120">지출 일자</th>
-								<td colspan="3" width="800"><input type="text" name="" id="" value="${ ea.month }" readonly style="width:130px;"></td>
+								<td colspan="3" style="padding-left:10px; width:800px;""> 
+									<fmt:parseDate value="${ ea.month }" var="month" pattern="yyyy-MM-dd HH:mm:ss"/>
+									<fmt:formatDate value="${ month }" pattern="yyyy-MM-dd"/>
+								</td>
 							</tr>
                             <tr height="40">
                                 <th>계좌 정보</th>

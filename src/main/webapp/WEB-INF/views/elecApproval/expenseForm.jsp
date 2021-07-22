@@ -30,7 +30,7 @@
         .outer{width:1000px; height:1200px; margin: auto;}
         
         /* 기본설정 */
-        .basicSetting{width:100%; height:50px; border:1px solid lightgray; font-size:13px;}
+        .basicSetting{width:100%; height:50px; border:1px solid lightgray; font-size:13px; margin-bottom:50px;}
         .basicSetting .td1{width:20%; text-align: center;}
         .basicSetting .td2{width:20%;}
         .basicSetting .td3{width:30%; text-align: right;}
@@ -132,6 +132,7 @@
                 <br><br>
                 <button type="submit" class="btn btn-warning" href="">기안하기</button>
                 <br><br>
+                
                 <!-- 기본설정 -->
                 <h6>기본설정</h6>
                 <table class="basicSetting">
@@ -156,7 +157,6 @@
                         <td class="td4">EX-<c:out value="${date}"/>-<c:out value="${randomNo}"/></td>
                     </tr>
                 </table>
-                <br><br>
 
                 <!-- 결재선 -->
                 <div class="signOff">
@@ -246,60 +246,54 @@
                 <br>
             </form>
 
-            <!-- The Modal -->
-                <div class="modal fade" id="signOffBtn">
-                    <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h5 class="modal-title">결재선 설정</h5>
-                        </div>
-	                      
-	                    <c:forEach var="count" items="${ mCount }">
-                        	<input type="hidden" name="memCount" value="${ mCount.memCount }">
-                        </c:forEach>
-                        
-                        <!-- Modal body -->
-                        <div class="modal-body" style="width:100%; height:100%;">
-                            <div class="signModalOuter">
-                                <div class="modal1">
-                                	<c:forEach var="dept" items="${ list }">
-                                		<ul id="dept">${ dept.deptName }(${ dept.count }) <input type="hidden" name=" deptNo" class="deptNo" value="${ dept.deptNo }" ></ul>
-                                    </c:forEach>
-                                </div>
-                                <div class="modal2">
-                                    <ul id="selectName"></ul>
-                                </div>
-                                <!-- <div class="modal3">
-                                    <button class="btn btn-primary"> > </button>
-                                    <button class="btn btn-primary"> < </button>
-                                </div> -->
-                                <div class="modal4" align="left">
-                                    <div style="margin-bottom:5px;"><b>기안자</b></div>
-                                    <div class="modal4_1">
-                                        <p>${ loginUser.memName }</p>
-                                    </div>
-                                    <div class="modal4_2">
-                                        <b style="float:left;">결재자</b>
-                                        <div>
-                                        <button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
-                                        <button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
-                                        </div>
-                                    </div>
-                                    <!-- 결재자 -->
-                                    <div class="modal4_3" id="modal4_3"></div>
-                                    <div>
-                                        <button type="submit" class="btn btn-secondary apply" id="apply" data-dismiss="modal">적용</button>
-                                        <button type="button" class="btn btn-secondary" id="delete" data-dismiss="modal">취소</button>
-                                    </div>
-                                </div>
-                            </div>    
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                
+           	<!-- The Modal -->
+               <div class="modal fade" id="signOffBtn">
+                   <div class="modal-dialog modal-xl">
+	                   <div class="modal-content">
+
+	                       <!-- Modal Header -->
+	                       <div class="modal-header">
+	                           <h5 class="modal-title">결재선 설정</h5>
+	                       </div>
+	                   	   
+	                   	   <c:forEach var="count" items="${ mCount }">
+						   	   <input type="hidden" name="memCount" value="${ mCount.memCount }">
+	                       </c:forEach>
+	                       
+	                       <!-- Modal body -->
+	                       <div class="modal-body" style="width:100%; height:100%;">
+	                           <div class="signModalOuter">
+	                               <div class="modal1">
+	                               	<c:forEach var="dept" items="${ list }">
+	                               		<ul id="dept">${ dept.deptName }(${ dept.count }) <input type="hidden" name=" deptNo" class="deptNo" value="${ dept.deptNo }" ></ul>
+	                                   </c:forEach>
+	                               </div>
+	                               <div class="modal2">
+	                                   <ul id="selectName"></ul>
+	                               </div>
+	                               <div class="modal4" align="left">
+	                                   <div style="margin-bottom:5px;"><b>기안자</b></div>
+	                                   <div class="modal4_1"><p>${ loginUser.memName }</p></div>
+	                                   <div class="modal4_2">
+	                                       <b style="float:left;">결재자</b>
+	                                       <div>
+		                                       <button type="button" class="btn btn-sm"><i class="fas fa-angle-down"></i></button>
+		                                       <button type="button" class="btn btn-sm"><i class="fas fa-angle-up"></i></button>
+	                                       </div>
+	                                   </div>
+	                                   <!-- 결재자 -->
+	                                   <div class="modal4_3" id="modal4_3"></div>
+	                                   <div>
+	                                       <button type="submit" class="btn btn-secondary apply" id="apply" data-dismiss="modal">적용</button>
+	                                       <button type="button" class="btn btn-secondary" id="delete" data-dismiss="modal">취소</button>
+	                                   </div>
+	                               </div>
+	                           </div>    
+	                       </div>
+	                       
+	                   </div>
+                   </div>
+               </div>
         </div>
     </div>
     
@@ -397,14 +391,14 @@
 		$(function(){
 		    $("#apply").click(function(){
 		      
-		      // 선택된 결재자들의 memNo, deptName, posiName, memName을 arr에 담아서 폼에 뿌리기
-		      $("#modal4_3 .memNo").each(function(i,input){
+		      // 선택된 결재자들의 memNo, deptName, posiName, memName, ecTurn을 arr에 담아서 폼에 뿌리기
+		      $("#modal4_3 .memNo").each(function(i, input){
 		    	  
 		          arr.push({
-				             memNo:$(this).val()
-				       	   , deptName:$("#modal4_3 .deptName").eq(i).val()
-				       	   , posiName:$("#modal4_3 .posiName").eq(i).val()
-				       	   , memName:$("#modal4_3 .memName").eq(i).val()
+				             memNo : $(this).val()
+				       	   , deptName : $("#modal4_3 .deptName").eq(i).val()
+				       	   , posiName : $("#modal4_3 .posiName").eq(i).val()
+				       	   , memName : $("#modal4_3 .memName").eq(i).val()
 		          		  });
 		          
 		    	   $(".dept"+i).append('<input tpye="text" class="form-control" id="deptName" value='+ arr[i].deptName +' readonly>');

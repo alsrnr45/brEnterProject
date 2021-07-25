@@ -84,9 +84,8 @@
         <!--컨텐츠-->
         <div id="layoutSidenav_content">
             <div class="outer">
-                <br><br>
-                <h2><b>근태관리</b></h2>
-                <br><br>
+                <br><br><h2><b>근태관리</b></h2><br><br>
+                
                 <div class="firstLine">
                     <span class="workTitle">
                         <h6><b>근무계획</b></h6>
@@ -109,16 +108,14 @@
                     <input type="hidden" name="memNo" value="${ loginUser.memNo }" />
                    
                     <div class="second">
-                        <h2><b id="dpTime">00 : 00 : 00</b></h2>
-                        <br>
-
+                        <h2><b id="dpTime">00 : 00 : 00</b></h2><br>
                         <input type="hidden" id="t" name="t" value="${ t.atCount }">
                         <c:choose>
                         	<c:when test="${ t.atCount eq 0 }">
                         		<button class="btn btn-primary checkIn" id="checkIn">출근하기</button>
                         	</c:when>
                         	<c:otherwise>
-                        		<button class="btn btn-primary checkIn" disabled>출근하기</button>
+                        		<button class="btn btn-primary checkIn" id="checkIn" disabled>출근하기</button>
                         	</c:otherwise>
                         </c:choose>
                         
@@ -131,8 +128,9 @@
                        			<button class="btn btn-primary checkOut" id="checkOut" disabled>퇴근하기</button>
                        		</c:otherwise>
                        	</c:choose>
-                        
+                       	
                     </div>
+                    
                     <div class="third">
                         <button class="btn btn-primary" disabled>출근체크시간</button>
                         <h2 class="third_1" id="checkInTime"><b>${ in.checkIn }</b></h2>

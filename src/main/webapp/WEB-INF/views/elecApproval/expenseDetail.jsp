@@ -178,13 +178,11 @@
 			                        <c:choose>
 	                                    <c:when test="${ ApprovalPathList[i].apEnrolldate != null }">
 			                                 <div style="height:80px; padding-top:10px;"><img src="resources/elecApprovalUpfiles/check2.png"></div>
-			                                 
 			                                 <!-- 기안/반려하기 버튼 구현 -->
 			                                 <c:if test="${ (i+1) lt ApprovalPathList.size() }">
 			                                    <c:set var="turnNo" value="${ ApprovalPathList[i+1].memNo }"/>
 			                                    <c:set var="approvalNo" value="${ ApprovalPathList[i+1].approvalPathNo }"/>
 			                                 </c:if>
-			                                 
 			                                 <!-- 삭제하기 버튼 구현 -->
 			                                 <c:set var="flag" value="delete"/>
 	                                     </c:when>
@@ -194,7 +192,7 @@
 												<c:set var="turnNo" value="${ApprovalPathList[i].memNo}"/>
 												<c:set var="approvalNo" value="${ ApprovalPathList[i].approvalPathNo }"/>
 											</c:if>
-									</c:otherwise>
+										</c:otherwise>
                                  	</c:choose>
 			                        
 			                        <div style="height:35px; padding-top:7px;">
@@ -271,12 +269,12 @@
 						<c:when test="${ approvalName != null }">     
 							<c:choose>                
 								<c:when test="${ turnNo eq loginUser.memNo }">
-									<button class="btn btn-light apply" onclick="approveFormSubmit();" style="background-color:lightgray; border-color:lightgray;">승인하기</button>
+									<button class="btn btn-light apply" onclick="approveFormSubmit();">승인하기</button>
 									<button class="btn btn-danger return" type="submit">반려하기</button>
 								</c:when>  
 								<c:otherwise>
-										<button class="btn btn-light apply" style="background-color:lightgray; border-color:lightgray;" disabled>승인하기</button>
-										<button class="btn btn-danger return" disabled>반려하기</button>
+									<button class="btn btn-light apply" disabled>승인하기</button>
+									<button class="btn btn-danger return" disabled>반려하기</button>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -287,8 +285,8 @@
 									<button class="btn btn-danger delete" onclick="postFormSubmit();" disabled>삭제하기</button>      
 								</c:when>
 								<c:otherwise>
-										<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
-									</c:otherwise>
+									<button class="btn btn-danger delete" onclick="postFormSubmit();">삭제하기</button> 
+								</c:otherwise>
 							</c:choose>
 						</c:when>                          
 					</c:choose>

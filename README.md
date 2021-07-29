@@ -43,4 +43,24 @@
 ## 기능구현 
  ### 일정만들기
   ![ezgif com-gif-maker](https://user-images.githubusercontent.com/74170717/127418382-2b88e878-9c19-40a3-a992-a8c8fee0b650.gif)
+ 
+ ### 일정 전체보기
+  ![ezgif com-gif-maker (1)](https://user-images.githubusercontent.com/74170717/127426509-de2623aa-4650-4ac6-a7ff-f57aa4cb3b9f.gif)
+ 
+ ### 관리자 전체 일정만들기
+ ![ezgif com-gif-maker (2)](https://user-images.githubusercontent.com/74170717/127426704-408e6a82-c06d-499c-a452-d03fff36c4f5.gif)
+ 
+ ### 받은 메일함 보기
+ ![ezgif com-gif-maker (3)](https://user-images.githubusercontent.com/74170717/127427043-ce29b13e-ccda-41ba-bd89-777ab9010178.gif)
+
+ ### 메일 보내기 & 보낸 메일 보기 & 주소록 추가
+ 
+ ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/74170717/127427683-cd78b70b-653c-452a-a4ad-8b7e068a23dc.gif)
+
+ ### 답장 & 전달 & 즐겨찾기
+ ![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/74170717/127427983-17ee4ec1-defd-4544-b71e-4cfb032e8262.gif)
+
+ ### 임시보관함 & 휴지통
+ 
+ ![ezgif com-gif-maker (6)](https://user-images.githubusercontent.com/74170717/127428283-2a484461-ce45-47bf-a3cc-6884423fc7f3.gif)
 

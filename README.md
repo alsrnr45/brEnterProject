@@ -42,5 +42,5 @@
 
 ## 기능구현 
  ### 일정만들기
-  
+  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/74170717/127418382-2b88e878-9c19-40a3-a992-a8c8fee0b650.gif)
 
